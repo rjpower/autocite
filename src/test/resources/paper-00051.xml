@@ -1,0 +1,1319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="999" width="659">
+	<fontspec id="0" size="9" family="Times" color="#131413"/>
+	<fontspec id="1" size="17" family="Times" color="#131413"/>
+	<fontspec id="2" size="12" family="Times" color="#131413"/>
+	<fontspec id="3" size="12" family="Times" color="#131413"/>
+	<fontspec id="4" size="12" family="Times" color="#131413"/>
+	<fontspec id="5" size="15" family="Times" color="#131413"/>
+	<fontspec id="6" size="9" family="Times" color="#131413"/>
+	<fontspec id="7" size="20" family="Times" color="#131413"/>
+<text top="51" left="76" width="54" height="11" font="0">Computing</text>
+<text top="65" left="76" width="161" height="11" font="0">DOI 10.1007/s00607-011-0183-7</text>
+<text top="139" left="76" width="435" height="18" font="1"><b>Computing of high breakdown regression estimators</b></text>
+<text top="161" left="76" width="366" height="18" font="1"><b>without sorting on graphics processing units</b></text>
+<text top="208" left="76" width="74" height="14" font="2"><b>G. Beliakov</b></text>
+<text top="204" left="157" width="200" height="19" font="3">· <b>M. Johnstone </b>· <b>S. Nahavandi</b></text>
+<text top="322" left="76" width="278" height="11" font="0">Received: 23 August 2011 / Accepted: 31 December 2011</text>
+<text top="336" left="76" width="115" height="11" font="0">© Springer-Verlag 2012</text>
+<text top="383" left="76" width="56" height="14" font="2"><b>Abstract</b></text>
+<text top="383" left="150" width="432" height="14" font="4">We present an approach to computing high-breakdown regression estima-</text>
+<text top="401" left="76" width="506" height="14" font="4">tors in parallel on graphics processing units (GPU). We show that sorting the residuals</text>
+<text top="419" left="76" width="506" height="14" font="4">is not necessary, and it can be substituted by calculating the median. We present and</text>
+<text top="436" left="76" width="506" height="14" font="4">compare various methods to calculate the median and order statistics on GPUs. We</text>
+<text top="454" left="76" width="506" height="14" font="4">introduce an alternative method based on the optimization of a convex function, and</text>
+<text top="472" left="76" width="506" height="14" font="4">show its numerical superiority when calculating the order statistics of very large arrays</text>
+<text top="490" left="76" width="58" height="14" font="4">on GPUs.</text>
+<text top="526" left="76" width="64" height="14" font="2"><b>Keywords</b></text>
+<text top="526" left="156" width="107" height="14" font="4">Robust regression</text>
+<text top="522" left="266" width="254" height="19" font="3">· Median · Order statistic · Sorting · GPU ·</text>
+<text top="544" left="76" width="81" height="14" font="4">Cutting plane</text>
+<text top="580" left="76" width="268" height="14" font="2"><b>Mathematics Subject Classiﬁcation (2000)</b></text>
+<text top="580" left="363" width="41" height="14" font="4">65Y05</text>
+<text top="576" left="407" width="159" height="19" font="3">· 65Y10 · 68W10 · 62J05 ·</text>
+<text top="598" left="76" width="41" height="14" font="4">65K05</text>
+<text top="636" left="76" width="94" height="14" font="2"><b>1 Introduction</b></text>
+<text top="672" left="76" width="506" height="14" font="4">Large data sets are not error free. It is reasonable to expect that gross errors due to</text>
+<text top="690" left="76" width="506" height="14" font="4">recording equipment failure, transmission and storage of data sets, and even typing</text>
+<text top="708" left="76" width="506" height="14" font="4">errors, will contaminate otherwise accurate data. In regression analysis, very unusual</text>
+<text top="777" left="76" width="64" height="11" font="0">G. Beliakov (</text>
+<text top="770" left="141" width="15" height="23" font="5">B</text>
+<text top="777" left="153" width="4" height="11" font="0">)</text>
+<text top="791" left="76" width="482" height="11" font="0">School of Information Technology, Deakin University, 221 Burwood Hwy, Burwood 3125, Australia</text>
+<text top="806" left="76" width="135" height="11" font="0">e-mail: gleb@deakin.edu.au</text>
+<text top="834" left="76" width="64" height="11" font="0">M. Johnstone</text>
+<text top="831" left="144" width="70" height="16" font="6">· S. Nahavandi</text>
+<text top="848" left="76" width="427" height="11" font="0">Institute for Technology Research and Innovation, Deakin University, Geelong, Australia</text>
+<text top="862" left="76" width="159" height="11" font="0">e-mail: mjohnsto@deakin.edu.au</text>
+<text top="884" left="76" width="64" height="11" font="0">S. Nahavandi</text>
+<text top="898" left="76" width="160" height="11" font="0">e-mail: nahavand@deakin.edu.au</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="999" width="659">
+	<fontspec id="8" size="12" family="Times" color="#131413"/>
+	<fontspec id="9" size="12" family="Times" color="#0000ff"/>
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="89" left="76" width="506" height="14" font="4">(possibly contaminated) values of independent variables are called <i>leverage points</i>,</text>
+<text top="107" left="76" width="506" height="14" font="4">and atypical values of the dependent variables are called (vertical) <i>outliers</i>. What is less</text>
+<text top="125" left="76" width="506" height="14" font="4">widely appreciated is that very few, even just one leverage point can render the whole</text>
+<text top="142" left="76" width="158" height="14" font="4">regression model useless <a href="pdfxml.html#14">[</a></text>
+<text top="142" left="234" width="7" height="14" font="9"><a href="pdfxml.html#14">1</a></text>
+<text top="142" left="241" width="4" height="14" font="4"><a href="pdfxml.html#14">,</a></text>
+<text top="142" left="246" width="7" height="14" font="9"><a href="pdfxml.html#14">2</a></text>
+<text top="142" left="254" width="328" height="14" font="4"><a href="pdfxml.html#14">]. </a>Furthermore, that datum itself becomes undetectable</text>
+<text top="160" left="76" width="506" height="14" font="4">by standard outlier detection methods. This is called the masking effect. Consequently,</text>
+<text top="178" left="76" width="506" height="14" font="4">regression algorithms that possess a degree of robustness against outliers and leverage</text>
+<text top="196" left="76" width="193" height="14" font="4">points are of significant interest.</text>
+<text top="214" left="93" width="489" height="14" font="4">On the other hand, atypical data are often themselves of the main interest. Notable</text>
+<text top="232" left="76" width="506" height="14" font="4">examples are intrusion and cyberattack detection, detection of harmful chemicals and</text>
+<text top="250" left="76" width="506" height="14" font="4">cancerous cells. To detect anomalies of this kind, a regression model that follows the</text>
+<text top="268" left="76" width="506" height="14" font="4">majority of the data can be built, and atypical, but not necessarily erroneous data are</text>
+<text top="286" left="76" width="312" height="14" font="4">detected based on how far they fall from that model.</text>
+<text top="304" left="93" width="489" height="14" font="4">The methods of the least median of squares, least trimmed squares (LTS), least</text>
+<text top="322" left="76" width="506" height="14" font="4">trimmed absolute deviation (LTA) and maximum trimmed likelihood (MTL) are robust</text>
+<text top="340" left="76" width="506" height="14" font="4">alternatives to traditional regression, which produce accurate models even if up to half</text>
+<text top="358" left="76" width="506" height="14" font="4">of the data are contaminated. These methods are called high breakdown regression</text>
+<text top="376" left="76" width="59" height="14" font="4">methods <a href="pdfxml.html#14">[</a></text>
+<text top="376" left="135" width="7" height="14" font="9"><a href="pdfxml.html#14">2</a></text>
+<text top="376" left="142" width="4" height="14" font="4"><a href="pdfxml.html#14">,</a></text>
+<text top="376" left="147" width="7" height="14" font="9"><a href="pdfxml.html#14">1</a></text>
+<text top="376" left="155" width="427" height="14" font="4"><a href="pdfxml.html#14">]. </a>A <i>breakdown point </i>of a regression estimator is the smallest proportion</text>
+<text top="393" left="76" width="485" height="14" font="4">of contaminated data that can make the estimator’s bias arbitrarily large (see <a href="pdfxml.html#14">[</a></text>
+<text top="393" left="561" width="7" height="14" font="9"><a href="pdfxml.html#14">3</a></text>
+<text top="393" left="568" width="14" height="14" font="4">]).</text>
+<text top="411" left="76" width="506" height="14" font="4">High breakdown methods are computationally expensive and require multiple sort</text>
+<text top="429" left="76" width="458" height="14" font="4">operations, which become a bottleneck when processing very large data sets.</text>
+<text top="447" left="93" width="489" height="14" font="4">General purpose graphics processing units (GPU) have recently become a powerful</text>
+<text top="465" left="76" width="506" height="14" font="4">alternative to traditional CPUs. GPUs allow one to offload various repetitive calcu-</text>
+<text top="483" left="76" width="442" height="14" font="4">lations to the GPU (called <i>device</i>). GPUs have many processor cores (<i>m</i></text>
+<text top="479" left="525" width="57" height="19" font="3">= 240 in</text>
+<text top="501" left="76" width="183" height="14" font="4">NVIDIA’s Tesla C1060 and <i>m</i></text>
+<text top="497" left="265" width="317" height="19" font="3">= 448 in Tesla 2050), and can execute thousands of</text>
+<text top="519" left="76" width="132" height="14" font="4">threads concurrently <a href="pdfxml.html#14">[</a></text>
+<text top="519" left="208" width="7" height="14" font="9"><a href="pdfxml.html#14">4</a></text>
+<text top="519" left="216" width="367" height="14" font="4"><a href="pdfxml.html#14">]. </a>The computational paradigm here is SIMD (single instruc-</text>
+<text top="537" left="76" width="506" height="14" font="4">tion multiple data) which means that all threads execute nearly identical instructions</text>
+<text top="555" left="76" width="125" height="14" font="4">but on different data.</text>
+<text top="573" left="93" width="489" height="14" font="4">While earlier GPUs have been designed to perform solely graphical operations</text>
+<text top="591" left="76" width="506" height="14" font="4">and had limited ﬂoating point computational power, the new generation of NVI-</text>
+<text top="609" left="76" width="506" height="14" font="4">DIA’s general purpose GPUs no longer suffers from this drawback. Tesla C1060/70</text>
+<text top="627" left="76" width="506" height="14" font="4">and C2050/70 units offer parallel calculations with 8-byte ﬂoating point precision</text>
+<text top="645" left="76" width="506" height="14" font="4">(data type <i>double </i>in C). Software development tools, such as CUDA (Computer Uni-</text>
+<text top="662" left="76" width="506" height="14" font="4">ﬁed Device Architecture) and OpenCL, allow developers to write code in high-level</text>
+<text top="680" left="76" width="506" height="14" font="4">languages C/C++ and Fortran with CUDA extensions, and even call GPU functions</text>
+<text top="698" left="76" width="506" height="14" font="4">from Matlab environment. Libraries that implement various parallel computing prim-</text>
+<text top="716" left="76" width="258" height="14" font="4">itives, e.g. reduction and sorting in Thrust <a href="pdfxml.html#14">[</a></text>
+<text top="716" left="334" width="7" height="14" font="9"><a href="pdfxml.html#14">5</a></text>
+<text top="716" left="341" width="241" height="14" font="4">], also facilitate high-level programming</text>
+<text top="734" left="76" width="58" height="14" font="4">on GPUs.</text>
+<text top="752" left="93" width="489" height="14" font="4">In this work we are motivated by using GPUs for high breakdown regression.</text>
+<text top="770" left="76" width="506" height="14" font="4">Calculation of the vector residuals for a given model parameters lends itself well for</text>
+<text top="788" left="76" width="506" height="14" font="4">parallel computations on GPUs. However, sorting the residuals is not easy in SIMD</text>
+<text top="806" left="76" width="506" height="14" font="4">computation model. The focus of this work is on parallel computation of the objective</text>
+<text top="824" left="76" width="252" height="14" font="4">in the LTS and LTA methods using GPUs.</text>
+<text top="842" left="93" width="489" height="14" font="4">Our contribution is threefold. First, we show that the sort operation is not actually</text>
+<text top="860" left="76" width="506" height="14" font="4">necessary for computation of the objective. Sorting can be avoided by calculating</text>
+<text top="878" left="76" width="506" height="14" font="4">the median (or, more generally, a <i>k</i>th order statistic) of the vector of absolute residu-</text>
+<text top="896" left="76" width="506" height="14" font="4">als. Second, we propose several parallel algorithms for calculation of the median in</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="999" width="659">
+	<fontspec id="10" size="9" family="Times" color="#131413"/>
+	<fontspec id="11" size="6" family="Times" color="#131413"/>
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="89" left="76" width="506" height="14" font="4">SIMD model on GPUs. Third, we perform a comparative analysis of these algorithms</text>
+<text top="107" left="76" width="506" height="14" font="4">and benchmark them against existing parallel sorting methods for GPUs and serial</text>
+<text top="125" left="76" width="125" height="14" font="4">selection algorithms.</text>
+<text top="142" left="93" width="489" height="14" font="4">Our results show that one of the proposed methods, based on numerical minimiza-</text>
+<text top="160" left="76" width="506" height="14" font="4">tion of a convex function, is computationally superior to all studied alternatives when</text>
+<text top="178" left="76" width="506" height="14" font="4">executed on a GPU. Furthermore, this method is scalable for very large data sets (hun-</text>
+<text top="196" left="76" width="505" height="14" font="4">dreds of millions of data), when data do not ﬁt the memory of a single GPU or CPU.</text>
+<text top="214" left="93" width="266" height="14" font="4">The paper is structured as follows. Section</text>
+<text top="214" left="365" width="7" height="14" font="9"><a href="pdfxml.html#3">2</a></text>
+<text top="214" left="378" width="204" height="14" font="4">brieﬂy outlines methods of high-</text>
+<text top="232" left="76" width="506" height="14" font="4">breakdown robust regression, and presents our approach to eliminating the sort</text>
+<text top="250" left="76" width="405" height="14" font="4">operation. It also outlines our GPU parallelization strategy. In Sect.</text>
+<text top="250" left="485" width="7" height="14" font="9"><a href="pdfxml.html#5">3</a></text>
+<text top="250" left="497" width="85" height="14" font="4">we outline the</text>
+<text top="268" left="76" width="506" height="14" font="4">traditional approaches to calculating the median and order statistics, and present our</text>
+<text top="286" left="76" width="506" height="14" font="4">alternatives suitable for GPUs. These alternative approaches are based on minimizing</text>
+<text top="304" left="76" width="346" height="14" font="4">a convex function, or solving a nonlinear equation. Section</text>
+<text top="304" left="425" width="7" height="14" font="9"><a href="pdfxml.html#8">4</a></text>
+<text top="304" left="435" width="147" height="14" font="4">is devoted to comparison</text>
+<text top="322" left="76" width="429" height="14" font="4">and benchmarking of different algorithms parallelized for GPUs. Section</text>
+<text top="322" left="508" width="7" height="14" font="9"><a href="pdfxml.html#14">5</a></text>
+<text top="322" left="519" width="63" height="14" font="4">concludes.</text>
+<text top="358" left="76" width="233" height="14" font="2"><b>2 High breakdown robust regression</b></text>
+<text top="393" left="76" width="97" height="14" font="4">2.1 Background</text>
+<text top="429" left="76" width="362" height="14" font="4">We consider a classical regression problem: given a set of pairs</text>
+<text top="426" left="440" width="18" height="19" font="3">{(<i>x</i></text>
+<text top="434" left="459" width="3" height="10" font="10"><i>i</i></text>
+<text top="426" left="464" width="15" height="19" font="3">, <i>y</i></text>
+<text top="434" left="479" width="3" height="10" font="10"><i>i</i></text>
+<text top="426" left="484" width="98" height="19" font="3">)}, <i>i </i>= 1, . . . , <i>n</i>:</text>
+<text top="447" left="77" width="7" height="14" font="8"><i>x</i></text>
+<text top="452" left="83" width="3" height="10" font="10"><i>i</i></text>
+<text top="444" left="93" width="9" height="19" font="3">∈</text>
+<text top="444" left="119" width="6" height="10" font="10"><i>p</i></text>
+<text top="444" left="126" width="15" height="19" font="3">, <i>y</i></text>
+<text top="452" left="140" width="3" height="10" font="10"><i>i</i></text>
+<text top="444" left="150" width="198" height="19" font="3">∈ (data), and a set of models <i>f</i></text>
+<text top="449" left="349" width="5" height="15" font="6">θ</text>
+<text top="444" left="360" width="4" height="19" font="3">:</text>
+<text top="444" left="380" width="6" height="10" font="10"><i>p</i></text>
+<text top="444" left="392" width="190" height="19" font="3">→ parameterized by a vector</text>
+<text top="465" left="76" width="83" height="14" font="4">of parameters</text>
+<text top="461" left="164" width="24" height="19" font="3">θ ∈</text>
+<text top="461" left="213" width="12" height="19" font="3">⊆</text>
+<text top="462" left="244" width="6" height="10" font="10"><i>p</i></text>
+<text top="465" left="250" width="199" height="14" font="4">, determine the parameter vector</text>
+<text top="461" left="455" width="7" height="19" font="3">θ</text>
+<text top="459" left="463" width="6" height="15" font="6">∗</text>
+<text top="465" left="469" width="76" height="14" font="4">, such that <i>f</i></text>
+<text top="467" left="546" width="5" height="15" font="6">θ</text>
+<text top="466" left="553" width="5" height="12" font="11">∗</text>
+<text top="465" left="564" width="18" height="14" font="4">ﬁts</text>
+<text top="483" left="76" width="506" height="14" font="4">the data best. The goodness of ﬁt can be measured in different ways. Three classical</text>
+<text top="501" left="76" width="506" height="14" font="4">instances are the least squares (LS) regression, the least absolute deviation (LAD)</text>
+<text top="519" left="76" width="506" height="14" font="4">regression and Chebychev (minimax) approximation. The maximum likelihood (ML)</text>
+<text top="537" left="76" width="506" height="14" font="4">estimators give another set of instances which include LS and LAD. When functions</text>
+<text top="555" left="79" width="4" height="14" font="8"><i>f</i></text>
+<text top="557" left="84" width="5" height="15" font="6">θ</text>
+<text top="555" left="94" width="62" height="14" font="4">depend on</text>
+<text top="551" left="160" width="423" height="19" font="3">θ linearly, the problem is called linear regression, otherwise it becomes</text>
+<text top="573" left="76" width="189" height="14" font="4">a nonlinear regression problem.</text>
+<text top="591" left="93" width="356" height="14" font="4">We concentrate on the linear regression, where the model is</text>
+<text top="627" left="185" width="7" height="14" font="8"><i>y</i></text>
+<text top="631" left="192" width="3" height="10" font="10"><i>i</i></text>
+<text top="623" left="201" width="23" height="19" font="3">= <i>x</i></text>
+<text top="631" left="224" width="10" height="10" font="10"><i>i </i>1</text>
+<text top="623" left="235" width="7" height="19" font="3">θ</text>
+<text top="631" left="241" width="6" height="10" font="0">1</text>
+<text top="623" left="251" width="58" height="19" font="3">+ · · · + <i>x</i></text>
+<text top="631" left="309" width="10" height="10" font="10"><i>i p</i></text>
+<text top="623" left="321" width="7" height="19" font="3">θ</text>
+<text top="631" left="328" width="6" height="10" font="10"><i>p</i></text>
+<text top="623" left="338" width="22" height="19" font="3">+ ε</text>
+<text top="631" left="360" width="3" height="10" font="10"><i>i</i></text>
+<text top="623" left="365" width="100" height="19" font="3">, <i>i </i>= 1, . . . , <i>n</i>,</text>
+<text top="627" left="565" width="17" height="14" font="4">(1)</text>
+<text top="662" left="76" width="38" height="14" font="4">with <i>x</i></text>
+<text top="667" left="114" width="10" height="10" font="10"><i>i p</i></text>
+<text top="659" left="130" width="337" height="19" font="3">= 1 for regression with an intercept term. The matrix {<i>x</i></text>
+<text top="667" left="467" width="8" height="10" font="10"><i>i j</i></text>
+<text top="659" left="477" width="52" height="19" font="3">} = <i>X </i>∈</text>
+<text top="660" left="545" width="6" height="10" font="10"><i>n</i></text>
+<text top="657" left="551" width="16" height="15" font="6">×<i>p</i></text>
+<text top="662" left="572" width="10" height="14" font="4">is</text>
+<text top="680" left="76" width="231" height="14" font="4">the matrix of explanatory variables and</text>
+<text top="677" left="311" width="271" height="19" font="3">ε is an <i>n</i>-vector of iid random errors with zero</text>
+<text top="698" left="76" width="184" height="14" font="4">mean and (unknown) variance</text>
+<text top="695" left="265" width="8" height="19" font="3">σ</text>
+<text top="695" left="275" width="6" height="10" font="0">2</text>
+<text top="698" left="281" width="301" height="14" font="4">. The goal is to determine the vector of unknown</text>
+<text top="716" left="76" width="66" height="14" font="4">parameters</text>
+<text top="713" left="146" width="436" height="19" font="3">θ. The goodness of ﬁt is expressed in terms of either squared or absolute</text>
+<text top="734" left="76" width="62" height="14" font="4">residuals <i>r</i></text>
+<text top="739" left="138" width="3" height="10" font="10"><i>i</i></text>
+<text top="730" left="147" width="23" height="19" font="3">= <i>f</i></text>
+<text top="736" left="171" width="5" height="15" font="6">θ</text>
+<text top="730" left="178" width="13" height="19" font="3">(<i>x</i></text>
+<text top="739" left="191" width="3" height="10" font="10"><i>i</i></text>
+<text top="730" left="196" width="30" height="19" font="3">) − <i>y</i></text>
+<text top="739" left="226" width="3" height="10" font="10"><i>i</i></text>
+<text top="734" left="231" width="186" height="14" font="4">, namely the weighted averages</text>
+<text top="730" left="435" width="6" height="10" font="10"><i>n</i></text>
+<text top="741" left="435" width="3" height="10" font="10"><i>i</i></text>
+<text top="738" left="439" width="15" height="15" font="6">=1</text>
+<text top="730" left="457" width="11" height="19" font="3">w</text>
+<text top="739" left="468" width="3" height="10" font="10"><i>i</i></text>
+<text top="734" left="473" width="6" height="14" font="8"><i>r</i></text>
+<text top="731" left="480" width="6" height="10" font="0">2</text>
+<text top="742" left="479" width="3" height="10" font="10"><i>i</i></text>
+<text top="734" left="490" width="12" height="14" font="4">or</text>
+<text top="730" left="521" width="6" height="10" font="10"><i>n</i></text>
+<text top="741" left="521" width="3" height="10" font="10"><i>i</i></text>
+<text top="738" left="525" width="15" height="15" font="6">=1</text>
+<text top="730" left="543" width="11" height="19" font="3">w</text>
+<text top="739" left="554" width="3" height="10" font="10"><i>i</i></text>
+<text top="730" left="559" width="10" height="19" font="3">|<i>r</i></text>
+<text top="739" left="569" width="3" height="10" font="10"><i>i</i></text>
+<text top="730" left="574" width="8" height="19" font="3">|.</text>
+<text top="752" left="93" width="489" height="14" font="4">It is known that the breakdown point of the maximum likelihood type estimators,</text>
+<text top="770" left="76" width="506" height="14" font="4">i.e., the proportion of data that can make the estimator’s bias arbitrarily large (see</text>
+<text top="788" left="76" width="5" height="14" font="4"><a href="pdfxml.html#14">[</a></text>
+<text top="788" left="81" width="7" height="14" font="9"><a href="pdfxml.html#14">1</a></text>
+<text top="788" left="89" width="4" height="14" font="4"><a href="pdfxml.html#14">,</a></text>
+<text top="788" left="93" width="7" height="14" font="9"><a href="pdfxml.html#14">2</a></text>
+<text top="788" left="101" width="481" height="14" font="4"><a href="pdfxml.html#14">]), </a>is 0. To overcome the lack of robustness of the LS and LAD estimators, Rous-</text>
+<text top="806" left="76" width="46" height="14" font="4">seeuw <a href="pdfxml.html#14">[</a></text>
+<text top="806" left="122" width="7" height="14" font="9"><a href="pdfxml.html#14">6</a></text>
+<text top="806" left="130" width="410" height="14" font="4"><a href="pdfxml.html#14">] </a>introduced the LMS estimator based on the solution of the problem</text>
+<text top="842" left="227" width="72" height="14" font="4">Minimize <i>F</i></text>
+<text top="838" left="301" width="80" height="19" font="3">(θ) = <i>Med</i>(<i>r</i></text>
+<text top="847" left="381" width="3" height="10" font="10"><i>i</i></text>
+<text top="838" left="386" width="25" height="19" font="3">(θ))</text>
+<text top="838" left="411" width="6" height="10" font="0">2</text>
+<text top="838" left="418" width="4" height="19" font="3">.</text>
+<text top="842" left="565" width="18" height="14" font="4">(2)</text>
+<text top="878" left="76" width="291" height="14" font="4">In order to achieve the maximal breakdown point</text>
+<text top="874" left="371" width="7" height="19" font="3">ε</text>
+<text top="872" left="378" width="6" height="15" font="6">∗</text>
+<text top="874" left="389" width="193" height="19" font="3">= 0.5, the median is replaced by</text>
+<text top="896" left="76" width="18" height="14" font="4">the</text>
+<text top="892" left="97" width="485" height="19" font="3">[(<i>n</i>+ <i>p</i>)/2]th quantile (the [<i>x</i>] denotes the nearest integer larger than or equal to <i>x</i>).</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="89" left="76" width="96" height="14" font="4">The authors of <a href="pdfxml.html#14">[</a></text>
+<text top="89" left="172" width="7" height="14" font="9"><a href="pdfxml.html#14">7</a></text>
+<text top="89" left="180" width="402" height="14" font="4"><a href="pdfxml.html#14">] </a>consider the method of the least trimmed squares (LTS), also pro-</text>
+<text top="107" left="76" width="59" height="14" font="4">posed in <a href="pdfxml.html#14">[</a></text>
+<text top="107" left="135" width="7" height="14" font="9"><a href="pdfxml.html#14">6</a></text>
+<text top="107" left="143" width="439" height="14" font="4"><a href="pdfxml.html#14">], </a>superior to the LMS, because the objective function is more smooth, its</text>
+<text top="125" left="76" width="506" height="14" font="4">statistical efﬁciency is better and the convergence rate is higher, while it has the same</text>
+<text top="142" left="76" width="109" height="14" font="4">breakdown point <a href="pdfxml.html#14">[</a></text>
+<text top="142" left="185" width="7" height="14" font="9"><a href="pdfxml.html#14">6</a></text>
+<text top="142" left="193" width="7" height="14" font="4"><a href="pdfxml.html#14">–</a></text>
+<text top="142" left="200" width="7" height="14" font="9"><a href="pdfxml.html#14">8</a></text>
+<text top="142" left="208" width="246" height="14" font="4"><a href="pdfxml.html#14">]. </a>Here the expression to be minimized is</text>
+<text top="196" left="229" width="72" height="14" font="4">Minimize <i>F</i></text>
+<text top="192" left="302" width="35" height="19" font="3">(θ) =</text>
+<text top="179" left="349" width="6" height="10" font="10"><i>h</i></text>
+<text top="217" left="342" width="3" height="10" font="10"><i>i</i></text>
+<text top="214" left="346" width="15" height="15" font="6">=1</text>
+<text top="192" left="362" width="11" height="19" font="3">(<i>r</i></text>
+<text top="198" left="374" width="13" height="15" font="6">(<i>i</i>)</text>
+<text top="192" left="387" width="25" height="19" font="3">(θ))</text>
+<text top="192" left="412" width="6" height="10" font="0">2</text>
+<text top="192" left="416" width="5" height="19" font="3">,</text>
+<text top="196" left="565" width="17" height="14" font="4">(3)</text>
+<text top="248" left="76" width="328" height="14" font="4">where the residuals are ordered in the increasing order</text>
+<text top="244" left="409" width="10" height="19" font="3">|<i>r</i></text>
+<text top="250" left="419" width="14" height="15" font="6">(1)</text>
+<text top="244" left="434" width="35" height="19" font="3">| ≤ |<i>r</i></text>
+<text top="250" left="469" width="14" height="15" font="6">(2)</text>
+<text top="244" left="484" width="74" height="19" font="3">| ≤ · · · ≤ |<i>r</i></text>
+<text top="250" left="559" width="15" height="15" font="6">(<i>n</i>)</text>
+<text top="244" left="574" width="8" height="19" font="3">|,</text>
+<text top="266" left="76" width="34" height="14" font="4">and <i>h</i></text>
+<text top="262" left="118" width="464" height="19" font="3">= [(<i>n </i>+ <i>p</i>)/2]. The method of least trimmed absolute deviation (LTA) was</text>
+<text top="284" left="76" width="84" height="14" font="4">advocated in <a href="pdfxml.html#14">[</a></text>
+<text top="284" left="160" width="7" height="14" font="9"><a href="pdfxml.html#14">9</a></text>
+<text top="284" left="168" width="4" height="14" font="4"><a href="pdfxml.html#14">,</a></text>
+<text top="284" left="173" width="15" height="14" font="9"><a href="pdfxml.html#14">10</a></text>
+<text top="284" left="188" width="186" height="14" font="4"><a href="pdfxml.html#14">]. </a>The minimization problem is</text>
+<text top="337" left="231" width="72" height="14" font="4">Minimize <i>F</i></text>
+<text top="333" left="304" width="35" height="19" font="3">(θ) =</text>
+<text top="321" left="351" width="6" height="10" font="10"><i>h</i></text>
+<text top="358" left="345" width="3" height="10" font="10"><i>i</i></text>
+<text top="355" left="349" width="15" height="15" font="6">=1</text>
+<text top="333" left="367" width="10" height="19" font="3">|<i>r</i></text>
+<text top="339" left="377" width="13" height="15" font="6">(<i>i</i>)</text>
+<text top="333" left="391" width="28" height="19" font="3">(θ)|.</text>
+<text top="337" left="565" width="17" height="14" font="4">(4)</text>
+<text top="389" left="93" width="489" height="14" font="4">In essence, in the LTS and LTA methods, half of the sample is discarded as potential</text>
+<text top="407" left="76" width="506" height="14" font="4">outliers, and the model is ﬁtted to the remaining half. This makes the estimator not</text>
+<text top="425" left="76" width="506" height="14" font="4">sensitive to contamination in up to a half of the data. Of course, the problem is to</text>
+<text top="443" left="76" width="506" height="14" font="4">decide which half of the data should be discarded. This is an NP-hard problem and</text>
+<text top="461" left="76" width="320" height="14" font="4">exact solutions are feasible only for small data sets (<i>n</i></text>
+<text top="457" left="401" width="142" height="19" font="3">&lt; 50 in a recent paper <a href="pdfxml.html#14">[</a></text>
+<text top="461" left="543" width="15" height="14" font="9"><a href="pdfxml.html#14">11</a></text>
+<text top="461" left="558" width="14" height="14" font="4">]).</text>
+<text top="479" left="93" width="489" height="14" font="4">Several approximate algorithms and heuristics have been proposed to ﬁnd minimiz-</text>
+<text top="497" left="76" width="274" height="14" font="4">ers of <i>F </i>. Fast-LTS method was presented in <a href="pdfxml.html#14">[</a></text>
+<text top="497" left="350" width="7" height="14" font="9"><a href="pdfxml.html#14">7</a></text>
+<text top="497" left="357" width="225" height="14" font="4">], and methods based on evolutionary</text>
+<text top="515" left="76" width="318" height="14" font="4">and semidefinite programming, were presented in <a href="pdfxml.html#14">[</a></text>
+<text top="515" left="394" width="15" height="14" font="9"><a href="pdfxml.html#14">12</a></text>
+<text top="515" left="409" width="7" height="14" font="4"><a href="pdfxml.html#14">–</a></text>
+<text top="515" left="416" width="15" height="14" font="9"><a href="pdfxml.html#14">15</a></text>
+<text top="515" left="431" width="151" height="14" font="4"><a href="pdfxml.html#14">], </a>and global nonsmooth</text>
+<text top="533" left="76" width="98" height="14" font="4">optimization is <a href="pdfxml.html#14">[</a></text>
+<text top="533" left="174" width="15" height="14" font="9"><a href="pdfxml.html#14">16</a></text>
+<text top="533" left="189" width="4" height="14" font="4"><a href="pdfxml.html#14">,</a></text>
+<text top="533" left="194" width="15" height="14" font="9"><a href="pdfxml.html#14">17</a></text>
+<text top="533" left="209" width="9" height="14" font="4"><a href="pdfxml.html#14">].</a></text>
+<text top="581" left="76" width="187" height="14" font="4">2.2 Avoiding the sort operation</text>
+<text top="617" left="76" width="146" height="14" font="4">The objective <i>F </i>in Eqs. <a href="pdfxml.html#4">(</a></text>
+<text top="617" left="222" width="7" height="14" font="9"><a href="pdfxml.html#4">3</a></text>
+<text top="617" left="230" width="37" height="14" font="4"><a href="pdfxml.html#4">) </a>and <a href="pdfxml.html#4">(</a></text>
+<text top="617" left="267" width="7" height="14" font="9"><a href="pdfxml.html#4">4</a></text>
+<text top="617" left="275" width="307" height="14" font="4"><a href="pdfxml.html#4">) </a>is calculated from a sorted vector of absolute resid-</text>
+<text top="635" left="76" width="506" height="14" font="4">uals. Multiple evaluations of <i>F </i>are needed in order to locate its minimum. Here we</text>
+<text top="653" left="76" width="506" height="14" font="4">propose an alternative expression of <i>F </i>, which avoids sorting, and therefore accelerates</text>
+<text top="670" left="76" width="115" height="14" font="4">minimization of <i>F </i>.</text>
+<text top="688" left="93" width="489" height="14" font="4">Let us show that only the median (or more precisely, the <i>h</i>th order statistic) is</text>
+<text top="706" left="76" width="506" height="14" font="4">needed. Computation of the median is less costly than sorting an array. The objectives</text>
+<text top="724" left="76" width="404" height="14" font="4">in the LTS and LTA methods can be rewritten in the following form</text>
+<text top="775" left="225" width="72" height="14" font="4">Minimize <i>F</i></text>
+<text top="771" left="298" width="35" height="19" font="3">(θ) =</text>
+<text top="759" left="345" width="6" height="10" font="10"><i>n</i></text>
+<text top="796" left="338" width="3" height="10" font="10"><i>i</i></text>
+<text top="793" left="342" width="15" height="15" font="6">=1</text>
+<text top="771" left="361" width="25" height="19" font="3">ρ(|<i>r</i></text>
+<text top="780" left="386" width="3" height="10" font="10"><i>i</i></text>
+<text top="771" left="391" width="34" height="19" font="3">(θ)|),</text>
+<text top="775" left="565" width="17" height="14" font="4">(5)</text>
+<text top="827" left="76" width="27" height="14" font="4">with</text>
+<text top="876" left="230" width="42" height="19" font="3">ρ(<i>t</i>) =</text>
+<text top="845" left="276" width="12" height="19" font="3">⎧</text>
+<text top="859" left="276" width="12" height="19" font="3">⎨</text>
+<text top="886" left="276" width="12" height="19" font="3">⎩</text>
+<text top="862" left="290" width="4" height="14" font="8"><i>t</i></text>
+<text top="859" left="296" width="6" height="10" font="10"><i>q</i></text>
+<text top="862" left="328" width="17" height="14" font="4">if <i>t</i></text>
+<text top="858" left="351" width="64" height="19" font="3">&lt; <i>Med</i>(<b>r</b>)</text>
+<text top="876" left="292" width="6" height="10" font="10"><i>a</i></text>
+<text top="887" left="292" width="6" height="10" font="10"><i>b</i></text>
+<text top="880" left="300" width="4" height="14" font="8"><i>t</i></text>
+<text top="877" left="306" width="6" height="10" font="10"><i>q</i></text>
+<text top="880" left="328" width="17" height="14" font="4">if <i>t</i></text>
+<text top="876" left="351" width="64" height="19" font="3">= <i>Med</i>(<b>r</b>)</text>
+<text top="898" left="290" width="7" height="14" font="4">0</text>
+<text top="898" left="328" width="58" height="14" font="4">otherwise</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="89" left="76" width="47" height="14" font="4">where <i>q</i></text>
+<text top="85" left="129" width="453" height="19" font="3">= 2 for LTS and <i>q </i>= 1 for LTA methods. The integers <i>a </i>and <i>b </i>are computed</text>
+<text top="107" left="76" width="379" height="14" font="4">from the multiplicity of the median, as will be explained below.</text>
+<text top="125" left="93" width="488" height="14" font="4">The objective <i>F </i>appears to be discontinuous, but we will show that by choosing <i>a</i></text>
+<text top="142" left="76" width="494" height="14" font="4">and <i>b </i>appropriately, <i>F </i>can be made Lipschitz-continuous. We argue that problem <a href="pdfxml.html#4">(</a></text>
+<text top="142" left="570" width="7" height="14" font="9"><a href="pdfxml.html#4">5</a></text>
+<text top="142" left="577" width="5" height="14" font="4"><a href="pdfxml.html#4">)</a></text>
+<text top="160" left="76" width="461" height="14" font="4">is equivalent to either the LTS or LTA problem depending on the choice of <i>q</i>.</text>
+<text top="178" left="93" width="489" height="14" font="4">A potential discontinuity can happen when one of the residuals approaches the</text>
+<text top="196" left="76" width="77" height="14" font="4">median <i>Med</i></text>
+<text top="192" left="154" width="428" height="19" font="3">(<b>r</b>), so that two or more residuals are equal to <i>Med</i>(<b>r</b>). The multiplicity</text>
+<text top="214" left="76" width="506" height="14" font="4">of the median is the number of components of <b>r </b>equal to the median. Consider the</text>
+<text top="232" left="76" width="63" height="14" font="4">numbers <i>b</i></text>
+<text top="237" left="140" width="6" height="10" font="10"><i>L</i></text>
+<text top="228" left="153" width="65" height="19" font="3">= <i>count</i>(<i>r</i></text>
+<text top="237" left="218" width="3" height="10" font="10"><i>i</i></text>
+<text top="228" left="228" width="179" height="19" font="3">&lt; <i>Med</i>(<b>r</b>)) and <i>b </i>= <i>count</i>(<i>r</i></text>
+<text top="237" left="407" width="3" height="10" font="10"><i>i</i></text>
+<text top="228" left="417" width="165" height="19" font="3">= <i>Med</i>(<b>r</b>)). In the LTS (or</text>
+<text top="250" left="76" width="121" height="14" font="4">LTA) method take <i>h</i></text>
+<text top="246" left="203" width="12" height="19" font="3">=</text>
+<text top="246" left="222" width="6" height="10" font="10"><i>n</i></text>
+<text top="244" left="228" width="15" height="15" font="6">+1</text>
+<text top="258" left="229" width="6" height="10" font="0">2</text>
+<text top="250" left="248" width="98" height="14" font="4">for odd <i>n</i>, and <i>h</i></text>
+<text top="246" left="352" width="12" height="19" font="3">=</text>
+<text top="246" left="370" width="6" height="10" font="10"><i>n</i></text>
+<text top="258" left="371" width="6" height="10" font="0">2</text>
+<text top="250" left="383" width="112" height="14" font="4">for even <i>n</i>. Then <i>h</i></text>
+<text top="246" left="501" width="24" height="19" font="3">= <i>b</i></text>
+<text top="255" left="525" width="6" height="10" font="10"><i>L</i></text>
+<text top="246" left="537" width="45" height="19" font="3">+ <i>a </i>for</text>
+<text top="268" left="76" width="43" height="14" font="4">some <i>a</i></text>
+<text top="264" left="125" width="334" height="19" font="3">≤ <i>b</i>. Now if we take <i>a </i>and <i>b </i>calculated in this way in <a href="pdfxml.html#4">(</a></text>
+<text top="268" left="459" width="7" height="14" font="9"><a href="pdfxml.html#4">5</a></text>
+<text top="268" left="467" width="115" height="14" font="4"><a href="pdfxml.html#4">), </a>the value of <i>F </i>in</text>
+<text top="286" left="76" width="5" height="14" font="4"><a href="pdfxml.html#4">(</a></text>
+<text top="286" left="81" width="7" height="14" font="9"><a href="pdfxml.html#4">5</a></text>
+<text top="286" left="89" width="494" height="14" font="4"><a href="pdfxml.html#4">) </a>will be the sum of exactly <i>h </i>smallest residuals, and will coincide with <i>F </i>in LTS</text>
+<text top="304" left="76" width="5" height="14" font="4"><a href="pdfxml.html#4">(</a></text>
+<text top="304" left="81" width="7" height="14" font="9"><a href="pdfxml.html#4">3</a></text>
+<text top="304" left="89" width="58" height="14" font="4"><a href="pdfxml.html#4">) </a>or LTA <a href="pdfxml.html#4">(</a></text>
+<text top="304" left="147" width="7" height="14" font="9"><a href="pdfxml.html#4">4</a></text>
+<text top="304" left="154" width="428" height="14" font="4"><a href="pdfxml.html#4">) </a>method. Since <i>F </i>in the LTS and LTA methods is Lipschitz-continuous,</text>
+<text top="322" left="76" width="65" height="14" font="4">so is <i>F </i>in <a href="pdfxml.html#4">(</a></text>
+<text top="322" left="141" width="7" height="14" font="9"><a href="pdfxml.html#4">5</a></text>
+<text top="322" left="149" width="158" height="14" font="4"><a href="pdfxml.html#4">). </a>For the usual choice of <i>h</i></text>
+<text top="318" left="312" width="270" height="19" font="3">= [(<i>n </i>+ <i>p</i>)/2], we simply replace the median</text>
+<text top="340" left="76" width="506" height="14" font="4">with <i>h</i>th order statistic. The values of <i>a </i>and <i>b </i>are easily calculated once the median is</text>
+<text top="358" left="76" width="44" height="14" font="4">known.</text>
+<text top="402" left="76" width="165" height="14" font="4">2.3 Parallelization for GPU</text>
+<text top="438" left="76" width="506" height="14" font="4">Minimization of <i>F </i>can be performed by various methods, such as subset selection</text>
+<text top="456" left="76" width="59" height="14" font="4">methods <a href="pdfxml.html#14">[</a></text>
+<text top="456" left="135" width="7" height="14" font="9"><a href="pdfxml.html#14">7</a></text>
+<text top="456" left="143" width="396" height="14" font="4"><a href="pdfxml.html#14">], </a>heuristics, or derivative-free optimization methods described in <a href="pdfxml.html#14">[</a></text>
+<text top="456" left="539" width="15" height="14" font="9"><a href="pdfxml.html#14">16</a></text>
+<text top="456" left="554" width="4" height="14" font="4"><a href="pdfxml.html#14">,</a></text>
+<text top="456" left="558" width="15" height="14" font="9"><a href="pdfxml.html#14">18</a></text>
+<text top="456" left="573" width="9" height="14" font="4">].</text>
+<text top="474" left="76" width="506" height="14" font="4">Regardless of the optimization method used, the values of <i>F </i>computed at multiple</text>
+<text top="492" left="76" width="37" height="14" font="4">points</text>
+<text top="488" left="116" width="87" height="19" font="3">θ are required.</text>
+<text top="510" left="93" width="489" height="14" font="4">To offload computations to a GPU device, we use the following strategy. A serial</text>
+<text top="528" left="76" width="506" height="14" font="4">optimization method runs on a CPU. It calls a subroutine for calculation of <i>F </i>, exe-</text>
+<text top="546" left="76" width="506" height="14" font="4">cuted on a GPU. The matrix <i>X </i>of explanatory variables and <b>y </b>are copied to GPU’s</text>
+<text top="564" left="76" width="384" height="14" font="4">global memory at the start of the process. Each time the value <i>F</i></text>
+<text top="560" left="461" width="121" height="19" font="3">(θ) is required, only</text>
+<text top="582" left="76" width="37" height="14" font="4">vector</text>
+<text top="578" left="117" width="465" height="19" font="3">θ is copied from CPU to GPU global memory, and the absolute residuals <b>r </b>are</text>
+<text top="600" left="76" width="152" height="14" font="4">evaluated in parallel in <i>O</i></text>
+<text top="596" left="230" width="6" height="19" font="3">(</text>
+<text top="596" left="238" width="6" height="10" font="10"><i>n</i></text>
+<text top="608" left="237" width="8" height="10" font="10"><i>m</i></text>
+<text top="596" left="248" width="334" height="19" font="3">) operations, where <i>m </i>is the number of GPU cores. The</text>
+<text top="618" left="76" width="506" height="14" font="4">residuals are kept in the GPU global memory. The C++ code which relies on CUDA</text>
+<text top="636" left="76" width="325" height="14" font="4">and high-level parallel primitives from Thrust library <a href="pdfxml.html#14">[</a></text>
+<text top="636" left="402" width="7" height="14" font="9"><a href="pdfxml.html#14">5</a></text>
+<text top="636" left="409" width="122" height="14" font="4">] is presented in Fig.</text>
+<text top="636" left="535" width="7" height="14" font="9"><a href="pdfxml.html#6">1</a></text>
+<text top="636" left="543" width="4" height="14" font="4"><a href="pdfxml.html#6">.</a></text>
+<text top="654" left="93" width="66" height="14" font="4">Next, <i>Med</i></text>
+<text top="650" left="160" width="422" height="19" font="3">(<b>r</b>) is required. The median is computed by using one of the methods</text>
+<text top="671" left="76" width="260" height="14" font="4">described in the next section. The terms in <a href="pdfxml.html#4">(</a></text>
+<text top="671" left="336" width="7" height="14" font="9"><a href="pdfxml.html#4">5</a></text>
+<text top="671" left="343" width="239" height="14" font="4"><a href="pdfxml.html#4">) </a>are computed in parallel on the device,</text>
+<text top="689" left="76" width="338" height="14" font="4">and the <i>reduce </i>operation is used to calculate the sum in <i>O</i></text>
+<text top="686" left="415" width="6" height="19" font="3">(</text>
+<text top="686" left="424" width="6" height="10" font="10"><i>n</i></text>
+<text top="697" left="423" width="8" height="10" font="10"><i>m</i></text>
+<text top="686" left="435" width="147" height="19" font="3">+log <i>m</i>) time. The value</text>
+<text top="707" left="76" width="506" height="14" font="4">of <i>F </i>is copied to the CPU and the minimization process continues until convergence.</text>
+<text top="725" left="93" width="364" height="14" font="4">Next we look at parallel computation of the median on GPU.</text>
+<text top="770" left="76" width="188" height="14" font="2"><b>3 Computation of the median</b></text>
+<text top="806" left="76" width="160" height="14" font="4">3.1 Traditional approaches</text>
+<text top="842" left="76" width="148" height="14" font="4">Consider a large vector <b>r</b></text>
+<text top="838" left="228" width="9" height="19" font="3">∈</text>
+<text top="839" left="253" width="6" height="10" font="10"><i>n</i></text>
+<text top="838" left="260" width="101" height="19" font="3">, <i>n </i>of order of 10</text>
+<text top="839" left="360" width="6" height="10" font="0">5</text>
+<text top="838" left="369" width="29" height="19" font="3">− 10</text>
+<text top="839" left="399" width="6" height="10" font="0">8</text>
+<text top="842" left="405" width="177" height="14" font="4">. We are interested in efﬁcient</text>
+<text top="860" left="76" width="442" height="14" font="4">calculation of its median, or an order statistic. The median is the value <i>r</i></text>
+<text top="864" left="518" width="3" height="10" font="10"><i>i</i></text>
+<text top="860" left="528" width="55" height="14" font="4">such that</text>
+<text top="878" left="76" width="506" height="14" font="4">there are an equal number of smaller and larger elements of <b>r</b>, provided <i>n </i>is odd. For</text>
+<text top="896" left="76" width="310" height="14" font="4">even <i>n </i>we consider the lower median, the element <i>r</i></text>
+<text top="900" left="386" width="3" height="10" font="10"><i>i</i></text>
+<text top="896" left="395" width="65" height="14" font="4">such that <i>n</i></text>
+<text top="892" left="461" width="121" height="19" font="3">/2 elements of <b>r </b>are</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="999" width="659">
+	<fontspec id="12" size="9" family="Times" color="#131413"/>
+	<fontspec id="13" size="9" family="Times" color="#0000ff"/>
+	<fontspec id="14" size="9" family="Courier" color="#131413"/>
+	<fontspec id="15" size="8" family="Times" color="#131413"/>
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="713" left="76" width="351" height="11" font="12"><b>Fig. 1 </b>A fragment of C++ code for evaluation of the objective <i>F </i>in <a href="pdfxml.html#4">(</a></text>
+<text top="713" left="427" width="6" height="11" font="13"><a href="pdfxml.html#4">5</a></text>
+<text top="713" left="433" width="149" height="11" font="0"><a href="pdfxml.html#4">) </a>in parallel on GPU by using</text>
+<text top="727" left="76" width="87" height="11" font="0">CUDA and Thrust</text>
+<text top="728" left="167" width="115" height="9" font="14">transform_reduce</text>
+<text top="727" left="284" width="17" height="11" font="0">and</text>
+<text top="728" left="304" width="57" height="9" font="14">for_each</text>
+<text top="727" left="364" width="99" height="11" font="0">functions, when <i>di m</i></text>
+<text top="724" left="467" width="115" height="16" font="6">= <i>p </i>= 3. For numerical</text>
+<text top="742" left="76" width="49" height="11" font="0">efﬁciency,</text>
+<text top="742" left="128" width="57" height="9" font="14">for_each</text>
+<text top="742" left="188" width="394" height="11" font="0">operation requires packing the data (inputs <i>X </i>,<i>y </i>and output <i>r esi d</i>) into a <i>zip </i>iterator</text>
+<text top="756" left="76" width="506" height="11" font="0">whose elements are tuples. Components of a tuple are extracted using <i>get </i>operation within <i>Residual</i>, which</text>
+<text top="770" left="76" width="359" height="11" font="0">is executed for each datum on GPU. <i>Transform_reduce </i>calculates the sum <a href="pdfxml.html#4">(</a></text>
+<text top="770" left="435" width="6" height="11" font="13"><a href="pdfxml.html#4">5</a></text>
+<text top="770" left="441" width="71" height="11" font="0"><a href="pdfxml.html#4">) </a>by evaluating</text>
+<text top="767" left="515" width="16" height="16" font="6">ρ(<i>r</i></text>
+<text top="774" left="532" width="3" height="9" font="15"><i>i</i></text>
+<text top="767" left="536" width="46" height="16" font="6">) for each</text>
+<text top="784" left="76" width="246" height="11" font="0">residual and performing summation simultaneously</text>
+<text top="824" left="76" width="151" height="14" font="4">smaller than or equal to <i>r</i></text>
+<text top="829" left="227" width="3" height="10" font="10"><i>i</i></text>
+<text top="824" left="232" width="101" height="14" font="4">. If we denote by</text>
+<text top="820" left="338" width="244" height="19" font="3">ˆ<b>r </b>the array obtained from <b>r </b>by sorting its</text>
+<text top="842" left="76" width="282" height="14" font="4">components in non-decreasing order, then <i>Med</i></text>
+<text top="838" left="359" width="44" height="19" font="3">(<b>r</b>) = ˆ<i>r</i></text>
+<text top="844" left="403" width="25" height="15" font="6">[<i>n</i>/2]</text>
+<text top="842" left="428" width="154" height="14" font="4">. Note that some elements</text>
+<text top="860" left="76" width="379" height="14" font="4">of <b>r </b>may coincide with each other. The <i>k</i>th order statistic is <i>O S</i></text>
+<text top="864" left="455" width="5" height="10" font="10"><i>k</i></text>
+<text top="856" left="461" width="44" height="19" font="3">(<b>r</b>) = ˆ<i>r</i></text>
+<text top="864" left="505" width="5" height="10" font="10"><i>k</i></text>
+<text top="860" left="512" width="4" height="14" font="4">.</text>
+<text top="878" left="93" width="414" height="14" font="4">A straightforward approach is to sort the elements of <b>r </b>and take <i>Med</i></text>
+<text top="874" left="508" width="45" height="19" font="3">(<b>r</b>) = ˆ<i>r</i></text>
+<text top="880" left="553" width="25" height="15" font="6">[<i>n</i>/2]</text>
+<text top="878" left="578" width="4" height="14" font="4">.</text>
+<text top="896" left="76" width="265" height="14" font="4">The complexity of the sort operation is <i>O</i></text>
+<text top="892" left="343" width="239" height="19" font="3">(<i>n </i>log <i>n</i>) by using one of the standard</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="89" left="76" width="416" height="14" font="4">sorting algorithms such as <i>quicksort</i>, <i>bucket sort </i>or <i>radix sort </i><a href="pdfxml.html#14">[</a></text>
+<text top="89" left="492" width="15" height="14" font="9"><a href="pdfxml.html#14">19</a></text>
+<text top="89" left="507" width="75" height="14" font="4"><a href="pdfxml.html#14">]. </a><i>Quicksort</i></text>
+<text top="107" left="76" width="38" height="14" font="4">has <i>O</i></text>
+<text top="103" left="115" width="467" height="19" font="3">(<i>n </i>log <i>n</i>) expected complexity, while for the other mentioned algorithms it</text>
+<text top="125" left="76" width="506" height="14" font="4">is the worst case complexity. Parallel versions of sorting methods for GPUs are</text>
+<text top="142" left="76" width="62" height="14" font="4">available <a href="pdfxml.html#14">[</a></text>
+<text top="142" left="138" width="15" height="14" font="9"><a href="pdfxml.html#14">20</a></text>
+<text top="142" left="153" width="7" height="14" font="4"><a href="pdfxml.html#15">–</a></text>
+<text top="142" left="161" width="15" height="14" font="9"><a href="pdfxml.html#15">22</a></text>
+<text top="142" left="175" width="9" height="14" font="4">].</text>
+<text top="160" left="93" width="391" height="14" font="4">An improvement over sorting is to use the algorithm <i>quickselect </i><a href="pdfxml.html#15">[</a></text>
+<text top="160" left="485" width="15" height="14" font="9"><a href="pdfxml.html#15">23</a></text>
+<text top="160" left="500" width="4" height="14" font="4"><a href="pdfxml.html#15">,</a></text>
+<text top="160" left="504" width="15" height="14" font="9"><a href="pdfxml.html#14">19</a></text>
+<text top="160" left="519" width="63" height="14" font="4">], which is</text>
+<text top="178" left="76" width="339" height="14" font="4">based on <i>quicksort</i>, and has an expected complexity of <i>O</i></text>
+<text top="175" left="416" width="166" height="19" font="3">(<i>n</i>). The median of medians</text>
+<text top="196" left="76" width="277" height="14" font="4">algorithm, also called <i>BFPRT</i>, developed in <a href="pdfxml.html#15">[</a></text>
+<text top="196" left="353" width="15" height="14" font="9"><a href="pdfxml.html#15">24</a></text>
+<text top="196" left="368" width="50" height="14" font="4">], has <i>O</i></text>
+<text top="192" left="419" width="163" height="19" font="3">(<i>n</i>) worst case complexity.</text>
+<text top="214" left="76" width="506" height="14" font="4">Our tests show however that the simpler <i>quickselect </i>outperforms <i>BFPRT </i>on average</text>
+<text top="232" left="76" width="144" height="14" font="4">by a factor of four (for <i>n</i></text>
+<text top="228" left="224" width="358" height="19" font="3">= 3,200,000). None of these methods are parallelized for or</text>
+<text top="250" left="76" width="148" height="14" font="4">take advantage of GPUs.</text>
+<text top="268" left="93" width="489" height="14" font="4">A speciﬁc feature of our problem is that the vector of absolute residuals <b>r </b>is stored</text>
+<text top="286" left="76" width="375" height="14" font="4">in an array on the GPU <i>device</i>, as mentioned at the end of Sect.</text>
+<text top="286" left="455" width="7" height="14" font="9"><a href="pdfxml.html#3">2</a></text>
+<text top="286" left="462" width="120" height="14" font="4"><a href="pdfxml.html#3">. </a>Therefore, in order</text>
+<text top="304" left="76" width="506" height="14" font="4">to use the faster <i>quickselect </i>algorithm we need to transfer <b>r </b>from the GPU memory to</text>
+<text top="322" left="76" width="506" height="14" font="4">the CPU memory. A single transfer is a trivial delay, but multiple transfers in various</text>
+<text top="340" left="76" width="506" height="14" font="4">minimization algorithms may become a bottleneck. Furthermore, several GPU devices</text>
+<text top="358" left="76" width="506" height="14" font="4">can be used to process arrays which do not ﬁt into the CPU’s main memory, but ﬁt in</text>
+<text top="376" left="76" width="506" height="14" font="4">the combined memory of several GPUs. In this case the use of <i>quickselect </i>on CPU is</text>
+<text top="393" left="76" width="120" height="14" font="4">no longer an option.</text>
+<text top="411" left="93" width="303" height="14" font="4">The sort operation was parallelized for GPUs <a href="pdfxml.html#14">[</a></text>
+<text top="411" left="396" width="15" height="14" font="9"><a href="pdfxml.html#14">20</a></text>
+<text top="411" left="411" width="7" height="14" font="4"><a href="pdfxml.html#15">–</a></text>
+<text top="411" left="419" width="15" height="14" font="9"><a href="pdfxml.html#15">22</a></text>
+<text top="411" left="434" width="149" height="14" font="4"><a href="pdfxml.html#15">]. </a>Here we consider an</text>
+<text top="429" left="76" width="182" height="14" font="4">approach based on radix sort <a href="pdfxml.html#15">[</a></text>
+<text top="429" left="258" width="15" height="14" font="9"><a href="pdfxml.html#15">25</a></text>
+<text top="429" left="273" width="309" height="14" font="4">], which at the time of writing was among the most</text>
+<text top="447" left="76" width="506" height="14" font="4">efﬁcient GPU sort algorithms. Taking into account the fact that <i>quickselect </i>requires</text>
+<text top="465" left="76" width="506" height="14" font="4">data transfer, whereas GPU version of radix sort does not, the latter may be more</text>
+<text top="483" left="76" width="52" height="14" font="4">efﬁcient.</text>
+<text top="531" left="76" width="352" height="14" font="4">3.2 Alternative approach based on search and optimization</text>
+<text top="567" left="76" width="506" height="14" font="4">It was known to Laplace and Gauss, that the arithmetic mean, the median, the mode</text>
+<text top="585" left="76" width="460" height="14" font="4">and some other functions are solutions to simple optimization problems, see <a href="pdfxml.html#15">[</a></text>
+<text top="585" left="536" width="15" height="14" font="9"><a href="pdfxml.html#15">26</a></text>
+<text top="585" left="551" width="7" height="14" font="4"><a href="pdfxml.html#15">–</a></text>
+<text top="585" left="558" width="15" height="14" font="9"><a href="pdfxml.html#15">28</a></text>
+<text top="585" left="573" width="9" height="14" font="4">].</text>
+<text top="603" left="76" width="315" height="14" font="4">A recent account and generalizations can be found in <a href="pdfxml.html#15">[</a></text>
+<text top="603" left="391" width="15" height="14" font="9"><a href="pdfxml.html#15">29</a></text>
+<text top="603" left="406" width="7" height="14" font="4"><a href="pdfxml.html#15">–</a></text>
+<text top="603" left="413" width="15" height="14" font="9"><a href="pdfxml.html#15">31</a></text>
+<text top="603" left="428" width="154" height="14" font="4">]. In particular, the median</text>
+<text top="621" left="76" width="257" height="14" font="4">is a minimizer of the following expression:</text>
+<text top="672" left="181" width="28" height="14" font="8"><i>Med</i></text>
+<text top="668" left="210" width="83" height="19" font="3">(<b>x</b>) = arg min</text>
+<text top="683" left="280" width="5" height="10" font="10"><i>y</i></text>
+<text top="672" left="300" width="4" height="14" font="8"><i>f</i></text>
+<text top="668" left="307" width="84" height="19" font="3">(<i>y</i>) = arg min</text>
+<text top="683" left="377" width="5" height="10" font="10"><i>y</i></text>
+<text top="656" left="401" width="6" height="10" font="10"><i>n</i></text>
+<text top="693" left="395" width="3" height="10" font="10"><i>i</i></text>
+<text top="690" left="399" width="15" height="15" font="6">=1</text>
+<text top="668" left="417" width="11" height="19" font="3">|<i>x</i></text>
+<text top="677" left="429" width="3" height="10" font="10"><i>i</i></text>
+<text top="668" left="437" width="32" height="19" font="3">− <i>y</i>|.</text>
+<text top="672" left="565" width="17" height="14" font="4">(6)</text>
+<text top="724" left="93" width="489" height="14" font="4">The objective is clearly non-smooth, but it is convex, and the problem can be solved</text>
+<text top="742" left="76" width="506" height="14" font="4">by a number of classical univariate optimization methods. Of course, the solution to</text>
+<text top="760" left="76" width="58" height="14" font="4">problem <a href="pdfxml.html#7">(</a></text>
+<text top="760" left="134" width="7" height="14" font="9"><a href="pdfxml.html#7">6</a></text>
+<text top="760" left="142" width="440" height="14" font="4"><a href="pdfxml.html#7">) </a>is more expensive than <i>quickselect </i>on CPUs, but taking into account that</text>
+<text top="778" left="76" width="506" height="14" font="4">the data reside on the GPU, and that each evaluation of all the terms in the objective</text>
+<text top="796" left="76" width="159" height="14" font="4">can be done in parallel in <i>O</i></text>
+<text top="792" left="236" width="6" height="19" font="3">(</text>
+<text top="792" left="245" width="6" height="10" font="10"><i>n</i></text>
+<text top="804" left="244" width="8" height="10" font="10"><i>m</i></text>
+<text top="792" left="254" width="328" height="19" font="3">) operations (again, <i>m </i>is the number of processor cores),</text>
+<text top="814" left="76" width="257" height="14" font="4">this method becomes a feasible alternative.</text>
+<text top="832" left="93" width="423" height="14" font="4">For calculation of a <i>k</i>th order statistic, the following objective is used <a href="pdfxml.html#15">[</a></text>
+<text top="832" left="516" width="15" height="14" font="9"><a href="pdfxml.html#15">30</a></text>
+<text top="832" left="531" width="4" height="14" font="4"><a href="pdfxml.html#15">,</a></text>
+<text top="832" left="536" width="15" height="14" font="9"><a href="pdfxml.html#15">31</a></text>
+<text top="832" left="551" width="5" height="14" font="4"><a href="pdfxml.html#15">]</a></text>
+<text top="883" left="230" width="20" height="14" font="8"><i>O S</i></text>
+<text top="888" left="250" width="5" height="10" font="10"><i>k</i></text>
+<text top="879" left="256" width="83" height="19" font="3">(<b>x</b>) = arg min</text>
+<text top="894" left="326" width="5" height="10" font="10"><i>y</i></text>
+<text top="866" left="350" width="6" height="10" font="10"><i>n</i></text>
+<text top="904" left="343" width="3" height="10" font="10"><i>i</i></text>
+<text top="901" left="348" width="15" height="15" font="6">=1</text>
+<text top="883" left="366" width="7" height="14" font="8"><i>u</i></text>
+<text top="879" left="374" width="13" height="19" font="3">(<i>x</i></text>
+<text top="888" left="387" width="3" height="10" font="10"><i>i</i></text>
+<text top="879" left="395" width="34" height="19" font="3">− <i>y</i>),</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="89" left="76" width="36" height="14" font="4">where</text>
+<text top="130" left="222" width="7" height="14" font="8"><i>u</i></text>
+<text top="126" left="231" width="54" height="19" font="3">(<i>t</i>) = (</text>
+<text top="121" left="284" width="7" height="14" font="8"><i>n</i></text>
+<text top="117" left="296" width="37" height="19" font="3">− <i>k </i>+</text>
+<text top="118" left="338" width="6" height="10" font="0">1</text>
+<text top="129" left="338" width="6" height="10" font="0">2</text>
+<text top="117" left="346" width="77" height="19" font="3">)<i>t </i>if <i>t </i>≥ 0,</text>
+<text top="136" left="279" width="40" height="19" font="3">−(<i>k </i>−</text>
+<text top="137" left="324" width="6" height="10" font="0">1</text>
+<text top="148" left="324" width="6" height="10" font="0">2</text>
+<text top="136" left="331" width="10" height="19" font="3">)<i>t</i></text>
+<text top="140" left="372" width="17" height="14" font="4">if <i>t</i></text>
+<text top="136" left="395" width="27" height="19" font="3">&lt; 0.</text>
+<text top="174" left="93" width="434" height="14" font="4">For the purposes of optimization, we consider the following alternatives:</text>
+<text top="192" left="93" width="122" height="14" font="4">(1) Brent’s method <a href="pdfxml.html#15">[</a></text>
+<text top="192" left="215" width="15" height="14" font="9"><a href="pdfxml.html#15">23</a></text>
+<text top="192" left="230" width="352" height="14" font="4"><a href="pdfxml.html#15">], </a>(2) the golden section method, (3) an analog of the New-</text>
+<text top="210" left="76" width="247" height="14" font="4">ton’s method for non-smooth functions <a href="pdfxml.html#15">[</a></text>
+<text top="210" left="323" width="15" height="14" font="9"><a href="pdfxml.html#15">32</a></text>
+<text top="210" left="338" width="244" height="14" font="4">], and (4) Kelley’s cutting plane method</text>
+<text top="228" left="76" width="5" height="14" font="4"><a href="pdfxml.html#15">[</a></text>
+<text top="228" left="81" width="15" height="14" font="9"><a href="pdfxml.html#15">33</a></text>
+<text top="228" left="96" width="9" height="14" font="4">].</text>
+<text top="246" left="93" width="489" height="14" font="4">An alternative to the minimization of univariate non-smooth functions is the solu-</text>
+<text top="264" left="76" width="237" height="14" font="4">tion to the following nonlinear equation</text>
+<text top="299" left="292" width="7" height="14" font="2"><b>0</b></text>
+<text top="296" left="303" width="55" height="19" font="3">∈ ∂ <i>f </i>(<i>y</i>),</text>
+<text top="335" left="76" width="36" height="14" font="4">where</text>
+<text top="331" left="116" width="183" height="19" font="3">∂ <i>f </i>is Clarke’s subdifferential <a href="pdfxml.html#15">[</a></text>
+<text top="335" left="300" width="15" height="14" font="9"><a href="pdfxml.html#15">34</a></text>
+<text top="335" left="314" width="95" height="14" font="4">]. We know that</text>
+<text top="383" left="239" width="38" height="19" font="3">∂|<i>t</i>| =</text>
+<text top="353" left="281" width="12" height="19" font="3">⎧</text>
+<text top="366" left="281" width="12" height="19" font="3">⎨</text>
+<text top="393" left="281" width="12" height="19" font="3">⎩</text>
+<text top="365" left="296" width="30" height="19" font="3">{−1}</text>
+<text top="369" left="355" width="17" height="14" font="4">if <i>t</i></text>
+<text top="365" left="377" width="28" height="19" font="3">&lt; 0,</text>
+<text top="387" left="296" width="5" height="14" font="4">[</text>
+<text top="383" left="301" width="105" height="19" font="3">−1, 1] if <i>t </i>= 0,</text>
+<text top="401" left="296" width="19" height="19" font="3">{1}</text>
+<text top="405" left="355" width="17" height="14" font="4">if <i>t</i></text>
+<text top="401" left="377" width="27" height="19" font="3">&gt; 0.</text>
+<text top="439" left="76" width="92" height="14" font="4">We can express</text>
+<text top="436" left="172" width="408" height="19" font="3">∂ <i>f </i>using <i>g </i>: → <i>I </i>⊆ , where <i>I </i>is a set of intervals on a real line,</text>
+<text top="475" left="110" width="7" height="14" font="8"><i>g</i></text>
+<text top="471" left="118" width="89" height="19" font="3">(<i>y</i>) = <i>count</i>(<i>x</i></text>
+<text top="479" left="207" width="3" height="10" font="10"><i>i</i></text>
+<text top="471" left="217" width="98" height="19" font="3">&gt; <i>y</i>) + <i>count</i>(<i>x</i></text>
+<text top="479" left="314" width="3" height="10" font="10"><i>i</i></text>
+<text top="471" left="324" width="128" height="19" font="3">&lt; <i>y</i>)(−1) + <i>count</i>(<i>x</i></text>
+<text top="479" left="452" width="3" height="10" font="10"><i>i</i></text>
+<text top="471" left="461" width="79" height="19" font="3">= <i>y</i>)[−1, 1],</text>
+<text top="510" left="76" width="506" height="14" font="4">where <i>count </i>is the number of elements of <b>x </b>satisfying a given condition, and where</text>
+<text top="528" left="76" width="223" height="14" font="4">the usual Minkowski sum for is used.</text>
+<text top="546" left="93" width="489" height="14" font="4">It is possible to adapt the classical bisection method, similar to how it was done in</text>
+<text top="564" left="76" width="5" height="14" font="4"><a href="pdfxml.html#15">[</a></text>
+<text top="564" left="81" width="15" height="14" font="9"><a href="pdfxml.html#15">35</a></text>
+<text top="564" left="96" width="486" height="14" font="4">] but in a different context, and other root ﬁnding algorithms to solve the equation</text>
+<text top="582" left="76" width="7" height="14" font="4">0</text>
+<text top="578" left="88" width="494" height="19" font="3">∈ <i>g</i>(<i>y</i>). In this study we used the method of parabolas combined with golden sec-</text>
+<text top="600" left="76" width="278" height="14" font="4">tion, which is also known as Brent algorithm <a href="pdfxml.html#15">[</a></text>
+<text top="600" left="354" width="15" height="14" font="9"><a href="pdfxml.html#15">23</a></text>
+<text top="600" left="369" width="213" height="14" font="4">]. In fact this root ﬁnding algorithm</text>
+<text top="618" left="76" width="506" height="14" font="4">is equivalent to Brent’s optimization method, however we looked at both alternatives,</text>
+<text top="636" left="76" width="487" height="14" font="4">as implementation details and stopping criteria may play a role in their efﬁciency.</text>
+<text top="654" left="93" width="489" height="14" font="4">In our study all the algorithms from this subsection were implemented for a CPU,</text>
+<text top="671" left="76" width="506" height="14" font="4">and only the objective <i>f </i>and subdifferential <i>g </i>were executed on GPU in parallel.</text>
+<text top="689" left="76" width="185" height="14" font="4">Evaluation of the objective in <a href="pdfxml.html#7">(</a></text>
+<text top="689" left="261" width="7" height="14" font="9"><a href="pdfxml.html#7">6</a></text>
+<text top="689" left="269" width="313" height="14" font="4"><a href="pdfxml.html#7">) </a>requires summation. On GPUs it can be performed</text>
+<text top="707" left="76" width="330" height="14" font="4">by using the <i>reduce </i>operation, using binary trees in <i>O</i></text>
+<text top="704" left="407" width="6" height="19" font="3">(</text>
+<text top="704" left="416" width="6" height="10" font="10"><i>n</i></text>
+<text top="715" left="415" width="8" height="10" font="10"><i>m</i></text>
+<text top="704" left="429" width="153" height="19" font="3">+ log <i>m</i>) operations. The</text>
+<text top="725" left="76" width="358" height="14" font="4">reduce operation on GPUs was efﬁciently implemented in <a href="pdfxml.html#15">[</a></text>
+<text top="725" left="434" width="15" height="14" font="9"><a href="pdfxml.html#15">36</a></text>
+<text top="725" left="449" width="133" height="14" font="4">], where various hard-</text>
+<text top="743" left="76" width="506" height="14" font="4">ware related aspects and strategies, like loop unrolling, are discussed. The actual C++</text>
+<text top="761" left="76" width="355" height="14" font="4">code which utilises parallel primitives from Thrust library <a href="pdfxml.html#14">[</a></text>
+<text top="761" left="431" width="7" height="14" font="9"><a href="pdfxml.html#14">5</a></text>
+<text top="761" left="438" width="122" height="14" font="4">] is presented in Fig.</text>
+<text top="761" left="564" width="7" height="14" font="9"><a href="pdfxml.html#9">2</a></text>
+<text top="761" left="572" width="4" height="14" font="4"><a href="pdfxml.html#9">.</a></text>
+<text top="806" left="76" width="291" height="14" font="2"><b>4 Empirical study of computational efﬁciency</b></text>
+<text top="842" left="76" width="506" height="14" font="4">We selected the following methods for numerical comparison: <i>quickselect </i>on CPU,</text>
+<text top="860" left="76" width="177" height="14" font="4">GPU version of the radix sort <a href="pdfxml.html#15">[</a></text>
+<text top="860" left="253" width="15" height="14" font="9"><a href="pdfxml.html#15">25</a></text>
+<text top="860" left="268" width="247" height="14" font="4">], four methods based on minimization of <a href="pdfxml.html#7">(</a></text>
+<text top="860" left="515" width="7" height="14" font="9"><a href="pdfxml.html#7">6</a></text>
+<text top="860" left="523" width="59" height="14" font="4"><a href="pdfxml.html#7">) </a>(Brent’s,</text>
+<text top="878" left="76" width="506" height="14" font="4">golden section, nonsmooth quasi-Newton and cutting plane) and two methods based</text>
+<text top="896" left="76" width="74" height="14" font="4">on solving 0</text>
+<text top="892" left="154" width="321" height="19" font="3">∈ <i>g</i>(<i>y</i>) (bisection and Brent’s root ﬁnding algorithm).</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="755" left="76" width="309" height="11" font="12"><b>Fig. 2 </b>A fragment of C++ code for evaluation of the objective <i>f</i></text>
+<text top="752" left="387" width="195" height="16" font="6">(<i>t</i>) and its subgradient <i>g</i>(<i>t</i>) in parallel by</text>
+<text top="769" left="76" width="61" height="11" font="0">using Thrust</text>
+<text top="770" left="141" width="115" height="9" font="14">transform_reduce</text>
+<text top="769" left="259" width="108" height="11" font="0">function. The function</text>
+<text top="770" left="371" width="65" height="9" font="14">Objective</text>
+<text top="769" left="440" width="109" height="11" font="0">is called by Algorithm</text>
+<text top="769" left="552" width="6" height="11" font="13"><a href="pdfxml.html#13">1</a></text>
+<text top="769" left="558" width="24" height="11" font="0"><a href="pdfxml.html#13">, </a>and</text>
+<text top="784" left="76" width="254" height="11" font="0">once it terminates after <i>maxi t </i>iterations, the function</text>
+<text top="784" left="333" width="36" height="9" font="14">SortZ</text>
+<text top="784" left="371" width="211" height="11" font="0">calculates the median of <b>x </b>by sorting array <b>z</b></text>
+<text top="798" left="76" width="187" height="11" font="0">containing the data in the pivot interval</text>
+<text top="795" left="266" width="316" height="16" font="6">[<i>L</i>, <i>R</i>]. Calculation of median multiplicity is omitted for clarity of</text>
+<text top="812" left="76" width="40" height="11" font="0">the code</text>
+<text top="860" left="93" width="489" height="14" font="4">Sorting and selection algorithm perform differently on data from different distri-</text>
+<text top="878" left="76" width="506" height="14" font="4">butions. Therefore we generated 8 byte ﬂoating point data from a variety of distri-</text>
+<text top="896" left="76" width="506" height="14" font="4">butions in order to test the algorithms. We randomly generated the following data</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="89" left="76" width="146" height="14" font="4">sets of varying length <i>n</i></text>
+<text top="85" left="229" width="84" height="19" font="3">∈ {8192 = 2</text>
+<text top="86" left="313" width="11" height="10" font="0">13</text>
+<text top="85" left="325" width="77" height="19" font="3">, 32768 = 2</text>
+<text top="86" left="402" width="11" height="10" font="0">15</text>
+<text top="85" left="415" width="85" height="19" font="3">, 131072 = 2</text>
+<text top="86" left="499" width="11" height="10" font="0">17</text>
+<text top="85" left="512" width="71" height="19" font="3">, 524288 =</text>
+<text top="107" left="76" width="7" height="14" font="4">2</text>
+<text top="104" left="84" width="11" height="10" font="0">19</text>
+<text top="103" left="96" width="87" height="19" font="3">, 2097152 = 2</text>
+<text top="104" left="183" width="11" height="10" font="0">21</text>
+<text top="103" left="195" width="87" height="19" font="3">, 8388608 = 2</text>
+<text top="104" left="282" width="11" height="10" font="0">23</text>
+<text top="103" left="295" width="95" height="19" font="3">, 33554432 = 2</text>
+<text top="104" left="389" width="11" height="10" font="0">25</text>
+<text top="103" left="401" width="10" height="19" font="3">}:</text>
+<text top="133" left="76" width="87" height="14" font="4">1. Uniform <i>x</i></text>
+<text top="138" left="163" width="3" height="10" font="10"><i>i</i></text>
+<text top="130" left="172" width="62" height="19" font="3">∼ <i>U</i>(0, 1)</text>
+<text top="151" left="76" width="81" height="14" font="4">2. Normal <i>x</i></text>
+<text top="156" left="157" width="3" height="10" font="10"><i>i</i></text>
+<text top="148" left="167" width="62" height="19" font="3">∼ <i>N</i>(0, 1)</text>
+<text top="169" left="76" width="109" height="14" font="4">3. Half-normal <i>x</i></text>
+<text top="174" left="186" width="3" height="10" font="10"><i>i</i></text>
+<text top="166" left="195" width="28" height="19" font="3">= |<i>y</i></text>
+<text top="174" left="222" width="3" height="10" font="10"><i>i</i></text>
+<text top="166" left="227" width="41" height="19" font="3">| and <i>y</i></text>
+<text top="174" left="268" width="3" height="10" font="10"><i>i</i></text>
+<text top="166" left="277" width="62" height="19" font="3">∼ <i>N</i>(0, 1)</text>
+<text top="187" left="76" width="63" height="14" font="4">4. Beta <i>x</i></text>
+<text top="192" left="139" width="3" height="10" font="10"><i>i</i></text>
+<text top="184" left="148" width="59" height="19" font="3">∼ β(2, 5)</text>
+<text top="205" left="76" width="251" height="14" font="4">5. Mixture 1, 66.6% of elements of <i>x</i></text>
+<text top="210" left="327" width="3" height="10" font="10"><i>i</i></text>
+<text top="205" left="340" width="96" height="14" font="4">chosen from <i>N</i></text>
+<text top="201" left="437" width="145" height="19" font="3">(0, 1) and 33.3% from</text>
+<text top="223" left="102" width="10" height="14" font="8"><i>N</i></text>
+<text top="219" left="113" width="49" height="19" font="3">(100, 1)</text>
+<text top="241" left="76" width="228" height="14" font="4">6. Mixture 2, 50% of elements of <i>x</i></text>
+<text top="246" left="305" width="3" height="10" font="10"><i>i</i></text>
+<text top="237" left="314" width="268" height="19" font="3">+ 1 chosen from <i>N</i>(0, 1) and the rest from</text>
+<text top="259" left="102" width="10" height="14" font="8"><i>N</i></text>
+<text top="255" left="113" width="49" height="19" font="3">(100, 1)</text>
+<text top="277" left="76" width="222" height="14" font="4">7. Mixture 3, 90% of elements of <i>x</i></text>
+<text top="282" left="299" width="3" height="10" font="10"><i>i</i></text>
+<text top="277" left="308" width="165" height="14" font="4">chosen from half-normal <i>N</i></text>
+<text top="273" left="475" width="107" height="19" font="3">(0, 1) and the test</text>
+<text top="295" left="101" width="54" height="14" font="4">set to 10.</text>
+<text top="313" left="76" width="230" height="14" font="4">8. Mixture 4, 66.6% of elements of <i>x</i></text>
+<text top="318" left="307" width="3" height="10" font="10"><i>i</i></text>
+<text top="313" left="316" width="163" height="14" font="4">chosen from half-normal <i>N</i></text>
+<text top="309" left="481" width="101" height="19" font="3">(0, 1) and 33.3%</text>
+<text top="331" left="101" width="44" height="14" font="4">from <i>N</i></text>
+<text top="327" left="146" width="49" height="19" font="3">(100, 1)</text>
+<text top="349" left="76" width="222" height="14" font="4">9. Mixture 5, 50% of elements of <i>x</i></text>
+<text top="353" left="298" width="3" height="10" font="10"><i>i</i></text>
+<text top="345" left="307" width="275" height="19" font="3">+ 1 chosen from half-normal <i>N</i>(0, 1) and the</text>
+<text top="367" left="101" width="69" height="14" font="4">rest from <i>N</i></text>
+<text top="363" left="171" width="49" height="19" font="3">(100, 1)</text>
+<text top="393" left="93" width="489" height="14" font="4">In addition, we performed experiments in which one or more components of <b>x</b></text>
+<text top="411" left="76" width="136" height="14" font="4">took very large values</text>
+<text top="408" left="217" width="27" height="19" font="3">∼10</text>
+<text top="409" left="244" width="6" height="10" font="0">9</text>
+<text top="411" left="250" width="332" height="14" font="4">. The reasons for our selection of the distributions are</text>
+<text top="429" left="76" width="506" height="14" font="4">the following. The median is scale invariant, so the parameters of <i>U </i>and <i>N </i>are taken</text>
+<text top="447" left="76" width="506" height="14" font="4">without loss of generality. We wanted to test the algorithms for symmetric and asym-</text>
+<text top="465" left="76" width="506" height="14" font="4">metric distributions, such as half-normal and beta, as well as for mixtures. The use of</text>
+<text top="483" left="76" width="506" height="14" font="4">half-normal distributions is motivated by our background application, that of robust</text>
+<text top="501" left="76" width="506" height="14" font="4">regression. If the data follow a linear model with normally distributed noise, the abso-</text>
+<text top="519" left="76" width="506" height="14" font="4">lute residuals follow a half-normal distribution. If there are large outliers in the data,</text>
+<text top="537" left="76" width="506" height="14" font="4">we will have a mixture of distributions for the residuals. We tested mixtures with both</text>
+<text top="555" left="76" width="506" height="14" font="4">equal and unequal proportions of the components. These proportions correspond to</text>
+<text top="573" left="76" width="506" height="14" font="4">the proportion of the outliers in our background application. The model with a mixture</text>
+<text top="591" left="76" width="351" height="14" font="4">of half-normal and normal is the closest to our application.</text>
+<text top="609" left="93" width="489" height="14" font="4">Our preliminary analysis allowed us to exclude several algorithms. Golden section</text>
+<text top="627" left="76" width="392" height="14" font="4">was inferior to Brent’s method. In fact, Brent’s algorithm from <a href="pdfxml.html#15">[</a></text>
+<text top="627" left="468" width="15" height="14" font="9"><a href="pdfxml.html#15">23</a></text>
+<text top="627" left="483" width="99" height="14" font="4"><a href="pdfxml.html#15">] </a>is organized in</text>
+<text top="645" left="76" width="506" height="14" font="4">such a way that it uses the method of parabolas, and reverts to the golden section if</text>
+<text top="662" left="76" width="506" height="14" font="4">the method of parabolas is unsuccessful, so it is always no worse than golden section.</text>
+<text top="680" left="76" width="506" height="14" font="4">The quasi-Newton method was very unstable, and failed to converge in most cases.</text>
+<text top="698" left="76" width="400" height="14" font="4">It was akin to using Newton’s method to solve the equation arctan</text>
+<text top="695" left="476" width="106" height="19" font="3">(<i>x</i>) = 0, where it</text>
+<text top="716" left="76" width="98" height="14" font="4">always diverges.</text>
+<text top="734" left="93" width="489" height="14" font="4">Thus we performed detailed numerical comparison of six algorithms: <i>quickselect</i>,</text>
+<text top="752" left="76" width="506" height="14" font="4">GPU radix sort, Brent’s method of optimization, cutting plane, bisection and Brent’s</text>
+<text top="770" left="76" width="234" height="14" font="4">method of solving nonlinear equations.</text>
+<text top="788" left="93" width="489" height="14" font="4">We measured the average time of each algorithm over 10 instances of each data set</text>
+<text top="806" left="76" width="506" height="14" font="4">for every ﬁxed <i>n</i>, and repeated calculations for each instance 10 times. We excluded</text>
+<text top="824" left="76" width="506" height="14" font="4">the time spent on loading the data set from a ﬁle and on transferring it to the GPU</text>
+<text top="842" left="76" width="42" height="14" font="4">device.</text>
+<text top="860" left="93" width="365" height="14" font="4">We present the results of our numerical experiments in Table</text>
+<text top="860" left="462" width="7" height="14" font="9"><a href="pdfxml.html#11">1</a></text>
+<text top="860" left="474" width="108" height="14" font="4">and graphically in</text>
+<text top="878" left="76" width="24" height="14" font="4">Fig.</text>
+<text top="878" left="103" width="7" height="14" font="9"><a href="pdfxml.html#11">3</a></text>
+<text top="878" left="110" width="472" height="14" font="4"><a href="pdfxml.html#11">. </a>The calculations were performed on a Pentium i7 workstation with 4 GB RAM</text>
+<text top="896" left="76" width="506" height="14" font="4">clocked at 2.8 GHz, running Linux (Fedora 12), and with Tesla C2050 GPU with 448</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="91" left="76" width="362" height="11" font="12"><b>Table 1 </b>The mean time (ms) for each method used to calculate the median</text>
+<text top="117" left="76" width="37" height="11" font="0">Method</text>
+<text top="117" left="202" width="99" height="11" font="0">Size of the data set <i>n</i></text>
+<text top="137" left="202" width="24" height="11" font="0">8192</text>
+<text top="137" left="249" width="30" height="11" font="0">32768</text>
+<text top="137" left="299" width="36" height="11" font="0">131072</text>
+<text top="137" left="355" width="36" height="11" font="0">524288</text>
+<text top="137" left="411" width="42" height="11" font="0">2097152</text>
+<text top="137" left="472" width="42" height="11" font="0">8388608</text>
+<text top="137" left="534" width="48" height="11" font="0">33554432</text>
+<text top="164" left="76" width="101" height="11" font="0">Radix Sort (on GPU)</text>
+<text top="164" left="202" width="6" height="11" font="0">0</text>
+<text top="161" left="208" width="21" height="16" font="6">.338</text>
+<text top="164" left="249" width="6" height="11" font="0">0</text>
+<text top="161" left="255" width="21" height="16" font="6">.525</text>
+<text top="164" left="299" width="6" height="11" font="0">1</text>
+<text top="161" left="305" width="21" height="16" font="6">.243</text>
+<text top="164" left="361" width="6" height="11" font="0">3</text>
+<text top="161" left="367" width="21" height="16" font="6">.915</text>
+<text top="164" left="411" width="12" height="11" font="0">14</text>
+<text top="161" left="423" width="21" height="16" font="6">.487</text>
+<text top="164" left="478" width="12" height="11" font="0">54</text>
+<text top="161" left="490" width="21" height="16" font="6">.084</text>
+<text top="164" left="534" width="18" height="11" font="0">229</text>
+<text top="161" left="552" width="21" height="16" font="6">.586</text>
+<text top="183" left="76" width="106" height="11" font="0">Quickselect (on CPU)</text>
+<text top="183" left="202" width="6" height="11" font="0">0</text>
+<text top="180" left="208" width="21" height="16" font="6">.164</text>
+<text top="183" left="249" width="6" height="11" font="0">0</text>
+<text top="180" left="255" width="21" height="16" font="6">.432</text>
+<text top="183" left="299" width="6" height="11" font="0">1</text>
+<text top="180" left="305" width="21" height="16" font="6">.638</text>
+<text top="183" left="361" width="6" height="11" font="0">6</text>
+<text top="180" left="367" width="21" height="16" font="6">.412</text>
+<text top="183" left="411" width="12" height="11" font="0">26</text>
+<text top="180" left="423" width="21" height="16" font="6">.980</text>
+<text top="183" left="472" width="18" height="11" font="0">105</text>
+<text top="180" left="490" width="21" height="16" font="6">.385</text>
+<text top="183" left="534" width="18" height="11" font="0">418</text>
+<text top="180" left="552" width="21" height="16" font="6">.056</text>
+<text top="202" left="76" width="45" height="11" font="0">Bisection</text>
+<text top="202" left="202" width="6" height="11" font="0">0</text>
+<text top="199" left="208" width="21" height="16" font="6">.467</text>
+<text top="202" left="249" width="6" height="11" font="0">0</text>
+<text top="199" left="255" width="21" height="16" font="6">.612</text>
+<text top="202" left="299" width="6" height="11" font="0">0</text>
+<text top="199" left="305" width="21" height="16" font="6">.799</text>
+<text top="202" left="361" width="6" height="11" font="0">1</text>
+<text top="199" left="367" width="21" height="16" font="6">.845</text>
+<text top="202" left="417" width="6" height="11" font="0">6</text>
+<text top="199" left="423" width="21" height="16" font="6">.597</text>
+<text top="202" left="478" width="12" height="11" font="0">31</text>
+<text top="199" left="490" width="21" height="16" font="6">.619</text>
+<text top="202" left="534" width="18" height="11" font="0">129</text>
+<text top="199" left="552" width="21" height="16" font="6">.101</text>
+<text top="220" left="76" width="101" height="11" font="0">Brent’s minimization</text>
+<text top="220" left="202" width="6" height="11" font="0">0</text>
+<text top="217" left="208" width="21" height="16" font="6">.598</text>
+<text top="220" left="249" width="6" height="11" font="0">0</text>
+<text top="217" left="255" width="21" height="16" font="6">.746</text>
+<text top="220" left="299" width="6" height="11" font="0">1</text>
+<text top="217" left="305" width="21" height="16" font="6">.024</text>
+<text top="220" left="361" width="6" height="11" font="0">2</text>
+<text top="217" left="367" width="21" height="16" font="6">.090</text>
+<text top="220" left="417" width="6" height="11" font="0">6</text>
+<text top="217" left="423" width="21" height="16" font="6">.560</text>
+<text top="220" left="478" width="12" height="11" font="0">27</text>
+<text top="217" left="490" width="21" height="16" font="6">.131</text>
+<text top="220" left="534" width="18" height="11" font="0">108</text>
+<text top="217" left="552" width="21" height="16" font="6">.819</text>
+<text top="239" left="76" width="103" height="11" font="0">Brent’s nonlinear eqn</text>
+<text top="239" left="202" width="6" height="11" font="0">0</text>
+<text top="236" left="208" width="21" height="16" font="6">.466</text>
+<text top="239" left="249" width="6" height="11" font="0">0</text>
+<text top="236" left="255" width="21" height="16" font="6">.572</text>
+<text top="239" left="299" width="6" height="11" font="0">0</text>
+<text top="236" left="305" width="21" height="16" font="6">.706</text>
+<text top="239" left="361" width="6" height="11" font="0">1</text>
+<text top="236" left="367" width="21" height="16" font="6">.275</text>
+<text top="239" left="417" width="6" height="11" font="0">3</text>
+<text top="236" left="423" width="21" height="16" font="6">.361</text>
+<text top="239" left="478" width="12" height="11" font="0">10</text>
+<text top="236" left="490" width="21" height="16" font="6">.480</text>
+<text top="239" left="540" width="12" height="11" font="0">39</text>
+<text top="236" left="552" width="21" height="16" font="6">.028</text>
+<text top="258" left="76" width="65" height="11" font="0">Cutting plane</text>
+<text top="258" left="202" width="6" height="11" font="0">0</text>
+<text top="255" left="208" width="21" height="16" font="6">.726</text>
+<text top="258" left="249" width="6" height="11" font="0">0</text>
+<text top="255" left="255" width="21" height="16" font="6">.852</text>
+<text top="258" left="299" width="6" height="11" font="0">1</text>
+<text top="255" left="305" width="21" height="16" font="6">.107</text>
+<text top="258" left="361" width="6" height="11" font="0">2</text>
+<text top="255" left="367" width="21" height="16" font="6">.109</text>
+<text top="258" left="417" width="6" height="11" font="0">6</text>
+<text top="255" left="423" width="21" height="16" font="6">.121</text>
+<text top="258" left="478" width="12" height="11" font="0">22</text>
+<text top="255" left="490" width="21" height="16" font="6">.113</text>
+<text top="258" left="540" width="12" height="11" font="0">86</text>
+<text top="255" left="552" width="21" height="16" font="6">.001</text>
+<text top="540" left="76" width="490" height="11" font="12"><b>Fig. 3 </b>Average time (in ms, on a logarithmic scale) used by different methods to calculate the median</text>
+<text top="591" left="76" width="506" height="14" font="4">cores clocked at 1.15 GHz and 3 GB of global memory, which offers peak 512 Gﬂops</text>
+<text top="609" left="76" width="433" height="14" font="4">ﬂoating point performance. We used data type <i>double </i>in all calculations.</text>
+<text top="627" left="93" width="278" height="14" font="4">We observe that for relatively small data sets <i>n</i></text>
+<text top="623" left="375" width="23" height="19" font="3">≤ 2</text>
+<text top="624" left="398" width="11" height="10" font="0">15</text>
+<text top="627" left="414" width="168" height="14" font="4">the use of <i>quickselect </i>on the</text>
+<text top="645" left="76" width="506" height="14" font="4">CPU is more efﬁcient than the remaining alternatives. For larger data sets, the cutting</text>
+<text top="662" left="76" width="506" height="14" font="4">plane method and Brent’s method of solving nonlinear equations on the GPU are the</text>
+<text top="680" left="76" width="506" height="14" font="4">most efﬁcient approaches. We also observe that the complexity of all methods grows</text>
+<text top="698" left="76" width="506" height="14" font="4">linearly with <i>n</i>. The difference in CPU time between <i>quickselect </i>and Brent’s method</text>
+<text top="716" left="76" width="164" height="14" font="4">is 10-fold for large arrays <i>n</i></text>
+<text top="713" left="245" width="23" height="19" font="3">= 2</text>
+<text top="713" left="268" width="11" height="10" font="0">25</text>
+<text top="716" left="280" width="4" height="14" font="4">.</text>
+<text top="734" left="93" width="489" height="14" font="4">However, the performance of all algorithms based on minimization or solving non-</text>
+<text top="752" left="76" width="506" height="14" font="4">linear equations, except the cutting plane method, drastically decreased when just one</text>
+<text top="770" left="76" width="352" height="14" font="4">or a few components of <b>x </b>took very large values (e.g., 10</text>
+<text top="767" left="428" width="6" height="10" font="0">9</text>
+<text top="770" left="435" width="148" height="14" font="4">, which could happen in</text>
+<text top="788" left="76" width="506" height="14" font="4">robust regression—one or a few large outliers). Clearly, the number of iterations of the</text>
+<text top="806" left="76" width="346" height="14" font="4">bisection method required to achieve a ﬁxed accuracy is <i>O</i></text>
+<text top="802" left="423" width="121" height="19" font="3">(log <i>r</i>), where <i>r </i>= ˆ<i>x</i></text>
+<text top="811" left="545" width="6" height="10" font="10"><i>n</i></text>
+<text top="802" left="554" width="21" height="19" font="3">− ˆ<i>x</i></text>
+<text top="811" left="576" width="6" height="10" font="0">1</text>
+<text top="824" left="76" width="506" height="14" font="4">is the range of the data, which can be unbounded. The same is true for the golden</text>
+<text top="842" left="76" width="506" height="14" font="4">section optimization method, which is the counterpart of the bisection. Both Brent’s</text>
+<text top="860" left="76" width="506" height="14" font="4">methods reverted to the slower bisection/golden section methods because the objective</text>
+<text top="878" left="76" width="303" height="14" font="4">is linear in almost all of the range of the data when <i>x</i></text>
+<text top="882" left="379" width="3" height="10" font="10"><i>i</i></text>
+<text top="878" left="387" width="195" height="14" font="4">have such an uneven distribution.</text>
+<text top="896" left="76" width="424" height="14" font="4">Hence the parabolic ﬁts attempted by Brent’s method are unsuccessful.</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="999" width="659">
+	<fontspec id="16" size="8" family="Times" color="#131413"/>
+	<fontspec id="17" size="8" family="Times" color="#131413"/>
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="494" left="76" width="506" height="11" font="12"><b>Fig. 4 </b>Illustration of the cutting plane algorithm. The <i>thick solid line </i>is the graph of the objective <i>f </i>.The</text>
+<text top="508" left="76" width="204" height="11" font="0">minimizer of <i>f </i>is always bracketed by <i>y</i></text>
+<text top="512" left="280" width="6" height="9" font="15"><i>L</i></text>
+<text top="508" left="292" width="28" height="11" font="0">and <i>y</i></text>
+<text top="512" left="320" width="6" height="9" font="15"><i>R</i></text>
+<text top="508" left="328" width="255" height="11" font="0">, which are updated at every iteration. The point of</text>
+<text top="523" left="76" width="325" height="11" font="0">intersection of two lines tangent to the graph of <i>f </i>yields the value <i>y</i></text>
+<text top="526" left="401" width="5" height="9" font="15"><i>k</i></text>
+<text top="524" left="406" width="13" height="13" font="16">+1</text>
+<text top="523" left="422" width="98" height="11" font="0">of the new iterations</text>
+<text top="572" left="93" width="457" height="14" font="4">The only optimization method insensitive to very large (or small) values of <i>x</i></text>
+<text top="577" left="550" width="3" height="10" font="10"><i>i</i></text>
+<text top="572" left="559" width="23" height="14" font="4">was</text>
+<text top="590" left="76" width="506" height="14" font="4">Kelley’s cutting plane method, which we present below. The reason this method was</text>
+<text top="608" left="76" width="506" height="14" font="4">successful is that it uses not only the values of the objective but also its subgradi-</text>
+<text top="626" left="76" width="506" height="14" font="4">ents, as well as convexity of the objective. The cutting plane method iteratively builds</text>
+<text top="644" left="76" width="506" height="14" font="4">a lower piecewise linear approximation to the objective, which also happens to be</text>
+<text top="662" left="76" width="506" height="14" font="4">piecewise linear. In that way, just one value of the objective and its subgradient allows</text>
+<text top="680" left="76" width="506" height="14" font="4">the algorithm to eliminate large uninteresting linear pieces, which do not contain the</text>
+<text top="698" left="76" width="64" height="14" font="4">minimizer.</text>
+<text top="716" left="93" width="489" height="14" font="4">Let us see how Kelley’s method in one variable works. At each iteration the algo-</text>
+<text top="734" left="76" width="506" height="14" font="4">rithm evaluates the value of the objective <i>f </i>and its subgradient <i>g</i>. A piecewise linear</text>
+<text top="752" left="76" width="271" height="14" font="4">lower estimate of <i>f </i>is built using the formula</text>
+<text top="793" left="205" width="7" height="14" font="8"><i>h</i></text>
+<text top="789" left="213" width="73" height="19" font="3">(<i>y</i>) = max</text>
+<text top="806" left="253" width="3" height="10" font="10"><i>i</i></text>
+<text top="803" left="257" width="36" height="15" font="6">=1,...,<i>k</i></text>
+<text top="789" left="294" width="27" height="19" font="3">{<i>g</i>(<i>y</i></text>
+<text top="798" left="321" width="3" height="10" font="10"><i>i</i></text>
+<text top="789" left="326" width="45" height="19" font="3">)(<i>y </i>− <i>y</i></text>
+<text top="798" left="371" width="3" height="10" font="10"><i>i</i></text>
+<text top="789" left="376" width="48" height="19" font="3">) + <i>f </i>(<i>y</i></text>
+<text top="798" left="423" width="3" height="10" font="10"><i>i</i></text>
+<text top="789" left="428" width="16" height="19" font="3">)},</text>
+<text top="842" left="76" width="48" height="14" font="4">where <i>y</i></text>
+<text top="847" left="124" width="3" height="10" font="10"><i>i</i></text>
+<text top="842" left="134" width="448" height="14" font="4">are the points the objective evaluated during the previous <i>k </i>iterations. The</text>
+<text top="860" left="76" width="196" height="14" font="4">minimizer of <i>h </i>is chosen as the <i>y</i></text>
+<text top="864" left="272" width="5" height="10" font="10"><i>k</i></text>
+<text top="862" left="278" width="15" height="15" font="6">+1</text>
+<text top="860" left="293" width="168" height="14" font="4">. The algorithm starts with <i>y</i></text>
+<text top="864" left="461" width="6" height="10" font="0">1</text>
+<text top="856" left="472" width="23" height="19" font="3">= ˆ<i>x</i></text>
+<text top="864" left="495" width="6" height="10" font="0">1</text>
+<text top="860" left="505" width="33" height="14" font="4">and <i>y</i></text>
+<text top="864" left="538" width="6" height="10" font="0">2</text>
+<text top="856" left="548" width="23" height="19" font="3">= ˆ<i>x</i></text>
+<text top="864" left="571" width="6" height="10" font="10"><i>n</i></text>
+<text top="860" left="578" width="4" height="14" font="4">.</text>
+<text top="878" left="76" width="39" height="14" font="4">Figure</text>
+<text top="878" left="119" width="7" height="14" font="9"><a href="pdfxml.html#12">4</a></text>
+<text top="878" left="130" width="130" height="14" font="4">illustrates these steps.</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="89" left="93" width="456" height="14" font="4">It is worth noting that the minimizer of <i>h </i>is always bracketed by two values <i>y</i></text>
+<text top="93" left="549" width="6" height="10" font="10"><i>L</i></text>
+<text top="89" left="561" width="22" height="14" font="4">and</text>
+<text top="107" left="77" width="7" height="14" font="8"><i>y</i></text>
+<text top="111" left="84" width="7" height="10" font="10"><i>R</i></text>
+<text top="107" left="93" width="65" height="14" font="4">, initially <i>y</i></text>
+<text top="111" left="158" width="6" height="10" font="0">1</text>
+<text top="107" left="168" width="33" height="14" font="4">and <i>y</i></text>
+<text top="111" left="201" width="6" height="10" font="0">2</text>
+<text top="107" left="207" width="160" height="14" font="4">, and is found explicitly by</text>
+<text top="157" left="180" width="7" height="14" font="8"><i>y</i></text>
+<text top="162" left="186" width="5" height="10" font="10"><i>k</i></text>
+<text top="159" left="192" width="15" height="15" font="6">+1</text>
+<text top="153" left="211" width="12" height="19" font="3">=</text>
+<text top="147" left="232" width="4" height="14" font="8"><i>f</i></text>
+<text top="143" left="240" width="13" height="19" font="3">(<i>y</i></text>
+<text top="151" left="254" width="7" height="10" font="10"><i>R</i></text>
+<text top="143" left="262" width="48" height="19" font="3">) − <i>f </i>(<i>y</i></text>
+<text top="151" left="310" width="6" height="10" font="10"><i>L</i></text>
+<text top="143" left="318" width="31" height="19" font="3">) + <i>y</i></text>
+<text top="151" left="350" width="6" height="10" font="10"><i>L</i></text>
+<text top="147" left="358" width="7" height="14" font="8"><i>g</i></text>
+<text top="143" left="366" width="13" height="19" font="3">(<i>y</i></text>
+<text top="151" left="380" width="6" height="10" font="10"><i>L</i></text>
+<text top="143" left="388" width="31" height="19" font="3">) − <i>y</i></text>
+<text top="151" left="420" width="7" height="10" font="10"><i>R</i></text>
+<text top="147" left="429" width="7" height="14" font="8"><i>g</i></text>
+<text top="143" left="437" width="13" height="19" font="3">(<i>y</i></text>
+<text top="151" left="451" width="7" height="10" font="10"><i>R</i></text>
+<text top="143" left="459" width="6" height="19" font="3">)</text>
+<text top="168" left="302" width="7" height="14" font="8"><i>g</i></text>
+<text top="164" left="310" width="13" height="19" font="3">(<i>y</i></text>
+<text top="173" left="324" width="6" height="10" font="10"><i>L</i></text>
+<text top="164" left="332" width="45" height="19" font="3">) − <i>g</i>(<i>y</i></text>
+<text top="173" left="378" width="7" height="10" font="10"><i>R</i></text>
+<text top="164" left="386" width="6" height="19" font="3">)</text>
+<text top="153" left="466" width="4" height="19" font="3">.</text>
+<text top="208" left="77" width="7" height="14" font="8"><i>y</i></text>
+<text top="212" left="84" width="6" height="10" font="10"><i>L</i></text>
+<text top="208" left="97" width="34" height="14" font="4">and <i>y</i></text>
+<text top="212" left="132" width="7" height="10" font="10"><i>R</i></text>
+<text top="208" left="145" width="232" height="14" font="4">are updated in the following way: if <i>g</i></text>
+<text top="204" left="377" width="13" height="19" font="3">(<i>y</i></text>
+<text top="212" left="390" width="5" height="10" font="10"><i>k</i></text>
+<text top="210" left="396" width="15" height="15" font="6">+1</text>
+<text top="204" left="411" width="79" height="19" font="3">) &lt; 0 then <i>y</i></text>
+<text top="212" left="491" width="6" height="10" font="10"><i>L</i></text>
+<text top="204" left="505" width="30" height="19" font="3">← <i>y</i></text>
+<text top="212" left="535" width="5" height="10" font="10"><i>k</i></text>
+<text top="210" left="540" width="15" height="15" font="6">+1</text>
+<text top="208" left="561" width="22" height="14" font="4">and</text>
+<text top="226" left="76" width="21" height="14" font="4">if <i>g</i></text>
+<text top="222" left="97" width="13" height="19" font="3">(<i>y</i></text>
+<text top="230" left="110" width="5" height="10" font="10"><i>k</i></text>
+<text top="227" left="116" width="15" height="15" font="6">+1</text>
+<text top="222" left="131" width="74" height="19" font="3">) &gt; 0 then <i>y</i></text>
+<text top="230" left="206" width="7" height="10" font="10"><i>R</i></text>
+<text top="222" left="218" width="28" height="19" font="3">← <i>y</i></text>
+<text top="230" left="247" width="5" height="10" font="10"><i>k</i></text>
+<text top="227" left="252" width="15" height="15" font="6">+1</text>
+<text top="226" left="268" width="29" height="14" font="4">. If <i>g</i></text>
+<text top="222" left="297" width="13" height="19" font="3">(<i>y</i></text>
+<text top="230" left="310" width="5" height="10" font="10"><i>k</i></text>
+<text top="227" left="316" width="15" height="15" font="6">+1</text>
+<text top="222" left="331" width="167" height="19" font="3">) = 0, the solution is found.</text>
+<text top="264" left="76" width="240" height="14" font="2"><b>Algorithm 1 </b>(<i>Cutting plane algorithm</i>)</text>
+<text top="282" left="93" width="331" height="14" font="4">Input: <i>f </i>- the objective function, <i>g </i>- a subgradient of <i>f</i></text>
+<text top="278" left="425" width="157" height="19" font="3">, <i>maxit </i>- the upper bound</text>
+<text top="300" left="76" width="166" height="14" font="4">on the number of iterations.</text>
+<text top="318" left="93" width="89" height="14" font="4">Input/output: <i>y</i></text>
+<text top="323" left="183" width="6" height="10" font="10"><i>L</i></text>
+<text top="314" left="191" width="15" height="19" font="3">, <i>y</i></text>
+<text top="323" left="207" width="7" height="10" font="10"><i>R</i></text>
+<text top="318" left="219" width="302" height="14" font="4">- the ends of the interval containing the minimizer.</text>
+<text top="336" left="93" width="174" height="14" font="4">Output: <i>y </i>- minimizer found.</text>
+<text top="373" left="82" width="38" height="14" font="4">0. <i>f L</i></text>
+<text top="369" left="126" width="44" height="19" font="3">← <i>f </i>(<i>y</i></text>
+<text top="378" left="170" width="6" height="10" font="10"><i>L</i></text>
+<text top="369" left="178" width="78" height="19" font="3">), <i>gL </i>← <i>g</i>(<i>y</i></text>
+<text top="378" left="257" width="6" height="10" font="10"><i>L</i></text>
+<text top="369" left="265" width="83" height="19" font="3">), <i>f R </i>← <i>f </i>(<i>y</i></text>
+<text top="378" left="349" width="7" height="10" font="10"><i>R</i></text>
+<text top="369" left="357" width="79" height="19" font="3">), <i>gR </i>← <i>g</i>(<i>y</i></text>
+<text top="378" left="436" width="7" height="10" font="10"><i>R</i></text>
+<text top="369" left="445" width="9" height="19" font="3">).</text>
+<text top="391" left="82" width="44" height="14" font="4">1. for <i>i</i></text>
+<text top="387" left="131" width="182" height="19" font="3">= 1; <i>i </i>≤ <i>maxit</i>; <i>i </i>= <i>i </i>+ 1 do:</text>
+<text top="409" left="106" width="30" height="14" font="4">1.1 <i>t</i></text>
+<text top="405" left="142" width="113" height="19" font="3">← ( <i>f R </i>− <i>f L </i>+ <i>y</i></text>
+<text top="413" left="256" width="6" height="10" font="10"><i>L</i></text>
+<text top="405" left="267" width="56" height="19" font="3">∗ <i>gL </i>− <i>y</i></text>
+<text top="413" left="323" width="7" height="10" font="10"><i>R</i></text>
+<text top="405" left="335" width="114" height="19" font="3">∗ <i>gR</i>)/(<i>gL </i>− <i>gR</i>).</text>
+<text top="427" left="106" width="41" height="14" font="4">1.2 <i>f t</i></text>
+<text top="423" left="153" width="123" height="19" font="3">← <i>f </i>(<i>t</i>), <i>gt </i>← <i>g</i>(<i>t</i>).</text>
+<text top="445" left="106" width="181" height="14" font="4">1.3 If Stopping criteria then <i>y</i></text>
+<text top="441" left="292" width="81" height="19" font="3">← <i>t </i>and exit.</text>
+<text top="463" left="106" width="52" height="14" font="4">1.4 If <i>gt</i></text>
+<text top="459" left="164" width="23" height="19" font="3">&lt; 0</text>
+<text top="480" left="133" width="37" height="14" font="4">then <i>y</i></text>
+<text top="485" left="170" width="6" height="10" font="10"><i>L</i></text>
+<text top="477" left="182" width="164" height="19" font="3">← <i>t</i>, <i>f L </i>← <i>f t</i>, <i>gL </i>← <i>gt</i>.</text>
+<text top="498" left="133" width="35" height="14" font="4">else <i>y</i></text>
+<text top="503" left="168" width="7" height="10" font="10"><i>R</i></text>
+<text top="495" left="180" width="165" height="19" font="3">← <i>t</i>, <i>f R </i>← <i>f t</i>, <i>gR </i>← <i>gt</i>.</text>
+<text top="516" left="82" width="26" height="14" font="4">2. <i>y</i></text>
+<text top="513" left="113" width="81" height="19" font="3">← <i>t </i>and exit.</text>
+<text top="555" left="93" width="361" height="14" font="4">The stopping criteria at step 1.3 comprise the following: <i>gt</i></text>
+<text top="551" left="462" width="120" height="19" font="3">= 0 (the point with</text>
+<text top="573" left="76" width="7" height="14" font="4">0</text>
+<text top="569" left="88" width="132" height="19" font="3">∈ ∂ <i>f </i>(<i>t</i>) was found), <i>y</i></text>
+<text top="578" left="221" width="7" height="10" font="10"><i>R</i></text>
+<text top="569" left="232" width="23" height="19" font="3">− <i>y</i></text>
+<text top="578" left="255" width="6" height="10" font="10"><i>L</i></text>
+<text top="569" left="268" width="77" height="19" font="3">≤ <i>tolerance</i></text>
+<text top="578" left="347" width="3" height="10" font="10"><i>f</i></text>
+<text top="569" left="354" width="111" height="19" font="3">, |<i>gt</i>| ≤ <i>tolerance</i></text>
+<text top="578" left="465" width="6" height="10" font="10"><i>g</i></text>
+<text top="573" left="472" width="4" height="14" font="4">.</text>
+<text top="591" left="93" width="489" height="14" font="4">The cutting plane algorithm in one dimension has little overhead, and both <i>f </i>and</text>
+<text top="609" left="76" width="506" height="14" font="8"><i>g </i>are easily computed in parallel on a GPU device. The actual C++ code for this com-</text>
+<text top="627" left="76" width="168" height="14" font="4">putation is presented in Fig.</text>
+<text top="627" left="249" width="7" height="14" font="9"><a href="pdfxml.html#9">2</a></text>
+<text top="627" left="256" width="149" height="14" font="4"><a href="pdfxml.html#9">. </a>Once an approximation</text>
+<text top="623" left="412" width="170" height="19" font="3">˜<i>y </i>to the median is computed</text>
+<text top="645" left="76" width="466" height="14" font="4">with the desired accuracy, a simple loop, which selects the largest element <i>x</i></text>
+<text top="649" left="542" width="3" height="10" font="10"><i>i</i></text>
+<text top="641" left="553" width="29" height="19" font="3">≤ ˜<i>y</i>,</text>
+<text top="662" left="76" width="250" height="14" font="4">ﬁnds the exact value of the median in <i>O</i></text>
+<text top="659" left="327" width="6" height="19" font="3">(</text>
+<text top="659" left="336" width="6" height="10" font="10"><i>n</i></text>
+<text top="670" left="334" width="8" height="10" font="10"><i>m</i></text>
+<text top="659" left="349" width="233" height="19" font="3">+ log <i>m</i>) operations on a GPU device</text>
+<text top="680" left="76" width="184" height="14" font="4">(a <i>reduce </i>operation is needed).</text>
+<text top="698" left="93" width="489" height="14" font="4">Here we shall make an important observation. We foresee regression problems with</text>
+<text top="716" left="76" width="506" height="14" font="4">many millions of data, where neither the matrix of observations <i>X </i>, nor the vector of</text>
+<text top="734" left="76" width="506" height="14" font="4">residuals <b>r </b>can ﬁt the RAM of the CPU. However they can be stored in the RAM of</text>
+<text top="752" left="76" width="506" height="14" font="4">multiple GPU devices, such as multiple Tesla units, connected to a single CPU host.</text>
+<text top="770" left="76" width="142" height="14" font="4">Evaluation of <b>r </b>for each</text>
+<text top="766" left="222" width="361" height="19" font="3">θ is performed on the GPUs in parallel. However, copying of</text>
+<text top="788" left="76" width="506" height="14" font="2"><b>r </b>to the CPU in order to execute <i>quickselect </i>algorithm is no longer an option. By using</text>
+<text top="806" left="76" width="506" height="14" font="4">the optimization method we advocate in this paper, we can compute the median on</text>
+<text top="824" left="76" width="446" height="14" font="4">multiple GPU devices seamlessly. Indeed computation of the objective in <a href="pdfxml.html#7">(</a></text>
+<text top="824" left="523" width="7" height="14" font="9"><a href="pdfxml.html#7">6</a></text>
+<text top="824" left="530" width="52" height="14" font="4"><a href="pdfxml.html#7">) </a>is trivi-</text>
+<text top="842" left="76" width="506" height="14" font="4">ally parallel, and each GPU device can handle its portion of the array <b>r </b>and compute a</text>
+<text top="860" left="76" width="89" height="14" font="4">partial sum in <a href="pdfxml.html#7">(</a></text>
+<text top="860" left="165" width="7" height="14" font="9"><a href="pdfxml.html#7">6</a></text>
+<text top="860" left="173" width="410" height="14" font="4"><a href="pdfxml.html#7">) </a>independently. Then the partial sums from multiple GPUs are added</text>
+<text top="878" left="76" width="506" height="14" font="4">together on the CPU. On the other hand, the use of GPU sorting is not efﬁcient in this</text>
+<text top="896" left="76" width="381" height="14" font="4">case, as it will require transfers of data between multiple GPUs.</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+<page number="14" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="498" width="84" height="11" font="0">G. Beliakov et al.</text>
+<text top="89" left="76" width="84" height="14" font="2"><b>5 Conclusion</b></text>
+<text top="125" left="76" width="506" height="14" font="4">We presented an approach for accelerating computations of hight-breakdown robust</text>
+<text top="142" left="76" width="506" height="14" font="4">regression estimators on GPUs. First, we have shown that the sort operation can be</text>
+<text top="160" left="76" width="506" height="14" font="4">avoided and only the median of the vector of absolute residuals is needed. This ﬁnding</text>
+<text top="178" left="76" width="506" height="14" font="4">is equally applicable to computations on a CPU or a GPU. Second, we investigated</text>
+<text top="196" left="76" width="506" height="14" font="4">efﬁcient methods of calculation of the median on GPUs. We proposed several alter-</text>
+<text top="214" left="76" width="506" height="14" font="4">native methods based on minimization of a convex function, which lend themselves</text>
+<text top="232" left="76" width="506" height="14" font="4">well for GPU parallelization. Finally, we benchmarked the proposed algorithms and</text>
+<text top="250" left="76" width="450" height="14" font="4">their alternatives on several data sets generated from different distributions.</text>
+<text top="268" left="93" width="489" height="14" font="4">We conclude that: (a) computation of the objectives in the LTS and LTA methods</text>
+<text top="286" left="76" width="506" height="14" font="4">can be efﬁciently parallelized for GPUs, (b) these objectives do not require sorting,</text>
+<text top="304" left="76" width="506" height="14" font="4">and (c) the proposed method of calculating the median on GPUs based on Kelley’s</text>
+<text top="322" left="76" width="394" height="14" font="4">cutting plane method is the most efﬁcient and scalable alternative.</text>
+<text top="367" left="76" width="69" height="14" font="2"><b>References</b></text>
+<text top="401" left="82" width="440" height="11" font="0">1. Rousseeuw P, Leroy A (2003) Robust regression and outlier detection. Wiley, New York</text>
+<text top="415" left="82" width="470" height="11" font="0">2. Maronna R, Martin R, Yohai V (2006) Robust statistics: theory and methods. Wiley, New York</text>
+<text top="429" left="82" width="474" height="11" font="0">3. Hampel FR (1971) A general qualitative definition of robustness. Ann Math Stat 42:1887–1896</text>
+<text top="443" left="82" width="174" height="11" font="0">4. NVIDIA (2010) Tesla datasheet.</text>
+<text top="443" left="260" width="323" height="11" font="13"><a href="http://www.nvidia.com/docs/io/43395/nv_ds_tesla_psc_us_nov08_lowres.pdf">http://www.nvidia.com/docs/io/43395/nv_ds_tesla_psc_us_nov08_</a></text>
+<text top="458" left="99" width="50" height="11" font="13"><a href="http://www.nvidia.com/docs/io/43395/nv_ds_tesla_psc_us_nov08_lowres.pdf">lowres.pdf</a></text>
+<text top="458" left="150" width="112" height="11" font="0"><a href="http://www.nvidia.com/docs/io/43395/nv_ds_tesla_psc_us_nov08_lowres.pdf">. </a>Accessed 1 December</text>
+<text top="472" left="82" width="382" height="11" font="0">5. Hoberock J, Bell N (2010) Thrust: a parallel template library. version 1.3.0.</text>
+<text top="472" left="468" width="114" height="11" font="13"><a href="http://code.google.com/p/thrust/">http://code.google.com/</a></text>
+<text top="486" left="99" width="40" height="11" font="13"><a href="http://code.google.com/p/thrust/">p/thrust/</a></text>
+<text top="500" left="82" width="432" height="11" font="0">6. Rousseeuw P (1984) Least median of squares regression. J Am Stat Assoc 79:871–880</text>
+<text top="514" left="82" width="500" height="11" font="0">7. Rousseeuw P, Van Driessen K (2006) Computing lts regression for large data sets. Data Min Knowl</text>
+<text top="529" left="99" width="82" height="11" font="0">Discov 12:29–45</text>
+<text top="543" left="82" width="500" height="11" font="0">8. Rousseeuw P, Croux C (1993) Alternatives to the median absolute deviation. J Am Stat Assoc 88:</text>
+<text top="557" left="99" width="54" height="11" font="0">1273–1283</text>
+<text top="571" left="82" width="500" height="11" font="0">9. Stromberg A, Hossjer O, Hawkins DM (2000) The least trimmed differences regression estimator and</text>
+<text top="585" left="99" width="200" height="11" font="0">alternatives. J Am Stat Assoc 95:853–864</text>
+<text top="600" left="76" width="506" height="11" font="0">10. Hawkins DM, Olive DJ (1999) Applications and algorithms for least trimmed sum of absolute devia-</text>
+<text top="614" left="99" width="253" height="11" font="0">tions regression. Comput Stat Data Anal 32:119–134</text>
+<text top="628" left="76" width="506" height="11" font="0">11. Hofmann M, Gatu C, Kontoghiorghes E (2010) An exact least trimmed squares algorithm for a range</text>
+<text top="642" left="99" width="273" height="11" font="0">of coverage values. J Comput Graph Stat 19(1):191–204</text>
+<text top="656" left="76" width="506" height="11" font="0">12. Nunkesser R, Morell O (2012) An evolutionary algorithm for robust regression. Comput Stat Data</text>
+<text top="671" left="99" width="96" height="11" font="0">Anal (in press). <a href="http://dx.doi.org/10.1016/j.csda.2010.04.017">doi:</a></text>
+<text top="671" left="194" width="133" height="11" font="13"><a href="http://dx.doi.org/10.1016/j.csda.2010.04.017">10.1016/j.csda.2010.04.017</a></text>
+<text top="685" left="76" width="506" height="11" font="0">13. Nguyen TD, Welsch R (2012) Outlier detection and least trimmed squares approximation using semi-</text>
+<text top="699" left="99" width="295" height="11" font="0">definite programming. Comput Stat Data Anal (in press). <a href="http://dx.doi.org/10.1016/j.csda.2009.09.037">doi:</a></text>
+<text top="699" left="393" width="133" height="11" font="13"><a href="http://dx.doi.org/10.1016/j.csda.2009.09.037">10.1016/j.csda.2009.09.037</a></text>
+<text top="713" left="76" width="506" height="11" font="0">14. Cerioli A (2010) Multivariate outlier detection with high-breakdown estimators. J Am Stat Assoc</text>
+<text top="727" left="99" width="89" height="11" font="0">105(489):147–156</text>
+<text top="742" left="76" width="506" height="11" font="0">15. Schyns M, Haesbroeck G, Critchley F (2010) RelaxMCD: smooth optimisation for the minimum</text>
+<text top="756" left="99" width="398" height="11" font="0">covariance determinant estimator. Comput Stat Data Anal 54(4):843–857, 1698643</text>
+<text top="770" left="76" width="506" height="11" font="0">16. Beliakov G, Kelarev A (2011) Global non-smooth optimization in robust multivariate regression. Optim</text>
+<text top="784" left="99" width="97" height="11" font="0">Methods Softw. <a href="http://dx.doi.org/10.1080/10556788.2011.614609">doi:</a></text>
+<text top="784" left="196" width="156" height="11" font="13"><a href="http://dx.doi.org/10.1080/10556788.2011.614609">10.1080/10556788.2011.614609</a></text>
+<text top="798" left="76" width="506" height="11" font="0">17. Yager R, Beliakov G (2010) OWA operators in regression problems. IEEE Trans Fuzzy Syst 18:</text>
+<text top="813" left="99" width="42" height="11" font="0">106–113</text>
+<text top="827" left="76" width="506" height="11" font="0">18. Moré J, Wild S (2009) Benchmarking derivative-free optimization algorithms. SIAM J Optim 20:</text>
+<text top="841" left="99" width="42" height="11" font="0">172–191</text>
+<text top="855" left="76" width="353" height="11" font="0">19. Sedgewick R (1988) Algorithms, 2nd edn. Addison-Wesley, Reading</text>
+<text top="869" left="76" width="506" height="11" font="0">20. Sengupta S, Harris M, Zhang Y, Owens JD (2007) Scan primitives for GPU computing. In: Proceedings</text>
+<text top="883" left="99" width="484" height="11" font="0">of the 22nd ACM SIGGRAPH/EUROGRAPHICS symposium on Graphics hardware, San Diego,</text>
+<text top="898" left="99" width="105" height="11" font="0">California, pp 97–106</text>
+<text top="928" left="76" width="60" height="29" font="7">123</text>
+</page>
+<page number="15" position="absolute" top="0" left="0" height="999" width="659">
+<text top="51" left="76" width="251" height="11" font="0">Computing of high breakdown regression estimators</text>
+<text top="91" left="76" width="506" height="11" font="0">21. Grand SL (2007) Broad-phase collision detection with CUDA. In: Nguyen H (ed) GPU Gems 3.</text>
+<text top="105" left="99" width="250" height="11" font="0">Addison-Wesley Professional, Reading, pp 697–721</text>
+<text top="119" left="76" width="506" height="11" font="0">22. Govindaraju NK, Gray J, Kumar R, Manocha D (2006) GPUTera-Sort: high performance graphics</text>
+<text top="133" left="99" width="484" height="11" font="0">coprocessor sorting for large database management. In: Proceedings of 2006 ACM SIGMOD interna-</text>
+<text top="148" left="99" width="260" height="11" font="0">tional conference on management of data, pp 325–336</text>
+<text top="162" left="76" width="506" height="11" font="0">23. Press A, Teukolsky S, Vetterling W, Flannery B (2002) Numerical recipes in C: the art of scientiﬁc</text>
+<text top="176" left="99" width="246" height="11" font="0">computing. Cambridge University Press, New York</text>
+<text top="190" left="76" width="506" height="11" font="0">24. Blum M, Floyd R, Watt V, Rive R, Tarjan R (1973) Time bounds for selection. J Comput Syst Sci</text>
+<text top="204" left="99" width="51" height="11" font="0">7:448–461</text>
+<text top="218" left="76" width="506" height="11" font="0">25. Satish N, Harris M, Garland M (2009) Designing efﬁcient sorting algorithms for manycore GPUs.</text>
+<text top="233" left="99" width="484" height="11" font="0">In: Proceedings of IEEE international parallel and distributed processing symposium (IPDPS 2009),</text>
+<text top="247" left="99" width="53" height="11" font="0">Rome. <a href="http://dx.doi.org/10.1109/IPDPS.2009.5161005">doi:</a></text>
+<text top="247" left="152" width="147" height="11" font="13"><a href="http://dx.doi.org/10.1109/IPDPS.2009.5161005">10.1109/IPDPS.2009.5161005</a></text>
+<text top="261" left="76" width="455" height="11" font="0">26. Jackson D (1921) Note on the median of a set of numbers. Bull Am Math Soc 27:160–164</text>
+<text top="275" left="76" width="397" height="11" font="0">27. Bullen P (2003) Handbook of means and their inequalities. Kluwer, Dordrecht</text>
+<text top="289" left="76" width="506" height="11" font="0">28. Gini C, Le Medie (1958) Unione Tipografico-Editorial Torinese, Milan (Russian translation, Srednie</text>
+<text top="304" left="99" width="175" height="11" font="0">Velichiny, Statistica, Moscow, 1970)</text>
+<text top="318" left="76" width="506" height="11" font="0">29. Yager R, Rybalov A (1997) Understanding the median as a fusion operator. Int J Gen Syst 26:239–263</text>
+<text top="332" left="76" width="506" height="11" font="0">30. Calvo T, Mesiar R, Yager R (2004) Quantitative weights and aggregation. IEEE Trans Fuzzy Syst</text>
+<text top="346" left="99" width="45" height="11" font="0">12:62–69</text>
+<text top="360" left="76" width="506" height="11" font="0">31. Calvo T, Beliakov G (2010) Aggregation functions based on penalties. Fuzzy Sets Syst 161:1420–1436</text>
+<text top="375" left="76" width="506" height="11" font="0">32. Bagirov A (2002) A method for minimization of quasidifferentiable functions. Optim Methods Softw</text>
+<text top="389" left="99" width="45" height="11" font="0">17:31–60</text>
+<text top="403" left="76" width="461" height="11" font="0">33. Kelley J (1960) The cutting-plane method for solving convex programs. J SIAM 8:703–712</text>
+<text top="417" left="76" width="495" height="11" font="0">34. Demyanov V, Rubinov A (1995) Constructive nonsmooth analysis. Peter Lang, Frankfurt am Main</text>
+<text top="431" left="76" width="506" height="11" font="0">35. Govindaraju NK, Lloyd B, Wang W, Lin M, Manocha D (2004) Fast computation of database opera-</text>
+<text top="446" left="99" width="484" height="11" font="0">tions using graphic processors. In: Proceedings of 2004 ACM SIGMOD International Conference on</text>
+<text top="460" left="99" width="164" height="11" font="0">Management of Data, pp 215–226</text>
+<text top="474" left="76" width="65" height="11" font="0">36. NVIDIA</text>
+<text top="474" left="153" width="32" height="11" font="0">(2011)</text>
+<text top="474" left="198" width="384" height="11" font="13"><a href="http://developer.download.nvidia.com/compute/cuda/1_1/website/data-parallel_algorithms.html">http://developer.download.nvidia.com/compute/cuda/1_1/website/data-parallel_</a></text>
+<text top="488" left="99" width="76" height="11" font="13"><a href="http://developer.download.nvidia.com/compute/cuda/1_1/website/data-parallel_algorithms.html">algorithms.html</a></text>
+<text top="488" left="175" width="106" height="11" font="0"><a href="http://developer.download.nvidia.com/compute/cuda/1_1/website/data-parallel_algorithms.html">. </a>Accessed 1 February</text>
+<text top="928" left="522" width="60" height="29" font="7">123</text>
+</page>
+</pdf2xml>

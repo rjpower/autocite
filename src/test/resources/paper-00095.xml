@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="0" size="19" family="Times" color="#000000"/>
+	<fontspec id="1" size="12" family="Times" color="#000000"/>
+	<fontspec id="2" size="11" family="Times" color="#000000"/>
+	<fontspec id="3" size="15" family="Times" color="#000000"/>
+	<fontspec id="4" size="8" family="Times" color="#000000"/>
+<text top="76" left="72" width="501" height="19" font="0">FPGA Implementation of the Selected Parts of</text>
+<text top="103" left="167" width="309" height="19" font="0">the Fast Image Segmentation</text>
+<text top="167" left="93" width="459" height="13" font="1">Maciej Wielgosz, Ernest Jamro, Dominik ˙Zurek, and Kazimierz Wiatr</text>
+<text top="200" left="190" width="264" height="12" font="2">AGH University of Science and Technology,</text>
+<text top="216" left="218" width="209" height="12" font="2">al. Mickiewicza 30, 30-059 Krakow</text>
+<text top="233" left="260" width="124" height="12" font="2">ACK Cyfronet AGH</text>
+<text top="249" left="229" width="187" height="12" font="2">ul. Nawojki 11, 30-950 Krakow</text>
+<text top="262" left="202" width="239" height="17" font="2">{wielgosz,jamro,wiatr}@agh.edu.pl,</text>
+<text top="283" left="227" width="190" height="11" font="2">dominik.zurek1102@gmail.com</text>
+<text top="343" left="105" width="434" height="12" font="2">Abstract. This paper presents preliminary implementation results of</text>
+<text top="359" left="105" width="434" height="12" font="2">the SVM (Support Vector Machine) algorithm. SVM is a dedicated math-</text>
+<text top="375" left="105" width="434" height="12" font="2">ematical formula which allows us to extract selective objects from a pic-</text>
+<text top="392" left="105" width="434" height="12" font="2">ture and assign them to an appropriate class. Consequently, a black and</text>
+<text top="408" left="105" width="434" height="12" font="2">white images reﬂecting an occurrence of the desired feature is derived</text>
+<text top="425" left="105" width="433" height="12" font="2">from an original picture fed into the classiﬁer. This work is primarily</text>
+<text top="441" left="105" width="433" height="12" font="2">focused on the FPGA implementation aspects of the algorithm as well</text>
+<text top="458" left="105" width="434" height="12" font="2">as on comparison of the hardware and software performance. A human</text>
+<text top="474" left="105" width="434" height="12" font="2">skin classiﬁer was used as an example and implemented both on AMD</text>
+<text top="490" left="105" width="434" height="12" font="2">AthlonII P320 Dual-Core2.10 GHz and Xilinx Spartan 6 FPGA. It is</text>
+<text top="507" left="105" width="434" height="12" font="2">worth emphasizing that the critical hardware components were designed</text>
+<text top="523" left="105" width="434" height="12" font="2">using HDL (Hardware Description Language), whereas the less demand-</text>
+<text top="540" left="105" width="434" height="12" font="2">ing or standard ones such as communication interfaces, FIFO, FSMs were</text>
+<text top="556" left="105" width="433" height="12" font="2">implemented in HLL (High Level Language). Such an approach allowed</text>
+<text top="573" left="105" width="434" height="12" font="2">us both to cut a design time and preserve a high performance of the</text>
+<text top="589" left="105" width="189" height="12" font="2">hardware classiﬁcation module.</text>
+<text top="622" left="105" width="425" height="12" font="2">Keywords: Picture segmentation, FPGA, reconﬁgurable logic, SVM.</text>
+<text top="670" left="63" width="10" height="16" font="3">1</text>
+<text top="670" left="93" width="111" height="16" font="3">Introduction</text>
+<text top="707" left="63" width="519" height="13" font="1">This work is part of the Synat project embracing several initiatives aiming to</text>
+<text top="725" left="63" width="519" height="13" font="1">create a repository of images which are assigned a descriptive name according to</text>
+<text top="743" left="63" width="519" height="13" font="1">their contents. Such a database of tagged images will signiﬁcantly reduce search</text>
+<text top="761" left="63" width="519" height="13" font="1">time since only picture tags will be processed instead of images so the process</text>
+<text top="779" left="63" width="519" height="13" font="1">will involve simple string operations rather than image recognition. It is worth</text>
+<text top="797" left="63" width="519" height="13" font="1">noting that such a database may also provide a mean to combat Internet threats</text>
+<text top="815" left="63" width="519" height="13" font="1">and crimes through an access to the large well classiﬁed repository of visual</text>
+<text top="833" left="63" width="80" height="13" font="1">information.</text>
+<text top="851" left="80" width="502" height="13" font="1">The project is a huge challenge due to an immense volume of data collected</text>
+<text top="869" left="63" width="519" height="13" font="1">over the past years denoted today as the Internet resources. Therefore the core</text>
+<text top="887" left="63" width="519" height="13" font="1">part of the undertaking is to design and implement a classiﬁcation system which</text>
+<text top="923" left="63" width="519" height="9" font="4">R. Bembenik et al. (Eds.): Intelligent Tools for Building a Scient. Info. Plat., SCI 390, pp. <a href="pdfxml.html#14">203–216.</a></text>
+<text top="935" left="63" width="86" height="9" font="4">springerlink.com</text>
+<text top="934" left="364" width="217" height="10" font="4">c Springer-Verlag Berlin Heidelberg 2012</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">204</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="81" left="63" width="519" height="13" font="1">should be both reliable and fast. In order to achieve the high performance of a</text>
+<text top="99" left="63" width="519" height="13" font="1">search engine the most computationally intensive operations are to be ported</text>
+<text top="117" left="63" width="519" height="13" font="1">to hardware. Thus FPGAs due to their strongly parallel structure, huge logic</text>
+<text top="135" left="63" width="460" height="13" font="1">resources and growing processing speed <a href="pdfxml.html#13">[1] </a>seem to be the best choice.</text>
+<text top="153" left="80" width="502" height="13" font="1">Image segmentation is a process which aims to separate a picture into sev-</text>
+<text top="171" left="63" width="519" height="13" font="1">eral regions based on objects or features of interest. A single SVM system may</text>
+<text top="188" left="63" width="519" height="13" font="1">embrace several modules trained to recognize diﬀerent features so the unit as</text>
+<text top="206" left="63" width="519" height="13" font="1">a whole is capable of tracing multidimensional objects in terms of a number of</text>
+<text top="224" left="63" width="55" height="13" font="1">features.</text>
+<text top="242" left="80" width="502" height="13" font="1">It is worth emphasizing that a segmentation may also be regarded as a form of</text>
+<text top="260" left="63" width="519" height="13" font="1">data compression, the classﬁer accepts images and yields information regarding</text>
+<text top="278" left="63" width="519" height="13" font="1">objects which usually occupies much less memory resources than corresponding</text>
+<text top="296" left="63" width="87" height="13" font="1">original data.</text>
+<text top="314" left="80" width="502" height="13" font="1">There are plantiful image segmentation algorithms <a href="pdfxml.html#13">[2,3,4] </a>and their number</text>
+<text top="332" left="63" width="519" height="13" font="1">is still growing to meet constantly rising demands of data analysis systems.</text>
+<text top="350" left="63" width="519" height="13" font="1">However, reliability and data processing speed are the factors which are at a</text>
+<text top="368" left="63" width="519" height="13" font="1">premium when it comes to a real life application of a given algorithm. SVM</text>
+<text top="386" left="63" width="519" height="13" font="1">meets both those criterions and therefore was chosen as a classiﬁcation algorithm</text>
+<text top="404" left="63" width="99" height="13" font="1">for the project.</text>
+<text top="449" left="63" width="10" height="16" font="3">2</text>
+<text top="449" left="93" width="140" height="16" font="3">SVM Classiﬁers</text>
+<text top="487" left="63" width="519" height="13" font="1">Support vector machines were originally devised and described by Vapnik <a href="pdfxml.html#13">[5,</a><a href="pdfxml.html#14">6]</a>.</text>
+<text top="505" left="63" width="519" height="13" font="1">They are used for binary classiﬁcation which means that there are exactly two</text>
+<text top="523" left="63" width="519" height="13" font="1">classes of objects (e.g. black and white rectangles) and a classiﬁcation formula</text>
+<text top="541" left="63" width="298" height="13" font="1">is found in a training process of the classiﬁer.</text>
+<text top="559" left="80" width="502" height="13" font="1">The SVM algorithm can be envisioned as a process of creating a hyperplane</text>
+<text top="577" left="63" width="519" height="13" font="1">which separates data in an n-dimensional space. It is conducted in an iterative</text>
+<text top="595" left="63" width="519" height="13" font="1">manner in which a selected plane is gradually adjusted to provide the optimal</text>
+<text top="613" left="63" width="414" height="13" font="1">so-called generalization margin. The following cases may occur:</text>
+<text top="643" left="72" width="510" height="13" font="1">– Input data is linearly separable and the SVM method guaranties that at</text>
+<text top="661" left="88" width="471" height="13" font="1">least one plane of the best separation margin exists and will be adopted</text>
+<text top="679" left="72" width="509" height="13" font="1">– A dimension incrementation is used to bring data to a space of more dimen-</text>
+<text top="697" left="88" width="304" height="13" font="1">sions space so a separation plane can be found</text>
+<text top="726" left="63" width="519" height="13" font="1">A feature space for 2D can be modeled as a sphere with its center and radius</text>
+<text top="744" left="63" width="78" height="13" font="1">(see Fig. <a href="pdfxml.html#3">1).</a></text>
+<text top="762" left="80" width="502" height="13" font="1">The sphere is build upon a set of supportive vectors which constitute its</text>
+<text top="780" left="63" width="519" height="13" font="1">structure. A classiﬁcation process of a priorly trained SVM maybe perceived as</text>
+<text top="798" left="63" width="519" height="13" font="1">probing whether a given point (input data) belongs to the sphere or it’s located</text>
+<text top="816" left="63" width="519" height="13" font="1">outside of it. In the ﬁrst case a point is positively classiﬁed whereas in the second</text>
+<text top="834" left="63" width="240" height="13" font="1">one it’s considered to be an outliner.</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="65" width="467" height="12" font="2">FPGA Implementation of the Selected Parts of the Fast Image Segmentation</text>
+<text top="43" left="561" width="21" height="12" font="2">205</text>
+<text top="424" left="272" width="100" height="12" font="2">Fig. 1. N-sphere</text>
+<text top="456" left="63" width="10" height="16" font="3">3</text>
+<text top="456" left="93" width="299" height="16" font="3">A Choice of a Hardware Platform</text>
+<text top="494" left="63" width="519" height="13" font="1">It is very important to choose a proper architecture and appropriate data transfer</text>
+<text top="512" left="63" width="519" height="13" font="1">protocol since it aﬀects the overall performance of the computational system. It</text>
+<text top="530" left="63" width="519" height="13" font="1">also may balk an eﬀort invested in the development of the hardware algorithm.</text>
+<text top="548" left="63" width="442" height="13" font="1">Therefore the authors decided to review available FPGA platforms.</text>
+<text top="566" left="80" width="502" height="13" font="1">FPGAs have been developed since late 1980s, and have a lot of advantages</text>
+<text top="584" left="63" width="519" height="13" font="1">over processors. The most important ones are: massive parallel architecture,</text>
+<text top="602" left="63" width="519" height="13" font="1">reconﬁgurability, low energy consumption, ability to shape freely its internal</text>
+<text top="620" left="63" width="82" height="13" font="1">architecture.</text>
+<text top="638" left="80" width="502" height="13" font="1">Design and eﬀective use of computing system based on FPGA is a diﬃcult</text>
+<text top="656" left="63" width="519" height="13" font="1">task, as evidenced by the long history of such trials. The father of the concept of</text>
+<text top="674" left="63" width="519" height="13" font="1">using reconﬁgurable logic in computational systems is considered Erstina Ger-</text>
+<text top="692" left="63" width="519" height="13" font="1">ald, who ﬁrst introduced a vision of a machine consisting of a number of repro-</text>
+<text top="710" left="63" width="519" height="13" font="1">grammable matrices in the 1960s. But the idea had not been fulﬁlled until the</text>
+<text top="728" left="63" width="519" height="13" font="1">late 80 century, when it ﬁrst appeared as a reconﬁgurable computer Algotronix</text>
+<text top="746" left="63" width="519" height="13" font="1">CHS2x4, built with 8 CAL1024 units. Since then the continuing development of</text>
+<text top="764" left="63" width="479" height="13" font="1">modules, which in various ways integrate FPGAs in a computing system.</text>
+<text top="781" left="80" width="502" height="13" font="1">Existing HPRC (High Performance Reconﬁgurable Computing ) solutions can</text>
+<text top="799" left="63" width="519" height="13" font="1">be classiﬁed based on their integration with other computing nodes in the system.</text>
+<text top="833" left="69" width="512" height="13" font="1">1. Solutions based on FPGAs as the processor directly attached to a computa-</text>
+<text top="851" left="88" width="493" height="13" font="1">tional system. Usually such modules communicate over PCI or PCI Express</text>
+<text top="869" left="88" width="493" height="13" font="1">or Ethernet bus. Such an arrangement is most common in small systems</text>
+<text top="887" left="88" width="493" height="13" font="1">consisting of several nodes. A system bus bandwidth is often the limiting</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">206</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="81" left="88" width="493" height="13" font="1">performance parameter of such solutions. Alpha-Data <a href="pdfxml.html#14">[7]</a>, Nallatech <a href="pdfxml.html#14">[8]</a>, Pico</text>
+<text top="99" left="88" width="301" height="13" font="1">Computing <a href="pdfxml.html#14">[9] </a>cards can be given as example.</text>
+<text top="117" left="69" width="512" height="13" font="1">2. System with a dedicated point-to-point connection between FPGAs. This</text>
+<text top="135" left="88" width="493" height="13" font="1">solution has a great potential for parallelization and scaling algorithm. A</text>
+<text top="152" left="88" width="493" height="13" font="1">communication with the nearest neighbor is particularly eﬀective. An exam-</text>
+<text top="170" left="88" width="351" height="13" font="1">ple of such a system may be a computer Maxwell <a href="pdfxml.html#14">[10]</a></text>
+<text top="188" left="69" width="512" height="13" font="1">3. Solution based on two-domain approach which divide FPGA part of the</text>
+<text top="206" left="88" width="493" height="13" font="1">system from CPU section. The advantage of this conﬁguration is the ability</text>
+<text top="224" left="88" width="493" height="13" font="1">to communicate across of the all computational units within a system. It is</text>
+<text top="242" left="88" width="493" height="13" font="1">worth taking into account that overloading of a communication bus results</text>
+<text top="260" left="88" width="493" height="13" font="1">in a sudden drop in system performance. Cray XD1 computer can be stated</text>
+<text top="278" left="88" width="217" height="13" font="1">as an example of such a solution.</text>
+<text top="296" left="69" width="512" height="13" font="1">4. A system based on non uniform memory access. This approach allows for</text>
+<text top="314" left="88" width="494" height="13" font="1">virtually any data exchange between computing nodes in the system and</text>
+<text top="332" left="88" width="493" height="13" font="1">creates a challenge in the form of memory coherence. The best-known com-</text>
+<text top="349" left="88" width="493" height="13" font="1">mercially available solution of this type is SGI RASC <a href="pdfxml.html#14">[11]</a>, which utilizes</text>
+<text top="367" left="88" width="494" height="13" font="1">the NUMAlink (Non Uniform Memory Access link) bus to access the global</text>
+<text top="385" left="88" width="494" height="13" font="1">memory. The downside of this solution is unpredictability of data access</text>
+<text top="403" left="88" width="493" height="13" font="1">time, what could potentially create diﬃculties for algorithms for which this</text>
+<text top="421" left="88" width="136" height="13" font="1">parameter is critical.</text>
+<text top="439" left="69" width="512" height="13" font="1">5. The idea of populating CPU sockets with FPGAs. This approach can be</text>
+<text top="457" left="88" width="493" height="13" font="1">considered as a modiﬁcation of the architecture described in section 2. An</text>
+<text top="475" left="88" width="493" height="13" font="1">example of such a system is the topology of the DRC coprocessor system</text>
+<text top="493" left="88" width="493" height="13" font="1">Accelium (Xilinx Virtex-5) <a href="pdfxml.html#14">[12]</a>. This architecture allows for equal access of</text>
+<text top="511" left="88" width="494" height="13" font="1">processor and FPGA to the system resources. However, this has a signiﬁcant</text>
+<text top="529" left="88" width="493" height="13" font="1">drawback, the occurrence of any error in the processing FPGA automatically</text>
+<text top="546" left="88" width="494" height="13" font="1">aﬀects the stability of the whole system, in particular shared memory read</text>
+<text top="564" left="88" width="140" height="13" font="1">and write operations.</text>
+<text top="597" left="63" width="519" height="13" font="1">The project described in this paper will be launch on the 1, 4 and 5 architecture</text>
+<text top="615" left="63" width="385" height="13" font="1">since those platforms are available at ACC Cyfronet AGH.</text>
+<text top="633" left="80" width="424" height="13" font="1">The main research objectives from the hardware perspective are:</text>
+<text top="662" left="69" width="513" height="13" font="1">1. Implement a large part of the SVM algorithm in FPGA. Design a set of</text>
+<text top="680" left="88" width="360" height="13" font="1">hardware modules which constitute the SVM classiﬁer.</text>
+<text top="697" left="69" width="451" height="13" font="1">2. Design of eﬀective mechanisms for the inter-module data transfer.</text>
+<text top="715" left="69" width="513" height="13" font="1">3. Research on the possibility of an eﬀective integration of the FPGA modules</text>
+<text top="733" left="88" width="493" height="13" font="1">within a single computational system using MPI, OpenMP or OpenCL. Such</text>
+<text top="751" left="88" width="494" height="13" font="1">an approach would signiﬁcantly facilitate integrating of the building modules</text>
+<text top="769" left="88" width="108" height="13" font="1">within a system.</text>
+<text top="813" left="63" width="10" height="16" font="3">4</text>
+<text top="813" left="93" width="153" height="16" font="3">System Overview</text>
+<text top="851" left="63" width="519" height="13" font="1">A human skin classiﬁer OC-SVM (One Class Supportive Vector Machine) was</text>
+<text top="869" left="63" width="519" height="13" font="1">implemented as a preliminary project which allows us to estimate performance</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="5" size="5" family="Times" color="#000000"/>
+<text top="43" left="65" width="467" height="12" font="2">FPGA Implementation of the Selected Parts of the Fast Image Segmentation</text>
+<text top="43" left="561" width="21" height="12" font="2">207</text>
+<text top="81" left="63" width="519" height="13" font="1">and resource consumption for other classiﬁers. As a result of an experiment a</text>
+<text top="99" left="63" width="519" height="13" font="1">black-and-white image is generated which reﬂect human skin location in the</text>
+<text top="117" left="63" width="519" height="13" font="1">original picture which was fed into the classiﬁer. A complete computational</text>
+<text top="135" left="63" width="256" height="13" font="1">procedure is composed of several steps:</text>
+<text top="166" left="72" width="129" height="13" font="1">– SVM vectors and</text>
+<text top="162" left="206" width="252" height="19" font="1">τ generation (training of the classiﬁer)</text>
+<text top="184" left="72" width="509" height="13" font="1">– Input image fetch (the step is diﬀerent for hardware and software implemen-</text>
+<text top="202" left="88" width="45" height="13" font="1">tation)</text>
+<text top="220" left="72" width="220" height="13" font="1">– Image resize and normalization</text>
+<text top="237" left="72" width="103" height="13" font="1">– Classiﬁcation</text>
+<text top="255" left="72" width="253" height="13" font="1">– Noise and skin-like objects ﬁltration</text>
+<text top="299" left="63" width="22" height="13" font="1">4.1</text>
+<text top="299" left="102" width="217" height="13" font="1">The Classiﬁcation Algorithm</text>
+<text top="328" left="63" width="404" height="13" font="1">The classiﬁcation algorithm is given by the following formula:</text>
+<text top="380" left="201" width="4" height="14" font="4">i</text>
+<text top="358" left="216" width="10" height="19" font="1">α</text>
+<text top="365" left="226" width="4" height="14" font="4">i</text>
+<text top="358" left="231" width="32" height="19" font="1">K(X</text>
+<text top="365" left="263" width="7" height="14" font="4">x</text>
+<text top="358" left="270" width="19" height="19" font="1">, X</text>
+<text top="365" left="289" width="4" height="14" font="4">i</text>
+<text top="362" left="294" width="6" height="13" font="1">)</text>
+<text top="358" left="304" width="12" height="19" font="1">≥</text>
+<text top="380" left="328" width="4" height="14" font="4">i</text>
+<text top="358" left="344" width="10" height="19" font="1">α</text>
+<text top="365" left="353" width="4" height="14" font="4">i</text>
+<text top="358" left="359" width="32" height="19" font="1">K(X</text>
+<text top="365" left="391" width="6" height="14" font="4">s</text>
+<text top="358" left="397" width="19" height="19" font="1">, X</text>
+<text top="365" left="416" width="4" height="14" font="4">i</text>
+<text top="362" left="421" width="22" height="13" font="1">) =</text>
+<text top="358" left="447" width="7" height="19" font="1">τ</text>
+<text top="362" left="562" width="19" height="13" font="1">(1)</text>
+<text top="407" left="63" width="38" height="13" font="1">where</text>
+<text top="403" left="108" width="172" height="19" font="1">τ is the sphere radius, X</text>
+<text top="410" left="280" width="6" height="14" font="4">s</text>
+<text top="407" left="293" width="24" height="13" font="1">and</text>
+<text top="403" left="324" width="10" height="19" font="1">α</text>
+<text top="410" left="333" width="4" height="14" font="4">i</text>
+<text top="407" left="345" width="236" height="13" font="1">are supportive vectors derived in a</text>
+<text top="425" left="63" width="108" height="13" font="1">training process,</text>
+<text top="421" left="175" width="12" height="19" font="1">X</text>
+<text top="428" left="188" width="7" height="14" font="4">x</text>
+<text top="425" left="200" width="111" height="13" font="1">is an input pixel.</text>
+<text top="443" left="80" width="502" height="13" font="1">Regardless of a choice of vectors in right side of the equation <a href="pdfxml.html#5">1 </a>the result is</text>
+<text top="461" left="63" width="130" height="13" font="1">constant and equals</text>
+<text top="457" left="198" width="384" height="19" font="1">τ. Each pixel fed into the classiﬁer is compared against all</text>
+<text top="479" left="63" width="519" height="13" font="1">the support vectors in order to determine if it is located inside the sphere (see</text>
+<text top="497" left="63" width="43" height="13" font="1">Fig<a href="pdfxml.html#3">.1).</a></text>
+<text top="515" left="80" width="436" height="13" font="1">In this implementation a Gaussian computational kernel was used:</text>
+<text top="545" left="265" width="41" height="19" font="1">K = e</text>
+<text top="543" left="305" width="32" height="14" font="4">−γ X</text>
+<text top="547" left="337" width="4" height="10" font="5">i</text>
+<text top="543" left="342" width="19" height="14" font="4">−X</text>
+<text top="547" left="361" width="4" height="10" font="5">j</text>
+<text top="541" left="373" width="5" height="10" font="5">2</text>
+<text top="549" left="562" width="19" height="13" font="1">(2)</text>
+<text top="580" left="63" width="38" height="13" font="1">where</text>
+<text top="576" left="106" width="175" height="19" font="1">γ is a spread of the kernel.</text>
+<text top="598" left="80" width="502" height="13" font="1">If the <a href="pdfxml.html#5">(1) </a>is met a given point is classiﬁed as belonging to the desired class.</text>
+<text top="616" left="63" width="519" height="13" font="1">For SVM classiﬁes the best results are achieved when input data is normalized</text>
+<text top="634" left="63" width="182" height="13" font="1">(i.e. fall in the range [-1;1]).</text>
+<text top="678" left="63" width="22" height="13" font="1">4.2</text>
+<text top="678" left="102" width="287" height="13" font="1">Architecture of the Hardware Module</text>
+<text top="707" left="63" width="519" height="13" font="1">The computationally intensive routines were ported to hardware to oﬄoad the</text>
+<text top="725" left="63" width="519" height="13" font="1">GPP (General Purpose Processor) and to accelerate the computations. It was</text>
+<text top="743" left="63" width="519" height="13" font="1">possible due to several features of the algorithm which makes it well suited for the</text>
+<text top="761" left="63" width="519" height="13" font="1">FPGA implementation such as: ﬁxed-point arithmetic, parallel structure (easy</text>
+<text top="779" left="63" width="519" height="13" font="1">to pipeline), narrow-range input argument. Consequently a series of hardware</text>
+<text top="797" left="63" width="519" height="13" font="1">units were designed which constitute the internal structure of computational</text>
+<text top="815" left="63" width="519" height="13" font="1">module as presented in <a href="pdfxml.html#6">Fig.2. </a>All the modules are parameterized and pipelined</text>
+<text top="833" left="63" width="519" height="13" font="1">blocks which process a single input vector X every clock cycle. For a sake of the</text>
+<text top="851" left="63" width="519" height="13" font="1">software compatibility the base data format employed in the application is 32 bit</text>
+<text top="869" left="63" width="519" height="13" font="1">ﬁxed-point (16 bits of both fractional and integer part) but it can be adjusted</text>
+<text top="887" left="63" width="519" height="13" font="1">to meet diﬀerent precision requirements in the future. Each module is equipped</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">208</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="456" left="170" width="303" height="12" font="2">Fig. 2. Block diagram of the classiﬁcation module</text>
+<text top="498" left="63" width="519" height="13" font="1">with the overﬂow signal which propagates across all the units composing the</text>
+<text top="516" left="63" width="519" height="13" font="1">classiﬁcation module. Such an approach allows us to avoid corruptions of the</text>
+<text top="534" left="63" width="344" height="13" font="1">result just by simply examining the overﬂow output.</text>
+<text top="552" left="80" width="502" height="13" font="1">It is possible to connect several classiﬁcation modules to form a parallel struc-</text>
+<text top="570" left="63" width="519" height="13" font="1">ture as it is depicted in Fig. 3. Furthermore, it is worth noting that support-</text>
+<text top="588" left="63" width="519" height="13" font="1">ive vectors (denoted as SV in Fig. <a href="pdfxml.html#7">3) </a>are fetched from an external memory</text>
+<text top="606" left="63" width="519" height="13" font="1">only once for the whole computations and therefore can be stored in the in-</text>
+<text top="624" left="63" width="519" height="13" font="1">ternal memory for all the computation. Moreover, the number of the support-</text>
+<text top="642" left="63" width="519" height="13" font="1">ive vectors as well as a is not large and usually not exceed tens, thus internal</text>
+<text top="660" left="63" width="519" height="13" font="1">BRAM memory suﬃce to accommodate those coeﬃcients (e.g. for the human</text>
+<text top="678" left="63" width="519" height="13" font="1">skin classiﬁcation only 17 supportive vectors are used). Increase of a number of</text>
+<text top="696" left="63" width="519" height="13" font="1">supportive vectors improves the classiﬁer accuracy at the expense of the accu-</text>
+<text top="714" left="63" width="519" height="13" font="1">mulator throughput decrease (see Fig<a href="pdfxml.html#6">.2) </a>which in turn aﬀects an overall system</text>
+<text top="731" left="63" width="85" height="13" font="1">performance.</text>
+<text top="749" left="80" width="502" height="13" font="1">The classiﬁer (presented in Fig. <a href="pdfxml.html#6">2) </a>yields one bit results which reﬂects an</text>
+<text top="767" left="63" width="519" height="13" font="1">occurrence of a feature of interest within an image. Therefore in order to take</text>
+<text top="785" left="63" width="519" height="13" font="1">a full advantage of an external bus throughput, classiﬁcation results are com-</text>
+<text top="803" left="63" width="519" height="13" font="1">pacted into 32 bit bundles and sent to a host processor as such. Thereafter the</text>
+<text top="821" left="63" width="519" height="13" font="1">GPP transforms those binary values into pixels to form a black-and-white image</text>
+<text top="839" left="63" width="217" height="13" font="1">depicting the features of interest.</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="65" width="467" height="12" font="2">FPGA Implementation of the Selected Parts of the Fast Image Segmentation</text>
+<text top="43" left="561" width="21" height="12" font="2">209</text>
+<text top="391" left="165" width="314" height="12" font="2">Fig. 3. Block diagram of the multimodule structure</text>
+<text top="429" left="63" width="22" height="13" font="1">4.3</text>
+<text top="429" left="102" width="93" height="13" font="1">Exp Module</text>
+<text top="461" left="63" width="519" height="13" font="1">The exp() function described in this paper was designed in VHDL from scratch.</text>
+<text top="479" left="63" width="519" height="13" font="1">According to authors knowledge there are only few available libraries of ﬁxed</text>
+<text top="497" left="63" width="519" height="13" font="1">point modules including exp() e.g. <a href="pdfxml.html#14">[13] </a>but they do not meet design requirements</text>
+<text top="515" left="63" width="519" height="13" font="1">such as a parameterization range. Therefore the authors implemented their own</text>
+<text top="533" left="63" width="91" height="13" font="1">exp() module.</text>
+<text top="551" left="80" width="502" height="13" font="1">The exp hardware algorithm is composed of two steps: reduction of a calcu-</text>
+<text top="569" left="63" width="519" height="13" font="1">lation range and approximation of the function within a priory deﬁned range.</text>
+<text top="587" left="63" width="519" height="13" font="1">It is based on a similar algorithm for ﬂoating point numbers <a href="pdfxml.html#14">[14] </a>and the block</text>
+<text top="605" left="63" width="304" height="13" font="1">diagram of the module was presented in Fig<a href="pdfxml.html#8">.4.</a></text>
+<text top="623" left="80" width="502" height="13" font="1">After applying the following formula, the input argument is separated to in-</text>
+<text top="641" left="63" width="32" height="13" font="1">teger</text>
+<text top="637" left="101" width="12" height="19" font="1">X</text>
+<text top="643" left="113" width="4" height="14" font="4">i</text>
+<text top="641" left="124" width="92" height="13" font="1">and fractional</text>
+<text top="637" left="221" width="12" height="19" font="1">X</text>
+<text top="643" left="234" width="6" height="14" font="4">f</text>
+<text top="641" left="247" width="206" height="13" font="1">part. It should be noted that 2</text>
+<text top="637" left="458" width="28" height="19" font="1">× X</text>
+<text top="643" left="485" width="4" height="14" font="4">i</text>
+<text top="641" left="496" width="86" height="13" font="1">can be easily</text>
+<text top="659" left="63" width="519" height="13" font="1">calculated employing a barrel shifter. Therefore the main problem is calculation</text>
+<text top="676" left="63" width="12" height="13" font="1">of</text>
+<text top="673" left="80" width="41" height="19" font="1">exp(X</text>
+<text top="679" left="121" width="6" height="14" font="4">f</text>
+<text top="676" left="129" width="10" height="13" font="1">).</text>
+<text top="710" left="280" width="7" height="19" font="1">e</text>
+<text top="709" left="287" width="7" height="14" font="4">x</text>
+<text top="714" left="299" width="12" height="13" font="1">=</text>
+<text top="710" left="314" width="7" height="19" font="1">e</text>
+<text top="709" left="321" width="42" height="14" font="4">X/ln(2)</text>
+<text top="714" left="562" width="19" height="13" font="1">(3)</text>
+<text top="743" left="63" width="111" height="13" font="1">A fractional part</text>
+<text top="739" left="179" width="12" height="19" font="1">X</text>
+<text top="746" left="191" width="6" height="14" font="4">f</text>
+<text top="743" left="204" width="49" height="13" font="1">= X - (</text>
+<text top="739" left="260" width="322" height="19" font="1">X/ln(2) × ln(2)) is obtained according to Fig<a href="pdfxml.html#8">.4.</a></text>
+<text top="761" left="63" width="519" height="13" font="1">It should be noted that integer part is calculated employing base 2 (thus barrel</text>
+<text top="779" left="63" width="519" height="13" font="1">shifter can be used) but the fractional part is calculated employing base e (thus</text>
+<text top="797" left="63" width="519" height="13" font="1">a simply Taylor expansion can be used). It is worth emphasizing that the exp()</text>
+<text top="815" left="63" width="519" height="13" font="1">is a strongly declining function (the argument is always a negative number)</text>
+<text top="833" left="63" width="519" height="13" font="1">consequently a relatively small input value (absolute value) yields roughly zero</text>
+<text top="851" left="63" width="369" height="13" font="1">as an exp() result. For instance an argument larger than</text>
+<text top="847" left="437" width="27" height="19" font="1">ln(2</text>
+<text top="848" left="464" width="12" height="9" font="4">16</text>
+<text top="851" left="476" width="105" height="13" font="1">) =11.09 (which</text>
+<text top="869" left="63" width="519" height="13" font="1">integer part can be mapped on 4 bits)gives zero as the fractional part of the</text>
+<text top="887" left="63" width="434" height="13" font="1">exp() result is represented only on 16-bits. Therefore calculation of</text>
+<text top="883" left="508" width="73" height="19" font="1">X/ln(2) ×</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">210</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="77" left="63" width="519" height="19" font="1">ln(2) can be conducted with the limited bit-width, which signiﬁcantly reduces</text>
+<text top="99" left="63" width="519" height="13" font="1">hardware requirements of the 1/ln(2) and ln(2) multipliers. The fractional part</text>
+<text top="113" left="63" width="12" height="19" font="1">X</text>
+<text top="119" left="75" width="6" height="14" font="4">f</text>
+<text top="117" left="87" width="230" height="13" font="1">is then bit separated into -the most</text>
+<text top="113" left="322" width="12" height="19" font="1">X</text>
+<text top="119" left="334" width="21" height="14" font="4">msb</text>
+<text top="117" left="361" width="51" height="13" font="1">and less</text>
+<text top="113" left="417" width="12" height="19" font="1">X</text>
+<text top="119" left="429" width="15" height="14" font="4">lsb</text>
+<text top="117" left="449" width="132" height="13" font="1">signiﬁcant part. The</text>
+<text top="131" left="63" width="12" height="19" font="1">X</text>
+<text top="137" left="75" width="21" height="14" font="4">msb</text>
+<text top="135" left="103" width="357" height="13" font="1">is fed to the LUT (Look-Up Table) memory. And the</text>
+<text top="131" left="466" width="12" height="19" font="1">X</text>
+<text top="137" left="479" width="15" height="14" font="4">lsb</text>
+<text top="135" left="500" width="82" height="13" font="1">is calculated</text>
+<text top="153" left="63" width="187" height="13" font="1">employing Taylor expansion.</text>
+<text top="607" left="193" width="259" height="12" font="2">Fig. 4. Block diagram of the exp() module</text>
+<text top="655" left="80" width="322" height="13" font="1">The complete exp() algorithm is given as follows:</text>
+<text top="695" left="217" width="7" height="19" font="1">e</text>
+<text top="694" left="224" width="7" height="14" font="4">x</text>
+<text top="699" left="236" width="12" height="13" font="1">=</text>
+<text top="695" left="252" width="7" height="19" font="1">e</text>
+<text top="694" left="259" width="39" height="14" font="4">x/ln(2)</text>
+<text top="699" left="303" width="23" height="13" font="1">= 2</text>
+<text top="694" left="326" width="7" height="14" font="4">x</text>
+<text top="698" left="333" width="4" height="10" font="5">i</text>
+<text top="695" left="342" width="15" height="19" font="1">· e</text>
+<text top="696" left="357" width="5" height="9" font="4">(</text>
+<text top="694" left="361" width="23" height="14" font="4">x−x</text>
+<text top="698" left="384" width="4" height="10" font="5">i</text>
+<text top="696" left="389" width="5" height="9" font="4">)</text>
+<text top="694" left="393" width="33" height="14" font="4">/ln(2)</text>
+<text top="699" left="562" width="19" height="13" font="1">(4)</text>
+<text top="740" left="103" width="7" height="19" font="1">e</text>
+<text top="738" left="110" width="10" height="14" font="4">X</text>
+<text top="742" left="120" width="5" height="10" font="5">f</text>
+<text top="743" left="131" width="12" height="13" font="1">=</text>
+<text top="740" left="147" width="7" height="19" font="1">e</text>
+<text top="738" left="154" width="10" height="14" font="4">X</text>
+<text top="742" left="164" width="25" height="10" font="5">MSB</text>
+<text top="740" left="190" width="9" height="9" font="4">+</text>
+<text top="738" left="199" width="10" height="14" font="4">X</text>
+<text top="742" left="209" width="22" height="10" font="5">LSB</text>
+<text top="743" left="236" width="12" height="13" font="1">=</text>
+<text top="740" left="252" width="7" height="19" font="1">e</text>
+<text top="738" left="259" width="10" height="14" font="4">X</text>
+<text top="742" left="269" width="25" height="10" font="5">MSB</text>
+<text top="740" left="299" width="15" height="19" font="1">· e</text>
+<text top="738" left="314" width="10" height="14" font="4">X</text>
+<text top="742" left="323" width="22" height="10" font="5">LSB</text>
+<text top="743" left="351" width="12" height="13" font="1">=</text>
+<text top="740" left="367" width="51" height="19" font="1">LUT (X</text>
+<text top="746" left="418" width="29" height="14" font="4">MSB</text>
+<text top="743" left="449" width="6" height="13" font="1">)</text>
+<text top="740" left="458" width="51" height="19" font="1">· (1 + X</text>
+<text top="746" left="509" width="25" height="14" font="4">LSB</text>
+<text top="743" left="535" width="6" height="13" font="1">)</text>
+<text top="743" left="562" width="19" height="13" font="1">(5)</text>
+<text top="779" left="63" width="26" height="13" font="1">The</text>
+<text top="775" left="95" width="7" height="19" font="1">e</text>
+<text top="774" left="102" width="10" height="14" font="4">X</text>
+<text top="778" left="112" width="22" height="10" font="5">LSB</text>
+<text top="779" left="135" width="446" height="13" font="1">evaluation is performed as a LUT operation which coeﬃcients are</text>
+<text top="797" left="63" width="519" height="13" font="1">stored in a internal FPGA block memory denoted as a BRAM. The second part</text>
+<text top="815" left="63" width="136" height="13" font="1">of the equation - 1+</text>
+<text top="811" left="198" width="12" height="19" font="1">X</text>
+<text top="817" left="211" width="25" height="14" font="4">LSB</text>
+<text top="815" left="243" width="339" height="13" font="1">was implemented as a short Taylor expansion. It is</text>
+<text top="833" left="63" width="120" height="13" font="1">achievable because</text>
+<text top="829" left="187" width="12" height="19" font="1">X</text>
+<text top="835" left="199" width="25" height="14" font="4">LSB</text>
+<text top="833" left="229" width="315" height="13" font="1">is so small that the next term of the Taylor series,</text>
+<text top="829" left="547" width="9" height="19" font="1">x</text>
+<text top="831" left="556" width="6" height="9" font="4">2</text>
+<text top="829" left="562" width="19" height="19" font="1">/2,</text>
+<text top="851" left="63" width="519" height="13" font="1">does not inﬂuence the result. The presented exp() implementation is fast and</text>
+<text top="869" left="63" width="519" height="13" font="1">consumes insigniﬁcant resources. Consequently a single FPGA can accommodate</text>
+<text top="887" left="63" width="334" height="13" font="1">several of such modules along with the other units.</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="65" width="467" height="12" font="2">FPGA Implementation of the Selected Parts of the Fast Image Segmentation</text>
+<text top="43" left="561" width="21" height="12" font="2">211</text>
+<text top="79" left="63" width="10" height="16" font="3">5</text>
+<text top="79" left="93" width="211" height="16" font="3">Implementation Results</text>
+<text top="117" left="63" width="519" height="13" font="1">The classiﬁcation algorithm was initially implemented on GPP in C++ and the</text>
+<text top="135" left="63" width="519" height="13" font="1">OpenCV library was used. A set of 17 support vectors was generated which</text>
+<text top="153" left="63" width="400" height="13" font="1">described a human skin, each of which are 32bit RGB colors.</text>
+<text top="171" left="80" width="502" height="13" font="1">The ﬁgures below represent experimental results for the randomly chosen im-</text>
+<text top="188" left="63" width="519" height="13" font="1">ages. It can be noticed that the system wrongly classiﬁed some parts of the image.</text>
+<text top="206" left="63" width="519" height="13" font="1">Unfortunately the system often confuses bright objects with a human skin. One</text>
+<text top="224" left="63" width="519" height="13" font="1">way to improve the accuracy is increasing the contrast between an object and</text>
+<text top="242" left="63" width="519" height="13" font="1">a background. Similar result of accuracy improvement may be achieved when a</text>
+<text top="260" left="63" width="519" height="13" font="1">larger number of supportive vectors is employed but it is done at a expanse of a</text>
+<text top="278" left="63" width="261" height="13" font="1">loss of classiﬁer’s generalization feature.</text>
+<text top="689" left="186" width="272" height="12" font="2">Fig. 5. Original image (before segmentation)</text>
+<text top="732" left="80" width="502" height="13" font="1">Time required to execute the following algorithm on GPP: AMD Athlon II</text>
+<text top="750" left="63" width="519" height="13" font="1">P320 Dual-Core 2.10 GHz (on a single core) for an image of 480x480 pixels</text>
+<text top="768" left="63" width="519" height="13" font="1">takes roughly 0.015s. Hardware implementation according to the formula (1)</text>
+<text top="786" left="63" width="519" height="13" font="1">(assuming that no input data fetch delay is introduced) can be calculated as fol-</text>
+<text top="804" left="63" width="57" height="13" font="1">lows: 17(</text>
+<text top="800" left="120" width="238" height="19" font="1">SV M)×480(pixels)×480(pixels) ∼</text>
+<text top="805" left="346" width="23" height="13" font="1">= 4</text>
+<text top="800" left="371" width="29" height="19" font="1">×10</text>
+<text top="802" left="400" width="6" height="9" font="4">6</text>
+<text top="804" left="411" width="171" height="13" font="1">clock cycles. Consequently</text>
+<text top="822" left="63" width="519" height="13" font="1">theoretical processing time for 200 MHz equals 0.02s. Due to a low resources</text>
+<text top="840" left="63" width="519" height="13" font="1">consumption a single FPGA can accommodate several modules which boost a</text>
+<text top="858" left="63" width="174" height="13" font="1">performance several times.</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">212</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="460" left="107" width="429" height="12" font="2">Fig. 6. Results of human skin segmentation with the proposed method</text>
+<text top="874" left="186" width="272" height="12" font="2">Fig. 7. Original image (before segmentation)</text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="65" width="467" height="12" font="2">FPGA Implementation of the Selected Parts of the Fast Image Segmentation</text>
+<text top="43" left="561" width="21" height="12" font="2">213</text>
+<text top="459" left="107" width="429" height="12" font="2">Fig. 8. Results of human skin segmentation with the proposed method</text>
+<text top="510" left="80" width="502" height="13" font="1">The implementation results of the module on Xilinx Spartan 6 (XC6SLX75)</text>
+<text top="528" left="63" width="289" height="13" font="1">FPGA were presented in Tab. <a href="pdfxml.html#11">1 </a>and Tab. <a href="pdfxml.html#12">2.</a></text>
+<text top="567" left="94" width="452" height="12" font="2">Table 1. Implementation results of the module building blocks (see F<a href="pdfxml.html#6">ig.2)</a></text>
+<text top="599" left="213" width="45" height="12" font="2">Module</text>
+<text top="599" left="300" width="166" height="12" font="2"># 4-input LUT # ﬂip-ﬂops</text>
+<text top="619" left="179" width="114" height="12" font="2">Square module - A</text>
+<text top="619" left="320" width="54" height="12" font="2">660 (1%)</text>
+<text top="619" left="404" width="55" height="12" font="2">220 (1%)</text>
+<text top="636" left="201" width="69" height="12" font="2">Module - B</text>
+<text top="636" left="316" width="62" height="12" font="2">1953 (4%)</text>
+<text top="636" left="404" width="55" height="12" font="2">760 (1%)</text>
+<text top="653" left="196" width="80" height="12" font="2">exp() module</text>
+<text top="653" left="320" width="54" height="12" font="2">312 (1%)</text>
+<text top="653" left="404" width="55" height="12" font="2">277 (1%)</text>
+<text top="705" left="80" width="502" height="13" font="1">It is worth noting that a number of coeﬃcients has a large impact on the</text>
+<text top="723" left="63" width="519" height="13" font="1">resources occupation. In this particular implementation the number of the coef-</text>
+<text top="741" left="63" width="165" height="13" font="1">ﬁcient is three (R, G, B).</text>
+<text top="758" left="80" width="502" height="13" font="1">The classiﬁcation module is a fully pipelined structure and it is capable of</text>
+<text top="776" left="63" width="519" height="13" font="1">working at the frequency of 200 MHz. Each module generates a single result every</text>
+<text top="794" left="63" width="519" height="13" font="1">n clock cycles where n denotes number of the support vectors employed. This</text>
+<text top="812" left="63" width="519" height="13" font="1">processing speed constrain results from the internal structure of the accumulator</text>
+<text top="830" left="63" width="453" height="13" font="1">(see Fig. <a href="pdfxml.html#6">2) </a>which requires n clock cycles to generated a single result.</text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">214</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="77" left="63" width="519" height="12" font="2">Table 2. Implementation results of the classiﬁer module for diﬀerent number of [j]</text>
+<text top="94" left="63" width="107" height="12" font="2">vector coeﬃcients</text>
+<text top="128" left="213" width="218" height="12" font="2">Module # 4-input LUT # ﬂip-ﬂops</text>
+<text top="148" left="232" width="7" height="12" font="2">2</text>
+<text top="148" left="282" width="62" height="12" font="2">2689 (5%)</text>
+<text top="148" left="366" width="61" height="12" font="2">1048 (1%)</text>
+<text top="166" left="232" width="7" height="12" font="2">3</text>
+<text top="166" left="282" width="62" height="12" font="2">3377 (7%)</text>
+<text top="166" left="366" width="61" height="12" font="2">1311 (1%)</text>
+<text top="183" left="232" width="7" height="12" font="2">4</text>
+<text top="183" left="278" width="68" height="12" font="2">6319 (13%)</text>
+<text top="183" left="366" width="61" height="12" font="2">1834 (2%)</text>
+<text top="545" left="143" width="357" height="12" font="2">Fig. 9. Data transfer scheme between FPGA and the GPP</text>
+<text top="595" left="80" width="502" height="13" font="1">Initially the platform of choice was Pico M-502 equipped with two Spartan-</text>
+<text top="613" left="63" width="519" height="13" font="1">6 LX150 FPGA and 512 MB DDR3 of local memory but as the calculations</text>
+<text top="631" left="63" width="519" height="13" font="1">below show the data bandwidth is too low. The board is connected with GPP</text>
+<text top="649" left="63" width="519" height="13" font="1">via PCI-express x4 interconnect which allows for 1 GB/s data transfer in each</text>
+<text top="667" left="63" width="68" height="13" font="1">directions.</text>
+<text top="685" left="80" width="181" height="13" font="1">Support vectors along with</text>
+<text top="681" left="267" width="315" height="19" font="1">α,γ,τ are generated on the host side (by GPP)</text>
+<text top="703" left="63" width="519" height="13" font="1">and are sent to the FPGA only once for the whole computations (see Fig<a href="pdfxml.html#12">.9).</a></text>
+<text top="721" left="63" width="519" height="13" font="1">The module implemented in the FPGA performs the classiﬁcation for all the X</text>
+<text top="739" left="63" width="369" height="13" font="1">vectors and sends the results back to the host processor.</text>
+<text top="756" left="80" width="382" height="13" font="1">The data bus is 32 bits width and each vector consist of 32</text>
+<text top="753" left="464" width="118" height="19" font="1">× 3 bits. However,</text>
+<text top="774" left="63" width="519" height="13" font="1">taking into account the range in which X vectors fall i.e.[-1;1], it can be noticed</text>
+<text top="792" left="63" width="519" height="13" font="1">that only 16 LSB bits are occupied. Therefore the amount of data to be transfer</text>
+<text top="810" left="63" width="519" height="13" font="1">over the data bus is reduced twice and it results in 16x3 bits. Nevertheless still</text>
+<text top="828" left="63" width="519" height="13" font="1">more than a single bus cycle is required to transfer a single x vector on Pico</text>
+<text top="846" left="63" width="60" height="13" font="1">platform.</text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="65" width="467" height="12" font="2">FPGA Implementation of the Selected Parts of the Fast Image Segmentation</text>
+<text top="43" left="561" width="21" height="12" font="2">215</text>
+<text top="81" left="80" width="502" height="13" font="1">Time essential to process a single x vector is given by the following formula</text>
+<text top="99" left="63" width="193" height="13" font="1">(FPGA clocked at 200 MHz):</text>
+<text top="131" left="279" width="85" height="19" font="1">n · 5ns/NoM</text>
+<text top="135" left="562" width="19" height="13" font="1">(6)</text>
+<text top="161" left="63" width="519" height="13" font="1">where NoM stands for the Number of Modules (classiﬁcation modules) working</text>
+<text top="179" left="63" width="366" height="13" font="1">in parallel and n - denotes a number of support vectors.</text>
+<text top="197" left="80" width="502" height="13" font="1">Back-of-the-envelope calculations for the human skin classiﬁer (17 support</text>
+<text top="215" left="63" width="519" height="13" font="1">vectors) show that in order to provide compatibility with HD (High Deﬁnition)</text>
+<text top="233" left="63" width="80" height="13" font="1">1080p (1920</text>
+<text top="229" left="147" width="435" height="19" font="1">× 1080 × 25) standard FPGA should process each pixel every 25</text>
+<text top="251" left="63" width="504" height="13" font="1">ns. It means that at least 4 parallel classiﬁcation modules should be used (17</text>
+<text top="247" left="570" width="12" height="19" font="1">×</text>
+<text top="269" left="63" width="7" height="13" font="1">5</text>
+<text top="265" left="70" width="511" height="19" font="1">ns/25ns = 3, 4) which in turn requires an external bus throughout of 4,8 GB/s</text>
+<text top="287" left="63" width="21" height="13" font="1">(16</text>
+<text top="283" left="84" width="289" height="19" font="1">b × 3 × 4 × 200MHz = 6B × 4 × 200MHz).</text>
+<text top="305" left="80" width="502" height="13" font="1">It turns out that in the case of Pico platform data throughput is a bottleneck.</text>
+<text top="323" left="63" width="519" height="13" font="1">Therefore the DRC AC2020 <a href="pdfxml.html#14">[12] </a>will be used to implement the classiﬁer. The</text>
+<text top="340" left="63" width="519" height="13" font="1">DRC platform is capable of achieving 9.6 GB/s of aggregated HT bus bandwidth.</text>
+<text top="385" left="63" width="10" height="16" font="3">6</text>
+<text top="385" left="93" width="84" height="16" font="3">Summary</text>
+<text top="422" left="63" width="519" height="13" font="1">In this paper preliminary implementation results of the selected parts of the fast</text>
+<text top="440" left="63" width="519" height="13" font="1">image segmentation were presented along with some performance analysis. Both</text>
+<text top="458" left="63" width="519" height="13" font="1">software and hardware approached were discussed with their critical aspects</text>
+<text top="476" left="63" width="519" height="13" font="1">such as bandwidth limitations and data precision. Furthermore several HPRC</text>
+<text top="494" left="63" width="519" height="13" font="1">platforms were described with a special focus of their architecture and inter-</text>
+<text top="512" left="63" width="228" height="13" font="1">module data exchange capabilities.</text>
+<text top="530" left="80" width="502" height="13" font="1">As a future work presented segmentation algorithm will be extended with</text>
+<text top="548" left="63" width="486" height="13" font="1">some additional functionality and implemented on the DRC platform <a href="pdfxml.html#14">[12].</a></text>
+<text top="592" left="63" width="519" height="13" font="1">Acknowledgments. The work presented in this paper was ﬁnanced through</text>
+<text top="610" left="63" width="148" height="13" font="1">the research program -</text>
+<text top="606" left="216" width="41" height="19" font="1">Synat.</text>
+<text top="654" left="63" width="94" height="16" font="3">References</text>
+<text top="691" left="70" width="512" height="12" font="2">1. Mueller, R., Teubner, J., Alonso, G.: Data Processing on FPGAs, Systems Group,</text>
+<text top="708" left="87" width="494" height="12" font="2">Department of Computer Science, ETH Zurich, Switzerland, VLDB 2009, August</text>
+<text top="724" left="87" width="162" height="12" font="2">24-28, Lyon, France (2009)</text>
+<text top="740" left="70" width="512" height="12" font="2">2. Jun, T.: A color image segmentation algorithm based on region growing. In: 2010</text>
+<text top="757" left="87" width="494" height="12" font="2">2nd International Conference on Computer Engineering and Technology (ICCET),</text>
+<text top="773" left="87" width="277" height="12" font="2">April 16-18, vol. 6, pp. V6-634–V6-637 (2010)</text>
+<text top="789" left="70" width="512" height="12" font="2">3. Farmer, M.E., Jain, A.K.: A wrapper-based approach to image segmentation and</text>
+<text top="806" left="87" width="484" height="12" font="2">classiﬁcation. IEEE Transactions on Image Processing 14(12), 2060–2072 (2005)</text>
+<text top="822" left="70" width="512" height="12" font="2">4. Lan, Y., Li, C., Zhang, Y., Zhao, X.: A novel image segmentation method based</text>
+<text top="838" left="87" width="494" height="12" font="2">on random walk. In: Asia-Paciﬁc Conference on Computational Intelligence and</text>
+<text top="855" left="87" width="494" height="12" font="2">Industrial Applications, PACIIA 2009, November 28-29, vol. 1, pp. 207–210 (2009)</text>
+<text top="871" left="70" width="512" height="12" font="2">5. Vapnik, V.N.: The Nature of Statistical Learning Theory. Springer, Heidelberg</text>
+<text top="888" left="87" width="38" height="12" font="2">(2000)</text>
+</page>
+<page number="14" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="21" height="12" font="2">216</text>
+<text top="43" left="112" width="110" height="12" font="2">M. Wielgosz et al.</text>
+<text top="82" left="70" width="512" height="12" font="2">6. Ben-Hur, A., Horn, D., Siegelmann, H.T., Vapnik, V.: A support vector clustering</text>
+<text top="98" left="87" width="494" height="12" font="2">method. In: Proceedings. 15th International Conference on Pattern Recognition</text>
+<text top="115" left="87" width="193" height="12" font="2">2000, vol. 2, pp. 724–727 (2000)</text>
+<text top="131" left="70" width="201" height="12" font="2">7. <a href="http://www.alpha-data.com/">http://www.alpha-data.com/</a></text>
+<text top="148" left="70" width="193" height="12" font="2">8. <a href="http://www.nallatech.com/">http://www.nallatech.com/</a></text>
+<text top="164" left="70" width="221" height="12" font="2">9. <a href="http://www.picocomputing.com/">http://www.picocomputing.com/</a></text>
+<text top="180" left="63" width="518" height="12" font="2">10. Baxter, R., Booth, S., Bull, M., Cawood, G., Perry, J., Parsons, M., Simpson,</text>
+<text top="197" left="87" width="494" height="12" font="2">A., Trew, A., McCormick, A., Smart, G., Smart, R., Cantle, A., Chamberlain,</text>
+<text top="213" left="87" width="494" height="12" font="2">R., Genest, G.: Maxwell - a 64 FPGA Supercomputer. In: Second NASA/ESA</text>
+<text top="230" left="87" width="488" height="12" font="2">Conference on Adaptive Hardware and Systems (AHS 2007), pp. 287–294 (2007)</text>
+<text top="246" left="63" width="355" height="12" font="2">11. <a href="http://www.silicongraphics.ru/pdf/rasc_data.pdf">http://www.silicongraphics.ru/pdf/rasc_data.pdf</a></text>
+<text top="263" left="63" width="426" height="12" font="2">12. <a href="http://www.drccomputer.com/pdfs/DRC_Accelium_Overview.pdf">http://www.drccomputer.com/pdfs/DRC_Accelium_Overview.pdf</a></text>
+<text top="279" left="63" width="207" height="12" font="2">13. <a href="http://www.vhdl.org/fphdl/">http://www.vhdl.org/fphdl/</a></text>
+<text top="296" left="63" width="519" height="12" font="2">14. Wielgosz, M., Jamro, E., Wiatr, K.: Hardware implementation of the exponent</text>
+<text top="312" left="87" width="494" height="12" font="2">based computational core for an exchange-correlation potential matrix generation.</text>
+<text top="328" left="87" width="494" height="12" font="2">In: Wyrzykowski, R., Dongarra, J., Karczewski, K., Wasniewski, J. (eds.) PPAM</text>
+<text top="345" left="87" width="391" height="12" font="2">2009. LNCS, vol. 6067, pp. 115–124. Springer, Heidelberg (2010)</text>
+</page>
+</pdf2xml>

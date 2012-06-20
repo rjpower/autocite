@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="33" family="Times" color="#000000"/>
+	<fontspec id="1" size="14" family="Times" color="#000000"/>
+	<fontspec id="2" size="12" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="9" family="Times" color="#000000"/>
+	<fontspec id="5" size="16" family="Helvetica" color="#585a60"/>
+	<fontspec id="6" size="11" family="Helvetica" color="#585a60"/>
+<text top="93" left="108" width="703" height="32" font="0">Preventing data leakage in service orchestration</text>
+<text top="153" left="184" width="135" height="15" font="1">Thomas Demongeot</text>
+<text top="173" left="92" width="319" height="13" font="2">DGA - Information Superiority Unit -Bruz - France</text>
+<text top="192" left="115" width="273" height="13" font="2">Telecom Bretagne -Cesson-S´evign´e - France</text>
+<text top="210" left="129" width="244" height="13" font="2">thomas.demongeot@dga.defense.gouv.fr</text>
+<text top="153" left="504" width="67" height="15" font="1">Eric Totel</text>
+<text top="173" left="455" width="164" height="15" font="1">Valerie Viet Triem Tong</text>
+<text top="192" left="430" width="215" height="13" font="2">Supelec - Cesson-S´evign´e - France</text>
+<text top="211" left="446" width="182" height="13" font="2">ﬁrstname.surname@supelec.fr</text>
+<text top="153" left="694" width="101" height="15" font="1">Yves Le Traon</text>
+<text top="173" left="664" width="162" height="13" font="2">University of Luxembourg</text>
+<text top="192" left="684" width="121" height="13" font="2">yves.letraon@uni.lu</text>
+<text top="287" left="88" width="362" height="12" font="3">Abstract—Web Services are currently the base of a lot a e-</text>
+<text top="302" left="73" width="377" height="12" font="3">commerce applications. Nevertheless, clients often use these ser-</text>
+<text top="317" left="73" width="377" height="12" font="3">vices without knowing anything about their internals. Moreover,</text>
+<text top="332" left="73" width="377" height="12" font="3">they have no clue about the use of their personal data inside the</text>
+<text top="347" left="73" width="377" height="12" font="3">global applications. In this paper, we offer the opportunity to</text>
+<text top="362" left="73" width="377" height="12" font="3">the user to specify constraints on the use of its personal data. To</text>
+<text top="377" left="73" width="377" height="12" font="3">ensure the privacy of data at runtime, we deﬁne a distributed</text>
+<text top="392" left="73" width="377" height="12" font="3">security policy model. This policy is conﬁgured at runtime by</text>
+<text top="406" left="73" width="377" height="12" font="3">the user of the BPEL program. This policy is enforced within a</text>
+<text top="421" left="73" width="377" height="12" font="3">BPEL interpreter, and ensures that no information ﬂow can be</text>
+<text top="436" left="73" width="377" height="12" font="3">produced from the user data to unauthorized services. However,</text>
+<text top="451" left="73" width="377" height="12" font="3">the dynamic aspects of web services lead to situations where</text>
+<text top="466" left="73" width="377" height="12" font="3">the policy prohibits the nominal operation of orchestration (e.g.,</text>
+<text top="481" left="73" width="377" height="12" font="3">when using a service that is unknown by the user). To solve</text>
+<text top="496" left="73" width="377" height="12" font="3">this problem, we propose to let user to dynamically permit</text>
+<text top="511" left="73" width="377" height="12" font="3">exceptional unauthorized ﬂows. In order to make decision, the</text>
+<text top="526" left="73" width="377" height="12" font="3">user is provided with all information necessary for decision-</text>
+<text top="541" left="73" width="377" height="12" font="3">making. We also present an implementation inside the Orchestra</text>
+<text top="556" left="73" width="377" height="12" font="3">BPEL interpreter. As far as we know this implementation is the</text>
+<text top="571" left="73" width="377" height="12" font="3">ﬁrst information ﬂow monitor for web services that is also end-</text>
+<text top="586" left="73" width="105" height="12" font="3">user conﬁgurable.</text>
+<text top="618" left="203" width="23" height="13" font="2">I. I</text>
+<text top="620" left="227" width="93" height="11" font="4">NTRODUCTION</text>
+<text top="645" left="88" width="362" height="13" font="2">Web services were originally designed as a set of reusable</text>
+<text top="663" left="73" width="377" height="13" font="2">services freely available to everyone. Service-orientation even-</text>
+<text top="681" left="73" width="377" height="13" font="2">tually offers an elegant way to build new services composed of</text>
+<text top="699" left="73" width="377" height="13" font="2">existing ones using the notion of orchestration. On one hand,</text>
+<text top="716" left="73" width="377" height="13" font="2">since services are based on encapsulation, the client does not</text>
+<text top="734" left="73" width="377" height="13" font="2">need to understand how a service works. On the other hand,</text>
+<text top="752" left="73" width="377" height="13" font="2">this lack of information also means that the client does not</text>
+<text top="770" left="73" width="377" height="13" font="2">know how his data are used and by who. Currently, most of</text>
+<text top="788" left="73" width="377" height="13" font="2">the efforts in web service security focus on the conﬁdentiality</text>
+<text top="806" left="73" width="377" height="13" font="2">of the information at communication protocol level, but do</text>
+<text top="824" left="73" width="377" height="13" font="2">not solve the problem of how to make a speciﬁc service</text>
+<text top="842" left="73" width="377" height="13" font="2">orchestration trustworthy for the clients. Even if the service or-</text>
+<text top="860" left="73" width="377" height="13" font="2">chestration provider is trustworthy, it has no technical solution</text>
+<text top="878" left="73" width="377" height="13" font="2">to guarantee a speciﬁc client that it satisﬁes his expectations</text>
+<text top="896" left="73" width="377" height="13" font="2">in terms of data protection. User data protection in a service</text>
+<text top="914" left="73" width="377" height="13" font="2">orchestration is thus crucial, and requires two basic bricks.</text>
+<text top="932" left="73" width="377" height="13" font="2">First, that expectations of the client must be expressed, which</text>
+<text top="950" left="73" width="377" height="13" font="2">implies some security policy language is available. In this</text>
+<text top="968" left="73" width="377" height="13" font="2">paper, we propose such an elementary data protection policy</text>
+<text top="985" left="73" width="377" height="13" font="2">conﬁgurable by the user of the service. Second, the technical</text>
+<text top="1003" left="73" width="377" height="13" font="2">support for checking the client’s data protection policy must</text>
+<text top="1021" left="73" width="377" height="13" font="2">be embedded in the orchestration interpreter. In this paper, we</text>
+<text top="1039" left="73" width="377" height="13" font="2">propose checking at runtime whether the data protection policy</text>
+<text top="1057" left="73" width="377" height="13" font="2">is satisﬁed with a prototype tool called OrchestraFlow. This</text>
+<text top="1075" left="73" width="377" height="13" font="2">tool extends a BPEL (Business Process Execution Language)</text>
+<text top="286" left="468" width="377" height="13" font="2">[1] interpretation engine, BPEL being the standard language</text>
+<text top="304" left="468" width="377" height="13" font="2">for programming an orchestration of web services. BPEL</text>
+<text top="322" left="468" width="377" height="13" font="2">is a relatively simple language that describes the sequences</text>
+<text top="340" left="468" width="377" height="13" font="2">of service calls necessary to properly achieve a composite</text>
+<text top="358" left="468" width="377" height="13" font="2">service. A BPEL program is a web service written in BPEL</text>
+<text top="376" left="468" width="377" height="13" font="2">executed by a BPEL interpreter. A BPEL program can invoke</text>
+<text top="394" left="468" width="377" height="13" font="2">other web services, thus it deﬁnes the orchestration of web</text>
+<text top="412" left="468" width="377" height="13" font="2">services. BPEL program may receive information from users,</text>
+<text top="430" left="468" width="377" height="13" font="2">and use these data to provide information to the invoked</text>
+<text top="447" left="468" width="377" height="13" font="2">services. Therefore, the BPEL program produces information</text>
+<text top="465" left="468" width="377" height="13" font="2">ﬂows from the user data to the used services. The problem</text>
+<text top="483" left="468" width="377" height="13" font="2">is whether these information ﬂows are legal according to the</text>
+<text top="501" left="468" width="377" height="13" font="2">user privacy policy. OrchestraFlow takes the data protection</text>
+<text top="519" left="468" width="377" height="13" font="2">policies of the service users as inputs and checks whether there</text>
+<text top="537" left="468" width="377" height="13" font="2">is a risk of information leakage at runtime w.r.t. the policy.</text>
+<text top="555" left="468" width="377" height="13" font="2">Instead of a static analysis of the BPEL program, a dynamic</text>
+<text top="573" left="468" width="377" height="13" font="2">analysis has been chosen in order to be able to handle dynamic</text>
+<text top="591" left="468" width="377" height="13" font="2">function discovery and dynamic update of the security policy.</text>
+<text top="609" left="468" width="377" height="13" font="2">Before describing this solution, we present a state of the art</text>
+<text top="627" left="468" width="377" height="13" font="2">on dynamic information ﬂow tracking (Section II). We deﬁne</text>
+<text top="645" left="468" width="377" height="13" font="2">a security policy that speciﬁes legal information ﬂows. We</text>
+<text top="663" left="468" width="377" height="13" font="2">deﬁne what properties it can provide (Section III) and how</text>
+<text top="681" left="468" width="377" height="13" font="2">to verify the policy (Section IV). Section V presents how to</text>
+<text top="699" left="468" width="377" height="13" font="2">dynamically update the security policy. Finally we describe our</text>
+<text top="716" left="468" width="377" height="13" font="2">implementation called OrchestraFlow (Section VI). Finally, we</text>
+<text top="734" left="468" width="301" height="13" font="2">conclude and expose future work in Section VII.</text>
+<text top="764" left="506" width="32" height="13" font="2">II. P</text>
+<text top="766" left="538" width="269" height="11" font="4">ROBLEM STATEMENT AND RELATED WORK</text>
+<text top="788" left="483" width="362" height="13" font="2">A web service orchestration consists in the execution of</text>
+<text top="806" left="468" width="377" height="13" font="2">a set of services that manipulate and transform data. These</text>
+<text top="824" left="468" width="377" height="13" font="2">data are injected by other services or by the users. In a</text>
+<text top="842" left="468" width="377" height="13" font="2">BPEL program these data are protected at different levels.</text>
+<text top="860" left="468" width="377" height="13" font="2">At message level WS-Security [2] aims at providing security</text>
+<text top="878" left="468" width="377" height="13" font="2">for exchanging SOAP messages. Besides security architecture,</text>
+<text top="896" left="468" width="377" height="13" font="2">there exist XML-based languages such as SAML (Security</text>
+<text top="914" left="468" width="377" height="13" font="2">Assertion Markup Language) [3] and XACML (eXtensible</text>
+<text top="932" left="468" width="377" height="13" font="2">Access Control Markup Language) [4] that allow specifying</text>
+<text top="950" left="468" width="377" height="13" font="2">access control rules for accessing data or services. However</text>
+<text top="968" left="468" width="377" height="13" font="2">there is no access control on the data once they have left their</text>
+<text top="985" left="468" width="377" height="13" font="2">original container. Using XACML we can specify that a user or</text>
+<text top="1003" left="468" width="377" height="13" font="2">a service can access some data but once these data are accessed</text>
+<text top="1021" left="468" width="377" height="13" font="2">by a service there is no control on their propagation. In this</text>
+<text top="1039" left="468" width="377" height="13" font="2">article we aim at providing a better security level by offering</text>
+<text top="1057" left="468" width="377" height="13" font="2">both a context-adaptative security policy driven by users and</text>
+<text top="1075" left="468" width="377" height="13" font="2">a dynamic enforcement mechanism of the security policy. The</text>
+<text top="730" left="29" width="0" height="17" font="5"><a href="http://hal-supelec.archives-ouvertes.fr/hal-00657796/fr/">hal-00657796, version 1 - 9 Jan 2012</a></text>
+<text top="19" left="102" width="771" height="12" font="6">Author manuscript, published in &#34;International Conference on Information Assurance and Security (IAS 2011), Malacca : Malaysia</text>
+<text top="32" left="830" width="43" height="12" font="6">(2011)&#34;</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="7" size="8" family="Times" color="#000000"/>
+<text top="89" left="73" width="377" height="13" font="2">services are not necessarily known before the execution as they</text>
+<text top="107" left="73" width="377" height="13" font="2">can be discovered at runtime, after a search in a directory of</text>
+<text top="125" left="73" width="377" height="13" font="2">services for example. Thus we don’t know before the execution</text>
+<text top="143" left="73" width="377" height="13" font="2">which services are called. Due to this particular feature we</text>
+<text top="161" left="73" width="377" height="13" font="2">believe that a precise security mechanism depends on the</text>
+<text top="178" left="73" width="377" height="13" font="2">context of the execution and has to be adjustable at run-time.</text>
+<text top="196" left="88" width="362" height="13" font="2">In our approach, the security policy will be deﬁned by users</text>
+<text top="214" left="73" width="377" height="13" font="2">and can be updated at run-time, for instance when services are</text>
+<text top="232" left="73" width="377" height="13" font="2">discovered. The security policy enforced at runtime relies on</text>
+<text top="250" left="73" width="377" height="13" font="2">information ﬂow tracking mechanisms that permit detecting</text>
+<text top="268" left="73" width="271" height="13" font="2">user data leakage inside a BPEL interpreter.</text>
+<text top="286" left="88" width="362" height="13" font="2">The area of information ﬂow tracking has been well-studied</text>
+<text top="304" left="73" width="377" height="13" font="2">during the last decade. The basic idea of information ﬂow</text>
+<text top="322" left="73" width="377" height="13" font="2">tracking is that sensible data are marked with an identiﬁer</text>
+<text top="340" left="73" width="377" height="13" font="2">sometimes called a taint, a label, a tag or a mark. The marks</text>
+<text top="358" left="73" width="377" height="13" font="2">are propagated along the ﬂow to taint objects in the system.</text>
+<text top="376" left="73" width="377" height="13" font="2">The propagation can be either dynamically observed or stat-</text>
+<text top="394" left="73" width="377" height="13" font="2">ically analysed. Several researches have helped to strengthen</text>
+<text top="412" left="73" width="377" height="13" font="2">the control of data privacy in BPEL programs, particularly by</text>
+<text top="430" left="73" width="377" height="13" font="2">statically controlling data ﬂows. In [?] BPEL is considered</text>
+<text top="447" left="73" width="377" height="13" font="2">as the description of a distributed collaborative system with a</text>
+<text top="465" left="73" width="377" height="13" font="2">multi-level security policy. This policy ensures that data from</text>
+<text top="483" left="73" width="377" height="13" font="2">Web Services are used properly, it lacks ﬂexibility and does not</text>
+<text top="501" left="73" width="377" height="13" font="2">manage dynamic adaptation. [?] and [?] proposed type systems</text>
+<text top="519" left="73" width="377" height="13" font="2">in order to guarantee non-interference property in dynamic</text>
+<text top="537" left="73" width="377" height="13" font="2">service composition. But the method proposed by [?] needs to</text>
+<text top="555" left="73" width="377" height="13" font="2">analyse each service involved in the orchestration and does not</text>
+<text top="573" left="73" width="377" height="13" font="2">support complex orchestration. In [?] each service involved</text>
+<text top="591" left="73" width="377" height="13" font="2">in the orchestration need to produce a contract describing</text>
+<text top="609" left="73" width="377" height="13" font="2">its internal behaviour and the authors proposed a framework</text>
+<text top="627" left="73" width="377" height="13" font="2">to analyse service orchestration. In [?], the authors propose</text>
+<text top="645" left="73" width="377" height="13" font="2">an XML schema for specifying an employment policy of</text>
+<text top="663" left="73" width="377" height="13" font="2">available Web-Services statically veriﬁed in BPEL programs.</text>
+<text top="681" left="73" width="377" height="13" font="2">In both cases, security policies are deﬁned by the host of BPEL</text>
+<text top="699" left="73" width="377" height="13" font="2">and do not specify a security policy for each user. Moreover,</text>
+<text top="716" left="73" width="377" height="13" font="2">the veriﬁcation of information ﬂows is done statically: it is</text>
+<text top="734" left="73" width="377" height="13" font="2">impossible to address the problem of dynamic discovery of</text>
+<text top="752" left="73" width="377" height="13" font="2">services. In [7] and [8] Myers and Liskov propose more</text>
+<text top="770" left="73" width="377" height="13" font="2">expressive marks (which are called labels). A label attached to</text>
+<text top="788" left="73" width="377" height="13" font="2">a value denote both owners and readers of this value. An owner</text>
+<text top="806" left="73" width="377" height="13" font="2">decides which principals can access his data, these principals</text>
+<text top="824" left="73" width="377" height="13" font="2">are the readers. In [9] Myers presents Jif, where labels are used</text>
+<text top="842" left="73" width="377" height="13" font="2">to annotate data items in a Java program. Jif checks at compile</text>
+<text top="860" left="73" width="377" height="13" font="2">time, in a manner similar to type checking, if all the executions</text>
+<text top="878" left="73" width="377" height="13" font="2">of annotated programs verify the information ﬂow policy. In</text>
+<text top="896" left="73" width="377" height="13" font="2">their approach, the information ﬂow policy consists of the</text>
+<text top="914" left="73" width="377" height="13" font="2">deﬁnition of the readers by the owner. This policy is deﬁned</text>
+<text top="932" left="73" width="377" height="13" font="2">before the analysis and can be updated by relabelling data.</text>
+<text top="950" left="73" width="377" height="13" font="2">Their model authorises only two relabelling rules: restriction</text>
+<text top="968" left="73" width="352" height="13" font="2">and declassiﬁcation. Data can only be relabelled from L</text>
+<text top="973" left="426" width="6" height="9" font="7">1</text>
+<text top="968" left="438" width="12" height="13" font="2">to</text>
+<text top="985" left="73" width="10" height="13" font="2">L</text>
+<text top="991" left="84" width="6" height="9" font="7">2</text>
+<text top="985" left="96" width="25" height="13" font="2">if L</text>
+<text top="991" left="121" width="6" height="9" font="7">2</text>
+<text top="985" left="133" width="159" height="13" font="2">is more restrictive than L</text>
+<text top="991" left="292" width="6" height="9" font="7">1</text>
+<text top="985" left="304" width="146" height="13" font="2">intuitively if it removes</text>
+<text top="1003" left="73" width="377" height="13" font="2">readers, adds owners, or both. A datum is declassiﬁed when it</text>
+<text top="1021" left="73" width="377" height="13" font="2">is relabelled to a label containing more readers for an owner</text>
+<text top="1039" left="73" width="377" height="14" font="2">o or when a owner o is removed. A declassiﬁcation process</text>
+<text top="1057" left="73" width="377" height="13" font="2">is allowed only when the process acts for o. In [10], [11]</text>
+<text top="1075" left="73" width="377" height="13" font="2">the authors explicitly distinguish information from containers</text>
+<text top="89" left="468" width="377" height="13" font="2">and thus propose to mark containers of information with two</text>
+<text top="107" left="468" width="377" height="13" font="2">tags reﬂecting both the origins of the value and the security</text>
+<text top="125" left="468" width="377" height="13" font="2">policy attached to the container. More precisely sensible data</text>
+<text top="143" left="468" width="377" height="13" font="2">are associated to a numerical identiﬁer and an information ﬂow</text>
+<text top="161" left="468" width="377" height="13" font="2">policy speciﬁes how combinations of these identiﬁed data can</text>
+<text top="178" left="468" width="377" height="13" font="2">ﬂow in information containers. The model of marks presented</text>
+<text top="196" left="468" width="377" height="13" font="2">in [11] can be either implemented at system level or at pro-</text>
+<text top="214" left="468" width="377" height="13" font="2">gram level. In [10] information ﬂows are tracked at run-time</text>
+<text top="232" left="468" width="377" height="13" font="2">allowing us to check if the current execution is correct with</text>
+<text top="250" left="468" width="377" height="13" font="2">regard to the deﬁnition of the policy. The policy is completely</text>
+<text top="268" left="468" width="377" height="13" font="2">deﬁned at the initialisation and can be either deduced from</text>
+<text top="286" left="468" width="377" height="13" font="2">an interpretation of access control rights or manually deﬁned.</text>
+<text top="304" left="468" width="377" height="13" font="2">The policy can be updated at run-time simply by changing the</text>
+<text top="322" left="468" width="377" height="13" font="2">tags. In [11] the authors explain how to perform a modiﬁcation</text>
+<text top="340" left="468" width="377" height="13" font="2">of the policy by changing tag value but not how, why or when</text>
+<text top="358" left="468" width="377" height="13" font="2">to perform such a modiﬁcation. We propose to adapt these</text>
+<text top="376" left="468" width="377" height="13" font="2">previous models in the particular context of web services. We</text>
+<text top="394" left="468" width="377" height="13" font="2">aim to observe information ﬂows inside an orchestration of</text>
+<text top="412" left="468" width="377" height="13" font="2">web services in order to ensure the user’s data protection.</text>
+<text top="430" left="468" width="377" height="13" font="2">We adopt a dynamic observation of these ﬂows since in a</text>
+<text top="447" left="468" width="377" height="13" font="2">context of web services we will dynamically discover the</text>
+<text top="465" left="468" width="377" height="13" font="2">environment. As in [10], [11] we explicitly identify user’s</text>
+<text top="483" left="468" width="377" height="13" font="2">data with numerical identiﬁer. As Myers and Liskov in [7]</text>
+<text top="501" left="468" width="377" height="13" font="2">and [8] the security policy will specify owners and readers</text>
+<text top="519" left="468" width="377" height="13" font="2">of the identiﬁed information items. In other words a user</text>
+<text top="537" left="468" width="377" height="13" font="2">deﬁnes which services can access his information items. The</text>
+<text top="555" left="468" width="377" height="13" font="2">description of all readers could be difﬁcult for uninformed</text>
+<text top="573" left="468" width="377" height="13" font="2">users. To solve this problem we propose to dynamically update</text>
+<text top="591" left="468" width="377" height="13" font="2">the security policy when services are discovered. Our tool</text>
+<text top="609" left="468" width="377" height="13" font="2">interacts with the users to adapt or complete the security policy</text>
+<text top="627" left="468" width="91" height="13" font="2">when required.</text>
+<text top="657" left="552" width="37" height="13" font="2">III. P</text>
+<text top="659" left="590" width="47" height="11" font="4">RIVACY</text>
+<text top="657" left="642" width="8" height="13" font="2">S</text>
+<text top="659" left="651" width="56" height="11" font="4">ECURITY</text>
+<text top="657" left="712" width="8" height="13" font="2">P</text>
+<text top="659" left="721" width="39" height="11" font="4">OLICY</text>
+<text top="681" left="483" width="362" height="13" font="2">A piece of information is a data item, a value such as a</text>
+<text top="699" left="468" width="377" height="13" font="2">string, or an integer. A piece of information is provided to a</text>
+<text top="716" left="468" width="377" height="13" font="2">web service orchestration through a call to this service. This</text>
+<text top="734" left="468" width="377" height="13" font="2">piece of information is manipulated by the orchestration and</text>
+<text top="752" left="468" width="377" height="13" font="2">the services it invoked and mixed with other pieces of infor-</text>
+<text top="770" left="468" width="377" height="13" font="2">mation. In this work, we consider that sensitive information</text>
+<text top="788" left="468" width="377" height="13" font="2">and in particular user private data have to be monitored in</text>
+<text top="806" left="468" width="377" height="13" font="2">order to protect where these information data items ﬂow. For</text>
+<text top="824" left="468" width="377" height="13" font="2">that purpose we reuse the notion of atomic information ﬁrst</text>
+<text top="842" left="468" width="377" height="13" font="2">introduced in [11] to identify sensitive or private information.</text>
+<text top="860" left="468" width="377" height="13" font="2">Any piece of information handled in the system is either</text>
+<text top="878" left="468" width="377" height="13" font="2">atomic or obtained after treatments (like calculus) on one or</text>
+<text top="896" left="468" width="377" height="13" font="2">more atomic information. Here any non-atomic information</text>
+<text top="914" left="468" width="377" height="13" font="2">is the compound of one or more atomic information. For</text>
+<text top="932" left="468" width="377" height="13" font="2">example, if x and y are atomic information, 2 × x, x + y, . . .</text>
+<text top="950" left="468" width="377" height="13" font="2">are compound information, the ﬁrst non-atomic information</text>
+<text top="968" left="468" width="377" height="13" font="2">results from the use of x, the second results from the use of</text>
+<text top="985" left="468" width="377" height="14" font="2">x and y. Let us consider an e-shop service as a example of</text>
+<text top="1003" left="468" width="377" height="13" font="2">service. In this example, atomic information items are provided</text>
+<text top="1021" left="468" width="377" height="13" font="2">by the client : the chosen product, bank details and client email</text>
+<text top="1039" left="468" width="377" height="13" font="2">address. These atomic data items are used to compute all infor-</text>
+<text top="1057" left="468" width="377" height="13" font="2">mation items handled by the complete system, such as the total</text>
+<text top="1075" left="468" width="377" height="13" font="2">amount of the transactions, the conﬁrmation of payment, ﬁnal</text>
+<text top="730" left="29" width="0" height="17" font="5">hal-00657796, version 1 - 9 Jan 2012</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="8" size="5" family="Times" color="#000000"/>
+<text top="89" left="73" width="377" height="13" font="2">product delivery notiﬁcation,. . . In a web service orchestration,</text>
+<text top="107" left="73" width="377" height="13" font="2">the information is located in logical containers of information</text>
+<text top="125" left="73" width="377" height="13" font="2">like the variables manipulated by services. The operations</text>
+<text top="143" left="73" width="377" height="13" font="2">performed by programs or services will generate information</text>
+<text top="161" left="73" width="377" height="13" font="2">ﬂows between variables and consequently information will be</text>
+<text top="178" left="73" width="377" height="13" font="2">mixed and/or will move from one variable to another. In this</text>
+<text top="196" left="73" width="377" height="13" font="2">work we want to prevent private or sensitive information to be</text>
+<text top="214" left="73" width="377" height="13" font="2">accessed by a non-authorized service, i.e., we want to ensure</text>
+<text top="232" left="73" width="377" height="13" font="2">that sensitive information ﬂows only into variables readable</text>
+<text top="250" left="73" width="377" height="13" font="2">by authorized services. The security policy allows the user</text>
+<text top="268" left="73" width="377" height="13" font="2">to specify which services are authorized to manipulate each</text>
+<text top="286" left="73" width="377" height="13" font="2">atomic information (and by composition for all the compound</text>
+<text top="304" left="73" width="377" height="13" font="2">information). For that purpose we ﬁrst determine an owner for</text>
+<text top="322" left="73" width="377" height="13" font="2">each atomic information (usually the service/user that provides</text>
+<text top="340" left="73" width="377" height="13" font="2">it to the system). The owner is responsible for statically (at</text>
+<text top="358" left="73" width="377" height="13" font="2">the start of the service invocation) or dynamically (during</text>
+<text top="376" left="73" width="377" height="13" font="2">the execution of the service orchestration) determining the set</text>
+<text top="394" left="73" width="377" height="13" font="2">of services that can access this information. These services</text>
+<text top="412" left="73" width="377" height="13" font="2">will be called information readers. A service is allowed to</text>
+<text top="430" left="73" width="377" height="13" font="2">read an atomic information only when it appears in the set</text>
+<text top="447" left="73" width="377" height="13" font="2">of legal readers for this atomic information. The rest of the</text>
+<text top="465" left="73" width="377" height="13" font="2">policy is determined by composition. When an information is</text>
+<text top="483" left="73" width="377" height="13" font="2">derived from several atomic information items, the owner of</text>
+<text top="501" left="73" width="377" height="13" font="2">this compound information is the set of all owners of atomic</text>
+<text top="519" left="73" width="377" height="13" font="2">information. The readers of this compound information are all</text>
+<text top="537" left="73" width="377" height="13" font="2">the services that are also readers of each atomic information</text>
+<text top="555" left="73" width="377" height="13" font="2">from which it derives. This security policy can be seen as an</text>
+<text top="573" left="73" width="377" height="13" font="2">information ﬂow policy: a ﬂow of information i (atomic or</text>
+<text top="591" left="73" width="377" height="13" font="2">compound) to a container belonging to a service s is legal if</text>
+<text top="609" left="73" width="377" height="13" font="2">and only if the service s has the right of access to information</text>
+<text top="627" left="73" width="377" height="14" font="2">i, i.e., if s is a reader of i. More formally we use the following</text>
+<text top="645" left="73" width="59" height="13" font="2">notations:</text>
+<text top="662" left="73" width="127" height="13" font="2">Information: I = {i</text>
+<text top="668" left="201" width="6" height="9" font="7">1</text>
+<text top="662" left="208" width="31" height="13" font="2">, ..., i</text>
+<text top="668" left="239" width="7" height="9" font="7">n</text>
+<text top="662" left="247" width="203" height="14" font="2">} is the set of atomic information</text>
+<text top="681" left="73" width="377" height="13" font="2">of the system. Information derived from several atomic infor-</text>
+<text top="699" left="73" width="69" height="13" font="2">mation in i</text>
+<text top="704" left="142" width="5" height="9" font="7">j</text>
+<text top="698" left="148" width="38" height="13" font="2">, . . . , i</text>
+<text top="704" left="187" width="6" height="9" font="7">k</text>
+<text top="699" left="199" width="93" height="13" font="2">is denoted by i</text>
+<text top="704" left="292" width="5" height="9" font="7">j</text>
+<text top="697" left="302" width="56" height="14" font="2">⊕ . . . ⊕ i</text>
+<text top="704" left="358" width="6" height="9" font="7">k</text>
+<text top="716" left="73" width="107" height="13" font="2">Services: S = {s</text>
+<text top="722" left="180" width="6" height="9" font="7">1</text>
+<text top="716" left="187" width="22" height="13" font="2">, ..s</text>
+<text top="722" left="209" width="11" height="9" font="7">m</text>
+<text top="715" left="220" width="230" height="14" font="2">} is the set of services of the system.</text>
+<text top="734" left="73" width="377" height="14" font="2">Owners of information i are services that we denote</text>
+<text top="752" left="73" width="272" height="14" font="2">owner(i) ⊆ S. They are deﬁned as follows:</text>
+<text top="776" left="88" width="6" height="10" font="7">•</text>
+<text top="774" left="103" width="347" height="13" font="2">If i is an atomic information then its owner is the service</text>
+<text top="792" left="103" width="191" height="13" font="2">that injected it into the system.</text>
+<text top="812" left="88" width="6" height="10" font="7">•</text>
+<text top="810" left="103" width="270" height="13" font="2">If i is a compound information, i.e., i = i</text>
+<text top="815" left="374" width="5" height="9" font="7">j</text>
+<text top="809" left="384" width="58" height="14" font="2">⊕ . . . ⊕ i</text>
+<text top="815" left="443" width="6" height="9" font="7">k</text>
+<text top="828" left="103" width="26" height="13" font="2">then</text>
+<text top="857" left="147" width="131" height="13" font="2">owner(i) = owner(i</text>
+<text top="862" left="278" width="5" height="9" font="7">j</text>
+<text top="857" left="284" width="109" height="13" font="2">) ∪ . . . ∪ owner(i</text>
+<text top="862" left="393" width="6" height="9" font="7">k</text>
+<text top="857" left="400" width="6" height="13" font="2">)</text>
+<text top="857" left="433" width="17" height="13" font="2">(1)</text>
+<text top="887" left="73" width="377" height="14" font="2">Readers of an information i are services deﬁned by the owners</text>
+<text top="905" left="73" width="377" height="13" font="2">of i which we denote readers(i) ⊆ S. Readers are deﬁned as</text>
+<text top="923" left="73" width="49" height="13" font="2">follows:</text>
+<text top="947" left="88" width="6" height="10" font="7">•</text>
+<text top="944" left="103" width="347" height="13" font="2">if i is an atomic information, readers of i are the readers</text>
+<text top="962" left="103" width="347" height="13" font="2">allowed by the service which injected it into the system;</text>
+<text top="982" left="88" width="6" height="10" font="7">•</text>
+<text top="980" left="103" width="45" height="13" font="2">if i = i</text>
+<text top="985" left="148" width="5" height="9" font="7">j</text>
+<text top="979" left="158" width="56" height="14" font="2">⊕ . . . ⊕ i</text>
+<text top="985" left="213" width="6" height="9" font="7">k</text>
+<text top="980" left="226" width="26" height="13" font="2">then</text>
+<text top="1009" left="124" width="149" height="13" font="2">readers(i) = readers(i</text>
+<text top="1015" left="274" width="5" height="9" font="7">j</text>
+<text top="1009" left="280" width="118" height="13" font="2">) ∩ . . . ∩ readers(i</text>
+<text top="1015" left="399" width="6" height="9" font="7">k</text>
+<text top="1009" left="406" width="6" height="13" font="2">)</text>
+<text top="1010" left="433" width="17" height="13" font="2">(2)</text>
+<text top="1039" left="73" width="377" height="14" font="2">The security policy deﬁnes allowed readers for atomic infor-</text>
+<text top="1057" left="73" width="377" height="13" font="2">mation, rules of composition (1) and (2) deﬁne, by composi-</text>
+<text top="1075" left="73" width="377" height="13" font="2">tion, readers of compound information. The policy is deﬁned</text>
+<text top="89" left="468" width="377" height="13" font="2">by the owners of information, since an owner determines the</text>
+<text top="107" left="468" width="377" height="13" font="2">readers that are allowed to read its atomic information. A call</text>
+<text top="125" left="468" width="377" height="13" font="2">to a service that brings information is legal only if the service</text>
+<text top="143" left="468" width="377" height="13" font="2">called is a reader for this information. In the same way, a</text>
+<text top="161" left="468" width="377" height="13" font="2">response from a service is only authorized if the caller is a</text>
+<text top="178" left="468" width="377" height="13" font="2">legal reader for the received information. The policy can be</text>
+<text top="196" left="468" width="377" height="13" font="2">updated at any time by adding or removing a reader from</text>
+<text top="214" left="468" width="377" height="13" font="2">the set of readers of information. An owner is responsible for</text>
+<text top="232" left="468" width="377" height="13" font="2">removing readers from its own atomic information. When an</text>
+<text top="250" left="468" width="377" height="13" font="2">information is compound, the several owners have to agree for</text>
+<text top="268" left="468" width="106" height="13" font="2">any modiﬁcation.</text>
+<text top="296" left="488" width="38" height="13" font="2">IV. D</text>
+<text top="298" left="526" width="52" height="11" font="4">YNAMIC</text>
+<text top="296" left="583" width="10" height="13" font="2">C</text>
+<text top="298" left="593" width="108" height="11" font="4">HECKING OF THE</text>
+<text top="296" left="706" width="8" height="13" font="2">S</text>
+<text top="298" left="715" width="56" height="11" font="4">ECURITY</text>
+<text top="296" left="776" width="8" height="13" font="2">P</text>
+<text top="298" left="785" width="39" height="11" font="4">OLICY</text>
+<text top="319" left="483" width="362" height="13" font="2">In this work, the security policy is enforced through meta-</text>
+<text top="337" left="468" width="377" height="13" font="2">data or simply labels put on every container of information:</text>
+<text top="355" left="468" width="377" height="13" font="2">which means on every variable in a BPEL program. As it has</text>
+<text top="373" left="468" width="377" height="13" font="2">been proposed by Myers in [7] a label of a variable denotes</text>
+<text top="391" left="468" width="377" height="13" font="2">the owners and the legal readers of its content. In order to</text>
+<text top="409" left="468" width="377" height="13" font="2">follow the origin of information ﬂow, we add to each variable</text>
+<text top="427" left="468" width="377" height="13" font="2">the list of initial information used to produce the content of</text>
+<text top="445" left="468" width="377" height="13" font="2">this variable. The value of a label is initialized as empty and</text>
+<text top="463" left="468" width="377" height="13" font="2">is ﬁrst modiﬁed when a new item is injected into the web</text>
+<text top="481" left="468" width="377" height="13" font="2">service through a call to this service. At this moment, the</text>
+<text top="499" left="468" width="377" height="13" font="2">injected information is considered atomic, its owner is the</text>
+<text top="517" left="468" width="377" height="13" font="2">caller. The caller also deﬁnes the allowed readers for this new</text>
+<text top="534" left="468" width="377" height="13" font="2">item and consequently the new value of the label. The label is</text>
+<text top="552" left="468" width="377" height="13" font="2">further modiﬁed at each operation on the variable that modiﬁes</text>
+<text top="570" left="468" width="377" height="13" font="2">the content of the variable. Labels are modiﬁed to reﬂect</text>
+<text top="588" left="468" width="377" height="13" font="2">owners and readers attached to the information contained in</text>
+<text top="606" left="468" width="377" height="13" font="2">the variable. When a service calls another service or makes a</text>
+<text top="624" left="468" width="377" height="13" font="2">response to another service, a veriﬁer checks if the resulting</text>
+<text top="642" left="468" width="377" height="13" font="2">ﬂow is legal with respect to the current security policy. More</text>
+<text top="660" left="468" width="377" height="13" font="2">precisely the veriﬁer checks if the recipient of the ﬂow appears</text>
+<text top="678" left="468" width="377" height="13" font="2">as a reader in the label of the item sent. In the following, we</text>
+<text top="696" left="468" width="377" height="13" font="2">formally deﬁne how labels are deﬁned and modiﬁed. As stated</text>
+<text top="714" left="468" width="377" height="13" font="2">before, a label is meta-data attached to each container and</text>
+<text top="732" left="468" width="377" height="13" font="2">describes owners and readers of information currently located</text>
+<text top="750" left="468" width="377" height="13" font="2">in the container. If c is a container its security label is of the</text>
+<text top="768" left="468" width="29" height="13" font="2">form</text>
+<text top="796" left="495" width="10" height="13" font="2">L</text>
+<text top="801" left="505" width="5" height="9" font="7">c</text>
+<text top="796" left="515" width="28" height="13" font="2">= {i</text>
+<text top="801" left="543" width="7" height="9" font="7">1</text>
+<text top="796" left="555" width="15" height="13" font="2">: s</text>
+<text top="801" left="570" width="8" height="9" font="7">α</text>
+<text top="796" left="593" width="7" height="13" font="2">s</text>
+<text top="801" left="600" width="8" height="9" font="7">α</text>
+<text top="804" left="608" width="5" height="7" font="8">1</text>
+<text top="796" left="614" width="33" height="13" font="2">, ..., s</text>
+<text top="801" left="647" width="8" height="9" font="7">α</text>
+<text top="804" left="655" width="7" height="7" font="8">n</text>
+<text top="796" left="663" width="31" height="13" font="2">; ...; i</text>
+<text top="801" left="693" width="4" height="9" font="7">j</text>
+<text top="796" left="702" width="15" height="13" font="2">: s</text>
+<text top="801" left="717" width="7" height="9" font="7">β</text>
+<text top="796" left="740" width="7" height="13" font="2">s</text>
+<text top="801" left="747" width="7" height="9" font="7">β</text>
+<text top="804" left="753" width="5" height="7" font="8">1</text>
+<text top="796" left="760" width="33" height="13" font="2">, ..., s</text>
+<text top="801" left="793" width="7" height="9" font="7">β</text>
+<text top="804" left="799" width="9" height="7" font="8">m</text>
+<text top="795" left="810" width="7" height="14" font="2">}</text>
+<text top="824" left="483" width="362" height="13" font="2">Such a label means that information i contained in c</text>
+<text top="842" left="468" width="166" height="13" font="2">is based on information i</text>
+<text top="847" left="633" width="7" height="9" font="7">1</text>
+<text top="842" left="641" width="31" height="13" font="2">, ..., i</text>
+<text top="847" left="672" width="4" height="9" font="7">j</text>
+<text top="842" left="676" width="96" height="13" font="2">. Information i</text>
+<text top="847" left="772" width="7" height="9" font="7">1</text>
+<text top="842" left="787" width="57" height="13" font="2">is owned</text>
+<text top="860" left="468" width="81" height="13" font="2">by owners(i</text>
+<text top="865" left="549" width="7" height="9" font="7">1</text>
+<text top="860" left="556" width="38" height="13" font="2">) = s</text>
+<text top="865" left="594" width="8" height="9" font="7">α</text>
+<text top="860" left="610" width="168" height="13" font="2">which authorizes readers s</text>
+<text top="865" left="778" width="8" height="9" font="7">α</text>
+<text top="869" left="786" width="5" height="7" font="8">1</text>
+<text top="860" left="792" width="33" height="13" font="2">, ..., s</text>
+<text top="865" left="825" width="8" height="9" font="7">α</text>
+<text top="869" left="833" width="7" height="7" font="8">n</text>
+<text top="860" left="841" width="4" height="13" font="2">.</text>
+<text top="878" left="468" width="377" height="13" font="2">Depending on this label the readers allowed to access the</text>
+<text top="896" left="468" width="377" height="13" font="2">information located in c are those authorized by all the owners,</text>
+<text top="914" left="468" width="138" height="13" font="2">i.e., readers(c) = {{s</text>
+<text top="919" left="606" width="8" height="9" font="7">α</text>
+<text top="922" left="614" width="5" height="7" font="8">1</text>
+<text top="913" left="620" width="33" height="13" font="2">, ..., s</text>
+<text top="919" left="653" width="8" height="9" font="7">α</text>
+<text top="922" left="661" width="7" height="7" font="8">n</text>
+<text top="913" left="669" width="68" height="14" font="2">} ∩ ... ∩ {s</text>
+<text top="919" left="737" width="7" height="9" font="7">β</text>
+<text top="922" left="743" width="5" height="7" font="8">1</text>
+<text top="913" left="750" width="33" height="13" font="2">, ..., s</text>
+<text top="919" left="783" width="7" height="9" font="7">β</text>
+<text top="922" left="789" width="9" height="7" font="8">m</text>
+<text top="913" left="800" width="19" height="14" font="2">}}.</text>
+<text top="932" left="468" width="341" height="13" font="2">By abusing the notation we may use owners(L</text>
+<text top="937" left="808" width="5" height="9" font="7">c</text>
+<text top="931" left="815" width="30" height="14" font="2">) or</text>
+<text top="949" left="468" width="67" height="13" font="2">readers(L</text>
+<text top="955" left="535" width="5" height="9" font="7">c</text>
+<text top="949" left="541" width="304" height="14" font="2">) to express the owners/readers of a container c</text>
+<text top="967" left="468" width="79" height="13" font="2">labeled by L</text>
+<text top="973" left="547" width="5" height="9" font="7">c</text>
+<text top="967" left="553" width="4" height="13" font="2">.</text>
+<text top="985" left="483" width="159" height="13" font="2">Let us consider a service s</text>
+<text top="991" left="642" width="6" height="9" font="7">1</text>
+<text top="985" left="653" width="192" height="13" font="2">injecting an item of information</text>
+<text top="1003" left="468" width="144" height="14" font="2">i in another service s</text>
+<text top="1008" left="612" width="6" height="9" font="7">2</text>
+<text top="1003" left="627" width="79" height="13" font="2">by calling s</text>
+<text top="1008" left="706" width="6" height="9" font="7">2</text>
+<text top="1003" left="721" width="123" height="13" font="2">using a variable v.</text>
+<text top="1021" left="468" width="85" height="13" font="2">The service s</text>
+<text top="1026" left="553" width="6" height="9" font="7">1</text>
+<text top="1021" left="566" width="278" height="13" font="2">is considered to be the owner of the atomic</text>
+<text top="1039" left="468" width="334" height="13" font="2">information i now located in the variable v of s</text>
+<text top="1044" left="801" width="6" height="9" font="7">2</text>
+<text top="1039" left="808" width="36" height="13" font="2">. The</text>
+<text top="1057" left="468" width="377" height="13" font="2">variable v is the container of i and its label is on the form</text>
+<text top="1074" left="468" width="14" height="14" font="2">{s</text>
+<text top="1080" left="482" width="7" height="9" font="7">1</text>
+<text top="1075" left="505" width="7" height="13" font="2">s</text>
+<text top="1080" left="512" width="8" height="9" font="7">α</text>
+<text top="1084" left="520" width="5" height="7" font="8">1</text>
+<text top="1075" left="527" width="40" height="13" font="2">, . . . , s</text>
+<text top="1080" left="567" width="8" height="9" font="7">α</text>
+<text top="1084" left="575" width="7" height="7" font="8">n</text>
+<text top="1074" left="583" width="63" height="14" font="2">} where s</text>
+<text top="1080" left="646" width="8" height="9" font="7">α</text>
+<text top="1084" left="654" width="5" height="7" font="8">1</text>
+<text top="1075" left="660" width="40" height="13" font="2">, . . . , s</text>
+<text top="1080" left="701" width="8" height="9" font="7">α</text>
+<text top="1084" left="708" width="7" height="7" font="8">n</text>
+<text top="1075" left="723" width="122" height="13" font="2">are the readers of i</text>
+<text top="730" left="29" width="0" height="17" font="5">hal-00657796, version 1 - 9 Jan 2012</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="89" left="73" width="78" height="13" font="2">allowed by s</text>
+<text top="94" left="152" width="7" height="9" font="7">1</text>
+<text top="89" left="159" width="212" height="13" font="2">. In practical terms if the service s</text>
+<text top="94" left="371" width="6" height="9" font="7">1</text>
+<text top="89" left="383" width="68" height="13" font="2">is executed</text>
+<text top="107" left="73" width="377" height="13" font="2">by a user, this user will be asked to deﬁne the services allowed</text>
+<text top="125" left="73" width="208" height="13" font="2">as readers of its own information.</text>
+<text top="145" left="88" width="362" height="13" font="2">When a service is called, it makes some internal computa-</text>
+<text top="163" left="73" width="377" height="13" font="2">tion before sending a response. These internal computations</text>
+<text top="181" left="73" width="377" height="13" font="2">induce information ﬂows and modify the content of informa-</text>
+<text top="199" left="73" width="377" height="13" font="2">tion containers. Since a label attached to a container describes</text>
+<text top="217" left="73" width="377" height="13" font="2">the security policy of its current content, it has to be updated at</text>
+<text top="235" left="73" width="377" height="13" font="2">each observation of an information ﬂow towards the container.</text>
+<text top="256" left="88" width="362" height="13" font="2">From a general point of view, we consider a set of containers</text>
+<text top="273" left="73" width="6" height="13" font="2">c</text>
+<text top="279" left="80" width="5" height="9" font="7">j</text>
+<text top="273" left="86" width="32" height="13" font="2">, ..., c</text>
+<text top="279" left="118" width="6" height="9" font="7">k</text>
+<text top="274" left="132" width="81" height="13" font="2">labeled by L</text>
+<text top="279" left="212" width="5" height="9" font="7">j</text>
+<text top="273" left="219" width="36" height="13" font="2">, ..., L</text>
+<text top="279" left="255" width="6" height="9" font="7">k</text>
+<text top="274" left="268" width="182" height="13" font="2">if we observe an information</text>
+<text top="291" left="73" width="160" height="13" font="2">ﬂow from the containers c</text>
+<text top="297" left="233" width="5" height="9" font="7">j</text>
+<text top="291" left="240" width="32" height="13" font="2">, ..., c</text>
+<text top="297" left="272" width="6" height="9" font="7">k</text>
+<text top="291" left="284" width="166" height="13" font="2">to another container c, then</text>
+<text top="309" left="73" width="377" height="13" font="2">we update the label of c which is now the union of labels</text>
+<text top="327" left="73" width="80" height="13" font="2">attached to c</text>
+<text top="332" left="154" width="5" height="9" font="7">j</text>
+<text top="327" left="160" width="32" height="13" font="2">, ..., c</text>
+<text top="332" left="192" width="6" height="9" font="7">k</text>
+<text top="327" left="199" width="230" height="13" font="2">. Like Myers, we use the notation L</text>
+<text top="332" left="430" width="5" height="9" font="7">j</text>
+<text top="345" left="73" width="40" height="13" font="2">. . . L</text>
+<text top="350" left="113" width="6" height="9" font="7">k</text>
+<text top="345" left="124" width="326" height="13" font="2">to denote the union of labels. The precise deﬁnition of</text>
+<text top="363" left="88" width="362" height="13" font="2">is given below. This new label means that the owner of the</text>
+<text top="381" left="73" width="377" height="13" font="2">content of c is now the union of owners of content located in</text>
+<text top="399" left="73" width="6" height="13" font="2">c</text>
+<text top="404" left="80" width="5" height="9" font="7">j</text>
+<text top="399" left="86" width="32" height="13" font="2">, ..., c</text>
+<text top="404" left="118" width="6" height="9" font="7">k</text>
+<text top="399" left="130" width="320" height="13" font="2">and the readers are those commonly allowed by these</text>
+<text top="417" left="73" width="377" height="13" font="2">owners. The new label should also reﬂect that information</text>
+<text top="435" left="73" width="278" height="13" font="2">contained in c depends on information from c</text>
+<text top="440" left="351" width="5" height="9" font="7">j</text>
+<text top="435" left="357" width="32" height="13" font="2">, ..., c</text>
+<text top="440" left="390" width="6" height="9" font="7">k</text>
+<text top="435" left="397" width="53" height="13" font="2">, i.e., the</text>
+<text top="453" left="73" width="266" height="13" font="2">label should reﬂect the information history.</text>
+<text top="475" left="103" width="247" height="13" font="2">Labels for Derived Values (Deﬁnition of</text>
+<text top="475" left="356" width="10" height="13" font="2">L</text>
+<text top="480" left="366" width="6" height="9" font="7">1</text>
+<text top="475" left="389" width="10" height="13" font="2">L</text>
+<text top="480" left="399" width="6" height="9" font="7">2</text>
+<text top="475" left="406" width="10" height="13" font="2">):</text>
+<text top="507" left="111" width="64" height="13" font="2">owners(L</text>
+<text top="512" left="176" width="6" height="9" font="7">1</text>
+<text top="507" left="199" width="10" height="13" font="2">L</text>
+<text top="512" left="209" width="6" height="9" font="7">2</text>
+<text top="507" left="216" width="90" height="13" font="2">) = owners(L</text>
+<text top="512" left="306" width="6" height="9" font="7">1</text>
+<text top="507" left="313" width="87" height="13" font="2">) ∪ owners(L</text>
+<text top="512" left="400" width="6" height="9" font="7">2</text>
+<text top="507" left="406" width="6" height="13" font="2">)</text>
+<text top="525" left="108" width="67" height="13" font="2">readers(L</text>
+<text top="530" left="175" width="6" height="9" font="7">1</text>
+<text top="525" left="198" width="10" height="13" font="2">L</text>
+<text top="530" left="208" width="6" height="9" font="7">2</text>
+<text top="525" left="215" width="93" height="13" font="2">) = readers(L</text>
+<text top="530" left="307" width="6" height="9" font="7">1</text>
+<text top="525" left="314" width="89" height="13" font="2">) ∩ readers(L</text>
+<text top="530" left="403" width="6" height="9" font="7">2</text>
+<text top="525" left="410" width="6" height="13" font="2">)</text>
+<text top="543" left="111" width="64" height="13" font="2">history(L</text>
+<text top="548" left="176" width="6" height="9" font="7">1</text>
+<text top="543" left="199" width="10" height="13" font="2">L</text>
+<text top="548" left="209" width="6" height="9" font="7">2</text>
+<text top="543" left="216" width="90" height="13" font="2">) = history(L</text>
+<text top="548" left="306" width="6" height="9" font="7">1</text>
+<text top="543" left="313" width="87" height="13" font="2">) ∪ history(L</text>
+<text top="548" left="400" width="6" height="9" font="7">2</text>
+<text top="543" left="406" width="6" height="13" font="2">)</text>
+<text top="573" left="88" width="280" height="13" font="2">There is an example with three containers c</text>
+<text top="578" left="368" width="6" height="9" font="7">1</text>
+<text top="573" left="375" width="17" height="13" font="2">, c</text>
+<text top="578" left="392" width="6" height="9" font="7">2</text>
+<text top="573" left="405" width="35" height="13" font="2">and c</text>
+<text top="578" left="440" width="6" height="9" font="7">3</text>
+<text top="573" left="446" width="4" height="13" font="2">,</text>
+<text top="591" left="73" width="150" height="13" font="2">respectively labeled by :</text>
+<text top="619" left="88" width="6" height="10" font="7">•</text>
+<text top="617" left="103" width="10" height="13" font="2">L</text>
+<text top="622" left="114" width="5" height="9" font="7">c</text>
+<text top="626" left="119" width="5" height="7" font="8">1</text>
+<text top="617" left="131" width="22" height="13" font="2">: {i</text>
+<text top="622" left="152" width="7" height="9" font="7">1</text>
+<text top="617" left="164" width="15" height="13" font="2">: s</text>
+<text top="622" left="179" width="7" height="9" font="7">1</text>
+<text top="617" left="201" width="7" height="13" font="2">s</text>
+<text top="622" left="208" width="6" height="9" font="7">5</text>
+<text top="617" left="215" width="14" height="13" font="2">, s</text>
+<text top="622" left="228" width="6" height="9" font="7">6</text>
+<text top="617" left="235" width="11" height="13" font="2">; i</text>
+<text top="622" left="246" width="7" height="9" font="7">2</text>
+<text top="617" left="258" width="15" height="13" font="2">: s</text>
+<text top="622" left="273" width="7" height="9" font="7">1</text>
+<text top="617" left="295" width="7" height="13" font="2">s</text>
+<text top="622" left="302" width="6" height="9" font="7">5</text>
+<text top="617" left="308" width="14" height="13" font="2">, s</text>
+<text top="622" left="322" width="6" height="9" font="7">6</text>
+<text top="616" left="329" width="7" height="14" font="2">}</text>
+<text top="637" left="88" width="6" height="10" font="7">•</text>
+<text top="635" left="103" width="10" height="13" font="2">L</text>
+<text top="640" left="114" width="5" height="9" font="7">c</text>
+<text top="644" left="119" width="5" height="7" font="8">2</text>
+<text top="635" left="131" width="22" height="13" font="2">: {i</text>
+<text top="640" left="152" width="7" height="9" font="7">1</text>
+<text top="635" left="164" width="15" height="13" font="2">: s</text>
+<text top="640" left="179" width="7" height="9" font="7">1</text>
+<text top="635" left="201" width="7" height="13" font="2">s</text>
+<text top="640" left="208" width="6" height="9" font="7">5</text>
+<text top="635" left="215" width="14" height="13" font="2">, s</text>
+<text top="640" left="228" width="6" height="9" font="7">6</text>
+<text top="635" left="235" width="11" height="13" font="2">; i</text>
+<text top="640" left="246" width="7" height="9" font="7">3</text>
+<text top="635" left="258" width="15" height="13" font="2">: s</text>
+<text top="640" left="273" width="7" height="9" font="7">2</text>
+<text top="635" left="295" width="7" height="13" font="2">s</text>
+<text top="640" left="302" width="6" height="9" font="7">6</text>
+<text top="635" left="308" width="14" height="13" font="2">, s</text>
+<text top="640" left="322" width="6" height="9" font="7">7</text>
+<text top="634" left="329" width="7" height="14" font="2">}</text>
+<text top="655" left="88" width="6" height="10" font="7">•</text>
+<text top="653" left="103" width="10" height="13" font="2">L</text>
+<text top="658" left="114" width="5" height="9" font="7">c</text>
+<text top="662" left="119" width="5" height="7" font="8">3</text>
+<text top="653" left="131" width="22" height="13" font="2">: {i</text>
+<text top="658" left="152" width="7" height="9" font="7">4</text>
+<text top="653" left="164" width="15" height="13" font="2">: s</text>
+<text top="658" left="179" width="7" height="9" font="7">3</text>
+<text top="653" left="201" width="7" height="13" font="2">s</text>
+<text top="658" left="208" width="6" height="9" font="7">4</text>
+<text top="653" left="215" width="14" height="13" font="2">, s</text>
+<text top="658" left="228" width="6" height="9" font="7">7</text>
+<text top="652" left="235" width="7" height="14" font="2">}</text>
+<text top="680" left="88" width="243" height="13" font="2">We consider an information ﬂow from c</text>
+<text top="685" left="331" width="6" height="9" font="7">1</text>
+<text top="680" left="343" width="32" height="13" font="2">and c</text>
+<text top="685" left="375" width="6" height="9" font="7">2</text>
+<text top="680" left="386" width="23" height="13" font="2">to c</text>
+<text top="685" left="409" width="6" height="9" font="7">3</text>
+<text top="680" left="415" width="35" height="13" font="2">. This</text>
+<text top="698" left="73" width="184" height="13" font="2">ﬂow modiﬁes the content of c</text>
+<text top="703" left="258" width="6" height="9" font="7">3</text>
+<text top="698" left="270" width="180" height="13" font="2">which is now a value derived</text>
+<text top="715" left="73" width="144" height="13" font="2">from those located in c</text>
+<text top="721" left="217" width="6" height="9" font="7">1</text>
+<text top="715" left="230" width="34" height="13" font="2">and c</text>
+<text top="721" left="263" width="6" height="9" font="7">2</text>
+<text top="715" left="270" width="83" height="13" font="2">. The label L</text>
+<text top="721" left="353" width="5" height="9" font="7">c</text>
+<text top="724" left="358" width="5" height="7" font="8">3</text>
+<text top="715" left="370" width="80" height="13" font="2">is updated to</text>
+<text top="733" left="73" width="10" height="13" font="2">L</text>
+<text top="739" left="84" width="5" height="9" font="7">c</text>
+<text top="742" left="89" width="5" height="7" font="8">1</text>
+<text top="733" left="112" width="10" height="13" font="2">L</text>
+<text top="739" left="122" width="5" height="9" font="7">c</text>
+<text top="742" left="128" width="5" height="7" font="8">2</text>
+<text top="733" left="134" width="27" height="13" font="2">, i.e.</text>
+<text top="753" left="88" width="12" height="14" font="2">{i</text>
+<text top="759" left="101" width="7" height="9" font="7">1</text>
+<text top="754" left="112" width="15" height="13" font="2">: s</text>
+<text top="759" left="127" width="7" height="9" font="7">1</text>
+<text top="754" left="149" width="7" height="13" font="2">s</text>
+<text top="759" left="156" width="6" height="9" font="7">5</text>
+<text top="754" left="163" width="14" height="13" font="2">, s</text>
+<text top="759" left="176" width="6" height="9" font="7">6</text>
+<text top="754" left="183" width="11" height="13" font="2">; i</text>
+<text top="759" left="194" width="7" height="9" font="7">2</text>
+<text top="754" left="206" width="15" height="13" font="2">: s</text>
+<text top="759" left="221" width="7" height="9" font="7">1</text>
+<text top="754" left="243" width="7" height="13" font="2">s</text>
+<text top="759" left="250" width="6" height="9" font="7">5</text>
+<text top="754" left="257" width="14" height="13" font="2">, s</text>
+<text top="759" left="270" width="6" height="9" font="7">6</text>
+<text top="754" left="277" width="11" height="13" font="2">; i</text>
+<text top="759" left="288" width="7" height="9" font="7">3</text>
+<text top="754" left="300" width="15" height="13" font="2">: s</text>
+<text top="759" left="315" width="7" height="9" font="7">2</text>
+<text top="754" left="337" width="7" height="13" font="2">s</text>
+<text top="759" left="344" width="6" height="9" font="7">6</text>
+<text top="754" left="350" width="14" height="13" font="2">, s</text>
+<text top="759" left="364" width="6" height="9" font="7">7</text>
+<text top="753" left="371" width="7" height="14" font="2">}</text>
+<text top="775" left="88" width="93" height="13" font="2">and means that</text>
+<text top="807" left="126" width="61" height="13" font="2">owners(c</text>
+<text top="812" left="186" width="6" height="9" font="7">3</text>
+<text top="807" left="193" width="86" height="13" font="2">) = owners(c</text>
+<text top="812" left="280" width="6" height="9" font="7">1</text>
+<text top="807" left="286" width="83" height="13" font="2">) ∪ owners(c</text>
+<text top="812" left="369" width="6" height="9" font="7">2</text>
+<text top="807" left="376" width="22" height="13" font="2">) =</text>
+<text top="824" left="180" width="14" height="14" font="2">{s</text>
+<text top="830" left="195" width="6" height="9" font="7">1</text>
+<text top="824" left="201" width="39" height="14" font="2">} ∪ {s</text>
+<text top="830" left="240" width="6" height="9" font="7">1</text>
+<text top="825" left="247" width="14" height="13" font="2">, s</text>
+<text top="830" left="260" width="6" height="9" font="7">2</text>
+<text top="824" left="267" width="42" height="14" font="2">} = {s</text>
+<text top="830" left="309" width="6" height="9" font="7">1</text>
+<text top="825" left="316" width="14" height="13" font="2">, s</text>
+<text top="830" left="329" width="6" height="9" font="7">2</text>
+<text top="824" left="336" width="7" height="14" font="2">}</text>
+<text top="845" left="122" width="63" height="13" font="2">readers(c</text>
+<text top="851" left="185" width="6" height="9" font="7">3</text>
+<text top="845" left="192" width="89" height="13" font="2">) = readers(c</text>
+<text top="851" left="281" width="6" height="9" font="7">1</text>
+<text top="845" left="288" width="86" height="13" font="2">) ∩ readers(c</text>
+<text top="851" left="373" width="6" height="9" font="7">2</text>
+<text top="845" left="380" width="22" height="13" font="2">) =</text>
+<text top="862" left="100" width="22" height="14" font="2">{{s</text>
+<text top="869" left="122" width="6" height="9" font="7">5</text>
+<text top="863" left="128" width="14" height="13" font="2">, s</text>
+<text top="869" left="142" width="6" height="9" font="7">6</text>
+<text top="862" left="149" width="39" height="14" font="2">} ∩ {s</text>
+<text top="869" left="187" width="6" height="9" font="7">5</text>
+<text top="863" left="194" width="14" height="13" font="2">, s</text>
+<text top="869" left="207" width="6" height="9" font="7">6</text>
+<text top="862" left="214" width="53" height="14" font="2">}} ∩ {{s</text>
+<text top="869" left="268" width="6" height="9" font="7">5</text>
+<text top="863" left="274" width="14" height="13" font="2">, s</text>
+<text top="869" left="288" width="6" height="9" font="7">6</text>
+<text top="862" left="295" width="39" height="14" font="2">} ∩ {s</text>
+<text top="869" left="333" width="6" height="9" font="7">6</text>
+<text top="863" left="340" width="14" height="13" font="2">, s</text>
+<text top="869" left="354" width="6" height="9" font="7">7</text>
+<text top="862" left="360" width="49" height="14" font="2">}} = {s</text>
+<text top="869" left="410" width="6" height="9" font="7">6</text>
+<text top="862" left="416" width="7" height="14" font="2">}</text>
+<text top="884" left="126" width="61" height="13" font="2">history(c</text>
+<text top="889" left="186" width="6" height="9" font="7">3</text>
+<text top="884" left="193" width="86" height="13" font="2">) = history(c</text>
+<text top="889" left="280" width="6" height="9" font="7">1</text>
+<text top="884" left="286" width="83" height="13" font="2">) ∪ history(c</text>
+<text top="889" left="369" width="6" height="9" font="7">2</text>
+<text top="884" left="376" width="22" height="13" font="2">) =</text>
+<text top="901" left="166" width="13" height="14" font="2">{i</text>
+<text top="907" left="179" width="6" height="9" font="7">1</text>
+<text top="902" left="186" width="12" height="13" font="2">, i</text>
+<text top="907" left="197" width="6" height="9" font="7">2</text>
+<text top="901" left="204" width="37" height="14" font="2">} ∪ {i</text>
+<text top="907" left="241" width="6" height="9" font="7">1</text>
+<text top="902" left="248" width="12" height="13" font="2">, i</text>
+<text top="907" left="259" width="6" height="9" font="7">3</text>
+<text top="901" left="266" width="40" height="14" font="2">} = {i</text>
+<text top="907" left="306" width="6" height="9" font="7">1</text>
+<text top="902" left="313" width="12" height="13" font="2">, i</text>
+<text top="907" left="325" width="6" height="9" font="7">2</text>
+<text top="902" left="331" width="12" height="13" font="2">, i</text>
+<text top="907" left="343" width="6" height="9" font="7">3</text>
+<text top="901" left="350" width="7" height="14" font="2">}</text>
+<text top="932" left="88" width="362" height="13" font="2">The deﬁnition of the security policy is carried out via</text>
+<text top="950" left="73" width="377" height="13" font="2">the propagation of the labels attached to the containers of</text>
+<text top="968" left="73" width="377" height="13" font="2">information. When a service performs a response using a</text>
+<text top="985" left="73" width="377" height="13" font="2">variable c this response will be authorized according to the</text>
+<text top="1003" left="73" width="330" height="13" font="2">security policy if the recipient appears as a reader in L</text>
+<text top="1008" left="404" width="5" height="9" font="7">c</text>
+<text top="1003" left="410" width="40" height="13" font="2">. From</text>
+<text top="1021" left="73" width="377" height="13" font="2">a practical point of view, in our work the security policy is</text>
+<text top="1039" left="73" width="377" height="13" font="2">propagated through the labels at runtime in a modiﬁed BPEL</text>
+<text top="1057" left="73" width="377" height="13" font="2">interpreter. The legality of a call to a service or a response</text>
+<text top="1075" left="73" width="349" height="13" font="2">from a service is checked just before the call / response.</text>
+<text top="89" left="500" width="32" height="13" font="2">V. D</text>
+<text top="91" left="533" width="52" height="11" font="4">YNAMIC</text>
+<text top="89" left="589" width="11" height="13" font="2">U</text>
+<text top="91" left="600" width="89" height="11" font="4">PDATE OF THE</text>
+<text top="89" left="694" width="8" height="13" font="2">S</text>
+<text top="91" left="703" width="56" height="11" font="4">ECURITY</text>
+<text top="89" left="764" width="8" height="13" font="2">P</text>
+<text top="91" left="773" width="39" height="11" font="4">OLICY</text>
+<text top="112" left="483" width="362" height="13" font="2">Let us consider a BPEL program performing a call of a</text>
+<text top="130" left="468" width="377" height="13" font="2">service s (or similarly a response to a service s) using data d</text>
+<text top="148" left="468" width="164" height="13" font="2">having a label on the form</text>
+<text top="176" left="500" width="10" height="13" font="2">L</text>
+<text top="181" left="510" width="6" height="9" font="7">d</text>
+<text top="176" left="522" width="28" height="13" font="2">= {i</text>
+<text top="181" left="550" width="7" height="9" font="7">1</text>
+<text top="176" left="561" width="15" height="13" font="2">: s</text>
+<text top="181" left="576" width="7" height="9" font="7">1</text>
+<text top="176" left="598" width="7" height="13" font="2">s</text>
+<text top="181" left="605" width="6" height="9" font="7">1</text>
+<text top="185" left="611" width="5" height="7" font="8">1</text>
+<text top="176" left="617" width="33" height="13" font="2">, ..., s</text>
+<text top="181" left="650" width="6" height="9" font="7">1</text>
+<text top="185" left="656" width="7" height="7" font="8">n</text>
+<text top="176" left="664" width="31" height="13" font="2">; ...; i</text>
+<text top="181" left="695" width="4" height="9" font="7">j</text>
+<text top="176" left="704" width="15" height="13" font="2">: s</text>
+<text top="181" left="719" width="4" height="9" font="7">j</text>
+<text top="176" left="738" width="7" height="13" font="2">s</text>
+<text top="181" left="745" width="5" height="9" font="7">j</text>
+<text top="185" left="750" width="5" height="7" font="8">1</text>
+<text top="176" left="756" width="33" height="13" font="2">, ..., s</text>
+<text top="181" left="789" width="5" height="9" font="7">j</text>
+<text top="185" left="794" width="9" height="7" font="8">m</text>
+<text top="175" left="805" width="7" height="14" font="2">}</text>
+<text top="204" left="468" width="377" height="13" font="2">We have to verify if this call is legal with regard to the security</text>
+<text top="222" left="468" width="377" height="13" font="2">policy before performing the call. By deﬁnition of the security</text>
+<text top="240" left="468" width="377" height="13" font="2">policy this call is legal if and only if the service s is an</text>
+<text top="258" left="468" width="377" height="13" font="2">authorised reader for the data d. To check this legality we only</text>
+<text top="276" left="468" width="377" height="13" font="2">need to verify if s appears as a reader in the label attached to d,</text>
+<text top="294" left="468" width="81" height="13" font="2">i.e., if s ∈ {s</text>
+<text top="299" left="549" width="6" height="9" font="7">1</text>
+<text top="303" left="555" width="5" height="7" font="8">1</text>
+<text top="294" left="562" width="33" height="13" font="2">, ..., s</text>
+<text top="299" left="595" width="6" height="9" font="7">1</text>
+<text top="303" left="601" width="7" height="7" font="8">n</text>
+<text top="294" left="609" width="34" height="13" font="2">, . . . s</text>
+<text top="299" left="642" width="5" height="9" font="7">j</text>
+<text top="303" left="647" width="5" height="7" font="8">1</text>
+<text top="294" left="654" width="34" height="13" font="2">, . . . s</text>
+<text top="299" left="687" width="5" height="9" font="7">j</text>
+<text top="303" left="692" width="9" height="7" font="8">m</text>
+<text top="293" left="703" width="142" height="14" font="2">}. If s is an authorized</text>
+<text top="312" left="468" width="377" height="13" font="2">reader then the BPEL program performs the call. Otherwise</text>
+<text top="330" left="468" width="377" height="13" font="2">we ask owners of s to conﬁrm if the call must be authorized</text>
+<text top="348" left="468" width="377" height="13" font="2">anyway. Indeed, since services can be dynamically discovered</text>
+<text top="366" left="468" width="377" height="13" font="2">we can not decide if the call is really forbidden or if the owners</text>
+<text top="383" left="468" width="294" height="13" font="2">have not completely deﬁned the security policy.</text>
+<text top="401" left="483" width="304" height="13" font="2">We use a dedicated service to ask all owners (s</text>
+<text top="407" left="787" width="7" height="9" font="7">1</text>
+<text top="401" left="795" width="40" height="13" font="2">, . . . , s</text>
+<text top="407" left="835" width="4" height="9" font="7">j</text>
+<text top="401" left="840" width="5" height="13" font="2">)</text>
+<text top="419" left="468" width="377" height="13" font="2">if they authorize or not sending a compound information d</text>
+<text top="437" left="468" width="295" height="13" font="2">computed using their atomic information resp. i</text>
+<text top="442" left="763" width="7" height="9" font="7">1</text>
+<text top="437" left="770" width="38" height="13" font="2">, . . . , i</text>
+<text top="442" left="808" width="4" height="9" font="7">j</text>
+<text top="437" left="813" width="4" height="13" font="2">.</text>
+<text top="455" left="483" width="362" height="13" font="2">More precisely the BPEL interpreter calls a dedicated</text>
+<text top="473" left="468" width="377" height="13" font="2">service to contact the information owners. This service is an</text>
+<text top="491" left="468" width="377" height="13" font="2">exception to the security policy, we consider that this particular</text>
+<text top="509" left="468" width="377" height="13" font="2">service is a reader for any atomic information. In future work</text>
+<text top="527" left="468" width="377" height="13" font="2">we plan to protect this dedicated service: for instance we plan</text>
+<text top="545" left="468" width="377" height="13" font="2">to encrypt the data sent to/by this service. This service is used</text>
+<text top="563" left="468" width="127" height="13" font="2">to ask every owner s</text>
+<text top="568" left="595" width="7" height="9" font="7">k</text>
+<text top="563" left="607" width="143" height="13" font="2">of atomic information i</text>
+<text top="568" left="750" width="7" height="9" font="7">k</text>
+<text top="563" left="762" width="82" height="13" font="2">if they accept</text>
+<text top="581" left="468" width="160" height="13" font="2">to modify the policy of i</text>
+<text top="586" left="628" width="7" height="9" font="7">k</text>
+<text top="581" left="636" width="209" height="13" font="2">. The service thus uses a request</text>
+<text top="599" left="468" width="147" height="13" font="2">composed of four parts:</text>
+<text top="622" left="483" width="6" height="10" font="7">•</text>
+<text top="620" left="498" width="148" height="13" font="2">the initial information i</text>
+<text top="625" left="646" width="6" height="9" font="7">k</text>
+<text top="620" left="659" width="185" height="13" font="2">that was used to compute the</text>
+<text top="638" left="498" width="54" height="13" font="2">value d ;</text>
+<text top="658" left="483" width="6" height="10" font="7">•</text>
+<text top="656" left="498" width="347" height="13" font="2">the value d if the owner is an authorized reader of d, this</text>
+<text top="674" left="498" width="149" height="13" font="2">part is empty otherwise;</text>
+<text top="694" left="483" width="6" height="10" font="7">•</text>
+<text top="692" left="498" width="87" height="13" font="2">the service s ;</text>
+<text top="712" left="483" width="6" height="10" font="7">•</text>
+<text top="709" left="498" width="347" height="13" font="2">if the information actually sent to the service depends</text>
+<text top="727" left="498" width="301" height="13" font="2">explicitly or implicitly on the initial information.</text>
+<text top="748" left="468" width="373" height="13" font="2">For each owner, this call may have three possible responses:</text>
+<text top="772" left="483" width="6" height="10" font="7">•</text>
+<text top="769" left="498" width="347" height="13" font="2">(refusal) the owner refuses to modify the security policy.</text>
+<text top="790" left="483" width="6" height="10" font="7">•</text>
+<text top="787" left="498" width="347" height="13" font="2">(temporary exception) the owner accepts the update of</text>
+<text top="805" left="498" width="347" height="13" font="2">the security policy only for this call/response of service.</text>
+<text top="826" left="483" width="6" height="10" font="7">•</text>
+<text top="823" left="498" width="347" height="13" font="2">(agreement) the owner accepts the update of the security</text>
+<text top="841" left="498" width="347" height="13" font="2">policy until the end of the execution of the BPEL pro-</text>
+<text top="859" left="498" width="339" height="13" font="2">gram. In this case the label of the variable is modiﬁed.</text>
+<text top="880" left="468" width="377" height="13" font="2">If at least one owner refuses the modiﬁcation, the service</text>
+<text top="898" left="468" width="377" height="13" font="2">call (or the response) is not performed. If all the owners</text>
+<text top="916" left="468" width="377" height="13" font="2">accept the modiﬁcation but at least one of them authorises</text>
+<text top="934" left="468" width="377" height="13" font="2">only a temporary exception then the call (or the response)</text>
+<text top="952" left="468" width="377" height="13" font="2">is performed and the label attached to d remains the same.</text>
+<text top="970" left="468" width="377" height="13" font="2">Finally when all the owners accept the modiﬁcation, the label</text>
+<text top="988" left="468" width="240" height="13" font="2">is modiﬁed: s is added as reader for d.</text>
+<text top="1016" left="471" width="40" height="13" font="2">VI. O</text>
+<text top="1018" left="512" width="68" height="11" font="4">RCHESTRA</text>
+<text top="1016" left="580" width="8" height="13" font="2">F</text>
+<text top="1018" left="589" width="28" height="11" font="4">LOW</text>
+<text top="1016" left="622" width="4" height="13" font="2">:</text>
+<text top="1018" left="631" width="167" height="11" font="4">A DYNAMIC MONITOR FOR</text>
+<text top="1016" left="803" width="39" height="13" font="2">BPEL</text>
+<text top="1039" left="483" width="362" height="13" font="2">In this section we present OrchestraFlow which implements</text>
+<text top="1057" left="468" width="377" height="13" font="2">the model detailed in the previous sections as a patch for</text>
+<text top="1075" left="468" width="377" height="13" font="2">the BPEL interpreter Orchestra. OrchestraFlow taints variables</text>
+<text top="730" left="29" width="0" height="17" font="5">hal-00657796, version 1 - 9 Jan 2012</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="89" left="73" width="377" height="13" font="2">of a BPEL program using labels as detailed before, the</text>
+<text top="107" left="73" width="377" height="13" font="2">implementation of labels is presented in this section. A label is</text>
+<text top="125" left="73" width="377" height="13" font="2">updated at each modiﬁcation of the content of the variable. In a</text>
+<text top="143" left="73" width="377" height="13" font="2">BPEL program this content is directly modiﬁed by operations</text>
+<text top="161" left="73" width="377" height="13" font="2">involving the variable. Thus we have modiﬁed the original</text>
+<text top="178" left="73" width="377" height="13" font="2">Orchestra interpreter to observe information ﬂows made by a</text>
+<text top="196" left="73" width="377" height="13" font="2">BPEL program and to consequently update the labels of the</text>
+<text top="214" left="73" width="114" height="13" font="2">involved variables.</text>
+<text top="232" left="88" width="362" height="13" font="2">A BPEL program takes as inputs messages coming from</text>
+<text top="250" left="73" width="377" height="13" font="2">other web services. Because all messages are in XML format,</text>
+<text top="268" left="73" width="377" height="13" font="2">we modify the XML inputs in order to add our security label.</text>
+<text top="286" left="73" width="377" height="13" font="2">We modiﬁed all XML primitive types by adding an optional</text>
+<text top="304" left="73" width="377" height="13" font="2">label attribute where authorized readers are represented by an</text>
+<text top="322" left="73" width="377" height="13" font="2">URI (adress of Web Services) separated by a semi-colon. If</text>
+<text top="340" left="73" width="377" height="13" font="2">the label attribute is used with an empty string then no service</text>
+<text top="358" left="73" width="377" height="13" font="2">is allowed to access that data. If the label attribute is not used,</text>
+<text top="376" left="73" width="266" height="13" font="2">all services are allowed to access that data.</text>
+<text top="394" left="88" width="362" height="13" font="2">In order to allow dynamic updates of the security policy,</text>
+<text top="412" left="73" width="377" height="13" font="2">each user of a BPEL program uses a client side security</text>
+<text top="430" left="73" width="377" height="13" font="2">service. The security service is a simple web-service that runs</text>
+<text top="447" left="73" width="377" height="13" font="2">on the computer of the client. This service receives all requests</text>
+<text top="465" left="73" width="366" height="13" font="2">to update the security policy deﬁned in the BPEL program.</text>
+<text top="483" left="88" width="362" height="13" font="2">If the sender is another web service which does not execute</text>
+<text top="501" left="73" width="377" height="13" font="2">OrchestraFlow, then we consider the variable as a new atomic</text>
+<text top="519" left="73" width="377" height="13" font="2">information without label (meaning that all services are legal</text>
+<text top="537" left="73" width="377" height="13" font="2">readers). Applying this property allows us to be compatible</text>
+<text top="555" left="73" width="377" height="13" font="2">with existing BPEL interpreters that do not carry out our</text>
+<text top="573" left="73" width="143" height="13" font="2">protection mechanisms.</text>
+<text top="591" left="88" width="362" height="13" font="2">In OrchestraFlow, a label is therefore a list of triple on the</text>
+<text top="609" left="73" width="377" height="13" font="2">form (initial information ; owner ; list of readers authorized</text>
+<text top="627" left="73" width="377" height="13" font="2">for this owner). In BPEL, a variable is represented via a</text>
+<text top="645" left="73" width="377" height="13" font="2">XML tree structure that can be composed of leafs (simple</text>
+<text top="663" left="73" width="377" height="13" font="2">elementary values) or nodes (complex variables composed of</text>
+<text top="681" left="73" width="377" height="13" font="2">several elementary values). In order to store the labels attached</text>
+<text top="699" left="73" width="377" height="13" font="2">to each variable, the tree structure is duplicated and ﬁlled up</text>
+<text top="716" left="73" width="341" height="13" font="2">with the labels of the elements composing the variable.</text>
+<text top="734" left="88" width="362" height="13" font="2">Each variable has its own label stored on a duplicated tree</text>
+<text top="752" left="73" width="377" height="13" font="2">structure. After the initial information, the ﬁrst URI of a label</text>
+<text top="770" left="73" width="377" height="13" font="2">represents the owner of the data, and the following URIs,</text>
+<text top="788" left="73" width="377" height="13" font="2">separated by a semi-colon, represent the authorized readers</text>
+<text top="806" left="73" width="73" height="13" font="2">of this data.</text>
+<text top="824" left="88" width="362" height="13" font="2">The label of a variable is updated at each observation</text>
+<text top="842" left="73" width="377" height="13" font="2">of an information ﬂow. As deﬁned early by D. Denning in</text>
+<text top="860" left="73" width="377" height="13" font="2">[12], Information ﬂows from object x to object y, whenever</text>
+<text top="878" left="73" width="377" height="13" font="2">information stored in x is transferred to, or used to derive</text>
+<text top="896" left="73" width="236" height="13" font="2">information transferred to, object y.</text>
+<text top="896" left="319" width="131" height="13" font="2">Here we distinguish</text>
+<text top="914" left="73" width="222" height="13" font="2">implicit or explicit information ﬂow</text>
+<text top="914" left="296" width="155" height="13" font="2">. An implicit information</text>
+<text top="932" left="73" width="377" height="13" font="2">ﬂow signals information through the control structure of a</text>
+<text top="950" left="73" width="51" height="13" font="2">program</text>
+<text top="950" left="130" width="320" height="13" font="2">[13]. The reader will ﬁnd a complete survey on this</text>
+<text top="968" left="73" width="377" height="13" font="2">subject in [13]. First we focus on explicit information ﬂows</text>
+<text top="985" left="73" width="377" height="13" font="2">between variables which are transfers of information induced</text>
+<text top="1003" left="73" width="377" height="13" font="2">by operations made by the program involving these variables.</text>
+<text top="1021" left="73" width="377" height="13" font="2">Among them Assign, Invoke, Receive, Reply in-</text>
+<text top="1039" left="73" width="377" height="13" font="2">duce explicit information ﬂows. OrchestraFlow extends Or-</text>
+<text top="1057" left="73" width="377" height="13" font="2">chestra in order to update concerned labels at each call of one</text>
+<text top="1075" left="73" width="175" height="13" font="2">of the mentioned operations.</text>
+<text top="89" left="483" width="362" height="13" font="2">Explicit information ﬂows are mostly induced by assign-</text>
+<text top="107" left="468" width="250" height="13" font="2">ments and communication with services.</text>
+<text top="125" left="498" width="97" height="13" font="2">An assignment:</text>
+<text top="125" left="606" width="239" height="13" font="2">copies the value of the expression e</text>
+<text top="143" left="468" width="377" height="13" font="2">in x. After the execution of the assignment the information</text>
+<text top="161" left="468" width="377" height="13" font="2">contained in x depends now on every information contained</text>
+<text top="178" left="468" width="377" height="13" font="2">in e. In this case, we must ensure that the label of x after</text>
+<text top="196" left="468" width="377" height="13" font="2">the execution of the assignment reﬂects the policy of the</text>
+<text top="214" left="468" width="377" height="13" font="2">information contained in e. When e is simply a single BPEL</text>
+<text top="232" left="468" width="377" height="13" font="2">variable then value of label of x is updated to the value of</text>
+<text top="250" left="468" width="377" height="13" font="2">the label of e. In other words, if an assignement copies the</text>
+<text top="268" left="468" width="377" height="13" font="2">value of e in x then OrchestraFlow propagates the value of</text>
+<text top="286" left="468" width="66" height="13" font="2">the label L</text>
+<text top="291" left="534" width="6" height="9" font="7">e</text>
+<text top="286" left="545" width="26" height="13" font="2">in L</text>
+<text top="291" left="571" width="7" height="9" font="7">x</text>
+<text top="286" left="579" width="266" height="13" font="2">. More generally an expression e in a BPEL</text>
+<text top="304" left="468" width="377" height="13" font="2">program could be a part of a BPEL variable or a more complex</text>
+<text top="322" left="468" width="377" height="13" font="2">expression written in an external language. OrchestraFlow</text>
+<text top="340" left="468" width="377" height="13" font="2">uses, like Orchestra, XPath 1.0 as expression language. For</text>
+<text top="358" left="468" width="377" height="13" font="2">each XPath expression we calculate the resulting label from</text>
+<text top="376" left="468" width="377" height="13" font="2">information contained in the XPath expression according to</text>
+<text top="394" left="468" width="106" height="13" font="2">the deﬁnition IV.</text>
+<text top="412" left="498" width="216" height="13" font="2">Communication between Services:</text>
+<text top="412" left="725" width="120" height="13" font="2">Three BPEL func-</text>
+<text top="430" left="468" width="377" height="13" font="2">tions allow communications with external services : invoke,</text>
+<text top="448" left="468" width="63" height="12" font="2">receive</text>
+<text top="447" left="539" width="305" height="13" font="2">and reply. The ﬁrst, invoke, provides syn-</text>
+<text top="465" left="468" width="377" height="13" font="2">chronous communications with services, i.e., in the same</text>
+<text top="483" left="468" width="377" height="13" font="2">function data are sent to the service and a response is received.</text>
+<text top="501" left="468" width="377" height="13" font="2">In order to allow asynchronous communication with services,</text>
+<text top="519" left="468" width="377" height="13" font="2">we use the same function invoke with the second function</text>
+<text top="538" left="468" width="63" height="12" font="2">receive</text>
+<text top="537" left="538" width="306" height="13" font="2">which allows the asynchronous reception of the</text>
+<text top="555" left="468" width="355" height="13" font="2">response of the service called with the invoke function.</text>
+<text top="573" left="483" width="362" height="13" font="2">These communication primitives produce information ﬂows</text>
+<text top="591" left="468" width="377" height="13" font="2">from the caller to the receiver. It is thus necessary to update</text>
+<text top="609" left="468" width="377" height="13" font="2">the labels of the sent messages (case of invoke) or the labels</text>
+<text top="627" left="468" width="377" height="13" font="2">of the variables assigned at the reception of a message (case</text>
+<text top="645" left="468" width="377" height="13" font="2">of a receive) by performing the union of the labels of the data</text>
+<text top="663" left="468" width="55" height="13" font="2">involved.</text>
+<text top="681" left="483" width="362" height="13" font="2">For example, by using an invoke function, the service</text>
+<text top="698" left="468" width="377" height="14" font="2">my service is called with the variable e as input parameter.</text>
+<text top="716" left="468" width="377" height="13" font="2">The result of this service will be stored in the variable x. The</text>
+<text top="734" left="468" width="377" height="13" font="2">variable x after executing the service depends both on the</text>
+<text top="752" left="468" width="377" height="13" font="2">information returned by the called service (my service) but</text>
+<text top="770" left="468" width="377" height="13" font="2">also on information contained in the variable e. Indeed there</text>
+<text top="788" left="468" width="377" height="13" font="2">are ﬂows from e and the return of my service. The security</text>
+<text top="806" left="468" width="377" height="13" font="2">label of x after the execution of the invocation of my service</text>
+<text top="824" left="468" width="266" height="13" font="2">is computed according to the deﬁnition IV.</text>
+<text top="842" left="483" width="362" height="13" font="2">In the same way we propagate labels in OrchestraFlow dur-</text>
+<text top="860" left="468" width="377" height="13" font="2">ing an asynchronous service call with the functions invoke</text>
+<text top="878" left="468" width="93" height="13" font="2">and receive.</text>
+<text top="896" left="483" width="362" height="13" font="2">The second type of information ﬂow that can be created by</text>
+<text top="914" left="468" width="377" height="13" font="2">the language is of implicit type. It is what happens for example</text>
+<text top="932" left="468" width="377" height="13" font="2">during conditional operations and loops. In these cases, data</text>
+<text top="950" left="468" width="377" height="13" font="2">manipulated within the structure of the loop or conditional</text>
+<text top="968" left="468" width="377" height="13" font="2">depend on the variables used in the conditional statement of</text>
+<text top="985" left="468" width="157" height="13" font="2">the condition or the loop.</text>
+<text top="1003" left="468" width="377" height="13" font="2">Loops and conditionals are treated in the same way. All</text>
+<text top="1021" left="468" width="377" height="13" font="2">operations performed inside the conditional or the loop are</text>
+<text top="1039" left="468" width="324" height="13" font="2">implicitly dependent on the value of the condition c.</text>
+<text top="1057" left="468" width="377" height="13" font="2">In the case of assignments in a conditional, the value of the</text>
+<text top="1075" left="468" width="377" height="13" font="2">variable x receiving the expression e also depends on the value</text>
+<text top="730" left="29" width="0" height="17" font="5">hal-00657796, version 1 - 9 Jan 2012</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="89" left="73" width="377" height="13" font="2">of c. There is a ﬂow from c to x. The label of x is computed</text>
+<text top="107" left="73" width="353" height="13" font="2">from the labels of e and c according to the deﬁnition IV.</text>
+<text top="125" left="73" width="377" height="13" font="2">In the case of service invocations in a conditional, if a service</text>
+<text top="143" left="73" width="377" height="13" font="2">call is performed there is an implicit information ﬂow from c</text>
+<text top="161" left="73" width="377" height="13" font="2">to the service call since it is done according to the value of c.</text>
+<text top="178" left="73" width="377" height="13" font="2">We must, at the time of the service call, ensure that it is also</text>
+<text top="196" left="73" width="316" height="13" font="2">authorized by the security policy associated with c.</text>
+<text top="214" left="73" width="377" height="13" font="2">In OrchestraFlow we modiﬁed the ScopeRuntime class in</text>
+<text top="232" left="73" width="377" height="13" font="2">order to add a stack which contains labels of conditional or</text>
+<text top="250" left="73" width="377" height="13" font="2">while condition. When a conditional starts, a label is added to</text>
+<text top="268" left="73" width="377" height="13" font="2">this stack. At the end of this conditional the label is removed.</text>
+<text top="286" left="73" width="377" height="13" font="2">During the execution of an explicit ﬂow the computation of</text>
+<text top="304" left="73" width="377" height="13" font="2">the new label takes care of both the labels of the expression</text>
+<text top="322" left="73" width="377" height="13" font="2">considered in the explicit ﬂow and the resulting label of the</text>
+<text top="340" left="73" width="377" height="13" font="2">implicit ﬂow stack. The legality of the information ﬂow is</text>
+<text top="358" left="73" width="377" height="13" font="2">checked when a service tries to send information to an other</text>
+<text top="376" left="73" width="377" height="13" font="2">service. Two functions send data to external services: invoke</text>
+<text top="394" left="73" width="377" height="13" font="2">and reply. When one of these functions is called, we verify</text>
+<text top="412" left="73" width="377" height="13" font="2">that the service call complies with the security policy, i.e., the</text>
+<text top="430" left="73" width="377" height="13" font="2">recipient service belongs to the authorized readers of the data.</text>
+<text top="447" left="73" width="377" height="13" font="2">More formally, when a service uses invoke or reply with</text>
+<text top="465" left="73" width="377" height="13" font="2">output variable m towards a service s OrchestraFlow checks if</text>
+<text top="483" left="73" width="377" height="14" font="2">s ∈ reader(m) as deﬁned in deﬁnition IV. In order to prevent</text>
+<text top="501" left="73" width="377" height="13" font="2">implicit information ﬂow, a second veriﬁcation must be done.</text>
+<text top="519" left="73" width="377" height="13" font="2">The service call should be authorized by the resulting label of</text>
+<text top="537" left="73" width="141" height="13" font="2">the implicit ﬂow stack.</text>
+<text top="555" left="88" width="362" height="13" font="2">When an illegal ﬂow is detected, it is necessary to ask the</text>
+<text top="573" left="73" width="377" height="13" font="2">information owner if he accepts or not to update the security</text>
+<text top="591" left="73" width="377" height="13" font="2">policy. In Section V we presented information sent by the</text>
+<text top="609" left="73" width="377" height="13" font="2">BPEL interpreter to the owner and the possible answers of</text>
+<text top="627" left="73" width="377" height="13" font="2">the owner. To implement this functionality in OrchestraFlow</text>
+<text top="645" left="73" width="377" height="13" font="2">we decided to delegate to each owner to implement their own</text>
+<text top="663" left="73" width="377" height="13" font="2">security service. This is a web service respecting a WSDL ﬁle</text>
+<text top="681" left="73" width="377" height="13" font="2">describing the interface. This interface is common to all se-</text>
+<text top="699" left="73" width="377" height="13" font="2">curity services enabling OrchestraFlow to interact in the same</text>
+<text top="717" left="73" width="377" height="13" font="2">way with all the security services. So when OrchestraFlow</text>
+<text top="735" left="73" width="377" height="13" font="2">detects an illegal information ﬂow, it makes a call to the</text>
+<text top="753" left="73" width="377" height="13" font="2">web security service of the owner of that information (the</text>
+<text top="770" left="73" width="377" height="13" font="2">address of the security service is sent with the security policy</text>
+<text top="788" left="73" width="377" height="13" font="2">information at the beginning of the BPEL program execution).</text>
+<text top="818" left="201" width="45" height="13" font="2">VII. C</text>
+<text top="820" left="247" width="75" height="11" font="4">ONCLUSION</text>
+<text top="842" left="88" width="362" height="13" font="2">The goal of our work is to give the user of a web service</text>
+<text top="860" left="73" width="377" height="13" font="2">the ability to restrain the use of his data by services he was</text>
+<text top="878" left="73" width="377" height="13" font="2">never heard of. At the time of a service call, he is able to</text>
+<text top="896" left="73" width="377" height="13" font="2">deﬁne which user data can be accessed by which web services.</text>
+<text top="914" left="73" width="377" height="13" font="2">This property is guaranteed by a distributed security policy</text>
+<text top="932" left="73" width="377" height="13" font="2">that deﬁnes which data can be accessed by which service.</text>
+<text top="950" left="73" width="377" height="13" font="2">Using the security model deﬁned by Myers et al. as a basis,</text>
+<text top="968" left="73" width="377" height="13" font="2">our contribution consists in applying this type of security</text>
+<text top="985" left="73" width="377" height="13" font="2">policy to Web Services and to dynamically deﬁne what are</text>
+<text top="1003" left="73" width="377" height="13" font="2">the variables in an orchestration of Web Services (written in a</text>
+<text top="1021" left="73" width="377" height="13" font="2">BPEL program) that are inﬂuenced by the user inputs. For this</text>
+<text top="1039" left="73" width="377" height="13" font="2">purpose, we follow the information ﬂows that are produced</text>
+<text top="1057" left="73" width="377" height="13" font="2">by the various operations available in the BPEL interpreter.</text>
+<text top="1075" left="73" width="377" height="13" font="2">When ﬂows are produced between variables, we update the</text>
+<text top="89" left="468" width="377" height="13" font="2">labels attached to these variables to reﬂect the services that can</text>
+<text top="107" left="468" width="377" height="13" font="2">read the data items. Thus, we can detect implicit or explicit</text>
+<text top="125" left="468" width="377" height="13" font="2">data leakage and ensure the privacy of the user data. This</text>
+<text top="143" left="468" width="377" height="13" font="2">approach proved to be feasible and lead to the implementation</text>
+<text top="161" left="468" width="377" height="13" font="2">of the mechanisms inside the Orchestra BPEL interpreter.</text>
+<text top="178" left="468" width="377" height="13" font="2">However such an approach usually requires that the user knows</text>
+<text top="196" left="468" width="377" height="13" font="2">all services involved in the orchestration. That is why we</text>
+<text top="214" left="468" width="377" height="13" font="2">proposed a mechanism to dynamically update or build the</text>
+<text top="232" left="468" width="377" height="13" font="2">security policy and principles for integrating this mechanism in</text>
+<text top="250" left="468" width="377" height="13" font="2">OrchestraFlow. In particular, we deﬁned a security mechanism</text>
+<text top="268" left="468" width="377" height="13" font="2">in order to allow updates of an information ﬂow security policy</text>
+<text top="286" left="468" width="199" height="13" font="2">by the user of a BPEL program.</text>
+<text top="314" left="614" width="10" height="13" font="2">R</text>
+<text top="316" left="625" width="73" height="11" font="4">EFERENCES</text>
+<text top="338" left="474" width="371" height="11" font="4">[1] OASIS, “Web services business process execution language version</text>
+<text top="352" left="495" width="349" height="11" font="4">2.0,” OASIS Standard, April 2007. [Online]. Available: http://docs.oasis-</text>
+<text top="365" left="495" width="184" height="11" font="4">open.org/wsbpel/2.0/wsbpel-v2.0.html</text>
+<text top="379" left="474" width="48" height="11" font="4">[2] ——,</text>
+<text top="379" left="535" width="27" height="11" font="4">“Web</text>
+<text top="379" left="575" width="38" height="11" font="4">services</text>
+<text top="379" left="627" width="41" height="11" font="4">security:</text>
+<text top="379" left="681" width="24" height="11" font="4">Soap</text>
+<text top="379" left="718" width="41" height="11" font="4">message</text>
+<text top="379" left="771" width="38" height="11" font="4">security</text>
+<text top="379" left="822" width="22" height="11" font="4">1.1,”</text>
+<text top="392" left="495" width="34" height="11" font="4">OASIS</text>
+<text top="392" left="544" width="43" height="11" font="4">Standard</text>
+<text top="392" left="601" width="68" height="11" font="4">Speciﬁcation,,</text>
+<text top="392" left="684" width="18" height="11" font="4">Feb</text>
+<text top="392" left="716" width="27" height="11" font="4">2006.</text>
+<text top="392" left="757" width="43" height="11" font="4">[Online].</text>
+<text top="392" left="815" width="29" height="11" font="4">Avail-</text>
+<text top="406" left="495" width="23" height="11" font="4">able:</text>
+<text top="406" left="530" width="315" height="11" font="4">http://www.oasis-open.org/committees/download.php/16790/wss-</text>
+<text top="419" left="495" width="195" height="11" font="4">v1.1-spec-os-SOAPMessageSecurity.pdf</text>
+<text top="432" left="474" width="371" height="11" font="4">[3] ——, “Assertions and protocols for the oasis security assertion markup</text>
+<text top="446" left="495" width="265" height="11" font="4">language (saml) v2.0,” OASIS Standard, March 2005.</text>
+<text top="459" left="474" width="371" height="11" font="4">[4] ——, “extensible access control markup language (xacml) version 2.0,”</text>
+<text top="473" left="495" width="137" height="11" font="4">OASIS Standard, Feb 2005.</text>
+<text top="486" left="474" width="371" height="11" font="4">[5] V. Haldar, D. Chandra, and M. Franz, “Dynamic taint propagation for</text>
+<text top="500" left="495" width="349" height="11" font="4">java,” in Annual Computer Security Applications Conference (ACSAC),</text>
+<text top="513" left="495" width="27" height="11" font="4">2005.</text>
+<text top="527" left="474" width="371" height="11" font="4">[6] G. E. Suh, J. W. Lee, D. Zhang, and S. Devadas, “Secure program</text>
+<text top="540" left="495" width="349" height="11" font="4">execution via dynamic information ﬂow tracking,” SIGARCH Comput.</text>
+<text top="554" left="495" width="62" height="10" font="4">Archit. News</text>
+<text top="553" left="558" width="164" height="11" font="4">, vol. 32, no. 5, pp. 85–96, 2004.</text>
+<text top="567" left="474" width="371" height="11" font="4">[7] A. C. Myers and B. Liskov, “A decentralized model for information ﬂow</text>
+<text top="580" left="495" width="349" height="11" font="4">control,” Proc. ACM Symp. on Operating System Principles, pp. 129 –</text>
+<text top="594" left="495" width="95" height="11" font="4">142, October 1997.</text>
+<text top="607" left="474" width="371" height="11" font="4">[8] A. Myers and B. Liskov, “Complete, safe information ﬂow with decen-</text>
+<text top="621" left="495" width="335" height="11" font="4">tralized labels,” in IEEE Symposium on Security and Privacy, 1998.</text>
+<text top="634" left="474" width="371" height="11" font="4">[9] A. C. Myers, “Jﬂow: Pratical mostly-static information ﬂow control,”</text>
+<text top="648" left="495" width="349" height="10" font="4">Proceedings of the 26th ACM Symposium on Principles of Programming</text>
+<text top="661" left="495" width="46" height="10" font="4">Langages</text>
+<text top="661" left="542" width="111" height="11" font="4">, pp. 228 – 241, 1999.</text>
+<text top="675" left="468" width="377" height="11" font="4">[10] G. Hiet, V. Viet Triem Tong, L. Me, and B. Morin, “Policy-based</text>
+<text top="688" left="495" width="349" height="11" font="4">intrusion detection in web applications by monitoring java information</text>
+<text top="701" left="495" width="343" height="11" font="4">ﬂows,” Int. J. Inf. Comput. Secur., vol. 3, no. 3/4, pp. 265–279, 2009.</text>
+<text top="715" left="468" width="377" height="11" font="4">[11] V. Viet Triem Tong, A. Clark, and L. M´e, “Specifying and enforc-</text>
+<text top="728" left="495" width="349" height="11" font="4">ing a ﬁne-grained information ﬂow policy: Model and experiments,”</text>
+<text top="742" left="495" width="349" height="11" font="4">in Journal of Wireless Mobile Networks, Ubiquitous Computing and</text>
+<text top="755" left="495" width="122" height="10" font="4">Dependable Applications</text>
+<text top="755" left="618" width="34" height="11" font="4">, 2010.</text>
+<text top="769" left="468" width="377" height="11" font="4">[12] D. E. Denning and P. J. Denning, “Certiﬁcation of programs for secure</text>
+<text top="782" left="495" width="349" height="11" font="4">information ﬂow,” Communications of the ACM, vol. 20, no. 7, pp. 504–</text>
+<text top="796" left="495" width="76" height="11" font="4">513, July 1977.</text>
+<text top="809" left="468" width="377" height="11" font="4">[13] A. Sabelfeld and A. C. Myers, “Language-based information-ﬂow se-</text>
+<text top="822" left="495" width="349" height="11" font="4">curity,” IEEE Journal on Selected Areas in Communications, vol. 21,</text>
+<text top="836" left="495" width="59" height="11" font="4">no. 1, 2003.</text>
+<text top="730" left="29" width="0" height="17" font="5">hal-00657796, version 1 - 9 Jan 2012</text>
+</page>
+</pdf2xml>

@@ -1,0 +1,79 @@
+!!! 5
+html(lang="en")
+  head
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+    title="AutoCite -- referencing made simple."
+    :css
+      body {
+        font-family: Verdana, sans-serif;
+      }
+
+      #results { display: none }
+      #preview { display: none }
+
+      .result-list {
+      }
+
+      .result {
+        border-left: 1px dotted black;
+      }
+
+    :javascript
+      function searchDone(data) {
+        $('#results').hide()
+        $('#resultList').html('')
+        var results = []
+        $.each(data.results, function(key, doc) {
+          var row = $('<tr>', { 'class' : 'result' })
+          var anchor = $('<a>').html(doc.title)
+            .attr('href', 'javascript:submitLookup("' + doc.shard + '",' + doc.luceneDocid + ')')
+          var title = $('<td>').append(anchor)
+          var score = $('<td>').html(doc.score)
+          var cites = $('<td>').html(doc.citations)
+          row.append(title, score, cites)
+          $('#resultList').append(row)
+        })
+
+        $('#results').show()
+      }
+
+      function submitSearch() {
+        $('#results').hide()
+        $.getJSON( 'search', { 
+          'q' : $('#q').attr('value'),
+          'scorer' : $('#scorer').attr('value')              
+        }, searchDone)
+        return false
+      }
+
+      function lookupDone(data) {
+        $('#p_title').html(data.title)
+        $('#p_text').html(data.text)
+        $('#preview').show()
+      }
+
+      function submitLookup(shard, docid) {
+        $('#preview').hide()
+        $.getJSON( 'lookup', { 'shard' : shard, 'ldocid' : docid }, lookupDone)
+      }
+
+      $(document).ready(function() {
+        $('#search').submit(submitSearch)
+      })
+
+  body
+    h1 Enter your reference query
+    form(id="search" action="search" method="get")
+      input(type="text" id="q" name="q" value="")
+      br
+      input(type="text" size=100 id="scorer" name="scorer" value="(s : ScoringInfo) => s.textScore * s.refs")
+      input(type="submit" value="Search")
+
+    div(id="preview")
+      h3(id="p_title") Title
+      p(id="p_text") Text
+
+    div(id="results")
+      h2 Results
+      table(id="resultList" class="result-list")
+

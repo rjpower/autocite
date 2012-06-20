@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="0" size="10" family="Times" color="#000000"/>
+	<fontspec id="1" size="8" family="Times" color="#000000"/>
+	<fontspec id="2" size="11" family="Times" color="#000000"/>
+	<fontspec id="3" size="2" family="Times" color="#000000"/>
+	<fontspec id="4" size="1" family="Times" color="#000000"/>
+	<fontspec id="5" size="19" family="Times" color="#000000"/>
+	<fontspec id="6" size="12" family="Times" color="#000000"/>
+	<fontspec id="7" size="11" family="Times" color="#000000"/>
+	<fontspec id="8" size="16" family="Times" color="#000000"/>
+	<fontspec id="9" size="12" family="Times" color="#000000"/>
+<text top="924" left="63" width="446" height="12" font="0">Y. Zhang (Ed.): Future Wireless Networks and Information Systems, LNEE 144, pp. 57<a href="pdfxml.html#7">–63. </a></text>
+<text top="938" left="63" width="85" height="12" font="0">springerlink.com </text>
+<text top="940" left="150" width="3" height="10" font="1"> </text>
+<text top="938" left="154" width="3" height="12" font="2"> </text>
+<text top="939" left="160" width="8" height="11" font="0">   </text>
+<text top="945" left="169" width="1" height="4" font="3"> </text>
+<text top="939" left="171" width="128" height="11" font="0">                                                     </text>
+<text top="946" left="301" width="1" height="3" font="4"> </text>
+<text top="939" left="302" width="209" height="11" font="0">© Springer-Verlag Berlin Heidelberg 2012 </text>
+<text top="89" left="118" width="414" height="19" font="5"><b>Remotely Run-Time FPGA Based WSN Node </b></text>
+<text top="150" left="214" width="221" height="14" font="6">Yibin Li, Zhiping Jia, and Fucai Liu </text>
+<text top="187" left="132" width="385" height="12" font="2">Computer Science and Technology Department, Shandong University, </text>
+<text top="204" left="185" width="278" height="12" font="2">shunhua Road No.1500, 250101, Jinan, P.R. China </text>
+<text top="221" left="189" width="275" height="11" font="2">{liyibing,jiazp,fcliu}@sdu.edu.cn </text>
+<text top="266" left="106" width="434" height="12" font="7"><b>Abstract.</b> In recent years, due to its full custom character, FPGA has been recog-</text>
+<text top="282" left="106" width="438" height="12" font="2">nized as an approach to raise performance with limited power consumption. For </text>
+<text top="298" left="106" width="434" height="12" font="2">WSN application, another important metric of FPGA is remote and dynamic con-</text>
+<text top="315" left="106" width="437" height="12" font="2">figurability. During the whole life-time of system, it is important that each node can </text>
+<text top="331" left="106" width="437" height="12" font="2">be reconfigured as the new functionality may be needed. To facilitate this function, </text>
+<text top="348" left="106" width="439" height="12" font="2">FPGA based WSN node need to be explored. In this paper, FPGA based WSN </text>
+<text top="364" left="106" width="434" height="12" font="2">node is prototyped. Also, the power and area data of node are collected and pre-</text>
+<text top="381" left="106" width="438" height="12" font="2">sented. Finally, the trade-off of FPGA implementation is studied. It is concluded </text>
+<text top="398" left="106" width="380" height="12" font="2">that area and static power can be saved using FPGA based WSN node.   </text>
+<text top="429" left="106" width="378" height="12" font="7"><b>Keyword</b>: WSN, FPGA, WSN node, PDR, Reconfigurble Hardware. </text>
+<text top="474" left="63" width="281" height="16" font="8"><b>1   Background and Related Work </b></text>
+<text top="514" left="63" width="523" height="14" font="6">FPGA has been widely adopted as an approach to gain high performance for specific </text>
+<text top="532" left="63" width="523" height="14" font="6">algorithm [1]. Moreover, with advanced ESL tool, FPGA also can be recognized as a </text>
+<text top="550" left="63" width="523" height="14" font="6">general purpose accelerator with less power consuming. Xia, etc [2] have found that a </text>
+<text top="568" left="63" width="525" height="14" font="6">general purpose accelerator with only one FPGA has equivalent performance as a </text>
+<text top="586" left="63" width="522" height="14" font="6">cluster of 20 Intel-Xeon CPU. In term of cost and power consumption, it only cost 20% </text>
+<text top="604" left="63" width="519" height="14" font="6">of cluster and consume less than 10% power. Apart from static configurability, dy-</text>
+<text top="622" left="63" width="519" height="14" font="6">namic reconfigurability of FPGA also has been stuied recently. The utilization of dy-</text>
+<text top="640" left="63" width="522" height="14" font="6">namic configurability can supply higher performance with less area and memory space </text>
+<text top="658" left="63" width="523" height="14" font="6">in applications such as automotive [3] and video [4], because different module can be </text>
+<text top="676" left="63" width="522" height="14" font="6">mapped on the same part of FPGA. For the remote configurability of FPGA, so far, it is </text>
+<text top="694" left="63" width="522" height="14" font="6">mainly implemented in the aerospace technology. For example, Xilinx and Actel FPGA </text>
+<text top="712" left="63" width="525" height="14" font="6">have been successfully used in Mars exploration. In WSN domain, a few research </text>
+<text top="730" left="63" width="519" height="14" font="6">works have been done to utilize the static configurability of FPGA in ad-hoc network</text>
+<text top="744" left="63" width="519" height="19" font="6">［5，6，7］. But the remotely dynamic reconfigurability of FPGA has not been stu-</text>
+<text top="766" left="63" width="162" height="14" font="6">died for WSN application. </text>
+<text top="809" left="63" width="483" height="16" font="8"><b>2   Proposed WSN Node Architecture and Development Flow </b></text>
+<text top="839" left="63" width="385" height="14" font="9"><b>2.1      The Architecture of Remote Configurable WSN Node </b></text>
+<text top="872" left="63" width="525" height="14" font="6">The node is constituted by processor and FPGA as Fig.1 illustrates. Two different </text>
+<text top="889" left="63" width="522" height="14" font="6">processors are respectively used in the proposed architecture. To quantify the benefit of </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="10" size="-1" family="Times" color="#000000"/>
+	<fontspec id="11" size="16" family="Times" color="#000000"/>
+<text top="43" left="63" width="17" height="12" font="2">58 </text>
+<text top="43" left="114" width="131" height="12" font="2">Y. Li, Z. Jia, and F. Liu </text>
+<text top="83" left="63" width="0" height="1" font="10"> </text>
+<text top="253" left="490" width="12" height="16" font="11">   </text>
+<text top="294" left="195" width="256" height="12" font="7"><b>Fig. 1. </b>Architecture of configurable WSN node</text>
+<text top="291" left="450" width="5" height="16" font="11"> </text>
+<text top="336" left="63" width="525" height="14" font="6">FPGA in WSN node, a SPARC based open source processor is used. Though the </text>
+<text top="353" left="63" width="522" height="14" font="6">processor is not developed for low power implementation, it is chosen for two reasons. </text>
+<text top="371" left="63" width="522" height="14" font="6">Firstly, it is supplied with softcore and related tools. Secondly, it can perform relatively </text>
+<text top="388" left="63" width="523" height="14" font="6">large applications which make it possible to compare software based implementation </text>
+<text top="405" left="63" width="218" height="14" font="6">with FPGA based implementation.   </text>
+<text top="422" left="80" width="506" height="14" font="6">After the benefit of FPGA is demonstrated, an 8051 core is used to replace SPARC </text>
+<text top="440" left="63" width="341" height="14" font="6">based processor to minimize the power consumption.       </text>
+<text top="750" left="457" width="3" height="12" font="2"> </text>
+<text top="779" left="255" width="135" height="12" font="7"><b>Fig. 2. </b>ICAP mechanism</text>
+<text top="775" left="390" width="5" height="16" font="11"> </text>
+<text top="805" left="80" width="505" height="14" font="6">Internal Configuration Access Port (ICAP) is the mechanism to configure the fabric </text>
+<text top="823" left="63" width="523" height="14" font="6">of Xilinx FPGAs. Through ICAP (Fig.2), the internal registers can be accessed. Also, </text>
+<text top="840" left="63" width="523" height="14" font="6">the configuration memory can be read and wrote. As described in Figure2, the ICAP </text>
+<text top="857" left="63" width="524" height="14" font="6">wrapper and ICAP are contained in a module named ICAP hardware system. In this </text>
+<text top="874" left="63" width="522" height="14" font="6">paper, it integrated with the rest WSN node as a slave to APB. The ICAP wrapper is the </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="3" height="12" font="2"> </text>
+<text top="43" left="279" width="255" height="12" font="2">Remotely Run-Time FPGA Based WSN Node </text>
+<text top="43" left="568" width="17" height="12" font="2">59 </text>
+<text top="86" left="63" width="526" height="14" font="6">module containing hardware controllers which function as interaction between the </text>
+<text top="103" left="63" width="122" height="14" font="6">software and ICAP. </text>
+<text top="121" left="80" width="506" height="14" font="6">Inside ICAP wrapper, the ICAP decoder is the main controller. It distinguishes the </text>
+<text top="138" left="63" width="519" height="14" font="6">data from the APB as instructions and data which are used as Partial Dynamic Recon-</text>
+<text top="155" left="63" width="523" height="14" font="6">figuration (PDR) and send the signal to the corresponding modules in ICAP wrapper. </text>
+<text top="172" left="63" width="523" height="14" font="6">The address controller and ICAP controller are used to control the flow of data within </text>
+<text top="190" left="63" width="522" height="14" font="6">the ICAP wrapper as the data can both be sent to the ICAP primitive or read back from </text>
+<text top="207" left="63" width="522" height="14" font="6">ICAP. The data to the ICAP primitive is the configuration file for FPGA configuration. </text>
+<text top="224" left="63" width="524" height="14" font="6">The read back data represents the particular design of application for a region of the </text>
+<text top="242" left="63" width="525" height="14" font="6">FPGA which are pre-stored in the configuration memory or data from the internal </text>
+<text top="259" left="63" width="241" height="14" font="6">registers of ICAP. The dual port BRAM</text>
+<text top="255" left="304" width="281" height="19" font="6">  works as buffer memory. Data to be written </text>
+<text top="276" left="63" width="529" height="14" font="6">into ICAP or read back from ICAP are temporally stored into BRAM before it is used.   </text>
+<text top="293" left="80" width="506" height="14" font="6">For the communication module, ETRX2 module from Telegesis is utilized as it is </text>
+<text top="310" left="63" width="523" height="14" font="6">based ZigBee and a low power implementation. Through the Universal Asynchronous </text>
+<text top="328" left="63" width="449" height="14" font="6">Receiver Transmitter (UART) port, the module is managed by processor.   </text>
+<text top="367" left="63" width="164" height="14" font="9"><b>2.2   Developemnt Flow </b></text>
+<text top="400" left="63" width="522" height="14" font="6">With the purpose of developing a partial runtime reconfigurable system, the FPGA chip </text>
+<text top="417" left="63" width="524" height="14" font="6">needs to be divided into reconfigurable and fixed regions. This process is called as </text>
+<text top="434" left="63" width="519" height="14" font="6">FPGA structure, resource arrangement or partitioning. In this paper, the partial recon-</text>
+<text top="452" left="63" width="524" height="14" font="6">figuration system development is based on virtual architecture which includes both </text>
+<text top="471" left="63" width="277" height="14" font="6">resource division and on-chip communication</text>
+<text top="467" left="340" width="246" height="19" font="6">（the interconnection between different </text>
+<text top="490" left="63" width="44" height="14" font="6">regions</text>
+<text top="486" left="107" width="479" height="19" font="6">）. For synthesis and floorplanning, ISE and PlanAhead are used respectively. </text>
+<text top="508" left="63" width="522" height="14" font="6">ISE is distributed with Xilinx products which are widely used in FPGA community. To </text>
+<text top="525" left="63" width="519" height="14" font="6">floorplan FPGA chip, PlanAhead is selected which is provided by Xilinx, as it is de-</text>
+<text top="542" left="63" width="525" height="14" font="6">veloped to design and analysis of large FPGA devices and PDR system. This tool </text>
+<text top="560" left="63" width="524" height="14" font="6">allows the input of netlist, floorplanning for both static and dynamic reconfiguration </text>
+<text top="577" left="63" width="522" height="14" font="6">systems, DRC, timing analysis. Within PlanAhead, after the designs are partitioned into </text>
+<text top="594" left="63" width="523" height="14" font="6">physical blocks (Pblocks), it allows constraining of modules to a particular region of </text>
+<text top="611" left="63" width="524" height="14" font="6">FPGA. In our design, the floorplannings for Pblocks are constrained depend on if it </text>
+<text top="629" left="63" width="524" height="14" font="6">belongs to static or reconfigurable module. The region for reconfigurable module is </text>
+<text top="646" left="63" width="523" height="14" font="6">known as the reconfigurable region and bus macro are placed between this region and </text>
+<text top="663" left="63" width="524" height="14" font="6">static region. For the second proposed node architecture, since the PDR function is </text>
+<text top="680" left="63" width="522" height="14" font="6">enable through JTAG port, iMPACT is used to generate the necessary binary formatted </text>
+<text top="697" left="63" width="522" height="14" font="6">boundary scan configuration file. For both systems, configuration files are pre-stored in </text>
+<text top="715" left="63" width="525" height="14" font="6">the flash memory of node, when the rconfiguration is needed, only related control </text>
+<text top="732" left="63" width="99" height="14" font="6">signals are sent. </text>
+<text top="766" left="63" width="277" height="14" font="9"><b>2.3      Software and Compiler Composition </b></text>
+<text top="800" left="63" width="522" height="14" font="6">The processor is the core element in the node reconfigurability control. It is in charge of </text>
+<text top="817" left="63" width="523" height="14" font="6">receiving new HW configurations and SW programs, manage them and deal with the </text>
+<text top="834" left="63" width="524" height="14" font="6">FPGA reconfiguration. To minimize the whole system, the node reconfigurability is </text>
+<text top="851" left="63" width="524" height="14" font="6">controlled by a simple and independent software stack. The structure of software is </text>
+<text top="869" left="63" width="524" height="14" font="6">described as Fig. 3. On top of hardware (FPGA, Sensors, Radio, Microcontroller), it </text>
+<text top="886" left="63" width="186" height="14" font="6">contains three software layers. </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="17" height="12" font="2">60 </text>
+<text top="43" left="114" width="131" height="12" font="2">Y. Li, Z. Jia, and F. Liu </text>
+<text top="231" left="438" width="3" height="12" font="2"> </text>
+<text top="269" left="252" width="144" height="12" font="7"><b>Fig. 3. </b>Software Structure </text>
+<text top="308" left="63" width="523" height="17" font="6">  The first layer is an abstraction layer. Abstraction layers are defined to facilitate </text>
+<text top="328" left="95" width="487" height="14" font="6">applications porting across different platforms. The whole abstraction can be di-</text>
+<text top="345" left="95" width="491" height="14" font="6">vided as two parts: one is the traditional Hardware Abstraction Layer (HAL) and </text>
+<text top="363" left="95" width="491" height="14" font="6">the second one is a Reconfigurable Hardware Abstraction Layer (RHAL). In our </text>
+<text top="380" left="95" width="491" height="14" font="6">design, the RHAL layer contains three parts. The first part contains a definition of </text>
+<text top="397" left="95" width="492" height="14" font="6">the partial run-time reconfigurable system architecture along with FPGA device </text>
+<text top="415" left="95" width="491" height="14" font="6">descriptors which stored as a set of bits (FPGA provider, available logic, etc). The </text>
+<text top="432" left="95" width="491" height="14" font="6">second part includes configuration library that can be loaded into the FPGA. The </text>
+<text top="449" left="95" width="462" height="14" font="6">third part is the FPGA programmer that is in charge of programming FPGA. </text>
+<text top="463" left="63" width="519" height="17" font="6">  The second layer is a light-weight compiler for specific application. Node de-</text>
+<text top="483" left="95" width="491" height="14" font="6">scriptors and state variables are described in this layer. The descriptors define the </text>
+<text top="501" left="95" width="493" height="14" font="6">current available resources like sensors and computational resources in library. </text>
+<text top="518" left="95" width="487" height="14" font="6">State variables define the node resources which are in used. A simple reconfigu-</text>
+<text top="535" left="95" width="491" height="14" font="6">ration policy is also adopted in this layer. Policy mainly is related to two aspects: </text>
+<text top="552" left="95" width="487" height="14" font="6">when a node reconfiguration is required, or what to do if the required configura-</text>
+<text top="570" left="95" width="125" height="14" font="6">tion is not available. </text>
+<text top="584" left="63" width="415" height="17" font="6">  The required task of node is defined in the application layer.       </text>
+<text top="634" left="63" width="505" height="16" font="8"><b>3   Run-Time Reconfigurable System Evaluation and Discussion </b></text>
+<text top="664" left="63" width="175" height="14" font="9"><b>3.1   Evaluation Method  </b></text>
+<text top="697" left="63" width="522" height="14" font="6">As the main restrictions of WSN node is power and memory, the cost is evaluated from </text>
+<text top="715" left="63" width="522" height="14" font="6">two perspectives. To analysis the whole process of remote reconfiguration, it is divided </text>
+<text top="732" left="63" width="524" height="14" font="6">into five sub-processes which are transmission stage, reception stage, retransmission </text>
+<text top="749" left="63" width="523" height="14" font="6">stage, reconfiguration stage and standby stage. In each stage, the power and memory </text>
+<text top="766" left="63" width="524" height="14" font="6">consumption have different characters. The power consumption can be calculated by </text>
+<text top="784" left="63" width="526" height="14" font="6">static power consumption and times for each stage. Static power consumption is </text>
+<text top="801" left="63" width="522" height="14" font="6">measured by Amper-meter during the sensor node consumption characterization. When </text>
+<text top="818" left="63" width="519" height="14" font="6">the node is running at typically 3 V, the power consumption for transmission and re-</text>
+<text top="836" left="63" width="524" height="14" font="6">ception stage is 240mW, for standby, reconfiguration and retransmission stage, it is </text>
+<text top="853" left="63" width="519" height="14" font="6">respectively 60mW, 150mW, and 110mW.As the energy and memory are major re-</text>
+<text top="870" left="63" width="524" height="14" font="6">strictions for FPGA implementation in WSN, to evaluate the feasibility of FPGA in </text>
+<text top="887" left="63" width="523" height="14" font="6">WSN, it is important to measure the power cost of reconfiguration. In this paper, we </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="12" size="7" family="Times" color="#000000"/>
+	<fontspec id="13" size="14" family="Times" color="#000000"/>
+	<fontspec id="14" size="14" family="Symbol" color="#000000"/>
+	<fontspec id="15" size="9" family="Times" color="#000000"/>
+	<fontspec id="16" size="18" family="Times" color="#000000"/>
+	<fontspec id="17" size="17" family="Times" color="#000000"/>
+	<fontspec id="18" size="17" family="Symbol" color="#000000"/>
+<text top="43" left="63" width="3" height="12" font="2"> </text>
+<text top="43" left="279" width="255" height="12" font="2">Remotely Run-Time FPGA Based WSN Node </text>
+<text top="43" left="568" width="17" height="12" font="2">61 </text>
+<text top="86" left="63" width="527" height="14" font="6">take approach to build HW reconfiguration node in which configuration file is </text>
+<text top="103" left="63" width="526" height="14" font="6">pre-stored rather than transferred remotely. As a result, only reconfiguration and </text>
+<text top="121" left="63" width="354" height="14" font="6">standby energy are needed to be measured and evaluated.   </text>
+<text top="148" left="63" width="12" height="13" font="0"> </text>
+<text top="149" left="95" width="451" height="14" font="6">Reconfiguration Energy: the energy consumed in a single reconfiguration   </text>
+<text top="187" left="351" width="46" height="9" font="12">reconfmode</text>
+<text top="187" left="302" width="25" height="9" font="12">reconf</text>
+<text top="187" left="249" width="25" height="9" font="12">reconf</text>
+<text top="178" left="343" width="9" height="15" font="13">P</text>
+<text top="178" left="293" width="10" height="15" font="13">T</text>
+<text top="178" left="237" width="10" height="15" font="13">E</text>
+<text top="173" left="331" width="9" height="22" font="14">×</text>
+<text top="173" left="280" width="9" height="22" font="14">=</text>
+<text top="176" left="399" width="163" height="16" font="11">                                             </text>
+<text top="178" left="564" width="18" height="14" font="6">(1)</text>
+<text top="176" left="582" width="5" height="16" font="11"> </text>
+<text top="226" left="79" width="56" height="11" font="15">reconfmode</text>
+<text top="215" left="67" width="11" height="19" font="16">P</text>
+<text top="220" left="151" width="310" height="14" font="6"> is the power consumption in this working mode. </text>
+<text top="227" left="475" width="27" height="10" font="1">reconf</text>
+<text top="218" left="465" width="11" height="16" font="11">T</text>
+<text top="220" left="505" width="77" height="14" font="6">  is the con-</text>
+<text top="242" left="63" width="523" height="14" font="6">sumed time for reconfiguration.    The similar formula is defined as below for standby </text>
+<text top="259" left="63" width="85" height="14" font="6">mode.        </text>
+<text top="287" left="63" width="12" height="13" font="0"> </text>
+<text top="287" left="95" width="318" height="14" font="6">Standby Energy : the energy needed in standby state </text>
+<text top="322" left="128" width="127" height="16" font="11">                                   </text>
+<text top="324" left="358" width="30" height="9" font="12">sbmode</text>
+<text top="324" left="315" width="30" height="9" font="12">sbmode</text>
+<text top="324" left="269" width="30" height="9" font="12">sbmode</text>
+<text top="315" left="351" width="9" height="15" font="13">P</text>
+<text top="315" left="308" width="10" height="15" font="13">T</text>
+<text top="315" left="260" width="10" height="15" font="13">E</text>
+<text top="309" left="342" width="9" height="22" font="14">×</text>
+<text top="309" left="297" width="9" height="22" font="14">=</text>
+<text top="322" left="384" width="177" height="16" font="11">                                                 </text>
+<text top="324" left="564" width="18" height="14" font="6">(2)</text>
+<text top="313" left="582" width="5" height="16" font="11"> </text>
+<text top="349" left="80" width="506" height="14" font="6">The cost of activity is formulated as the part of the total node energy that has to be </text>
+<text top="364" left="63" width="524" height="14" font="6">consumed during reconfiguration. Here, the total energy of node is used rather than </text>
+<text top="379" left="63" width="523" height="14" font="6">the currently available energy as described in paper . Because there is no standard to </text>
+<text top="394" left="63" width="524" height="14" font="6">measure the currently available energy and it is supposed that such reconfigurations </text>
+<text top="409" left="63" width="160" height="14" font="6">are not needed frequently. </text>
+<text top="436" left="63" width="12" height="13" font="0"> </text>
+<text top="436" left="95" width="129" height="14" font="6">Reconfiguration cost </text>
+<text top="466" left="449" width="113" height="16" font="11">                               </text>
+<text top="476" left="564" width="18" height="14" font="6">(3)</text>
+<text top="473" left="582" width="12" height="16" font="11">   </text>
+<text top="516" left="376" width="5" height="16" font="11"> </text>
+<text top="546" left="63" width="419" height="14" font="6">Also, the memory cost is formulated the same way as the energy cost </text>
+<text top="574" left="63" width="12" height="13" font="0"> </text>
+<text top="574" left="95" width="87" height="14" font="6">Memory Cost </text>
+<text top="636" left="355" width="19" height="9" font="12">node</text>
+<text top="612" left="352" width="25" height="9" font="12">reconf</text>
+<text top="623" left="287" width="25" height="9" font="12">reconf</text>
+<text top="627" left="339" width="15" height="15" font="13">M</text>
+<text top="603" left="335" width="15" height="15" font="13">M</text>
+<text top="613" left="275" width="11" height="15" font="13">C</text>
+<text top="608" left="320" width="9" height="22" font="14">=</text>
+<text top="634" left="384" width="177" height="16" font="11">                                                 </text>
+<text top="613" left="565" width="18" height="14" font="6">(4)</text>
+<text top="634" left="582" width="5" height="16" font="11"> </text>
+<text top="682" left="63" width="184" height="14" font="9"><b>3.2   Result and Discussion </b></text>
+<text top="715" left="63" width="522" height="14" font="6">In our current evaluation, it’s assumed that the application related SW and HW are only </text>
+<text top="733" left="63" width="524" height="14" font="6">through one hip to reach the target node. A simple moving average filter has been </text>
+<text top="750" left="63" width="519" height="14" font="6">recognized as test bench to evaluation the cost of communication. The HW configura-</text>
+<text top="767" left="63" width="524" height="14" font="6">tion file is about roughly 6KB in .bit format and slightly more in .xsvf format. For </text>
+<text top="784" left="63" width="519" height="14" font="6">evaluation purpose, the related configuration files are packaged as 16 and 8 bytes re-</text>
+<text top="802" left="63" width="525" height="14" font="6">spectively. Both transmission packets have been tested in two modes. Firstly, it is </text>
+<text top="819" left="63" width="519" height="14" font="6">supposed that the node is connected through a Cable. Secondly, each node is experi-</text>
+<text top="836" left="63" width="476" height="14" font="6">mented through Zigbee protocol under a direct connection mode (single hop).   </text>
+<text top="856" left="95" width="5" height="16" font="11"> </text>
+<text top="879" left="95" width="5" height="16" font="11"> </text>
+<text top="503" left="318" width="22" height="10" font="15">node</text>
+<text top="476" left="314" width="28" height="10" font="15">reconf</text>
+<text top="489" left="259" width="28" height="10" font="15">reconf</text>
+<text top="493" left="307" width="12" height="17" font="17">E</text>
+<text top="466" left="303" width="12" height="17" font="17">E</text>
+<text top="478" left="247" width="13" height="17" font="17">C</text>
+<text top="472" left="289" width="10" height="25" font="18">=</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="19" size="16" family="Times" color="#ff0000"/>
+<text top="43" left="63" width="17" height="12" font="2">62 </text>
+<text top="43" left="114" width="131" height="12" font="2">Y. Li, Z. Jia, and F. Liu </text>
+<text top="90" left="190" width="269" height="12" font="7"><b>Table 1. </b>The Evaluation of Communication Cost </text>
+<text top="131" left="68" width="92" height="14" font="6">Trans. Mode     </text>
+<text top="131" left="182" width="403" height="14" font="6">Timing(sec.)  Rate(Bytes/S)  Etrans(mWmim)   Eret(mWmim)  </text>
+<text top="156" left="68" width="88" height="14" font="6">Cable 8 Bytes </text>
+<text top="157" left="194" width="179" height="14" font="6">29.4 303.04 </text>
+<text top="157" left="396" width="56" height="14" font="6"> </text>
+<text top="157" left="512" width="56" height="14" font="6"> </text>
+<text top="198" left="68" width="97" height="14" font="6">ZigBee 8 Bytes </text>
+<text top="200" left="194" width="251" height="14" font="6">76.09 128.47  760 </text>
+<text top="200" left="485" width="78" height="14" font="6">1520 </text>
+<text top="241" left="68" width="107" height="14" font="6">Cable 16 Bytes     </text>
+<text top="243" left="194" width="172" height="14" font="6">21.42 460.70 </text>
+<text top="243" left="396" width="48" height="14" font="6"> </text>
+<text top="243" left="512" width="48" height="14" font="6"> </text>
+<text top="284" left="68" width="105" height="14" font="6">ZigBee 16 Bytes </text>
+<text top="285" left="194" width="258" height="14" font="6">45.9 200.40 459 </text>
+<text top="285" left="489" width="78" height="14" font="6">918 </text>
+<text top="325" left="80" width="4" height="14" font="6"> </text>
+<text top="343" left="80" width="505" height="14" font="6">After the dynamic power has been measured, in order to know the live time for each </text>
+<text top="360" left="63" width="522" height="14" font="6">node, the available power of node has to be known. As the node run at 3V and powered </text>
+<text top="377" left="63" width="522" height="14" font="6">by two standard AA batteries.    When the node is set as normal mode, it can last for 100 </text>
+<text top="394" left="63" width="522" height="14" font="6">hours. From the above data, regarding the cost of communication, two things are found. </text>
+<text top="412" left="63" width="519" height="14" font="6">Firstly, the transferring of configuration files can cost large portion of energy as illu-</text>
+<text top="429" left="63" width="524" height="14" font="6">strated in Table 1. Secondly, transmission error often occurs especially for 16 Bytes </text>
+<text top="446" left="63" width="522" height="14" font="6">ZigBee. Therefore, to minimize data transmission, the configuration files are pre-stored </text>
+<text top="463" left="63" width="519" height="14" font="6">in the node. To evaluate the power consumption of FPGA based node, with the con-</text>
+<text top="481" left="63" width="523" height="14" font="6">sideration of different nature of application and the availability of hardware core, FIR, </text>
+<text top="498" left="63" width="524" height="14" font="6">SHA-2, FFT and AES have been selected to evaluate the applicability of FPGA for </text>
+<text top="515" left="63" width="152" height="14" font="6">WSN node in this paper. </text>
+<text top="559" left="255" width="139" height="12" font="7"><b>Table 2. </b>Power Analysis </text>
+<text top="593" left="71" width="266" height="14" font="6"> Static </text>
+<text top="608" left="187" width="50" height="14" font="6">Power  </text>
+<text top="593" left="270" width="54" height="14" font="6">Average </text>
+<text top="608" left="270" width="55" height="14" font="6">Runtime </text>
+<text top="623" left="270" width="42" height="14" font="6">Power </text>
+<text top="638" left="270" width="64" height="14" font="6">(Software)</text>
+<text top="593" left="368" width="54" height="14" font="6">Average </text>
+<text top="608" left="368" width="98" height="14" font="6">Runtime Power </text>
+<text top="623" left="368" width="110" height="14" font="6">(Reconfigurable  </text>
+<text top="638" left="368" width="68" height="14" font="6">Hardware )</text>
+<text top="593" left="488" width="74" height="14" font="6">Application </text>
+<text top="608" left="488" width="50" height="14" font="6">Power  </text>
+<text top="623" left="488" width="66" height="14" font="6">Reduction </text>
+<text top="653" left="71" width="50" height="14" font="6">Leon3  </text>
+<text top="668" left="71" width="82" height="14" font="6">Static&amp;Blank</text>
+<text top="653" left="187" width="26" height="14" font="6">620 </text>
+<text top="684" left="71" width="78" height="14" font="6">Leon3&amp;AES</text>
+<text top="684" left="187" width="113" height="14" font="6">629 1267</text>
+<text top="684" left="368" width="23" height="14" font="6">932</text>
+<text top="684" left="488" width="87" height="14" font="6">53% </text>
+<text top="700" left="71" width="73" height="14" font="6">Leon3&amp;FIR</text>
+<text top="700" left="187" width="105" height="14" font="6">623 681</text>
+<text top="700" left="368" width="23" height="14" font="6">660</text>
+<text top="700" left="488" width="87" height="14" font="6">36% </text>
+<text top="716" left="71" width="76" height="14" font="6">Leon3&amp;FFT</text>
+<text top="716" left="187" width="113" height="14" font="6">633 2033</text>
+<text top="716" left="368" width="30" height="14" font="6">1204</text>
+<text top="716" left="488" width="87" height="14" font="6">60% </text>
+<text top="731" left="71" width="92" height="14" font="6">Leon3&amp;SHA-2</text>
+<text top="731" left="187" width="105" height="14" font="6">628 831</text>
+<text top="731" left="368" width="23" height="14" font="6">723</text>
+<text top="731" left="488" width="87" height="14" font="6">53% </text>
+<text top="747" left="80" width="4" height="14" font="6"> </text>
+<text top="763" left="71" width="238" height="14" font="6"> 8051&amp;AES </text>
+<text top="763" left="263" width="65" height="14" font="6">8051&amp;FIR</text>
+<text top="763" left="367" width="67" height="14" font="6">8051&amp;FFT</text>
+<text top="763" left="473" width="168" height="14" font="6">8051&amp;SHA-2 </text>
+<text top="779" left="71" width="38" height="14" font="6">Static </text>
+<text top="794" left="71" width="42" height="14" font="6">Power </text>
+<text top="779" left="156" width="15" height="14" font="6">59</text>
+<text top="779" left="263" width="15" height="14" font="6">53</text>
+<text top="779" left="367" width="15" height="14" font="6">65</text>
+<text top="779" left="473" width="15" height="14" font="6">59</text>
+<text top="809" left="71" width="55" height="14" font="6">Runtime </text>
+<text top="824" left="71" width="42" height="14" font="6">Power </text>
+<text top="809" left="156" width="123" height="14" font="6">353 86</text>
+<text top="809" left="367" width="23" height="14" font="6">622</text>
+<text top="809" left="473" width="23" height="14" font="6">143</text>
+<text top="844" left="80" width="19" height="16" font="11">     </text>
+<text top="867" left="80" width="5" height="16" font="19"> </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="3" height="12" font="2"> </text>
+<text top="43" left="279" width="255" height="12" font="2">Remotely Run-Time FPGA Based WSN Node </text>
+<text top="43" left="568" width="17" height="12" font="2">63 </text>
+<text top="86" left="80" width="507" height="14" font="6">In Table 2, the experimental result of power consumption is analyzed. The static </text>
+<text top="103" left="63" width="519" height="14" font="6">design without hard cores implementation dissipates about 620 mW without any pro-</text>
+<text top="121" left="63" width="519" height="14" font="6">gram in running. With software implementation of test functionality, the power con-</text>
+<text top="138" left="63" width="524" height="14" font="6">sumption significantly raise, apart from FIR case. This is due to the FIR is relatively </text>
+<text top="155" left="63" width="519" height="14" font="6">small application compared to the rest of test cases. Compared to the software imple-</text>
+<text top="172" left="63" width="528" height="14" font="6">mentation, HW configuration system can save from 31 to 829 mW power for each case.   </text>
+<text top="190" left="63" width="519" height="14" font="6">This demonstrated the saving of power consumption during the run time by imple-</text>
+<text top="207" left="63" width="524" height="14" font="6">menting HW configuration. Considering the running time of HW implementation is </text>
+<text top="224" left="63" width="524" height="14" font="6">much less than software implementation. FPGA based WSN node has both time and </text>
+<text top="242" left="63" width="299" height="14" font="6">power advantage over software implementation.   </text>
+<text top="262" left="63" width="4" height="14" font="6"> </text>
+<text top="282" left="63" width="523" height="14" font="9"><b>Acknowledgments. </b>This reseach is supported by Shandong Province Natural Science </text>
+<text top="299" left="63" width="525" height="14" font="6">Foundation (Y2008G13), Shandong Province Research Program (2010GcG20101), </text>
+<text top="317" left="63" width="525" height="14" font="6">Independent Innovation Foundation of Shandong University (IIFSDU 2010TB020), </text>
+<text top="334" left="63" width="391" height="14" font="6">and IT Development Fund of Shandong Province ( 2010R1501). </text>
+<text top="381" left="63" width="88" height="16" font="8"><b>References </b></text>
+<text top="420" left="66" width="520" height="12" font="2">1.  Scrofano, R., Gokhale, M.B., Trouw, F., Prasanna, V.K.: Accelerating molecular dynamics </text>
+<text top="437" left="89" width="497" height="12" font="2">simulations with reconfigurable computers. IEEE Transactions on Parallel and Distributed </text>
+<text top="453" left="89" width="174" height="12" font="2">Systems 19(6), 764–778 (2008) </text>
+<text top="470" left="66" width="516" height="12" font="2">2.  Xia, F., Dou, Y., Song, J., Lei, G.: Fine-Grained Parallel RNA Secondary Structure Pre-</text>
+<text top="486" left="89" width="470" height="12" font="2">diction Using SCFGs on FPGA. Chinese Journal of Computers 33(5), 797–812 (2010) </text>
+<text top="503" left="66" width="520" height="12" font="2">3.  Becker, J., et al.: Dynamic and Partial FPGA Exploitation. Proceedings of the IEEE 92(2), </text>
+<text top="519" left="89" width="90" height="12" font="2">438–452 (2007) </text>
+<text top="536" left="66" width="519" height="12" font="2">4.  Sedcole, P., Peter, Y.K., George, C., Constantinides, A., Luk, W.:    Run-time integration of </text>
+<text top="552" left="89" width="501" height="12" font="2">reconfigurable video processing systems. IEEE Transactions on VLSI Systems 15(9), </text>
+<text top="569" left="89" width="103" height="12" font="2">1003–1016 (2007) </text>
+<text top="585" left="66" width="520" height="12" font="2">5.  Krasteva, Y., Portilla, J., de la Torre, E., Riesgo, T.: Embedded Run-time Reconfigurable </text>
+<text top="602" left="89" width="499" height="12" font="2">Nodes for Wireless Sensor Networks Applications. IEEE Sensors Journal, IEEE Early </text>
+<text top="618" left="89" width="81" height="12" font="2">Access (2010) </text>
+<text top="635" left="66" width="520" height="12" font="2">6.  Hinkelmann, H., Zipf, P., Glesner, M.: Design concepts for a dynamically reconfigurable </text>
+<text top="651" left="89" width="499" height="12" font="2">wireless sensor node. In: Proceedings of the 1st NASA/ESA Conference on Adaptive </text>
+<text top="668" left="89" width="334" height="12" font="2">Hardware and Systems, AHS 2006, pp. 436–441 (June 2006) </text>
+<text top="684" left="66" width="522" height="12" font="2">7.  Şuşu, A.E., Magno, M., Acquaviva, A., Atienza, D., De Micheli, G.: Reconfiguration </text>
+<text top="701" left="89" width="498" height="12" font="2">Strategies for Environmentally Powered Devices: Theoretical Analysis and Experimental </text>
+<text top="717" left="89" width="493" height="12" font="2">Validation. In: Stenström, P. (ed.) Transactions on High-Performance Embedded Archi-</text>
+<text top="734" left="89" width="468" height="12" font="2">tectures and Compilers I. LNCS, vol. 4050, pp. 341–360. Springer, Heidelberg (2007) </text>
+<text top="753" left="63" width="4" height="14" font="6"> </text>
+</page>
+</pdf2xml>

@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="24" family="Times" color="#000000"/>
+	<fontspec id="1" size="15" family="Times" color="#000000"/>
+	<fontspec id="2" size="12" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="9" family="Times" color="#000000"/>
+<text top="109" left="148" width="619" height="25" font="0"><b>Prototype and Evaluation of the CoRAM Memory</b></text>
+<text top="138" left="196" width="522" height="25" font="0"><b>Architecture for FPGA-Based Computing</b></text>
+<text top="207" left="142" width="631" height="17" font="1">Eric S. Chung, Michael K. Papamichael, Gabriel Weisz, James C. Hoe, Ken Mai</text>
+<text top="232" left="242" width="430" height="14" font="2">Carnegie Mellon University, Computer Architecture Lab (CALCM)</text>
+<text top="252" left="372" width="170" height="17" font="1">coram@ece.cmu.edu</text>
+<text top="312" left="81" width="97" height="16" font="1">ABSTRACT</text>
+<text top="337" left="81" width="359" height="12" font="3">The CoRAM memory architecture for FPGA-based comput-</text>
+<text top="352" left="81" width="359" height="12" font="3">ing augments traditional reconﬁgurable fabric with a natural</text>
+<text top="368" left="81" width="359" height="12" font="3">and eﬀective way for applications to interact with oﬀ-chip</text>
+<text top="384" left="81" width="359" height="12" font="3">memory and I/O. The two central tenets of the CoRAM</text>
+<text top="399" left="81" width="359" height="12" font="3">memory architecture are (1) the deliberate separation of con-</text>
+<text top="415" left="81" width="359" height="12" font="3">cerns between computation versus data marshalling and (2)</text>
+<text top="431" left="81" width="359" height="12" font="3">the use of a multithreaded software abstraction to replace</text>
+<text top="446" left="81" width="359" height="12" font="3">FSM-based memory control logic. To evaluate the viabil-</text>
+<text top="462" left="81" width="359" height="12" font="3">ity of the CoRAM memory architecture, we developed a</text>
+<text top="478" left="81" width="359" height="12" font="3">full RTL implementation of a CoRAM microarchitecture in-</text>
+<text top="494" left="81" width="359" height="12" font="3">stance that can be synthesized for standard cells or emulated</text>
+<text top="509" left="81" width="359" height="12" font="3">on FPGAs. The results of our evaluation show that a soft</text>
+<text top="525" left="81" width="359" height="12" font="3">emulation of the CoRAM memory architecture on current</text>
+<text top="541" left="81" width="359" height="12" font="3">FPGAs can be impractical for memory-intensive, large-scale</text>
+<text top="556" left="81" width="359" height="12" font="3">applications due to the high performance and area penalties</text>
+<text top="572" left="81" width="359" height="12" font="3">incurred by the soft mechanisms. The results further show</text>
+<text top="588" left="81" width="359" height="12" font="3">that in an envisioned FPGA built with CoRAM in mind, the</text>
+<text top="603" left="81" width="359" height="12" font="3">introduction of hard macro blocks for data distribution can</text>
+<text top="619" left="81" width="359" height="12" font="3">mitigate these ineﬃciencies—allowing applications to take</text>
+<text top="635" left="81" width="359" height="12" font="3">advantage of the CoRAM memory architecture for ease of</text>
+<text top="650" left="81" width="359" height="12" font="3">programmability and portability while still enjoying perfor-</text>
+<text top="666" left="81" width="359" height="12" font="3">mance and eﬃciency comparable to RTL-level application</text>
+<text top="682" left="81" width="228" height="12" font="3">development on conventional FPGAs.</text>
+<text top="712" left="81" width="277" height="12" font="3">ACM Categories &amp; Subject Descriptors</text>
+<text top="728" left="81" width="359" height="12" font="3">C.0 [Computer System Organization]: System Architectures</text>
+<text top="744" left="81" width="256" height="12" font="3">General Terms: Design, standardization</text>
+<text top="760" left="81" width="321" height="12" font="3">Keywords: FPGA computing, memory architecture</text>
+<text top="797" left="81" width="13" height="16" font="1">1.</text>
+<text top="797" left="112" width="143" height="16" font="1">INTRODUCTION</text>
+<text top="819" left="94" width="345" height="12" font="3">In the quest for energy-eﬃcient computing, Field Pro-</text>
+<text top="835" left="81" width="359" height="12" font="3">grammable Gate Arrays (FPGAs) have emerged as a class</text>
+<text top="851" left="81" width="359" height="12" font="3">of general-purpose accelerators to address the increasing</text>
+<text top="866" left="81" width="359" height="12" font="3">demands for performance while reducing energy consump-</text>
+<text top="882" left="81" width="359" height="12" font="3">tion. Despite their raw capabilities, today’s commodity FP-</text>
+<text top="898" left="81" width="359" height="12" font="3">GAs are impractical as general-purpose computing devices.</text>
+<text top="914" left="81" width="359" height="12" font="3">When developing an application for an FPGA, designers</text>
+<text top="977" left="81" width="359" height="11" font="4">Permission to make digital or hard copies of all or part of this work for</text>
+<text top="990" left="81" width="359" height="11" font="4">personal or classroom use is granted without fee provided that copies are</text>
+<text top="1004" left="81" width="359" height="11" font="4">not made or distributed for proﬁt or commercial advantage and that copies</text>
+<text top="1017" left="81" width="359" height="11" font="4">bear this notice and the full citation on the ﬁrst page. To copy otherwise, to</text>
+<text top="1031" left="81" width="359" height="11" font="4">republish, to post on servers or to redistribute to lists, requires prior speciﬁc</text>
+<text top="1044" left="81" width="115" height="11" font="4">permission and/or a fee.</text>
+<text top="1058" left="81" width="49" height="10" font="4">FPGA’12,</text>
+<text top="1058" left="133" width="245" height="11" font="4">February 22–24, 2012, Monterey, California, USA.</text>
+<text top="1071" left="81" width="280" height="11" font="4">Copyright 2012 ACM 978-1-4503-1155-7/12/02 ...$10.00.</text>
+<text top="315" left="475" width="359" height="12" font="3">are often confronted by: (1) low-level, error-prone hardware</text>
+<text top="331" left="475" width="359" height="12" font="3">description languages (HDL), (2) “bare-bones” fabric with</text>
+<text top="346" left="475" width="359" height="12" font="3">nothing but a sea of logic and I/O pins, and (3) low-level,</text>
+<text top="362" left="475" width="359" height="12" font="3">vendor-speciﬁc interfaces and gateware that the application</text>
+<text top="378" left="475" width="191" height="12" font="3">must be made compatible with.</text>
+<text top="401" left="475" width="359" height="12" font="3">CoRAM Memory Architecture. To address these limi-</text>
+<text top="417" left="475" width="359" height="12" font="3">tations, the CoRAM memory architecture [1] is an endeavor</text>
+<text top="432" left="475" width="359" height="12" font="3">to standardize and simplify how FPGA computing applica-</text>
+<text top="448" left="475" width="359" height="12" font="3">tions interact with memory and I/O, which is a critical step</text>
+<text top="464" left="475" width="359" height="12" font="3">towards a portable FPGA abstraction. CoRAM presents a</text>
+<text top="479" left="475" width="359" height="12" font="3">programmable, customizable view of memory that can be</text>
+<text top="495" left="475" width="359" height="12" font="3">retargeted to diﬀerent devices and platforms. The abstrac-</text>
+<text top="511" left="475" width="359" height="12" font="3">tion modiﬁes the traditional FPGA’s on-die SRAMs to act</text>
+<text top="526" left="475" width="359" height="12" font="3">as in-fabric distributed portals to oﬀ-chip memory and I/O.</text>
+<text top="542" left="475" width="359" height="12" font="3">A salient feature of CoRAM is the ability to program these</text>
+<text top="558" left="475" width="359" height="12" font="3">customizable, on-die SRAMs using a software control thread</text>
+<text top="573" left="475" width="359" height="12" font="3">that is portable and easy-to-use. Compared to the tradi-</text>
+<text top="589" left="475" width="359" height="12" font="3">tional approach where the FPGA memory hierarchy and</text>
+<text top="605" left="475" width="359" height="12" font="3">I/O sub-system is hand-built at the RTL-level for each ap-</text>
+<text top="621" left="475" width="359" height="12" font="3">plication, the CoRAM memory architecture can be used to</text>
+<text top="636" left="475" width="293" height="12" font="3">eﬃciently support a broad range of applications.</text>
+<text top="659" left="475" width="359" height="12" font="3">Evaluating the Viability of CoRAM. The architectural</text>
+<text top="675" left="475" width="359" height="12" font="3">features of CoRAM, however compelling, cannot be practical</text>
+<text top="691" left="475" width="359" height="12" font="3">unless eﬃcient underlying implementations are possible. In</text>
+<text top="706" left="475" width="359" height="12" font="3">this paper, we investigate the extent to which CoRAM suc-</text>
+<text top="722" left="475" width="359" height="12" font="3">ceeds in serving as a performance- and cost-eﬀective memory</text>
+<text top="738" left="475" width="359" height="12" font="3">system replacement for FPGA-based applications. A critical</text>
+<text top="754" left="475" width="359" height="12" font="3">aspect to be examined is whether the software-based control</text>
+<text top="769" left="475" width="359" height="12" font="3">abstraction in CoRAM can adequately support FPGA ap-</text>
+<text top="785" left="475" width="359" height="12" font="3">plications with memory-intensive requirements. Our objec-</text>
+<text top="801" left="475" width="359" height="12" font="3">tives require us to investigate the various ways in which the</text>
+<text top="816" left="475" width="359" height="12" font="3">CoRAM memory architecture can be realized. At one end of</text>
+<text top="832" left="475" width="359" height="12" font="3">the spectrum, CoRAM can be emulated on a conventional</text>
+<text top="848" left="475" width="359" height="12" font="3">FPGA, albeit at the cost of soft logic area and performance.</text>
+<text top="863" left="475" width="359" height="12" font="3">At the opposite end, general-purpose hard macro blocks can</text>
+<text top="879" left="475" width="359" height="12" font="3">be embedded within conventional reconﬁgurable fabric to ac-</text>
+<text top="895" left="475" width="359" height="12" font="3">celerate and to reduce the overhead of CoRAM operations.</text>
+<text top="910" left="475" width="359" height="12" font="3">In this paper, we investigate both extremes and compare</text>
+<text top="926" left="475" width="359" height="12" font="3">these implementations against traditional hand-built RTL</text>
+<text top="942" left="475" width="196" height="12" font="3">designs on conventional FPGAs.</text>
+<text top="965" left="475" width="237" height="12" font="3">Prototyping Eﬀorts and Results.</text>
+<text top="965" left="726" width="108" height="12" font="3">Our investigation</text>
+<text top="981" left="475" width="359" height="12" font="3">is supported by a full-featured prototype of a working</text>
+<text top="996" left="475" width="359" height="12" font="3">CoRAM microarchitectural instance comprising: (1) a C-</text>
+<text top="1012" left="475" width="359" height="12" font="3">based language speciﬁcation and compiler for software con-</text>
+<text top="1028" left="475" width="359" height="12" font="3">trol threads, and (2) a highly parameterized RTL design</text>
+<text top="1043" left="475" width="359" height="12" font="3">of an optimized CoRAM microarchitecture retargetable to</text>
+<text top="1059" left="475" width="359" height="12" font="3">either standard cells (to model a future FPGA with hard</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="5" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="6" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="8" family="Helvetica" color="#000000"/>
+	<fontspec id="9" size="7" family="Times" color="#000000"/>
+	<fontspec id="10" size="10" family="Times" color="#ffffff"/>
+	<fontspec id="11" size="10" family="Times" color="#000000"/>
+	<fontspec id="12" size="9" family="Times" color="#000000"/>
+	<fontspec id="13" size="6" family="Times" color="#000000"/>
+<text top="109" left="280" width="12" height="8" font="5">L1 </text>
+<text top="91" left="277" width="20" height="7" font="5">Core </text>
+<text top="141" left="264" width="155" height="8" font="6"><i>Single-Chip Heterogeneous Processor </i></text>
+<text top="95" left="107" width="21" height="8" font="5">CPU </text>
+<text top="95" left="210" width="27" height="8" font="5">FPGA </text>
+<text top="137" left="108" width="29" height="8" font="5">DRAM </text>
+<text top="137" left="207" width="29" height="8" font="5">DRAM </text>
+<text top="109" left="319" width="12" height="8" font="5">L1 </text>
+<text top="91" left="315" width="20" height="7" font="5">Core </text>
+<text top="125" left="320" width="45" height="9" font="7">L2 Cache </text>
+<text top="95" left="146" width="21" height="8" font="5">CPU </text>
+<text top="118" left="120" width="104" height="10" font="8">Memory Interconnect </text>
+<text top="98" left="379" width="29" height="9" font="7">FPGA </text>
+<text top="156" left="166" width="12" height="9" font="7">(a)</text>
+<text top="156" left="178" width="2" height="10" font="9"> </text>
+<text top="156" left="340" width="12" height="9" font="7">(b)</text>
+<text top="156" left="352" width="2" height="10" font="9"> </text>
+<text top="174" left="113" width="294" height="12" font="3">Figure 1: Assumed System Organizations.</text>
+<text top="307" left="237" width="45" height="12" font="10">Memory </text>
+<text top="207" left="317" width="47" height="12" font="11"><i>Software </i></text>
+<text top="221" left="317" width="81" height="12" font="11"><i>Control Threads </i></text>
+<text top="225" left="125" width="53" height="12" font="11"><i>Core Logic </i></text>
+<text top="204" left="195" width="47" height="12" font="11"><i>Channels </i></text>
+<text top="278" left="246" width="0" height="12" font="12">Co</text>
+<text top="266" left="246" width="0" height="12" font="12">RAM</text>
+<text top="243" left="246" width="0" height="12" font="12"> </text>
+<text top="340" left="136" width="248" height="12" font="3">Figure 2: CoRAM Program Model.</text>
+<text top="387" left="81" width="359" height="12" font="3">CoRAM support) or conventional FPGAs (as a soft logic</text>
+<text top="403" left="81" width="69" height="12" font="3">emulation).</text>
+<text top="403" left="162" width="277" height="12" font="3">We select three diverse applications to eval-</text>
+<text top="418" left="81" width="359" height="12" font="3">uate the hard versus soft CoRAM implementations. Our</text>
+<text top="434" left="81" width="359" height="12" font="3">evaluation results suggest that a soft emulation of CoRAM</text>
+<text top="450" left="81" width="359" height="12" font="3">falls short in large-scale, memory-intensive applications due</text>
+<text top="465" left="81" width="359" height="12" font="3">to the high performance and area penalties incurred by the</text>
+<text top="481" left="81" width="359" height="12" font="3">soft mechanisms. However, our results show that the in-</text>
+<text top="497" left="81" width="359" height="12" font="3">troduction of hard macro blocks for data distribution in</text>
+<text top="513" left="81" width="359" height="12" font="3">a future FPGA with CoRAM support can mitigate these</text>
+<text top="528" left="81" width="359" height="12" font="3">ineﬃciencies—allowing applications to achieve performance</text>
+<text top="544" left="81" width="359" height="12" font="3">and eﬃciency comparable to tuned applications on a con-</text>
+<text top="560" left="81" width="103" height="12" font="3">ventional FPGA.</text>
+<text top="597" left="81" width="13" height="16" font="1">2.</text>
+<text top="597" left="112" width="204" height="16" font="1">CORAM BACKGROUND</text>
+<text top="620" left="81" width="94" height="12" font="3">Assumptions.</text>
+<text top="620" left="192" width="248" height="12" font="3">At the system level, CoRAM assumes</text>
+<text top="635" left="81" width="359" height="12" font="3">the existence of FPGA-based accelerators co-existing with</text>
+<text top="651" left="81" width="359" height="12" font="3">general-purpose processors on a shared memory interconnect</text>
+<text top="667" left="81" width="359" height="12" font="3">(see Figure 1). Within an FPGA, CoRAM assumes that</text>
+<text top="683" left="81" width="359" height="12" font="3">one or more load-store interfaces provide external memory</text>
+<text top="698" left="81" width="359" height="12" font="3">accesses at the boundaries of the fabric. The same assump-</text>
+<text top="714" left="81" width="359" height="12" font="3">tions are similarly applicable in a single-chip hetereogeneous</text>
+<text top="730" left="81" width="351" height="12" font="3">multicore where cores and fabric co-exist on the same die.</text>
+<text top="753" left="81" width="359" height="12" font="3">CoRAM Program Model. When developing an applica-</text>
+<text top="768" left="81" width="359" height="12" font="3">tion with CoRAM support, the user perceives a simpliﬁed</text>
+<text top="784" left="81" width="359" height="12" font="3">view of fabric as depicted in Figure 2. The core logic compo-</text>
+<text top="800" left="81" width="359" height="12" font="3">nent is an isolated, contiguous region of fabric that preserves</text>
+<text top="816" left="81" width="359" height="12" font="3">the hardware-centric view familiar to designers that target</text>
+<text top="831" left="81" width="359" height="12" font="3">FPGAs today. Applications that are mapped to core logic</text>
+<text top="847" left="81" width="359" height="12" font="3">can be programmed with any hardware synthesis language</text>
+<text top="863" left="81" width="359" height="12" font="3">supported by contemporary tools from low-level RTL (e.g.,</text>
+<text top="878" left="81" width="359" height="12" font="3">Verilog) to high-level languages (e.g., C-to-gates, Bluespec).</text>
+<text top="894" left="81" width="359" height="12" font="3">To create a uniform abstraction that can be made portable</text>
+<text top="910" left="81" width="359" height="12" font="3">across diﬀerent devices and platforms, the CoRAM program</text>
+<text top="925" left="81" width="359" height="12" font="3">model restricts all communication by the core logic to the</text>
+<text top="941" left="81" width="359" height="12" font="3">external environment through the embedded CoRAM blocks</text>
+<text top="957" left="81" width="359" height="12" font="3">shown at the edges of core logic in Figure 2. The embed-</text>
+<text top="972" left="81" width="359" height="12" font="3">ded CoRAM blocks are user-instantiated, parameterizable</text>
+<text top="988" left="81" width="359" height="12" font="3">SRAM modules that follow a similar usage paradigm of con-</text>
+<text top="1004" left="81" width="359" height="12" font="3">ventional embedded SRAMs [3]. On one hand, like SRAM</text>
+<text top="1020" left="81" width="359" height="12" font="3">blocks, CoRAM blocks oﬀer customizable high-bandwidth</text>
+<text top="1035" left="81" width="359" height="12" font="3">storage, provide deterministic access ports to independent</text>
+<text top="1051" left="81" width="359" height="12" font="3">banks with local addresses, and can be composed with ﬂex-</text>
+<text top="1067" left="81" width="359" height="12" font="3">ible aspect ratios to match the requirements of the applica-</text>
+<text top="86" left="475" width="359" height="12" font="3">tion. On the other hand, unlike passive SRAM blocks, the</text>
+<text top="102" left="475" width="359" height="12" font="3">contents of embedded CoRAM blocks are dynamically man-</text>
+<text top="118" left="475" width="359" height="12" font="3">aged (such as loading and unloading against external main</text>
+<text top="133" left="475" width="359" height="12" font="3">memory) using software control threads depicted in the right</text>
+<text top="149" left="475" width="70" height="12" font="3">of Figure 2.</text>
+<text top="172" left="475" width="191" height="12" font="3">Software Control Threads.</text>
+<text top="172" left="681" width="153" height="12" font="3">Software control threads</text>
+<text top="188" left="475" width="359" height="12" font="3">form a fabric-distributed collection of logical, asynchronous</text>
+<text top="204" left="475" width="359" height="12" font="3">control state machines for managing and mediating the</text>
+<text top="219" left="475" width="359" height="12" font="3">data transfers between embedded CoRAM blocks and the</text>
+<text top="235" left="475" width="359" height="12" font="3">edge memory interfaces. The software control threads and</text>
+<text top="251" left="475" width="359" height="12" font="3">core logic are asynchronous peer entities in charge of data</text>
+<text top="266" left="475" width="359" height="12" font="3">marshalling and computation, respectively; they communi-</text>
+<text top="282" left="475" width="359" height="12" font="3">cate over bidirectional command queues. At a high level,</text>
+<text top="298" left="475" width="359" height="12" font="3">the threads can be viewed as programmable mechanisms</text>
+<text top="313" left="475" width="359" height="12" font="3">for prefetching an application’s required data from the</text>
+<text top="329" left="475" width="359" height="12" font="3">edge memory interface to the fabric-distributed embedded</text>
+<text top="345" left="475" width="359" height="12" font="3">CoRAM blocks. At the lowest level, threads describe an</text>
+<text top="361" left="475" width="359" height="12" font="3">ordered sequence of memory commands directed by control</text>
+<text top="376" left="475" width="359" height="12" font="3">ﬂow. The application developer relies solely on instantiated</text>
+<text top="392" left="475" width="359" height="12" font="3">control threads to access shared memory and I/O from the</text>
+<text top="408" left="475" width="202" height="12" font="3">beginning to end of computation.</text>
+<text top="423" left="489" width="345" height="12" font="3">Control threads can be used to express a rich variety of</text>
+<text top="439" left="475" width="359" height="12" font="3">memory access patterns (e.g., random access, streaming,</text>
+<text top="455" left="475" width="359" height="12" font="3">etc.) while maintaining portability. For example, a random-</text>
+<text top="470" left="475" width="359" height="12" font="3">access cache controller could be implemented by combining</text>
+<text top="486" left="475" width="359" height="12" font="3">soft logic and embedded CoRAM blocks (serving as the data</text>
+<text top="502" left="475" width="359" height="12" font="3">array) and a control thread that implements a miss handler</text>
+<text top="517" left="475" width="359" height="12" font="3">to memory. A stream FIFO could also be implemented by</text>
+<text top="533" left="475" width="359" height="12" font="3">instantiating an embedded CoRAM block as a circular buﬀer</text>
+<text top="549" left="475" width="359" height="12" font="3">with an associated control thread that ﬁlls or drains the</text>
+<text top="565" left="475" width="359" height="12" font="3">buﬀer as needed. These portable memory building blocks</text>
+<text top="580" left="475" width="359" height="12" font="3">can be expressed succinctly with relatively few lines of code</text>
+<text top="596" left="475" width="244" height="12" font="3">(in most cases, under 100 lines of C) [1].</text>
+<text top="630" left="475" width="13" height="16" font="1">3.</text>
+<text top="630" left="507" width="184" height="16" font="1">CORAM PROTOTYPE</text>
+<text top="652" left="489" width="345" height="12" font="3">There are two requirements to execute an application de-</text>
+<text top="668" left="475" width="359" height="12" font="3">scription in CoRAM: (1) interpreting or synthesizing high-</text>
+<text top="684" left="475" width="359" height="12" font="3">level control threads into state machines, and (2) transport-</text>
+<text top="699" left="475" width="359" height="12" font="3">ing data eﬃciently between memory interfaces and fabric-</text>
+<text top="715" left="475" width="359" height="12" font="3">distributed embedded CoRAM blocks. To facilitate these,</text>
+<text top="731" left="475" width="359" height="12" font="3">we developed a full-featured RTL prototype and control</text>
+<text top="746" left="475" width="359" height="12" font="3">thread compiler for the CoRAM memory architecture. Our</text>
+<text top="762" left="475" width="359" height="12" font="3">framework comprises: (1) the CoRAM Control Compiler</text>
+<text top="778" left="475" width="274" height="12" font="3">(CORCC), which is an LLVM-based backend</text>
+<text top="775" left="749" width="5" height="8" font="13">1</text>
+<text top="778" left="760" width="74" height="12" font="3">that synthe-</text>
+<text top="793" left="475" width="359" height="12" font="3">sizes C-based control thread programs into hardware ﬁnite</text>
+<text top="809" left="475" width="359" height="12" font="3">state machines, (2) CONNECT [4], a ﬂexible network-on-</text>
+<text top="825" left="475" width="359" height="12" font="3">chip (NoC) generator tuned for the Virtex-6 architecture,</text>
+<text top="841" left="475" width="359" height="12" font="3">and (3) pre-optimized macro blocks in Verilog for request</text>
+<text top="856" left="475" width="359" height="12" font="3">handling, scoreboarding, and data distribution for the em-</text>
+<text top="872" left="475" width="359" height="12" font="3">bedded CoRAM blocks. The RTL generated by our frame-</text>
+<text top="888" left="475" width="359" height="12" font="3">work can be synthesized to standard cells for estimating</text>
+<text top="903" left="475" width="359" height="12" font="3">the area, power, and performance in a hypothetical future</text>
+<text top="919" left="475" width="246" height="12" font="3">FPGA with hardwired CoRAM support.</text>
+<text top="935" left="489" width="345" height="12" font="3">Figure 3 shows how a high-level CoRAM application is</text>
+<text top="950" left="475" width="359" height="12" font="3">mapped into the synthesizable RTL generated by our frame-</text>
+<text top="966" left="475" width="359" height="12" font="3">work. The embedded CoRAM blocks instantiated within the</text>
+<text top="982" left="475" width="359" height="12" font="3">application are mapped into physical macro blocks called</text>
+<text top="997" left="475" width="359" height="12" font="3">clusters, which aggregate up to 64 homogeneous 1024x32b</text>
+<text top="1013" left="475" width="46" height="12" font="3">SRAMs</text>
+<text top="1011" left="522" width="5" height="8" font="13">2</text>
+<text top="1013" left="535" width="119" height="12" font="3">into a single node.</text>
+<text top="1013" left="668" width="166" height="12" font="3">Embedded CoRAM blocks</text>
+<text top="1035" left="476" width="5" height="8" font="13">1</text>
+<text top="1038" left="482" width="188" height="12" font="3">Low-Level Virtual Machine [2].</text>
+<text top="1051" left="476" width="5" height="8" font="13">2</text>
+<text top="1053" left="482" width="352" height="12" font="3">Corresponding to the default aspect ratio of a typical</text>
+<text top="1067" left="475" width="134" height="12" font="3">FPGA BlockRAM [3].</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="14" size="8" family="Times" color="#000000"/>
+	<fontspec id="15" size="5" family="Times" color="#000000"/>
+	<fontspec id="16" size="8" family="Times" color="#ffffff"/>
+	<fontspec id="17" size="4" family="Times" color="#000000"/>
+<text top="85" left="231" width="87" height="9" font="14">Max-Cfg Cluster</text>
+<text top="85" left="334" width="67" height="9" font="14">Mesh Router</text>
+<text top="104" left="231" width="21" height="9" font="14">Soft</text>
+<text top="104" left="271" width="26" height="9" font="14">Hard</text>
+<text top="104" left="334" width="21" height="9" font="14">Soft</text>
+<text top="104" left="374" width="26" height="9" font="14">Hard</text>
+<text top="123" left="111" width="100" height="9" font="14">LUTS+LUTRAMS</text>
+<text top="123" left="231" width="24" height="9" font="14">7615</text>
+<text top="123" left="271" width="4" height="9" font="14">-</text>
+<text top="123" left="334" width="24" height="9" font="14">6002</text>
+<text top="123" left="374" width="4" height="9" font="14">-</text>
+<text top="135" left="111" width="20" height="9" font="14">FFs</text>
+<text top="135" left="231" width="24" height="9" font="14">4741</text>
+<text top="135" left="271" width="4" height="9" font="14">-</text>
+<text top="135" left="334" width="24" height="9" font="14">1144</text>
+<text top="135" left="374" width="4" height="9" font="14">-</text>
+<text top="147" left="111" width="68" height="9" font="14">Clock (MHz)</text>
+<text top="147" left="231" width="18" height="9" font="14">108</text>
+<text top="147" left="271" width="18" height="9" font="14">840</text>
+<text top="147" left="334" width="18" height="9" font="14">125</text>
+<text top="147" left="374" width="18" height="9" font="14">610</text>
+<text top="159" left="111" width="93" height="9" font="14">SRAM Area (mm</text>
+<text top="157" left="204" width="5" height="7" font="15">2</text>
+<text top="159" left="210" width="5" height="9" font="14">)</text>
+<text top="159" left="231" width="4" height="9" font="14">-</text>
+<text top="159" left="271" width="21" height="9" font="14">0.57</text>
+<text top="159" left="334" width="4" height="9" font="14">-</text>
+<text top="159" left="374" width="21" height="9" font="14">0.23</text>
+<text top="172" left="111" width="76" height="9" font="14">Die Area (mm</text>
+<text top="170" left="187" width="5" height="7" font="15">2</text>
+<text top="172" left="193" width="5" height="9" font="14">)</text>
+<text top="172" left="231" width="12" height="9" font="14">23</text>
+<text top="172" left="271" width="21" height="9" font="14">0.74</text>
+<text top="172" left="334" width="21" height="9" font="14">18.1</text>
+<text top="172" left="374" width="15" height="9" font="14">0.3</text>
+<text top="203" left="81" width="359" height="12" font="3">Table 1: 65nm Characteristics of Single Cluster and</text>
+<text top="219" left="81" width="96" height="12" font="3">Mesh Router.</text>
+<text top="249" left="274" width="28" height="9" font="14">LUT</text>
+<text top="249" left="318" width="17" height="9" font="14">FF</text>
+<text top="249" left="358" width="42" height="9" font="14">BRAM</text>
+<text top="249" left="416" width="29" height="9" font="14">MHz</text>
+<text top="268" left="81" width="135" height="9" font="14">Microblaze (min-area-cfg)</text>
+<text top="268" left="274" width="24" height="9" font="14">1210</text>
+<text top="268" left="318" width="18" height="9" font="14">973</text>
+<text top="268" left="358" width="6" height="9" font="14">4</text>
+<text top="268" left="416" width="18" height="9" font="14">161</text>
+<text top="280" left="81" width="67" height="9" font="14">Stream Loop</text>
+<text top="280" left="274" width="18" height="9" font="14">155</text>
+<text top="280" left="318" width="18" height="9" font="14">118</text>
+<text top="280" left="358" width="6" height="9" font="14">0</text>
+<text top="280" left="416" width="18" height="9" font="14">345</text>
+<text top="292" left="81" width="153" height="9" font="14">Matrix Matrix Multiplication</text>
+<text top="292" left="274" width="24" height="9" font="14">2581</text>
+<text top="292" left="318" width="24" height="9" font="14">2802</text>
+<text top="292" left="358" width="6" height="9" font="14">0</text>
+<text top="292" left="416" width="18" height="9" font="14">192</text>
+<text top="304" left="81" width="177" height="9" font="14">Non-blocking Cache Miss Handler</text>
+<text top="304" left="274" width="18" height="9" font="14">242</text>
+<text top="304" left="318" width="18" height="9" font="14">316</text>
+<text top="304" left="358" width="6" height="9" font="14">0</text>
+<text top="304" left="416" width="18" height="9" font="14">354</text>
+<text top="316" left="81" width="163" height="9" font="14">Stream FIFO Producer Thread</text>
+<text top="316" left="274" width="18" height="9" font="14">544</text>
+<text top="316" left="318" width="18" height="9" font="14">523</text>
+<text top="316" left="358" width="6" height="9" font="14">0</text>
+<text top="316" left="416" width="18" height="9" font="14">204</text>
+<text top="347" left="88" width="345" height="12" font="3">Table 2: Control Thread Synthesis (Virtex-6, -2).</text>
+<text top="393" left="81" width="359" height="12" font="3">with aspect ratios larger than 1024x32b are constructed by</text>
+<text top="408" left="81" width="316" height="12" font="3">spanning across multiple SRAMs within a cluster.</text>
+<text top="406" left="397" width="5" height="8" font="13">3</text>
+<text top="408" left="416" width="24" height="12" font="3">The</text>
+<text top="424" left="81" width="359" height="12" font="3">clusters are connected to external memory links through a</text>
+<text top="440" left="81" width="359" height="12" font="3">CONNECT-generated NoC. Figure 3 illustrates how each of</text>
+<text top="455" left="81" width="359" height="12" font="3">the clusters are attached to one or more Control Finite State</text>
+<text top="471" left="81" width="359" height="12" font="3">Machines (C-FSM) generated by CORCC from the control</text>
+<text top="487" left="81" width="359" height="12" font="3">threads. At run-time, the C-FSMs issue memory commands</text>
+<text top="502" left="81" width="359" height="12" font="3">to the NoC—the subsequent memory responses are collected</text>
+<text top="518" left="81" width="359" height="12" font="3">at the clusters, which are responsible for steering and align-</text>
+<text top="534" left="81" width="339" height="12" font="3">ing the memory data to the destination CoRAM blocks.</text>
+<text top="557" left="81" width="54" height="12" font="3">Soft vs.</text>
+<text top="557" left="147" width="293" height="12" font="3">Hard Macro Blocks. The C-FSMs, clusters,</text>
+<text top="573" left="81" width="359" height="12" font="3">and NoC are performance- and area-critical macro blocks</text>
+<text top="588" left="81" width="359" height="12" font="3">that can either be soft-emulated in today’s FPGAs or em-</text>
+<text top="604" left="81" width="359" height="12" font="3">bedded as hard logic in a future FPGA. Although we omit</text>
+<text top="620" left="81" width="359" height="12" font="3">the details, a substantial eﬀort was invested in optimiz-</text>
+<text top="635" left="81" width="324" height="12" font="3">ing the macro blocks for the Virtex-6 architecture.</text>
+<text top="635" left="419" width="20" height="12" font="3">Ta-</text>
+<text top="651" left="81" width="359" height="12" font="3">ble 1 compares the cost of a single maximally-conﬁgured</text>
+<text top="667" left="81" width="359" height="12" font="3">cluster and mesh router for both hard and soft implemen-</text>
+<text top="682" left="81" width="45" height="12" font="3">tations.</text>
+<text top="680" left="126" width="5" height="8" font="13">4</text>
+<text top="682" left="147" width="293" height="12" font="3">Note that a maximally-conﬁgured cluster sup-</text>
+<text top="698" left="81" width="359" height="12" font="3">ports up to 64 SRAMs, 16 control threads, and 128 con-</text>
+<text top="714" left="81" width="359" height="12" font="3">current transactions to memory. In practice, a soft clus-</text>
+<text top="730" left="81" width="359" height="12" font="3">ter can be conﬁgured less aggressively depending on the</text>
+<text top="745" left="81" width="359" height="12" font="3">application—as little as 2KLUTs. When normalized to die</text>
+<text top="761" left="81" width="359" height="12" font="3">area, both the hard cluster and mesh router achieve an</text>
+<text top="777" left="81" width="359" height="12" font="3">order-of-magnitude improvement in area eﬃciency as ex-</text>
+<text top="792" left="81" width="359" height="12" font="3">pected. The hard macro blocks also operate at higher clock</text>
+<text top="808" left="81" width="359" height="12" font="3">frequencies (e.g., 610MHz vs. 125MHz for the mesh router).</text>
+<text top="824" left="81" width="359" height="12" font="3">Table 2 further shows the soft logic area of various control</text>
+<text top="839" left="81" width="359" height="12" font="3">threads synthesized to FPGA fabric using CORCC. Across</text>
+<text top="855" left="81" width="359" height="12" font="3">most applications, the area consumption is modest when</text>
+<text top="871" left="81" width="359" height="12" font="3">compared to a minimally-conﬁgured Microblaze core, which</text>
+<text top="886" left="81" width="359" height="12" font="3">suggests that control threads can be supported practically</text>
+<text top="902" left="81" width="139" height="12" font="3">in conventional fabrics.</text>
+<text top="935" left="81" width="13" height="16" font="1">4.</text>
+<text top="935" left="112" width="116" height="16" font="1">EVALUATION</text>
+<text top="958" left="81" width="94" height="12" font="3">Methodology.</text>
+<text top="958" left="193" width="246" height="12" font="3">For our evaluation, we study the use</text>
+<text top="973" left="81" width="359" height="12" font="3">of CoRAM in three diverse RTL applications reﬂecting</text>
+<text top="995" left="81" width="5" height="8" font="13">3</text>
+<text top="997" left="88" width="352" height="12" font="3">The maximum size of the cluster can either be set auto-</text>
+<text top="1011" left="81" width="215" height="12" font="3">matically or conﬁgured by the user.</text>
+<text top="1024" left="81" width="5" height="8" font="13">4</text>
+<text top="1026" left="88" width="352" height="12" font="3">FPGA results were obtained with XST 13.1 for the Virtex-</text>
+<text top="1040" left="81" width="359" height="12" font="3">6; ASIC results were obtained using CACTI 6.5 [5] and Syn-</text>
+<text top="1053" left="81" width="359" height="12" font="3">opsys Design Compiler conﬁgured with commercial 65nm</text>
+<text top="1067" left="81" width="87" height="12" font="3">standard cells.</text>
+<text top="133" left="658" width="8" height="10" font="14">B </text>
+<text top="133" left="629" width="8" height="10" font="14">A </text>
+<text top="184" left="622" width="8" height="10" font="14">A </text>
+<text top="191" left="682" width="36" height="10" font="14">Clusters </text>
+<text top="278" left="589" width="25" height="10" font="16">Mem </text>
+<text top="278" left="635" width="25" height="10" font="16">Mem </text>
+<text top="278" left="751" width="25" height="10" font="16">Mem </text>
+<text top="232" left="536" width="37" height="10" font="14">On-Chip </text>
+<text top="245" left="535" width="39" height="10" font="14">Network </text>
+<text top="151" left="495" width="50" height="10" font="14">Application </text>
+<text top="225" left="608" width="9" height="12" font="4">R </text>
+<text top="225" left="674" width="9" height="12" font="4">R </text>
+<text top="253" left="597" width="9" height="12" font="4">R </text>
+<text top="253" left="643" width="9" height="12" font="4">R </text>
+<text top="253" left="760" width="9" height="12" font="4">R </text>
+<text top="225" left="737" width="9" height="12" font="4">R </text>
+<text top="168" left="495" width="44" height="10" font="14">Hardware </text>
+<text top="266" left="517" width="39" height="10" font="14">Memory </text>
+<text top="279" left="514" width="44" height="10" font="14">Interfaces </text>
+<text top="184" left="638" width="6" height="10" font="14">B</text>
+<text top="189" left="643" width="5" height="7" font="17">0 </text>
+<text top="184" left="656" width="6" height="10" font="14">B</text>
+<text top="189" left="662" width="5" height="7" font="17">1 </text>
+<text top="184" left="749" width="6" height="10" font="14">C</text>
+<text top="189" left="754" width="5" height="7" font="17">0 </text>
+<text top="185" left="766" width="6" height="10" font="14">C</text>
+<text top="190" left="772" width="5" height="7" font="17">1 </text>
+<text top="82" left="595" width="46" height="10" font="14">Core Logic </text>
+<text top="107" left="561" width="34" height="10" font="14">Control </text>
+<text top="119" left="561" width="32" height="10" font="14">Thread </text>
+<text top="105" left="741" width="34" height="10" font="14">Control </text>
+<text top="117" left="742" width="32" height="10" font="14">Thread </text>
+<text top="136" left="687" width="8" height="10" font="14">C </text>
+<text top="191" left="526" width="34" height="10" font="14">Control </text>
+<text top="203" left="533" width="21" height="10" font="14">FSM </text>
+<text top="310" left="523" width="263" height="12" font="3">Figure 3: CoRAM Microarchitecture.</text>
+<text top="345" left="674" width="31" height="9" font="14">500K</text>
+<text top="345" left="721" width="19" height="9" font="14">1M</text>
+<text top="345" left="765" width="19" height="9" font="14">2M</text>
+<text top="345" left="810" width="19" height="9" font="14">4M</text>
+<text top="364" left="499" width="59" height="9" font="14">Technology</text>
+<text top="364" left="674" width="28" height="9" font="14">45nm</text>
+<text top="364" left="721" width="28" height="9" font="14">32nm</text>
+<text top="364" left="765" width="28" height="9" font="14">22nm</text>
+<text top="364" left="810" width="28" height="9" font="14">16nm</text>
+<text top="377" left="499" width="76" height="9" font="14">Die Area (mm</text>
+<text top="374" left="575" width="5" height="7" font="15">2</text>
+<text top="377" left="581" width="5" height="9" font="14">)</text>
+<text top="377" left="674" width="18" height="9" font="14">600</text>
+<text top="377" left="721" width="18" height="9" font="14">600</text>
+<text top="377" left="765" width="18" height="9" font="14">600</text>
+<text top="377" left="810" width="18" height="9" font="14">600</text>
+<text top="389" left="499" width="52" height="9" font="14">LUTs (K)</text>
+<text top="389" left="674" width="18" height="9" font="14">500</text>
+<text top="389" left="721" width="24" height="9" font="14">1000</text>
+<text top="389" left="765" width="24" height="9" font="14">2000</text>
+<text top="389" left="810" width="24" height="9" font="14">4000</text>
+<text top="401" left="499" width="91" height="9" font="14">Frequency (MHz)</text>
+<text top="401" left="674" width="18" height="9" font="14">200</text>
+<text top="401" left="721" width="18" height="9" font="14">200</text>
+<text top="401" left="765" width="18" height="9" font="14">225</text>
+<text top="401" left="810" width="18" height="9" font="14">250</text>
+<text top="413" left="499" width="99" height="9" font="14">Bandwidth (GB/s)</text>
+<text top="413" left="674" width="21" height="9" font="14">25.6</text>
+<text top="413" left="721" width="21" height="9" font="14">51.2</text>
+<text top="413" left="765" width="27" height="9" font="14">102.4</text>
+<text top="413" left="810" width="27" height="9" font="14">204.8</text>
+<text top="425" left="499" width="104" height="9" font="14">4kB CoRAM blocks</text>
+<text top="425" left="674" width="24" height="9" font="14">1024</text>
+<text top="425" left="721" width="24" height="9" font="14">2048</text>
+<text top="425" left="765" width="24" height="9" font="14">4096</text>
+<text top="425" left="810" width="24" height="9" font="14">8192</text>
+<text top="461" left="482" width="0" height="9" font="14">S</text>
+<text top="455" left="482" width="0" height="9" font="14">oft</text>
+<text top="443" left="499" width="134" height="9" font="14">Cluster/NoC clock (GHz)</text>
+<text top="443" left="674" width="15" height="9" font="14">0.2</text>
+<text top="443" left="721" width="15" height="9" font="14">0.2</text>
+<text top="443" left="765" width="27" height="9" font="14">0.225</text>
+<text top="443" left="810" width="21" height="9" font="14">0.25</text>
+<text top="455" left="499" width="125" height="9" font="14">Cluster/NoC link width</text>
+<text top="455" left="674" width="18" height="9" font="14">128</text>
+<text top="455" left="721" width="18" height="9" font="14">128</text>
+<text top="455" left="765" width="18" height="9" font="14">128</text>
+<text top="455" left="810" width="18" height="9" font="14">128</text>
+<text top="467" left="499" width="80" height="9" font="14">Clusters/Nodes</text>
+<text top="467" left="697" width="118" height="9" font="14">Application-dependent</text>
+<text top="525" left="482" width="0" height="9" font="14">Hard</text>
+<text top="486" left="499" width="134" height="9" font="14">Cluster/NoC clock (GHz)</text>
+<text top="486" left="674" width="15" height="9" font="14">0.8</text>
+<text top="486" left="721" width="15" height="9" font="14">0.8</text>
+<text top="486" left="765" width="15" height="9" font="14">0.9</text>
+<text top="486" left="810" width="6" height="9" font="14">1</text>
+<text top="498" left="499" width="125" height="9" font="14">Cluster/NoC link width</text>
+<text top="498" left="674" width="18" height="9" font="14">128</text>
+<text top="498" left="721" width="18" height="9" font="14">128</text>
+<text top="498" left="765" width="18" height="9" font="14">128</text>
+<text top="498" left="810" width="18" height="9" font="14">128</text>
+<text top="510" left="499" width="43" height="9" font="14">Clusters</text>
+<text top="510" left="674" width="12" height="9" font="14">16</text>
+<text top="510" left="721" width="12" height="9" font="14">32</text>
+<text top="510" left="765" width="12" height="9" font="14">64</text>
+<text top="510" left="810" width="18" height="9" font="14">128</text>
+<text top="522" left="499" width="159" height="9" font="14">Nodes (clusters+DRAM links)</text>
+<text top="522" left="674" width="12" height="9" font="14">20</text>
+<text top="522" left="721" width="12" height="9" font="14">40</text>
+<text top="522" left="765" width="12" height="9" font="14">80</text>
+<text top="522" left="810" width="18" height="9" font="14">160</text>
+<text top="534" left="499" width="102" height="9" font="14">SRAMs per Cluster</text>
+<text top="534" left="674" width="12" height="9" font="14">64</text>
+<text top="534" left="721" width="12" height="9" font="14">64</text>
+<text top="534" left="765" width="12" height="9" font="14">64</text>
+<text top="534" left="810" width="12" height="9" font="14">64</text>
+<text top="546" left="499" width="102" height="9" font="14">Die Area Ovhd (%)</text>
+<text top="546" left="674" width="15" height="9" font="14">1.7</text>
+<text top="546" left="721" width="15" height="9" font="14">1.7</text>
+<text top="546" left="765" width="15" height="9" font="14">1.4</text>
+<text top="546" left="810" width="15" height="9" font="14">1.4</text>
+<text top="576" left="542" width="226" height="12" font="3">Table 3: Evaluation Parameters.</text>
+<text top="620" left="475" width="360" height="12" font="3">bandwidth-bound, compute-bound, and latency-bound char-</text>
+<text top="635" left="475" width="87" height="12" font="3">acteristics [1]:</text>
+<text top="635" left="577" width="257" height="12" font="3">(1) Black-Scholes Options Pricing (BS),</text>
+<text top="651" left="475" width="359" height="12" font="3">(2) Matrix-Matrix Multiplication (MMM), and (3) Sparse</text>
+<text top="667" left="475" width="359" height="12" font="3">Matrix-Vector Multiplication (SpMV). Our evaluation con-</text>
+<text top="683" left="475" width="359" height="12" font="3">siders the cost and performance of the CoRAM memory ar-</text>
+<text top="698" left="475" width="359" height="12" font="3">chitecture across multiple dimensions: (1) VLSI technology,</text>
+<text top="714" left="475" width="359" height="12" font="3">(2) NoC topology, and (3) hard vs. soft logic implementa-</text>
+<text top="730" left="475" width="359" height="12" font="3">tions. Table 3 shows the parameters and characteristics of</text>
+<text top="745" left="475" width="359" height="12" font="3">the selected FPGA conﬁgurations. All conﬁgurations (with</text>
+<text top="761" left="475" width="359" height="12" font="3">or without hard CoRAM support) assume the existence of</text>
+<text top="777" left="475" width="359" height="12" font="3">hard memory controllers that provide high external memory</text>
+<text top="792" left="475" width="359" height="12" font="3">bandwidth to the fabric. All soft-logic designs are tested</text>
+<text top="808" left="475" width="359" height="12" font="3">against diﬀerent NoC topologies (ring, mesh, crossbar) to</text>
+<text top="824" left="475" width="359" height="12" font="3">reﬂect the option of customization in a soft-logic implemen-</text>
+<text top="839" left="475" width="40" height="12" font="3">tation.</text>
+<text top="839" left="529" width="305" height="12" font="3">Furthermore, in the soft designs, the number of</text>
+<text top="855" left="475" width="359" height="12" font="3">clusters and SRAMs per cluster are tuned for each respec-</text>
+<text top="871" left="475" width="359" height="12" font="3">tive application. The hard implementation assumes a mesh</text>
+<text top="887" left="475" width="359" height="12" font="3">topology with a ﬁxed number of clusters and SRAMs per</text>
+<text top="902" left="475" width="44" height="12" font="3">cluster.</text>
+<text top="925" left="475" width="359" height="12" font="3">Results. Figure 4 (top) shows the performance trends for</text>
+<text top="941" left="475" width="360" height="12" font="3">all applications. On the x-axis, labels prepended with “soft”</text>
+<text top="957" left="475" width="359" height="12" font="3">indicate designs using a soft-logic implementation on a con-</text>
+<text top="972" left="475" width="359" height="12" font="3">ventional FPGA. Designs labeled “hard” indicate FPGAs</text>
+<text top="988" left="475" width="359" height="12" font="3">with dedicated CoRAM support operating at 4X the clock</text>
+<text top="1004" left="475" width="359" height="12" font="3">rate of the soft-logic design. The right-most design point</text>
+<text top="1020" left="475" width="359" height="12" font="3">of each graph shows the results for an “ideal” application</text>
+<text top="1035" left="475" width="359" height="12" font="3">running on a conventional FPGA that can access external</text>
+<text top="1051" left="475" width="359" height="12" font="3">DRAM with no on-chip delay or soft logic area overheads.</text>
+<text top="1067" left="475" width="359" height="12" font="3">Figure 4 (bottom) shows the LUT area breakdown and LUT-</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="18" size="5" family="Times" color="#000000"/>
+	<fontspec id="19" size="5" family="Times" color="#000000"/>
+	<fontspec id="20" size="4" family="Times" color="#000000"/>
+	<fontspec id="21" size="4" family="Times" color="#000000"/>
+<text top="153" left="105" width="4" height="7" font="15">0</text>
+<text top="139" left="98" width="11" height="7" font="15">100</text>
+<text top="126" left="98" width="11" height="7" font="15">200</text>
+<text top="112" left="98" width="11" height="7" font="15">300</text>
+<text top="98" left="98" width="11" height="7" font="15">400</text>
+<text top="85" left="98" width="11" height="7" font="15">500</text>
+<text top="182" left="131" width="0" height="7" font="18">Soft </text>
+<text top="169" left="131" width="0" height="7" font="18">Ring</text>
+<text top="196" left="139" width="0" height="7" font="18">Soft </text>
+<text top="182" left="139" width="0" height="7" font="18">2D M</text>
+<text top="166" left="139" width="0" height="7" font="18">esh</text>
+<text top="183" left="147" width="0" height="7" font="18">Soft </text>
+<text top="169" left="147" width="0" height="7" font="18">X</text>
+<text top="166" left="147" width="0" height="7" font="18">bar</text>
+<text top="205" left="156" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="164" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="189" width="0" height="7" font="18">Soft </text>
+<text top="169" left="189" width="0" height="7" font="18">Ring</text>
+<text top="196" left="197" width="0" height="7" font="18">Soft </text>
+<text top="182" left="197" width="0" height="7" font="18">2D M</text>
+<text top="166" left="197" width="0" height="7" font="18">esh</text>
+<text top="183" left="206" width="0" height="7" font="18">Soft </text>
+<text top="169" left="206" width="0" height="7" font="18">X</text>
+<text top="166" left="206" width="0" height="7" font="18">bar</text>
+<text top="205" left="214" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="222" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="247" width="0" height="7" font="18">Soft </text>
+<text top="169" left="247" width="0" height="7" font="18">Ring</text>
+<text top="196" left="255" width="0" height="7" font="18">Soft </text>
+<text top="182" left="255" width="0" height="7" font="18">2D M</text>
+<text top="166" left="255" width="0" height="7" font="18">esh</text>
+<text top="183" left="264" width="0" height="7" font="18">Soft </text>
+<text top="169" left="264" width="0" height="7" font="18">X</text>
+<text top="166" left="264" width="0" height="7" font="18">bar</text>
+<text top="205" left="272" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="280" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="305" width="0" height="7" font="18">Soft </text>
+<text top="169" left="305" width="0" height="7" font="18">Ring</text>
+<text top="196" left="314" width="0" height="7" font="18">Soft </text>
+<text top="182" left="314" width="0" height="7" font="18">2D M</text>
+<text top="166" left="314" width="0" height="7" font="18">esh</text>
+<text top="183" left="322" width="0" height="7" font="18">Soft </text>
+<text top="169" left="322" width="0" height="7" font="18">X</text>
+<text top="166" left="322" width="0" height="7" font="18">bar</text>
+<text top="205" left="330" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="339" width="0" height="7" font="18">Ideal</text>
+<text top="217" left="128" width="33" height="7" font="15">FPGA-500K</text>
+<text top="217" left="189" width="28" height="7" font="15">FPGA-1M</text>
+<text top="217" left="247" width="28" height="7" font="15">FPGA-2M</text>
+<text top="217" left="301" width="28" height="7" font="15">FPGA-4M</text>
+<text top="153" left="359" width="4" height="7" font="15">0</text>
+<text top="143" left="359" width="4" height="7" font="15">2</text>
+<text top="133" left="359" width="4" height="7" font="15">4</text>
+<text top="123" left="359" width="4" height="7" font="15">6</text>
+<text top="113" left="359" width="4" height="7" font="15">8</text>
+<text top="103" left="355" width="7" height="7" font="15">10</text>
+<text top="93" left="355" width="7" height="7" font="15">12</text>
+<text top="83" left="355" width="7" height="7" font="15">14</text>
+<text top="182" left="384" width="0" height="7" font="18">Soft </text>
+<text top="168" left="384" width="0" height="7" font="18">Ring</text>
+<text top="195" left="393" width="0" height="7" font="18">Soft </text>
+<text top="182" left="393" width="0" height="7" font="18">2D M</text>
+<text top="166" left="393" width="0" height="7" font="18">esh</text>
+<text top="183" left="401" width="0" height="7" font="18">Soft </text>
+<text top="169" left="401" width="0" height="7" font="18">X</text>
+<text top="165" left="401" width="0" height="7" font="18">bar</text>
+<text top="204" left="409" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="417" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="442" width="0" height="7" font="18">Soft </text>
+<text top="168" left="442" width="0" height="7" font="18">Ring</text>
+<text top="195" left="451" width="0" height="7" font="18">Soft </text>
+<text top="182" left="451" width="0" height="7" font="18">2D M</text>
+<text top="166" left="451" width="0" height="7" font="18">esh</text>
+<text top="183" left="459" width="0" height="7" font="18">Soft </text>
+<text top="169" left="459" width="0" height="7" font="18">X</text>
+<text top="165" left="459" width="0" height="7" font="18">bar</text>
+<text top="204" left="467" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="476" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="501" width="0" height="7" font="18">Soft </text>
+<text top="168" left="501" width="0" height="7" font="18">Ring</text>
+<text top="195" left="509" width="0" height="7" font="18">Soft </text>
+<text top="182" left="509" width="0" height="7" font="18">2D M</text>
+<text top="166" left="509" width="0" height="7" font="18">esh</text>
+<text top="183" left="517" width="0" height="7" font="18">Soft </text>
+<text top="169" left="517" width="0" height="7" font="18">X</text>
+<text top="165" left="517" width="0" height="7" font="18">bar</text>
+<text top="204" left="526" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="534" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="559" width="0" height="7" font="18">Soft </text>
+<text top="168" left="559" width="0" height="7" font="18">Ring</text>
+<text top="195" left="567" width="0" height="7" font="18">Soft </text>
+<text top="182" left="567" width="0" height="7" font="18">2D M</text>
+<text top="166" left="567" width="0" height="7" font="18">esh</text>
+<text top="183" left="575" width="0" height="7" font="18">Soft </text>
+<text top="169" left="575" width="0" height="7" font="18">X</text>
+<text top="165" left="575" width="0" height="7" font="18">bar</text>
+<text top="204" left="584" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="592" width="0" height="7" font="18">Ideal</text>
+<text top="216" left="382" width="33" height="7" font="15">FPGA-500K</text>
+<text top="216" left="442" width="28" height="7" font="15">FPGA-1M</text>
+<text top="216" left="501" width="28" height="7" font="15">FPGA-2M</text>
+<text top="216" left="555" width="28" height="7" font="15">FPGA-4M</text>
+<text top="153" left="612" width="4" height="7" font="15">0</text>
+<text top="141" left="612" width="4" height="7" font="15">5</text>
+<text top="130" left="608" width="7" height="7" font="15">10</text>
+<text top="118" left="608" width="7" height="7" font="15">15</text>
+<text top="107" left="608" width="7" height="7" font="15">20</text>
+<text top="95" left="608" width="7" height="7" font="15">25</text>
+<text top="84" left="608" width="7" height="7" font="15">30</text>
+<text top="182" left="638" width="0" height="7" font="18">Soft </text>
+<text top="168" left="638" width="0" height="7" font="18">Ring</text>
+<text top="195" left="646" width="0" height="7" font="18">Soft </text>
+<text top="182" left="646" width="0" height="7" font="18">2D M</text>
+<text top="166" left="646" width="0" height="7" font="18">esh</text>
+<text top="182" left="654" width="0" height="7" font="18">Soft </text>
+<text top="169" left="654" width="0" height="7" font="18">X</text>
+<text top="165" left="654" width="0" height="7" font="18">bar</text>
+<text top="204" left="663" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="671" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="696" width="0" height="7" font="18">Soft </text>
+<text top="168" left="696" width="0" height="7" font="18">Ring</text>
+<text top="195" left="704" width="0" height="7" font="18">Soft </text>
+<text top="182" left="704" width="0" height="7" font="18">2D M</text>
+<text top="166" left="704" width="0" height="7" font="18">esh</text>
+<text top="182" left="712" width="0" height="7" font="18">Soft </text>
+<text top="169" left="712" width="0" height="7" font="18">X</text>
+<text top="165" left="712" width="0" height="7" font="18">bar</text>
+<text top="204" left="721" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="729" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="754" width="0" height="7" font="18">Soft </text>
+<text top="168" left="754" width="0" height="7" font="18">Ring</text>
+<text top="195" left="762" width="0" height="7" font="18">Soft </text>
+<text top="182" left="762" width="0" height="7" font="18">2D M</text>
+<text top="166" left="762" width="0" height="7" font="18">esh</text>
+<text top="182" left="771" width="0" height="7" font="18">Soft </text>
+<text top="169" left="771" width="0" height="7" font="18">X</text>
+<text top="165" left="771" width="0" height="7" font="18">bar</text>
+<text top="204" left="779" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="787" width="0" height="7" font="18">Ideal</text>
+<text top="182" left="812" width="0" height="7" font="18">Soft </text>
+<text top="168" left="812" width="0" height="7" font="18">Ring</text>
+<text top="195" left="820" width="0" height="7" font="18">Soft </text>
+<text top="182" left="820" width="0" height="7" font="18">2D M</text>
+<text top="166" left="820" width="0" height="7" font="18">esh</text>
+<text top="182" left="829" width="0" height="7" font="18">Soft </text>
+<text top="169" left="829" width="0" height="7" font="18">X</text>
+<text top="165" left="829" width="0" height="7" font="18">bar</text>
+<text top="204" left="837" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="170" left="845" width="0" height="7" font="18">Ideal</text>
+<text top="216" left="635" width="33" height="7" font="15">FPGA-500K</text>
+<text top="216" left="696" width="28" height="7" font="15">FPGA-1M</text>
+<text top="216" left="754" width="28" height="7" font="15">FPGA-2M</text>
+<text top="216" left="808" width="28" height="7" font="15">FPGA-4M</text>
+<text top="299" left="314" width="13" height="7" font="15">0.01</text>
+<text top="273" left="314" width="13" height="7" font="15">0.10</text>
+<text top="247" left="314" width="13" height="7" font="15">1.00</text>
+<text top="221" left="314" width="17" height="7" font="15">10.00</text>
+<text top="299" left="103" width="4" height="7" font="15">0</text>
+<text top="287" left="96" width="11" height="7" font="15">500</text>
+<text top="276" left="92" width="15" height="7" font="15">1000</text>
+<text top="264" left="92" width="15" height="7" font="15">1500</text>
+<text top="253" left="92" width="15" height="7" font="15">2000</text>
+<text top="241" left="92" width="15" height="7" font="15">2500</text>
+<text top="230" left="92" width="15" height="7" font="15">3000</text>
+<text top="328" left="127" width="0" height="7" font="18">Soft </text>
+<text top="314" left="127" width="0" height="7" font="18">Ring</text>
+<text top="341" left="134" width="0" height="7" font="18">Soft </text>
+<text top="328" left="134" width="0" height="7" font="18">2D M</text>
+<text top="312" left="134" width="0" height="7" font="18">esh</text>
+<text top="329" left="141" width="0" height="7" font="18">Soft </text>
+<text top="315" left="141" width="0" height="7" font="18">X</text>
+<text top="311" left="141" width="0" height="7" font="18">bar</text>
+<text top="350" left="147" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="316" left="154" width="0" height="7" font="18">Ideal</text>
+<text top="328" left="175" width="0" height="7" font="18">Soft </text>
+<text top="314" left="175" width="0" height="7" font="18">Ring</text>
+<text top="341" left="182" width="0" height="7" font="18">Soft </text>
+<text top="328" left="182" width="0" height="7" font="18">2D M</text>
+<text top="312" left="182" width="0" height="7" font="18">esh</text>
+<text top="329" left="189" width="0" height="7" font="18">Soft </text>
+<text top="315" left="189" width="0" height="7" font="18">X</text>
+<text top="311" left="189" width="0" height="7" font="18">bar</text>
+<text top="350" left="196" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="316" left="203" width="0" height="7" font="18">Ideal</text>
+<text top="328" left="223" width="0" height="7" font="18">Soft </text>
+<text top="314" left="223" width="0" height="7" font="18">Ring</text>
+<text top="341" left="230" width="0" height="7" font="18">Soft </text>
+<text top="328" left="230" width="0" height="7" font="18">2D M</text>
+<text top="312" left="230" width="0" height="7" font="18">esh</text>
+<text top="329" left="237" width="0" height="7" font="18">Soft </text>
+<text top="315" left="237" width="0" height="7" font="18">X</text>
+<text top="311" left="237" width="0" height="7" font="18">bar</text>
+<text top="350" left="244" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="316" left="251" width="0" height="7" font="18">Ideal</text>
+<text top="328" left="272" width="0" height="7" font="18">Soft </text>
+<text top="314" left="272" width="0" height="7" font="18">Ring</text>
+<text top="341" left="279" width="0" height="7" font="18">Soft </text>
+<text top="328" left="279" width="0" height="7" font="18">2D M</text>
+<text top="312" left="279" width="0" height="7" font="18">esh</text>
+<text top="329" left="286" width="0" height="7" font="18">Soft </text>
+<text top="315" left="286" width="0" height="7" font="18">X</text>
+<text top="311" left="286" width="0" height="7" font="18">bar</text>
+<text top="350" left="293" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="316" left="299" width="0" height="7" font="18">Ideal</text>
+<text top="362" left="121" width="33" height="7" font="15">FPGA-500K</text>
+<text top="362" left="172" width="28" height="7" font="15">FPGA-1M</text>
+<text top="362" left="221" width="28" height="7" font="15">FPGA-2M</text>
+<text top="362" left="265" width="28" height="7" font="15">FPGA-4M</text>
+<text top="294" left="339" width="0" height="7" font="19"><b>GFL</b></text>
+<text top="283" left="339" width="0" height="7" font="19"><b>OP</b></text>
+<text top="274" left="339" width="0" height="7" font="19"><b>s/</b></text>
+<text top="268" left="339" width="0" height="7" font="19"><b>sec</b></text>
+<text top="259" left="339" width="0" height="7" font="19"><b> per K</b></text>
+<text top="241" left="339" width="0" height="7" font="19"><b>LUT</b></text>
+<text top="230" left="339" width="0" height="7" font="19"><b> </b></text>
+<text top="262" left="86" width="0" height="7" font="19"><b>KL</b></text>
+<text top="255" left="86" width="0" height="7" font="19"><b>UT</b></text>
+<text top="247" left="86" width="0" height="7" font="19"><b>s </b></text>
+<text top="236" left="122" width="26" height="7" font="15">Network</text>
+<text top="236" left="156" width="21" height="7" font="15">Thread</text>
+<text top="236" left="184" width="21" height="7" font="15">Cluster</text>
+<text top="236" left="213" width="31" height="7" font="15">Core Logic</text>
+<text top="236" left="251" width="29" height="7" font="15">Efficiency</text>
+<text top="296" left="585" width="9" height="7" font="15">0.1</text>
+<text top="275" left="585" width="4" height="7" font="15">1</text>
+<text top="253" left="585" width="7" height="7" font="15">10</text>
+<text top="232" left="585" width="11" height="7" font="15">100</text>
+<text top="296" left="367" width="4" height="7" font="15">0</text>
+<text top="288" left="359" width="11" height="7" font="15">500</text>
+<text top="280" left="355" width="15" height="7" font="15">1000</text>
+<text top="272" left="355" width="15" height="7" font="15">1500</text>
+<text top="264" left="355" width="15" height="7" font="15">2000</text>
+<text top="256" left="355" width="15" height="7" font="15">2500</text>
+<text top="248" left="355" width="15" height="7" font="15">3000</text>
+<text top="240" left="355" width="15" height="7" font="15">3500</text>
+<text top="232" left="355" width="15" height="7" font="15">4000</text>
+<text top="326" left="390" width="0" height="7" font="18">Soft </text>
+<text top="312" left="390" width="0" height="7" font="18">Ring</text>
+<text top="339" left="398" width="0" height="7" font="18">Soft </text>
+<text top="326" left="398" width="0" height="7" font="18">2D M</text>
+<text top="309" left="398" width="0" height="7" font="18">esh</text>
+<text top="326" left="405" width="0" height="7" font="18">Soft </text>
+<text top="313" left="405" width="0" height="7" font="18">X</text>
+<text top="309" left="405" width="0" height="7" font="18">bar</text>
+<text top="348" left="412" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="419" width="0" height="7" font="18">Ideal</text>
+<text top="326" left="441" width="0" height="7" font="18">Soft </text>
+<text top="312" left="441" width="0" height="7" font="18">Ring</text>
+<text top="339" left="448" width="0" height="7" font="18">Soft </text>
+<text top="326" left="448" width="0" height="7" font="18">2D M</text>
+<text top="309" left="448" width="0" height="7" font="18">esh</text>
+<text top="326" left="455" width="0" height="7" font="18">Soft </text>
+<text top="313" left="455" width="0" height="7" font="18">X</text>
+<text top="309" left="455" width="0" height="7" font="18">bar</text>
+<text top="348" left="462" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="470" width="0" height="7" font="18">Ideal</text>
+<text top="326" left="491" width="0" height="7" font="18">Soft </text>
+<text top="312" left="491" width="0" height="7" font="18">Ring</text>
+<text top="339" left="498" width="0" height="7" font="18">Soft </text>
+<text top="326" left="498" width="0" height="7" font="18">2D M</text>
+<text top="309" left="498" width="0" height="7" font="18">esh</text>
+<text top="326" left="506" width="0" height="7" font="18">Soft </text>
+<text top="313" left="506" width="0" height="7" font="18">X</text>
+<text top="309" left="506" width="0" height="7" font="18">bar</text>
+<text top="348" left="513" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="520" width="0" height="7" font="18">Ideal</text>
+<text top="326" left="542" width="0" height="7" font="18">Soft </text>
+<text top="312" left="542" width="0" height="7" font="18">Ring</text>
+<text top="339" left="549" width="0" height="7" font="18">Soft </text>
+<text top="326" left="549" width="0" height="7" font="18">2D M</text>
+<text top="309" left="549" width="0" height="7" font="18">esh</text>
+<text top="326" left="556" width="0" height="7" font="18">Soft </text>
+<text top="313" left="556" width="0" height="7" font="18">X</text>
+<text top="309" left="556" width="0" height="7" font="18">bar</text>
+<text top="348" left="563" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="570" width="0" height="7" font="18">Ideal</text>
+<text top="360" left="385" width="34" height="7" font="15">Small FPGA</text>
+<text top="360" left="431" width="43" height="7" font="15">Medium FPGA</text>
+<text top="360" left="486" width="34" height="7" font="15">Large FPGA</text>
+<text top="360" left="531" width="38" height="7" font="15">Future FPGA</text>
+<text top="303" left="604" width="0" height="7" font="19"><b>MOp</b></text>
+<text top="288" left="604" width="0" height="7" font="19"><b>tion</b></text>
+<text top="276" left="604" width="0" height="7" font="19"><b>s/</b></text>
+<text top="270" left="604" width="0" height="7" font="19"><b>sec</b></text>
+<text top="260" left="604" width="0" height="7" font="19"><b> p</b></text>
+<text top="255" left="604" width="0" height="7" font="19"><b>er KL</b></text>
+<text top="240" left="604" width="0" height="7" font="19"><b>UT</b></text>
+<text top="232" left="604" width="0" height="7" font="19"><b>s </b></text>
+<text top="269" left="351" width="0" height="7" font="19"><b>KL</b></text>
+<text top="263" left="351" width="0" height="7" font="19"><b>UT</b></text>
+<text top="255" left="351" width="0" height="7" font="19"><b>s </b></text>
+<text top="236" left="387" width="26" height="7" font="15">Network</text>
+<text top="236" left="425" width="21" height="7" font="15">Thread</text>
+<text top="236" left="457" width="21" height="7" font="15">Cluster</text>
+<text top="236" left="489" width="31" height="7" font="15">Core Logic</text>
+<text top="236" left="532" width="29" height="7" font="15">Efficiency</text>
+<text top="260" left="389" width="15" height="6" font="20"><b>8-PEs </b></text>
+<text top="260" left="437" width="18" height="6" font="20"><b>16-PEs </b></text>
+<text top="259" left="487" width="18" height="6" font="20"><b>32-PEs </b></text>
+<text top="248" left="524" width="18" height="6" font="20"><b>64-PEs </b></text>
+<text top="297" left="837" width="9" height="7" font="15">0.1</text>
+<text top="280" left="837" width="4" height="7" font="15">1</text>
+<text top="263" left="837" width="7" height="7" font="15">10</text>
+<text top="246" left="837" width="11" height="7" font="15">100</text>
+<text top="297" left="630" width="4" height="7" font="15">0</text>
+<text top="288" left="623" width="11" height="7" font="15">500</text>
+<text top="279" left="619" width="15" height="7" font="15">1000</text>
+<text top="269" left="619" width="15" height="7" font="15">1500</text>
+<text top="260" left="619" width="15" height="7" font="15">2000</text>
+<text top="251" left="619" width="15" height="7" font="15">2500</text>
+<text top="242" left="619" width="15" height="7" font="15">3000</text>
+<text top="233" left="619" width="15" height="7" font="15">3500</text>
+<text top="326" left="654" width="0" height="7" font="18">Soft </text>
+<text top="312" left="654" width="0" height="7" font="18">Ring</text>
+<text top="339" left="660" width="0" height="7" font="18">Soft </text>
+<text top="326" left="660" width="0" height="7" font="18">2D M</text>
+<text top="310" left="660" width="0" height="7" font="18">esh</text>
+<text top="327" left="667" width="0" height="7" font="18">Soft </text>
+<text top="313" left="667" width="0" height="7" font="18">X</text>
+<text top="309" left="667" width="0" height="7" font="18">bar</text>
+<text top="348" left="674" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="681" width="0" height="7" font="18">Ideal</text>
+<text top="326" left="701" width="0" height="7" font="18">Soft </text>
+<text top="312" left="701" width="0" height="7" font="18">Ring</text>
+<text top="339" left="708" width="0" height="7" font="18">Soft </text>
+<text top="326" left="708" width="0" height="7" font="18">2D M</text>
+<text top="310" left="708" width="0" height="7" font="18">esh</text>
+<text top="327" left="714" width="0" height="7" font="18">Soft </text>
+<text top="313" left="714" width="0" height="7" font="18">X</text>
+<text top="309" left="714" width="0" height="7" font="18">bar</text>
+<text top="348" left="721" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="728" width="0" height="7" font="18">Ideal</text>
+<text top="326" left="748" width="0" height="7" font="18">Soft </text>
+<text top="312" left="748" width="0" height="7" font="18">Ring</text>
+<text top="339" left="755" width="0" height="7" font="18">Soft </text>
+<text top="326" left="755" width="0" height="7" font="18">2D M</text>
+<text top="310" left="755" width="0" height="7" font="18">esh</text>
+<text top="327" left="762" width="0" height="7" font="18">Soft </text>
+<text top="313" left="762" width="0" height="7" font="18">X</text>
+<text top="309" left="762" width="0" height="7" font="18">bar</text>
+<text top="348" left="768" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="775" width="0" height="7" font="18">Ideal</text>
+<text top="326" left="795" width="0" height="7" font="18">Soft </text>
+<text top="312" left="795" width="0" height="7" font="18">Ring</text>
+<text top="339" left="802" width="0" height="7" font="18">Soft </text>
+<text top="326" left="802" width="0" height="7" font="18">2D M</text>
+<text top="310" left="802" width="0" height="7" font="18">esh</text>
+<text top="327" left="809" width="0" height="7" font="18">Soft </text>
+<text top="313" left="809" width="0" height="7" font="18">X</text>
+<text top="309" left="809" width="0" height="7" font="18">bar</text>
+<text top="348" left="816" width="0" height="7" font="18">Hard Mesh/Clstr</text>
+<text top="314" left="822" width="0" height="7" font="18">Ideal</text>
+<text top="360" left="648" width="33" height="7" font="15">FPGA-500K</text>
+<text top="360" left="698" width="28" height="7" font="15">FPGA-1M</text>
+<text top="360" left="745" width="28" height="7" font="15">FPGA-2M</text>
+<text top="360" left="789" width="28" height="7" font="15">FPGA-4M</text>
+<text top="299" left="855" width="0" height="7" font="19"><b>MFL</b></text>
+<text top="286" left="855" width="0" height="7" font="19"><b>OP</b></text>
+<text top="277" left="855" width="0" height="7" font="19"><b>s/</b></text>
+<text top="271" left="855" width="0" height="7" font="19"><b>sec</b></text>
+<text top="261" left="855" width="0" height="7" font="19"><b> per K</b></text>
+<text top="244" left="855" width="0" height="7" font="19"><b>LUT</b></text>
+<text top="232" left="855" width="0" height="7" font="19"><b> </b></text>
+<text top="270" left="615" width="0" height="7" font="19"><b>KL</b></text>
+<text top="263" left="615" width="0" height="7" font="19"><b>UT</b></text>
+<text top="255" left="615" width="0" height="7" font="19"><b>s </b></text>
+<text top="236" left="652" width="26" height="7" font="15">Network</text>
+<text top="236" left="701" width="21" height="7" font="15">Thread</text>
+<text top="236" left="750" width="21" height="7" font="15">Cluster</text>
+<text top="244" left="652" width="31" height="7" font="15">Core Logic</text>
+<text top="244" left="701" width="29" height="7" font="15">Efficiency</text>
+<text top="258" left="647" width="18" height="6" font="20"><b>16-PEs </b></text>
+<text top="261" left="695" width="18" height="6" font="20"><b>32-PEs </b></text>
+<text top="260" left="740" width="18" height="6" font="20"><b>64-PEs </b></text>
+<text top="246" left="775" width="21" height="6" font="20"><b>128-PEs </b></text>
+<text top="241" left="815" width="26" height="6" font="21"><i>4.8MLUTs </i></text>
+<text top="259" left="122" width="21" height="6" font="20"><b>128-PEs </b></text>
+<text top="258" left="171" width="21" height="6" font="20"><b>256-PEs </b></text>
+<text top="261" left="217" width="21" height="6" font="20"><b>512-PEs </b></text>
+<text top="248" left="248" width="24" height="6" font="20"><b>1024-PEs </b></text>
+<text top="91" left="120" width="122" height="10" font="9">MMM Performance (GFLOP/s) </text>
+<text top="89" left="373" width="140" height="10" font="9">Bscholes Performance (Moption/s) </text>
+<text top="89" left="628" width="114" height="10" font="9">SpMV Performance (MOP/s) </text>
+<text top="361" left="386" width="182" height="7" font="15">FPGA-500K           FPGA-1M              FPGA-2M             FPGA-4M </text>
+<text top="392" left="279" width="357" height="12" font="3">Figure 4: Performance and Area Eﬃciency Trends.</text>
+<text top="436" left="81" width="359" height="12" font="3">normalized performance for the same corresponding perfor-</text>
+<text top="452" left="81" width="84" height="12" font="3">mance points.</text>
+<text top="475" left="81" width="359" height="12" font="3">What Is The Gap Between Soft versus Hard? The</text>
+<text top="491" left="81" width="359" height="12" font="3">overall trends in Figure 4 show a gap in performance and ef-</text>
+<text top="506" left="81" width="359" height="12" font="3">ﬁciency between soft and hard implementations of CoRAM.</text>
+<text top="522" left="81" width="359" height="12" font="3">In MMM, the performance is comparable across all design</text>
+<text top="538" left="81" width="359" height="12" font="3">points (except for the soft ring network, which suﬀers from</text>
+<text top="553" left="81" width="359" height="12" font="3">high contention). When normalized to area, however, a sig-</text>
+<text top="569" left="81" width="359" height="12" font="3">niﬁcant gap in eﬃciency (about 2X) separates soft versus</text>
+<text top="585" left="81" width="359" height="12" font="3">hard implementations of CoRAM. The NoCs expend con-</text>
+<text top="600" left="81" width="359" height="12" font="3">siderable soft logic area in buﬀering, which is the largest</text>
+<text top="616" left="81" width="359" height="12" font="3">contributer to overhead. In the more memory-intensive ap-</text>
+<text top="632" left="81" width="359" height="12" font="3">plications such as BS and SpMV, the biggest impact on per-</text>
+<text top="647" left="81" width="359" height="12" font="3">formance is the increased queuing delay as a result of higher</text>
+<text top="663" left="81" width="359" height="12" font="3">latency and contention in the soft data distribution mecha-</text>
+<text top="679" left="81" width="359" height="12" font="3">nisms. This impacts SpMV the greatest (which is latency-</text>
+<text top="695" left="81" width="359" height="12" font="3">sensitive)—resulting in a 2X gap in performance between</text>
+<text top="710" left="81" width="282" height="12" font="3">the soft versus hard CoRAM implementations.</text>
+<text top="733" left="81" width="359" height="12" font="3">Do Software Control Threads Limit Eﬃciency or</text>
+<text top="749" left="81" width="359" height="12" font="3">Performance? A notable result of Figure 4 (bottom) is</text>
+<text top="765" left="81" width="359" height="12" font="3">that the synthesized control threads constitute only a rela-</text>
+<text top="780" left="81" width="359" height="12" font="3">tively small fraction of the overall area. What also stands</text>
+<text top="796" left="81" width="359" height="12" font="3">out is that with an eﬃcient implementation of CoRAM us-</text>
+<text top="812" left="81" width="359" height="12" font="3">ing hard macro blocks, the use of software-based control</text>
+<text top="828" left="81" width="359" height="12" font="3">threads does not limit the peak performance potential of</text>
+<text top="843" left="81" width="151" height="12" font="3">the various applications.</text>
+<text top="843" left="244" width="195" height="12" font="3">Both SpMV and Black-Scholes,</text>
+<text top="859" left="81" width="359" height="12" font="3">for example, were able to achieve bandwidth-limited perfor-</text>
+<text top="875" left="81" width="359" height="12" font="3">mance even though the logic used to generate their mem-</text>
+<text top="890" left="81" width="359" height="12" font="3">ory accesses were described using high-level, C-based con-</text>
+<text top="906" left="81" width="359" height="12" font="3">trol threads. These results support the hypothesis that a</text>
+<text top="922" left="81" width="359" height="12" font="3">high-level software-based abstraction for memory manage-</text>
+<text top="937" left="81" width="359" height="12" font="3">ment does not fundamentally limit the performance poten-</text>
+<text top="953" left="81" width="309" height="12" font="3">tial of memory-intensive FPGA-based applications.</text>
+<text top="976" left="81" width="359" height="12" font="3">Hard CoRAM vs. Conventional FPGA. A key result</text>
+<text top="992" left="81" width="359" height="12" font="3">of Figure 4 is that applications mapped to a hard imple-</text>
+<text top="1008" left="81" width="359" height="12" font="3">mentation of CoRAM are capable of achieving performance</text>
+<text top="1023" left="81" width="359" height="12" font="3">and eﬃciency comparable to tuned applications on conven-</text>
+<text top="1039" left="81" width="359" height="12" font="3">tional FPGAs (labeled “ideal”). Recall, the measured results</text>
+<text top="1055" left="81" width="359" height="12" font="3">of “ideal” applications are based on simulations and synthe-</text>
+<text top="436" left="475" width="359" height="12" font="3">sis of core logic that do not incur any overheads in latency</text>
+<text top="452" left="475" width="359" height="12" font="3">or area from memory control logic or data distribution be-</text>
+<text top="467" left="475" width="359" height="12" font="3">tween the core logic and the external memory interfaces.</text>
+<text top="483" left="475" width="359" height="12" font="3">This suggests that hard macro blocks for CoRAM can re-</text>
+<text top="499" left="475" width="359" height="12" font="3">duce the tuning eﬀort needed by designers when optimizing</text>
+<text top="514" left="475" width="240" height="12" font="3">the memory accesses for an application.</text>
+<text top="546" left="475" width="13" height="16" font="1">5.</text>
+<text top="546" left="507" width="132" height="16" font="1">CONCLUSIONS</text>
+<text top="568" left="489" width="345" height="12" font="3">This paper presented a full-featured RTL prototype of the</text>
+<text top="584" left="475" width="359" height="12" font="3">CoRAM memory architecture for FPGA-based computing.</text>
+<text top="599" left="475" width="359" height="12" font="3">Our prototype enabled us to investigate designs across the</text>
+<text top="615" left="475" width="359" height="12" font="3">continuum—from soft-logic emulation on conventional FP-</text>
+<text top="631" left="475" width="359" height="12" font="3">GAs to hard macro blocks in future FPGA fabrics. Despite</text>
+<text top="647" left="475" width="359" height="12" font="3">our best eﬀorts, our soft implementations of CoRAM fell</text>
+<text top="662" left="475" width="359" height="12" font="3">short of being practical in large-scale, memory-intensive ap-</text>
+<text top="678" left="475" width="359" height="12" font="3">plications. Our results show that the hardening of macro</text>
+<text top="694" left="475" width="359" height="12" font="3">blocks for data distribution in CoRAM enables application</text>
+<text top="709" left="475" width="359" height="12" font="3">development using a high-level software memory abstraction</text>
+<text top="725" left="475" width="359" height="12" font="3">to achieve performance and eﬃciency that is comparable to</text>
+<text top="741" left="475" width="330" height="12" font="3">optimized RTL development on a conventional FPGA.</text>
+<text top="772" left="475" width="13" height="16" font="1">6.</text>
+<text top="772" left="507" width="209" height="16" font="1">ACKNOWLEDGEMENTS</text>
+<text top="794" left="475" width="359" height="12" font="3">Funding for this work was provided in part by NSF CCF-</text>
+<text top="810" left="475" width="359" height="12" font="3">1012851 and by Altera. We thank the anonymous reviewers,</text>
+<text top="826" left="475" width="359" height="12" font="3">members of CALCM, and Chuck Thacker for their com-</text>
+<text top="841" left="475" width="359" height="12" font="3">ments and feedback. We thank Xilinx and Altera for their</text>
+<text top="857" left="475" width="359" height="12" font="3">FPGA and tool donations. We thank Bluespec for their tool</text>
+<text top="873" left="475" width="140" height="12" font="3">donations and support.</text>
+<text top="904" left="475" width="13" height="16" font="1">7.</text>
+<text top="904" left="507" width="121" height="16" font="1">REFERENCES</text>
+<text top="917" left="475" width="332" height="9" font="14">[1] E. S. Chung, J. C. Hoe, and K. Mai. CoRAM: An In-Fabric</text>
+<text top="929" left="495" width="281" height="9" font="14">Memory Architecture for FPGA-based Computing. In</text>
+<text top="941" left="495" width="135" height="9" font="14">Proceedings of FPGA’11.</text>
+<text top="955" left="475" width="349" height="9" font="14">[2] C. Lattner and V. Adve. LLVM: A Compilation Framework for</text>
+<text top="967" left="495" width="335" height="9" font="14">Lifelong Program Analysis &amp; Transformation. In Proceedings of</text>
+<text top="979" left="495" width="47" height="9" font="14">CGO’04.</text>
+<text top="992" left="475" width="326" height="9" font="14">[3] T. Ngai, J. Rose, and S. Wilton. An SRAM-programmable</text>
+<text top="1004" left="495" width="289" height="9" font="14">ﬁeld-conﬁgurable memory. In Proceedings of CICC’95.</text>
+<text top="1017" left="475" width="346" height="9" font="14">[4] M. K. Papamichael and J. C. Hoe. CONNECT: Re-Examining</text>
+<text top="1029" left="495" width="314" height="9" font="14">Conventional Wisdom for Designing NoCs in the Context of</text>
+<text top="1041" left="495" width="196" height="9" font="14">FPGAs. In Proceedings of FPGA’12.</text>
+<text top="1055" left="475" width="332" height="9" font="14">[5] D. T. S. Thoziyoor, D. Tarjan, and S. Thoziyoor. Cacti 4.0.</text>
+<text top="1067" left="495" width="249" height="9" font="14">Technical Report HPL-2006-86, HP Labs, 2006.</text>
+</page>
+</pdf2xml>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="0" size="16" family="Times" color="#000000"/>
+	<fontspec id="1" size="12" family="Times" color="#000000"/>
+	<fontspec id="2" size="19" family="Times" color="#000000"/>
+	<fontspec id="3" size="16" family="Times" color="#000000"/>
+	<fontspec id="4" size="12" family="Times" color="#000000"/>
+	<fontspec id="5" size="12" family="Times" color="#000000"/>
+	<fontspec id="6" size="12" family="Times" color="#000000"/>
+	<fontspec id="7" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="8" family="Times" color="#000000"/>
+	<fontspec id="9" size="8" family="Times" color="#000000"/>
+<text top="97" left="743" width="5" height="16" font="0"> </text>
+<text top="1185" left="439" width="19" height="13" font="1">94 </text>
+<text top="1203" left="108" width="5" height="16" font="0"> </text>
+<text top="178" left="199" width="523" height="19" font="2"><b>IMPLEMENTATION OF DIGITAL FILTERS IN FPGA </b></text>
+<text top="202" left="387" width="147" height="19" font="2"><b>STRUCTURES </b></text>
+<text top="234" left="286" width="327" height="16" font="3"><b>Ferenc-Emil Mózes, Zoltán Germán-Salló </b></text>
+<text top="254" left="329" width="240" height="13" font="1">Petru Maior University of Tirgu-Mureş </text>
+<text top="271" left="258" width="382" height="13" font="1">mozes.ferenc.emil@gmail.com, zgerman@engineering.upm.ro </text>
+<text top="307" left="401" width="103" height="16" font="3"><b>ABSTRACT </b></text>
+<text top="327" left="172" width="546" height="13" font="5"><i>Filtering  is  the  most  common  task  in  digital  signal  processing,  when  some  particular </i></text>
+<text top="344" left="172" width="546" height="13" font="5"><i>parameters of the input signal are removed or modified and a new signal is obtained at </i></text>
+<text top="361" left="172" width="546" height="13" font="5"><i>the  output.  The  most  common  filtering  goal  is  to  remove  noise  from  a  signal.  Digital </i></text>
+<text top="379" left="172" width="546" height="13" font="5"><i>filtering  deals  with  discrete  sequences,  their  implementation  require  both  soft  and  hard </i></text>
+<text top="396" left="172" width="546" height="13" font="5"><i>solutions.  This  work  focuses  on  some  useful  methods  to  implement  digital  filters  in </i></text>
+<text top="413" left="172" width="546" height="13" font="5"><i>reconfigurable  hardware  structures,  as  FPGAs.  This  paper  presents  FIR  filters  of </i></text>
+<text top="431" left="172" width="546" height="13" font="5"><i>different  order  and  structures,  and  using  the  MathWorks®  tools,  shows  how  these </i></text>
+<text top="448" left="172" width="546" height="13" font="5"><i>structures  can  be  mapped  to  the  Xilinx®  FPGA  architecture.  The  implemented  digital </i></text>
+<text top="465" left="172" width="546" height="13" font="5"><i>filters  are  evaluated  through  signal  to  noise  ratio  and  root  mean  square  error  between </i></text>
+<text top="482" left="172" width="201" height="13" font="5"><i>the filtered and the noisy signal.  </i></text>
+<text top="517" left="323" width="257" height="13" font="6"><b>Keywords</b>: digital filter, FPGA, FIR filter </text>
+<text top="552" left="108" width="5" height="16" font="0"> </text>
+<text top="573" left="151" width="11" height="13" font="6"><b>1.</b></text>
+<text top="572" left="162" width="4" height="14" font="7"><b> </b></text>
+<text top="573" left="162" width="89" height="13" font="6"><b> Introduction </b></text>
+<text top="589" left="151" width="287" height="13" font="1">Filtering  is  a  fundamental  aspect  of  signal </text>
+<text top="607" left="108" width="329" height="13" font="1">processing  which  performs  direct  manipulations  on </text>
+<text top="624" left="108" width="329" height="13" font="1">the  frequency  band  of  signals,  removing  undesirable </text>
+<text top="641" left="108" width="329" height="13" font="1">parts as noise or extracting useful components. There </text>
+<text top="658" left="108" width="329" height="13" font="1">are  two  main  types  of  filter,  analog  and  digital,  they </text>
+<text top="676" left="108" width="329" height="13" font="1">are  very  different  in  physical  structure  and  function. </text>
+<text top="693" left="108" width="329" height="13" font="1">An  analog  filter  uses  analog  electronic  circuits  made </text>
+<text top="710" left="108" width="329" height="13" font="1">up from components such as resistors, capacitors and </text>
+<text top="727" left="108" width="329" height="13" font="1">operational  amplifiers  to  produce  the  required </text>
+<text top="745" left="108" width="329" height="13" font="1">filtering effect. A digital filter uses a digital processor </text>
+<text top="762" left="108" width="329" height="13" font="1">to perform  numerical calculations on  sampled  values </text>
+<text top="779" left="108" width="329" height="13" font="1">of  the  signal.  They  can  achieve  better  performance </text>
+<text top="796" left="108" width="329" height="13" font="1">than  analog  filters  (limited  by  the  accuracy  of  their </text>
+<text top="814" left="108" width="329" height="13" font="1">electronic  components),  can  easily  be  changed </text>
+<text top="831" left="108" width="329" height="13" font="1">without affecting the circuitry (hardware). An analog </text>
+<text top="848" left="108" width="329" height="13" font="1">filter  can  only  be  changed  by  redesigning  the  filter </text>
+<text top="865" left="108" width="329" height="13" font="1">circuit.  Digital  filters  are  build  from  three  basic </text>
+<text top="883" left="108" width="329" height="13" font="1">elements:  an  adder,  a  multiplier  and  a  delay  element </text>
+<text top="900" left="108" width="329" height="13" font="1">and can be implemented using either a block diagram </text>
+<text top="917" left="108" width="329" height="13" font="1">or  a  signal  flow  graph.  Recently  the  Field </text>
+<text top="934" left="108" width="329" height="13" font="1">Programmable  Gate  Arrays  (FPGAs)  became  one  of </text>
+<text top="952" left="108" width="329" height="13" font="1">the  most  preferred  platform  for  evaluating  and </text>
+<text top="969" left="108" width="329" height="13" font="1">implementing  signal  processing  algorithms.  They </text>
+<text top="986" left="108" width="329" height="13" font="1">have  special  features,  like  embedded  multipliers, </text>
+<text top="1003" left="108" width="61" height="13" font="1">dedicated </text>
+<text top="1003" left="183" width="31" height="13" font="1">DSP </text>
+<text top="1003" left="227" width="58" height="13" font="1">circuitry, </text>
+<text top="1003" left="299" width="65" height="13" font="1">scalability </text>
+<text top="1003" left="378" width="25" height="13" font="1">and </text>
+<text top="1003" left="417" width="17" height="13" font="1">re-</text>
+<text top="1021" left="108" width="333" height="13" font="1">configurability  therefore  they  are  one  of  the  most  </text>
+<text top="1038" left="108" width="329" height="13" font="1">attractive  platforms  for  advanced  signal  processing </text>
+<text top="1055" left="108" width="329" height="13" font="1">algorithms  [1,  6].  Some  engineering  tools  like </text>
+<text top="1072" left="108" width="329" height="13" font="1">MATLAB have enabled the design of  various digital </text>
+<text top="1090" left="108" width="329" height="13" font="1">filter  structures  in  a  faster  and  more  accurate  way </text>
+<text top="1107" left="108" width="329" height="13" font="1">with the possibility of implementation in FPGAs. The </text>
+<text top="1124" left="108" width="329" height="13" font="1">second  part  of  this  work  presents  briefly  the  most </text>
+<text top="572" left="460" width="56" height="13" font="1">common </text>
+<text top="572" left="531" width="42" height="13" font="1">digital </text>
+<text top="572" left="588" width="33" height="13" font="1">filter </text>
+<text top="572" left="636" width="62" height="13" font="1">structures </text>
+<text top="572" left="713" width="25" height="13" font="1">and </text>
+<text top="572" left="753" width="36" height="13" font="1">some </text>
+<text top="589" left="460" width="329" height="13" font="1">possibilities  to  implement  them.  The  proposed </text>
+<text top="607" left="460" width="329" height="13" font="1">implementation and structures are shown in the third </text>
+<text top="624" left="460" width="329" height="13" font="1">part.  Experimental  results  obtained  with  different </text>
+<text top="641" left="460" width="329" height="13" font="1">structures  on  test  signal  are  presented  in  the  fourth </text>
+<text top="658" left="460" width="329" height="13" font="1">section.  Finally,  the  conclusions  show  some  possible </text>
+<text top="676" left="460" width="167" height="13" font="1">directions for further work. </text>
+<text top="693" left="460" width="4" height="13" font="1"> </text>
+<text top="710" left="502" width="11" height="13" font="6"><b>2.</b></text>
+<text top="710" left="513" width="4" height="14" font="7"><b> </b></text>
+<text top="710" left="514" width="164" height="13" font="6"><b> Digital filter realizations </b></text>
+<text top="727" left="502" width="287" height="13" font="1">The  Fourier  transform  theory  says  that  the </text>
+<text top="745" left="460" width="329" height="13" font="1">linear  convolution  of  two  sequences  in  the  time </text>
+<text top="762" left="460" width="329" height="13" font="1">domain  is  the  same  as  multiplication  of  two </text>
+<text top="779" left="460" width="329" height="13" font="1">corresponding  spectral  sequences  in  the  frequency </text>
+<text top="796" left="460" width="329" height="13" font="1">domain. Therefore filtering is in the multiplication of </text>
+<text top="814" left="460" width="329" height="13" font="1">the signal spectrum by the frequency domain impulse </text>
+<text top="831" left="460" width="329" height="13" font="1">response  of  the  filter.  Usually  a  digital  filter  is  a </text>
+<text top="848" left="460" width="329" height="13" font="1">simple  discrete-time,  discrete-amplitude  convolver </text>
+<text top="865" left="460" width="329" height="13" font="1">which  performs  a  convolution  of  the  time  domain </text>
+<text top="883" left="460" width="329" height="13" font="1">impulse  response  and  the  discrete  (sampled)  signal. </text>
+<text top="900" left="460" width="329" height="13" font="1">There are two types of digital filters: a non-recursive </text>
+<text top="917" left="460" width="329" height="13" font="1">(known  as  an  FIR  or  Finite  Impulse  Response  filter) </text>
+<text top="934" left="460" width="329" height="13" font="1">and  a  recursive  (named  IIR  or  Infinite  Impulse </text>
+<text top="952" left="460" width="329" height="13" font="1">Response) filter [3, 4]. An FIR type has the output as </text>
+<text top="969" left="460" width="329" height="13" font="1">a  convolution  between  the  input  sequence  and  the </text>
+<text top="986" left="460" width="161" height="13" font="1">impulse response of filter: </text>
+<text top="1003" left="460" width="4" height="13" font="1"> </text>
+<text top="1005" left="605" width="5" height="9" font="8">1</text>
+<text top="1041" left="603" width="5" height="9" font="8">0</text>
+<text top="1020" left="632" width="5" height="13" font="1">)</text>
+<text top="1020" left="618" width="5" height="13" font="1">(</text>
+<text top="1005" left="590" width="7" height="9" font="9"><i>N</i></text>
+<text top="1041" left="590" width="5" height="9" font="9"><i>k</i></text>
+<text top="1020" left="679" width="7" height="13" font="5"><i>k</i></text>
+<text top="1020" left="657" width="7" height="13" font="5"><i>n</i></text>
+<text top="1020" left="646" width="7" height="13" font="5"><i>x</i></text>
+<text top="1020" left="624" width="7" height="13" font="5"><i>k</i></text>
+<text top="1020" left="610" width="7" height="13" font="5"><i>b</i></text>
+<text top="1020" left="562" width="7" height="13" font="5"><i>n</i></text>
+<text top="1020" left="550" width="7" height="13" font="5"><i>y</i></text>
+<text top="1020" left="694" width="4" height="13" font="1"> </text>
+<text top="1021" left="768" width="21" height="13" font="1">(1) </text>
+<text top="1056" left="502" width="287" height="13" font="1">A  large  percentage  of  filters  implemented  in </text>
+<text top="1073" left="460" width="329" height="13" font="1">the digital domain are Finite Impulse Response (FIR) </text>
+<text top="1090" left="460" width="329" height="13" font="1">filters.  These  filters  are  used  over  a  wide  range  of </text>
+<text top="1108" left="460" width="329" height="13" font="1">sample  rates  and  are  supported  in  terms  of  software </text>
+<text top="1125" left="460" width="329" height="13" font="1">tools,  and  FPGA  IP  cores.  An  FIR  filter  is  usually </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="10" size="12" family="Times" color="#000000"/>
+	<fontspec id="11" size="7" family="Times" color="#000000"/>
+	<fontspec id="12" size="7" family="Times" color="#000000"/>
+	<fontspec id="13" size="7" family="Times" color="#000000"/>
+<text top="1186" left="439" width="19" height="13" font="1">95 </text>
+<text top="1204" left="108" width="5" height="16" font="0"> </text>
+<text top="111" left="108" width="329" height="13" font="1">implemented by  using a  series of delays,  multipliers, </text>
+<text top="129" left="108" width="323" height="13" font="1">and adders in order to have the desired filter's output. </text>
+<text top="146" left="151" width="286" height="13" font="1">Another  type  of  digital  filter  is  the  Infinite </text>
+<text top="163" left="108" width="312" height="13" font="1">Impulse Response (IIR) filter, which has the output </text>
+<text top="180" left="151" width="4" height="13" font="1"> </text>
+<text top="198" left="108" width="4" height="13" font="1"> </text>
+<text top="200" left="307" width="5" height="9" font="8">1</text>
+<text top="235" left="304" width="5" height="9" font="8">0</text>
+<text top="200" left="188" width="5" height="9" font="8">1</text>
+<text top="235" left="186" width="5" height="9" font="8">0</text>
+<text top="214" left="332" width="5" height="13" font="1">)</text>
+<text top="214" left="319" width="5" height="13" font="1">(</text>
+<text top="214" left="215" width="5" height="13" font="1">)</text>
+<text top="214" left="202" width="5" height="13" font="1">(</text>
+<text top="200" left="290" width="9" height="9" font="9"><i>M</i></text>
+<text top="235" left="291" width="5" height="9" font="9"><i>k</i></text>
+<text top="200" left="173" width="7" height="9" font="9"><i>N</i></text>
+<text top="235" left="173" width="5" height="9" font="9"><i>k</i></text>
+<text top="214" left="381" width="7" height="13" font="5"><i>k</i></text>
+<text top="214" left="359" width="8" height="13" font="5"><i>n</i></text>
+<text top="214" left="347" width="7" height="13" font="5"><i>y</i></text>
+<text top="214" left="325" width="7" height="13" font="5"><i>k</i></text>
+<text top="214" left="311" width="8" height="13" font="5"><i>b</i></text>
+<text top="214" left="263" width="7" height="13" font="5"><i>k</i></text>
+<text top="214" left="241" width="8" height="13" font="5"><i>n</i></text>
+<text top="214" left="230" width="7" height="13" font="5"><i>x</i></text>
+<text top="214" left="208" width="7" height="13" font="5"><i>k</i></text>
+<text top="214" left="194" width="8" height="13" font="5"><i>a</i></text>
+<text top="214" left="145" width="8" height="13" font="5"><i>n</i></text>
+<text top="214" left="133" width="7" height="13" font="5"><i>y</i></text>
+<text top="214" left="396" width="4" height="13" font="1"> </text>
+<text top="216" left="416" width="18" height="13" font="1">(2)</text>
+<text top="213" left="434" width="5" height="16" font="0"> </text>
+<text top="233" left="423" width="4" height="13" font="1"> </text>
+<text top="250" left="108" width="4" height="13" font="1"> </text>
+<text top="267" left="151" width="287" height="13" font="1">As  it  can  be  seen,  portions  of  the  output  are </text>
+<text top="284" left="108" width="329" height="13" font="1">returned  to  be  recomputed  &#34;over  and  over&#34;  by  the </text>
+<text top="302" left="108" width="329" height="13" font="1">same  few  coefficients,  meaning  that  IIR  structure </text>
+<text top="319" left="108" width="127" height="13" font="1">uses feedback [3, 4]. </text>
+<text top="336" left="151" width="287" height="13" font="1">Structurally,  FIR  filters  consist  of  two </text>
+<text top="354" left="108" width="329" height="13" font="1">elements:  a  sample  delay  line  and  a  set  of </text>
+<text top="371" left="108" width="329" height="13" font="1">coefficients. To implement the filter, the input sample </text>
+<text top="388" left="108" width="329" height="13" font="1">is put into the delay line, each sample is multiplied by </text>
+<text top="405" left="108" width="329" height="13" font="1">the  corresponding  coefficient  and  the  result  is </text>
+<text top="423" left="108" width="329" height="13" font="1">accumulated, after that the delay line is shifted by one </text>
+<text top="440" left="108" width="329" height="13" font="1">sample  to  make  room  for  the  next  input  sample  [6]. </text>
+<text top="457" left="108" width="293" height="13" font="1">This is the serial direct form, presented in fig. 1. </text>
+<text top="474" left="151" width="4" height="13" font="1"> </text>
+<text top="748" left="347" width="4" height="13" font="1"> </text>
+<text top="762" left="152" width="240" height="13" font="6"><b>Fig. 1 – Serial Direct Form FIR filter </b></text>
+<text top="779" left="108" width="4" height="13" font="1"> </text>
+<text top="796" left="151" width="287" height="13" font="1">Another  implementation  structure  called  the </text>
+<text top="813" left="108" width="329" height="13" font="1">transposed  form  FIR  filter,  where  data  samples  are </text>
+<text top="831" left="108" width="329" height="13" font="1">applied  in  parallel  to  all  the  tap  multipliers  through </text>
+<text top="848" left="108" width="329" height="13" font="1">pipeline registers is shown in fig. 2. The products are </text>
+<text top="865" left="108" width="294" height="13" font="1">applied to a cascaded chain of registered adders. </text>
+<text top="882" left="108" width="4" height="13" font="1"> </text>
+<text top="1022" left="421" width="5" height="16" font="0"> </text>
+<text top="1038" left="175" width="195" height="13" font="6"><b>Fig. 2 – Transposed FIR filter </b></text>
+<text top="1055" left="151" width="11" height="13" font="6"><b>3.</b></text>
+<text top="1054" left="162" width="4" height="14" font="7"><b> </b></text>
+<text top="1055" left="162" width="208" height="13" font="6"><b> The Implementation procedure </b></text>
+<text top="1072" left="151" width="287" height="13" font="1">The  Filter  Design  and  Analysis  Tool  (FDA </text>
+<text top="1089" left="108" width="329" height="13" font="1">Tool) is a graphical user interface (GUI) available in </text>
+<text top="1106" left="108" width="329" height="13" font="1">the  Signal  Processing  Toolbox  of  MATLAB  for </text>
+<text top="111" left="460" width="329" height="13" font="1">designing  and  analyzing  filters.  The  FDA  Tool  uses </text>
+<text top="129" left="460" width="329" height="13" font="1">double  precision  floating  point  representation  for  the </text>
+<text top="146" left="460" width="329" height="13" font="1">design calculations. This allows the tool to achieve a </text>
+<text top="163" left="460" width="329" height="13" font="1">fair  degree  of  precision,  which  is  reflected  in  the </text>
+<text top="180" left="460" width="329" height="13" font="1">close-to-ideal  response  of  the  reference  filter.  This </text>
+<text top="198" left="460" width="329" height="13" font="1">tool  along  with  the  Simulink  HDL  Coder  is  a </text>
+<text top="215" left="460" width="329" height="13" font="1">powerful  utility  to  generate  HDL  versions  of  the </text>
+<text top="232" left="460" width="99" height="13" font="1">designed filters. </text>
+<text top="249" left="502" width="287" height="13" font="1">In  the  first  place  a  model  only  using </text>
+<text top="263" left="460" width="329" height="17" font="4">Simulink’s  common  blocks  and  the  FDATool  block </text>
+<text top="284" left="460" width="329" height="13" font="1">from  the  Signal  Processing  Toolbox  was  designed. </text>
+<text top="301" left="460" width="158" height="13" font="1">This can be seen in fig. 3. </text>
+<text top="318" left="502" width="4" height="13" font="1"> </text>
+<text top="462" left="780" width="4" height="13" font="1"> </text>
+<text top="476" left="522" width="204" height="13" font="6"><b>Fig. 3 – Filter simulation model </b></text>
+<text top="493" left="460" width="5" height="16" font="0"> </text>
+<text top="513" left="502" width="287" height="13" font="1">To  evaluate  the  performances  of  the  designed </text>
+<text top="530" left="460" width="329" height="13" font="1">filter  model,  a  sine  wave  was  used  as  a  test  signal </text>
+<text top="548" left="460" width="329" height="13" font="1">with  known  added  noise.  This  made  possible  to </text>
+<text top="565" left="460" width="329" height="13" font="1">compute  the  signal  to  noise  ratio  and  filtering  error. </text>
+<text top="582" left="460" width="329" height="13" font="1">This  model  was  later  built  using  Xilinx’s  System </text>
+<text top="599" left="460" width="329" height="13" font="1">Generator  blocks  from  Simulink,  created  with  the </text>
+<text top="617" left="460" width="248" height="13" font="1">purpose to be transferable to FPGAs [5]. </text>
+<text top="634" left="502" width="287" height="13" font="1">Five  low-pass  filters  of  different  order  (8,  12, </text>
+<text top="651" left="460" width="329" height="13" font="1">16, 20, 24)  were designed using FDA Tool,  with the </text>
+<text top="668" left="460" width="151" height="13" font="1">following  parameters:  <i>F</i></text>
+<text top="674" left="610" width="4" height="9" font="11"><i>s</i></text>
+<text top="668" left="614" width="81" height="13" font="1">  =  4  kHz,  <i>F</i></text>
+<text top="674" left="695" width="17" height="9" font="11"><i>pass</i></text>
+<text top="668" left="713" width="76" height="13" font="1">  =  100  Hz, </text>
+<text top="686" left="460" width="9" height="13" font="5"><i>F</i></text>
+<text top="692" left="469" width="16" height="9" font="11"><i>stop</i></text>
+<text top="686" left="485" width="304" height="13" font="1"> = 300 Hz. Figure 4 presents the specifications of </text>
+<text top="703" left="460" width="41" height="13" font="1">the  24</text>
+<text top="700" left="501" width="8" height="9" font="12">th</text>
+<text top="703" left="509" width="280" height="13" font="1">  order  filter,  i.e.  the  magnitude  and  phase </text>
+<text top="720" left="460" width="268" height="13" font="1">response in the specified frequency domain. </text>
+<text top="737" left="502" width="4" height="13" font="1"> </text>
+<text top="918" left="785" width="4" height="13" font="1"> </text>
+<text top="932" left="464" width="307" height="13" font="6"><b>Fig. 4 – Magnitude and phase response of the 24</b></text>
+<text top="929" left="772" width="9" height="9" font="13"><b>th</b></text>
+<text top="932" left="780" width="4" height="13" font="6"><b> </b></text>
+<text top="949" left="587" width="75" height="13" font="6"><b>order filter </b></text>
+<text top="966" left="460" width="4" height="13" font="1"> </text>
+<text top="983" left="502" width="287" height="13" font="1">The  designed  filters  were  exported  to  VHDL </text>
+<text top="1001" left="460" width="329" height="13" font="1">models  using  the  Simulink  HDL  Coder.  The  Black </text>
+<text top="1018" left="460" width="333" height="13" font="1">Box  block  from  the  System  Generator  blockset  </text>
+<text top="1035" left="460" width="329" height="13" font="1">offered the possibility to simulate VHDL code within </text>
+<text top="1052" left="460" width="280" height="13" font="1">Simulink. Figure 5 shows the obtained model. </text>
+<text top="1070" left="460" width="4" height="13" font="6"><b> </b></text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="14" size="5" family="Times" color="#000000"/>
+	<fontspec id="15" size="15" family="Times" color="#000000"/>
+	<fontspec id="16" size="15" family="Times" color="#000000"/>
+<text top="1186" left="439" width="19" height="13" font="1">96 </text>
+<text top="1204" left="108" width="5" height="16" font="0"> </text>
+<text top="516" left="151" width="11" height="13" font="6"><b>4.</b></text>
+<text top="515" left="162" width="4" height="14" font="7"><b> </b></text>
+<text top="516" left="162" width="54" height="13" font="6"><b> Results </b></text>
+<text top="533" left="151" width="287" height="13" font="1">A 100 Hz frequency sine wave corrupted with </text>
+<text top="550" left="108" width="329" height="13" font="1">a  uniform  noise  was  considered  as  input  for  the  five </text>
+<text top="567" left="108" width="329" height="13" font="1">filters.  The  signal  to  noise  ratio,  the  gain  and  the </text>
+<text top="584" left="108" width="329" height="13" font="1">resulting error were calculated in case of every filter. </text>
+<text top="602" left="108" width="329" height="13" font="1">Equation  3  was  used  to  calculate  the  signal  to  noise </text>
+<text top="619" left="108" width="316" height="13" font="1">ratio, while the error was obtained using equation 4. </text>
+<text top="636" left="151" width="4" height="13" font="1"> </text>
+<text top="653" left="138" width="4" height="13" font="1"> </text>
+<text top="698" left="329" width="4" height="7" font="14"><i>n</i></text>
+<text top="698" left="314" width="2" height="7" font="14"><i>f</i></text>
+<text top="669" left="322" width="2" height="7" font="14"><i>f</i></text>
+<text top="694" left="325" width="4" height="9" font="9"><i>s</i></text>
+<text top="694" left="308" width="4" height="9" font="9"><i>s</i></text>
+<text top="664" left="316" width="4" height="9" font="9"><i>s</i></text>
+<text top="680" left="229" width="12" height="9" font="9"><i>dB</i></text>
+<text top="684" left="299" width="11" height="16" font="15"><i>P</i></text>
+<text top="655" left="307" width="11" height="16" font="15"><i>P</i></text>
+<text top="670" left="197" width="32" height="16" font="15"><i>SNR</i></text>
+<text top="670" left="280" width="14" height="16" font="16">lg</text>
+<text top="670" left="260" width="19" height="16" font="16">10</text>
+<text top="673" left="341" width="4" height="13" font="1"> </text>
+<text top="675" left="416" width="21" height="13" font="1">(3) </text>
+<text top="713" left="138" width="4" height="13" font="1"> </text>
+<text top="715" left="240" width="7" height="9" font="9"><i>N</i></text>
+<text top="750" left="236" width="3" height="9" font="9"><i>i</i></text>
+<text top="737" left="311" width="3" height="9" font="9"><i>f</i></text>
+<text top="728" left="323" width="5" height="16" font="15"><i>i</i></text>
+<text top="728" left="302" width="7" height="16" font="15"><i>s</i></text>
+<text top="728" left="274" width="5" height="16" font="15"><i>i</i></text>
+<text top="728" left="262" width="7" height="16" font="15"><i>s</i></text>
+<text top="742" left="217" width="12" height="16" font="15"><i>N</i></text>
+<text top="750" left="246" width="5" height="9" font="8">1</text>
+<text top="725" left="341" width="5" height="9" font="8">2</text>
+<text top="728" left="329" width="11" height="16" font="16">])</text>
+<text top="728" left="317" width="6" height="16" font="16">[</text>
+<text top="728" left="280" width="6" height="16" font="16">]</text>
+<text top="728" left="268" width="6" height="16" font="16">[</text>
+<text top="728" left="255" width="6" height="16" font="16">(</text>
+<text top="717" left="218" width="9" height="16" font="16">1</text>
+<text top="730" left="351" width="4" height="13" font="1"> </text>
+<text top="730" left="416" width="21" height="13" font="1">(4) </text>
+<text top="764" left="108" width="4" height="13" font="1"> </text>
+<text top="798" left="168" width="2" height="7" font="14"><i>f</i></text>
+<text top="793" left="162" width="4" height="9" font="9"><i>s</i></text>
+<text top="784" left="154" width="11" height="16" font="15"><i>P</i></text>
+<text top="786" left="176" width="261" height="13" font="1">  denotes  the  power  of  the  filtered  signal, </text>
+<text top="828" left="142" width="4" height="7" font="14"><i>n</i></text>
+<text top="828" left="125" width="2" height="7" font="14"><i>f</i></text>
+<text top="823" left="137" width="4" height="9" font="9"><i>s</i></text>
+<text top="823" left="120" width="4" height="9" font="9"><i>s</i></text>
+<text top="814" left="111" width="11" height="16" font="15"><i>P</i></text>
+<text top="816" left="150" width="287" height="13" font="1">  is  the  power  of  the  difference  between  the </text>
+<text top="841" left="108" width="319" height="13" font="1">filtered signal and the noisy signal (this difference is </text>
+<text top="859" left="108" width="182" height="13" font="1"> the  estimated  noise)  and </text>
+<text top="857" left="304" width="6" height="16" font="15"><i>s</i></text>
+<text top="859" left="314" width="123" height="13" font="1">  is  the  original, </text>
+<text top="877" left="108" width="143" height="13" font="1">uncorrupted sine wave. </text>
+<text top="895" left="151" width="287" height="13" font="1">Figure 6 shows the input signal and the output </text>
+<text top="912" left="108" width="81" height="13" font="1">of the filters. </text>
+<text top="929" left="151" width="4" height="13" font="1"> </text>
+<text top="947" left="248" width="190" height="13" font="6"><b>Table 1 Measurement results </b></text>
+<text top="964" left="127" width="72" height="13" font="1">Filter order </text>
+<text top="964" left="249" width="29" height="13" font="1">SNR</text>
+<text top="970" left="278" width="2" height="9" font="12"> </text>
+<text top="964" left="280" width="31" height="13" font="1">[dB] </text>
+<text top="964" left="372" width="35" height="13" font="1">Error </text>
+<text top="982" left="157" width="11" height="13" font="1">8 </text>
+<text top="982" left="258" width="45" height="13" font="1">7.0390 </text>
+<text top="982" left="368" width="45" height="13" font="1">0.0780 </text>
+<text top="1000" left="154" width="19" height="13" font="1">12 </text>
+<text top="1000" left="254" width="53" height="13" font="1">11.5297 </text>
+<text top="1000" left="368" width="45" height="13" font="1">0.0592 </text>
+<text top="1018" left="154" width="19" height="13" font="1">16 </text>
+<text top="1018" left="254" width="53" height="13" font="1">11.7168 </text>
+<text top="1018" left="368" width="45" height="13" font="1">0.0573 </text>
+<text top="1036" left="154" width="19" height="13" font="1">20 </text>
+<text top="1036" left="254" width="53" height="13" font="1">12.4403 </text>
+<text top="1036" left="368" width="45" height="13" font="1">0.0569 </text>
+<text top="1054" left="154" width="19" height="13" font="1">24 </text>
+<text top="1054" left="254" width="53" height="13" font="1">12.8034 </text>
+<text top="1054" left="368" width="45" height="13" font="1">0.0561 </text>
+<text top="1072" left="151" width="4" height="13" font="1"> </text>
+<text top="938" left="784" width="4" height="13" font="1"> </text>
+<text top="952" left="481" width="286" height="13" font="6"><b>Fig. 6 – The original signal and the different </b></text>
+<text top="970" left="576" width="98" height="13" font="6"><b>filtered signals </b></text>
+<text top="987" left="460" width="4" height="13" font="6"><b> </b></text>
+<text top="1004" left="502" width="287" height="13" font="1">Figures  7  and  8  were  are  based  on  the  values </text>
+<text top="1021" left="460" width="329" height="13" font="1">from table 1. Figure 7 shows the values of the signal </text>
+<text top="1038" left="460" width="329" height="13" font="1">to noise ratios for each  filter. It can be observed that </text>
+<text top="1055" left="460" width="329" height="13" font="1">the  higher  the  filter  order  is,  the  higher  the  signal  to </text>
+<text top="1073" left="460" width="127" height="13" font="1">noise ratio becomes. </text>
+<text top="477" left="170" width="509" height="13" font="6"><b>Fig. 5 – Simulink model of a FIR filter, using Xilinx’s System Generator blocks </b></text>
+<text top="495" left="101" width="5" height="16" font="0"> </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="17" size="12" family="Times" color="#ff0000"/>
+	<fontspec id="18" size="12" family="Times" color="#000000"/>
+<text top="1186" left="439" width="19" height="13" font="1">97 </text>
+<text top="1204" left="108" width="5" height="16" font="0"> </text>
+<text top="422" left="427" width="4" height="13" font="1"> </text>
+<text top="436" left="117" width="311" height="13" font="6"><b>Fig. 7 – The obtained signal to nosie ratio values </b></text>
+<text top="453" left="108" width="5" height="16" font="0"> </text>
+<text top="473" left="151" width="287" height="13" font="1">Figure  8  shows  the  evolution  of  the  error </text>
+<text top="490" left="108" width="173" height="13" font="1">during the filtering process.  </text>
+<text top="786" left="426" width="5" height="16" font="0"> </text>
+<text top="802" left="116" width="314" height="13" font="6"><b>Fig. 8 – The obtained error for each of the filters </b></text>
+<text top="819" left="151" width="96" height="13" font="6"><b>5. Conclusions </b></text>
+<text top="111" left="502" width="286" height="13" font="1">The filters were synthesized for the Spartan 3E </text>
+<text top="129" left="460" width="329" height="13" font="1">FPGA  produced  by  Xilinx.  Table  2  contains  the </text>
+<text top="146" left="460" width="249" height="13" font="1">resource  utilization  statistics  for  the  24</text>
+<text top="143" left="709" width="8" height="9" font="12">th</text>
+<text top="146" left="716" width="73" height="13" font="1">  order  FIR </text>
+<text top="163" left="460" width="33" height="13" font="1">filter.</text>
+<text top="163" left="493" width="4" height="13" font="17"> </text>
+<text top="180" left="502" width="4" height="13" font="17"> </text>
+<text top="198" left="606" width="183" height="13" font="6"><b>Table 2 Resource utilization </b></text>
+<text top="216" left="460" width="96" height="13" font="1">Resource name </text>
+<text top="216" left="589" width="35" height="13" font="1">Used </text>
+<text top="216" left="643" width="62" height="13" font="1">Available </text>
+<text top="216" left="719" width="70" height="13" font="1">Percentage </text>
+<text top="234" left="460" width="99" height="13" font="1">Slice Flip Flops </text>
+<text top="234" left="589" width="26" height="13" font="1">961 </text>
+<text top="234" left="643" width="41" height="13" font="1">17344 </text>
+<text top="234" left="719" width="27" height="13" font="1">4 % </text>
+<text top="252" left="460" width="40" height="13" font="1">Slices </text>
+<text top="252" left="589" width="26" height="13" font="1">856 </text>
+<text top="252" left="643" width="34" height="13" font="1">8672 </text>
+<text top="252" left="719" width="27" height="13" font="1">9 % </text>
+<text top="270" left="460" width="85" height="13" font="1">4 input LUTs </text>
+<text top="270" left="589" width="26" height="13" font="1">843 </text>
+<text top="270" left="643" width="41" height="13" font="1">17344 </text>
+<text top="270" left="719" width="27" height="13" font="1">4 % </text>
+<text top="288" left="460" width="141" height="13" font="1">MULT18X18SIOs  1 </text>
+<text top="288" left="643" width="19" height="13" font="1">28 </text>
+<text top="288" left="719" width="27" height="13" font="1">3 % </text>
+<text top="306" left="460" width="5" height="16" font="0"> </text>
+<text top="326" left="502" width="287" height="13" font="1">FIR  filters  are  most  widely  used  in  FPGA </text>
+<text top="344" left="460" width="329" height="13" font="1">implementations  because  they  have  linear  phase. </text>
+<text top="361" left="460" width="329" height="13" font="1">Compared  to  IIR  filters,  FIR  filters  have  simple  and </text>
+<text top="378" left="460" width="329" height="13" font="1">regular  structures  which  are  easy  to  implement  on </text>
+<text top="395" left="460" width="329" height="13" font="1">hardware. However FIR filters require higher number </text>
+<text top="413" left="460" width="329" height="13" font="1">of  taps  compared  to  IIR  filters  to  achieve  the  same </text>
+<text top="430" left="460" width="154" height="13" font="1">frequency specifications. </text>
+<text top="447" left="502" width="4" height="13" font="1"> </text>
+<text top="465" left="500" width="77" height="13" font="6"><b>References</b>  </text>
+<text top="481" left="460" width="329" height="13" font="1"> [1]  Vahid,  F.  –  <i>Digital  Design  with  RTL  Design, </i></text>
+<text top="499" left="460" width="329" height="13" font="5"><i>VHDL  and  Verilog</i>,  John  Wiley  &amp;  Sons  Inc.  USA, </text>
+<text top="516" left="460" width="34" height="13" font="1">2011 </text>
+<text top="533" left="460" width="329" height="13" font="1">[2]  Bose,  T.  –  <i>Digital  Signal  and  Image  Processing,</i> </text>
+<text top="551" left="460" width="219" height="13" font="1">John Wiley &amp; Sons Inc. USA, 2004 </text>
+<text top="568" left="460" width="329" height="13" font="1">[3]  Smith,  S.  W.  –  <i>Digital  Signal  Processing  A </i></text>
+<text top="585" left="460" width="329" height="13" font="5"><i>Practical  Guide  for  Engineers  and  Scientists</i>, </text>
+<text top="602" left="460" width="90" height="13" font="1">Newnes, 2003 </text>
+<text top="620" left="460" width="329" height="13" font="1">[4]  Oppenheim,  A.  V.  ,  Schafer,  R.  W.  <i>–  Discrete </i></text>
+<text top="637" left="460" width="270" height="13" font="5"><i>Time Signal Processing</i>, Prentice Hall, 1989 </text>
+<text top="654" left="460" width="329" height="13" font="1">[5]  Loomis,  H.H.,  Sinha,  B.  –  <i>High  Speed  Recursive </i></text>
+<text top="671" left="460" width="329" height="13" font="5"><i>Digital  Filter  Realization  Circuits</i>,  Systems  and </text>
+<text top="688" left="460" width="273" height="13" font="1">Signal Processing, Vol. 3, pp. 267-294, 1984 </text>
+<text top="706" left="460" width="329" height="13" font="1">[6]  Meyer  –  Baese,  U.  –  <i>Digital  Signal  Processing </i></text>
+<text top="723" left="460" width="329" height="13" font="5"><i>with  Field  Programmable  Gate  Arrays  (Signals  and </i></text>
+<text top="740" left="460" width="196" height="13" font="5"><i>Communication  Technology)  3</i></text>
+<text top="737" left="656" width="9" height="9" font="11"><i>rd</i></text>
+<text top="740" left="664" width="125" height="13" font="5"><i>  Edition</i>,  Springer, </text>
+<text top="758" left="460" width="30" height="13" font="1">2007</text>
+<text top="836" left="151" width="8" height="13" font="6"><b>  </b></text>
+</page>
+</pdf2xml>

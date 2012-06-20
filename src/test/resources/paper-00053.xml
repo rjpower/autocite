@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="916">
+	<fontspec id="0" size="16" family="Times" color="#000000"/>
+	<fontspec id="1" size="21" family="Times" color="#000000"/>
+	<fontspec id="2" size="37" family="Helvetica" color="#ff0000"/>
+	<fontspec id="3" size="25" family="Times" color="#000000"/>
+	<fontspec id="4" size="21" family="Times" color="#000000"/>
+<text top="297" left="157" width="601" height="16" font="0"><b>FACULTY OF ELECTRONICS, COMUNICATIONS AND INFORMATION</b></text>
+<text top="318" left="393" width="131" height="16" font="0"><b>TECHNOLOGY</b></text>
+<text top="423" left="363" width="190" height="22" font="1"><i><b>mat.  Petrean Liviu</b></i></text>
+<text top="501" left="205" width="506" height="36" font="2"><b>PhD THESIS ABSTRACT</b></text>
+<text top="599" left="193" width="529" height="24" font="3"><b>Software Security – Contributions to Portable</b></text>
+<text top="630" left="313" width="290" height="24" font="3"><b>Executable Files Security</b></text>
+<text top="775" left="572" width="236" height="22" font="4"><b>Scientific Coordinator:</b></text>
+<text top="802" left="464" width="345" height="22" font="4"><b>Prof. Eng. Gavril Toderean, PhD.</b></text>
+<text top="885" left="363" width="190" height="22" font="4"><b>Cluj-Napoca, 2011</b></text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="916">
+	<fontspec id="5" size="16" family="Times" color="#000000"/>
+	<fontspec id="6" size="16" family="Times" color="#000000"/>
+<text top="135" left="384" width="148" height="24" font="3"><b>CONTENTS</b></text>
+<text top="185" left="108" width="592" height="16" font="5"><i><b>1. Introduction……………………………………………………………...…........</b></i></text>
+<text top="185" left="754" width="9" height="16" font="5"><i><b>3</b></i></text>
+<text top="205" left="108" width="592" height="16" font="6">    1.1 Research Objectives…………………………...…………………....…..........</text>
+<text top="205" left="754" width="9" height="16" font="6">3</text>
+<text top="226" left="108" width="598" height="16" font="6">    1.2 Thesis Structure.................................................................................................</text>
+<text top="226" left="754" width="9" height="16" font="6">4</text>
+<text top="267" left="108" width="599" height="16" font="5"><i><b>2. The Current Status of Software Security...............................................................</b></i></text>
+<text top="267" left="754" width="9" height="16" font="5"><i><b>6</b></i></text>
+<text top="288" left="108" width="598" height="16" font="6">    2.1 The Current Status of Software Piracy..............................................................</text>
+<text top="288" left="754" width="9" height="16" font="6">6</text>
+<text top="308" left="108" width="599" height="16" font="6">    2.2 The Vulnerabilities of a Portable Executable File.............................................</text>
+<text top="308" left="754" width="9" height="16" font="6">7</text>
+<text top="329" left="121" width="586" height="16" font="6"> 2.3 Tools Used by Crackers….................................................................................</text>
+<text top="329" left="754" width="9" height="16" font="6">9</text>
+<text top="350" left="108" width="601" height="16" font="6">    2.4 Olly Debugger…………………………………………………………............</text>
+<text top="350" left="754" width="18" height="16" font="6">11</text>
+<text top="371" left="108" width="602" height="16" font="6">    2.5 Current Solutions of Software Protections…………….....................................</text>
+<text top="371" left="754" width="18" height="16" font="6">12</text>
+<text top="391" left="162" width="550" height="16" font="6">2.5.1 ASProtect.................................................................................................</text>
+<text top="391" left="754" width="18" height="16" font="6">14</text>
+<text top="412" left="162" width="547" height="16" font="6">2.5.2 Execryptor...............................................................................................</text>
+<text top="412" left="754" width="18" height="16" font="6">14</text>
+<text top="433" left="162" width="550" height="16" font="6">2.5.3 Molebox...................................................................................................</text>
+<text top="433" left="754" width="18" height="16" font="6">15</text>
+<text top="453" left="162" width="549" height="16" font="6">2.5.4 Enigma Protector……………………………………………………….</text>
+<text top="453" left="754" width="18" height="16" font="6">15</text>
+<text top="474" left="162" width="548" height="16" font="6">2.5.5 SVKP………………………………………………………… ………..</text>
+<text top="474" left="754" width="18" height="16" font="6">16</text>
+<text top="495" left="162" width="549" height="16" font="6">2.5.6 ExeWrapper…………………………………………………………….</text>
+<text top="495" left="754" width="18" height="16" font="6">16</text>
+<text top="516" left="162" width="553" height="16" font="6">2.5.7 Themida…………………………………………………………………</text>
+<text top="516" left="754" width="18" height="16" font="6">17</text>
+<text top="536" left="162" width="553" height="16" font="6">2.5.8 Private Exe Protector................................................................................</text>
+<text top="536" left="754" width="18" height="16" font="6">17</text>
+<text top="557" left="108" width="610" height="16" font="6">    2.6 Conclusions..........................................................................................................</text>
+<text top="557" left="754" width="18" height="16" font="6">17</text>
+<text top="599" left="108" width="610" height="16" font="5"><i><b>3. Basic Theoretical Fundaments.................................................................................</b></i></text>
+<text top="599" left="754" width="18" height="16" font="5"><i><b>20</b></i></text>
+<text top="619" left="126" width="592" height="16" font="6">3.1 The Structure and the Parameters of a Portable Executable File.........................</text>
+<text top="619" left="754" width="18" height="16" font="6">20</text>
+<text top="640" left="108" width="611" height="16" font="6">    3.2 The Exports Section of a Portable Executable File..............................................</text>
+<text top="640" left="754" width="18" height="16" font="6">25</text>
+<text top="660" left="108" width="611" height="16" font="6">    3.3 The Imports Section of a Portable Executable File..............................................</text>
+<text top="660" left="754" width="18" height="16" font="6">28</text>
+<text top="681" left="126" width="593" height="16" font="6">3.4 8086 Instructions Set............................................................................................</text>
+<text top="681" left="754" width="18" height="16" font="6">31</text>
+<text top="702" left="108" width="612" height="16" font="6">    3.5 Assembly Language Instructions Format.............................................................</text>
+<text top="702" left="754" width="18" height="16" font="6">32</text>
+<text top="723" left="108" width="612" height="16" font="6">    3.6 Assembly Language Instructions Level Transformations....................................</text>
+<text top="723" left="754" width="18" height="16" font="6">35</text>
+<text top="764" left="108" width="612" height="16" font="5"><i><b>4. The Design and the Programming of a Portable Executable File Protector..........</b></i></text>
+<text top="764" left="754" width="18" height="16" font="5"><i><b>39</b></i></text>
+<text top="785" left="108" width="613" height="16" font="6">    4.1 The Packer Design................................................................................................</text>
+<text top="785" left="754" width="18" height="16" font="6">40</text>
+<text top="805" left="162" width="559" height="16" font="6">4.1.1 The Backup Copy of a Protected File........................................................</text>
+<text top="805" left="754" width="18" height="16" font="6">40</text>
+<text top="826" left="162" width="557" height="16" font="6">4.1.2 Allocating Memory Space for the Protected File......................................</text>
+<text top="826" left="754" width="18" height="16" font="6">41</text>
+<text top="847" left="162" width="561" height="16" font="6">4.1.3 Identifying and Reading the Parameters of a Portable Executable File.....</text>
+<text top="847" left="754" width="18" height="16" font="6">42</text>
+<text top="868" left="162" width="562" height="16" font="6">4.1.4 Original Import Table Elimination.............................................................</text>
+<text top="868" left="754" width="18" height="16" font="6">43</text>
+<text top="888" left="162" width="560" height="16" font="6">4.1.5 Encrypting the Names of DLL Libraries and Windows API Functions....</text>
+<text top="888" left="754" width="18" height="16" font="6">43</text>
+<text top="909" left="162" width="562" height="16" font="6">4.1.6 The Encryption of the Portable Executable File Sections..........................</text>
+<text top="909" left="754" width="18" height="16" font="6">44</text>
+<text top="930" left="162" width="560" height="16" font="6">4.1.7 Adding a New Section to the Protected File..............................................</text>
+<text top="930" left="754" width="18" height="16" font="6">50</text>
+<text top="950" left="162" width="562" height="16" font="6">4.1.8 The Reconstruction of the Packer Imports Table.......................................</text>
+<text top="950" left="754" width="18" height="16" font="6">54</text>
+<text top="971" left="108" width="612" height="16" font="6">    4.2 Depacker Programming........................................................................................</text>
+<text top="971" left="754" width="18" height="16" font="6">55</text>
+<text top="992" left="162" width="559" height="16" font="6">4.2.1 Calling Windows API Functions from Depacker......................................</text>
+<text top="992" left="754" width="18" height="16" font="6">55</text>
+<text top="1012" left="162" width="559" height="16" font="6">4.2.2 Jumping to the Portable Executable File Entry Point................................</text>
+<text top="1012" left="754" width="18" height="16" font="6">56</text>
+<text top="1033" left="162" width="559" height="16" font="6">4.2.3 Initialising and Reconstructing the Depacker Import Table......................</text>
+<text top="1033" left="754" width="18" height="16" font="6">56</text>
+<text top="1054" left="162" width="561" height="16" font="6">4.2.4 The Encryption of the Depacker Code.......................................................</text>
+<text top="1054" left="754" width="18" height="16" font="6">57</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="916">
+	<fontspec id="7" size="16" family="Times" color="#000000"/>
+<text top="112" left="162" width="561" height="16" font="6">4.2.5 The Static Obfuscation of the Depacker Code...........................................</text>
+<text top="112" left="754" width="18" height="16" font="6">58</text>
+<text top="133" left="162" width="568" height="16" font="6">4.2.6 The Dynamic Obfuscation of the Depacker Code.......................................</text>
+<text top="133" left="754" width="18" height="16" font="6">60</text>
+<text top="153" left="108" width="624" height="16" font="6">    4.3 Conclusions.............................................................................................................</text>
+<text top="153" left="754" width="18" height="16" font="6">61</text>
+<text top="195" left="108" width="619" height="16" font="5"><i><b>5. Serial Numbers Encryption Algorithms.....................................................................</b></i></text>
+<text top="195" left="754" width="18" height="16" font="5"><i><b>63</b></i></text>
+<text top="215" left="126" width="605" height="16" font="6">5.1 Mathematical Basic Notions...................................................................................</text>
+<text top="215" left="754" width="18" height="16" font="6">63</text>
+<text top="236" left="108" width="622" height="16" font="6">    5.2 Encryption Algorithms Using Two Key Matrices..................................................</text>
+<text top="236" left="754" width="18" height="16" font="6">67</text>
+<text top="257" left="108" width="624" height="16" font="6">    5.3 The Results Obtained Using the Encryption with Two Key Matrices....................</text>
+<text top="257" left="754" width="18" height="16" font="6">70</text>
+<text top="277" left="108" width="622" height="16" font="6">    5.4 Key Matrices Generation........................................................................................</text>
+<text top="277" left="754" width="18" height="16" font="6">73</text>
+<text top="298" left="108" width="623" height="16" font="6">    5.5 Encryption Algorithm with One Key Matrix..........................................................</text>
+<text top="298" left="754" width="18" height="16" font="6">76</text>
+<text top="319" left="108" width="627" height="16" font="6">    5.6 Results Obtained Using the Encryption Algorithm with One Key Matrix..............</text>
+<text top="319" left="754" width="18" height="16" font="6">79</text>
+<text top="340" left="108" width="625" height="16" font="6">    5.7 The Utility of Encryption Algorithms with Matrices..............................................</text>
+<text top="340" left="754" width="18" height="16" font="6">82</text>
+<text top="381" left="108" width="606" height="16" font="5"><i><b>6. The Evaluation of the Performances of the Protected Portable Executable Files</b></i></text>
+<text top="402" left="108" width="620" height="16" font="5"><i><b>with the Program Developed in this Thesis ...................................................................</b></i></text>
+<text top="402" left="754" width="18" height="16" font="5"><i><b>83</b></i></text>
+<text top="422" left="108" width="619" height="16" font="6">    6.1 Performance Tests..................................................................................................</text>
+<text top="422" left="754" width="18" height="16" font="6">84</text>
+<text top="443" left="108" width="618" height="16" font="6">    6.2 Security Tests of the Obfuscation Methods...........................................................</text>
+<text top="443" left="754" width="18" height="16" font="6">86</text>
+<text top="464" left="108" width="620" height="16" font="6">    6.3 The Performances of the Encryption Algorithms Using Matrices.........................</text>
+<text top="464" left="754" width="18" height="16" font="6">88</text>
+<text top="506" left="108" width="622" height="16" font="5"><i><b>7. Conclusions..................................................................................................................</b></i></text>
+<text top="506" left="754" width="18" height="16" font="5"><i><b>89</b></i></text>
+<text top="526" left="108" width="620" height="16" font="6">    7.1 Final Conclusions...................................................................................................</text>
+<text top="526" left="754" width="18" height="16" font="6">89</text>
+<text top="547" left="126" width="602" height="16" font="6">7.2 Contributions..........................................................................................................</text>
+<text top="547" left="754" width="18" height="16" font="6">91</text>
+<text top="567" left="108" width="617" height="16" font="6">    7.3 Research Directions...............................................................................................</text>
+<text top="567" left="754" width="18" height="16" font="6">94</text>
+<text top="609" left="108" width="616" height="16" font="5"><i><b>References.......................................................................................................................</b></i></text>
+<text top="609" left="754" width="18" height="16" font="5"><i><b>95</b></i></text>
+<text top="651" left="108" width="619" height="16" font="5"><i><b>Annex...............................................................................................................................</b></i></text>
+<text top="651" left="754" width="27" height="16" font="5"><i><b>100</b></i></text>
+<text top="671" left="126" width="600" height="16" font="6">Annex 1........................................................................................................................</text>
+<text top="671" left="754" width="27" height="16" font="6">100</text>
+<text top="692" left="108" width="618" height="16" font="6">    Annex 2........................................................................................................................</text>
+<text top="692" left="754" width="27" height="16" font="6">105</text>
+<text top="712" left="108" width="618" height="16" font="6">    Annex 3........................................................................................................................</text>
+<text top="712" left="754" width="27" height="16" font="6">110</text>
+<text top="733" left="108" width="618" height="16" font="6">    Annex 4........................................................................................................................</text>
+<text top="733" left="754" width="27" height="16" font="6">130</text>
+<text top="774" left="108" width="618" height="16" font="7"><i>Tables List........................................................................................................................</i></text>
+<text top="774" left="754" width="27" height="16" font="7"><i>135</i></text>
+<text top="795" left="108" width="617" height="16" font="7"><i>Figures List......................................................................................................................</i></text>
+<text top="795" left="754" width="27" height="16" font="7"><i>135</i></text>
+<text top="816" left="108" width="617" height="16" font="7"><i>Abbreviations and Names List.........................................................................................</i></text>
+<text top="816" left="754" width="27" height="16" font="7"><i>136</i></text>
+<text top="837" left="108" width="617" height="16" font="7"><i>Paper Work List...............................................................................................................</i></text>
+<text top="837" left="754" width="27" height="16" font="7"><i>136</i></text>
+<text top="857" left="108" width="620" height="16" font="7"><i>Curriculum Vitae..............................................................................................................</i></text>
+<text top="857" left="754" width="27" height="16" font="7"><i>138</i></text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="916">
+	<fontspec id="8" size="16" family="Symbol" color="#000000"/>
+<text top="112" left="386" width="171" height="16" font="0"><b>1. INTRODUCTION</b></text>
+<text top="154" left="135" width="175" height="16" font="0"><b>1.1 Problem Statement</b></text>
+<text top="195" left="135" width="674" height="16" font="6">Software  development  is  a  complex  field  that  increases  along  with  the  development  of the</text>
+<text top="215" left="108" width="701" height="16" font="6">new  Integrated  Development  Environments  (IDE)  from  Microsoft,  Borland,  etc.  and  their</text>
+<text top="236" left="108" width="59" height="16" font="6">updates.</text>
+<text top="257" left="135" width="674" height="16" font="6">The complexity of software sets new levels of difficulty for programmers and thus errors and</text>
+<text top="277" left="108" width="701" height="16" font="6">failures are introduced in many stages of the software life-cycle. In software security the sum of</text>
+<text top="298" left="108" width="700" height="16" font="6">all  these  errors  and  failures  is  defined  as <i>software  vulnerability. </i>Vulnerable  software  allows</text>
+<text top="319" left="108" width="701" height="16" font="6">information to be accessed by the prying eyes of crackers who may publish and compromise it.</text>
+<text top="340" left="108" width="701" height="16" font="6">After examining hundreds of programs and their vulnerabilities we concluded that the best way</text>
+<text top="360" left="108" width="604" height="16" font="6">to protect software is to develop a personalized solution against software tampering.</text>
+<text top="381" left="135" width="674" height="16" font="6">The  current  thesis  is  approaching  the  critical  analysis  of  software  vulnerabilities  and</text>
+<text top="402" left="108" width="617" height="16" font="6">describes genuine contributions to reducing and minimizing of software vulnerability.</text>
+<text top="443" left="135" width="135" height="16" font="0"><b>1.2 Contributions</b></text>
+<text top="485" left="162" width="647" height="16" font="6">The research activity conducted for the development of this thesis required knowledge of</text>
+<text top="505" left="108" width="700" height="16" font="6">the structure of portable executable files, the instructions set of 8086 microprocessor, computer</text>
+<text top="526" left="108" width="701" height="16" font="6">programming  and  software  tools.  We  brought  up  a  few  genuine  contributions  in  each  of  the</text>
+<text top="547" left="108" width="174" height="16" font="6">above fields, as follows.</text>
+<text top="567" left="162" width="647" height="16" font="6">We performed a study of the current protection methods of software protection. We took</text>
+<text top="588" left="108" width="700" height="16" font="6">into  consideration  the  vulnerabilities  of  the  portable  executable  files,  which  we  presented  in</text>
+<text top="609" left="108" width="420" height="16" font="6">paragraph 2.2. This study consisted of the following steps:</text>
+<text top="631" left="171" width="638" height="16" font="6">We  selected  a  sample  of  more  than  400  computer  programs  in  shareware  versions,</text>
+<text top="651" left="171" width="637" height="16" font="6">distributed through internet. All these programs had in common the fact that they were</text>
+<text top="672" left="171" width="637" height="16" font="6">protected  by  a  serial  number  protection  scheme  to  activate  them.  We  selected  the</text>
+<text top="693" left="171" width="427" height="16" font="6">program randomly or according to their popularity or price.</text>
+<text top="715" left="171" width="638" height="16" font="6">We  installed  each  program  separately  and  we  analyzed  it  using  Olly  Debugger.  We</text>
+<text top="736" left="171" width="351" height="16" font="6">defined the analyzed program as <i>target</i> program.</text>
+<text top="758" left="171" width="637" height="16" font="6">We  ran  the  target  program  through  the  debugger  by  examining  its  behavior  during</text>
+<text top="778" left="171" width="638" height="16" font="6">execution.  The  conclusion  of  this  examination  was  that  each  program  which  had  not</text>
+<text top="799" left="171" width="638" height="16" font="6">been protected against debugging worked out effectively and the logic of the assembly</text>
+<text top="820" left="171" width="456" height="16" font="6">code was visible from the beginning to the end of its execution.</text>
+<text top="842" left="171" width="637" height="16" font="6">We used the debugger to access the text resources, the code section, the import table of</text>
+<text top="862" left="171" width="638" height="16" font="6">the target file and we set some breakpoints through its execution to reach the sensitive</text>
+<text top="883" left="171" width="637" height="16" font="6">parts  of  the  assembly  code.  These  portions  of  code  corresponded  to  the  protection</text>
+<text top="904" left="171" width="638" height="16" font="6">scheme  which  was  now  visible  through  debugging  and  the  code  could  be  modified  to</text>
+<text top="924" left="171" width="221" height="16" font="6">generate a valid serial number.</text>
+<text top="947" left="171" width="637" height="16" font="6">We noted the vulnerabilities of each target file and the results are presented in paragraph</text>
+<text top="967" left="171" width="27" height="16" font="6">2.6.</text>
+<text top="988" left="162" width="646" height="16" font="6">We performed a study of the fusibility of 10 protection programs used by the developers</text>
+<text top="1008" left="144" width="665" height="16" font="6">of the examined target files by studying their behavior according to the operating systems</text>
+<text top="1029" left="144" width="518" height="16" font="6">and the antivirus programs. The results are presented in the table below:</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="916">
+<text top="113" left="390" width="147" height="16" font="0"><b>Number of imports</b></text>
+<text top="113" left="137" width="26" height="16" font="0"><b>No.</b></text>
+<text top="113" left="210" width="80" height="16" font="0"><b>Protection</b></text>
+<text top="134" left="193" width="114" height="16" font="0"><b>program name</b></text>
+<text top="135" left="340" width="9" height="16" font="0"><b>1</b></text>
+<text top="135" left="380" width="9" height="16" font="0"><b>2</b></text>
+<text top="135" left="419" width="9" height="16" font="0"><b>3</b></text>
+<text top="135" left="458" width="9" height="16" font="0"><b>4</b></text>
+<text top="135" left="497" width="9" height="16" font="0"><b>5</b></text>
+<text top="135" left="536" width="9" height="16" font="0"><b>6</b></text>
+<text top="135" left="577" width="9" height="16" font="0"><b>7</b></text>
+<text top="113" left="623" width="60" height="16" font="0"><b>VC++ 6</b></text>
+<text top="113" left="720" width="54" height="16" font="0"><b>VBasic</b></text>
+<text top="156" left="146" width="9" height="16" font="6">1</text>
+<text top="156" left="203" width="93" height="16" font="6">Our program</text>
+<text top="156" left="333" width="23" height="16" font="6">Err</text>
+<text top="156" left="373" width="23" height="16" font="6">Err</text>
+<text top="156" left="490" width="26" height="16" font="6">OK</text>
+<text top="156" left="640" width="26" height="16" font="6">OK</text>
+<text top="156" left="734" width="26" height="16" font="6">OK</text>
+<text top="177" left="146" width="9" height="16" font="6">2</text>
+<text top="177" left="210" width="80" height="16" font="6">Execryptor</text>
+<text top="177" left="359" width="210" height="16" font="6">Conflicting Norton Antivirus</text>
+<text top="177" left="615" width="76" height="16" font="6">Invalid PE</text>
+<text top="177" left="734" width="26" height="16" font="6">OK</text>
+<text top="199" left="146" width="9" height="16" font="6">3</text>
+<text top="199" left="210" width="78" height="16" font="6">AS Protect</text>
+<text top="199" left="334" width="22" height="16" font="6">No</text>
+<text top="199" left="373" width="22" height="16" font="6">No</text>
+<text top="199" left="412" width="23" height="16" font="6">Err</text>
+<text top="199" left="451" width="23" height="16" font="6">Err</text>
+<text top="199" left="490" width="62" height="16" font="6">Err Err</text>
+<text top="199" left="568" width="26" height="16" font="6">OK</text>
+<text top="199" left="640" width="26" height="16" font="6">OK</text>
+<text top="199" left="734" width="26" height="16" font="6">OK</text>
+<text top="220" left="146" width="9" height="16" font="6">4</text>
+<text top="220" left="191" width="117" height="16" font="6">AS Protect SKE</text>
+<text top="220" left="334" width="22" height="16" font="6">No</text>
+<text top="220" left="373" width="22" height="16" font="6">No</text>
+<text top="220" left="412" width="23" height="16" font="6">Err</text>
+<text top="220" left="451" width="23" height="16" font="6">Err</text>
+<text top="220" left="490" width="62" height="16" font="6">Err Err</text>
+<text top="220" left="568" width="26" height="16" font="6">OK</text>
+<text top="220" left="640" width="26" height="16" font="6">OK</text>
+<text top="220" left="734" width="26" height="16" font="6">OK</text>
+<text top="241" left="146" width="9" height="16" font="6">5</text>
+<text top="241" left="222" width="56" height="16" font="6">Enigma</text>
+<text top="241" left="452" width="210" height="16" font="6">Conflicting Norton Antivirus</text>
+<text top="263" left="146" width="9" height="16" font="6">6</text>
+<text top="263" left="202" width="95" height="16" font="6">Exe Wrapper</text>
+<text top="263" left="333" width="23" height="16" font="6">Err</text>
+<text top="263" left="373" width="23" height="16" font="6">Err</text>
+<text top="263" left="412" width="23" height="16" font="6">Err</text>
+<text top="263" left="451" width="23" height="16" font="6">Err</text>
+<text top="263" left="490" width="62" height="16" font="6">Err Err</text>
+<text top="263" left="568" width="26" height="16" font="6">OK</text>
+<text top="263" left="640" width="26" height="16" font="6">OK</text>
+<text top="263" left="734" width="26" height="16" font="6">OK</text>
+<text top="285" left="146" width="9" height="16" font="6">7</text>
+<text top="285" left="217" width="65" height="16" font="6">Molebox</text>
+<text top="285" left="451" width="26" height="16" font="6">OK</text>
+<text top="285" left="640" width="26" height="16" font="6">OK</text>
+<text top="285" left="734" width="26" height="16" font="6">OK</text>
+<text top="306" left="146" width="9" height="16" font="6">8</text>
+<text top="306" left="227" width="46" height="16" font="6">SVKP</text>
+<text top="306" left="452" width="210" height="16" font="6">Conflicting Norton Antivirus</text>
+<text top="327" left="146" width="9" height="16" font="6">9</text>
+<text top="327" left="218" width="64" height="16" font="6">Themida</text>
+<text top="327" left="452" width="210" height="16" font="6">Conflicting Norton Antivirus</text>
+<text top="349" left="141" width="18" height="16" font="6">10</text>
+<text top="349" left="208" width="83" height="16" font="6">Private Exe</text>
+<text top="370" left="217" width="66" height="16" font="6">Protector</text>
+<text top="349" left="451" width="26" height="16" font="6">OK</text>
+<text top="349" left="640" width="26" height="16" font="6">OK</text>
+<text top="349" left="734" width="26" height="16" font="6">OK</text>
+<text top="391" left="207" width="539" height="16" font="7"><i>Table 1 – Fusibility tests of our software compared with existing programs</i></text>
+<text top="432" left="108" width="700" height="16" font="6">We  observed  that  the  most  trustful  solutions  are  Molebox,  Private  EXE  Protector  and  our</text>
+<text top="453" left="108" width="65" height="16" font="6">program.</text>
+<text top="494" left="108" width="700" height="16" font="6">After these studies we continued by optimizing the existing solutions and by elaborating new and</text>
+<text top="515" left="108" width="700" height="16" font="6">genuine software protection solutions. Some of the results obtained were published in the papers</text>
+<text top="536" left="108" width="701" height="16" font="6">noted in annex 1 and 2. The original methods of serial number protection elaborated in this thesis</text>
+<text top="557" left="108" width="27" height="16" font="6">are:</text>
+<text top="579" left="162" width="646" height="16" font="6">new  serial  numbers  encryption  algorithms  aiming  to  delay  and  thwart  the  cracking</text>
+<text top="599" left="162" width="647" height="16" font="6">process. We extended the Hill algorithm by using the linear algebra notion of arithmetic</text>
+<text top="620" left="162" width="647" height="16" font="6">equivalent  matrices  and  we  destroyed  the  linearity  of  the  Hill  algorithm  by  performing</text>
+<text top="641" left="162" width="647" height="16" font="6">non-linear transformations over the lines and columns of the state matrix corresponding</text>
+<text top="661" left="162" width="646" height="16" font="6">to  the  encrypted  serial  number.  We  implemented  this  solution  using  C  language  in  a</text>
+<text top="682" left="162" width="647" height="16" font="6">separated  DLL  file  loaded  dynamically  into  memory  during  execution  using</text>
+<text top="703" left="162" width="647" height="16" font="6">GetProcAddress and LoadLibrary functions. We avoided loading the entire DLL file into</text>
+<text top="723" left="162" width="186" height="16" font="6">memory at the same time.</text>
+<text top="746" left="162" width="647" height="16" font="6">original  methods  to  destroy  the  assembly  language  logic  during  debugging  by  using</text>
+<text top="766" left="162" width="647" height="16" font="6">polymorphic  and  metamorphic  assembly  code.  We  defined  the  static  code  obfuscation</text>
+<text top="787" left="162" width="646" height="16" font="6">and  the  dynamic  code  obfuscation  and  we  developed  new  methods  to  perform  these</text>
+<text top="808" left="162" width="647" height="16" font="6">operations.  The  static  obfuscation  consists  in  many  loops  developed  in  assembly</text>
+<text top="828" left="162" width="647" height="16" font="6">language  designed  to  throw  the  crackers  on  a  false track  during  debugging  creating</text>
+<text top="849" left="162" width="646" height="16" font="6">diversions.  We  used  simple  loops  with  large  induction  constants  for  each  loop.  The</text>
+<text top="870" left="162" width="646" height="16" font="6">dynamic obfuscation consists into a metamorphic engine that injects and replaces blocks</text>
+<text top="890" left="162" width="184" height="16" font="6">of code during execution.</text>
+<text top="911" left="135" width="673" height="16" font="6">We designed methods of debugger detection and we stopped the execution of the protected</text>
+<text top="932" left="108" width="213" height="16" font="6">while loaded into a debugger.</text>
+<text top="952" left="135" width="673" height="16" font="6">We developed a program for the automatic protection of the portable executable files, whose</text>
+<text top="973" left="108" width="304" height="16" font="6">entire source code is presented in annex 3.</text>
+<text top="994" left="135" width="673" height="16" font="6">We used a new and original method of imports redirection and reconstruction as presented in</text>
+<text top="1015" left="108" width="166" height="16" font="6">chapter 4 of this thesis.</text>
+<text top="1035" left="135" width="674" height="16" font="6">This  thesis  addresses the  following  requirements  of  the  protection  of  portable  executable</text>
+<text top="1056" left="108" width="36" height="16" font="6">files:</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1188" width="916">
+<text top="113" left="198" width="611" height="16" font="6">metamorphic  assembly  code  transformations  without  constant  signatures  into  the</text>
+<text top="134" left="198" width="176" height="16" font="6">protected blocks of code</text>
+<text top="156" left="198" width="432" height="16" font="6">total destruction of the assembly language instructions logic</text>
+<text top="178" left="198" width="346" height="16" font="6">anti-debugging and debugger detection methods</text>
+<text top="200" left="198" width="165" height="16" font="6">import table protection</text>
+<text top="222" left="198" width="234" height="16" font="6">serial number protection scheme</text>
+<text top="243" left="162" width="647" height="16" font="6">We carried  out  two  performance  tests  over  the  automatic software  protection  program</text>
+<text top="263" left="108" width="279" height="16" font="6">developed during the research activity.</text>
+<text top="284" left="162" width="647" height="16" font="6">The first test consisted of the comparison of the code size before and after protection with</text>
+<text top="305" left="108" width="701" height="16" font="6">our program. We used a protection buffer with metamorphic transformations of 1024 bytes, and</text>
+<text top="325" left="108" width="311" height="16" font="6">the results are presented in the table below:</text>
+<text top="368" left="155" width="67" height="16" font="6">EXE File</text>
+<text top="368" left="297" width="20" height="16" font="6">E1</text>
+<text top="368" left="351" width="20" height="16" font="6">E2</text>
+<text top="368" left="398" width="20" height="16" font="6">E3</text>
+<text top="368" left="452" width="20" height="16" font="6">E4</text>
+<text top="368" left="506" width="20" height="16" font="6">E5</text>
+<text top="368" left="560" width="20" height="16" font="6">E6</text>
+<text top="368" left="614" width="20" height="16" font="6">E7</text>
+<text top="368" left="668" width="20" height="16" font="6">E8</text>
+<text top="368" left="722" width="20" height="16" font="6">E9</text>
+<text top="368" left="771" width="29" height="16" font="6">E10</text>
+<text top="389" left="148" width="81" height="16" font="6">Size before</text>
+<text top="410" left="135" width="107" height="16" font="6">protection (kb)</text>
+<text top="389" left="303" width="9" height="16" font="6">3</text>
+<text top="389" left="352" width="18" height="16" font="6">40</text>
+<text top="389" left="395" width="27" height="16" font="6">243</text>
+<text top="389" left="449" width="27" height="16" font="6">433</text>
+<text top="389" left="503" width="27" height="16" font="6">644</text>
+<text top="389" left="556" width="27" height="16" font="6">700</text>
+<text top="389" left="610" width="27" height="16" font="6">848</text>
+<text top="389" left="660" width="36" height="16" font="6">1130</text>
+<text top="389" left="714" width="36" height="16" font="6">1333</text>
+<text top="389" left="767" width="36" height="16" font="6">2115</text>
+<text top="431" left="123" width="132" height="16" font="6">Increasing percent</text>
+<text top="452" left="175" width="27" height="16" font="6">(%)</text>
+<text top="431" left="289" width="36" height="16" font="6">1100</text>
+<text top="431" left="352" width="18" height="16" font="6">80</text>
+<text top="431" left="399" width="18" height="16" font="6">15</text>
+<text top="431" left="458" width="9" height="16" font="6">6</text>
+<text top="431" left="512" width="9" height="16" font="6">4</text>
+<text top="431" left="565" width="9" height="16" font="6">3</text>
+<text top="431" left="619" width="9" height="16" font="6">3</text>
+<text top="431" left="673" width="9" height="16" font="6">2</text>
+<text top="431" left="727" width="9" height="16" font="6">2</text>
+<text top="431" left="781" width="9" height="16" font="6">1</text>
+<text top="473" left="356" width="258" height="16" font="7"><i>Table 2 – The first performance test</i></text>
+<text top="515" left="162" width="646" height="16" font="6">The  second  performance  test  compares  the  execution  of  the  target  file  before  and  after</text>
+<text top="535" left="108" width="700" height="16" font="6">protection by  measuring  the  loading  times  in  both  cases. As  the  protected  file  contains  the</text>
+<text top="556" left="108" width="700" height="16" font="6">depacker  code,  the  loading  time  is  increased  by  the  decryption  delay  and  the  time  taken  to</text>
+<text top="577" left="108" width="700" height="16" font="6">redirect and reconstruct the import table. Table 3 contains the decryption delays of 10 protected</text>
+<text top="597" left="108" width="700" height="16" font="6">portable executable files. We must emphasize the fact that there is no fixed decryption delay for</text>
+<text top="618" left="108" width="701" height="16" font="6">each  portable  executable  file  because  of  their  dependence of  the  operating  system  and  its</text>
+<text top="639" left="108" width="701" height="16" font="6">resources. The decryption delay depends of the complexity of each protected file. In conclusion</text>
+<text top="660" left="108" width="497" height="16" font="6">we will obtain different results for different portable executable files.</text>
+<text top="702" left="149" width="80" height="16" font="6">Fisier EXE</text>
+<text top="702" left="290" width="20" height="16" font="6">E1</text>
+<text top="702" left="344" width="20" height="16" font="6">E2</text>
+<text top="702" left="398" width="20" height="16" font="6">E3</text>
+<text top="702" left="452" width="20" height="16" font="6">E4</text>
+<text top="702" left="506" width="20" height="16" font="6">E5</text>
+<text top="702" left="560" width="20" height="16" font="6">E6</text>
+<text top="702" left="614" width="20" height="16" font="6">E7</text>
+<text top="702" left="668" width="20" height="16" font="6">E8</text>
+<text top="702" left="722" width="20" height="16" font="6">E9</text>
+<text top="702" left="771" width="29" height="16" font="6">E10</text>
+<text top="723" left="115" width="147" height="16" font="6">Loading time before</text>
+<text top="744" left="152" width="73" height="16" font="6">protection</text>
+<text top="765" left="172" width="33" height="16" font="6">(ms)</text>
+<text top="723" left="287" width="27" height="16" font="6">100</text>
+<text top="723" left="341" width="27" height="16" font="6">102</text>
+<text top="723" left="395" width="27" height="16" font="6">180</text>
+<text top="723" left="449" width="27" height="16" font="6">240</text>
+<text top="723" left="503" width="27" height="16" font="6">260</text>
+<text top="723" left="556" width="27" height="16" font="6">265</text>
+<text top="723" left="610" width="27" height="16" font="6">272</text>
+<text top="723" left="664" width="27" height="16" font="6">305</text>
+<text top="723" left="718" width="27" height="16" font="6">320</text>
+<text top="723" left="772" width="27" height="16" font="6">540</text>
+<text top="786" left="122" width="134" height="16" font="6">Loading time after</text>
+<text top="807" left="134" width="110" height="16" font="6">protection (ms)</text>
+<text top="786" left="287" width="27" height="16" font="6">101</text>
+<text top="786" left="341" width="27" height="16" font="6">103</text>
+<text top="786" left="395" width="27" height="16" font="6">195</text>
+<text top="786" left="449" width="27" height="16" font="6">270</text>
+<text top="786" left="503" width="27" height="16" font="6">295</text>
+<text top="786" left="556" width="27" height="16" font="6">302</text>
+<text top="786" left="610" width="27" height="16" font="6">320</text>
+<text top="786" left="664" width="27" height="16" font="6">350</text>
+<text top="786" left="718" width="27" height="16" font="6">375</text>
+<text top="786" left="772" width="27" height="16" font="6">610</text>
+<text top="828" left="127" width="124" height="16" font="6">Decryption delay</text>
+<text top="849" left="172" width="33" height="16" font="6">(ms)</text>
+<text top="828" left="296" width="9" height="16" font="6">1</text>
+<text top="828" left="350" width="9" height="16" font="6">1</text>
+<text top="828" left="399" width="18" height="16" font="6">15</text>
+<text top="828" left="453" width="18" height="16" font="6">30</text>
+<text top="828" left="507" width="18" height="16" font="6">35</text>
+<text top="828" left="561" width="18" height="16" font="6">37</text>
+<text top="828" left="615" width="18" height="16" font="6">38</text>
+<text top="828" left="669" width="18" height="16" font="6">45</text>
+<text top="828" left="723" width="18" height="16" font="6">55</text>
+<text top="828" left="776" width="18" height="16" font="6">70</text>
+<text top="870" left="117" width="681" height="16" font="7"><i>Table 3 – The decryption delay of portable executable files protected using a single encryption</i></text>
+<text top="891" left="386" width="143" height="16" font="7"><i>buffer of 1024 bytes</i></text>
+<text top="932" left="162" width="646" height="16" font="6">The  decryption  delay  is  reduced  for  small  portable  executable  files  because  of  the</text>
+<text top="953" left="108" width="701" height="16" font="6">reduced size of their code section. The tables similar to table 3, presented in this thesis will be</text>
+<text top="974" left="108" width="700" height="16" font="6">used to set the encryption buffer size at protection and for the multiple uses of the same or more</text>
+<text top="995" left="108" width="701" height="16" font="6">encryption buffers over the same protected file. The decryption delays will be summed at each</text>
+<text top="1015" left="108" width="700" height="16" font="6">use  of  the  encryption  buffer.  Decryption  delays  greater  than  2-3  seconds  will  not  be  admitted.</text>
+<text top="1036" left="108" width="701" height="16" font="6">The  encryption  buffers  will  have  the  size  between  124  and  5120  bytes.  For  greater  encryption</text>
+<text top="1057" left="108" width="681" height="16" font="6">buffers the decryption delays increases rapidly resulting in conflicts with the operating system.</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1188" width="916">
+	<fontspec id="9" size="16" family="Times" color="#333333"/>
+	<fontspec id="10" size="16" family="Times" color="#333333"/>
+<text top="112" left="416" width="139" height="16" font="0"><b>2. REFERENCES</b></text>
+<text top="153" left="162" width="646" height="16" font="6">[1]  Toderean  G,  Caruntu  A,  Buza  O, Nica  A: <i>Microprocessors – Laboratory  Guide,</i></text>
+<text top="174" left="162" width="207" height="16" font="7"><i>edition 2007, </i>Risoprint 2007</text>
+<text top="215" left="162" width="647" height="16" font="6">[2]  Petrean  L.: <i>Software  Security –  Polymorphic  and  Metamorphic  Code  applications,</i></text>
+<text top="236" left="162" width="258" height="16" font="6">SIITME 2007, Baia Mare, Romania</text>
+<text top="277" left="162" width="647" height="16" font="6">[3]  Petrean  L.: <i>Software  Security –  General  Method  of  Literal  Strings  Obfuscation</i>,</text>
+<text top="298" left="162" width="281" height="16" font="6">IWCIT 2007, Ostrava, Czech Republic</text>
+<text top="340" left="162" width="571" height="16" font="6">[4] Kaspersky K.: <i>Hacker Disassembling Uncovered</i>, A-LIST Publishing, 2003</text>
+<text top="381" left="162" width="584" height="16" font="6">[5] Eilam E.: <i>Reversing: Secrets of Reverse Engineering</i>, Wiley Publishing, 2005</text>
+<text top="422" left="162" width="607" height="16" font="6">[6] Pirogov V.: <i>The Assembly Programming Master Book</i>, A-LIST Publishing, 2005</text>
+<text top="464" left="162" width="647" height="16" font="6">[7]  Petrean  L.,  Toderean  G.: <i>Portable  Executable  Format  Security  Patterns</i>,  IWCIT</text>
+<text top="485" left="162" width="166" height="16" font="6">2008, Gliwice, Polonia</text>
+<text top="526" left="162" width="465" height="16" font="6">[8] Cerven P.: <i>Crackproof Your Software, </i>No Starch Press, 2002</text>
+<text top="567" left="162" width="647" height="16" font="6">[9]  Petrean  L.,  Toderean  G.: <i>Portable  Executable  File Format –  Import  Address  Table</i></text>
+<text top="588" left="162" width="492" height="16" font="7"><i>Redirection and Reconstruction</i>, microCAD 2008, Miskolc, Ungaria</text>
+<text top="629" left="162" width="647" height="16" font="6">[10]  Petrean  L.,  Toderean  G.: <i>Assembly  Metamorphic  Code  Transformations  as  a</i></text>
+<text top="650" left="162" width="610" height="16" font="7"><i>Protection Method of Portable Executable Files, </i>microCAD 2009, Miskolc, Ungaria</text>
+<text top="692" left="162" width="647" height="16" font="6">[11]  Duntemann  J.: <i>Assembly  Language  Step-by-Step,  Programming  with  DOS  and</i></text>
+<text top="712" left="162" width="353" height="16" font="7"><i>Linux, Second Edition, </i>John Wiley &amp; Sons, 2000</text>
+<text top="754" left="162" width="490" height="16" font="6">[12] Oprea D.: <i>Protecţia şi Securitatea Informaţiilor, </i>Polirom, 2007</text>
+<text top="795" left="162" width="580" height="16" font="6">[13] Lungu V.: <i>Intel Processors Assembly Language Programming, </i>Teora, 2004</text>
+<text top="837" left="162" width="459" height="16" font="6">[14] Muscă G.: <i>Assembly Language Programming, </i>Teora, 1996</text>
+<text top="878" left="162" width="647" height="16" font="6">[15]  Howard  M.,  LeBlanc  D.,  Viega  J.: <i>19  Deadly  Sins  of  Software  Security</i>,  McGraw-</text>
+<text top="899" left="162" width="139" height="16" font="6">Hill/Osborne, 2005</text>
+<text top="940" left="162" width="598" height="16" font="6">[16] McGraw G.: <i>Exploiting Software How To Break Code</i>, Addison Wesley, 2004</text>
+<text top="981" left="162" width="30" height="16" font="6">[17]</text>
+<text top="981" left="196" width="520" height="16" font="9">Denning D. E.: <i>Information Warfare &amp; Security,</i> Addison-Wesley, 1999</text>
+<text top="1023" left="162" width="30" height="16" font="9">[18]</text>
+<text top="1023" left="196" width="487" height="16" font="6">Erickson J.: <i>Hacking: The Art of Eploitation</i>, No Starch Press, 2003</text>
+</page>
+</pdf2xml>

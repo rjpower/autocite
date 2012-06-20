@@ -1,0 +1,1845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="19" family="Times" color="#006e8e"/>
+	<fontspec id="1" size="43" family="Times" color="#006e8e"/>
+<text top="672" left="319" width="259" height="24" font="0">Technische Berichte Nr. 48</text>
+<text top="709" left="319" width="303" height="24" font="0">des Hasso-Plattner-Instituts für  </text>
+<text top="735" left="319" width="229" height="24" font="0">Softwaresystemtechnik  </text>
+<text top="760" left="319" width="250" height="24" font="0">an der Universität Potsdam</text>
+<text top="225" left="319" width="208" height="51" font="1">CSOM/PL  </text>
+<text top="285" left="319" width="376" height="51" font="1">A Virtual Machine </text>
+<text top="345" left="319" width="261" height="51" font="1">Product Line</text>
+<text top="429" left="319" width="416" height="24" font="0">Michael Haupt, Stefan Marr, Robert Hirschfeld</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="2" size="16" family="Times" color="#000000"/>
+<text top="107" left="106" width="5" height="20" font="2"> </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="107" left="371" width="420" height="20" font="2">Technische Berichte des Hasso-Plattner-Instituts für </text>
+<text top="127" left="374" width="417" height="20" font="2"> Softwaresystemtechnik an der Universität Potsdam </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="3" size="18" family="Times" color="#000000"/>
+<text top="107" left="446" width="5" height="23" font="3"> </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="4" size="25" family="Times" color="#000000"/>
+<text top="108" left="278" width="515" height="23" font="3">Technische Berichte des Hasso-Plattner-Instituts für </text>
+<text top="132" left="246" width="547" height="23" font="3">Softwaresystemtechnik an der Universität Potsdam | 48 </text>
+<text top="157" left="787" width="6" height="23" font="3"> </text>
+<text top="181" left="787" width="6" height="23" font="3"> </text>
+<text top="205" left="787" width="6" height="23" font="3"> </text>
+<text top="229" left="787" width="6" height="23" font="3"> </text>
+<text top="253" left="787" width="6" height="23" font="3"> </text>
+<text top="277" left="787" width="6" height="23" font="3"> </text>
+<text top="301" left="787" width="6" height="23" font="3"> </text>
+<text top="326" left="787" width="6" height="23" font="3"> </text>
+<text top="350" left="787" width="6" height="23" font="3"> </text>
+<text top="374" left="787" width="6" height="23" font="3"> </text>
+<text top="398" left="787" width="6" height="23" font="3"> </text>
+<text top="422" left="787" width="6" height="23" font="3"> </text>
+<text top="446" left="787" width="6" height="23" font="3"> </text>
+<text top="471" left="787" width="6" height="23" font="3"> </text>
+<text top="495" left="787" width="6" height="23" font="3"> </text>
+<text top="519" left="787" width="6" height="23" font="3"> </text>
+<text top="543" left="346" width="446" height="23" font="3">Michael Haupt | Stefan Marr | Robert Hirschfeld </text>
+<text top="567" left="787" width="6" height="23" font="3"> </text>
+<text top="593" left="664" width="130" height="30" font="4"><b>CSOM/PL </b></text>
+<text top="624" left="787" width="6" height="23" font="3"> </text>
+<text top="648" left="498" width="294" height="23" font="3">A Virtual Machine Product Line </text>
+<text top="672" left="787" width="6" height="23" font="3"> </text>
+<text top="697" left="787" width="6" height="23" font="3"> </text>
+<text top="721" left="787" width="6" height="23" font="3"> </text>
+<text top="745" left="787" width="6" height="23" font="3"> </text>
+<text top="769" left="787" width="6" height="23" font="3"> </text>
+<text top="793" left="787" width="6" height="23" font="3"> </text>
+<text top="817" left="787" width="6" height="23" font="3"> </text>
+<text top="842" left="787" width="6" height="23" font="3"> </text>
+<text top="866" left="787" width="6" height="23" font="3"> </text>
+<text top="890" left="787" width="6" height="23" font="3"> </text>
+<text top="914" left="787" width="6" height="23" font="3"> </text>
+<text top="938" left="787" width="6" height="23" font="3"> </text>
+<text top="962" left="787" width="6" height="23" font="3"> </text>
+<text top="986" left="787" width="6" height="23" font="3"> </text>
+<text top="1011" left="787" width="6" height="23" font="3"> </text>
+<text top="1035" left="787" width="6" height="23" font="3"> </text>
+<text top="1059" left="787" width="6" height="23" font="3"> </text>
+<text top="1083" left="787" width="6" height="23" font="3"> </text>
+<text top="1107" left="787" width="6" height="23" font="3"> </text>
+<text top="1131" left="531" width="261" height="23" font="3">Universitätsverlag Potsdam </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="5" size="14" family="Times" color="#000000"/>
+	<fontspec id="6" size="14" family="Times" color="#000000"/>
+<text top="107" left="106" width="490" height="18" font="5"><b>Bibliografische Information der Deutschen Nationalbibliothek  </b></text>
+<text top="126" left="106" width="507" height="18" font="6">Die Deutsche Nationalbibliothek verzeichnet diese Publikation in der  </text>
+<text top="145" left="106" width="511" height="18" font="6">Deutschen Nationalbibliografie; detaillierte bibliografische Daten sind  </text>
+<text top="164" left="106" width="292" height="18" font="6">im Internet über http://dnb.de/ abrufbar. </text>
+<text top="183" left="106" width="5" height="18" font="6"> </text>
+<text top="202" left="106" width="5" height="18" font="6"> </text>
+<text top="221" left="106" width="5" height="18" font="6"> </text>
+<text top="240" left="106" width="5" height="18" font="6"> </text>
+<text top="258" left="106" width="5" height="18" font="6"> </text>
+<text top="277" left="106" width="5" height="18" font="6"> </text>
+<text top="296" left="106" width="5" height="18" font="6"> </text>
+<text top="315" left="106" width="5" height="18" font="6"> </text>
+<text top="334" left="106" width="5" height="18" font="6"> </text>
+<text top="353" left="106" width="5" height="18" font="6"> </text>
+<text top="372" left="106" width="5" height="18" font="6"> </text>
+<text top="391" left="106" width="5" height="18" font="6"> </text>
+<text top="410" left="106" width="5" height="18" font="6"> </text>
+<text top="429" left="106" width="5" height="18" font="6"> </text>
+<text top="448" left="106" width="5" height="18" font="6"> </text>
+<text top="467" left="106" width="5" height="18" font="6"> </text>
+<text top="486" left="106" width="5" height="18" font="6"> </text>
+<text top="505" left="106" width="5" height="18" font="6"> </text>
+<text top="524" left="106" width="5" height="18" font="6"> </text>
+<text top="543" left="106" width="5" height="18" font="6"> </text>
+<text top="562" left="106" width="5" height="18" font="6"> </text>
+<text top="581" left="106" width="5" height="18" font="6"> </text>
+<text top="600" left="106" width="5" height="18" font="6"> </text>
+<text top="619" left="106" width="5" height="18" font="6"> </text>
+<text top="638" left="106" width="5" height="18" font="6"> </text>
+<text top="657" left="106" width="5" height="18" font="6"> </text>
+<text top="676" left="106" width="5" height="18" font="6"> </text>
+<text top="695" left="106" width="5" height="18" font="6"> </text>
+<text top="714" left="106" width="263" height="18" font="5"><b>Universitätsverlag Potsdam 2011 </b></text>
+<text top="733" left="106" width="295" height="18" font="6">http://info.ub.uni-potsdam.de/verlag.htm </text>
+<text top="752" left="106" width="5" height="18" font="6"> </text>
+<text top="771" left="106" width="280" height="18" font="6">Am Neuen Palais 10, 14469 Potsdam </text>
+<text top="790" left="106" width="282" height="18" font="6">Tel.: +49 (0)331 977 4623 / Fax: 3474 </text>
+<text top="809" left="106" width="236" height="18" font="6"><a href="mailto:verlag@uni-potsdam.de">E-Mail: verlag@uni-potsdam.de </a></text>
+<text top="828" left="106" width="5" height="18" font="6"> </text>
+<text top="847" left="106" width="552" height="18" font="6">Die Schriftenreihe <b>Technische Berichte des Hasso-Plattner-Instituts für </b></text>
+<text top="866" left="106" width="561" height="18" font="5"><b>Softwaresystemtechnik an der Universität Potsdam</b> wird herausgegeben </text>
+<text top="885" left="106" width="562" height="18" font="6">von den Professoren des Hasso-Plattner-Instituts für Softwaresystemtechnik </text>
+<text top="904" left="106" width="208" height="18" font="6">an der Universität Potsdam. </text>
+<text top="923" left="106" width="5" height="18" font="6"> </text>
+<text top="942" left="106" width="174" height="18" font="6">ISSN (print) 1613-5652 </text>
+<text top="961" left="106" width="186" height="18" font="6">ISSN (online) 2191-1665 </text>
+<text top="979" left="106" width="5" height="18" font="6"> </text>
+<text top="998" left="106" width="348" height="18" font="6">Das Manuskript ist urheberrechtlich geschützt.  </text>
+<text top="1017" left="106" width="5" height="18" font="6"> </text>
+<text top="1036" left="106" width="535" height="18" font="6">Online veröffentlicht auf dem Publikationsserver der Universität Potsdam </text>
+<text top="1055" left="106" width="404" height="18" font="6">URL http://pub.ub.uni-potsdam.de/volltexte/2011/5233/ </text>
+<text top="1074" left="106" width="288" height="18" font="6">URN urn:nbn:de:kobv:517-opus-52332 </text>
+<text top="1093" left="106" width="421" height="18" font="6">http://nbn-resolving.org/urn:nbn:de:kobv:517-opus-52332 </text>
+<text top="1112" left="106" width="5" height="18" font="6"> </text>
+<text top="1131" left="106" width="452" height="18" font="6">Zugleich gedruckt erschienen im Universitätsverlag Potsdam: </text>
+<text top="1150" left="106" width="189" height="18" font="6">ISBN 978-3-86956-134-9 </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="7" size="35" family="Times" color="#000000"/>
+	<fontspec id="8" size="23" family="Times" color="#000000"/>
+	<fontspec id="9" size="15" family="Times" color="#000000"/>
+<text top="169" left="335" width="178" height="37" font="7">CSOM/PL</text>
+<text top="216" left="157" width="533" height="37" font="7">A Virtual Machine Product Line</text>
+<text top="271" left="337" width="173" height="26" font="8">Michael Haupt</text>
+<text top="304" left="247" width="353" height="18" font="2">michael.haupt@hpi.uni-potsdam.de</text>
+<text top="347" left="165" width="136" height="26" font="8">Stefan Marr</text>
+<text top="380" left="117" width="231" height="18" font="2">stefan.marr@vub.ac.be</text>
+<text top="347" left="468" width="205" height="26" font="8">Robert Hirschfeld</text>
+<text top="380" left="410" width="320" height="18" font="2">hirschfeld@hpi.uni-potsdam.de</text>
+<text top="414" left="344" width="160" height="26" font="8">April 18, 2011</text>
+<text top="505" left="158" width="550" height="18" font="9">CSOM/PL is a software product line (SPL) derived from applying</text>
+<text top="528" left="140" width="568" height="18" font="9">multi-dimensional separation of concerns (MDSOC) techniques to the</text>
+<text top="551" left="140" width="571" height="18" font="9">domain of high-level language virtual machine (VM) implementations.</text>
+<text top="573" left="140" width="568" height="18" font="9">For CSOM/PL, we modularised CSOM, a Smalltalk VM implemented</text>
+<text top="596" left="140" width="571" height="18" font="9">in C, using VMADL (virtual machine architecture description language).</text>
+<text top="619" left="140" width="568" height="18" font="9">Several features of the original CSOM were encapsulated in VMADL</text>
+<text top="642" left="140" width="568" height="18" font="9">modules and composed in various combinations. In an evaluation of</text>
+<text top="664" left="140" width="568" height="18" font="9">our approach, we show that applying MDSOC and SPL principles to a</text>
+<text top="687" left="140" width="570" height="18" font="9">domain as complex as that of VMs is not only feasible but beneﬁcial,</text>
+<text top="710" left="140" width="568" height="18" font="9">as it improves understandability, maintainability, and conﬁgurability of</text>
+<text top="733" left="139" width="422" height="18" font="9">VM implementations without harming performance.</text>
+<text top="792" left="100" width="13" height="13" font="8">1</text>
+<text top="792" left="134" width="197" height="13" font="8">i n t r o d u c t i o n</text>
+<text top="837" left="99" width="652" height="18" font="9">Implementors working on high-level language virtual machines (VMs) [36] typi-</text>
+<text top="860" left="99" width="650" height="18" font="9">cally face the characteristic problem of very high complexity, expressed in source</text>
+<text top="883" left="99" width="650" height="18" font="9">code as intricately intertwined module dependencies. Even worse, even though</text>
+<text top="906" left="99" width="652" height="18" font="9">logical modules such as memory management and emulation engine are perceiv-</text>
+<text top="928" left="99" width="650" height="18" font="9">able, they can often hardly be identiﬁed as such in the code. The interdependencies</text>
+<text top="951" left="99" width="650" height="18" font="9">lead to partial functionality realisations of logical modules being interwoven with</text>
+<text top="974" left="99" width="650" height="18" font="9">other logical modules’ code. This, in turn, is due to a lack of modular abstraction</text>
+<text top="997" left="99" width="407" height="18" font="9">application in the domain of VM implementations.</text>
+<text top="1019" left="115" width="633" height="18" font="9">A second difﬁculty with VM implementations is that they frequently need to</text>
+<text top="1042" left="99" width="650" height="18" font="9">be tailored to speciﬁc needs. Different dimensions of interest are relevant in this</text>
+<text top="1122" left="740" width="9" height="9" font="9">1</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="10" size="15" family="Times" color="#000000"/>
+	<fontspec id="11" size="11" family="Times" color="#000000"/>
+	<fontspec id="12" size="9" family="Times" color="#000000"/>
+	<fontspec id="13" size="10" family="Times" color="#000000"/>
+<text top="60" left="144" width="110" height="18" font="10"><i>1 </i>Introduction</text>
+<text top="114" left="144" width="650" height="18" font="9">regard. The particular application domain might call for differently aggressive</text>
+<text top="137" left="144" width="650" height="18" font="9">optimisation. For instance, Sun’s HotSpot JVM features two different versions</text>
+<text top="160" left="144" width="653" height="18" font="9">optimised for client- or server-speciﬁc applications, which use different just-in-</text>
+<text top="182" left="144" width="161" height="18" font="9">time (JIT) compilers</text>
+<text top="182" left="306" width="7" height="7" font="11">1</text>
+<text top="182" left="313" width="484" height="18" font="9">. The optimisation to be used is chosen at VM startup time.</text>
+<text top="205" left="144" width="121" height="18" font="9">The Jikes RVM</text>
+<text top="205" left="265" width="7" height="7" font="11">2</text>
+<text top="205" left="278" width="515" height="18" font="9">[5, 6] can employ a selection of two different JIT compilers that</text>
+<text top="228" left="144" width="616" height="18" font="9">can moreover be combined with an adaptively optimising infrastructure [12].</text>
+<text top="251" left="161" width="633" height="18" font="9">Other dimensions of interest are, e. g., memory allocation behaviour, calling for</text>
+<text top="273" left="144" width="653" height="18" font="9">different choices of garbage collectors (GCs) [22, 11]; availability of CPU cores, in-</text>
+<text top="296" left="144" width="652" height="18" font="9">ﬂuencing the threading model (native or user-level threads, or hybrid scheduling);</text>
+<text top="319" left="144" width="650" height="18" font="9">and the target platform, possibly imposing all kinds of limitations on the rest of</text>
+<text top="342" left="144" width="650" height="18" font="9">the implementation (e. g., VMs for resource-constrained devices). Clearly, all of</text>
+<text top="364" left="144" width="650" height="18" font="9">the choices have implications on the interactions of the different modules, in turn</text>
+<text top="387" left="144" width="345" height="18" font="9">leading to more intricate relationships [20].</text>
+<text top="410" left="161" width="633" height="18" font="9">The notion of service modules was introduced [20] to address module entangling</text>
+<text top="433" left="144" width="650" height="18" font="9">in VMs. A service module is a module with a bidirectional interface—in the fashion</text>
+<text top="455" left="144" width="650" height="18" font="9">of open modules [2] or XPIs [19]—that can not only be sent requests, but that</text>
+<text top="478" left="144" width="650" height="18" font="9">can also exhibit internal situations of interest to the outside. An initial proposal</text>
+<text top="501" left="144" width="650" height="18" font="9">of an architecture description language (VMADL) was introduced, along with a</text>
+<text top="524" left="144" width="650" height="18" font="9">proof of concept implementation, supporting the concepts of service modules at</text>
+<text top="546" left="144" width="266" height="18" font="9">the programming language level.</text>
+<text top="569" left="161" width="633" height="18" font="9">The characteristics of the second problem suggest to regard the various VM</text>
+<text top="592" left="144" width="650" height="18" font="9">subsystems and their variations as concepts and features in the sense of a software</text>
+<text top="615" left="144" width="650" height="18" font="9">product line (SPL) [14]. This paper reports on the results achieved in combining</text>
+<text top="637" left="144" width="653" height="18" font="9">the VMADL approach and SPL principles and applying them to the VM imple-</text>
+<text top="660" left="144" width="152" height="18" font="9">mentation domain.</text>
+<text top="683" left="161" width="587" height="18" font="9">In particular, we have applied these principles and techniques to CSOM</text>
+<text top="683" left="748" width="7" height="7" font="11">3</text>
+<text top="683" left="762" width="35" height="18" font="9">[21],</text>
+<text top="706" left="144" width="650" height="18" font="9">a VM for a Smalltalk [18] dialect, which is used in teaching at the Hasso Plattner</text>
+<text top="728" left="144" width="652" height="18" font="9">Institute. Focusing on understandability and clarity, CSOM is moderately complex,</text>
+<text top="751" left="144" width="650" height="18" font="9">featuring a simple bytecode interpreter and a mark/sweep GC [22]. Despite its</text>
+<text top="774" left="144" width="650" height="18" font="9">simplicity, CSOM exhibits characteristic crosscutting concerns [20]; increasingly so</text>
+<text top="797" left="144" width="653" height="18" font="9">when extended with additional or alternative features, e. g., in coursework settings.</text>
+<text top="819" left="161" width="636" height="18" font="9">VMADL was used to modularise several extensions to CSOM that were pre-</text>
+<text top="842" left="144" width="650" height="18" font="9">viously introduced by hand. The extensions were of different kinds—garbage</text>
+<text top="865" left="144" width="650" height="18" font="9">collectors, multi-threading implementations, optimised representation of integral</text>
+<text top="888" left="144" width="653" height="18" font="9">numbers, and image persistence—and exhibited different crosscutting characteris-</text>
+<text top="910" left="144" width="650" height="18" font="9">tics. Encapsulating these extensions in service modules allowed for turning CSOM</text>
+<text top="1008" left="153" width="6" height="6" font="12">1</text>
+<text top="1009" left="159" width="344" height="13" font="13">java.sun.com/products/hotspot/whitepaper.html</text>
+<text top="1026" left="153" width="6" height="6" font="12">2</text>
+<text top="1027" left="159" width="92" height="13" font="13">jikesrvm.org</text>
+<text top="1044" left="153" width="6" height="6" font="12">3</text>
+<text top="1045" left="159" width="299" height="13" font="13">www.hpi.uni-potsdam.de/swa/projects/som</text>
+<text top="1122" left="144" width="9" height="9" font="9">2</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="14" size="12" family="Times" color="#000000"/>
+<text top="114" left="99" width="305" height="18" font="9">into an SPL, which we call CSOM/PL</text>
+<text top="114" left="409" width="7" height="7" font="11">4</text>
+<text top="114" left="416" width="335" height="18" font="9">, enabling different combinations of mod-</text>
+<text top="137" left="99" width="271" height="18" font="9">ules to be chosen at compile-time.</text>
+<text top="160" left="115" width="468" height="18" font="9">In summary, the contributions of this paper are as follows.</text>
+<text top="184" left="100" width="9" height="15" font="14">•</text>
+<text top="182" left="117" width="635" height="18" font="9">We present the ﬁrst full version and implementation of VMADL. It differs sig-</text>
+<text top="205" left="117" width="635" height="18" font="9">niﬁcantly from the proof of concept [20] in that it has explicit constructs and ex-</text>
+<text top="228" left="117" width="632" height="18" font="9">tended support for service module combinations. Moreover, the proof of concept</text>
+<text top="251" left="116" width="587" height="18" font="9">was replaced with a more stable implementation that applies AspectC++</text>
+<text top="250" left="704" width="7" height="7" font="11">5</text>
+<text top="251" left="716" width="35" height="18" font="9">[30],</text>
+<text top="273" left="117" width="355" height="18" font="9">a production-quality AOP extension to C++.</text>
+<text top="298" left="100" width="9" height="15" font="14">•</text>
+<text top="296" left="117" width="632" height="18" font="9">We show that an approach based on multi-dimensional separation of concerns</text>
+<text top="319" left="117" width="632" height="18" font="9">at source code level alleviates programming in a complex domain with intricate</text>
+<text top="342" left="117" width="632" height="18" font="9">crosscutting relationships. The beneﬁcial effect of applying VMADL in the VM</text>
+<text top="364" left="117" width="635" height="18" font="9">implementation domain consists in making architectural interdependencies ex-</text>
+<text top="387" left="116" width="632" height="18" font="9">plicit not only at the source code level, but abstractly so, by means of interactions</text>
+<text top="410" left="117" width="258" height="18" font="9">between bidirectional interfaces.</text>
+<text top="435" left="100" width="9" height="15" font="14">•</text>
+<text top="433" left="117" width="632" height="18" font="9">We demonstrate how the approach can be used to establish an SPL in this</text>
+<text top="455" left="117" width="632" height="18" font="9">domain, fostering conﬁguration and variability management as well as code</text>
+<text top="478" left="117" width="632" height="18" font="9">reuse. The SPL includes combinations of features that were previously applied in</text>
+<text top="501" left="117" width="561" height="18" font="9">isolation only. The CSOM product line was realised using pure::variants</text>
+<text top="501" left="678" width="7" height="7" font="11">6</text>
+<text top="501" left="686" width="66" height="18" font="9">, a state-</text>
+<text top="524" left="117" width="632" height="18" font="9">of-the-art tool for SPL development. By virtue of pure::variants, the CSOM/PL</text>
+<text top="546" left="116" width="632" height="18" font="9">product space is consistently represented as a feature model, and products</text>
+<text top="569" left="117" width="634" height="18" font="9">can be easily conﬁgured and validated. Once a product has been conﬁgured,</text>
+<text top="592" left="117" width="492" height="18" font="9">corresponding build scripts can be generated by the SPL tool.</text>
+<text top="615" left="115" width="636" height="18" font="9">In the remainder of this paper, we ﬁrst introduce the CSOM VM in the fol-</text>
+<text top="637" left="99" width="650" height="18" font="9">lowing section. We then, in Sec. 3, adumbrate the architectural principles at work</text>
+<text top="660" left="99" width="650" height="18" font="9">in CSOM/PL, and give an introduction to the language VMADL, including a</text>
+<text top="683" left="99" width="650" height="18" font="9">brief description of its implementation. The CSOM/PL results and how they were</text>
+<text top="706" left="99" width="650" height="18" font="9">achieved is illustrated in Sec. 4. The evaluation of the obtained results is described</text>
+<text top="728" left="99" width="650" height="18" font="9">in Sec. 5. Related work is discussed in Sec. 6, and Sec. 7 summarises the paper and</text>
+<text top="751" left="99" width="230" height="18" font="9">gives future work directions.</text>
+<text top="797" left="100" width="13" height="13" font="8">2</text>
+<text top="797" left="134" width="380" height="13" font="8">t h e c s o m v i r t ua l m a c h i n e</text>
+<text top="842" left="99" width="54" height="18" font="9">CSOM</text>
+<text top="842" left="153" width="7" height="7" font="11">7</text>
+<text top="842" left="167" width="582" height="18" font="9">[21] is a VM for a Smalltalk dialect designed for teaching purposes. Its</text>
+<text top="865" left="99" width="651" height="18" font="9">precursor, SOM (Simple Object Machine) was implemented in Java at the University</text>
+<text top="888" left="99" width="650" height="18" font="9">of Århus. CSOM is a port of SOM to C; that has been done at the Hasso Plattner</text>
+<text top="910" left="99" width="650" height="18" font="9">Institute. There, CSOM has been used in two graduate courses on virtual machines</text>
+<text top="933" left="99" width="138" height="18" font="9">in 2007 and 2008.</text>
+<text top="970" left="108" width="6" height="6" font="12">4</text>
+<text top="970" left="114" width="423" height="15" font="14">A live CD image with the complete CSOM/PL is available at</text>
+<text top="971" left="543" width="207" height="13" font="13">www.hpi.uni-potsdam.de/swa/</text>
+<text top="990" left="121" width="92" height="13" font="13">projects/som</text>
+<text top="989" left="213" width="535" height="15" font="14">. Due to license regulations, pure::variants cannot be included with the CD image.</text>
+<text top="1007" left="108" width="6" height="6" font="12">5</text>
+<text top="1008" left="114" width="115" height="13" font="13">www.aspectc.org</text>
+<text top="1026" left="108" width="6" height="6" font="12">6</text>
+<text top="1027" left="114" width="337" height="13" font="13">www.pure-systems.com/pure_variants.49.0.html</text>
+<text top="1044" left="108" width="6" height="6" font="12">7</text>
+<text top="1044" left="114" width="154" height="15" font="14">Pronounced “see-som”.</text>
+<text top="1122" left="740" width="9" height="9" font="9">3</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="15" size="13" family="Times" color="#000000"/>
+<text top="60" left="144" width="228" height="18" font="10"><i>2 </i>The CSOM Virtual Machine</text>
+<text top="160" left="455" width="24" height="18" font="5"><b>VM</b></text>
+<text top="442" left="623" width="71" height="18" font="5"><b>Compiler</b></text>
+<text top="350" left="546" width="73" height="18" font="5"><b>Bytecode</b></text>
+<text top="294" left="679" width="57" height="18" font="5"><b>Switch/</b></text>
+<text top="313" left="688" width="39" height="18" font="5"><b>Case</b></text>
+<text top="333" left="667" width="81" height="18" font="5"><b>Interpreter</b></text>
+<text top="323" left="171" width="55" height="18" font="5"><b>Helper </b></text>
+<text top="343" left="169" width="55" height="18" font="5"><b>Library</b></text>
+<text top="362" left="174" width="44" height="18" font="6">(Misc)</text>
+<text top="279" left="408" width="81" height="18" font="5"><b>Language </b></text>
+<text top="299" left="428" width="37" height="18" font="5"><b>Core</b></text>
+<text top="318" left="401" width="90" height="18" font="6">(VMObjects)</text>
+<text top="312" left="289" width="43" height="18" font="5"><b>Mark/</b></text>
+<text top="331" left="284" width="52" height="18" font="5"><b>Sweep</b></text>
+<text top="351" left="277" width="71" height="18" font="5"><b>Garbage </b></text>
+<text top="370" left="271" width="79" height="18" font="5"><b>Collection</b></text>
+<text top="116" left="327" width="281" height="18" font="5"><b>Smalltalk Libraries and Applications</b></text>
+<text top="317" left="545" width="98" height="18" font="5"><b>ObjectModel</b></text>
+<text top="486" left="473" width="78" height="18" font="5"><b>Primitives</b></text>
+<text top="537" left="351" width="65" height="16" font="5"><b>Figure 1:</b></text>
+<text top="537" left="421" width="167" height="16" font="6">Architecture of CSOM.</text>
+<text top="567" left="161" width="633" height="18" font="9">Untypically, CSOM does not support images [18], but instead relies on text ﬁles</text>
+<text top="590" left="144" width="650" height="18" font="9">containing Smalltalk code as input. The Smalltalk application to be run is passed</text>
+<text top="612" left="144" width="652" height="18" font="9">as a command line parameter when the VM is started. If no application is given,</text>
+<text top="635" left="144" width="249" height="18" font="9">the VM starts a Smalltalk shell.</text>
+<text top="658" left="161" width="636" height="18" font="9">The architecture of CSOM is deliberately simple to ease its employment in teach-</text>
+<text top="681" left="144" width="650" height="18" font="9">ing. An overview about the architecture is given as block diagram in Fig. 1. The</text>
+<text top="703" left="144" width="652" height="18" font="9">arrows between modules denote “uses” relationships. The standard implementa-</text>
+<text top="726" left="144" width="650" height="18" font="9">tion features a Smalltalk parser and compiler, a corresponding object model for</text>
+<text top="749" left="144" width="650" height="18" font="9">representing Smalltalk entities, a simple bytecode interpreter, and a mark/sweep</text>
+<text top="772" left="144" width="412" height="18" font="9">GC. The CSOM source code consists of 88 C ﬁles (43</text>
+<text top="773" left="561" width="18" height="15" font="15">.c</text>
+<text top="772" left="584" width="53" height="18" font="9">and 45</text>
+<text top="773" left="642" width="18" height="15" font="15">.h</text>
+<text top="772" left="665" width="129" height="18" font="9">ﬁles) accounting</text>
+<text top="794" left="144" width="650" height="18" font="9">for 6,725 PSLOC [31] spread over seven logical modules represented by the folder</text>
+<text top="817" left="144" width="650" height="18" font="9">structure of the implementation. The C implementation is accompanied by 568</text>
+<text top="840" left="144" width="653" height="18" font="9">lines of Smalltalk code in roughly two dozen ﬁles constituting its standard library.</text>
+<text top="863" left="144" width="504" height="18" font="9">Additionally, a test suite and a set of benchmarks are available.</text>
+<text top="885" left="161" width="636" height="18" font="9">SOM, implemented in Java, exploited object-oriented programming (OOP) con-</text>
+<text top="908" left="144" width="650" height="18" font="9">cepts to a large extent, using inheritance and interfaces. Also, the VM-level and</text>
+<text top="931" left="144" width="653" height="18" font="9">language-level representations of core classes of the SOM Smalltalk standard li-</text>
+<text top="954" left="144" width="650" height="18" font="9">brary have parallel hierarchies. For instance, the Smalltalk implementation of the</text>
+<text top="978" left="144" width="55" height="15" font="15">Object</text>
+<text top="977" left="205" width="590" height="18" font="9">class is mirrored by a corresponding class on the VM side. The Smalltalk</text>
+<text top="1000" left="144" width="46" height="15" font="15">Array</text>
+<text top="999" left="198" width="154" height="18" font="9">class inherits from</text>
+<text top="1000" left="361" width="55" height="15" font="15">Object</text>
+<text top="999" left="416" width="378" height="18" font="9">, and so does the VM-level representation of</text>
+<text top="1022" left="144" width="653" height="18" font="9">Smalltalk arrays. This design is preserved in CSOM by using a macro-based emu-</text>
+<text top="1122" left="144" width="9" height="9" font="9">4</text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="16" size="15" family="Times" color="#000000"/>
+<text top="114" left="99" width="650" height="18" font="9">lation of OOP constructs in C. It supports single inheritance and a limited notion</text>
+<text top="137" left="99" width="650" height="18" font="9">of traits [13], which is used to emulate Java’s interfaces. Late binding is achieved</text>
+<text top="160" left="99" width="83" height="18" font="9">by using a</text>
+<text top="161" left="187" width="37" height="15" font="15">SEND</text>
+<text top="160" left="229" width="408" height="18" font="9">macro to send messages and parameters to objects.</text>
+<text top="182" left="115" width="634" height="18" font="9">As already mentioned, CSOM has been used in teaching over the past few</text>
+<text top="205" left="99" width="651" height="18" font="9">years. Several students have implemented extensions to CSOM to fulﬁl coursework</text>
+<text top="228" left="99" width="535" height="18" font="9">assignments. So far, the following extensions have been developed.</text>
+<text top="251" left="115" width="633" height="18" font="9">Two alternative <b>multi-threading </b>approaches have been realised. Native threading</text>
+<text top="273" left="99" width="64" height="18" font="9">uses the</text>
+<text top="274" left="168" width="73" height="15" font="15">pthreads</text>
+<text top="273" left="246" width="502" height="18" font="9">[25] library, whereas green threading implements scheduling and</text>
+<text top="296" left="99" width="331" height="18" font="9">thread management within the VM itself.</text>
+<text top="319" left="115" width="636" height="18" font="9">For <b>memory management</b>, GCs applying mark/sweep and reference-</text>
+<text top="342" left="99" width="650" height="18" font="9">counting [22] have been implemented. Since then, the mark/sweep GC is also</text>
+<text top="364" left="99" width="431" height="18" font="9">part of the “standard” CSOM handed out to students.</text>
+<text top="387" left="115" width="633" height="18" font="9">As an <b>emulation engine optimisation</b>, a threaded interpreter [10] has been</text>
+<text top="410" left="99" width="653" height="18" font="9">implemented. <b>Integer representation </b>was optimised using one-based tagged inte-</text>
+<text top="433" left="99" width="650" height="18" font="9">gers [18]. <b>Virtual images </b>[18], saving snapshots of application state, are common</text>
+<text top="455" left="98" width="365" height="18" font="9">with Smalltalk and were provided for CSOM.</text>
+<text top="478" left="115" width="633" height="18" font="9">Each of the above was implemented as a stand-alone extension to CSOM, as</text>
+<text top="501" left="99" width="650" height="18" font="9">the coursework groups were working separately. Hence, they were not concerned</text>
+<text top="524" left="98" width="650" height="18" font="9">with clear modularisation and interoperability among the extensions. Thus, the</text>
+<text top="546" left="99" width="650" height="18" font="9">implementations mentioned above are independent of each other, and represent</text>
+<text top="569" left="99" width="463" height="18" font="9">custom-built products derived from a common code base.</text>
+<text top="592" left="115" width="634" height="18" font="9">The different extensions exhibit largely different crosscutting characteristics. For</text>
+<text top="615" left="99" width="653" height="18" font="9">instance, mark/sweep and reference-counting GC both require the structural ex-</text>
+<text top="637" left="99" width="653" height="18" font="9">tension (“introduction” [23]) of adding a mark bit or reference count to objects.</text>
+<text top="660" left="99" width="650" height="18" font="9">Behavioural crosscutting, however, is much different: while reference counting</text>
+<text top="683" left="99" width="650" height="18" font="9">requires modiﬁcations at practically all pointer assignments (including parameter</text>
+<text top="706" left="99" width="650" height="18" font="9">passing), mark/sweep GC is attached only to allocation requests. Another example</text>
+<text top="728" left="99" width="653" height="18" font="9">is multi-threading. Native threading effectively requires the interpreter implemen-</text>
+<text top="751" left="99" width="650" height="18" font="9">tation to be thread-safe (i. e., the interpreter’s global state must be turned into</text>
+<text top="774" left="99" width="650" height="18" font="9">thread-local state). Conversely, green threading implies signiﬁcant changes in the</text>
+<text top="797" left="99" width="650" height="18" font="9">interpreter logic itself, as the interpreter is responsible for passing control to the</text>
+<text top="819" left="99" width="370" height="18" font="9">scheduler, e. g., every N bytecode instructions.</text>
+<text top="842" left="115" width="633" height="18" font="9">All in all, the extensions realised so far constitute an interesting challenge with</text>
+<text top="865" left="99" width="653" height="18" font="9">regard to modularisation. This holds even more when combinations of the afore-</text>
+<text top="888" left="99" width="650" height="18" font="9">mentioned extensions are taken into account, e. g., a version of CSOM that features</text>
+<text top="910" left="99" width="366" height="18" font="9">both a mark/sweep GC and native threading.</text>
+<text top="956" left="100" width="13" height="13" font="8">3</text>
+<text top="956" left="134" width="419" height="13" font="8">v i r t ua l m a c h i n e m o d u l a r i t y</text>
+<text top="1001" left="99" width="650" height="18" font="9">In this section, we will ﬁrst summarise the approach to VM modularisation [20]</text>
+<text top="1024" left="98" width="650" height="18" font="9">whose concepts VMADL implements. We will then give a tutorial on VMADL in</text>
+<text top="1122" left="740" width="9" height="9" font="9">5</text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="17" size="19" family="Times" color="#000000"/>
+<text top="60" left="144" width="227" height="18" font="10"><i>3 </i>Virtual Machine Modularity</text>
+<text top="114" left="144" width="650" height="18" font="9">its current state. It will include an extension to C that was necessary to allow for</text>
+<text top="137" left="144" width="653" height="18" font="9">VMADL’s application to the C programming language in the setting with CSOM.</text>
+<text top="160" left="144" width="616" height="18" font="9">Finally, the VMADL implementation and tool chain will be brieﬂy described.</text>
+<text top="207" left="145" width="11" height="11" font="17">3</text>
+<text top="203" left="158" width="18" height="21" font="17">. 1</text>
+<text top="203" left="199" width="302" height="21" font="17">Disentangling VM Architecture</text>
+<text top="251" left="144" width="650" height="18" font="9">In previous work [20], the architectures of different VM implementations were</text>
+<text top="273" left="144" width="650" height="18" font="9">investigated. It was found that most of them exhibit no clear boundaries between</text>
+<text top="296" left="144" width="653" height="18" font="9">subsystems perceivable as logical modules. The necessity of an architectural ap-</text>
+<text top="319" left="144" width="650" height="18" font="9">proach with support for reasoning about high-level modular structures in VM</text>
+<text top="342" left="144" width="301" height="18" font="9">implementations was then motivated.</text>
+<text top="364" left="161" width="633" height="18" font="9">We would like to explain the notion of architecture that we adopt. There is no</text>
+<text top="387" left="144" width="652" height="18" font="9">consensus on a deﬁnition for the terms “architecture” and “architectural descrip-</text>
+<text top="410" left="144" width="650" height="18" font="9">tion language” (ADL). A wide range of different interpretations of the terms [28]</text>
+<text top="433" left="144" width="650" height="18" font="9">exists. On the one end of the spectrum, there are, e. g., graphical ADLs that enable</text>
+<text top="455" left="144" width="650" height="18" font="9">an easier comprehension of system architectures to improve communication about</text>
+<text top="478" left="144" width="650" height="18" font="9">systems. On the other, there are languages proposing formal semantics and tools</text>
+<text top="501" left="144" width="650" height="18" font="9">for analyses, code synthesis, and run-time support, to allow for a formal evaluation</text>
+<text top="524" left="144" width="161" height="18" font="9">of complex systems.</text>
+<text top="546" left="161" width="633" height="18" font="9">For VM implementations, system architecture needs to be supported at the</text>
+<text top="569" left="144" width="650" height="18" font="9">source code level: architectural building blocks have no clear boundaries and are</text>
+<text top="592" left="144" width="650" height="18" font="9">hence not cleanly modularisable. Consequently, modules and their interactions</text>
+<text top="615" left="144" width="650" height="18" font="9">have to be described at a level that is close to the implementation language but</text>
+<text top="637" left="144" width="653" height="18" font="9">still supports architectural abstraction in that it expresses larger-scale interdepen-</text>
+<text top="660" left="144" width="650" height="18" font="9">dencies. At the same time, the implementation language must not be constrained</text>
+<text top="683" left="144" width="360" height="18" font="9">in its degree of control over low-level details.</text>
+<text top="706" left="161" width="633" height="18" font="9">The earlier introduced approach [20] modularises VM implementations into</text>
+<text top="728" left="144" width="650" height="18" font="9">service modules with bidirectional interfaces. That is, a service module can not only</text>
+<text top="751" left="144" width="650" height="18" font="9">be sent requests, but it can also signal internal situations of interest to the outside</text>
+<text top="774" left="144" width="650" height="18" font="9">world. Other service modules can attach to these signals and react to them. These</text>
+<text top="797" left="144" width="650" height="18" font="9">signals are called exposed join points, are deﬁned using pointcuts, and constitute</text>
+<text top="819" left="144" width="650" height="18" font="9">a module-speciﬁc join point model, elements of which can be quantiﬁed over by</text>
+<text top="842" left="144" width="156" height="18" font="9">means of pointcuts.</text>
+<text top="865" left="161" width="633" height="18" font="9">To achieve these goals, VMADL provides a frame in which an implementation</text>
+<text top="888" left="144" width="650" height="18" font="9">language and an aspect language can be combined. Consequently, VMADL is</text>
+<text top="910" left="144" width="650" height="18" font="9">essentially agnostic as far as the particular implementation and aspect languages</text>
+<text top="933" left="144" width="650" height="18" font="9">at work are concerned: it adds high-level modularity constructs that coordinate the</text>
+<text top="956" left="144" width="650" height="18" font="9">interaction of the former two. The ﬁrst VMADL proof of concept [20] was applied</text>
+<text top="979" left="144" width="653" height="18" font="9">with C as the implementation language, and Aspicere2 [1] as the aspect language.</text>
+<text top="1001" left="144" width="650" height="18" font="9">In the present work, the implementation language is still C, but AspectC++ [30] is</text>
+<text top="1024" left="144" width="162" height="18" font="9">the aspect language.</text>
+<text top="1122" left="144" width="9" height="9" font="9">6</text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="18" size="6" family="Times" color="#000000"/>
+	<fontspec id="19" size="8" family="Times" color="#000000"/>
+	<fontspec id="20" size="8" family="Times" color="#000000"/>
+<text top="60" left="528" width="220" height="18" font="10"><i>3</i>.<i>2 </i>VMADL: A Walkthrough</text>
+<text top="116" left="100" width="11" height="11" font="17">3</text>
+<text top="112" left="113" width="18" height="21" font="17">. 2</text>
+<text top="112" left="154" width="243" height="21" font="17">VMADL: A Walkthrough</text>
+<text top="160" left="99" width="653" height="18" font="9">This overview of VMADL uses abbreviated actual code from the CSOM/PL imple-</text>
+<text top="182" left="99" width="650" height="18" font="9">mentation (cf. Sec. 4) to introduce the various features. A complete example of two</text>
+<text top="205" left="99" width="549" height="18" font="9">service module deﬁnitions and their combination is given in App. A.</text>
+<text top="236" left="224" width="4" height="4" font="18">1</text>
+<text top="232" left="235" width="128" height="10" font="19">service Interpreter {</text>
+<text top="252" left="224" width="4" height="4" font="18">2</text>
+<text top="249" left="260" width="24" height="10" font="20"><b>void</b></text>
+<text top="249" left="290" width="146" height="10" font="19">Interpreter_start(<b>void</b>);</text>
+<text top="268" left="224" width="4" height="4" font="18">3</text>
+<text top="265" left="235" width="6" height="10" font="19">}</text>
+<text top="285" left="224" width="4" height="4" font="18">4</text>
+<text top="281" left="235" width="98" height="10" font="19">service VMCore {</text>
+<text top="301" left="224" width="4" height="4" font="18">5</text>
+<text top="298" left="260" width="24" height="10" font="20"><b>void</b></text>
+<text top="298" left="290" width="268" height="12" font="19">Universe_set_global(_VMSymbol*, _VMObject*);</text>
+<text top="318" left="224" width="4" height="4" font="18">6</text>
+<text top="314" left="235" width="6" height="10" font="19">}</text>
+<text top="334" left="224" width="4" height="4" font="18">7</text>
+<text top="331" left="235" width="134" height="10" font="19">service ObjectModel {}</text>
+<text top="350" left="224" width="4" height="4" font="18">8</text>
+<text top="347" left="235" width="116" height="10" font="19">service VMObjects {</text>
+<text top="367" left="224" width="4" height="4" font="18">9</text>
+<text top="363" left="260" width="122" height="10" font="19">require ObjectModel;</text>
+<text top="383" left="219" width="9" height="4" font="18">10</text>
+<text top="380" left="260" width="49" height="10" font="19">expose {</text>
+<text top="400" left="219" width="9" height="4" font="18">11</text>
+<text top="396" left="284" width="287" height="10" font="19">pointcut initializer() = &#34;void _VM%_init(...)&#34;;</text>
+<text top="416" left="219" width="9" height="4" font="18">12</text>
+<text top="413" left="260" width="6" height="10" font="19">}</text>
+<text top="432" left="219" width="9" height="4" font="18">13</text>
+<text top="429" left="235" width="6" height="10" font="19">}</text>
+<text top="447" left="247" width="70" height="16" font="5"><b>Listing 1:</b></text>
+<text top="447" left="321" width="279" height="16" font="6">Service module deﬁnition in VMADL.</text>
+<text top="476" left="115" width="633" height="18" font="9">Lst. 1 introduces service module deﬁnitions. Four such modules are deﬁned, and the</text>
+<text top="500" left="99" width="101" height="15" font="15">Interpreter</text>
+<text top="498" left="204" width="30" height="18" font="9">and</text>
+<text top="500" left="239" width="55" height="15" font="15">VMCore</text>
+<text top="498" left="298" width="454" height="18" font="9">module deﬁnitions demonstrate that the API is simply de-</text>
+<text top="521" left="99" width="650" height="18" font="9">ﬁned by declaring the corresponding C function. It is also possible to express that a</text>
+<text top="544" left="99" width="356" height="18" font="9">given module is required by another, as in the</text>
+<text top="545" left="459" width="83" height="15" font="15">VMObjects</text>
+<text top="544" left="546" width="203" height="18" font="9">deﬁnition. The listing also</text>
+<text top="567" left="99" width="652" height="18" font="9">demonstrates how join point exposition is achieved by using AspectC++ deﬁnitions:</text>
+<text top="589" left="99" width="25" height="18" font="9">the</text>
+<text top="591" left="130" width="83" height="15" font="15">VMObjects</text>
+<text top="589" left="219" width="162" height="18" font="9">module exposes the</text>
+<text top="591" left="388" width="101" height="15" font="15">initializer</text>
+<text top="589" left="495" width="257" height="18" font="9">pointcut, which matches when-</text>
+<text top="612" left="99" width="289" height="18" font="9">ever a C function matching the name</text>
+<text top="610" left="393" width="83" height="19" font="15">_VM%_init</text>
+<text top="612" left="480" width="269" height="18" font="9">is executed. To express mandatory</text>
+<text top="635" left="99" width="282" height="18" font="9">relationships between modules, the</text>
+<text top="636" left="387" width="64" height="15" font="15">require</text>
+<text top="635" left="456" width="292" height="18" font="9">statement is used. It ensures that the</text>
+<text top="658" left="99" width="512" height="18" font="9">resulting conﬁguration includes all mandatory service modules.</text>
+<text top="680" left="115" width="636" height="18" font="9">The speciﬁcation of service module interactions is illustrated in Lst. 2. The con-</text>
+<text top="703" left="99" width="339" height="18" font="9">struct used for this is called a combiner. The</text>
+<text top="704" left="442" width="64" height="15" font="15">combine</text>
+<text top="703" left="511" width="237" height="18" font="9">construct allows to implement</text>
+<text top="726" left="99" width="650" height="18" font="9">module interactions at the same architectural level as service modules, but without</text>
+<text top="749" left="99" width="653" height="18" font="9">touching module deﬁnitions. This separation enables developers to describe mod-</text>
+<text top="772" left="99" width="650" height="18" font="9">ule interactions at a well-deﬁned place in the source code. This allows an easier</text>
+<text top="794" left="99" width="650" height="18" font="9">recognition of module relationships and dependencies. Furthermore, a combiner</text>
+<text top="817" left="99" width="650" height="18" font="9">becomes part of the system only if all modules it refers to are part of the product</text>
+<text top="840" left="99" width="112" height="18" font="9">conﬁguration.</text>
+<text top="863" left="115" width="633" height="18" font="9">The ﬁrst combiner in Lst. 2 avoids garbage collection during object initialisation</text>
+<text top="885" left="99" width="312" height="18" font="9">by attaching an around advice to the</text>
+<text top="886" left="419" width="101" height="15" font="15">initializer</text>
+<text top="885" left="528" width="221" height="18" font="9">pointcut exposed from the</text>
+<text top="909" left="99" width="83" height="15" font="15">VMObjects</text>
+<text top="908" left="185" width="563" height="18" font="9">module. The second combiner shows how join point context information</text>
+<text top="931" left="99" width="650" height="18" font="9">can be used in advice. It establishes management of a symbol table saved along</text>
+<text top="954" left="98" width="263" height="18" font="9">with the Smalltalk virtual image.</text>
+<text top="976" left="115" width="636" height="18" font="9">When implementation languages such as C or C++ are used, the VM imple-</text>
+<text top="999" left="99" width="650" height="18" font="9">mentation most likely uses preprocessor macros. In the case of CSOM, whose</text>
+<text top="1022" left="99" width="653" height="18" font="9">implementation emulates object-orientation in C, macros are used to realise mes-</text>
+<text top="1122" left="740" width="9" height="9" font="9">7</text>
+</page>
+<page number="14" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="227" height="18" font="10"><i>3 </i>Virtual Machine Modularity</text>
+<text top="122" left="269" width="4" height="4" font="18">1</text>
+<text top="118" left="281" width="195" height="10" font="19">combine GCMarkSweep, VMObjects {</text>
+<text top="138" left="269" width="4" height="4" font="18">2</text>
+<text top="135" left="305" width="256" height="10" font="19">advice execution(VMObjects::initializer())</text>
+<text top="155" left="269" width="4" height="4" font="18">3</text>
+<text top="151" left="311" width="73" height="10" font="19">: around() {</text>
+<text top="171" left="269" width="4" height="4" font="18">4</text>
+<text top="168" left="329" width="232" height="10" font="19">gc_start_uninterruptable_allocation();</text>
+<text top="187" left="269" width="4" height="4" font="18">5</text>
+<text top="184" left="329" width="91" height="10" font="19">tjp-&gt;proceed();</text>
+<text top="204" left="269" width="4" height="4" font="18">6</text>
+<text top="200" left="329" width="220" height="10" font="19">gc_end_uninterruptable_allocation();</text>
+<text top="220" left="269" width="4" height="4" font="18">7</text>
+<text top="217" left="305" width="6" height="10" font="19">}</text>
+<text top="237" left="269" width="4" height="4" font="18">8</text>
+<text top="233" left="281" width="6" height="10" font="19">}</text>
+<text top="253" left="269" width="4" height="4" font="18">9</text>
+<text top="250" left="281" width="140" height="10" font="19">combine Image, VMCore {</text>
+<text top="269" left="264" width="9" height="4" font="18">10</text>
+<text top="266" left="305" width="299" height="10" font="19">advice execution(&#34;void Universe_set_global(...)&#34;)</text>
+<text top="286" left="264" width="9" height="4" font="18">11</text>
+<text top="282" left="311" width="122" height="10" font="19">&amp;&amp; args(name, value)</text>
+<text top="302" left="264" width="9" height="4" font="18">12</text>
+<text top="299" left="311" width="274" height="12" font="19">: after (_VMSymbol* name, _VMObject* value) {</text>
+<text top="319" left="264" width="9" height="4" font="18">13</text>
+<text top="315" left="329" width="159" height="10" font="19">// register key for symbol</text>
+<text top="335" left="264" width="9" height="4" font="18">14</text>
+<text top="332" left="329" width="195" height="10" font="19">SEND(globals_dictionary_symbols,</text>
+<text top="351" left="264" width="9" height="4" font="18">15</text>
+<text top="348" left="390" width="116" height="10" font="19">addIfAbsent, name);</text>
+<text top="368" left="264" width="9" height="4" font="18">16</text>
+<text top="364" left="305" width="6" height="10" font="19">}</text>
+<text top="384" left="264" width="9" height="4" font="18">17</text>
+<text top="381" left="281" width="6" height="10" font="19">}</text>
+<text top="402" left="281" width="70" height="16" font="5"><b>Listing 2:</b></text>
+<text top="402" left="355" width="302" height="16" font="6">Deﬁnition of service module interactions.</text>
+<text top="457" left="144" width="650" height="18" font="9">sage sending. The implementation of 1-based integer tagging (cf. Sec. 4.2.4) requires</text>
+<text top="480" left="144" width="158" height="18" font="9">a redeﬁnition of the</text>
+<text top="481" left="308" width="37" height="15" font="15">SEND</text>
+<text top="480" left="350" width="447" height="18" font="9">macro. As macros are not ﬁrst-class values in the C pro-</text>
+<text top="503" left="144" width="552" height="18" font="9">gramming language, some means for their redeﬁnition was required.</text>
+<text top="531" left="269" width="4" height="4" font="18">1</text>
+<text top="528" left="281" width="128" height="10" font="19">service ObjectModel {</text>
+<text top="548" left="269" width="4" height="4" font="18">2</text>
+<text top="544" left="305" width="67" height="10" font="19">SendMacro {</text>
+<text top="564" left="269" width="4" height="4" font="18">3</text>
+<text top="561" left="330" width="280" height="10" font="19">#define SEND(O,M,...) ({ typeof(O) _O = (O); \</text>
+<text top="581" left="269" width="4" height="4" font="18">4</text>
+<text top="577" left="354" width="244" height="10" font="19">(_O-&gt;_vtable-&gt;M(_O , ##__VA_ARGS__)); })</text>
+<text top="597" left="269" width="4" height="4" font="18">5</text>
+<text top="594" left="305" width="6" height="10" font="19">}</text>
+<text top="613" left="269" width="4" height="4" font="18">6</text>
+<text top="610" left="281" width="6" height="10" font="19">}</text>
+<text top="630" left="269" width="4" height="4" font="18">7</text>
+<text top="626" left="281" width="134" height="10" font="19">service TaggedIntOne {</text>
+<text top="646" left="269" width="4" height="4" font="18">8</text>
+<text top="643" left="305" width="256" height="10" font="19">#include &lt;tagged-<b>int</b>-one/tagged-<b>int</b>-one.h&gt;</text>
+<text top="663" left="269" width="4" height="4" font="18">9</text>
+<text top="659" left="305" width="189" height="10" font="19">replace ObjectModel.SendMacro {</text>
+<text top="679" left="264" width="9" height="4" font="18">10</text>
+<text top="676" left="330" width="146" height="10" font="19">#define SEND(O,M,...) ({</text>
+<text top="695" left="264" width="9" height="4" font="18">11</text>
+<text top="692" left="354" width="207" height="10" font="19">typeof(O) _Org = (typeof(O))(O); \</text>
+<text top="712" left="264" width="9" height="4" font="18">12</text>
+<text top="708" left="354" width="104" height="10" font="19">typeof(_Org) _O =</text>
+<text top="728" left="264" width="9" height="4" font="18">13</text>
+<text top="725" left="378" width="232" height="10" font="19">(typeof(_Org))(INT_IS_TAGGED(_Org) ? \</text>
+<text top="745" left="264" width="9" height="4" font="18">14</text>
+<text top="741" left="354" width="201" height="10" font="19">VMInteger_Global_Box() : _Org); \</text>
+<text top="761" left="264" width="9" height="4" font="18">15</text>
+<text top="758" left="354" width="250" height="10" font="19">(_O-&gt;_vtable-&gt;M(_Org, ##__VA_ARGS__)); })</text>
+<text top="777" left="264" width="9" height="4" font="18">16</text>
+<text top="774" left="305" width="6" height="10" font="19">}</text>
+<text top="794" left="264" width="9" height="4" font="18">17</text>
+<text top="790" left="281" width="6" height="10" font="19">}</text>
+<text top="811" left="328" width="70" height="16" font="5"><b>Listing 3:</b></text>
+<text top="811" left="403" width="208" height="16" font="6">Named section replacement.</text>
+<text top="840" left="161" width="633" height="18" font="9">Lst. 3 introduces the concept of named sections, i. e., parts of source code that</text>
+<text top="863" left="144" width="650" height="18" font="9">can be referenced by name in VMADL. Named sections add structure to interface</text>
+<text top="885" left="144" width="650" height="18" font="9">deﬁnitions and are used to support interface deﬁnition reﬁnement. The listing</text>
+<text top="908" left="144" width="126" height="18" font="9">shows how the</text>
+<text top="909" left="279" width="37" height="15" font="15">SEND</text>
+<text top="908" left="323" width="196" height="18" font="9">macro is deﬁned in the</text>
+<text top="909" left="527" width="83" height="15" font="15">SendMacro</text>
+<text top="908" left="618" width="176" height="18" font="9">named section in the</text>
+<text top="932" left="144" width="101" height="15" font="15">ObjectModel</text>
+<text top="931" left="250" width="368" height="18" font="9">service module, and also its redeﬁnition in the</text>
+<text top="932" left="624" width="110" height="15" font="15">TaggedIntOne</text>
+<text top="931" left="739" width="55" height="18" font="9">service</text>
+<text top="954" left="144" width="66" height="18" font="9">module.</text>
+<text top="976" left="161" width="636" height="18" font="9">Since C is the implementation language, we had to introduce a language or-</text>
+<text top="999" left="144" width="650" height="18" font="9">thogonal to VMADL, which provides us with the necessary ﬂexibility to describe</text>
+<text top="1022" left="144" width="650" height="18" font="9">crosscutting reﬁnements of classes in our OOP emulation. Thus, we designed a</text>
+<text top="1122" left="144" width="9" height="9" font="9">8</text>
+</page>
+<page number="15" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="528" width="220" height="18" font="10"><i>3</i>.<i>2 </i>VMADL: A Walkthrough</text>
+<text top="114" left="99" width="653" height="18" font="9">small class deﬁnition language (ClassDL) as an add-on to C to be able to modu-</text>
+<text top="137" left="99" width="650" height="18" font="9">larise the features of our VM product line completely. ClassDL is implemented as</text>
+<text top="160" left="99" width="516" height="18" font="9">part of the VMADL tool chain used in our case study on CSOM.</text>
+<text top="182" left="115" width="633" height="18" font="9">ClassDL provides a C-like notation to deﬁne classes and traits according to</text>
+<text top="205" left="99" width="653" height="18" font="9">CSOM’s OOP emulation. ClassDL can be used to reﬁne classes from other mod-</text>
+<text top="228" left="99" width="650" height="18" font="9">ules as well. From ClassDL deﬁnitions, the necessary implementation details like</text>
+<text top="251" left="99" width="650" height="18" font="9">structure deﬁnitions for object layout and virtual method tables, including code for</text>
+<text top="273" left="99" width="653" height="18" font="9">their initialisation, are generated. The ClassDL notation used to deﬁne ﬁelds con-</text>
+<text top="296" left="99" width="650" height="18" font="9">forms to ﬁeld deﬁnitions in C structures. Respectively, method deﬁnitions conform</text>
+<text top="319" left="99" width="194" height="18" font="9">to function declarations.</text>
+<text top="342" left="115" width="633" height="18" font="9">To support structural changes in VMADL service module combinations, an</text>
+<text top="364" left="99" width="653" height="18" font="9">additional keyword was introduced to reﬁne classes or traits from other modules.</text>
+<text top="387" left="98" width="650" height="18" font="9">Within the scope of our case study, it was necessary to add methods and ﬁelds</text>
+<text top="410" left="99" width="650" height="18" font="9">to existing classes due to the structural crosscutting exhibited by some features</text>
+<text top="433" left="98" width="650" height="18" font="9">(cf. Sec. 2). For method introductions, simple deﬁnitions are given like in a normal</text>
+<text top="455" left="99" width="653" height="18" font="9">class deﬁnition. As object layout must be controllable at a ﬁne level of granularity—</text>
+<text top="478" left="99" width="650" height="18" font="9">in particular, the order of ﬁelds in objects is important—, a ﬁeld can be deﬁned with</text>
+<text top="501" left="99" width="650" height="18" font="9">an additional predicate specifying the position with respect to another ﬁeld. These</text>
+<text top="524" left="99" width="653" height="18" font="9">language constructs are sufﬁcient to modularise the features under consideration.</text>
+<text top="577" left="224" width="4" height="4" font="18">1</text>
+<text top="573" left="235" width="116" height="10" font="19">service VMObjects {</text>
+<text top="593" left="224" width="4" height="4" font="18">2</text>
+<text top="590" left="260" width="31" height="10" font="20"><b>class</b></text>
+<text top="590" left="296" width="61" height="10" font="19">VMObject {</text>
+<text top="610" left="224" width="4" height="4" font="18">3</text>
+<text top="606" left="284" width="37" height="10" font="19">size_t</text>
+<text top="606" left="345" width="79" height="10" font="19">num_of_fields</text>
+<text top="626" left="224" width="4" height="4" font="18">4</text>
+<text top="623" left="284" width="116" height="10" font="19">pVMObject fields[0]</text>
+<text top="642" left="224" width="4" height="4" font="18">5</text>
+<text top="639" left="260" width="6" height="10" font="19">}</text>
+<text top="659" left="224" width="4" height="4" font="18">6</text>
+<text top="656" left="260" width="31" height="10" font="20"><b>trait</b></text>
+<text top="655" left="296" width="146" height="10" font="19">VMInvokable : VMObject {</text>
+<text top="675" left="224" width="4" height="4" font="18">7</text>
+<text top="672" left="284" width="116" height="10" font="19">pVMSymbol signature</text>
+<text top="692" left="224" width="4" height="4" font="18">8</text>
+<text top="688" left="284" width="49" height="10" font="19">pVMClass</text>
+<text top="688" left="345" width="37" height="10" font="19">holder</text>
+<text top="708" left="224" width="4" height="4" font="18">9</text>
+<text top="705" left="284" width="24" height="10" font="20"><b>void</b></text>
+<text top="705" left="345" width="98" height="10" font="19">invoke(pVMFrame)</text>
+<text top="724" left="219" width="9" height="4" font="18">10</text>
+<text top="721" left="260" width="6" height="10" font="19">}</text>
+<text top="741" left="219" width="9" height="4" font="18">11</text>
+<text top="738" left="260" width="31" height="10" font="20"><b>class</b></text>
+<text top="737" left="296" width="128" height="10" font="19">VMArray : VMObject {}</text>
+<text top="757" left="219" width="9" height="4" font="18">12</text>
+<text top="754" left="260" width="31" height="10" font="20"><b>class</b></text>
+<text top="754" left="296" width="201" height="10" font="19">VMMethod : VMArray, VMInvokable {</text>
+<text top="774" left="219" width="9" height="4" font="18">13</text>
+<text top="770" left="284" width="55" height="10" font="19">pVMSymbol</text>
+<text top="770" left="351" width="55" height="10" font="19">signature</text>
+<text top="790" left="219" width="9" height="4" font="18">14</text>
+<text top="787" left="284" width="49" height="10" font="19">pVMClass</text>
+<text top="787" left="351" width="37" height="10" font="19">holder</text>
+<text top="806" left="219" width="9" height="4" font="18">15</text>
+<text top="803" left="284" width="201" height="10" font="19">bytecode_t get_bytecode(intptr_t)</text>
+<text top="823" left="219" width="9" height="4" font="18">16</text>
+<text top="820" left="284" width="24" height="10" font="20"><b>void</b></text>
+<text top="819" left="351" width="207" height="10" font="19">set_bytecode(intptr_t, bytecode_t)</text>
+<text top="839" left="219" width="9" height="4" font="18">17</text>
+<text top="836" left="284" width="24" height="10" font="20"><b>void</b></text>
+<text top="836" left="351" width="140" height="10" font="19">invoke_method(pVMFrame)</text>
+<text top="856" left="219" width="9" height="4" font="18">18</text>
+<text top="852" left="260" width="6" height="10" font="19">}</text>
+<text top="872" left="219" width="9" height="4" font="18">19</text>
+<text top="869" left="235" width="6" height="10" font="19">}</text>
+<text top="888" left="219" width="9" height="4" font="18">20</text>
+<text top="885" left="235" width="122" height="10" font="19">service GCRefCount {</text>
+<text top="905" left="219" width="9" height="4" font="18">21</text>
+<text top="902" left="260" width="37" height="10" font="20"><b>refine</b></text>
+<text top="901" left="303" width="61" height="10" font="19">VMObject {</text>
+<text top="921" left="219" width="9" height="4" font="18">22</text>
+<text top="918" left="284" width="49" height="10" font="19">intptr_t</text>
+<text top="918" left="351" width="165" height="10" font="19">gc_field {<b>before </b>fields[0]}</text>
+<text top="938" left="219" width="9" height="4" font="18">23</text>
+<text top="934" left="260" width="6" height="10" font="19">}</text>
+<text top="954" left="219" width="9" height="4" font="18">24</text>
+<text top="951" left="235" width="6" height="10" font="19">}</text>
+<text top="971" left="264" width="70" height="16" font="5"><b>Listing 4:</b></text>
+<text top="971" left="339" width="244" height="16" font="6">ClassDL object layout deﬁnitions.</text>
+<text top="1019" left="115" width="636" height="18" font="9">Lst. 4 shows some ClassDL examples. It ﬁrst presents how object layouts and in-</text>
+<text top="1042" left="99" width="335" height="18" font="9">terfaces for classes and traits deﬁned in the</text>
+<text top="1043" left="438" width="83" height="15" font="15">VMObjects</text>
+<text top="1042" left="525" width="226" height="18" font="9">service module are speciﬁed.</text>
+<text top="1122" left="740" width="9" height="9" font="9">9</text>
+</page>
+<page number="16" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="227" height="18" font="10"><i>3 </i>Virtual Machine Modularity</text>
+<text top="114" left="144" width="650" height="18" font="9">It then shows how the reference-counting GC extends object layout in a controlled</text>
+<text top="137" left="144" width="419" height="18" font="9">way by inserting the reference count ﬁeld before the</text>
+<text top="138" left="568" width="55" height="15" font="15">fields</text>
+<text top="137" left="628" width="166" height="18" font="9">array responsible for</text>
+<text top="160" left="144" width="206" height="18" font="9">storing actual object slots.</text>
+<text top="182" left="161" width="633" height="18" font="9">We would like to point out once more that ClassDL is entirely orthogonal to</text>
+<text top="205" left="144" width="650" height="18" font="9">VMADL. Also, ClassDL is purely declarative: method implementations are not</text>
+<text top="228" left="144" width="650" height="18" font="9">given. Its sole purpose is to help with the particularities of the OOP emulation</text>
+<text top="251" left="144" width="650" height="18" font="9">approach chosen in CSOM. Had CSOM been implemented in a different language</text>
+<text top="273" left="144" width="650" height="18" font="9">with dedicated support for object-oriented modularisation and heterogeneous</text>
+<text top="296" left="144" width="430" height="18" font="9">crosscutting, ClassDL would not have been necessary.</text>
+<text top="319" left="161" width="633" height="18" font="9">A note on differences between the VMADL proof of concept [20] and the robust</text>
+<text top="342" left="144" width="650" height="18" font="9">version of the language presented here is advisable. The proof of concept did not</text>
+<text top="364" left="144" width="650" height="18" font="9">feature explicit combiners—service module interactions were deﬁned in service</text>
+<text top="387" left="144" width="650" height="18" font="9">module deﬁnitions themselves, prohibiting deﬁnitions of interaction facets when</text>
+<text top="410" left="144" width="650" height="18" font="9">introducing new service modules. The proof of concept also lacked named sections</text>
+<text top="433" left="144" width="394" height="18" font="9">and explicit module relationships expressed with</text>
+<text top="434" left="543" width="64" height="15" font="15">require</text>
+<text top="433" left="608" width="4" height="18" font="9">.</text>
+<text top="480" left="145" width="11" height="11" font="17">3</text>
+<text top="476" left="158" width="18" height="21" font="17">. 3</text>
+<text top="476" left="199" width="236" height="21" font="17">The VMADL Tool Chain</text>
+<text top="524" left="144" width="650" height="18" font="9">The VMADL compiler acts as a preprocessor for the actual implementation and</text>
+<text top="546" left="144" width="650" height="18" font="9">aspect languages. It produces implementation ﬁles according to a given set of</text>
+<text top="569" left="144" width="650" height="18" font="9">chosen service modules and identiﬁes the required service module combinations</text>
+<text top="592" left="144" width="650" height="18" font="9">automatically to provide the intended variability. The product conﬁguration is given</text>
+<text top="615" left="144" width="650" height="18" font="9">by passing the chosen service modules’ names to the VMADL compiler. With this</text>
+<text top="637" left="144" width="524" height="18" font="9">information available, the VMADL ﬁles are parsed, and AspectC++</text>
+<text top="638" left="673" width="28" height="15" font="15">.ah</text>
+<text top="637" left="705" width="89" height="18" font="9">ﬁles as well</text>
+<text top="660" left="144" width="34" height="18" font="9">as C</text>
+<text top="661" left="184" width="18" height="15" font="15">.h</text>
+<text top="660" left="207" width="590" height="18" font="9">ﬁles are generated, deﬁning the function interfaces at the C language level.</text>
+<text top="683" left="144" width="399" height="18" font="9">The ClassDL compiler also processes the respective</text>
+<text top="684" left="547" width="18" height="15" font="15">.c</text>
+<text top="683" left="569" width="225" height="18" font="9">ﬁles to generate initialisation</text>
+<text top="706" left="144" width="650" height="18" font="9">code for the OOP emulation. It outputs a set of C header and implementation ﬁles</text>
+<text top="728" left="144" width="650" height="18" font="9">as well, whose contents also depend on the chosen conﬁguration and the actual</text>
+<text top="751" left="144" width="652" height="18" font="9">implementation. The resulting ﬁles are processed by the AspectC++ and C++</text>
+<text top="774" left="144" width="83" height="18" font="9">compilers.</text>
+<text top="797" left="161" width="635" height="18" font="9">A VMADL ﬁle may contain a service module deﬁnition along with combiners,</text>
+<text top="819" left="144" width="650" height="18" font="9">or just one or more combiners. Hence, it is possible to specify a newly arisen</text>
+<text top="842" left="144" width="633" height="18" font="9">combination in a single new ﬁle without having to touch already existing ones.</text>
+<text top="865" left="161" width="633" height="18" font="9">The tool chain itself integrates into the CSOM build environment which is based</text>
+<text top="888" left="144" width="652" height="18" font="9">on make. A sample invocation to generate a CSOM instance with mark/sweep GC,</text>
+<text top="915" left="143" width="9" height="9" font="9">1</text>
+<text top="910" left="152" width="485" height="18" font="9">-based tagged integers and green threading looks as follows:</text>
+<text top="934" left="144" width="395" height="15" font="15">./configure marksweep int-one green &amp;&amp; make</text>
+<text top="933" left="539" width="4" height="18" font="9">.</text>
+<text top="1122" left="144" width="18" height="9" font="9">10</text>
+</page>
+<page number="17" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="21" size="7" family="Times" color="#000000"/>
+	<fontspec id="22" size="4" family="Times" color="#000000"/>
+<text top="239" left="200" width="6" height="9" font="21"> </text>
+<text top="239" left="127" width="7" height="9" font="21">!</text>
+<text top="239" left="144" width="8" height="9" font="21"> &#34;</text>
+<text top="195" left="284" width="6" height="9" font="21"> </text>
+<text top="239" left="263" width="8" height="9" font="21">#</text>
+<text top="239" left="304" width="7" height="9" font="21">$</text>
+<text top="195" left="440" width="5" height="9" font="21">%</text>
+<text top="283" left="352" width="21" height="9" font="21">&amp;&#34; !</text>
+<text top="283" left="410" width="15" height="9" font="21">' (</text>
+<text top="239" left="389" width="8" height="9" font="21">#</text>
+<text top="322" left="124" width="65" height="16" font="5"><b>Figure 2:</b></text>
+<text top="322" left="194" width="530" height="16" font="6">The CSOM/PL feature model as realised by the current implementation.</text>
+<text top="362" left="100" width="13" height="13" font="8">4</text>
+<text top="362" left="134" width="465" height="13" font="8">a v i r t ua l m a c h i n e p r o d u c t l i n e</text>
+<text top="408" left="99" width="650" height="18" font="9">This section presents CSOM/PL. The ﬁrst part will discuss the product line’s</text>
+<text top="430" left="99" width="650" height="18" font="9">feature model, possible conﬁgurations, realisation using pure::variants, and overall</text>
+<text top="453" left="99" width="650" height="18" font="9">beneﬁts of our approach. Subsequently, we will discuss the language-level concepts</text>
+<text top="476" left="99" width="298" height="18" font="9">used to modularise CSOM’s features.</text>
+<text top="524" left="100" width="11" height="11" font="17">4</text>
+<text top="519" left="113" width="18" height="21" font="17">. 1</text>
+<text top="519" left="154" width="291" height="21" font="17">The CSOM/PL Feature Model</text>
+<text top="567" left="98" width="650" height="18" font="9">With the earlier proof of concept implementation of VMADL [20], it was possible</text>
+<text top="590" left="99" width="650" height="18" font="9">to use the implementation of explicit memory management, mark/sweep and</text>
+<text top="612" left="99" width="650" height="18" font="9">reference-counting garbage collection, and green as well as native threads for a</text>
+<text top="635" left="99" width="650" height="18" font="9">case study. Each of these features was implemented as a mere add-on to CSOM; no</text>
+<text top="658" left="99" width="650" height="18" font="9">combinations of features were provided. Some of the CSOM versions composed</text>
+<text top="681" left="99" width="650" height="18" font="9">using the VMADL proof of concept were less robust than the CSOM extensions</text>
+<text top="704" left="98" width="390" height="18" font="9">with the same features that were coded by hand.</text>
+<text top="726" left="115" width="636" height="18" font="9">In contrast, the present VMADL implementation enabled us to achieve signif-</text>
+<text top="749" left="99" width="650" height="18" font="9">icantly better results. On the one hand, we were able to use, in addition to the</text>
+<text top="772" left="99" width="650" height="18" font="9">features mentioned above, implementations of Smalltalk virtual images, 1-based</text>
+<text top="795" left="99" width="653" height="18" font="9">tagged integers, and threaded interpretation. On the other hand, feature combina-</text>
+<text top="817" left="99" width="602" height="18" font="9">tions were achieved that were not even existent in hand-coded form before.</text>
+<text top="840" left="115" width="636" height="18" font="9">Fig. 2 shows a feature diagram representing the current status of CSOM/PL.</text>
+<text top="863" left="99" width="650" height="18" font="9">Mandatory core assets of any given instance of the product line are a memory</text>
+<text top="886" left="99" width="650" height="18" font="9">manager and an execution engine, i. e., interpreter. Both can be instantiated by</text>
+<text top="908" left="99" width="375" height="18" font="9">using either of the options mentioned in Sec. 2.</text>
+<text top="931" left="115" width="635" height="18" font="9">Each of the 16 concrete features has been realised as a VMADL service module,</text>
+<text top="954" left="99" width="650" height="18" font="9">and all of the achieved product line instances have been realised using VMADL</text>
+<text top="977" left="99" width="652" height="18" font="9">combiners. The latter not only make it possible to create actual CSOM/PL products,</text>
+<text top="999" left="99" width="650" height="18" font="9">but also make the architectural relationships between the features (cf. Fig. 1) explicit</text>
+<text top="1022" left="99" width="650" height="18" font="9">at the source code level. Based on the given module names (cf. Sec. 3.3), the VMADL</text>
+<text top="1122" left="731" width="18" height="9" font="9">11</text>
+</page>
+<page number="18" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="256" height="18" font="10"><i>4 </i>A Virtual Machine Product Line</text>
+<text top="114" left="144" width="650" height="18" font="9">compiler decides which interactions are actually required to instantiate a given</text>
+<text top="137" left="144" width="650" height="18" font="9">product, and generates code only for those. More detailed descriptions of the</text>
+<text top="160" left="144" width="394" height="18" font="9">various feature implementations are given below.</text>
+<text top="703" left="144" width="65" height="16" font="5"><b>Figure 3:</b></text>
+<text top="703" left="214" width="257" height="16" font="6">A concrete CSOM/PL conﬁgura-</text>
+<text top="724" left="214" width="157" height="16" font="6">tion in pure::variants.</text>
+<text top="182" left="500" width="296" height="18" font="9">The feature diagram exhibits a con-</text>
+<text top="205" left="484" width="312" height="18" font="9">straint imposed on virtual images:</text>
+<text top="228" left="484" width="310" height="18" font="9">they require combination with the</text>
+<text top="251" left="484" width="313" height="18" font="9">mark/sweep GC as they are not com-</text>
+<text top="273" left="483" width="310" height="18" font="9">patible with reference counting. This</text>
+<text top="296" left="484" width="310" height="18" font="9">is due to the Image feature’s relying</text>
+<text top="319" left="484" width="313" height="18" font="9">on all objects being laid out in a sin-</text>
+<text top="342" left="484" width="310" height="18" font="9">gle contiguous memory area, which</text>
+<text top="364" left="483" width="310" height="18" font="9">property explicit memory management</text>
+<text top="387" left="484" width="313" height="18" font="9">and reference counting do not guaran-</text>
+<text top="410" left="484" width="310" height="18" font="9">tee. The feature diagram also excludes</text>
+<text top="433" left="484" width="310" height="18" font="9">combinations of virtual images with</text>
+<text top="455" left="484" width="310" height="18" font="9">multi-threading. This is simply because</text>
+<text top="478" left="484" width="310" height="18" font="9">the Image feature was not adapted for</text>
+<text top="501" left="484" width="313" height="18" font="9">thread safety. Note that these combina-</text>
+<text top="524" left="484" width="310" height="18" font="9">tions are, in principle, achievable but</text>
+<text top="546" left="484" width="313" height="18" font="9">require some more implementation ef-</text>
+<text top="569" left="484" width="115" height="18" font="9">fort (cf. Sec. 7).</text>
+<text top="592" left="500" width="293" height="18" font="9">The feature model has been realised</text>
+<text top="615" left="484" width="310" height="18" font="9">in software using the pure::variants</text>
+<text top="637" left="484" width="312" height="18" font="9">tool, which features a model editor,</text>
+<text top="660" left="483" width="313" height="18" font="9">product conﬁgurator, validity checker,</text>
+<text top="683" left="484" width="313" height="18" font="9">and a rich generator infrastructure.</text>
+<text top="706" left="484" width="313" height="18" font="9">Fig. 3 shows a screenshot from the prod-</text>
+<text top="728" left="484" width="313" height="18" font="9">uct conﬁguration view, where the en-</text>
+<text top="751" left="484" width="310" height="18" font="9">tire feature model tree of CSOM/PL</text>
+<text top="774" left="144" width="650" height="18" font="9">has been expanded. The selected conﬁguration represents a CSOM VM with a</text>
+<text top="797" left="144" width="650" height="18" font="9">threaded interpreter, mark-sweep GC, one-tagged integer representation, virtual</text>
+<text top="819" left="144" width="650" height="18" font="9">images, and no multithreading support. The mark-sweep GC has been selected</text>
+<text top="842" left="144" width="653" height="18" font="9">automatically by pure::variants as the Image feature was included in the product.</text>
+<text top="865" left="144" width="650" height="18" font="9">From such a product conﬁguration, the SPL tool generates a build script which is</text>
+<text top="888" left="144" width="63" height="18" font="9">used by</text>
+<text top="889" left="212" width="37" height="15" font="15">make</text>
+<text top="888" left="254" width="264" height="18" font="9">to compile a CSOM/PL instance.</text>
+<text top="936" left="145" width="11" height="11" font="17">4</text>
+<text top="931" left="158" width="18" height="21" font="17">. 2</text>
+<text top="931" left="199" width="365" height="21" font="17">Feature and Product Implementations</text>
+<text top="979" left="143" width="662" height="18" font="9">We will now give brief examples how VMADL was used to implement the CSOM/PL</text>
+<text top="1001" left="144" width="653" height="18" font="9">features as service modules, and how those were combined to instantiate products.</text>
+<text top="1024" left="144" width="650" height="18" font="9">It is interesting to note that the CSOM “base implementation” did not have to be</text>
+<text top="1122" left="144" width="18" height="9" font="9">12</text>
+</page>
+<page number="19" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="23" size="13" family="Times" color="#000000"/>
+<text top="60" left="442" width="307" height="18" font="10"><i>4</i>.<i>2 </i>Feature and Product Implementations</text>
+<text top="114" left="99" width="653" height="18" font="9">adapted to meet the needs of any of the extensions that were added. All combi-</text>
+<text top="137" left="99" width="650" height="18" font="9">nations could be expressed using the abstraction capabilities of VMADL and the</text>
+<text top="160" left="99" width="650" height="18" font="9">embedded aspect language, AspectC++. Throughout this section, we will only give</text>
+<text top="182" left="99" width="650" height="18" font="9">brief examples. A more elaborate example is given in the Appendix. It shows the</text>
+<text top="205" left="99" width="650" height="18" font="9">deﬁnition of the native multi-threading service module and its combination with</text>
+<text top="228" left="99" width="650" height="18" font="9">the interpreter and mark/sweep GC modules. This combination was chosen because</text>
+<text top="251" left="99" width="443" height="18" font="9">it signiﬁcantly inﬂuences the involved service modules.</text>
+<text top="303" left="100" width="11" height="11" font="17">4</text>
+<text top="298" left="113" width="39" height="21" font="17">. 2 . 1</text>
+<text top="298" left="174" width="195" height="21" font="17">Memory Management</text>
+<text top="324" left="99" width="650" height="18" font="9">The three different service modules representing concrete memory management</text>
+<text top="346" left="99" width="650" height="18" font="9">features each have a particular implementation of a common interface. The explicit</text>
+<text top="369" left="99" width="653" height="18" font="9">memory management service module does not provide any additional functional-</text>
+<text top="392" left="99" width="650" height="18" font="9">ity but relies on the interfaces offered by the VMCore and the VMObjects service</text>
+<text top="415" left="99" width="73" height="18" font="9">modules.</text>
+<text top="465" left="224" width="4" height="4" font="18">1</text>
+<text top="462" left="235" width="128" height="10" font="19">service GCMarkSweep {</text>
+<text top="482" left="224" width="4" height="4" font="18">2</text>
+<text top="478" left="248" width="37" height="10" font="20"><b>refine</b></text>
+<text top="478" left="290" width="61" height="10" font="19">VMObject {</text>
+<text top="498" left="224" width="4" height="4" font="18">3</text>
+<text top="495" left="260" width="18" height="10" font="20"><b>int</b></text>
+<text top="495" left="284" width="177" height="10" font="19">gc_field { <b>before </b>fields[0] }</text>
+<text top="515" left="224" width="4" height="4" font="18">4</text>
+<text top="511" left="248" width="6" height="10" font="19">}</text>
+<text top="531" left="224" width="4" height="4" font="18">5</text>
+<text top="527" left="235" width="6" height="10" font="19">}</text>
+<text top="547" left="224" width="4" height="4" font="18">6</text>
+<text top="544" left="235" width="195" height="10" font="19">combine GCMarkSweep, VMObjects {</text>
+<text top="564" left="224" width="4" height="4" font="18">7</text>
+<text top="560" left="248" width="268" height="10" font="19">advice execution(VMObjects::initializer()) :</text>
+<text top="580" left="224" width="4" height="4" font="18">8</text>
+<text top="577" left="248" width="61" height="10" font="19">around() {</text>
+<text top="597" left="224" width="4" height="4" font="18">9</text>
+<text top="593" left="260" width="232" height="10" font="19">gc_start_uninterruptable_allocation();</text>
+<text top="613" left="219" width="9" height="4" font="18">10</text>
+<text top="609" left="260" width="91" height="10" font="19">tjp-&gt;proceed();</text>
+<text top="629" left="219" width="9" height="4" font="18">11</text>
+<text top="626" left="260" width="220" height="10" font="19">gc_end_uninterruptable_allocation();</text>
+<text top="646" left="219" width="9" height="4" font="18">12</text>
+<text top="642" left="248" width="6" height="10" font="19">}</text>
+<text top="662" left="219" width="9" height="4" font="18">13</text>
+<text top="659" left="235" width="6" height="10" font="19">}</text>
+<text top="679" left="239" width="70" height="16" font="5"><b>Listing 5:</b></text>
+<text top="679" left="314" width="294" height="16" font="6">Combine Mark/Sweep with VMObjects.</text>
+<text top="735" left="115" width="633" height="18" font="9">The implementation of the <b>mark/sweep GC </b>is almost as transparent as that of</text>
+<text top="757" left="99" width="653" height="18" font="9">explicit memory management. Just a few parts are adapted in other service mod-</text>
+<text top="780" left="99" width="650" height="18" font="9">ules by reﬁnement or combiners. An example is given in Lst. 5 for the introduction</text>
+<text top="803" left="99" width="185" height="18" font="9">of a mark ﬁeld into the</text>
+<text top="804" left="290" width="73" height="15" font="15">VMObject</text>
+<text top="803" left="368" width="34" height="18" font="9">by a</text>
+<text top="804" left="407" width="55" height="14" font="23"><b>refine</b></text>
+<text top="803" left="467" width="281" height="18" font="9">statement of ClassDL. It inserts the</text>
+<text top="826" left="99" width="458" height="18" font="9">mark ﬁeld before the ﬁrst ﬁeld containing a member slot.</text>
+<text top="848" left="115" width="633" height="18" font="9">Furthermore, a combiner describes the interaction of the mark/sweep GC and the</text>
+<text top="871" left="99" width="650" height="18" font="9">VMObjects service modules. It introduces a guard for object initialisation. This</text>
+<text top="894" left="99" width="650" height="18" font="9">avoids dangling pointers resulting from only partially initialised objects which</text>
+<text top="917" left="99" width="650" height="18" font="9">could be caused by a GC run during object creation. The corresponding code is</text>
+<text top="939" left="99" width="228" height="18" font="9">shown in lines 6–13 in Lst. 5.</text>
+<text top="962" left="115" width="634" height="18" font="9">The modularisation of the <b>reference-counting GC </b>is, at ﬁrst, quite similar. A</text>
+<text top="985" left="99" width="66" height="18" font="9">ClassDL</text>
+<text top="986" left="169" width="55" height="14" font="23"><b>refine</b></text>
+<text top="985" left="228" width="443" height="18" font="9">statement introduces a ﬁeld for the reference count in the</text>
+<text top="986" left="675" width="73" height="15" font="15">VMObject</text>
+<text top="1008" left="99" width="650" height="18" font="9">class of the VMObjects service module. Other than with mark/sweep GC, the</text>
+<text top="1030" left="99" width="650" height="18" font="9">nature of reference counting demands a high number of interactions with other</text>
+<text top="1122" left="731" width="18" height="9" font="9">13</text>
+</page>
+<page number="20" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="256" height="18" font="10"><i>4 </i>A Virtual Machine Product Line</text>
+<text top="114" left="144" width="653" height="18" font="9">modules, since almost every assignment of an object reference has to be tracked.</text>
+<text top="137" left="144" width="650" height="18" font="9">Thus, combiners have to be deﬁned for all service modules the reference-counting</text>
+<text top="160" left="144" width="650" height="18" font="9">GC has to be used with. These combiners are typically straightforward. They</text>
+<text top="182" left="144" width="650" height="18" font="9">increase the reference count of the new object before the actual execution and</text>
+<text top="205" left="144" width="452" height="18" font="9">decrease the reference count of the old value afterwards.</text>
+<text top="258" left="145" width="11" height="11" font="17">4</text>
+<text top="253" left="158" width="39" height="21" font="17">. 2 . 2</text>
+<text top="253" left="220" width="148" height="21" font="17">Multi-Threading</text>
+<text top="278" left="144" width="650" height="18" font="9">From the modularisation perspective, <b>green threading </b>is quite undemanding. The</text>
+<text top="301" left="144" width="650" height="18" font="9">service module interacts with the primitives service module to register primitives</text>
+<text top="324" left="144" width="54" height="18" font="9">for the</text>
+<text top="325" left="204" width="83" height="15" font="15">Scheduler</text>
+<text top="324" left="293" width="501" height="18" font="9">class and with the VMCore service module to enable the shell</text>
+<text top="346" left="144" width="650" height="18" font="9">to use threads as well. Another combiner is used to adapt the interpreter service</text>
+<text top="369" left="144" width="653" height="18" font="9">module to signal when it reaches a safe point in execution to allow thread pre-</text>
+<text top="392" left="144" width="218" height="18" font="9">emption as shown in Lst. 6.</text>
+<text top="440" left="269" width="4" height="4" font="18">1</text>
+<text top="437" left="281" width="128" height="10" font="19">service Interpreter {</text>
+<text top="457" left="269" width="4" height="4" font="18">2</text>
+<text top="453" left="293" width="49" height="10" font="19">expose {</text>
+<text top="473" left="269" width="4" height="4" font="18">3</text>
+<text top="470" left="305" width="146" height="10" font="19">pointcut safe_points() =</text>
+<text top="490" left="269" width="4" height="4" font="18">4</text>
+<text top="486" left="317" width="171" height="10" font="19">execution(&#34;void send(...)&#34;);</text>
+<text top="506" left="269" width="4" height="4" font="18">5</text>
+<text top="502" left="293" width="6" height="10" font="19">}</text>
+<text top="522" left="269" width="4" height="4" font="18">6</text>
+<text top="519" left="281" width="6" height="10" font="19">}</text>
+<text top="539" left="269" width="4" height="4" font="18">7</text>
+<text top="535" left="281" width="213" height="10" font="19">combine GreenThreads, Interpreter {</text>
+<text top="555" left="269" width="4" height="4" font="18">8</text>
+<text top="552" left="293" width="280" height="10" font="19">advice Interpreter::safe_points() : <b>before</b>() {</text>
+<text top="572" left="269" width="4" height="4" font="18">9</text>
+<text top="568" left="305" width="152" height="10" font="19">++scheduler_return_count;</text>
+<text top="588" left="264" width="9" height="4" font="18">10</text>
+<text top="585" left="305" width="177" height="10" font="19">Scheduler_insert_scheduler();</text>
+<text top="604" left="264" width="9" height="4" font="18">11</text>
+<text top="601" left="293" width="6" height="10" font="19">}</text>
+<text top="621" left="264" width="9" height="4" font="18">12</text>
+<text top="617" left="281" width="6" height="10" font="19">}</text>
+<text top="629" left="320" width="70" height="16" font="5"><b>Listing 6:</b></text>
+<text top="629" left="394" width="224" height="16" font="6">Pre-emption for green threads.</text>
+<text top="678" left="161" width="633" height="18" font="9">Some additional combiners are necessary to support the combined usage of</text>
+<text top="701" left="144" width="661" height="18" font="9">multi-threading with, e. g., the different GCs. For conﬁgurations using the mark/sweep</text>
+<text top="723" left="144" width="650" height="18" font="9">GC, the combiner implements an extension to the GC’s mark phase to add the</text>
+<text top="747" left="144" width="83" height="15" font="15">Scheduler</text>
+<text top="746" left="227" width="569" height="18" font="9">-internal list of available threads to the GC’s root set. Were this not done,</text>
+<text top="769" left="144" width="650" height="18" font="9">all but the currently running thread would not be regarded as live objects. The case</text>
+<text top="792" left="144" width="391" height="18" font="9">is similar for reference counting: assignments to</text>
+<text top="793" left="541" width="83" height="15" font="15">Scheduler</text>
+<text top="792" left="630" width="164" height="18" font="9">data structures have</text>
+<text top="815" left="144" width="650" height="18" font="9">to be handled like all other assignments to ensure reference counts are updated</text>
+<text top="837" left="144" width="72" height="18" font="9">correctly.</text>
+<text top="860" left="161" width="633" height="18" font="9">For <b>native threads</b>, the changes are more fundamental than for green threads</text>
+<text top="883" left="144" width="650" height="18" font="9">(cf. Sec. 2). The major task is to achieve thread-local execution of interpreters. This</text>
+<text top="906" left="144" width="650" height="18" font="9">is achieved by adapting the global frame pointer to be a thread-local one. Since</text>
+<text top="928" left="144" width="650" height="18" font="9">most service modules are implemented without global state, this adaptation need</text>
+<text top="951" left="144" width="91" height="18" font="9">is very low.</text>
+<text top="974" left="161" width="636" height="18" font="9">The aforementioned assignment adjustments were done to enable the combina-</text>
+<text top="997" left="144" width="650" height="18" font="9">tion of the native multi-threading and reference-counting GC features. With mark/sweep</text>
+<text top="1019" left="144" width="650" height="18" font="9">GC, this is more challenging. The scheme that was implemented in the feature</text>
+<text top="1042" left="144" width="653" height="18" font="9">combination found in CSOM/PL is a stop-the-world solution [22]. This is imple-</text>
+<text top="1122" left="144" width="18" height="9" font="9">14</text>
+</page>
+<page number="21" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="114" left="99" width="650" height="18" font="9">mented entirely inside a combiner and will therefore become part of an instance of</text>
+<text top="137" left="99" width="650" height="18" font="9">the CSOM product line only if both service modules—mark/sweep GC and native</text>
+<text top="160" left="99" width="166" height="18" font="9">threads—are chosen.</text>
+<text top="212" left="100" width="11" height="11" font="17">4</text>
+<text top="207" left="113" width="39" height="21" font="17">. 2 . 3</text>
+<text top="207" left="174" width="156" height="21" font="17">Execution Engine</text>
+<text top="233" left="99" width="653" height="18" font="9">Interaction with the two possible interpreters (switch/case and threading) is re-</text>
+<text top="255" left="99" width="653" height="18" font="9">alised using the common interpreter service module interface. The <b>threaded inter-</b></text>
+<text top="278" left="99" width="49" height="17" font="16"><b>preter</b></text>
+<text top="278" left="153" width="596" height="18" font="9">requires some interaction with other service modules; e. g., a combination</text>
+<text top="301" left="98" width="650" height="18" font="9">with the VMObjects service module achieves the translation of method bytecodes</text>
+<text top="324" left="99" width="650" height="18" font="9">into threaded code [10] after method assembly by the Smalltalk compiler. Bytecode</text>
+<text top="346" left="99" width="650" height="18" font="9">index handling is also adapted. The original design implies a local bytecode index</text>
+<text top="369" left="99" width="67" height="18" font="9">in every</text>
+<text top="370" left="173" width="64" height="15" font="15">VMFrame</text>
+<text top="369" left="245" width="506" height="18" font="9">object. For threaded interpretation, this needs to be changed,</text>
+<text top="392" left="99" width="574" height="18" font="9">since it relies on a global pointer to the bytecode handler executed next.</text>
+<text top="445" left="100" width="11" height="11" font="17">4</text>
+<text top="440" left="113" width="39" height="21" font="17">. 2 . 4</text>
+<text top="440" left="174" width="198" height="21" font="17">Integer Representation</text>
+<text top="465" left="98" width="650" height="18" font="9">When integers are implemented as “ordinary” objects, i. e., boxed integers, there</text>
+<text top="488" left="99" width="399" height="18" font="9">is no difference between sending a message to an</text>
+<text top="489" left="503" width="64" height="15" font="15">Integer</text>
+<text top="488" left="573" width="176" height="18" font="9">instance or to another</text>
+<text top="510" left="99" width="650" height="18" font="9">object: the virtual method table (VMT) is accessed and the message implementation</text>
+<text top="533" left="99" width="650" height="18" font="9">resolved. Conversely, tagged integers do not have a multiple-slot representation in</text>
+<text top="556" left="99" width="650" height="18" font="9">memory, and do not reference a VMT. Instead, a global “surrogate object” exists</text>
+<text top="579" left="99" width="520" height="18" font="9">via whose VMT messages sent to tagged integers are dispatched.</text>
+<text top="601" left="115" width="633" height="18" font="9">In CSOM, adopting this change is challenging because sending messages to</text>
+<text top="624" left="99" width="650" height="18" font="9">objects is realised via C macros, which cannot normally be redeﬁned. However, as</text>
+<text top="647" left="98" width="469" height="18" font="9">VMADL features named sections (cf. Sec. 3.2), redeﬁning the</text>
+<text top="648" left="572" width="37" height="15" font="15">SEND</text>
+<text top="647" left="614" width="137" height="18" font="9">macro infrastruc-</text>
+<text top="670" left="99" width="650" height="18" font="9">ture is done by providing a replacement for the corresponding named section in</text>
+<text top="693" left="99" width="255" height="18" font="9">the ObjectModel service module.</text>
+<text top="715" left="115" width="566" height="18" font="9">For this case study, we used <b>one-based tagging </b>as in Smalltalk-80 [18].</text>
+<text top="768" left="100" width="11" height="11" font="17">4</text>
+<text top="763" left="113" width="39" height="21" font="17">. 2 . 5</text>
+<text top="763" left="174" width="156" height="21" font="17">Image Persistence</text>
+<text top="788" left="99" width="650" height="18" font="9">The Smalltalk <b>virtual images </b>implementation relies predominantly on the abilities</text>
+<text top="811" left="99" width="650" height="18" font="9">of ClassDL to reﬁne classes and add methods. This is used to update references</text>
+<text top="834" left="99" width="650" height="18" font="9">after loading an existing image. The change in the startup process of the VM to</text>
+<text top="857" left="99" width="650" height="18" font="9">load an image instead of initialising the VM from source ﬁles is done by simple</text>
+<text top="879" left="99" width="653" height="18" font="9">adaptations of initialisation routines implemented with a service module combina-</text>
+<text top="902" left="99" width="36" height="18" font="9">tion.</text>
+<text top="948" left="100" width="13" height="13" font="8">5</text>
+<text top="948" left="134" width="161" height="13" font="8">e va l ua t i o n</text>
+<text top="993" left="98" width="651" height="18" font="9">When turning a set of hand-crafted extensions to a base system into a cleanly</text>
+<text top="1016" left="99" width="650" height="18" font="9">encapsulated set of service modules forming an SPL, there are two points of</text>
+<text top="1039" left="99" width="650" height="18" font="9">view from which the results should be evaluated. First of all, it is important to</text>
+<text top="1122" left="731" width="18" height="9" font="9">15</text>
+</page>
+<page number="22" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="98" height="18" font="10"><i>5 </i>Evaluation</text>
+<text top="114" left="144" width="650" height="18" font="9">assess the impact of modularisation and combination on performance. This is</text>
+<text top="137" left="144" width="650" height="18" font="9">especially interesting in the domain of VM implementations, where performance is</text>
+<text top="160" left="144" width="650" height="18" font="9">crucial. CSOM has a set of benchmarks (cf. Sec. 2) that can be used to evaluate the</text>
+<text top="182" left="144" width="653" height="18" font="9">performance of hand-crafted extensions versus automatically combined products.</text>
+<text top="205" left="144" width="650" height="18" font="9">The second perspective is that of code complexity. We have evaluated the source</text>
+<text top="228" left="144" width="650" height="18" font="9">code by applying several source code metrics to it. Modularity improvements were</text>
+<text top="251" left="144" width="128" height="18" font="9">also considered.</text>
+<text top="273" left="161" width="633" height="18" font="9">Below, we will elaborate on these assessments, and conclude the section with</text>
+<text top="296" left="144" width="652" height="18" font="9">a brief discussion of our approach in the light of Parnas’ modularity criteria [32],</text>
+<text top="319" left="144" width="577" height="18" font="9">SPL development tool support, and how the two coincide in CSOM/PL.</text>
+<text top="367" left="145" width="11" height="11" font="17">5</text>
+<text top="362" left="158" width="18" height="21" font="17">. 1</text>
+<text top="362" left="199" width="283" height="21" font="17">Virtual Machine Performance</text>
+<text top="410" left="144" width="650" height="18" font="9">Performance measurements were run on a Dual Xeon PC (2.5 GHz clock rate, four</text>
+<text top="433" left="144" width="650" height="18" font="9">cores overall) with 6 MB cache and 8 GB RAM. The operating system was Debian</text>
+<text top="455" left="144" width="650" height="18" font="9">Linux 4.0r3 with a 64-bit kernel (version 2.6.18) and 32-bit user land. The used</text>
+<text top="478" left="144" width="300" height="18" font="9">compilers were GNU C++ 4.1.2, and</text>
+<text top="479" left="451" width="37" height="15" font="15">ac++</text>
+<text top="482" left="494" width="9" height="9" font="9">1</text>
+<text top="478" left="503" width="60" height="18" font="9">.0pre4/</text>
+<text top="479" left="564" width="37" height="15" font="15">ag++</text>
+<text top="482" left="607" width="9" height="9" font="9">0</text>
+<text top="478" left="616" width="178" height="18" font="9">.7 for AspectC++. For</text>
+<text top="501" left="144" width="650" height="18" font="9">compiling CSOM, standard compiler settings were used, the optimisation ﬂag</text>
+<text top="524" left="144" width="80" height="18" font="9">given was</text>
+<text top="525" left="229" width="28" height="15" font="15">-O3</text>
+<text top="524" left="262" width="180" height="18" font="9">(highest optimisation).</text>
+<text top="546" left="161" width="636" height="18" font="9">To obtain performance results, each benchmark was run ten times as a stand-</text>
+<text top="569" left="144" width="650" height="18" font="9">alone application in a dedicated CSOM instance; the average running time was</text>
+<text top="592" left="144" width="650" height="18" font="9">taken as the result. The time required to start up the VM is not contained in</text>
+<text top="615" left="144" width="653" height="18" font="9">these values; they reﬂect the sheer time required to actually run the benchmarks.</text>
+<text top="637" left="144" width="650" height="18" font="9">Measurements were run for pairs of CSOM versions with the same features. We</text>
+<text top="660" left="144" width="650" height="18" font="9">compare the hand-crafted implementations with the corresponding CSOM/PL</text>
+<text top="683" left="144" width="650" height="18" font="9">conﬁguration generated from VMADL service modules. This allowed for assessing</text>
+<text top="706" left="144" width="591" height="18" font="9">the performance impact of using VMADL on a single CSOM/PL product.</text>
+<text top="728" left="161" width="636" height="18" font="9">Performance measurement results are displayed in Fig. 4. For each CSOM con-</text>
+<text top="751" left="144" width="650" height="18" font="9">ﬁguration, the relative performance of the VMADL version to the hand-crafted</text>
+<text top="774" left="144" width="653" height="18" font="9">build is shown. VMADL employment does not bring about severe impacts. In-</text>
+<text top="797" left="144" width="653" height="18" font="9">terestingly, half of the VMADL-generated products exhibit small improvements.</text>
+<text top="819" left="144" width="650" height="18" font="9">This is because the compiler applied different optimisations in the presence of</text>
+<text top="842" left="144" width="650" height="18" font="9">code constructs generated by AspectC++. We comment on the more signiﬁcant</text>
+<text top="865" left="144" width="650" height="18" font="9">penalties observed for the reference-counting GC, virtual images, and threaded</text>
+<text top="888" left="144" width="190" height="18" font="9">interpretation products.</text>
+<text top="910" left="161" width="636" height="18" font="9">First of all, in case of the reference-counting GC, the fact that the VMADL imple-</text>
+<text top="933" left="144" width="653" height="18" font="9">mentation performs worse than the hand-crafted one is due to that the reference-</text>
+<text top="956" left="144" width="653" height="18" font="9">counting service module is more accurate than the hand-crafted code. This is be-</text>
+<text top="979" left="144" width="650" height="18" font="9">cause the pointcuts used to quantify over pointer assignment join points are more</text>
+<text top="1001" left="144" width="650" height="18" font="9">robust than an approach where all pointer assignments have to be identiﬁed and</text>
+<text top="1122" left="144" width="18" height="9" font="9">16</text>
+</page>
+<page number="23" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="24" size="14" family="Times" color="#000000"/>
+<text top="60" left="501" width="248" height="18" font="10"><i>5</i>.<i>1 </i>Virtual Machine Performance</text>
+<text top="275" left="208" width="0" height="17" font="24">plain</text>
+<text top="283" left="270" width="0" height="17" font="24">green</text>
+<text top="285" left="332" width="0" height="17" font="24">native</text>
+<text top="301" left="395" width="0" height="17" font="24">refcount</text>
+<text top="328" left="457" width="0" height="17" font="24">marksweep</text>
+<text top="355" left="509" width="0" height="17" font="24">marksweep-int-</text>
+<text top="312" left="530" width="0" height="17" font="24">one</text>
+<text top="332" left="572" width="0" height="17" font="24">marksweep-</text>
+<text top="309" left="592" width="0" height="17" font="24">image</text>
+<text top="332" left="634" width="0" height="17" font="24">marksweep-</text>
+<text top="321" left="655" width="0" height="17" font="24">threading</text>
+<text top="301" left="707" width="0" height="17" font="24">average</text>
+<text top="436" left="99" width="65" height="16" font="5"><b>Figure 4:</b></text>
+<text top="435" left="169" width="580" height="16" font="6">Performance measurement results: relative performance of VMADL versions to</text>
+<text top="457" left="169" width="255" height="16" font="6">hand-crafted feature combinations.</text>
+<text top="499" left="99" width="650" height="18" font="9">instrumented by hand. Thus, the VMADL reference-counting GC implementation</text>
+<text top="521" left="99" width="270" height="18" font="9">is slower just because it is correct.</text>
+<text top="544" left="115" width="633" height="18" font="9">For virtual images, the reason for the observed slight decrease in performance</text>
+<text top="567" left="99" width="650" height="18" font="9">is due to differences in method localisation between the hand-crafted and the</text>
+<text top="590" left="98" width="650" height="18" font="9">VMADL versions. The hand-crafted image feature had added various methods to</text>
+<text top="612" left="99" width="650" height="18" font="9">different C source ﬁles. Since they belong to the image logical module, they were</text>
+<text top="635" left="99" width="650" height="18" font="9">all collected in one place in the VMADL version, namely in the corresponding</text>
+<text top="658" left="99" width="652" height="18" font="9">service module. That is, instead of being scattered over different compilation units,</text>
+<text top="681" left="99" width="650" height="18" font="9">they are now found in a single one. The GNU C++ compiler does not support</text>
+<text top="703" left="99" width="650" height="18" font="9">inter-module optimisation and thus fails to inline the methods from the single</text>
+<text top="726" left="99" width="650" height="18" font="9">implementation ﬁle into the code where they are actually used. This leads to the</text>
+<text top="749" left="99" width="650" height="18" font="9">observed penalty for the cleanly modularised implementation of the image feature</text>
+<text top="772" left="98" width="115" height="18" font="9">with VMADL.</text>
+<text top="794" left="115" width="633" height="18" font="9">Threaded interpretation is the implementation where the implementation based</text>
+<text top="817" left="99" width="650" height="18" font="9">on service modules exhibits the most signiﬁcant penalty (about 5 %). This case</text>
+<text top="840" left="99" width="650" height="18" font="9">in fact illustrates that VMADL requires a feature it is currently lacking: control</text>
+<text top="863" left="99" width="650" height="18" font="9">over the order in which features apply. In this product, the mark/sweep GC and</text>
+<text top="885" left="99" width="650" height="18" font="9">threaded interpretation features interact at certain points. Manual modiﬁcation of</text>
+<text top="908" left="99" width="650" height="18" font="9">the advice application order in the AspectC++ code generated from the VMADL</text>
+<text top="931" left="99" width="653" height="18" font="9">preprocessor led to a performance impact of only 1.4 %. This remaining degrada-</text>
+<text top="954" left="99" width="221" height="18" font="9">tion is owed to the usage of</text>
+<text top="955" left="325" width="46" height="15" font="15">cflow</text>
+<text top="954" left="376" width="348" height="18" font="9">constructs [23] which could not be avoided.</text>
+<text top="977" left="115" width="633" height="18" font="9">The average performance over all considered CSOM/PL conﬁgurations is about</text>
+<text top="1003" left="98" width="26" height="9" font="9">100</text>
+<text top="999" left="125" width="627" height="18" font="9">.2 % compared to the hand-crafted versions. So, even though there can be perfor-</text>
+<text top="1122" left="731" width="18" height="9" font="9">17</text>
+</page>
+<page number="24" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="98" height="18" font="10"><i>5 </i>Evaluation</text>
+<text top="114" left="144" width="650" height="18" font="9">mance penalties caused by the usage of aspect-oriented means, overall performance</text>
+<text top="137" left="144" width="338" height="18" font="9">is not inﬂuenced when applying VMADL.</text>
+<text top="185" left="145" width="11" height="11" font="17">5</text>
+<text top="180" left="158" width="18" height="21" font="17">. 2</text>
+<text top="180" left="199" width="239" height="21" font="17">Source Code Complexity</text>
+<text top="228" left="144" width="650" height="18" font="9">To assess source code complexity, several metrics were applied. Notice that only the</text>
+<text top="251" left="144" width="652" height="18" font="9">actual CSOM/PL source code was taken into account. For some of the extensions,</text>
+<text top="273" left="144" width="650" height="18" font="9">e. g., multi-threading, the Smalltalk libraries had to be extended as well to provide</text>
+<text top="296" left="144" width="650" height="18" font="9">APIs for the new features. As those do not belong to the VM as such, they were not</text>
+<text top="319" left="144" width="76" height="18" font="9">regarded.</text>
+<text top="342" left="161" width="633" height="18" font="9">The metrics were applied to the entire corpus of CSOM source code including all</text>
+<text top="364" left="144" width="650" height="18" font="9">extensions. Hand-crafted versions represented reference values, to which results</text>
+<text top="387" left="144" width="508" height="18" font="9">obtained from service module source code were put in relation.</text>
+<text top="440" left="145" width="11" height="11" font="17">5</text>
+<text top="435" left="158" width="39" height="21" font="17">. 2 . 1</text>
+<text top="435" left="220" width="188" height="21" font="17">Lines of Code Results</text>
+<text top="460" left="144" width="650" height="18" font="9">The physical source lines of code (PSLOC) [31] metrics counts all lines of code that</text>
+<text top="483" left="144" width="650" height="18" font="9">are not empty and do not solely consist of comments. Applying VMADL resulted</text>
+<text top="506" left="144" width="650" height="18" font="9">in a moderate increase of 2.1 % (143 lines) in PSLOC. It needs to be noted that this</text>
+<text top="528" left="144" width="650" height="18" font="9">value is adjusted as it does not account for the effect of also using ClassDL. The</text>
+<text top="551" left="144" width="650" height="18" font="9">employment of ClassDL resulted in a decrease of 738 PSLOC. As we want to assess</text>
+<text top="574" left="144" width="438" height="18" font="9">the sheer effect of VMADL, we elided ClassDL’s effect.</text>
+<text top="627" left="145" width="11" height="11" font="17">5</text>
+<text top="622" left="158" width="39" height="21" font="17">. 2 . 2</text>
+<text top="622" left="220" width="171" height="21" font="17">Modularity Results</text>
+<text top="647" left="144" width="653" height="18" font="9">To determine feature locality and modularisation, we identiﬁed changed imple-</text>
+<text top="670" left="144" width="650" height="18" font="9">mentation modules as well as modiﬁed functions and structures at the sub-module</text>
+<text top="693" left="144" width="650" height="18" font="9">level. CSOM’s base conﬁguration was compared to others with reference-counting</text>
+<text top="715" left="144" width="650" height="18" font="9">and mark/sweep GCs, and green as well as native threading. Moreover, CSOM</text>
+<text top="738" left="144" width="653" height="18" font="9">with mark/sweep GC was compared to conﬁgurations with virtual images, 1-</text>
+<text top="761" left="144" width="650" height="18" font="9">based integer tagging, and threaded interpretation. That way, it was possible to</text>
+<text top="784" left="144" width="650" height="18" font="9">determine, by feature, how many lines of code were added or modiﬁed, and how</text>
+<text top="806" left="144" width="650" height="18" font="9">many ﬁles and function or structure deﬁnitions were affected. The results allow a</text>
+<text top="829" left="144" width="475" height="18" font="9">comparison of hand-crafted and VMADL implementations.</text>
+<text top="852" left="161" width="633" height="18" font="9">Results from the modularity metrics are shown in Fig. 5. The shown values are</text>
+<text top="875" left="144" width="650" height="18" font="9">cumulative: they represent the sums of the respective metrics from measuring</text>
+<text top="897" left="144" width="650" height="18" font="9">them for all of the analysed feature implementations. In the ﬁgure, the left-hand</text>
+<text top="920" left="145" width="649" height="18" font="9">y axis relates to the dotted large bars in the background; the right-hand y axis, to</text>
+<text top="943" left="144" width="650" height="18" font="9">the bars in the foreground. The background bars, “new lines” represent the total</text>
+<text top="966" left="144" width="652" height="18" font="9">number of added lines of code. The foreground bars present additional details,</text>
+<text top="988" left="144" width="652" height="18" font="9">namely the number of lines that had to be removed, number of newly added ﬁles,</text>
+<text top="1011" left="144" width="653" height="18" font="9">changed ﬁles, and changed function or structure deﬁnitions. The “changed lines”</text>
+<text top="1122" left="144" width="18" height="9" font="9">18</text>
+</page>
+<page number="25" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="25" size="7" family="Times" color="#000000"/>
+<text top="60" left="518" width="230" height="18" font="10"><i>5</i>.<i>3 </i>Discussion and Conclusion</text>
+<text top="279" left="266" width="5" height="11" font="25">0</text>
+<text top="257" left="250" width="21" height="11" font="25">1000</text>
+<text top="235" left="250" width="21" height="11" font="25">2000</text>
+<text top="214" left="250" width="21" height="11" font="25">3000</text>
+<text top="192" left="250" width="21" height="11" font="25">4000</text>
+<text top="170" left="250" width="21" height="11" font="25">5000</text>
+<text top="148" left="250" width="21" height="11" font="25">6000</text>
+<text top="126" left="250" width="21" height="11" font="25">7000</text>
+<text top="105" left="250" width="21" height="11" font="25">8000</text>
+<text top="293" left="298" width="109" height="11" font="25">Hand-Crafted CSOM VMs</text>
+<text top="293" left="453" width="97" height="11" font="25">CSOM/PL with VMADL</text>
+<text top="279" left="583" width="5" height="11" font="25">0</text>
+<text top="257" left="583" width="10" height="11" font="25">50</text>
+<text top="235" left="583" width="16" height="11" font="25">100</text>
+<text top="214" left="583" width="16" height="11" font="25">150</text>
+<text top="192" left="583" width="16" height="11" font="25">200</text>
+<text top="170" left="583" width="16" height="11" font="25">250</text>
+<text top="148" left="583" width="16" height="11" font="25">300</text>
+<text top="126" left="583" width="16" height="11" font="25">350</text>
+<text top="105" left="583" width="16" height="11" font="25">400</text>
+<text top="320" left="258" width="46" height="12" font="12">new lines</text>
+<text top="320" left="436" width="69" height="12" font="12">removed lines</text>
+<text top="335" left="258" width="93" height="12" font="12">changed lines (old)</text>
+<text top="335" left="436" width="99" height="12" font="12">changed lines (new)</text>
+<text top="351" left="258" width="43" height="12" font="12">new files</text>
+<text top="351" left="436" width="65" height="12" font="12">changed files</text>
+<text top="366" left="258" width="162" height="12" font="12">changed functions and structures</text>
+<text top="404" left="99" width="65" height="16" font="5"><b>Figure 5:</b></text>
+<text top="404" left="169" width="582" height="16" font="6">Modularity metrics results. Left y axis (background bars): number of new lines;</text>
+<text top="426" left="169" width="582" height="16" font="6">right y axis (foreground bars): number of added/changed lines/ﬁles/functions/</text>
+<text top="447" left="169" width="76" height="16" font="6">structures.</text>
+<text top="476" left="99" width="650" height="18" font="9">numbers express how many lines were modiﬁed in the transition in a way reported</text>
+<text top="499" left="99" width="108" height="18" font="9">by a common</text>
+<text top="500" left="213" width="37" height="15" font="15">diff</text>
+<text top="499" left="255" width="35" height="18" font="9">tool.</text>
+<text top="521" left="115" width="634" height="18" font="9">The ﬁgure clearly shows that hand-crafted implementations exhibit a larger</text>
+<text top="544" left="98" width="650" height="18" font="9">(more than 1,000 lines) implementation overhead. Since we did not change the</text>
+<text top="567" left="99" width="653" height="18" font="9">inner modularisation of service modules, the number of added ﬁles remains con-</text>
+<text top="590" left="99" width="650" height="18" font="9">stant, while eliminating crosscutting changes and thus reducing implementation</text>
+<text top="612" left="99" width="653" height="18" font="9">overhead. Thus, the VMADL approach yields excellent modularity: while hand-</text>
+<text top="635" left="99" width="650" height="18" font="9">crafting involves a large number of modiﬁcations in existing code, using VMADL</text>
+<text top="658" left="99" width="650" height="18" font="9">and service modules merely implies introducing new ﬁles, which contain all of the</text>
+<text top="681" left="99" width="189" height="18" font="9">newly introduced code.</text>
+<text top="703" left="115" width="633" height="18" font="9">In a nutshell, this means that VMADL supports real modularity: extensions are</text>
+<text top="726" left="99" width="650" height="18" font="9">not invasive in any way; they are completely encapsulated in dedicated ﬁles, which</text>
+<text top="749" left="99" width="515" height="18" font="9">in turn results in a uniﬁed source base for the whole CSOM/PL.</text>
+<text top="797" left="100" width="11" height="11" font="17">5</text>
+<text top="792" left="113" width="18" height="21" font="17">. 3</text>
+<text top="792" left="154" width="260" height="21" font="17">Discussion and Conclusion</text>
+<text top="840" left="99" width="653" height="18" font="9">D. L. Parnas has formulated [32] a set of three criteria for modular programming.</text>
+<text top="863" left="99" width="650" height="18" font="9">In short, an approach can be called “modular” if “separate groups [can] work on</text>
+<text top="886" left="99" width="650" height="18" font="9">each module with little need for communication”, “drastic changes [can be made]</text>
+<text top="908" left="99" width="650" height="18" font="9">to one module without a need to change others”, and “it [is] possible to study the</text>
+<text top="931" left="99" width="650" height="18" font="9">system one module at a time”. More recent elaborations on modularity, such as</text>
+<text top="954" left="99" width="653" height="18" font="9">those by Meyer [29], add more detail to these criteria but basically imply the same.</text>
+<text top="977" left="98" width="650" height="18" font="9">We will now brieﬂy discuss our approach to modularising VM implementations</text>
+<text top="999" left="99" width="156" height="18" font="9">along these criteria.</text>
+<text top="1122" left="731" width="18" height="9" font="9">19</text>
+</page>
+<page number="26" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="116" height="18" font="10"><i>6 </i>Related Work</text>
+<text top="114" left="161" width="633" height="18" font="9">As interfaces are at the core of the VMADL approach, the beneﬁts usually brought</text>
+<text top="137" left="144" width="650" height="18" font="9">about by them are also beneﬁts of VMADL. Communication among development</text>
+<text top="160" left="144" width="650" height="18" font="9">groups can take place in terms of the interfaces of service modules. As long as</text>
+<text top="182" left="144" width="650" height="18" font="9">changes to modules do not affect their interfaces, other modules do not have to</text>
+<text top="205" left="144" width="650" height="18" font="9">be changed. When semantically meaningful sets of join points are exposed and</text>
+<text top="228" left="144" width="650" height="18" font="9">given appropriate names (cf. Lst. 1), it is even possible to change their deﬁnition</text>
+<text top="251" left="144" width="650" height="18" font="9">(i. e., pointcut) without having to change a client. In fact, it might even be the case</text>
+<text top="273" left="144" width="650" height="18" font="9">that the details of a module interaction change, but the modules themselves do not</text>
+<text top="296" left="144" width="650" height="18" font="9">have to be modiﬁed as the interaction is speciﬁed in a VMADL combiner. Studying</text>
+<text top="319" left="144" width="650" height="18" font="9">a system as complex as a VM one module at a time is usually hard. Having a clear</text>
+<text top="342" left="144" width="650" height="18" font="9">separation of the various services into distinct modules helps in this process as it</text>
+<text top="364" left="144" width="227" height="18" font="9">clariﬁes module boundaries.</text>
+<text top="387" left="161" width="633" height="18" font="9">Utilisation of SPL tool support in CSOM/PL is less extensive than it might</text>
+<text top="410" left="144" width="653" height="18" font="9">be expected: pure::variants is only used for feature model representation, prod-</text>
+<text top="433" left="144" width="650" height="18" font="9">uct conﬁguration and validation, but not for generating large amounts of source</text>
+<text top="455" left="144" width="650" height="18" font="9">code required to build the product. Instead, there exist various cleanly separated</text>
+<text top="478" left="144" width="650" height="18" font="9">modules with explicit bidirectional interfaces mapping directly to product line</text>
+<text top="501" left="144" width="68" height="18" font="9">features.</text>
+<text top="524" left="161" width="633" height="18" font="9">From the results in the three different areas of interest described above, and from</text>
+<text top="546" left="144" width="650" height="18" font="9">the considerations on Parnas’ modularity criteria, we conclude that using VMADL</text>
+<text top="569" left="144" width="650" height="18" font="9">is fruitful. Its employment has no negative impact on performance. It supports</text>
+<text top="592" left="144" width="650" height="18" font="9">actual modularity. The lines of code count increases slightly, but for the greater</text>
+<text top="615" left="144" width="650" height="18" font="9">good of module interdependencies’ being made explicit in the code. The subjective</text>
+<text top="637" left="144" width="650" height="18" font="9">impression of developers is that VMADL makes working with the CSOM source</text>
+<text top="660" left="144" width="188" height="18" font="9">code more comfortable.</text>
+<text top="683" left="161" width="636" height="18" font="9">Finally, the strong modular characteristics of the product family code base en-</text>
+<text top="706" left="144" width="653" height="18" font="9">abled by VMADL result in an excellent direct mappability of product conﬁgu-</text>
+<text top="728" left="144" width="650" height="18" font="9">rations to source code. This, in turn, signiﬁcantly reduces the effort required to</text>
+<text top="751" left="144" width="650" height="18" font="9">establish a collection of code fragments as input to the complex SPL generator</text>
+<text top="774" left="144" width="114" height="18" font="9">infrastructure.</text>
+<text top="820" left="146" width="13" height="13" font="8">6</text>
+<text top="820" left="179" width="195" height="13" font="8">r e l a t e d w o r k</text>
+<text top="865" left="144" width="650" height="18" font="9">In the ﬁeld of VM implementations, various projects have attempted to tackle</text>
+<text top="888" left="144" width="650" height="18" font="9">the large complexity that is typical of the domain. Still, the strong focus on both</text>
+<text top="910" left="144" width="650" height="18" font="9">architecture and modularity that we have adopted has not been chosen by any</text>
+<text top="933" left="144" width="650" height="18" font="9">of them. Hence, the results from these projects do, however signiﬁcant in their</text>
+<text top="956" left="144" width="650" height="18" font="9">own right, not bring about the same improvements in terms of modularity and</text>
+<text top="979" left="144" width="443" height="18" font="9">architecture perception at the source code level as ours.</text>
+<text top="1001" left="161" width="633" height="18" font="9">The PyPy project [34] focuses on tool-chain based VM development. The core</text>
+<text top="1024" left="144" width="650" height="18" font="9">idea is to swap out implementation complexity to dedicated tools that are applied</text>
+<text top="1122" left="144" width="18" height="9" font="9">20</text>
+</page>
+<page number="27" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="114" left="99" width="650" height="18" font="9">at certain times during VM code generation. The PyPy VM is implemented in</text>
+<text top="137" left="99" width="653" height="18" font="9">Python at a very high level, allowing developers to use the object-oriented abstrac-</text>
+<text top="160" left="99" width="650" height="18" font="9">tion and dynamic language mechanisms that Python offers. Implementation takes</text>
+<text top="182" left="99" width="653" height="18" font="9">place without regarding the fact that the ultimate VM will have a GC component.</text>
+<text top="205" left="99" width="650" height="18" font="9">The GC is added later automatically during code transformation steps of the tool</text>
+<text top="228" left="99" width="48" height="18" font="9">chain.</text>
+<text top="251" left="115" width="633" height="18" font="9">PyPy thus hides complexity away, easing development signiﬁcantly. While this is</text>
+<text top="273" left="99" width="653" height="18" font="9">appreciable, we do not agree with the idea of ignoring the presence of certain fea-</text>
+<text top="296" left="99" width="650" height="18" font="9">tures. It is our goal to give VM developers full control over all features at the same</text>
+<text top="319" left="99" width="650" height="18" font="9">level of abstraction. VMADL supports this approach by providing bidirectional</text>
+<text top="342" left="99" width="647" height="18" font="9">interfaces and combiners that allow for dealing with complex interdependencies.</text>
+<text top="364" left="115" width="633" height="18" font="9">Metacircular VM implementations generally beneﬁt from the modularisation</text>
+<text top="387" left="99" width="650" height="18" font="9">techniques offered by the implemented language directly. The Jikes RVM [5, 6] and</text>
+<text top="410" left="99" width="59" height="18" font="9">Maxine</text>
+<text top="410" left="158" width="7" height="7" font="11">8</text>
+<text top="410" left="171" width="280" height="18" font="9">are Java VMs implemented in Java.</text>
+<text top="433" left="115" width="633" height="18" font="9">Jikes is a magniﬁcent platform for VM implementation research and supports</text>
+<text top="455" left="99" width="653" height="18" font="9">a wide variety of choices among, e. g., GC implementations and JIT compilers.</text>
+<text top="478" left="99" width="261" height="18" font="9">It makes use of code generation</text>
+<text top="478" left="367" width="7" height="7" font="11">9</text>
+<text top="478" left="380" width="368" height="18" font="9">to complete Java source ﬁle stubs for various</text>
+<text top="501" left="99" width="652" height="18" font="9">features prior to compile-time. Memory management is performed by MMTk [11],</text>
+<text top="524" left="98" width="650" height="18" font="9">which encapsulates GC complexity, but introduces hardwired interactions between</text>
+<text top="546" left="99" width="650" height="18" font="9">GC logic and the VM, in either code base, leading to the kind of crosscutting</text>
+<text top="569" left="99" width="653" height="18" font="9">concerns typical for the VM implementation domain. Opposed to use code gen-</text>
+<text top="592" left="99" width="652" height="18" font="9">eration for variability, To summarise, Jikes realises variability by code generation,</text>
+<text top="615" left="99" width="650" height="18" font="9">as opposed to VMADL, which achieves the same using declarative means at the</text>
+<text top="637" left="99" width="651" height="18" font="9">programming language level. Also, Jikes does not support disentangling the way</text>
+<text top="660" left="98" width="115" height="18" font="9">VMADL does.</text>
+<text top="683" left="115" width="493" height="18" font="9">Maxine tries to improve modularity with the language features</text>
+<text top="683" left="613" width="13" height="7" font="11">10</text>
+<text top="683" left="632" width="116" height="18" font="9">offered by Java</text>
+<text top="710" left="99" width="9" height="9" font="9">5</text>
+<text top="706" left="108" width="644" height="18" font="9">. Interfaces are used to encapsulate features, and a build-time conﬁguration mech-</text>
+<text top="728" left="99" width="650" height="18" font="9">anism decides about feature implementations. Even though all feature interactions</text>
+<text top="751" left="99" width="650" height="18" font="9">are done via interfaces, dependencies between feature implementations are not as</text>
+<text top="774" left="99" width="650" height="18" font="9">obvious as with VMADL, since interactions are still scattered. Furthermore, the</text>
+<text top="797" left="99" width="650" height="18" font="9">implementation does not achieve modularisation at the same degree as it would</text>
+<text top="819" left="99" width="298" height="18" font="9">be possible with MDSOC techniques.</text>
+<text top="842" left="115" width="636" height="18" font="9">ClassDL was inspired by feature-oriented programming [33, 8]. Reﬁning a pre-</text>
+<text top="865" left="99" width="653" height="18" font="9">viously deﬁned class in the context of a speciﬁc feature effectively supports het-</text>
+<text top="888" left="99" width="653" height="18" font="9">erogeneous crosscuts. VMADL thus combines aspect- and feature-oriented ap-</text>
+<text top="910" left="99" width="401" height="18" font="9">proaches [9] in a more architecture-aware manner.</text>
+<text top="933" left="115" width="633" height="18" font="9">VMKit [17] is called a “substrate” for implementing VMs. It provides a common</text>
+<text top="956" left="99" width="650" height="18" font="9">foundation that implementations of different instruction sets and programming</text>
+<text top="1008" left="108" width="6" height="6" font="12">8</text>
+<text top="1009" left="114" width="245" height="13" font="13">research.sun.com/projects/maxine</text>
+<text top="1026" left="108" width="6" height="6" font="12">9</text>
+<text top="1027" left="114" width="222" height="13" font="13">jikesrvm.org/Building+the+RVM</text>
+<text top="1044" left="102" width="11" height="6" font="12">10</text>
+<text top="1045" left="114" width="497" height="13" font="13">java.sun.com/developer/technicalArticles/releases/j2se15langfeat/</text>
+<text top="1122" left="731" width="18" height="9" font="9">21</text>
+</page>
+<page number="28" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="116" height="18" font="10"><i>6 </i>Related Work</text>
+<text top="114" left="144" width="650" height="18" font="9">languages can build upon. The substrate includes memory and thread managers as</text>
+<text top="137" left="144" width="650" height="18" font="9">well as a JIT compiler. Implementing a VM on top of it involves providing certain</text>
+<text top="160" left="144" width="650" height="18" font="9">callbacks to the substrate, and mappings from ISA or programming language</text>
+<text top="182" left="144" width="650" height="18" font="9">constructs to the substrate’s abstractions. VM implementation is thus signiﬁcantly</text>
+<text top="205" left="144" width="85" height="18" font="9">simpliﬁed.</text>
+<text top="228" left="161" width="636" height="18" font="9">While VMKit supports variability to the extent that implementation of differ-</text>
+<text top="251" left="144" width="650" height="18" font="9">ent languages is simpliﬁed in this environment, it is restricted in the choices it</text>
+<text top="273" left="144" width="650" height="18" font="9">offers at the substrate level. For instance, LLVM [24] is used as the JIT compiler</text>
+<text top="296" left="144" width="653" height="18" font="9">infrastructure, and MMTk [11] as the memory manager. The latter provides partic-</text>
+<text top="319" left="144" width="650" height="18" font="9">ularly good variability, but the overall degree of control over feature variation is</text>
+<text top="342" left="144" width="345" height="18" font="9">coarse-grained, compared to our approach.</text>
+<text top="364" left="161" width="633" height="18" font="9">Compared to other ADLs, VMADL is most closely related to ArchJava [3]. Like</text>
+<text top="387" left="144" width="653" height="18" font="9">ArchJava, VMADL makes system architecture explicit in the source code itself.</text>
+<text top="410" left="144" width="650" height="18" font="9">Other languages like WRIGHT [4] or Rapide [27] separate architecture description</text>
+<text top="433" left="144" width="650" height="18" font="9">from actual implementation, which is problematic, since it implies the need to</text>
+<text top="455" left="144" width="650" height="18" font="9">keep both synchronised. VMADL’s bidirectional interfaces are related to principles</text>
+<text top="478" left="144" width="653" height="18" font="9">found in nesC [16], an extension to C designed to structure systems into compo-</text>
+<text top="501" left="144" width="650" height="18" font="9">nents with clear boundaries. The interfaces used in nesC declaratively describe</text>
+<text top="524" left="144" width="409" height="18" font="9">component interactions using events and callbacks.</text>
+<text top="546" left="161" width="636" height="18" font="9">In contrast to VMADL, ArchJava assumes a dynamic architecture and multi-</text>
+<text top="569" left="144" width="650" height="18" font="9">ple instances of a component at run-time. Components provide communication</text>
+<text top="592" left="144" width="650" height="18" font="9">ports, and connections are explicit. This idea is similar to VMADL combiners but</text>
+<text top="615" left="144" width="653" height="18" font="9">provides lower ﬂexibility, since connections need to be explicit in component im-</text>
+<text top="637" left="144" width="650" height="18" font="9">plementations. VMADL’s combiners support module combinations at the interface</text>
+<text top="660" left="144" width="650" height="18" font="9">level without changing their implementations. By using a pointcut language, our</text>
+<text top="683" left="144" width="206" height="18" font="9">approach is more ﬂexible.</text>
+<text top="706" left="161" width="633" height="18" font="9">MDSOC techniques offer various opportunities for building SPLs. Alves et al. [7]</text>
+<text top="728" left="144" width="650" height="18" font="9">describe a methodology which uses aspect-oriented techniques to extract an SPL</text>
+<text top="751" left="144" width="650" height="18" font="9">from an existing code base. The approach is similar to what we have done to create</text>
+<text top="774" left="144" width="650" height="18" font="9">CSOM/PL on the basis of the different extensions available. Compared to it, we do</text>
+<text top="797" left="144" width="650" height="18" font="9">not use additional aspects for the evolution to be able to add new products to the</text>
+<text top="819" left="144" width="650" height="18" font="9">SPL, instead we chose to bring the adaption to an architectural level and describe</text>
+<text top="842" left="144" width="275" height="18" font="9">it by means of module interaction.</text>
+<text top="865" left="161" width="636" height="18" font="9">One of the application areas of FeatureC++ [8] is the implementation of SPLs [35].</text>
+<text top="888" left="144" width="650" height="18" font="9">It regards feature composition as reﬁnement of a basis implementation. Feature</text>
+<text top="910" left="144" width="653" height="18" font="9">modules are represented as (aspectual) mixin layers deﬁning such reﬁnements.</text>
+<text top="933" left="144" width="650" height="18" font="9">Conversely, VMADL service modules are complete implementations of features</text>
+<text top="956" left="144" width="650" height="18" font="9">that are composed with others by connecting interfaces. VMADL does not as much</text>
+<text top="979" left="144" width="650" height="18" font="9">regard the single features as crosscutting concerns as their orchestration, which it</text>
+<text top="1001" left="144" width="227" height="18" font="9">makes explicit in combiners.</text>
+<text top="1122" left="144" width="18" height="9" font="9">22</text>
+</page>
+<page number="29" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="114" left="115" width="634" height="18" font="9">Figueiredo et al. [15] investigated the inﬂuences on stability as an important SPL</text>
+<text top="137" left="99" width="650" height="18" font="9">property. Their results suggest that SPLs decomposed with AOP are more stable</text>
+<text top="160" left="99" width="650" height="18" font="9">regarding adaptions in optional or alternative features. We assume similar beneﬁts</text>
+<text top="182" left="99" width="246" height="18" font="9">for an SPL built with VMADL.</text>
+<text top="205" left="115" width="633" height="18" font="9">VMADL, in its current version, expresses explicit interactions between service</text>
+<text top="228" left="99" width="650" height="18" font="9">modules. Some languages for modelling variability at an architectural level include</text>
+<text top="251" left="99" width="650" height="18" font="9">constructs to model other types of relationships as well. One example in the ﬁeld</text>
+<text top="273" left="99" width="650" height="18" font="9">of product lines is the Variability Modelling Language [26]. This language is meant</text>
+<text top="296" left="99" width="653" height="18" font="9">to be used on a more conceptual level and not embedded into the implementa-</text>
+<text top="319" left="99" width="650" height="18" font="9">tion. It aims to describe variability orthogonally to architectural descriptions. This</text>
+<text top="342" left="99" width="653" height="18" font="9">approach would be beneﬁcial to describe, for instance, service modules as alter-</text>
+<text top="364" left="99" width="650" height="18" font="9">natives. In addition to the variability already described with VMADL, some of</text>
+<text top="387" left="99" width="650" height="18" font="9">the concepts of this language could be used to provide advanced means for the</text>
+<text top="410" left="99" width="323" height="18" font="9">conﬁguration of instances of CSOM/PL.</text>
+<text top="456" left="100" width="13" height="13" font="8">7</text>
+<text top="456" left="134" width="381" height="13" font="8">s u m m a r y a n d f u t u r e w o r k</text>
+<text top="501" left="98" width="653" height="18" font="9">We have presented CSOM/PL, a virtual machine product line implemented in C,</text>
+<text top="524" left="98" width="653" height="18" font="9">AspectC++, and VMADL, and realised with pure::variants. VMADL, an implemen-</text>
+<text top="546" left="99" width="650" height="18" font="9">tation of which is one of this work’s contributions, surpasses previously achieved</text>
+<text top="569" left="99" width="653" height="18" font="9">modularisation in the VM implementation domain. It supports modular abstrac-</text>
+<text top="592" left="99" width="650" height="18" font="9">tion by means of service modules with bidirectional interfaces. Using VMADL</text>
+<text top="615" left="99" width="650" height="18" font="9">allowed us to implement various of the features of the CSOM Smalltalk VM in</text>
+<text top="637" left="99" width="650" height="18" font="9">combinable isolated modules—features that were previously realised as hand-crafted</text>
+<text top="660" left="99" width="653" height="18" font="9">extensions. This also facilitated devising a product line. The evaluation of the ap-</text>
+<text top="683" left="99" width="650" height="18" font="9">proach shows that performance is not harmed, and that modularity in source code</text>
+<text top="706" left="99" width="202" height="18" font="9">is signiﬁcantly improved.</text>
+<text top="728" left="115" width="633" height="18" font="9">Regarding SPL tool support, VMADL represents a valuable tool that can be</text>
+<text top="751" left="99" width="650" height="18" font="9">used to introduce modular SPL development in languages like C that do not</text>
+<text top="774" left="99" width="650" height="18" font="9">inherently support modularity. Moreover, VMADL supports direct mappings from</text>
+<text top="797" left="99" width="650" height="18" font="9">feature models to source modules, reducing the complexity of code preparation</text>
+<text top="819" left="99" width="251" height="18" font="9">for consumption by generators.</text>
+<text top="842" left="115" width="636" height="18" font="9">Some perceivable feature combinations have not been realised yet (cf. Sec. 4.1).</text>
+<text top="865" left="99" width="650" height="18" font="9">This is not because they are impossible to achieve; it is a matter of providing more</text>
+<text top="888" left="99" width="650" height="18" font="9">service module interfaces and combinations to make them work. Our ongoing work</text>
+<text top="910" left="99" width="650" height="18" font="9">is concerned with moving towards the goal of dropping all constraints shown in</text>
+<text top="933" left="99" width="650" height="18" font="9">Fig. 2, which are not conceptually necessary. For instance, threading together with</text>
+<text top="956" left="99" width="650" height="18" font="9">virtual images could be realised as well as virtual images independent from a</text>
+<text top="979" left="99" width="316" height="18" font="9">particular garbage collection technique.</text>
+<text top="1122" left="731" width="18" height="9" font="9">23</text>
+</page>
+<page number="30" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="76" height="18" font="9">References</text>
+<text top="114" left="161" width="633" height="18" font="9">Performance measurements have shown that ﬁne-grained control over feature</text>
+<text top="137" left="144" width="650" height="18" font="9">application order is important. We will investigate how to make such control</text>
+<text top="160" left="144" width="632" height="18" font="9">available in VMADL declarations without introducing uncalled-for complexity.</text>
+<text top="182" left="161" width="634" height="18" font="9">The ClassDL extension was necessary because CSOM, including its particular</text>
+<text top="205" left="144" width="653" height="18" font="9">OOP emulation, is implemented in C, and because this led to a lack of declara-</text>
+<text top="228" left="144" width="650" height="18" font="9">tive means for class (re)deﬁnitions. An implementation in C++, combined with</text>
+<text top="251" left="144" width="650" height="18" font="9">AspectC++ and/or FeatureC++, would have eliminated this need. In fact, a port</text>
+<text top="273" left="144" width="650" height="18" font="9">of CSOM to C++ is in progress, and will allow to use VMADL directly with</text>
+<text top="296" left="144" width="653" height="18" font="9">AspectC++. The port will be an important cornerstone of future research in disen-</text>
+<text top="319" left="144" width="205" height="18" font="9">tangling VM architecture.</text>
+<text top="342" left="161" width="633" height="18" font="9">In addition to our ongoing activities to evaluate, adjust and extend the CSOM</text>
+<text top="364" left="144" width="652" height="18" font="9">VM in our research and teaching activities, we hope to transfer our results to other,</text>
+<text top="387" left="144" width="650" height="18" font="9">more complex, VM implementations to gain more insights into the modularisation</text>
+<text top="410" left="144" width="272" height="18" font="9">of full-scale VM implementations.</text>
+<text top="456" left="146" width="13" height="13" font="8">8</text>
+<text top="456" left="179" width="264" height="13" font="8">a c k n o w l e d g m e n t s</text>
+<text top="501" left="144" width="652" height="18" font="9">The authors are grateful for the contributions of Bram Adams, Yvonne Coady,</text>
+<text top="524" left="144" width="653" height="18" font="9">Celina Gibbs, and Stijn Timbermont to the ideas underlying the presented results.</text>
+<text top="546" left="144" width="512" height="18" font="9">Special thanks go to Tobias Pape for his contributions to CSOM.</text>
+<text top="592" left="146" width="158" height="13" font="8">r e f e r e n c e s</text>
+<text top="637" left="153" width="643" height="18" font="9">[1] B. Adams and K. D. Schutter. An aspect for idiom-based exception handling:</text>
+<text top="660" left="182" width="612" height="18" font="9">(using local continuation join points, join point properties, annotations and</text>
+<text top="683" left="182" width="392" height="18" font="9">type parameters). In Proc. SPLAT’<i>07</i>. ACM, 2007.</text>
+<text top="706" left="153" width="116" height="18" font="9">[2] J. Aldrich.</text>
+<text top="706" left="289" width="420" height="18" font="9">Open modules: Modular reasoning about advice.</text>
+<text top="706" left="730" width="64" height="18" font="9">In Proc.</text>
+<text top="728" left="182" width="518" height="18" font="9">ECOOP’<i>05</i>, volume 3586 of LNCS, pages 144–168. Springer, 2005.</text>
+<text top="751" left="153" width="644" height="18" font="9">[3] J. Aldrich, C. Chambers, and D. Notkin. Archjava: Connecting software archi-</text>
+<text top="774" left="182" width="572" height="18" font="9">tecture to implementation. In Proc. ICSE’<i>02</i>, pages 187–197. ACM, 2002.</text>
+<text top="797" left="153" width="641" height="18" font="9">[4] R. Allen and D. Garlan. A formal basis for architectural connection. ACM</text>
+<text top="819" left="182" width="370" height="18" font="9">Trans. Softw. Eng. Methodol., 6(3):213–249, 1997.</text>
+<text top="842" left="153" width="643" height="18" font="9">[5] B. Alpern, D. Attanasio, J. J. Barton, A. Cocchi, S. F. Hummel, D. Lieber,</text>
+<text top="865" left="182" width="615" height="18" font="9">M. Mergen, T. Ngo, J. Shepherd, and S. Smith. Implementing Jalapeño in Java.</text>
+<text top="888" left="182" width="308" height="18" font="9">In Proc. OOPSLA’<i>99</i>. ACM Press, 1999.</text>
+<text top="910" left="153" width="643" height="18" font="9">[6] B. Alpern et al. The Jalapeño Virtual Machine. IBM Systems Journal, 39(1):211–</text>
+<text top="937" left="182" width="27" height="9" font="9">238</text>
+<text top="933" left="209" width="128" height="18" font="9">, February 2000.</text>
+<text top="956" left="153" width="644" height="18" font="9">[7] V. Alves, P. Matos, L. Cole, A. Vasconcelos, P. Borba, and G. Ramalho. Extract-</text>
+<text top="979" left="182" width="611" height="18" font="9">ing and evolving code in product lines with aspect-oriented programming. In</text>
+<text top="1001" left="182" width="614" height="18" font="9">Transactions on Aspect-Oriented Software Development IV, volume 4640 of LNCS,</text>
+<text top="1024" left="182" width="241" height="18" font="9">pages 117–142. Springer, 2007.</text>
+<text top="1122" left="144" width="18" height="9" font="9">24</text>
+</page>
+<page number="31" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="673" width="76" height="18" font="9">References</text>
+<text top="114" left="108" width="641" height="18" font="9">[8] S. Apel, T. Leich, M. Rosenmüller, and G. Saake. FeatureC++: On the symbiosis</text>
+<text top="137" left="137" width="601" height="18" font="9">of feature-oriented and aspect-oriented programming. In Proc. GPCE, 2005.</text>
+<text top="160" left="108" width="641" height="18" font="9">[9] S. Apel, T. Leich, and G. Saake. Aspectual mixin layers: Aspects and features</text>
+<text top="182" left="137" width="360" height="18" font="9">in concert. In Proc. ICSE’<i>06</i>. ACM, May 2006.</text>
+<text top="205" left="99" width="629" height="18" font="9">[10] J. R. Bell. Threaded code. Communications of the ACM, 16(6):370–372, 1973.</text>
+<text top="228" left="99" width="653" height="18" font="9">[11] S. M. Blackburn, P. Cheng, and K. S. McKinley. Oil and Water? High Perfor-</text>
+<text top="251" left="137" width="558" height="18" font="9">mance Garbage Collection in Java with MMTk. In Proc. ICSE’<i>07</i>, 2004.</text>
+<text top="273" left="99" width="652" height="18" font="9">[12] M. G. Burke, J.-D. Choi, S. Fink, D. Grove, M. Hind, V. Sarkar, M. J. Serrano,</text>
+<text top="296" left="136" width="615" height="18" font="9">V. C. Sreedhar, H. Srinivasan, and J. Whaley. The Jalapeño Dynamic Opti-</text>
+<text top="319" left="137" width="614" height="18" font="9">mizing Compiler for Java. In Proc. Java Grande’<i>99</i>, pages 129–141. ACM Press,</text>
+<text top="346" left="136" width="36" height="9" font="9">1999</text>
+<text top="342" left="172" width="4" height="18" font="9">.</text>
+<text top="364" left="99" width="650" height="18" font="9">[13] C. Chambers, D. Ungar, and E. Lee. An efﬁcient implementation of self</text>
+<text top="387" left="137" width="611" height="18" font="9">a dynamically-typed object-oriented language based on prototypes. ACM</text>
+<text top="410" left="137" width="293" height="18" font="9">SIGPLAN Notices, 24(10):49–70, 1989.</text>
+<text top="433" left="99" width="653" height="18" font="9">[14] P. Clements and L. Northrop. Software Product Lines: Practices and Patterns.</text>
+<text top="455" left="136" width="179" height="18" font="9">Addison-Wesley, 2002.</text>
+<text top="478" left="99" width="652" height="18" font="9">[15] E. Figueiredo, N. Cacho, C. Sant’Anna, M. Monteiro, U. Kulesza, A. Garcia,</text>
+<text top="501" left="137" width="611" height="18" font="9">S. Soares, F. Ferrari, S. Khan, F. C. Filho, and F. Dantas. Evolving software</text>
+<text top="524" left="137" width="612" height="18" font="9">product lines with aspects: An empirical study on design stability. In Proc.</text>
+<text top="546" left="137" width="165" height="18" font="9">ICSE’<i>08</i>. ACM, 2008.</text>
+<text top="569" left="99" width="650" height="18" font="9">[16] D. Gay, P. Levis, R. von Behren, M. Welsh, E. Brewer, and D. Culler. The</text>
+<text top="592" left="137" width="611" height="18" font="9">nesC language: A holistic approach to networked embedded systems. In Proc.</text>
+<text top="615" left="137" width="304" height="18" font="9">PLDI’<i>03</i>, pages 1–11. ACM, May 2003.</text>
+<text top="637" left="99" width="650" height="18" font="9">[17] N. Geoffray, G. Thomas, J. Lawall, G. Muller, and B. Folliot. VMKit: a Substrate</text>
+<text top="660" left="137" width="615" height="18" font="9">for Managed Runtime Environments. In Proceedings of VEE. ACM Press, 2010.</text>
+<text top="683" left="99" width="653" height="18" font="9">[18] A. Goldberg and D. Robson. Smalltalk-<i>80</i>: The Language and its Implementation.</text>
+<text top="706" left="136" width="179" height="18" font="9">Addison-Wesley, 1983.</text>
+<text top="728" left="99" width="653" height="18" font="9">[19] W. G. Griswold, K. Sullivan, Y. Song, M. Shonle, N. Tewari, Y. Cai, and H. Ra-</text>
+<text top="751" left="137" width="614" height="18" font="9">jan. Modular software design with crosscutting interfaces. IEEE Software,</text>
+<text top="778" left="137" width="18" height="9" font="9">23</text>
+<text top="774" left="155" width="120" height="18" font="9">(1):51–60, 2006.</text>
+<text top="797" left="99" width="653" height="18" font="9">[20] M. Haupt, B. Adams, S. Timbermont, C. Gibbs, Y. Coady, and R. Hirschfeld.</text>
+<text top="819" left="137" width="370" height="18" font="9">Disentangling Virtual Machine Architecture.</text>
+<text top="819" left="526" width="223" height="18" font="9">IET Journal Special Issue on</text>
+<text top="842" left="137" width="387" height="18" font="9">Domain-Speciﬁc Aspect Languages, 3(3), June 2009.</text>
+<text top="865" left="99" width="652" height="18" font="9">[21] M. Haupt, R. Hirschfeld, T. Pape, G. Gabrysiak, S. Marr, A. Bergmann,</text>
+<text top="888" left="136" width="612" height="18" font="9">A. Heise, M. Kleine, and R. Krahn. The SOM Family: Virtual Machines</text>
+<text top="910" left="137" width="611" height="18" font="9">for Teaching and Research. In Proceedings of the <i>15</i>th Annual Conference on</text>
+<text top="933" left="137" width="614" height="18" font="9">Innovation and Technology in Computer Science Education (ITiCSE). ACM Press,</text>
+<text top="960" left="137" width="36" height="9" font="9">2010</text>
+<text top="956" left="173" width="4" height="18" font="9">.</text>
+<text top="979" left="99" width="650" height="18" font="9">[22] R. Jones and R. Lins. Garbage Collection. Algorithms for Automatic Dynamic</text>
+<text top="1001" left="137" width="268" height="18" font="9">Memory Management. Wiley, 1996.</text>
+<text top="1122" left="731" width="18" height="9" font="9">25</text>
+</page>
+<page number="32" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="60" left="144" width="76" height="18" font="9">References</text>
+<text top="114" left="144" width="653" height="18" font="9">[23] G. Kiczales, E. Hilsdale, J. Hugunin, M. Kersten, J. Palm, and W. G. Griswold.</text>
+<text top="137" left="182" width="612" height="18" font="9">An Overview of AspectJ. In J. L. Knudsen, editor, Proc. ECOOP’<i>01</i>, volume</text>
+<text top="164" left="182" width="36" height="9" font="9">2072</text>
+<text top="160" left="223" width="317" height="18" font="9">of LNCS, pages 327–353. Springer, 2001.</text>
+<text top="182" left="144" width="653" height="18" font="9">[24] C. Lattner and V. Adve. LLVM: A Compilation Framework for Lifelong Pro-</text>
+<text top="205" left="182" width="611" height="18" font="9">gram Analysis &amp; Transformation. In CGO ’<i>04</i>: Proceedings of the international</text>
+<text top="228" left="182" width="602" height="18" font="9">symposium on Code generation and optimization. IEEE Computer Society, 2004.</text>
+<text top="251" left="144" width="653" height="18" font="9">[25] B. Lewis and D. J. Berg. Threads Primer. A Guide to Multithreaded Programming.</text>
+<text top="273" left="182" width="154" height="18" font="9">Prentice Hall, 1996.</text>
+<text top="296" left="144" width="650" height="18" font="9">[26] N. Loughran, P. Sánchez, A. Garcia, and L. Fuentes. Language Support for</text>
+<text top="319" left="182" width="614" height="18" font="9">Managing Variability in Architectural Models, volume 4954 of LNCS, pages 36–</text>
+<text top="346" left="182" width="18" height="9" font="9">51</text>
+<text top="342" left="200" width="129" height="18" font="9">. Springer, 2008.</text>
+<text top="364" left="144" width="653" height="18" font="9">[27] D. C. Luckham and J. Vera. An event-based architecture deﬁnition language.</text>
+<text top="387" left="182" width="488" height="18" font="9">IEEE Transactions on Software Engineering, 21(9):717–734, 1995.</text>
+<text top="410" left="144" width="650" height="18" font="9">[28] N. Medvidovic and R. N. Taylor. A classiﬁcation and comparison framework</text>
+<text top="433" left="182" width="611" height="18" font="9">for software architecture description languages. IEEE TSE, 26(1):70–93, 2000.</text>
+<text top="455" left="144" width="652" height="18" font="9">[29] B. Meyer. Object-Oriented Software Construction. Prentice Hall, 2nd edition,</text>
+<text top="482" left="181" width="36" height="9" font="9">1997</text>
+<text top="478" left="217" width="4" height="18" font="9">.</text>
+<text top="501" left="144" width="653" height="18" font="9">[30] O. Spinczyk and A. Gal and W. Schröder-Preikschat. AspectC++: An Aspect-</text>
+<text top="524" left="182" width="528" height="18" font="9">Oriented Extension to C++. In Proc. TOOLS Paciﬁc’<i>02</i>. ACM, 2002.</text>
+<text top="546" left="144" width="650" height="18" font="9">[31] R. E. Park. Software size measurement: A framework for counting source</text>
+<text top="569" left="182" width="611" height="18" font="9">statements. Technical Report CMU/SEI-92-TR- 20, ESC-TR-92-20, Software</text>
+<text top="592" left="182" width="538" height="18" font="9">Engineering Institute, Carnegie Mellon University, September 1992.</text>
+<text top="615" left="144" width="653" height="18" font="9">[32] D. L. Parnas. On the criteria to be used in decomposing systems into modules.</text>
+<text top="637" left="182" width="312" height="18" font="9">Commun. ACM, 15(12):1053–1058, 1972.</text>
+<text top="660" left="144" width="652" height="18" font="9">[33] C. Prehofer. Feature-Oriented Programming: A Fresh Look at Objects. LNCS,</text>
+<text top="687" left="181" width="36" height="9" font="9">1241</text>
+<text top="683" left="217" width="117" height="18" font="9">:419–434, 1997.</text>
+<text top="706" left="144" width="650" height="18" font="9">[34] A. Rigo and S. Pedroni. Pypy’s approach to virtual machine construction. In</text>
+<text top="728" left="182" width="363" height="18" font="9">Proc. OOPSLA’<i>06</i>, pages 944–953. ACM, 2006.</text>
+<text top="751" left="144" width="650" height="18" font="9">[35] M. Rosenmüller, N. Siegmund, G. Saake, and S. Apel. Code generation to</text>
+<text top="774" left="182" width="611" height="18" font="9">support static and dynamic composition of software product lines. In Proc.</text>
+<text top="797" left="182" width="270" height="18" font="9">GPCE’<i>08</i>, pages 3–12. ACM, 2008.</text>
+<text top="819" left="144" width="650" height="18" font="9">[36] J. E. Smith and R. Nair. Virtual Machines. Versatile Platforms for Systems and</text>
+<text top="842" left="182" width="282" height="18" font="9">Processes. Morgan Kaufmann, 2005.</text>
+<text top="1122" left="144" width="18" height="9" font="9">26</text>
+</page>
+<page number="33" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="26" size="11" family="Times" color="#000000"/>
+	<fontspec id="27" size="13" family="Times" color="#000000"/>
+<text top="114" left="100" width="16" height="13" font="8">a</text>
+<text top="114" left="137" width="216" height="13" font="8">v m a d l e x a m p l e</text>
+<text top="159" left="57" width="186" height="15" font="26"><b>service NativeThreads {</b></text>
+<text top="174" left="57" width="154" height="15" font="26"><b>    require Memory;</b></text>
+<text top="189" left="57" width="122" height="15" font="26"><b>    require VM;</b></text>
+<text top="204" left="57" width="178" height="15" font="26"><b>    require VMObjects;</b></text>
+<text top="219" left="57" width="194" height="15" font="26"><b>    require Interpreter;</b></text>
+<text top="234" left="57" width="194" height="15" font="26"><b>    #include &lt;pthread.h&gt;</b></text>
+<text top="249" left="57" width="381" height="15" font="26"><b>    extern pthread_key_t tsg_frame, tsg_thread;</b></text>
+<text top="264" left="57" width="259" height="15" font="26"><b>    pVMMutex  VMMutex_new(void);</b></text>
+<text top="279" left="57" width="437" height="15" font="26"><b>    void*     VMThread_get_safe_global(pthread_key_t);</b></text>
+<text top="294" left="57" width="494" height="15" font="26"><b>    void      VMThread_set_safe_global(pthread_key_t, void*);</b></text>
+<text top="309" left="57" width="243" height="15" font="26"><b>    class VMMutex : VMObject {</b></text>
+<text top="324" left="57" width="340" height="15" font="26"><b>        pthread_mutex_t  embedded_mutex_id</b></text>
+<text top="339" left="57" width="389" height="15" font="26"><b>        pthread_mutex_t* get_embedded_mutex_id()</b></text>
+<text top="354" left="57" width="251" height="15" font="26"><b>        void             lock()</b></text>
+<text top="369" left="57" width="267" height="15" font="26"><b>        void             unlock()</b></text>
+<text top="384" left="57" width="292" height="15" font="26"><b>        bool             is_locked()</b></text>
+<text top="399" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="414" left="57" width="300" height="15" font="26"><b>    class VMSignal : VMObject { ... }</b></text>
+<text top="429" left="57" width="300" height="15" font="26"><b>    class VMThread : VMObject { ... }</b></text>
+<text top="444" left="57" width="8" height="15" font="26"><b>}</b></text>
+<text top="474" left="57" width="292" height="15" font="26"><b>combine NativeThreads, Interpreter {</b></text>
+<text top="489" left="57" width="794" height="15" font="26"><b>    advice execution(&#34;void Interpreter_set_frame(...)&#34;) &amp;&amp; args(value) : around(_VMFrame* value) {</b></text>
+<text top="504" left="57" width="413" height="15" font="26"><b>        VMThread_set_safe_global(tsg_frame, value);</b></text>
+<text top="519" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="534" left="57" width="567" height="15" font="26"><b>    advice execution(&#34;_VMFrame* Interpreter_get_frame()&#34;) : around() {</b></text>
+<text top="549" left="57" width="575" height="15" font="26"><b>        pVMFrame frame = (pVMFrame)VMThread_get_safe_global(tsg_frame);</b></text>
+<text top="564" left="57" width="251" height="15" font="26"><b>        *tjp-&gt;result() = frame;</b></text>
+<text top="579" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="594" left="57" width="8" height="15" font="26"><b>}</b></text>
+<text top="624" left="57" width="292" height="15" font="26"><b>combine NativeThreads, GCMarkSweep {</b></text>
+<text top="639" left="57" width="194" height="15" font="26"><b>    require Interpreter;</b></text>
+<text top="654" left="57" width="194" height="15" font="26"><b>    #include &lt;pthread.h&gt;</b></text>
+<text top="669" left="57" width="73" height="15" font="26"><b>    bool </b></text>
+<text top="669" left="225" width="122" height="15" font="26"><b>stop_the_world;</b></text>
+<text top="684" left="57" width="284" height="15" font="26"><b>    pthread_mutex_t mtx_do_collect;</b></text>
+<text top="699" left="57" width="300" height="15" font="26"><b>    pthread_mutex_t mtx_gc_structure;</b></text>
+<text top="714" left="57" width="437" height="15" font="26"><b>    advice execution(&#34;void gc_collect()&#34;) : around() {</b></text>
+<text top="729" left="57" width="470" height="15" font="26"><b>        if (pthread_mutex_trylock(&amp;mtx_do_collect) == 0) {</b></text>
+<text top="744" left="57" width="275" height="15" font="26"><b>            stop_the_world = true;</b></text>
+<text top="759" left="57" width="284" height="15" font="26"><b>            wait_for_all_threads();</b></text>
+<text top="774" left="57" width="219" height="15" font="26"><b>            tjp-&gt;proceed();</b></text>
+<text top="789" left="57" width="356" height="15" font="26"><b>            signal_proceed_to_all_threads();</b></text>
+<text top="804" left="57" width="405" height="15" font="26"><b>            pthread_mutex_unlock(&amp;mtx_do_collect);</b></text>
+<text top="819" left="57" width="73" height="15" font="26"><b>        }</b></text>
+<text top="834" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="849" left="57" width="502" height="15" font="26"><b>    advice Interpreter::safe_point_in_execution() : before() {</b></text>
+<text top="864" left="57" width="235" height="15" font="26"><b>        if (stop_the_world) {</b></text>
+<text top="879" left="57" width="373" height="15" font="26"><b>            gc_mark_reachable_stack_objects();</b></text>
+<text top="894" left="57" width="308" height="15" font="26"><b>            wait_until_gc_completed();</b></text>
+<text top="909" left="57" width="73" height="15" font="26"><b>        }</b></text>
+<text top="924" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="939" left="57" width="591" height="15" font="26"><b>    advice call(&#34;% pthread_exit(...)&#34;) : before() { dec_thread_count(); }</b></text>
+<text top="954" left="57" width="608" height="15" font="26"><b>    advice call(&#34;% pthread_create(...)&#34;) : before() { inc_thread_count(); }</b></text>
+<text top="969" left="57" width="729" height="15" font="26"><b>    advice execution(&#34;void Universe_exit(int)&#34;) : before() { signal_exit_to_gc_thread(); }</b></text>
+<text top="984" left="57" width="486" height="15" font="26"><b>    advice GCMarkSweep::reserve_and_get_entry() : around() {</b></text>
+<text top="999" left="57" width="373" height="15" font="26"><b>        pthread_mutex_lock(&amp;mtx_gc_structure);</b></text>
+<text top="1014" left="57" width="186" height="15" font="26"><b>        tjp-&gt;proceed();</b></text>
+<text top="1029" left="57" width="389" height="15" font="26"><b>        pthread_mutex_unlock(&amp;mtx_gc_structure);</b></text>
+<text top="1044" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="1059" left="57" width="502" height="15" font="26"><b>    advice GCMarkSweep::split_and_reserve_entry() : around() {</b></text>
+<text top="1074" left="57" width="373" height="15" font="26"><b>        pthread_mutex_lock(&amp;mtx_gc_structure);</b></text>
+<text top="1089" left="57" width="186" height="15" font="26"><b>        tjp-&gt;proceed();</b></text>
+<text top="1104" left="57" width="389" height="15" font="26"><b>        pthread_mutex_unlock(&amp;mtx_gc_structure);</b></text>
+<text top="1119" left="57" width="40" height="15" font="26"><b>    }</b></text>
+<text top="1134" left="57" width="8" height="15" font="26"><b>}</b></text>
+<text top="169" left="629" width="168" height="15" font="23"><b>Note:</b> the code displayed</text>
+<text top="187" left="629" width="218" height="15" font="15">here was abbreviated. Irrelevant </text>
+<text top="205" left="629" width="136" height="15" font="15">parts are not shown.</text>
+<text top="180" left="331" width="124" height="15" font="15">required interfaces</text>
+<text top="198" left="331" width="181" height="15" font="15">from other service modules</text>
+<text top="273" left="572" width="160" height="15" font="15">here starts the deﬁnition</text>
+<text top="291" left="572" width="195" height="15" font="15">of the <i>NativeThreads</i> service </text>
+<text top="309" left="572" width="183" height="15" font="15">module interface, including </text>
+<text top="327" left="572" width="128" height="15" font="15">ClassDL deﬁnitions</text>
+<text top="401" left="428" width="176" height="15" font="15">the interpreter needs to be</text>
+<text top="419" left="428" width="218" height="15" font="15">executed thread-locally; thus, its </text>
+<text top="437" left="428" width="219" height="15" font="15">global state variables have to be </text>
+<text top="455" left="428" width="118" height="15" font="15">made thread-safe</text>
+<text top="576" left="378" width="203" height="15" font="15">the <i>stop-the-world</i> GC scheme</text>
+<text top="594" left="378" width="253" height="15" font="15">is implemented entirely in this service </text>
+<text top="612" left="378" width="134" height="15" font="15">module combination</text>
+<text top="657" left="541" width="150" height="15" font="15">this advice guarantees</text>
+<text top="675" left="541" width="171" height="15" font="27"><i>stop-the-world</i> semantics:</text>
+<text top="693" left="541" width="286" height="15" font="15">– try to acquire a lock; if this fails, a GC run</text>
+<text top="711" left="541" width="273" height="15" font="15">   has already been requested in another </text>
+<text top="729" left="541" width="55" height="15" font="15">   thread</text>
+<text top="747" left="541" width="268" height="15" font="15">– when the lock was acquired, signal all </text>
+<text top="765" left="541" width="285" height="15" font="15">   threads and wait until they have stopped </text>
+<text top="783" left="541" width="263" height="15" font="15">   at a safe point; then proceed with the </text>
+<text top="801" left="541" width="75" height="15" font="15">   collection</text>
+<text top="819" left="541" width="248" height="15" font="15">– ﬁnally, signal all threads to continue</text>
+<text top="874" left="473" width="181" height="15" font="27"><i>safe point</i>: suspend thread </text>
+<text top="892" left="473" width="224" height="15" font="15">execution, mark all stack objects, </text>
+<text top="910" left="473" width="228" height="15" font="15">and wait for the signal to continue </text>
+<text top="1048" left="617" width="153" height="15" font="15">management: counting</text>
+<text top="1066" left="617" width="176" height="15" font="15">threads, and ensuring GC </text>
+<text top="1084" left="617" width="172" height="15" font="15">structures are thread-safe</text>
+</page>
+<page number="34" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="901" left="146" width="140" height="13" font="8">c o l o p h o n</text>
+<text top="946" left="144" width="228" height="18" font="9">This report was typeset by L</text>
+<text top="946" left="365" width="10" height="13" font="11">A</text>
+<text top="946" left="373" width="422" height="22" font="9">TEX 2<i>ε </i>with pdf/<i>ε</i>-TEX using KOMA-Script. The body</text>
+<text top="969" left="144" width="650" height="18" font="9">text is set 12/15 pt on a 36.2 pc measure. The body type face is Palatino by Hermann</text>
+<text top="992" left="144" width="650" height="22" font="9">Zapf, brought to TEX as Type 1 PostScript font URW Palladio L. The listing type</text>
+<text top="1014" left="144" width="650" height="18" font="9">face is Bera Mono, based on the Vera family by Bitstream, Inc.; Type 1 PostScript</text>
+<text top="1037" left="144" width="489" height="18" font="9">fonts were made available by Malte Rosenau and Ulrich Dirr.</text>
+<text top="1039" left="708" width="86" height="15" font="14">—Tobias Pape</text>
+</page>
+<page number="35" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="107" left="106" width="5" height="20" font="2"> </text>
+</page>
+<page number="36" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="107" left="106" width="5" height="20" font="2"> </text>
+</page>
+<page number="37" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="28" size="16" family="Times" color="#000000"/>
+<text top="100" left="259" width="389" height="30" font="4"><b>Aktuelle Technische Berichte  </b></text>
+<text top="131" left="268" width="365" height="30" font="4"><b>des Hasso-Plattner-Instituts </b></text>
+<text top="166" left="106" width="5" height="20" font="2"> </text>
+<text top="187" left="106" width="5" height="20" font="2"> </text>
+<text top="210" left="115" width="247" height="20" font="28"><b>Band ISBN Titel </b></text>
+<text top="210" left="568" width="111" height="20" font="28"><b>Autoren </b></text>
+<text top="210" left="642" width="47" height="20" font="28"><b>/ </b></text>
+<text top="210" left="651" width="129" height="20" font="28"><b>Redaktion </b></text>
+<text top="231" left="138" width="4" height="15" font="11"> </text>
+<text top="231" left="225" width="4" height="15" font="11"> </text>
+<text top="231" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="231" left="567" width="4" height="15" font="11"> </text>
+<text top="249" left="130" width="135" height="15" font="11">47 978-3-86956-</text>
+<text top="265" left="207" width="38" height="15" font="11">130-1 </text>
+<text top="249" left="284" width="273" height="15" font="26"><b>State Propagation in Abstracted Business </b></text>
+<text top="265" left="284" width="71" height="15" font="26"><b>Processes </b></text>
+<text top="280" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="249" left="567" width="191" height="15" font="11">Sergey Smirnov, Armin Zamani </text>
+<text top="265" left="567" width="157" height="15" font="11">Farahani, Mathias Weske </text>
+<text top="296" left="130" width="135" height="15" font="11">46 978-3-86956-</text>
+<text top="311" left="207" width="38" height="15" font="11">129-5 </text>
+<text top="296" left="284" width="254" height="15" font="26"><b>Proceedings of the 5th Ph.D. Retreat of </b></text>
+<text top="311" left="284" width="236" height="15" font="26"><b>the HPI Research School on Service-</b></text>
+<text top="327" left="284" width="198" height="15" font="26"><b>oriented Systems Engineering </b></text>
+<text top="342" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="296" left="567" width="168" height="15" font="11">Hrsg. von den Professoren  </text>
+<text top="311" left="567" width="52" height="15" font="11">des HPI </text>
+<text top="358" left="130" width="135" height="15" font="11">45 978-3-86956-</text>
+<text top="373" left="207" width="38" height="15" font="11">128-8 </text>
+<text top="358" left="284" width="220" height="15" font="26"><b>Survey on Healthcare IT systems: </b></text>
+<text top="373" left="284" width="239" height="15" font="26"><b>Standards, Regulations and Security </b></text>
+<text top="358" left="567" width="122" height="15" font="11">Christian Neuhaus,  </text>
+<text top="373" left="567" width="99" height="15" font="11">Andreas Polze,  </text>
+<text top="389" left="567" width="190" height="15" font="11">Mohammad M. R. Chowdhuryy </text>
+<text top="404" left="567" width="4" height="15" font="11"> </text>
+<text top="420" left="130" width="135" height="15" font="11">44 978-3-86956-</text>
+<text top="436" left="207" width="38" height="15" font="11">113-4 </text>
+<text top="420" left="284" width="248" height="15" font="26"><b>Virtualisierung und Cloud Computing: </b></text>
+<text top="435" left="284" width="195" height="15" font="26"><b>Konzepte, Technologiestudie, </b></text>
+<text top="451" left="284" width="101" height="15" font="26"><b>Marktübersicht </b></text>
+<text top="420" left="567" width="166" height="15" font="11">Christoph Meinel, Christian </text>
+<text top="436" left="567" width="179" height="15" font="11">Willems, Sebastian Roschke, </text>
+<text top="451" left="567" width="106" height="15" font="11">Maxim Schnjakin </text>
+<text top="467" left="567" width="4" height="15" font="11"> </text>
+<text top="482" left="130" width="135" height="15" font="11">43 978-3-86956-</text>
+<text top="498" left="207" width="38" height="15" font="11">110-3 </text>
+<text top="482" left="284" width="235" height="15" font="26"><b>SOA-Security 2010 : Symposium für </b></text>
+<text top="498" left="284" width="215" height="15" font="26"><b>Sicherheit in Service-orientierten </b></text>
+<text top="513" left="284" width="265" height="15" font="26"><b>Architekturen ; 28. / 29. Oktober 2010 am </b></text>
+<text top="528" left="284" width="149" height="15" font="26"><b>Hasso-Plattner-Institut </b></text>
+<text top="544" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="482" left="567" width="113" height="15" font="11">Christoph Meinel,  </text>
+<text top="498" left="567" width="104" height="15" font="11">Ivonne Thomas,  </text>
+<text top="513" left="567" width="158" height="15" font="11">Robert Warschofsky et al. </text>
+<text top="560" left="130" width="135" height="15" font="11">42 978-3-86956-</text>
+<text top="575" left="207" width="38" height="15" font="11">114-1 </text>
+<text top="560" left="284" width="265" height="15" font="26"><b>Proceedings of the Fall 2010 Future SOC </b></text>
+<text top="575" left="284" width="56" height="15" font="26"><b>Lab Day </b></text>
+<text top="591" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="560" left="567" width="170" height="15" font="11">Hrsg. von Christoph Meinel, </text>
+<text top="575" left="567" width="194" height="15" font="11">Andreas Polze, Alexander Zeier </text>
+<text top="591" left="567" width="33" height="15" font="11">et al. </text>
+<text top="606" left="567" width="4" height="15" font="11"> </text>
+<text top="622" left="130" width="135" height="15" font="11">41 978-3-86956-</text>
+<text top="637" left="207" width="38" height="15" font="11">108-0 </text>
+<text top="622" left="284" width="203" height="15" font="26"><b>The effect of tangible media on </b></text>
+<text top="637" left="284" width="276" height="15" font="26"><b>individuals in business process modeling: </b></text>
+<text top="653" left="284" width="158" height="15" font="26"><b>A controlled experiment </b></text>
+<text top="668" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="622" left="567" width="106" height="15" font="11">Alexander Lübbe </text>
+<text top="684" left="130" width="135" height="15" font="11">40 978-3-86956-</text>
+<text top="699" left="207" width="38" height="15" font="11">106-6 </text>
+<text top="684" left="284" width="234" height="15" font="26"><b>Selected Papers of the International </b></text>
+<text top="699" left="284" width="244" height="15" font="26"><b>Workshop on Smalltalk Technologies </b></text>
+<text top="715" left="284" width="65" height="15" font="26"><b>(IWST’10) </b></text>
+<text top="730" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="684" left="567" width="159" height="15" font="11">Hrsg. von Michael Haupt,  </text>
+<text top="699" left="567" width="108" height="15" font="11">Robert Hirschfeld </text>
+<text top="746" left="130" width="135" height="15" font="11">39 978-3-86956-</text>
+<text top="761" left="207" width="38" height="15" font="11">092-2 </text>
+<text top="746" left="284" width="221" height="15" font="26"><b>Dritter Deutscher IPv6 Gipfel 2010 </b></text>
+<text top="746" left="567" width="193" height="15" font="11">Hrsg. von Christoph Meinel und </text>
+<text top="761" left="567" width="77" height="15" font="11">Harald Sack </text>
+<text top="777" left="567" width="4" height="15" font="11"> </text>
+<text top="793" left="130" width="135" height="15" font="11">38 978-3-86956-</text>
+<text top="808" left="207" width="38" height="15" font="11">081-6 </text>
+<text top="792" left="284" width="254" height="15" font="26"><b>Extracting Structured Information from </b></text>
+<text top="808" left="284" width="265" height="15" font="26"><b>Wikipedia Articles to Populate Infoboxes </b></text>
+<text top="823" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="793" left="567" width="191" height="15" font="11">Dustin Lange, Christoph Böhm, </text>
+<text top="808" left="567" width="95" height="15" font="11">Felix Naumann </text>
+<text top="839" left="130" width="135" height="15" font="11">37 978-3-86956-</text>
+<text top="855" left="207" width="38" height="15" font="11">078-6 </text>
+<text top="839" left="284" width="273" height="15" font="26"><b>Toward Bridging the Gap Between Formal </b></text>
+<text top="855" left="284" width="260" height="15" font="26"><b>Semantics and Implementation of Triple </b></text>
+<text top="870" left="284" width="115" height="15" font="26"><b>Graph Grammars </b></text>
+<text top="886" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="839" left="567" width="90" height="15" font="11">Holger Giese,  </text>
+<text top="855" left="567" width="134" height="15" font="11">Stephan Hildebrandt,  </text>
+<text top="870" left="567" width="90" height="15" font="11">Leen Lambers </text>
+<text top="901" left="130" width="135" height="15" font="11">36 978-3-86956-</text>
+<text top="917" left="207" width="38" height="15" font="11">065-6 </text>
+<text top="901" left="284" width="258" height="15" font="26"><b>Pattern Matching for an Object-oriented </b></text>
+<text top="917" left="284" width="245" height="15" font="26"><b>and Dynamically Typed Programming </b></text>
+<text top="932" left="284" width="68" height="15" font="26"><b>Language </b></text>
+<text top="948" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="901" left="567" width="188" height="15" font="11">Felix Geller, Robert Hirschfeld, </text>
+<text top="917" left="567" width="82" height="15" font="11">Gilad Bracha </text>
+<text top="963" left="130" width="135" height="15" font="11">35 978-3-86956-</text>
+<text top="979" left="207" width="38" height="15" font="11">054-0 </text>
+<text top="963" left="284" width="254" height="15" font="26"><b>Business Process Model Abstraction :  </b></text>
+<text top="979" left="284" width="133" height="15" font="26"><b>Theory and Practice </b></text>
+<text top="994" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="963" left="567" width="201" height="15" font="11">Sergey Smirnov, Hajo A. Reijers, </text>
+<text top="979" left="567" width="191" height="15" font="11">Thijs Nugteren, Mathias Weske </text>
+<text top="1010" left="130" width="135" height="15" font="11">34 978-3-86956-</text>
+<text top="1025" left="207" width="38" height="15" font="11">048-9 </text>
+<text top="1010" left="284" width="224" height="15" font="26"><b>Efficient and exact computation of </b></text>
+<text top="1025" left="284" width="210" height="15" font="26"><b>inclusion dependencies for data </b></text>
+<text top="1041" left="284" width="74" height="15" font="26"><b>integration </b></text>
+<text top="1056" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="1010" left="567" width="173" height="15" font="11">Jana Bauckmann, Ulf Leser, </text>
+<text top="1025" left="567" width="95" height="15" font="11">Felix Naumann </text>
+<text top="1072" left="130" width="135" height="15" font="11">33 978-3-86956-</text>
+<text top="1088" left="207" width="38" height="15" font="11">043-4 </text>
+<text top="1103" left="225" width="4" height="15" font="11"> </text>
+<text top="1072" left="284" width="239" height="15" font="26"><b>Proceedings of the 9th Workshop on </b></text>
+<text top="1087" left="284" width="257" height="15" font="26"><b>Aspects, Components, and Patterns for </b></text>
+<text top="1103" left="284" width="236" height="15" font="26"><b>Infrastructure Software (ACP4IS '10) </b></text>
+<text top="1118" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="1072" left="567" width="151" height="15" font="11">Hrsg. von Bram Adams,  </text>
+<text top="1087" left="567" width="196" height="15" font="11">Michael Haupt, Daniel Lohmann </text>
+<text top="1134" left="130" width="135" height="15" font="11">32 978-3-86956-</text>
+<text top="1150" left="207" width="38" height="15" font="11">037-3 </text>
+<text top="1165" left="225" width="4" height="15" font="11"> </text>
+<text top="1134" left="284" width="141" height="15" font="26"><b>STG Decomposition:  </b></text>
+<text top="1149" left="284" width="197" height="15" font="26"><b>Internal Communication for SI </b></text>
+<text top="1165" left="284" width="110" height="15" font="26"><b>Implementability </b></text>
+<text top="1181" left="284" width="4" height="15" font="26"><b> </b></text>
+<text top="1134" left="567" width="182" height="15" font="11">Dominic Wist, Mark Schaefer, </text>
+<text top="1150" left="567" width="181" height="15" font="11">Walter Vogler, Ralf Wollowski </text>
+<text top="1196" left="106" width="5" height="20" font="2"> </text>
+</page>
+<page number="38" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="1154" left="64" width="243" height="27" font="0">ISBN 978-3-86956-134-9</text>
+<text top="1179" left="64" width="157" height="27" font="0">ISSN 1613-5652</text>
+</page>
+</pdf2xml>

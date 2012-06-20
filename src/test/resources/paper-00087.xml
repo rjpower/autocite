@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1020" width="723">
+	<fontspec id="0" size="25" family="Times" color="#000000"/>
+	<fontspec id="1" size="22" family="Times" color="#000000"/>
+	<fontspec id="2" size="14" family="Times" color="#000000"/>
+	<fontspec id="3" size="13" family="Times" color="#000000"/>
+	<fontspec id="4" size="13" family="Times" color="#000000"/>
+	<fontspec id="5" size="11" family="Times" color="#000000"/>
+<text top="107" left="608" width="38" height="30" font="0"><b>12 </b></text>
+<text top="171" left="365" width="287" height="27" font="1"><b>Inspiration from Nature:  </b></text>
+<text top="198" left="134" width="518" height="27" font="1"><b>Insights from Crustacean Chemical Sensors  </b></text>
+<text top="226" left="149" width="496" height="27" font="1"><b>Can Lead to Successful Design of Artificial </b></text>
+<text top="253" left="430" width="215" height="27" font="1"><b>Chemical Sensors </b></text>
+<text top="299" left="517" width="125" height="20" font="2">Kristina S. Mead </text>
+<text top="319" left="514" width="132" height="18" font="3"><i>Denison University,  </i></text>
+<text top="337" left="607" width="35" height="18" font="3"><i>USA </i></text>
+<text top="385" left="85" width="108" height="17" font="4"><b>1. Introduction </b></text>
+<text top="412" left="85" width="557" height="16" font="5">The chemical sensors possessed by crustaceans are aesthetically beautiful and are deployed </text>
+<text top="429" left="85" width="557" height="16" font="5">in many ways, depending on the ecological task being carried out by the animal, the nature </text>
+<text top="445" left="85" width="556" height="16" font="5">of the chemical signal, and the dispersal characteristics of the environment. As many studies </text>
+<text top="462" left="85" width="560" height="16" font="5">have indicated, they are engineering marvels, able to detect very low concentration of </text>
+<text top="479" left="85" width="560" height="16" font="5">odorant molecules under difficult conditions, and also able to respond to evolutionary </text>
+<text top="496" left="85" width="559" height="16" font="5">pressures, so that over time, populations that migrate to different habitats have evolved </text>
+<text top="512" left="85" width="434" height="16" font="5">sensor characteristics that match the features of their new surroundings. </text>
+<text top="538" left="85" width="556" height="16" font="5">While it may not be possible at this point to create “smart” materials that can evolve, we can </text>
+<text top="555" left="85" width="559" height="16" font="5">learn from patterns of sensor structure observed in nature. This work typically involves </text>
+<text top="572" left="85" width="559" height="16" font="5">comparative functional anatomy and biomechanics. We can also learn from patterns of </text>
+<text top="589" left="85" width="559" height="16" font="5">sensor deployment. These studies examine the role of sensor movement relative to the </text>
+<text top="605" left="85" width="557" height="16" font="5">animal, or the role of animal movement relative to the environment. These approaches often </text>
+<text top="622" left="85" width="556" height="16" font="5">involve comparative behavioral observations of the animals followed by the development of </text>
+<text top="639" left="85" width="557" height="16" font="5">algorithms that are then tested using biomimetic robots. The ability of the robots to perform </text>
+<text top="656" left="85" width="560" height="16" font="5">basic olfactory tasks- such as finding an odor source- can indicate the validity of the </text>
+<text top="672" left="85" width="397" height="16" font="5">programmed search strategies determined from animal behavior.  </text>
+<text top="698" left="85" width="559" height="16" font="5">While interesting in their own right, these discoveries can also have profound medical, </text>
+<text top="715" left="85" width="558" height="16" font="5">technical, and military implications. For example, researchers are investigating the use of </text>
+<text top="732" left="85" width="556" height="16" font="5">animal-based search strategies to map chemical plumes, to pinpoint dangerous domestic gas </text>
+<text top="748" left="85" width="559" height="16" font="5">leaks, to monitor hazardous water decontamination, to fine-tune the efforts of homeland </text>
+<text top="765" left="85" width="246" height="16" font="5">security in detecting chemical traces, etc. </text>
+<text top="791" left="85" width="560" height="16" font="5">In this chapter, I plan to discuss approaches and key findings that detail the synergistic </text>
+<text top="807" left="85" width="557" height="16" font="5">approach taken by biologists and engineers in tandem to analyze crustacean chemical sensors. </text>
+<text top="823" left="85" width="559" height="16" font="5">I will start by describing how crustaceans use chemical sensors in a variety of impressive, </text>
+<text top="839" left="85" width="558" height="16" font="5">ecologically critical tasks such as finding food, mates, habitat, avoiding predators, and even </text>
+<text top="856" left="85" width="557" height="16" font="5">recognizing specific individual conspecifics. I will then detail the findings from mathematical </text>
+<text top="872" left="85" width="560" height="16" font="5">models synthesizing these observations, as well as results from programmed robots and </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1020" width="723">
+	<fontspec id="6" size="9" family="Times" color="#000000"/>
+	<fontspec id="7" size="16" family="Times" color="#000000"/>
+	<fontspec id="8" size="11" family="Times" color="#000000"/>
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">258 </text>
+<text top="106" left="85" width="557" height="16" font="5">autonomous underwater vehicles. Lastly, I will examine the societal benefits and outcomes of </text>
+<text top="122" left="85" width="420" height="16" font="5">this work. I will conclude with a section on promising future directions. </text>
+<text top="160" left="85" width="508" height="17" font="4"><b>2. Engineers and biologists work together to study biological chemical </b></text>
+<text top="177" left="85" width="62" height="17" font="4"><b>sensors </b></text>
+<text top="203" left="85" width="558" height="16" font="5">Engineers and biologists can share their expertise about structures in order to learn how </text>
+<text top="219" left="85" width="561" height="16" font="5">animals have evolved strategies to solve ecological problems. This knowledge can be </text>
+<text top="236" left="85" width="493" height="16" font="5">translated to the development of technology benefiting humans or human society. </text>
+<text top="234" left="578" width="4" height="18" font="4"><b> </b></text>
+<text top="273" left="85" width="315" height="15" font="8"><b>2.1 High performing biological chemical sensors </b></text>
+<text top="297" left="85" width="560" height="16" font="5">Often, these projects start when biologists identify species of organisms that perform a </text>
+<text top="314" left="85" width="557" height="16" font="5">particular physiological or ecological task at a high level. For example, male sphinx moths, </text>
+<text top="330" left="85" width="558" height="16" font="5">after encountering a very small number of pheromone molecules, can identify and follow </text>
+<text top="346" left="85" width="557" height="16" font="5">the odor signal released by a female moth for 1-2 miles (Ache &amp; Young, 2005). This ability </text>
+<text top="363" left="85" width="557" height="16" font="5">has led to significant research of insect and crustacean chemical sensors, and the strategies </text>
+<text top="379" left="85" width="402" height="16" font="5">used by these animals to track the odors of interest to their source.  </text>
+<text top="416" left="85" width="154" height="15" font="8"><b>2.2 Fruitful team efforts </b></text>
+<text top="441" left="85" width="558" height="16" font="5">Because of the complexity of the science, these experiments often require teams of people </text>
+<text top="457" left="85" width="571" height="16" font="5">including organismal biologists, biomechanicians, neurophysiologists, chemists, </text>
+<text top="473" left="85" width="240" height="16" font="5">mathematical modelers, and engineers.  </text>
+<text top="511" left="85" width="136" height="15" font="8"><b>2.3 Many techniques </b></text>
+<text top="535" left="85" width="558" height="16" font="5">In addition to requiring a team of researchers, this work gains strength from a variety of </text>
+<text top="551" left="85" width="557" height="16" font="5">experimental approaches. In order to properly replicate the natural environment, behavioral </text>
+<text top="568" left="85" width="559" height="16" font="5">observations supplementing those made in the field are often made with living animals </text>
+<text top="584" left="85" width="560" height="16" font="5">tracking odors in a carefully calibrated flume. Once the behavioral studies have been </text>
+<text top="600" left="85" width="559" height="16" font="5">completed, the team may rely on scanning electron micrography to understand the fine </text>
+<text top="616" left="85" width="561" height="16" font="5">structure of the chemical sensors. Because successful olfaction requires that the odor </text>
+<text top="633" left="85" width="560" height="16" font="5">molecule come in contact with the chemical sensor, it is imperative to understand the </text>
+<text top="649" left="85" width="561" height="16" font="5">interaction of the sensor with the surrounding fluid (air or water). Thus, a common </text>
+<text top="665" left="85" width="562" height="16" font="5">approach is to make large, dynamically scaled models of the sensor. The resulting </text>
+<text top="682" left="85" width="420" height="16" font="5">information can then be used in the creation of mathematical models.  </text>
+<text top="719" left="85" width="424" height="17" font="4"><b>3. Crustaceans interpret their world through chemical cues </b></text>
+<text top="746" left="85" width="557" height="16" font="5">As humans, we are used to our perception of the world being dominated by our senses of </text>
+<text top="762" left="85" width="559" height="16" font="5">sight and hearing. While crustaceans use those senses as well, their dominant senses are </text>
+<text top="779" left="85" width="559" height="16" font="5">those relying on chemical sensors: smell and taste. This is especially true of crustaceans </text>
+<text top="796" left="85" width="232" height="16" font="5">living in low light or noisy conditions. </text>
+<text top="833" left="85" width="120" height="15" font="8"><b>3.1 Smell vs. taste </b></text>
+<text top="858" left="85" width="557" height="16" font="5">For terrestrial animals, smell is typically used to describe the modality of detecting volatile </text>
+<text top="875" left="85" width="558" height="16" font="5">compounds in low concentrations, while taste refers to the chemical detection that occurs </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1020" width="723">
+	<fontspec id="9" size="8" family="Times" color="#000000"/>
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">259 </text>
+<text top="106" left="85" width="557" height="16" font="5">during the physical manipulation of highly concentrated material. This distinction between </text>
+<text top="123" left="85" width="271" height="16" font="5">smell and taste is less clear in aquatic species </text>
+<text top="126" left="356" width="4" height="13" font="9">(</text>
+<text top="123" left="359" width="282" height="16" font="5">Ache &amp; Young, 2005), since neither sense deals </text>
+<text top="140" left="85" width="558" height="16" font="5">with volatile compounds in aqueous environments, and because the same compounds, or </text>
+<text top="157" left="85" width="431" height="16" font="5">mixtures of compounds can be of interest in both senses (Caprio, 1977).  </text>
+<text top="182" left="85" width="561" height="16" font="5">However, there may be some relevant distinctions at the chemical sensor level. All </text>
+<text top="199" left="85" width="557" height="16" font="5">crustacean chemosensory organs for both smell and taste are chemosensory sensilla, which </text>
+<text top="216" left="85" width="559" height="16" font="5">are small, hair-like structures containing chemosensory cells and supporting cells. These </text>
+<text top="233" left="85" width="559" height="16" font="5">sensilla are divided into two types: bimodal chemosensory and mechanosensory sensilla </text>
+<text top="250" left="85" width="563" height="16" font="5">located on mouthparts, walking legs, and other parts of the body, and unimodal </text>
+<text top="266" left="85" width="560" height="16" font="5">chemosensory sensilla located on the antennules (Hallberg &amp; Skog, 2011). The bimodal </text>
+<text top="283" left="85" width="560" height="16" font="5">sensilla are thought to function when the chemical source is in direct contact with the </text>
+<text top="300" left="85" width="558" height="16" font="5">animal, while the unimodal sensilla are thought to detect molecules traveling through the </text>
+<text top="317" left="85" width="408" height="16" font="5">water. The following treatment will focus on the unimodal sensilla.  </text>
+<text top="354" left="85" width="293" height="15" font="8"><b>3.2 Roles of chemical cues in animal ecology </b></text>
+<text top="379" left="85" width="559" height="16" font="5">Many marine crustaceans rely on water-borne chemical cues in a variety of ecologically </text>
+<text top="396" left="85" width="560" height="16" font="5">critical activities such as finding food, mates, suitable habitat, detecting predators, and </text>
+<text top="413" left="85" width="557" height="16" font="5">communicating with conspecifics (e.g. Atema &amp; Voigt 1995, Caldwell 1979, 1985, Weissburg </text>
+<text top="429" left="85" width="561" height="16" font="5">2000, Weissburg &amp; Zimmer-Faust 1993, 1994, Zimmer-Faust, 1989). Most crustaceans, </text>
+<text top="446" left="85" width="558" height="16" font="5">including lobsters, crabs, crayfish, prawns, leptostracans, anaspidans, mysids, amphipods, </text>
+<text top="463" left="85" width="560" height="16" font="5">tanaids, isopods, ostracods, phyllopods, cumaceans and stomatopods detect odors from </text>
+<text top="480" left="85" width="558" height="16" font="5">distant sources by using unimodal chemosensory sensillae called aesthetascs (Hallberg &amp; </text>
+<text top="496" left="85" width="472" height="16" font="5">Skog, 2011). The following descriptions describe these activities in more detail. </text>
+<text top="534" left="85" width="399" height="15" font="8"><b>3.2.1 Chemical cues help crustaceans obtain food and habitat </b></text>
+<text top="559" left="85" width="556" height="16" font="5">Environmental odors help organisms find food and suitable habitat. For example, blue crabs </text>
+<text top="575" left="85" width="557" height="16" font="5">(Weissburg, 2000), crayfish (Moore &amp; Grills 1999) and mantis shrimp (Mead et al., 2003) use </text>
+<text top="592" left="85" width="559" height="16" font="5">chemical plumes to find food. At smaller spatial scales, copepods do the same (Koehl &amp; </text>
+<text top="609" left="85" width="557" height="16" font="5">Stricker, 1981). Spiny lobsters use chemical cues to decide whether or not to use a particular </text>
+<text top="626" left="85" width="559" height="16" font="5">shelter (Horner et al., 2006), and anomurans are attracted by the odors emitted by large </text>
+<text top="643" left="85" width="558" height="16" font="5">predatory snails consuming prey snails. In this case, although a food odor is the cue, the </text>
+<text top="659" left="85" width="556" height="16" font="5">goal is not food but a potential exchange of shells negotiated at a trade “market” made up of </text>
+<text top="676" left="85" width="557" height="16" font="5">all the attracted crabs. Even one more available shell may cause a cascade of shell exchanges </text>
+<text top="693" left="85" width="559" height="16" font="5">(Gherardi &amp; Tricarico, 2011). Similarly, despite the danger associated with such a signal, </text>
+<text top="710" left="85" width="557" height="16" font="5">odors emitted by dead or damaged conspecifics are also attractive, with the goal to induce </text>
+<text top="727" left="85" width="333" height="16" font="5">acquisition of better shells (Gherardi &amp; Tricarico, 2011). </text>
+<text top="764" left="85" width="318" height="15" font="8"><b>3.2.2 Chemical cues help crustaceans find mates </b></text>
+<text top="789" left="85" width="558" height="16" font="5">Crustaceans also use chemical substances dissolved in water to find and recognize mates. </text>
+<text top="806" left="85" width="558" height="16" font="5">For example, male copepods can accurately and rapidly follow odor trails left by females, </text>
+<text top="822" left="85" width="557" height="16" font="5">over hundreds of body lengths (Yen et al., 1998, Yen &amp; Laskey, 2011). Shore crabs and blue </text>
+<text top="839" left="85" width="558" height="16" font="5">crabs find mates and form pairs in the presence of sex pheromones (Hardege &amp; Terschak, </text>
+<text top="856" left="85" width="558" height="16" font="5">2011, Kamio &amp; Derby, 2011). Female reproductive pre-molt decapod shrimp release water </text>
+<text top="873" left="85" width="557" height="16" font="5">soluble substances that elicit mate searching behavior in males. In some species of caridean </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1020" width="723">
+	<fontspec id="10" size="11" family="Times" color="#000000"/>
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">260 </text>
+<text top="106" left="85" width="557" height="16" font="5">shrimp, large dominant males release a substance that is attractive to females (Bauer, 2011). </text>
+<text top="123" left="85" width="558" height="16" font="5">In low density systems, the pheromone release is premolt, but in high density systems it </text>
+<text top="140" left="85" width="557" height="16" font="5">appears to be postmolt, possibly limiting harassment (tumults) in dense populations (Bauer, </text>
+<text top="157" left="85" width="562" height="16" font="5">2011). Lobsters also release and detect chemical cues to find mates. Males release </text>
+<text top="173" left="85" width="557" height="16" font="5">compounds in their urine that help female lobsters locate a potential mate. Once the females </text>
+<text top="190" left="85" width="557" height="16" font="5">are nearby, they release chemicals that drive subsequent mating behaviors (Aggio &amp; Derby </text>
+<text top="207" left="85" width="38" height="16" font="5">2011). </text>
+<text top="244" left="85" width="408" height="15" font="8"><b>3.2.3 Chemical cues mediate social interactions in crustaceans </b></text>
+<text top="269" left="85" width="559" height="16" font="5">Once the potential partners are in proximity, pheromones mediate sexual attraction and </text>
+<text top="286" left="85" width="557" height="16" font="5">mating readiness, but can also signal social status, aggregation, and alarm (Ache &amp; Young, </text>
+<text top="303" left="85" width="561" height="16" font="5">2005). Decapod shrimp (Bauer, 2011) and anomuran crabs and lobsters (Gherardi &amp; </text>
+<text top="320" left="85" width="559" height="16" font="5">Tricarico, 2011) can recognize members of the opposite sex via contact chemoreception, </text>
+<text top="336" left="85" width="561" height="16" font="5">perhaps (at least in decapod shrimp) using cuticular hydrocarbons and glycoproteins </text>
+<text top="353" left="85" width="558" height="16" font="5">(Bauer, 2011). Chemical cues may also indicate advanced reproductive state, i.e. spawning </text>
+<text top="370" left="85" width="558" height="16" font="5">readiness in females and sperm availability in males (Gherardi &amp; Tricarico, 2011). Contact </text>
+<text top="387" left="85" width="557" height="16" font="5">cues may also mediate initial pair formation in monogamous shrimp species that establish </text>
+<text top="404" left="85" width="197" height="16" font="5">permanent bonds (Bauer, 2011).  </text>
+<text top="429" left="85" width="557" height="16" font="5">In contrast, mantis shrimp rely on chemical cues that act over a distance to identify sex and </text>
+<text top="445" left="85" width="558" height="16" font="5">relative social position (Mead &amp; Caldwell, 2011). For example, mantis shrimp enter empty </text>
+<text top="462" left="85" width="557" height="16" font="5">burrow cavities spiked with the odor of a mantis shrimp that lost a dominance battle with </text>
+<text top="478" left="85" width="561" height="16" font="5">the test mantis shrimp much more rapidly than they enter an empty burrow cavity </text>
+<text top="495" left="85" width="563" height="16" font="5">containing the odor of a victorious mantis shrimp (Caldwell, 1985). Dominant or </text>
+<text top="511" left="85" width="557" height="16" font="5">subordinate status is also mediated by odors that act over a distance in crayfish (Breithaupt, </text>
+<text top="528" left="85" width="558" height="16" font="5">2011). During dyadic contests, crayfish emit more urine containing chemical signals as the </text>
+<text top="544" left="85" width="563" height="16" font="5">aggression escalates, and the eventual winner emits more than the eventual loser </text>
+<text top="560" left="85" width="558" height="16" font="5">(Breithaupt, 2011). Since urine contains the metabolites of current and recent biochemical </text>
+<text top="577" left="85" width="559" height="16" font="5">processes, it is quite feasible that these cues contain important physiological information </text>
+<text top="593" left="85" width="561" height="16" font="5">about the signaler. Biogenic amines such as serotonin and octopamine, implicated in </text>
+<text top="610" left="85" width="419" height="16" font="5">aggression in crustaceans, are candidate molecules (Breithaupt, 2011). </text>
+<text top="647" left="85" width="457" height="15" font="8"><b>3.2.4 Chemical cues are important in sibling and individual recognition </b></text>
+<text top="672" left="85" width="559" height="16" font="5">Several crustaceans employ chemical cues in sibling or individual recognition. Decapod </text>
+<text top="689" left="85" width="557" height="16" font="5">shrimp can recognize previous pair partners, also via contact chemoreception, (Bauer, 2011). </text>
+<text top="706" left="85" width="559" height="16" font="5">They appear to spend less time on courtship behaviors when reintroduced to previous </text>
+<text top="722" left="85" width="558" height="16" font="5">mating partners than when encountering individuals of the opposite sex which they had </text>
+<text top="739" left="85" width="556" height="16" font="5">never met (Johnson, 1977). A similar effect is also seen in the mantis shrimp <i>Pseudosquilla </i></text>
+<text top="756" left="85" width="557" height="16" font="10"><i>ciliata </i>(Mead &amp; Caldwell, 2011). In other species of mantis shrimp, males are less aggressive </text>
+<text top="773" left="85" width="558" height="16" font="5">with previous mating partners than they are with females with which they have not been </text>
+<text top="789" left="85" width="561" height="16" font="5">paired (Caldwell, 1992). As mentioned above, mantis shrimp also recognize previous </text>
+<text top="806" left="85" width="560" height="16" font="5">winners and losers of cavity contests (Caldwell, 1985). Lobsters (Aggio &amp; Derby, 2011, </text>
+<text top="823" left="85" width="557" height="16" font="5">Karavanich &amp; Atema 1998a) and crayfish (Breithaupt, 2011) have this ability as well. Hermit </text>
+<text top="840" left="85" width="556" height="16" font="5">crabs  may  have  an  even  more  refined  ability  to  remember  individuals,  able  to  identify  a </text>
+<text top="856" left="85" width="559" height="16" font="5">conspecific as familiar outside the winner/loser dichotomy (Gherardi &amp; Tricarico, 2011). </text>
+<text top="873" left="85" width="416" height="16" font="5">This recognition appears to be associated with properties of the shell. </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">261 </text>
+<text top="106" left="85" width="315" height="15" font="8"><b>3.2.5 Chemical cues assist in avoiding predators </b></text>
+<text top="131" left="85" width="559" height="16" font="5">Chemical cues are not necessarily attractive; in the case of predator cues or of damaged </text>
+<text top="147" left="85" width="559" height="16" font="5">conspecifics, they are usually repulsive. For instance, blue crabs avoid traps baited with </text>
+<text top="163" left="85" width="557" height="16" font="5">injured conspecifics (Hay, 2011). Crustaceans can exhibit a variety of responses to chemical </text>
+<text top="180" left="85" width="557" height="16" font="5">cues (crushed conspecifics, or predator odor), such as decreasing their forward movement, </text>
+<text top="196" left="85" width="557" height="16" font="5">reducing movement in any direction and assuming protective positions, moving away from </text>
+<text top="213" left="85" width="558" height="16" font="5">the source of odor, increasing defensive displays, and increasing preference for protective </text>
+<text top="229" left="85" width="558" height="16" font="5">habitats (Hazlett, 2011).  When crayfish are exposed to a combination of food odors and </text>
+<text top="246" left="85" width="556" height="16" font="5">predator odors, they reduce their foraging, increase their use of refuges, and avoid the alarm </text>
+<text top="262" left="85" width="557" height="16" font="5">odor by spending more time outside of the odor plume (Tomba et al., 2001). Of course, this </text>
+<text top="278" left="85" width="243" height="16" font="5">results in a decrease in foraging success. </text>
+<text top="316" left="85" width="273" height="17" font="4"><b>4. Crustacean chemosensor structure </b></text>
+<text top="342" left="85" width="557" height="16" font="5">All chemosensory sensilla contain ciliated bipolar sensory cells. The bimodal sensory cells, </text>
+<text top="359" left="85" width="558" height="16" font="5">are thought to function in contact chemosensation. In contrast, most of the cues described </text>
+<text top="375" left="85" width="557" height="16" font="5">above that act over a distance are detected by unimodal chemical sensors called aesthetascs. </text>
+<text top="391" left="85" width="562" height="16" font="5">The description below focuses on aesthetascs. In order for distance chemoreception </text>
+<text top="408" left="85" width="557" height="16" font="5">mediated by aesthetascs to work, the odor molecules must first be transported to the surface </text>
+<text top="424" left="85" width="558" height="16" font="5">of the aesthetasc, the cuticle. The morphology of the aesthetascs, their arrangement on the </text>
+<text top="441" left="85" width="557" height="16" font="5">antennule, and the movement of the antennule relative to ambient water motion affect the </text>
+<text top="457" left="85" width="558" height="16" font="5">flow of water bearing odorants around the sensillae. This in turn affects the transport of </text>
+<text top="474" left="85" width="559" height="16" font="5">odorants to the aesthetasc surface and hence to the chemoreceptors within the sensillae. </text>
+<text top="490" left="85" width="559" height="16" font="5">Thus, the structure and deployment of the antennules affect the ability of the animal to </text>
+<text top="506" left="85" width="330" height="16" font="5">identify the contents of the plume and locate its source </text>
+<text top="544" left="85" width="441" height="15" font="8"><b>4.1 Contact chemoreception is usually mediated by bimodal sensilla </b></text>
+<text top="568" left="85" width="559" height="16" font="5">Bimodal sensilla contain both chemosensory and mechanosensory cells. These structures </text>
+<text top="585" left="85" width="557" height="16" font="5">typically have a thick, dense cuticle with an apical pore, and are arranged all over the body </text>
+<text top="601" left="85" width="558" height="16" font="5">but especially densely on the mouthparts and walking legs (Hallberg &amp; Skog 2011). They </text>
+<text top="618" left="85" width="557" height="16" font="5">can be large and robust, as in the lobster hedgehog sensilla, or small and slender, as in some </text>
+<text top="634" left="85" width="558" height="16" font="5">crab bimodal sensilla. Often the former are found on the walking legs while the latter are </text>
+<text top="650" left="85" width="437" height="16" font="5">found on mouthparts, antennae, and antennules (Hallberg &amp; Skog 2011). </text>
+<text top="688" left="85" width="549" height="15" font="8"><b>4.2 Chemoreception of odor from distant sources is usually mediated by aesthetascs </b></text>
+<text top="703" left="85" width="103" height="15" font="8"><b>and antennules </b></text>
+<text top="728" left="85" width="558" height="16" font="5">The most common unimodal sensillum found in crustaceans is the aesthetasc. Aesthetascs </text>
+<text top="744" left="85" width="562" height="16" font="5">are stiff, cuticular hair-like structures organized in arrays found exclusively on the </text>
+<text top="760" left="85" width="557" height="16" font="5">antennules (Hallberg et al., 1992). Aesthetascs are typically long and slender, varying from </text>
+<text top="777" left="85" width="557" height="16" font="5">5-30 um in diameter and 10-1400 um long, depending on the species and the age, sex, and </text>
+<text top="793" left="85" width="559" height="16" font="5">condition of the individual, and the flow habitat. For example, aesthetascs in low flow </text>
+<text top="809" left="85" width="558" height="16" font="5">environments tend to be longer and more spaciously arrayed, to facilitate odorant access </text>
+<text top="826" left="85" width="557" height="16" font="5">(Ziemba et al., 2003, Mead, 2008). In contrast to bimodal sensilla, aesthetascs have a porous </text>
+<text top="842" left="85" width="560" height="16" font="5">cuticle that allows low molecular weight molecules to pass through, thus acting like a </text>
+<text top="858" left="85" width="560" height="16" font="5">molecular sieve (Gleeson et al., 1993). Male-specific sensilla, another type of unimodal </text>
+<text top="874" left="85" width="555" height="16" font="5">olfactory sensilla, are found in only a few groups, including mysids (Hallberg &amp; Skog, 2011). </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">262 </text>
+<text top="106" left="85" width="182" height="15" font="8"><b>4.3 Two signaling pathways </b></text>
+<text top="131" left="85" width="558" height="16" font="5">The dichotomy of the two types of chemoreceptors is reflected in the organization of the </text>
+<text top="148" left="85" width="559" height="16" font="5">CNS pathways. Evidence from spiny lobsters and other crustaceans suggests that many </text>
+<text top="164" left="85" width="562" height="16" font="5">crustaceans possess two pathways that contribute to chemically mediated responses </text>
+<text top="181" left="85" width="560" height="16" font="5">(Mellon, 2007, Schmidt &amp; Ache, 1996, Schmidt <i>et al.</i>, 1992). In the olfactory pathway, </text>
+<text top="198" left="85" width="556" height="16" font="5">olfactory neurons within the aesthetascs project into a synaptic region of the midbrain called </text>
+<text top="215" left="85" width="558" height="16" font="5">the olfactory lobe which is organized in dense regions called glomeruli (Schmidt &amp; Ache, </text>
+<text top="232" left="85" width="559" height="16" font="5">1992). The non-olfactory chemoreceptive pathway involving contact chemoreception via </text>
+<text top="248" left="85" width="558" height="16" font="5">bimodal sensilla projects onto a variety of synaptic areas distributed throughout the brain </text>
+<text top="265" left="85" width="298" height="16" font="5">and ventral nerve cord (Schmidt &amp; Mellon 2011).  </text>
+<text top="303" left="85" width="305" height="15" font="8"><b>4.4 Aesthetasc cellular structure and receptors </b></text>
+<text top="327" left="85" width="557" height="16" font="5">Within the cuticle, each aesthetasc typically has between a few to a hundred bipolar sensory </text>
+<text top="344" left="85" width="561" height="16" font="5">cells, which may have highly branched outer dendritic surfaces. This multiplicity of </text>
+<text top="361" left="85" width="559" height="16" font="5">neuronal processes is thought to increase the surface area for stimulus capture. (Ache &amp; </text>
+<text top="378" left="85" width="558" height="16" font="5">Young, 2005). The outer dendritic surfaces are sprinkled with odor receptors, which are G </text>
+<text top="394" left="85" width="560" height="16" font="5">protein coupled receptors (Buck &amp; Axel, 1991). It is thought that each sensory bipolar </text>
+<text top="411" left="85" width="410" height="16" font="5">neuron expresses one receptor type, and projects to one glomerulus. </text>
+<text top="449" left="85" width="285" height="15" font="8"><b>4.5 Variable number of sensors in the array  </b></text>
+<text top="474" left="85" width="556" height="16" font="5">The number of aesthetascs per antennules is variable. Burrowing decapods such as <i>Upogebia </i></text>
+<text top="490" left="85" width="559" height="16" font="5">spp<i>.  </i>and  <i>Callianassa  </i>spp. have 15-22 aesthetascs per antennules (Hallberg &amp; Skog, 2011). </text>
+<text top="507" left="85" width="558" height="16" font="5">Decapods such as <i>Panulirus argus </i>have between 1,200 and 2,400 aesthetascs, depending on </text>
+<text top="524" left="85" width="558" height="16" font="5">the size of the individual (Hallberg &amp; Skog, 2011). It is not yet known to what extent this </text>
+<text top="541" left="85" width="558" height="16" font="5">difference in sensor number is reflected in olfactory use or ability to use olfaction in the </text>
+<text top="558" left="85" width="209" height="16" font="5">various tasks outlined in section 3. </text>
+<text top="596" left="85" width="209" height="15" font="8"><b>4.5.1 Role of number of sensors </b></text>
+<text top="621" left="85" width="558" height="16" font="5">Especially when considering how knowledge of animal sensors can be applied to artificial </text>
+<text top="637" left="85" width="560" height="16" font="5">sensors, it can be interesting to speculate on the performance advantage conferred by </text>
+<text top="654" left="85" width="556" height="16" font="5">multiple sensors (Derby &amp; Steullet, 2001). This question can be considered biologically, </text>
+<text top="671" left="85" width="556" height="16" font="5">chemically, and physically. In terms of biology, crustaceans rely on olfaction for a number of </text>
+<text top="688" left="85" width="557" height="16" font="5">critically important ecological tasks, sometimes involving exquisitely complicated behavior. </text>
+<text top="704" left="85" width="559" height="16" font="5">It stands to reason that there would be a many-sensored apparatus capable of resolving </text>
+<text top="721" left="85" width="556" height="16" font="5">nuanced information to support these tasks. Also, given the developmental or molt stages in </text>
+<text top="738" left="85" width="558" height="16" font="5">which aesthetascs are nonfunctional and also the inevitable damage likely to sensor arrays </text>
+<text top="755" left="85" width="557" height="16" font="5">belonging to crustaceans that engage in aggressive encounters, it would be practical to have </text>
+<text top="772" left="85" width="556" height="16" font="5">some redundancy. Chemically, more sensors might mean that more odor molecules, or more </text>
+<text top="788" left="85" width="562" height="16" font="5">mixtures of compounds, are distinguishable. Similarly, many sensors allows for the </text>
+<text top="805" left="85" width="558" height="16" font="5">possibility of range fractionation. If different populations of sensors sensitive to the same </text>
+<text top="822" left="85" width="561" height="16" font="5">molecule are responsive at different concentrations, more sensitive measurements and </text>
+<text top="839" left="85" width="559" height="16" font="5">responses might be possible. In terms of physics, range fractionation could also occur in </text>
+<text top="855" left="85" width="557" height="16" font="5">terms of temporal dynamics. As a result, different populations of sensors responsive to the </text>
+<text top="872" left="85" width="560" height="16" font="5">same molecule might respond and thus adapt over different time courses, resulting in </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">263 </text>
+<text top="106" left="85" width="561" height="16" font="5">subsets of receptors best able to detect slow, medium, or rapid changes in chemical </text>
+<text top="123" left="85" width="561" height="16" font="5">concentrations. This ability could also be important in some models of odor plume </text>
+<text top="140" left="85" width="557" height="16" font="5">navigation. As we will see later, the arrangement of sensor arrays is important too. Some of </text>
+<text top="157" left="85" width="557" height="16" font="5">the methods of following odor plumes to their source require at least two sensor arrays, for </text>
+<text top="173" left="85" width="556" height="16" font="5">spatial comparison of odor concentration. Lastly, larger arrays, with more sensors, have an </text>
+<text top="190" left="85" width="561" height="16" font="5">increased probability of encountering chemical signal. This increase in size could be </text>
+<text top="207" left="85" width="558" height="16" font="5">especially important in flow conditions that give rise to sparse odor filaments within the </text>
+<text top="224" left="85" width="255" height="16" font="5">odor plume envelope, as described below. </text>
+<text top="261" left="85" width="194" height="15" font="8"><b>4.5.2 Role of shape of sensor  </b></text>
+<text top="286" left="85" width="557" height="16" font="5">Crimaldi et al. (2002) used physical and mathematical models to analyze the effect of sensor </text>
+<text top="303" left="85" width="556" height="16" font="5">size and shape, among other characteristics. When they used similar-sized sensors that were </text>
+<text top="320" left="85" width="556" height="16" font="5">either square-shaped or long, skinny rectangles,  they found that the linear arrangement was </text>
+<text top="338" left="85" width="557" height="16" font="5">much more efficient at capturing odor signals from the environment when the average odor </text>
+<text top="355" left="85" width="558" height="16" font="5">concentration was low, but that the square arrangement had better performance when the </text>
+<text top="372" left="85" width="228" height="16" font="5">average odor concentration was high. </text>
+<text top="410" left="85" width="179" height="15" font="8"><b>4.5.3 Sensor response time </b></text>
+<text top="434" left="85" width="557" height="16" font="5">The odor-containing filaments within the odor plume are often very narrow, and thus of short </text>
+<text top="452" left="85" width="556" height="16" font="5">duration. Therefore, chemical sensors with a slow response time (e.g. slower than 100 Hz, for a </text>
+<text top="469" left="85" width="560" height="16" font="5">small sensor) are apt to register lower concentrations than the actual peak concentration </text>
+<text top="486" left="85" width="558" height="16" font="5">encountered because the peak is temporally “smeared” over the entire response time of the </text>
+<text top="503" left="85" width="559" height="16" font="5">sensor. Thus, the likelihood of detecting large concentrations decreases dramatically as the </text>
+<text top="521" left="85" width="560" height="16" font="5">temporal response of the sensor becomes slow (Crimaldi et al., 2002). Interestingly, large </text>
+<text top="538" left="85" width="557" height="16" font="5">sensors are less sensitive to this temporal smearing, with a cut-off of about 10 Hz rather than </text>
+<text top="555" left="85" width="558" height="16" font="5">the 100 Hz for the small sensors. Smearing also occurs spatially. Because odor filaments are </text>
+<text top="573" left="85" width="557" height="16" font="5">highly localized, large sensors operating at a low frequency (e.g. slower than 1 Hz) are apt to </text>
+<text top="590" left="85" width="559" height="16" font="5">register lower concentrations than the actual peak signal encountered because the signal is </text>
+<text top="607" left="85" width="385" height="16" font="5">averaged over the full extent of the sensor and effectively diluted. </text>
+<text top="645" left="85" width="174" height="17" font="4"><b>5. Odor plume structure </b></text>
+<text top="672" left="85" width="557" height="16" font="5">The dispersal of chemical signals is controlled by the physics governing flow. At low flow </text>
+<text top="688" left="85" width="557" height="16" font="5">velocities and at small length scales, flow is dominated by viscous processes. In this laminar </text>
+<text top="705" left="85" width="558" height="16" font="5">regime, experienced by animals such as copepods, streamlines do not cross, and the odor </text>
+<text top="722" left="85" width="557" height="16" font="5">plume is relatively coherent (Weissburg, 2011). Animals attempting to follow such an odor </text>
+<text top="739" left="85" width="553" height="16" font="5">plume would experience sharp gradients in chemical concentration, especially in the cross-</text>
+<text top="755" left="85" width="561" height="16" font="5">stream direction. In contrast, many animals, especially those in coastal and/or wavy </text>
+<text top="772" left="85" width="566" height="16" font="5">environments, experience more turbulent flow regimes. These environments are </text>
+<text top="789" left="85" width="557" height="16" font="5">characterized by unpredictable velocity fluctuations, leading to fluctuations in the chemical </text>
+<text top="806" left="85" width="558" height="16" font="5">concentrations of odor plumes downstream from the odor source. In these circumstances, </text>
+<text top="823" left="85" width="560" height="16" font="5">experienced by many larger benthic crustaceans including crabs, lobsters, crayfish, and </text>
+<text top="839" left="85" width="560" height="16" font="5">mantis shrimp, turbulent odor plumes are composed of filaments of odor-laden water </text>
+<text top="856" left="85" width="557" height="16" font="5">interspersed with odor-free fluid (e.g. Crimaldi et al., 2002, Crimaldi &amp; Koseff, 2001, Koehl, </text>
+<text top="873" left="85" width="558" height="16" font="5">2006, Moore &amp; Crimaldi 2004, Moore et al., 1991, Moore et al., 1994, Webster et al., 2001, </text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">264 </text>
+<text top="106" left="85" width="557" height="16" font="5">Weissburg, 2000). The structure of an odor plume (and thus how the plume is encountered </text>
+<text top="123" left="85" width="556" height="16" font="5">by navigating animals) is affected by several flow and substrate characteristics including the </text>
+<text top="140" left="85" width="557" height="16" font="5">mean velocity, the turbulent intensity, the presence of waves and the gradient of flow speed </text>
+<text top="157" left="85" width="560" height="16" font="5">above the substratum (the current boundary layer) (Crimaldi &amp; Koseff 2001). As flow </text>
+<text top="173" left="85" width="556" height="16" font="5">becomes more turbulent, the odor filaments typically thin, elongate, and have lower odorant </text>
+<text top="190" left="85" width="553" height="16" font="5">concentration. This is probably because the more numerous eddies stretch the odor-</text>
+<text top="207" left="85" width="558" height="16" font="5">containing fluid into longer elements that increase the surface area across which diffusion </text>
+<text top="224" left="85" width="557" height="16" font="5">can act. Often the odor filaments are more numerous (Finelli, 2000), and more often above a </text>
+<text top="241" left="85" width="557" height="16" font="5">concentration threshold (Crimaldi &amp; Koseff 2001). Different substrates, such as sand, gravel </text>
+<text top="257" left="85" width="560" height="16" font="5">or cobble, and the type of vegetation growing on the substrate, give rise to different </text>
+<text top="274" left="85" width="560" height="16" font="5">boundary layer features and different chemical signal structures due to changes in the </text>
+<text top="291" left="85" width="317" height="16" font="5">turbulent intensity (Finelli, 2000, Moore et al., 2000).  </text>
+<text top="328" left="85" width="314" height="15" font="8"><b>5.1 Effects of plume structure on plume tracking </b></text>
+<text top="353" left="85" width="559" height="16" font="5">These differences in hydrodynamics affect plume tracking success. Blue crabs are more </text>
+<text top="370" left="85" width="556" height="16" font="5">successful at finding odor sources when the flow speed is above 1 cm/s, and walk straighter </text>
+<text top="387" left="85" width="558" height="16" font="5">and more directly upstream as flow velocity increases (Weissburg &amp; Zimmer-Faust, 1993, </text>
+<text top="404" left="85" width="553" height="16" font="5">Finelli et al., 2000). Stomatopods are more successful at finding odor sources in wave-</text>
+<text top="420" left="85" width="557" height="16" font="5">affected flow than in unidirectional flow (Mead et al., 2003). Crabs find odor sources more </text>
+<text top="437" left="85" width="454" height="16" font="5">efficiently on a cobble substrate rather than on sand (Moore &amp; Grills, 1999).  </text>
+<text top="475" left="85" width="478" height="15" font="8"><b>5.2 Features of odor plume structure of interest to navigating crustaceans </b></text>
+<text top="499" left="85" width="559" height="16" font="5">It is not clear precisely what aspects of environmental odor signals are important to the </text>
+<text top="516" left="85" width="558" height="16" font="5">animal, but progress has been made in terms of understanding the responses of olfactory </text>
+<text top="533" left="85" width="559" height="16" font="5">neurons. Different olfactory cells probably respond to different aspects of odor filament </text>
+<text top="550" left="85" width="562" height="16" font="5">structure, but at least some olfactory neurons appear to be sensitive to peak odor </text>
+<text top="566" left="85" width="557" height="16" font="5">concentration and odor pulse duration (Gomez &amp; Atema, 1996a, 1996b; Gomez et al<i>.</i>, 1999). </text>
+<text top="583" left="85" width="559" height="16" font="5">In addition, models and experiments suggest that sensory cells can distinguish between </text>
+<text top="600" left="85" width="560" height="16" font="5">different rates of increasing odor concentration (onset slope) (Kaissling, 1998a, 1998b , </text>
+<text top="617" left="85" width="263" height="16" font="5">Rospars et al., 2000, Zettler &amp; Atema, 1999). </text>
+<text top="654" left="85" width="299" height="17" font="4"><b>6. How crustaceans deploy their sensors  </b></text>
+<text top="681" left="85" width="557" height="16" font="5">Many crustaceans create some kind of movement or current to facilitate olfaction. In some </text>
+<text top="698" left="85" width="557" height="16" font="5">cases, the movement is by the signaler, as in the case of chemicals emitted in urine streams </text>
+<text top="714" left="85" width="561" height="16" font="5">directed forward by strong gill currents in crayfish (Breithaupt, 2011). Since urinary </text>
+<text top="731" left="85" width="557" height="16" font="5">distribution of chemical cues, especially sex pheromones, and gill currents, are common in </text>
+<text top="748" left="85" width="557" height="16" font="5">crabs and lobsters (Aggio &amp; Derby, 2011), it is probable that these odor-laden streams or jets </text>
+<text top="765" left="85" width="557" height="16" font="5">are common among the decapod crustaceans. These jets can impart significant energy to the </text>
+<text top="781" left="85" width="557" height="16" font="5">surrounding flow (Weissburg 2011).  Pleopod fanning, used by crayfish (Breithaupt, 2001), </text>
+<text top="798" left="85" width="561" height="16" font="5">male blue crabs (Weissburg, 2011) and mantis shrimp (Mead &amp; Caldwell, 2011), and </text>
+<text top="815" left="85" width="558" height="16" font="5">maxilliped pulsing, used by mantis shrimp (Mead &amp; Caldwell, 2011) are other movements </text>
+<text top="832" left="85" width="371" height="16" font="5">used to increase the transport of scent away from the animal.  </text>
+<text top="858" left="85" width="558" height="16" font="5">Animal movements can facilitate chemoreception as well. Pleopod fanning and maxilliped </text>
+<text top="874" left="85" width="556" height="16" font="5">pulsing can be used by mantis shrimp to create currents that draw water past chemosensory </text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">265 </text>
+<text top="106" left="85" width="558" height="16" font="5">surfaces (Mead &amp; Caldwell, 2011). Crayfish use a fan organ for the same task (Breithaupt, </text>
+<text top="123" left="85" width="38" height="16" font="5">2001). </text>
+<text top="149" left="85" width="560" height="16" font="5">Other movements or currents are generated only by the receiver. For example, many </text>
+<text top="166" left="85" width="559" height="16" font="5">crustaceans move their antennules- and thus their aesthetascs- through the surrounding </text>
+<text top="182" left="85" width="558" height="16" font="5">medium to facilitate odor reception. One common movement found in crayfish, lobsters, </text>
+<text top="199" left="85" width="561" height="16" font="5">crabs, mantis shrimp, and other crustaceans is an olfactory flick (Koehl, 2011). Other </text>
+<text top="216" left="85" width="559" height="16" font="5">receptive sensor movements include antennulation in mantis shrimp (Mead &amp; Caldwell, </text>
+<text top="233" left="85" width="556" height="16" font="5">2011). These currents or movements of the sensory appendages allow chemical cues to better </text>
+<text top="250" left="85" width="557" height="16" font="5">penetrate the sensory arrays. The sensor movements implicated in signal reception and the </text>
+<text top="266" left="85" width="436" height="16" font="5">ways in which the motions benefit olfaction are further described below. </text>
+<text top="304" left="85" width="266" height="15" font="8"><b>6.1 Pleopod fanning and other fan organs</b></text>
+<text top="304" left="351" width="3" height="16" font="8"><b> </b></text>
+<text top="329" left="85" width="558" height="16" font="5">Pleopod fanning or use of crayfish fan organs can create large, local currents greater than </text>
+<text top="345" left="85" width="556" height="16" font="5">the ambient flow. When crayfish fan organs are restrained so that no current is produced, </text>
+<text top="362" left="85" width="559" height="16" font="5">they are unable to localize odor sources (Breithaupt, 2001). Recent field observations of </text>
+<text top="379" left="85" width="557" height="16" font="10"><i>Squilla empusa</i> (Mead, <i>unpublished</i>)<i> </i>indicate that mantis shrimp often lurk at the entrance of </text>
+<text top="396" left="85" width="557" height="16" font="5">their burrows with their eyes and antennules near the substrate surface. In this orientation, </text>
+<text top="413" left="85" width="557" height="16" font="5">pleopod fanning draws fluid into the burrow past the antennules. Mantis shrimp appear to </text>
+<text top="429" left="85" width="557" height="16" font="5">engage in pleopod fanning when a variety of olfactory stimuli- food odors, predator odors, </text>
+<text top="446" left="85" width="557" height="16" font="5">odors from conspecifics- are presented. Since these mantis shrimp currents are also essential </text>
+<text top="463" left="85" width="557" height="16" font="5">for keeping oxygenated water moving through the burrow, it has not been possible to test </text>
+<text top="480" left="85" width="558" height="16" font="5">the effect of pleopod fanning currents on olfactory response by restraining the pleopods, </text>
+<text top="496" left="85" width="558" height="16" font="5">because this would quickly be lethal. However, since the benthic boundary layer near the </text>
+<text top="513" left="85" width="558" height="16" font="5">mantis shrimp burrows is typically on the order of 2-3 cm, it is likely that mantis shrimp </text>
+<text top="530" left="85" width="558" height="16" font="5">lurking in burrows would be less likely to detect, let alone respond to, olfactory stimuli in </text>
+<text top="547" left="85" width="193" height="16" font="5">the absence of pleopod fanning. </text>
+<text top="584" left="85" width="140" height="15" font="8"><b>6.2 Maxilliped pulsing</b></text>
+<text top="584" left="225" width="3" height="16" font="8"><b> </b></text>
+<text top="609" left="85" width="557" height="16" font="5">Maxilliped pulsing creates more local and more transient changes in water flow and thus in </text>
+<text top="626" left="85" width="559" height="16" font="5">chemical signal distribution. Maxilliped pulsing is often seen in burrow occupants as an </text>
+<text top="643" left="85" width="558" height="16" font="5">intruder is approaching the entrance.  The movement consists of a series of simultaneous </text>
+<text top="659" left="85" width="558" height="16" font="5">anterior extensions of multiple pairs of maxillipeds toward the intruder. The appendages </text>
+<text top="676" left="85" width="560" height="16" font="5">move in circular strokes, with cycle rate, extension distance, and the openness of the </text>
+<text top="693" left="85" width="559" height="16" font="5">maxilliped dactyls all increased the closer the male came to the entrance. Although dye </text>
+<text top="710" left="85" width="558" height="16" font="5">studies indicate that most of the resultant fluid motion is away from the occupant, small </text>
+<text top="727" left="85" width="559" height="16" font="5">return currents bring water from the side and across the female’s antennules (Caldwell </text>
+<text top="743" left="85" width="508" height="16" font="5">1992). Maxilliped pulses, therefore, may function to both send and to receive signals. </text>
+<text top="781" left="85" width="117" height="15" font="8"><b>6.3 Antennulation </b></text>
+<text top="781" left="202" width="3" height="16" font="8"><b> </b></text>
+<text top="806" left="85" width="560" height="16" font="5">Antennulation consists of the forward extension of the paired antennules coupled with </text>
+<text top="822" left="85" width="560" height="16" font="5">short, quick oscillations in the vertical plane (Caldwell, 1992). Antennulation typically </text>
+<text top="839" left="85" width="561" height="16" font="5">occurs as a male is approaching a cavity inhabited by a female, possibly to garner </text>
+<text top="856" left="85" width="558" height="16" font="5">information about the inhabitant’s reproductive status and to determine, if female, if the </text>
+<text top="873" left="85" width="556" height="16" font="5">occupant is a previous mate. Antennulation appears to be a subcategory of olfactory flicking </text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">266 </text>
+<text top="106" left="85" width="557" height="16" font="5">used by mantis shrimp in many investigatory situations, such as in response to a food odor </text>
+<text top="123" left="85" width="212" height="16" font="5">or in tracking an odor to its source. </text>
+<text top="161" left="85" width="133" height="15" font="8"><b>6.4 Olfactory flicking</b></text>
+<text top="160" left="218" width="3" height="16" font="8"><b> </b></text>
+<text top="185" left="85" width="560" height="16" font="5">Olfactory flicking describes an antennule odor sampling movement observed in many </text>
+<text top="201" left="85" width="560" height="16" font="5">crustaceans. In all crustaceans studied to date, including shrimp, mantis shrimp, crabs, </text>
+<text top="218" left="85" width="560" height="16" font="5">crayfish, and lobsters (Koehl, 2011), each flick has two parts: a rapid, outward lateral </text>
+<text top="234" left="85" width="559" height="16" font="5">movement followed by a slower return medial movement. The functional importance of </text>
+<text top="250" left="85" width="557" height="16" font="5">flicking, and indeed of all the other sensor movements described in this section, is based on </text>
+<text top="266" left="85" width="175" height="16" font="5">the idea of a boundary layer. </text>
+<text top="304" left="85" width="344" height="15" font="8"><b>6.5 A layer of slow-moving fluid coats the antennules </b></text>
+<text top="328" left="85" width="556" height="16" font="5">An antennule immersed in a fluid can be roughly  thought  of  as  having  layers  of  fluid </text>
+<text top="345" left="85" width="558" height="16" font="5">coating every surface. Because of the “no-slip” condition, the layer of fluid closest to the </text>
+<text top="361" left="85" width="558" height="16" font="5">antennule’s surface does not move with respect to that surface.  Thus, a velocity gradient </text>
+<text top="378" left="85" width="557" height="16" font="5">forms in the fluid between the antennule and the mainstream flow. Typically, the distance </text>
+<text top="394" left="85" width="557" height="16" font="5">from the surface to the point where the velocity is 99% of the mainstream velocity is called </text>
+<text top="411" left="85" width="230" height="16" font="5">the boundary layer (e.g., Vogel, 1994).<b> </b></text>
+<text top="448" left="85" width="546" height="15" font="8"><b>6.6 Olfactory sampling currents and movements “thin” the boundary layer, speed up </b></text>
+<text top="463" left="85" width="555" height="15" font="8"><b>the delivery of chemical cues, allow discrete sampling, and increase the probability of </b></text>
+<text top="479" left="85" width="112" height="15" font="8"><b>signal encounter </b></text>
+<text top="504" left="85" width="558" height="16" font="5">When the appendage moves rapidly through the fluid (in a flick or an antennulation), or </text>
+<text top="520" left="85" width="557" height="16" font="5">when the ambient flow is fast relative to the antennule (because of environmental flows or </text>
+<text top="536" left="85" width="557" height="16" font="5">animal-created currents such as pleopod fanning), the boundary layer of slow-moving fluid </text>
+<text top="553" left="85" width="557" height="16" font="5">coating the antennules gets thinner. The thickness of the boundary layer is very important </text>
+<text top="569" left="85" width="559" height="16" font="5">for olfaction because it can act as a barrier to odorant access to the aesthetascs. While </text>
+<text top="586" left="85" width="557" height="16" font="5">odorants can be very rapidly transported through the environment in currents (at speeds on </text>
+<text top="602" left="85" width="556" height="16" font="5">the order of centimeters to meters per second), the time required to cross the boundary layer </text>
+<text top="619" left="85" width="344" height="16" font="5">relies on the much slower process of molecular diffusion. </text>
+<text top="644" left="85" width="558" height="16" font="5">Thus, flicking can speed up the delivery of chemical cues to the surface of the aesthetasc. </text>
+<text top="660" left="85" width="557" height="16" font="5">Advection-diffusion models using data from dynamically scaled physical models of mantis </text>
+<text top="677" left="85" width="558" height="16" font="5">shrimp antennules indicate that odor molecules in filaments moving into the sensor array </text>
+<text top="693" left="85" width="557" height="16" font="5">arrive at the surfaces of the aesthetascs within milliseconds (Stacey et al., 2003). In contrast, </text>
+<text top="710" left="85" width="557" height="16" font="5">during the slower return stroke of the flick and during the stationary pause between flicks, </text>
+<text top="726" left="85" width="556" height="16" font="5">the just-sampled fluid remains in a layer coating the sensors, and new, odor-containing fluid </text>
+<text top="743" left="85" width="558" height="16" font="5">flows around rather than into the array of chemosensory hairs (Mead et al., 1999; Mead &amp; </text>
+<text top="759" left="85" width="558" height="16" font="5">Koehl, 2000). Thus, an antennule of a mantis shrimp takes a discrete sample in time and </text>
+<text top="775" left="85" width="557" height="16" font="5">space of its odor environment only during the flick outstroke (Mead &amp; Koehl, 2000, Stacey, </text>
+<text top="792" left="85" width="557" height="16" font="5">et al., 2003). This pattern of discrete sampling appears to be widespread among crustaceans </text>
+<text top="808" left="85" width="562" height="16" font="5">(Koehl, 2011). Other ventilatory mechanisms in other phyla have similar functions, </text>
+<text top="825" left="85" width="556" height="16" font="5">suggesting that the ability to take discrete samples of the chemical environment is integral to </text>
+<text top="841" left="85" width="557" height="16" font="5">the success of odor discrimination (Ache &amp; Young, 2005). Lastly, physical and mathematical </text>
+<text top="858" left="85" width="558" height="16" font="5">modeling of lobster flicks indicate that flicking increases the likelihood that the antennule </text>
+<text top="874" left="85" width="381" height="16" font="5">encounters peak concentrations of signal (Crimaldi et al., 2002). </text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1020" width="723">
+	<fontspec id="11" size="11" family="Times" color="#211c1c"/>
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">267 </text>
+<text top="106" left="85" width="266" height="15" font="8"><b>6.7 The frequency of sensor movements  </b></text>
+<text top="130" left="85" width="558" height="16" font="5">When a crustacean samples water with a flick outstroke, the movement of the antennule </text>
+<text top="147" left="85" width="559" height="16" font="5">changes the rate at which chemical signals are encountered. If the flicking is against the </text>
+<text top="163" left="85" width="557" height="16" font="5">mainstream flow, (i.e. the animal is angled upstream) the velocity of the antennules relative </text>
+<text top="179" left="85" width="557" height="16" font="5">to the ambient flow will be increased, so that the speed of signal encounter will increase. In </text>
+<text top="196" left="85" width="557" height="16" font="5">addition, since flicking into the direction of flow also increases the area of the plume that is </text>
+<text top="212" left="85" width="562" height="16" font="5">sampled, flicking antennules encounter more odor relative to stationary antennules </text>
+<text top="228" left="85" width="138" height="16" font="5">(Crimaldi et al., 2002).  </text>
+<text top="266" left="85" width="347" height="17" font="4"><b>7. Crustaceans are able to localize odor sources </b></text>
+<text top="292" left="85" width="558" height="16" font="5">Once crustaceans have detected chemical cues from distant sources, identified them, and </text>
+<text top="308" left="85" width="556" height="16" font="5">determined that they are of interest, they often have to navigate the odor plume to its source </text>
+<text top="325" left="85" width="560" height="16" font="5">to find food, habitat, or a mate. The difficulty of this task depends both on the flow </text>
+<text top="341" left="85" width="557" height="16" font="5">environment, which sculpts the odor signal, and on the sensory and locomotory abilities of </text>
+<text top="358" left="85" width="71" height="16" font="5">the animal. </text>
+<text top="358" left="156" width="486" height="16" font="11">Organisms tracking odors must sample the odor signal, usually by moving their </text>
+<text top="374" left="85" width="558" height="16" font="11">chemosensitive organs through the odor-containing medium, or by creating currents that </text>
+<text top="390" left="85" width="561" height="16" font="11">bring the odor to the chemosensors. Since odor plumes consist of fine filaments of </text>
+<text top="407" left="85" width="562" height="16" font="11">concentrated odor molecules interspersed with the surrounding fluid, and since the </text>
+<text top="423" left="85" width="557" height="16" font="11">filaments can be twisted along all axes and the entire plume can meander, the organism has </text>
+<text top="440" left="85" width="556" height="16" font="11">to continuously sample the plume to get updated information about possible locations of the </text>
+<text top="456" left="85" width="557" height="16" font="11">source. This can lead to more complicated tracking strategies than those found in organisms </text>
+<text top="473" left="85" width="161" height="16" font="11">orienting to light or sound.</text>
+<text top="473" left="246" width="395" height="16" font="5"> Various taxes and odor localization schemes have been proposed </text>
+<text top="489" left="85" width="285" height="16" font="5">to describe these odor plume search strategies.  </text>
+<text top="526" left="85" width="425" height="15" font="8"><b>7.1 Navigating using presence/absence of odor and flow direction </b></text>
+<text top="551" left="85" width="561" height="16" font="5">One of the simplest navigational strategies proposed is odor-gated rheotaxis. In this </text>
+<text top="567" left="85" width="561" height="16" font="5">strategy, an organism moves upstream as long as it detects odor above a threshold </text>
+<text top="584" left="85" width="558" height="16" font="5">concentration or frequency. This strategy requires only the ability to distinguish between </text>
+<text top="600" left="85" width="556" height="16" font="5">absence and presence, and the ability to determine the direction of flow. Behavioral data sets </text>
+<text top="617" left="85" width="557" height="16" font="5">in support of this idea include the fact that some crustaceans do not respond to odor cues in </text>
+<text top="633" left="85" width="334" height="16" font="5">the absence of flow (Weissburg &amp; Zimmer-Faust, 1993).<b> </b></text>
+<text top="670" left="85" width="415" height="15" font="8"><b>7.2 Navigating using time-averaging and temporal comparisons  </b></text>
+<text top="695" left="85" width="557" height="16" font="5">An organism searching odor sources using klinotaxis moves upstream as long as sequential </text>
+<text top="712" left="85" width="559" height="16" font="5">measurements show a stable or increasing concentration of odor. For this to work, each </text>
+<text top="728" left="85" width="559" height="16" font="5">measurement has to reflect a time-averaged signal, since instantaneous measurements of </text>
+<text top="745" left="85" width="558" height="16" font="5">odor concentration fluctuate over orders of magnitude. Most crustaceans do not appear to </text>
+<text top="762" left="85" width="558" height="16" font="5">sample long enough or fast enough in one location to be able to reliably estimate average </text>
+<text top="778" left="85" width="560" height="16" font="5">odor concentrations. This strategy has been hypothesized to be most effective in large, </text>
+<text top="795" left="85" width="374" height="16" font="5">slowly moving predators such as starfish, whelks, and catfish. </text>
+<text top="832" left="85" width="269" height="15" font="8"><b>7.3 Navigating using spatial comparisons </b></text>
+<text top="857" left="85" width="559" height="16" font="5">Many crustaceans appear to be using a variation of strategies in which the organism </text>
+<text top="874" left="85" width="559" height="16" font="5">compares inputs to more than one chemosensory structure, for example left and right </text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">268 </text>
+<text top="106" left="85" width="553" height="16" font="5">antennules. Removing the chemosensory structures on one or both sides limits plume-</text>
+<text top="123" left="85" width="559" height="16" font="5">tracking success in crayfish (Kraus-Epley &amp; Moore, 2002). In the version of the spatial </text>
+<text top="140" left="85" width="556" height="16" font="5">comparison  strategy  used  by  lobsters,  the  animal  appears  to  turn  slightly  to  the  sensor </text>
+<text top="157" left="85" width="560" height="16" font="5">that intercepted the highest chemical concentration. The lobster thus remains in the </text>
+<text top="173" left="85" width="562" height="16" font="5">“center” of the odor plume, where there is a greater likelihood of encountering </text>
+<text top="190" left="85" width="558" height="16" font="5">concentrated odor filaments (Weissburg, 2011). Other navigational strategies relying on </text>
+<text top="207" left="85" width="559" height="16" font="5">spatial comparisons seem to cause animals to move upstream when the left and right </text>
+<text top="224" left="85" width="558" height="16" font="5">chemosensory inputs are different. This mechanism could result in animals tracking the </text>
+<text top="241" left="85" width="557" height="16" font="5">“edges” of plumes, as blue crabs (Weissburg, 2011) and mantis shrimp (Mead et al., 2003) </text>
+<text top="257" left="85" width="557" height="16" font="5">appear to do, because the antennules closest to the plume “center” would have a greater </text>
+<text top="274" left="85" width="559" height="16" font="5">likelihood of encountering high concentration than the antennules sampling in a more </text>
+<text top="291" left="85" width="557" height="16" font="5">lateral position. Note that plume “center” and plume “edge” are statistical concepts only </text>
+<text top="308" left="85" width="212" height="16" font="5">evident after long time-averaging. </text>
+<text top="345" left="85" width="420" height="15" font="8"><b>7.4 Other navigational strategies used by very small crustaceans </b></text>
+<text top="370" left="85" width="559" height="16" font="5">While probably all organisms can detect some classes of chemicals, organisms that are </text>
+<text top="386" left="85" width="557" height="16" font="5">very small may have difficulty detecting the differences in concentration across space that </text>
+<text top="403" left="85" width="557" height="16" font="5">could assist in orienting to an odor source. It is possible that some very small crustaceans, </text>
+<text top="419" left="85" width="558" height="16" font="5">like bacteria, adopt a kinesis strategy in which they move in larger randomly oriented </text>
+<text top="435" left="85" width="561" height="16" font="5">steps when subject to low concentration, and smaller steps when exposed to high </text>
+<text top="452" left="85" width="557" height="16" font="5">concentration. Eventually, this ‘random walk’ positions them in areas of higher </text>
+<text top="468" left="85" width="556" height="16" font="5">concentration. Other microorganisms alter their rate of rotation, with similar effect (Vogel, </text>
+<text top="485" left="85" width="39" height="16" font="5">1994). </text>
+<text top="522" left="85" width="515" height="17" font="4"><b>8. What can we learn from animal sensors to apply to artificial sensors? </b></text>
+<text top="548" left="85" width="558" height="16" font="5">Table 1 sums up some of the factors affecting performance in crustacean chemical sensors </text>
+<text top="565" left="85" width="559" height="16" font="5">discussed in sections 4-7. The summary is broken into 1) structural factors affecting the </text>
+<text top="582" left="85" width="562" height="16" font="5">isolated sensor, flow factors affecting chemosensor performance, and animal factors </text>
+<text top="598" left="85" width="180" height="16" font="5">affecting sensor performance. </text>
+<text top="636" left="85" width="139" height="15" font="8"><b>8.1 Design principles </b></text>
+<text top="661" left="85" width="557" height="16" font="5">Studies of crustacean chemosensor design suggest that artificial chemical sensors should </text>
+<text top="677" left="85" width="559" height="16" font="5">be composed of multiple small elements, distributed spatially across the platform. The </text>
+<text top="694" left="85" width="559" height="16" font="5">sensors should be a sensitive as possible, and sample at a high frequency, in order to </text>
+<text top="711" left="85" width="562" height="16" font="5">detect the maximum number of encountered odor filaments. The ability to make </text>
+<text top="728" left="85" width="557" height="16" font="5">simultaneous spatial comparisons between at least two sensors facilitates plume tracking </text>
+<text top="745" left="85" width="134" height="16" font="5">(Webster et al., 2001). </text>
+<text top="782" left="85" width="143" height="15" font="8"><b>8.2 Role of movement </b></text>
+<text top="807" left="85" width="561" height="16" font="5">Artificial sensors will probably be the most effective if they can move through the </text>
+<text top="824" left="85" width="562" height="16" font="5">environment or have the fluid medium flow past them. A repetitive, asymmetrical </text>
+<text top="840" left="85" width="559" height="16" font="5">movement analogous to the ubiquitous crustacean flick will 1) hasten the arrival of the </text>
+<text top="857" left="85" width="558" height="16" font="5">chemicals at the sensor array, 2) facilitate the creation of discrete samples, and 3) increase </text>
+<text top="874" left="85" width="175" height="16" font="5">the size of the sample space.  </text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">269 </text>
+<text top="107" left="89" width="460" height="16" font="8"><b>Factor Effect  Rationale </b></text>
+<text top="124" left="89" width="230" height="16" font="8"><b>Factors affecting sensor performance </b></text>
+<text top="141" left="89" width="117" height="16" font="5">Number of sensors </text>
+<text top="141" left="231" width="121" height="16" font="5">More sensors better </text>
+<text top="141" left="386" width="246" height="16" font="5">Redundancy, can detect more chemicals, </text>
+<text top="158" left="386" width="216" height="16" font="5">accuracy, range fractionation, if can </text>
+<text top="175" left="386" width="231" height="16" font="5">compare between arrays can probably </text>
+<text top="192" left="386" width="212" height="16" font="5">navigate to source more effectively </text>
+<text top="209" left="89" width="120" height="16" font="5">Size of sensor array </text>
+<text top="209" left="231" width="115" height="16" font="5">Bigger array better </text>
+<text top="209" left="386" width="240" height="16" font="5">Can intercept more signals; many small </text>
+<text top="226" left="386" width="244" height="16" font="5">sensors better than one big one, to avoid </text>
+<text top="243" left="386" width="102" height="16" font="5">spatial smearing </text>
+<text top="260" left="89" width="107" height="16" font="5">Ability to resolve </text>
+<text top="277" left="89" width="102" height="16" font="5">discrete samples </text>
+<text top="260" left="231" width="57" height="16" font="5">Essential </text>
+<text top="260" left="386" width="189" height="16" font="5">Can potentially make temporal </text>
+<text top="277" left="386" width="200" height="16" font="5">comparisons, necessary for some </text>
+<text top="294" left="386" width="132" height="16" font="5">navigational schemes </text>
+<text top="311" left="89" width="111" height="16" font="5">Sample frequency </text>
+<text top="311" left="231" width="112" height="16" font="5">Higher frequency  </text>
+<text top="311" left="386" width="241" height="16" font="5">Higher frequency leads to less temporal </text>
+<text top="328" left="386" width="204" height="16" font="5">smearing, so more odor filaments </text>
+<text top="345" left="386" width="78" height="16" font="5">encountered </text>
+<text top="362" left="89" width="313" height="16" font="8"><b>Factors affecting flow and/or odor plume structure </b></text>
+<text top="379" left="89" width="103" height="16" font="5">Ambient current </text>
+<text top="379" left="231" width="100" height="16" font="5">Can be essential </text>
+<text top="379" left="386" width="169" height="16" font="5">Current aids in establishing </text>
+<text top="396" left="386" width="83" height="16" font="5">directionality </text>
+<text top="414" left="89" width="108" height="16" font="5">Current or sensor </text>
+<text top="430" left="89" width="129" height="16" font="5">movement produced </text>
+<text top="447" left="89" width="63" height="16" font="5">by animal </text>
+<text top="414" left="231" width="395" height="16" font="5">Aids in signal reception  Can improve chemical cue reception by </text>
+<text top="430" left="386" width="236" height="16" font="5">favoring advective transport over slow </text>
+<text top="447" left="386" width="249" height="16" font="5">molecular diffusion, but will affect signal </text>
+<text top="464" left="386" width="79" height="16" font="5">downstream </text>
+<text top="481" left="89" width="109" height="16" font="5">Turbulent mixing </text>
+<text top="481" left="231" width="96" height="16" font="5">Can increase or </text>
+<text top="498" left="231" width="122" height="16" font="5">decrease navigation </text>
+<text top="515" left="231" width="47" height="16" font="5">success </text>
+<text top="481" left="386" width="208" height="16" font="5">Turbulent mixing increases plume </text>
+<text top="498" left="386" width="230" height="16" font="5">volume, increasing the likelihood that </text>
+<text top="515" left="386" width="206" height="16" font="5">animals will encounter signal, but </text>
+<text top="532" left="386" width="227" height="16" font="5">decreasing signal strength via mixing </text>
+<text top="549" left="89" width="125" height="16" font="5">Substrate roughness </text>
+<text top="549" left="231" width="96" height="16" font="5">Can increase or </text>
+<text top="566" left="231" width="122" height="16" font="5">decrease navigation </text>
+<text top="583" left="231" width="47" height="16" font="5">success </text>
+<text top="549" left="386" width="203" height="16" font="5">Turbulence increases as substrate </text>
+<text top="566" left="386" width="238" height="16" font="5">roughness increases; this can positively </text>
+<text top="583" left="386" width="236" height="16" font="5">or negatively affect a sensor’s ability to </text>
+<text top="600" left="386" width="79" height="16" font="5">detect signal </text>
+<text top="617" left="89" width="249" height="16" font="8"><b>Factors affecting odor plume navigation </b></text>
+<text top="634" left="89" width="75" height="16" font="5">Animal size </text>
+<text top="634" left="231" width="120" height="16" font="5">Large animals have </text>
+<text top="651" left="231" width="143" height="16" font="5">better spatial sampling  </text>
+<text top="634" left="386" width="195" height="16" font="5">Bigger animals can use spatially </text>
+<text top="651" left="386" width="117" height="16" font="5">distributed sensors </text>
+<text top="668" left="89" width="102" height="16" font="5">Animal mobility </text>
+<text top="668" left="231" width="137" height="16" font="5">More search strategies </text>
+<text top="685" left="231" width="104" height="16" font="5">available to slow </text>
+<text top="702" left="231" width="50" height="16" font="5">animals </text>
+<text top="668" left="386" width="222" height="16" font="5">Slow animals may be able to employ </text>
+<text top="685" left="386" width="94" height="16" font="5">time-averaging </text>
+<text top="720" left="89" width="117" height="16" font="5">Animal antennules </text>
+<text top="736" left="89" width="49" height="16" font="5">flicking </text>
+<text top="720" left="231" width="105" height="16" font="5">Facilitates plume </text>
+<text top="736" left="231" width="53" height="16" font="5">tracking </text>
+<text top="720" left="386" width="169" height="16" font="5">Increases encounter of peak </text>
+<text top="736" left="386" width="85" height="16" font="5">concentration </text>
+<text top="760" left="85" width="396" height="16" font="5">Table 1. Factors affecting crustacean chemical sensor performance </text>
+<text top="797" left="85" width="370" height="15" font="8"><b>8.3 Applications in medical, technical and military realms </b></text>
+<text top="822" left="85" width="557" height="16" font="5">There are many potential applications of knowledge about crustacean chemosensors to the </text>
+<text top="839" left="85" width="565" height="16" font="5">medical, technical, and military fields. Recently, several groups have developed </text>
+<text top="856" left="85" width="557" height="16" font="5">autonomous, chemical sensing robots that can track odors using strategies derived (in part) </text>
+<text top="872" left="85" width="557" height="16" font="5">from crustaceans (Grasso, 2001, Ishida et al., 2001). Large scale devices could work in open </text>
+</page>
+<page number="14" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">270 </text>
+<text top="106" left="85" width="559" height="16" font="5">environments to find and destroy unexploded mines or repair leaks of toxic substances. </text>
+<text top="123" left="85" width="557" height="16" font="5">Small scale devices could potentially detect and identify odors of life-threatening chemicals </text>
+<text top="140" left="85" width="559" height="16" font="5">in enclosed hospital environments, or even within the human body. Other applications </text>
+<text top="157" left="85" width="558" height="16" font="5">include quality control in industrial settings. Most of these developments have been based </text>
+<text top="173" left="85" width="557" height="16" font="5">on developing sensors appropriate for the task at hand, and combining them with the tactic </text>
+<text top="190" left="85" width="249" height="16" font="5">strategies employed by living organisms. </text>
+<text top="228" left="85" width="209" height="15" font="8"><b>8.3.1 Human health applications </b></text>
+<text top="253" left="85" width="557" height="16" font="5">Pathfinding using chemical cues is an important process with many applications in normal </text>
+<text top="269" left="85" width="560" height="16" font="5">growth and development. For instance, the location of certain chemoattractants in the </text>
+<text top="286" left="85" width="557" height="16" font="5">extracellular matrix (ECM) can be critical for the appropriate laying down of new neurons </text>
+<text top="303" left="85" width="561" height="16" font="5">(neurogenesis) and blood vessels (angiogenesis). The subversion of these processes is </text>
+<text top="320" left="85" width="557" height="16" font="5">implicated in some forms of cancer metastasis, and in many other diseases and syndromes, </text>
+<text top="336" left="85" width="560" height="16" font="5">including atherosclerosis, arthritis, infertility, and tooth decay. If we better understand </text>
+<text top="353" left="85" width="561" height="16" font="5">sensors and odor trail navigation, we might be more equipped to predict and treat </text>
+<text top="370" left="85" width="561" height="16" font="5">malfunctions of chemical sensor operation in the body. Furthermore, the body emits </text>
+<text top="387" left="85" width="560" height="16" font="5">characteristic odors via the skin, blood, urine, and breath. These odors reflect genetics, </text>
+<text top="404" left="85" width="558" height="16" font="5">physiological state, diet, metabolic condition, age, the immune response, and the effects of </text>
+<text top="420" left="85" width="557" height="16" font="5">stress by virtue of VOCs (volatile organic compounds). Typically, there is no one particular </text>
+<text top="437" left="85" width="557" height="16" font="5">marker of state or disease, but changes in the relative abundances of key VOC components. </text>
+<text top="454" left="85" width="557" height="16" font="5">For example, VOC changes due to schizophrenia can be detected in skin odor, alterations in </text>
+<text top="471" left="85" width="558" height="16" font="5">blood VOCs may indicate liver cancer, breath VOCs may predict diabetes, breast cancer, </text>
+<text top="487" left="85" width="558" height="16" font="5">and cystic fibrosis, and urine VOCs may help diagnose urinary tract infections (Oh, et al., </text>
+<text top="504" left="85" width="557" height="16" font="5">2011). It has been possible to study at least some of these VOCs using gas chromatography, </text>
+<text top="521" left="85" width="557" height="16" font="5">mass spectrophometry and other methods, but these techniques have been time-consuming </text>
+<text top="538" left="85" width="556" height="16" font="5">and expensive. Electronic noses are small, portable, cheaper to use once developed, and give </text>
+<text top="555" left="85" width="129" height="16" font="5">results more quickly. </text>
+<text top="580" left="85" width="497" height="16" font="8"><b>8.3.1.1 Structure of electronic and bioelectrical noses for biomedical applications </b></text>
+<text top="606" left="85" width="557" height="16" font="5">Currently, there are research and commercially available electronic noses based on a variety </text>
+<text top="622" left="85" width="553" height="16" font="5">of nanotechnologies including metal oxide semiconductor sensors, conducting polymer-</text>
+<text top="639" left="85" width="557" height="16" font="5">based sensors, piezoelectric sensors, and optical sensors, described beautifully in Oh, et al. </text>
+<text top="656" left="85" width="557" height="16" font="5">(2011). A new generation of bioelectrical sensors is also being developed. These bioelectrical </text>
+<text top="673" left="85" width="561" height="16" font="5">noses consist of harvested or cultured cells or odorant receptors grown or otherwise </text>
+<text top="689" left="85" width="559" height="16" font="5">attached to microchips that respond with an electrical output as part of the odor signal </text>
+<text top="706" left="85" width="559" height="16" font="5">transduction process. Both the electronic noses and bioelectrical noses represent areas of </text>
+<text top="723" left="85" width="557" height="16" font="5">active research. Two of the most promising health applications using electrical noses will be </text>
+<text top="740" left="85" width="105" height="16" font="5">described below. </text>
+<text top="765" left="85" width="279" height="16" font="8"><b>8.3.1.2 The detection of bacterial populations </b></text>
+<text top="791" left="85" width="556" height="16" font="5">Dutta et al. have used an electronic nose consisting of 32 black carbon composite conducting </text>
+<text top="808" left="85" width="559" height="16" font="5">polymer sensors to distinguish between populations of bacteria (2002). When VOCs are </text>
+<text top="824" left="85" width="558" height="16" font="5">introduced to the system, any of the 32 individual sensors that bind to any of the VOCs </text>
+<text top="841" left="85" width="557" height="16" font="5">swell and change their conductivity. These changes create a combinatorial profile in the 32 </text>
+<text top="858" left="85" width="558" height="16" font="5">sensors that can be analyzed via principle component analysis to identify specific species </text>
+<text top="875" left="85" width="557" height="16" font="5">and types of bacteria. One of the most interesting (of many!) applications of this sensor has </text>
+</page>
+<page number="15" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">271 </text>
+<text top="106" left="85" width="557" height="16" font="5">been to detect and distinguish MRSA (methicillin resistant <i>Staphylococcus aureus</i>) and MSSA </text>
+<text top="123" left="85" width="557" height="16" font="5">(methicillin susceptible <i>S. aureus</i>; Dutta et al., 2005). In this report, swabs from infected areas </text>
+<text top="140" left="85" width="558" height="16" font="5">of  patients  were  placed  in  15  ml  vials  for  5 minutes, to allow the aromatic compounds to </text>
+<text top="157" left="85" width="558" height="16" font="5">volatilize. The resulting sa,ple was then “sniffed” by the electronic nose. Using innovative </text>
+<text top="173" left="85" width="558" height="16" font="5">data clustering techniques, Dutta et al. (2005) were able to identify bacterial classes with </text>
+<text top="190" left="85" width="560" height="16" font="5">very high accuracy. If placed in hospital ventilation systems, this electronic nose could </text>
+<text top="207" left="85" width="475" height="16" font="5">theoretically detect and prevent contamination of other patients or equipment.  </text>
+<text top="232" left="85" width="339" height="16" font="8"><b>8.3.1.3 The use of electronic noses to detect lung cancer </b></text>
+<text top="258" left="85" width="557" height="16" font="5">Peng et al. (2009) have developed an electronic nose based on cross-reactive chemiresisters </text>
+<text top="275" left="85" width="557" height="16" font="5">in which the organic molecules that respond to particular odorants are adsorbed onto gold </text>
+<text top="292" left="85" width="562" height="16" font="5">nanoparticles. The gold/organic film lies between adjacent electrodes; the resistance </text>
+<text top="308" left="85" width="557" height="16" font="5">between the electrodes changes in response to odorant binding, which probably causes the </text>
+<text top="325" left="85" width="556" height="16" font="5">film to swell. The sensors were able to distinguish between breath samples from healthy and </text>
+<text top="342" left="85" width="410" height="16" font="5">cancerous individuals with &gt; 86% accuracy and &gt;90% repeatability.  </text>
+<text top="379" left="85" width="205" height="15" font="8"><b>8.3.2 Industrial and military use </b></text>
+<text top="404" left="85" width="558" height="16" font="5">Artificial noses are also used to monitor VOCs in industrial settings. Recent uses include </text>
+<text top="421" left="85" width="560" height="16" font="5">monitoring the quality of tea (Dutta et al., 2003), and checking pork products for the </text>
+<text top="439" left="85" width="558" height="16" font="5">presence of boar taint (Wäcker et al., 2010). The electronic noses used by Dutta and others </text>
+<text top="456" left="85" width="558" height="16" font="5">are typically used in a stationary manner, with the sampled air drawn into the apparatus </text>
+<text top="473" left="85" width="556" height="16" font="5">much like a vertebrate sniff. Other artificial chemical sensors are being developed for robotic </text>
+<text top="490" left="85" width="558" height="16" font="5">platforms, so that they could not only identify chemical compounds, but search and find </text>
+<text top="507" left="85" width="478" height="16" font="5">them, much as insects and crustaceans follow odor plumes in the environment.  </text>
+<text top="533" left="85" width="345" height="16" font="8"><b>8.3.2.1 Autonomous electronic nose searching platforms </b></text>
+<text top="558" left="85" width="556" height="16" font="5">In addition to the high sensitivity, selectivity, and rapidity of response that are optimal in all </text>
+<text top="576" left="85" width="557" height="16" font="5">electronic noses, autonomous sensors expected to move freely in an environment must also </text>
+<text top="593" left="85" width="558" height="16" font="5">be small, consume power efficiently, and be robust enough to withstand the elements and </text>
+<text top="610" left="85" width="559" height="16" font="5">any other hazards. Common approaches for these sensors include tin oxide sensors and </text>
+<text top="627" left="85" width="558" height="16" font="5">quartz microbalance sensors (Russell, 2001). Tin oxide sensors work on the principle that </text>
+<text top="644" left="85" width="560" height="16" font="5">when the heated sensor encounters reducing gases, resistance decreases. Quartz crystal </text>
+<text top="661" left="85" width="558" height="16" font="5">microbalances function by detecting changes in crystal resonant frequency as the chemical </text>
+<text top="678" left="85" width="556" height="16" font="5">of interest is adsorbed onto the quartz. Robotic platforms equipped with at least two of these </text>
+<text top="695" left="85" width="558" height="16" font="5">sensors and a inward drawing fan to facilitate odor interception have been programmed </text>
+<text top="713" left="85" width="557" height="16" font="5">with variations on the plume searching and plume tracking algorithms used by crustaceans </text>
+<text top="730" left="85" width="562" height="16" font="5">described in section 7.3. (Kowadlo and Russell, 2008). These robots were 70%-100% </text>
+<text top="747" left="85" width="558" height="16" font="5">successful, depending on the nature of the flow field, the odor source, the particular robot </text>
+<text top="764" left="85" width="280" height="16" font="5">platform, and the signal processing algorithm. </text>
+<text top="790" left="85" width="559" height="16" font="5">Encouraged by the success of trained dogs at finding explosives, researchers are excited </text>
+<text top="807" left="85" width="557" height="16" font="5">about the possibility to developing odor-searching robots that could find traces of TNT and </text>
+<text top="824" left="85" width="557" height="16" font="5">other explosives. These robots could potentially find and signal the presence of unexploded </text>
+<text top="840" left="85" width="559" height="16" font="5">ordinance, old abandoned mines, and other hazards (Russell, 2001). Other potential uses </text>
+<text top="857" left="85" width="561" height="16" font="5">include implants or roving sensors that could warn of the presence of natural gas, </text>
+<text top="874" left="85" width="560" height="16" font="5">radioactive material, or could monitor water quality, especially during the clean-up of </text>
+</page>
+<page number="16" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">272 </text>
+<text top="106" left="85" width="556" height="16" font="5">hazardous materials. In addition to the unexploded ordinance application mentioned above, </text>
+<text top="123" left="85" width="557" height="16" font="5">field-deployed sensors could also help to detect the presence of biological toxins and other </text>
+<text top="140" left="85" width="560" height="16" font="5">agents of war. These latter applications would have the advantage of limiting human </text>
+<text top="157" left="85" width="558" height="16" font="5">exposure to potentially lethal situations. In an interesting, iterative relationship, one of the </text>
+<text top="173" left="85" width="557" height="16" font="5">most potent applications of the artificial sensors coupled with robotic, motile platforms is to </text>
+<text top="190" left="85" width="559" height="16" font="5">test the search algorithms predicted from animal behavior. This approach has been used </text>
+<text top="207" left="85" width="324" height="16" font="5">effectively by Grasso (2001), Ishida (2001), and others. </text>
+<text top="245" left="85" width="143" height="17" font="4"><b>9. Future directions </b></text>
+<text top="271" left="85" width="557" height="16" font="5">While much progress has been made, much work remains to be done, in terms of both basic </text>
+<text top="288" left="85" width="173" height="16" font="5">science and its applications.  </text>
+<text top="325" left="85" width="116" height="15" font="8"><b>9.1 Basic science </b></text>
+<text top="350" left="85" width="561" height="16" font="5">From a basic research perspective, the chemicals used in olfactory signaling are still </text>
+<text top="366" left="85" width="558" height="16" font="5">unknown, in all but a few cases. Furthermore, it is suspected that in most cases, the cues </text>
+<text top="382" left="85" width="559" height="16" font="5">consist of mixtures of compounds. The ways in which nuanced physiological condition </text>
+<text top="399" left="85" width="557" height="16" font="5">could be communicated via small alterations in ratios of mixtures will no doubt be a fruitful </text>
+<text top="415" left="85" width="558" height="16" font="5">area of future study. Another important future topic for both basic and applied scientists </text>
+<text top="431" left="85" width="561" height="16" font="5">should be the role of the multiple sensory modalities used simultaneously by many </text>
+<text top="447" left="85" width="558" height="16" font="5">crustaceans and available for sensor designers. For instance, mantis shrimp probably use </text>
+<text top="464" left="85" width="559" height="16" font="5">vision as well as their sense of smell, at least when light conditions are favorable, and </text>
+<text top="480" left="85" width="473" height="16" font="5">copepods and crabs rely on hydromechanical cues as well as olfactory signals.  </text>
+<text top="505" left="85" width="559" height="16" font="5">Other basic questions involve the role of deception using chemical signals, the energetic </text>
+<text top="522" left="85" width="558" height="16" font="5">costs to chemical signaling, and the social costs of chemical signaling. These questions are </text>
+<text top="538" left="85" width="557" height="16" font="5">connected. For instance, when is it against an organism’s interest for information about its </text>
+<text top="554" left="85" width="344" height="16" font="5">physiological state to be broadcast into the environment? </text>
+<text top="592" left="85" width="130" height="15" font="8"><b>9.2 Applied aspects </b></text>
+<text top="616" left="85" width="557" height="16" font="5">While the chemical sensors deployed in a industrial or hospital setting may face predictable </text>
+<text top="632" left="85" width="559" height="16" font="5">environments, one of the biggest challenges to using chemical sensors in the field is the </text>
+<text top="648" left="85" width="559" height="16" font="5">unpredictability of the flow environment. Many features of the odor plume- peak odor </text>
+<text top="665" left="85" width="561" height="16" font="5">concentrations, filament width, filament sharpness, etc. vary both with environmental </text>
+<text top="681" left="85" width="556" height="16" font="5">factors and with distance from the source. Different odor plume tracking strategies used by </text>
+<text top="697" left="85" width="559" height="16" font="5">crustaceans may work best under different flow conditions, and some crustaceans even </text>
+<text top="714" left="85" width="558" height="16" font="5">seem to vary their strategy based on odor plume structure (Grasso, 2001). Thus, it will be </text>
+<text top="730" left="85" width="557" height="16" font="5">important to develop autonomous devices that can flexibly and intelligently adopt the best </text>
+<text top="746" left="85" width="557" height="16" font="5">navigational strategy given the task, the habitat and the available odor signal, even more so </text>
+<text top="763" left="85" width="559" height="16" font="5">than as described in Kowadlo and Russell (2008). Lastly, the ability to deploy different </text>
+<text top="779" left="85" width="558" height="16" font="5">sensors given the exigencies of the environment would be an asset. Here, too, the use of </text>
+<text top="795" left="85" width="545" height="16" font="5">multiple sensory modalities should be a future topic (Grasso, 2001, Grasso &amp; Atema, 2002). </text>
+<text top="833" left="85" width="119" height="17" font="4"><b>10. Conclusions </b></text>
+<text top="859" left="85" width="560" height="16" font="5">In conclusion, crustacean chemical sensors are remarkably effective structures that are </text>
+<text top="876" left="85" width="557" height="16" font="5">essential in helping these animals complete a variety of critical ecological tasks. By studying </text>
+</page>
+<page number="17" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">273 </text>
+<text top="106" left="85" width="559" height="16" font="5">crustacean chemical sensors, we can both contribute to the understanding of important </text>
+<text top="123" left="85" width="558" height="16" font="5">biological questions and provide inspiration to engineers trying to create artificial sensors </text>
+<text top="140" left="85" width="377" height="16" font="5">that can carry out important and dangerous tasks for humans.  </text>
+<text top="178" left="85" width="170" height="17" font="4"><b>11. Acknowledgements </b></text>
+<text top="204" left="85" width="558" height="16" font="5">I am grateful to InTech for the invitation to submit this chapter, to Denison University for </text>
+<text top="221" left="85" width="561" height="16" font="5">funding during part of the writing period of this chapter, to the Marine Biological </text>
+<text top="238" left="85" width="559" height="16" font="5">Laboratory for access to their wonderful library holdings, and to Breithaupt and Thiel’s </text>
+<text top="254" left="85" width="361" height="16" font="5">book <i>Chemical communication in crustaceans</i>, a great resource. </text>
+<text top="292" left="85" width="110" height="17" font="4"><b>12. References </b></text>
+<text top="318" left="85" width="556" height="16" font="5">Ache, B. W. &amp; Young, J. R. (2005). Olfaction: diverse species, conserved principles. <i>Neuron</i> </text>
+<text top="334" left="138" width="100" height="16" font="5">Vol. 48: 417-430. </text>
+<text top="350" left="85" width="556" height="16" font="5">Aggio, J.  &amp; Derby C. D. (2011) Chemical communication in lobsters. Chapter 12 in <i>Chemical </i></text>
+<text top="366" left="138" width="504" height="16" font="10"><i>communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 239-256, Springer </text>
+<text top="381" left="138" width="194" height="16" font="5">ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="397" left="85" width="557" height="16" font="5">Atema, J. &amp; Voigt, R. (1995) Behavior and sensory biology. In <i>Biology of the Lobster Homarus </i></text>
+<text top="413" left="138" width="401" height="16" font="10"><i>americanus</i> (ed JR Factor), pp. 313- 348. San Diego: Academic Press. </text>
+<text top="429" left="85" width="556" height="16" font="5">Bauer,  R. T. (2011). Chemical communication in decapods shrimp. Chapter 9 in <i>Chemical </i></text>
+<text top="445" left="138" width="504" height="16" font="10"><i>communication in crustaceans. </i>Eds T. Breithaupt and M. Thiel. Pp. 277-296, Springer </text>
+<text top="461" left="138" width="194" height="16" font="5">ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="477" left="85" width="556" height="16" font="5">Breithaupt, T. (2001). Fan Organs of Crayfish Enhance Chemical Information Flow. <i>Biol. Bull. </i></text>
+<text top="493" left="138" width="79" height="16" font="5">200: 150-154. </text>
+<text top="509" left="85" width="556" height="16" font="5">Breithaupt, T (2011). Chemical communication in crayfish. Chapter 13 in <i>Chemical </i></text>
+<text top="525" left="138" width="504" height="16" font="10"><i>communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 257-276, Springer </text>
+<text top="541" left="138" width="194" height="16" font="5">ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="557" left="85" width="559" height="16" font="5">Buck, L., &amp; Axel, R. (1991). A novel multigene family may encode odorant receptors: a </text>
+<text top="573" left="138" width="319" height="16" font="5">molecular basis for odor recognition. <i>Cell</i> 65:175–187. </text>
+<text top="589" left="85" width="559" height="16" font="5">Caldwell, R. L. (1979). Cavity occupation and defensive behaviour in the mantis shrimp </text>
+<text top="605" left="138" width="507" height="16" font="5">Gonodactylus festae: evidence for chemically mediated individual recognition. </text>
+<text top="620" left="138" width="150" height="16" font="10"><i>Anim. Behav</i>.<i> </i>27: 194-201. </text>
+<text top="636" left="85" width="556" height="16" font="5">Caldwell, R. L. (1985). A test of individual recognition in the mantis shrimp <i>Gonodactylus </i></text>
+<text top="652" left="138" width="187" height="16" font="10"><i>festae</i>. <i>Anim. Behav. </i>33: 101-106. </text>
+<text top="668" left="85" width="560" height="16" font="5">Caldwell, R. L. (1992). Recognition, signaling, and reduced aggression between former </text>
+<text top="684" left="138" width="279" height="16" font="5">mates in a stomatopod. <i>Anim. Behav</i>. 44: 11-19. </text>
+<text top="700" left="85" width="559" height="16" font="5">Caprio, J. (1977). Electrophysiological distinctions between the taste and smell of amino </text>
+<text top="716" left="138" width="222" height="16" font="5">acids in catfish. Nature 266, 850–851. </text>
+<text top="732" left="85" width="560" height="16" font="5">Crimaldi, J. P. &amp; Koseff, J. R. (2001) High-resolution measurements of the spatial and </text>
+<text top="748" left="138" width="433" height="16" font="5">temporal scalar structure of a turbulent plume. <i>Exp. in Fluids</i> 31, 90-102.  </text>
+<text top="764" left="85" width="556" height="16" font="5">Crimaldi, J. P., Koehl, M. A. R., Koseff, J. R. (2002) Effects of the resolution and kinematics of </text>
+<text top="780" left="138" width="505" height="16" font="5">olfactory appendages on the interception of chemical signals in a turbulent odor </text>
+<text top="796" left="138" width="196" height="16" font="5">plume. <i>Env. Fluid Mech</i>. 2, 35-63. </text>
+<text top="812" left="85" width="559" height="16" font="5">Derby, C.D., &amp; Steullet, P. (2001). Why do animals have so many receptors? The role of </text>
+<text top="828" left="138" width="409" height="16" font="5">multiple chemosensors in animal perception. <i>Biol. Bull. </i> 200: 211-215 </text>
+<text top="844" left="85" width="556" height="16" font="5">Dutta, R., Hines, E. L., Gardner, J. W., Boilot, P. (2002). Bacteria classification using Cyranose </text>
+<text top="860" left="138" width="274" height="16" font="5">320 electronic nose. <i>Biomed. Eng. Online</i> 1:1–7. </text>
+</page>
+<page number="18" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">274 </text>
+<text top="106" left="85" width="557" height="16" font="5">Dutta, R., Kashwan, K. R., Bhuyan, M., Hines, E. L. &amp; Gardner, J. W. (2003) Electronic nose </text>
+<text top="122" left="138" width="372" height="16" font="5">based tea quality standardization. <i>Neural Networks</i> 16: 847-853 </text>
+<text top="138" left="85" width="557" height="16" font="5">Dutta, R. (2005) Identification of Staphylococcus aureus infections in hospital environment: </text>
+<text top="154" left="138" width="412" height="16" font="5">electronic nose based approach. <i>Sensors and Actuators</i> <i>B</i> 109: 355–362. </text>
+<text top="169" left="85" width="558" height="16" font="5">Finelli, C. M. (2000). Velocity and concentration distributions in turbulent odor plumes in </text>
+<text top="185" left="138" width="496" height="16" font="5">the presence of vegetation mimics: A flume study <i>Mar. Ecol. Prog. Ser. </i>207: 297-309. </text>
+<text top="201" left="85" width="561" height="16" font="5">Gherardi F. &amp; Tricarico, E (2011). Chemical ecology and social behavior of anomura. </text>
+<text top="217" left="138" width="503" height="16" font="5">Chapter 15 in <i>Chemical communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. </text>
+<text top="233" left="138" width="324" height="16" font="5">Pp. 297-312, Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="249" left="85" width="557" height="16" font="5">Gleeson, R.A., Carr, W.E.S., &amp; Trapido-Rosenthal, H.G. (1993). Morphological characteristics </text>
+<text top="265" left="138" width="504" height="16" font="5">facilitating stimulus access and removal in the olfactory organ of the spiny lobster, </text>
+<text top="281" left="138" width="380" height="16" font="10"><i>Panulirus argus</i>: insight from the design. <i>Chem. Senses</i> 18: 67–75. </text>
+<text top="297" left="85" width="557" height="16" font="5">Gomez, G. &amp; Atema, J. (1996a). Temporal resolution in olfaction: stimulus integration time </text>
+<text top="313" left="138" width="345" height="16" font="5">of lobster chemoreceptor cells. <i>J. Exp. Biol. </i>199: 1771-1779. </text>
+<text top="329" left="85" width="557" height="16" font="5">Gomez, G. &amp; Atema, J. (1996b). Temporal resolution in olfaction II: Time course of recovery </text>
+<text top="345" left="138" width="439" height="16" font="5">from adaptation in lobster chemoreceptor cells. <i>J.</i> <i>Neurobiol. </i>76: 1340-1343 </text>
+<text top="361" left="85" width="557" height="16" font="5">Gomez, G., Voigt, R., &amp; Atema, J. (1999). Temporal resolution in olfaction III: flicker fusion </text>
+<text top="377" left="138" width="510" height="16" font="5">and concentration-dependent synchronization with stimulus pulse trains of </text>
+<text top="393" left="138" width="503" height="16" font="5">antennular chemoreceptor cells in the American lobster. <i>J. Comp. Physiol. A </i>185: </text>
+<text top="409" left="138" width="52" height="16" font="5">427-436. </text>
+<text top="424" left="85" width="565" height="16" font="5">Grasso, F. (2001). Invertebrate-Inspired Sensory-Motor Systems and Autonomous, </text>
+<text top="440" left="138" width="323" height="16" font="5">Olfactory-Guided Exploration<i> Biol. Bull. </i>200: 160–168. </text>
+<text top="456" left="85" width="560" height="16" font="5">Grasso, F. &amp; Atema J (2002) Integration of flow and chemical sensing for guidance of </text>
+<text top="472" left="138" width="508" height="16" font="5">autonomous marine robots in turbulent flows. <i>Journal of Environmental Fluid </i></text>
+<text top="488" left="138" width="122" height="16" font="10"><i>Mechanics</i> 2: 95–114. </text>
+<text top="504" left="85" width="560" height="16" font="5">Hallberg, E. and Skog, M. (2011). Chemosensory sensilla in crustaceans. Chapter 6 in </text>
+<text top="520" left="138" width="504" height="16" font="10"><i>Chemical communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 103-121, </text>
+<text top="536" left="138" width="249" height="16" font="5">Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="552" left="85" width="556" height="16" font="5">Hardege, J. D. &amp; Terschak, J. A. (2011). Identification of crustacean sex pheromones. Chapter </text>
+<text top="568" left="138" width="500" height="16" font="5">19 in <i>Chemical communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 373-</text>
+<text top="584" left="138" width="276" height="16" font="5">392, Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="600" left="85" width="556" height="16" font="5">Hay, M. E. (2011). Crustaceans as powerful models in aquatic chemical ecology. Chapter 3 in </text>
+<text top="616" left="138" width="506" height="16" font="10"><i>Chemical communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 41-62, </text>
+<text top="632" left="138" width="249" height="16" font="5">Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="648" left="85" width="560" height="16" font="5">Hazlett, B. A. (2011). Chemical cues and reducing the risk of predation. Chapter 18 in </text>
+<text top="664" left="138" width="504" height="16" font="10"><i>Chemical communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 355-370, </text>
+<text top="680" left="138" width="249" height="16" font="5">Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="695" left="85" width="557" height="16" font="5">Horner, A. J., Nickles, S. P., Weissburg, M. J., Derby, C. D. (2006). Source and specificity of </text>
+<text top="711" left="138" width="503" height="16" font="5">chemical cues mediating shelter preference of Caribbean spiny lobsters (<i>Panulirus </i></text>
+<text top="727" left="138" width="179" height="16" font="10"><i>argus</i>). <i>Biol. Bull.</i> 211: 128-139. </text>
+<text top="743" left="85" width="560" height="16" font="5">Ishida, H., Nakamoto, T., Moriizumi, T., Kikas, T., &amp; Janata, J. (2001). Plume-Tracking </text>
+<text top="759" left="138" width="433" height="16" font="5">Robots: A New Application of Chemical Sensors. <i>Biol. Bull</i>. 200: 222-226. </text>
+<text top="775" left="85" width="556" height="16" font="5">Johnson, T.R. Jr. (1977). Individual recognition in the banded shrimp <i>Stenopus hispidus</i> </text>
+<text top="791" left="138" width="159" height="16" font="5">(Olivier). <i>Pac. Sci</i> 23:40-50. </text>
+<text top="807" left="85" width="562" height="16" font="5">Kaissling, K. E. (1998a) Flux detectors versus concentration detectors: Two types of </text>
+<text top="823" left="138" width="247" height="16" font="5">chemoreceptors. <i>Chem. Senses</i> 23: 99–111. </text>
+<text top="839" left="85" width="562" height="16" font="5">Kaissling, K. E. (1998b). Pheromone deactivation catalyzed by receptor molecules: a </text>
+<text top="855" left="138" width="313" height="16" font="5">quantitative kinetic model. <i>Chem. Senses </i>23: 383-395. </text>
+</page>
+<page number="19" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="86" width="269" height="13" font="6">Inspiration from Nature: Insights from Crustacean  </text>
+<text top="74" left="85" width="431" height="13" font="6">Chemical Sensors Can Lead to Successful Design of Artificial Chemical Sensors </text>
+<text top="936" left="112" width="5" height="20" font="7"> </text>
+<text top="73" left="615" width="26" height="15" font="5">275 </text>
+<text top="106" left="85" width="557" height="16" font="5">Kamio, M. &amp; Derby, C. D. (2011). Approaches to molecular identification of sex pheromones </text>
+<text top="122" left="138" width="503" height="16" font="5">in blue crabs. Chapter 20 in <i>Chemical communication in crustaceans. </i>Eds T. Breithaupt </text>
+<text top="138" left="138" width="406" height="16" font="5">and M. Thiel. Pp. 393-412, Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="154" left="85" width="557" height="16" font="5">Karavanich, C. &amp; Atema, J. 1998. Individual recognition and memory in lobster dominance. </text>
+<text top="169" left="138" width="167" height="16" font="10"><i>Anim Behav.</i> 56: 15553-1560. </text>
+<text top="185" left="85" width="561" height="16" font="5">Koehl, M. A. R. (2006) The fluid mechanics of arthropod sniffing in turbulent odor plumes.  </text>
+<text top="201" left="138" width="146" height="16" font="10"><i>Chem. Senses</i>  31, 93-105. </text>
+<text top="217" left="85" width="556" height="16" font="5">Koehl, M.A.R. (2011). Hydrodynamics of sniffing by crustaceans. Chapter 11 in <i>Chemical </i></text>
+<text top="233" left="138" width="505" height="16" font="10"><i>communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 85-102, Springer </text>
+<text top="249" left="138" width="194" height="16" font="5">ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="265" left="85" width="559" height="16" font="5">Koehl, M. A. R. &amp; Stricker, J. R. (1981). Copepod feeding currents: food capture at low </text>
+<text top="281" left="138" width="299" height="16" font="5">Reynolds number. <i>Limnol. Oceanog</i>. 26: 1062-1073. </text>
+<text top="297" left="85" width="556" height="16" font="5">Kowadlo, G., &amp; Russell, R. A. (2008). Robot Odor Localization: A Taxonomy and Survey. <i>The </i></text>
+<text top="313" left="138" width="308" height="16" font="10"><i>International Journal of Robotics Research</i> 27: 869–894. </text>
+<text top="329" left="85" width="558" height="16" font="5">Kraus-Epley, K. E. &amp; Moore, P. A. (2002) Bilateral and unilateral lesions alter orientation </text>
+<text top="345" left="138" width="404" height="16" font="5">abilities of the crayfish, Orconectes rusticus. <i>Chem. Senses</i> 27: 49–55. </text>
+<text top="361" left="85" width="556" height="16" font="5">Mead, K. S. (2008).<i>  </i>Do antennule and aesthetasc structure in the crayfish <i>Orconectes virilis</i> </text>
+<text top="377" left="138" width="408" height="16" font="5">correlate with the flow environment? <i>Int. and Comp. Biol. </i>48:823-833. </text>
+<text top="393" left="85" width="558" height="16" font="5">Mead, K., Koehl, M. A. R., &amp; O’Donnell, M. J. 1999. Mantis shrimp sniffing: the scaling of </text>
+<text top="409" left="138" width="503" height="16" font="5">chemosensory sensilla and flicking behavior with body size. <i>J. Exp. Mar. Biol. Ecol</i>.<i> </i></text>
+<text top="424" left="138" width="79" height="16" font="5">241: 235-261. </text>
+<text top="440" left="85" width="558" height="16" font="5">Mead, K. &amp; Koehl, M. A. R. 2000. Particle image velocimetry measurements of fluid flow </text>
+<text top="456" left="138" width="505" height="16" font="5">through a model array of mantis shrimp chemosensory sensilla. <i>J. Exp. Biol</i>. 203: </text>
+<text top="472" left="138" width="69" height="16" font="5">3795-3808<i>. </i> </text>
+<text top="488" left="85" width="557" height="16" font="5">Mead, K. S., Wiley, M. B., Koehl, M. A. R., &amp; Koseff J. R. (2003). Fine-scale patterns of odor </text>
+<text top="504" left="138" width="500" height="16" font="5">encounter by the antennules of mantis shrimp tracking turbulent plumes in wave-</text>
+<text top="520" left="138" width="345" height="16" font="5">affected and unidirectional flow. <i>J. Exp. Biol. </i>206, 181-193. </text>
+<text top="536" left="85" width="557" height="16" font="5">Mead, K. S. &amp; Caldwell, R. L. (2011). Mantis Shrimp: Olfactory apparatus and chemosensory </text>
+<text top="552" left="138" width="506" height="16" font="5">behavior. Chapter 11 in <i>Chemical communication in crustaceans. </i>Eds T. Breithaupt </text>
+<text top="568" left="138" width="403" height="16" font="5">and M Thiel. Pp. 219-238, Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="584" left="85" width="556" height="16" font="5">Moore, P. A., Scholz, N., &amp; Atema, J. (1991). Chemical orientation of lobsters, <i>Homarus </i></text>
+<text top="600" left="138" width="392" height="16" font="10"><i>americanus</i>, in turbulent odor plumes. <i>J. Chem. Ecol. </i>17: 1293-1307. </text>
+<text top="616" left="85" width="557" height="16" font="5">Moore, P. A., Weissburg, M. J., Parrish, J. M., Zimmer-Faust, R. K. &amp; Gerhardt, G. A. (1994) </text>
+<text top="632" left="138" width="503" height="16" font="5">The spatial distribution of odors in simulated benthic boundary layer flows. <i>J Chem </i></text>
+<text top="648" left="138" width="99" height="16" font="10"><i>Ecol</i> 20: 255-279. </text>
+<text top="664" left="85" width="556" height="16" font="5">Moore, P. A., &amp; Grills, J. L. (1999) Chemical orientation to food by the crayfish <i>Orconectes </i></text>
+<text top="680" left="138" width="404" height="16" font="10"><i>rusticus</i>: influence of hydrodynamics. <i>Animal Behaviour</i>, 58, 953–963 </text>
+<text top="695" left="85" width="557" height="16" font="5">Moore, P. &amp; Crimaldi, J. (2004) Odor landscapes and animal behavior: tracking odor plumes </text>
+<text top="711" left="138" width="307" height="16" font="5">in different physical worlds. <i>J. Mar. Syst</i>., 49, 55-64. </text>
+<text top="727" left="85" width="558" height="16" font="5">Oh, E. H., Song, H. S., Park, T. H., (2011). Recent advances in electronic and bioelectronic </text>
+<text top="743" left="138" width="504" height="16" font="5">noses and their biomedical applications. <i>Enzyme and Microbial Technology</i> 48 (2011) </text>
+<text top="759" left="138" width="54" height="16" font="5">427–437. </text>
+<text top="775" left="85" width="553" height="16" font="5">Peng, G., Tisch, U., Adams, O., Hakim, M., Shehada, N., Broza, Y., Billan, S., Abdah-</text>
+<text top="791" left="138" width="504" height="16" font="5">Bornyak, R., Kuten, A., Haick, H. (2009). Diagnosing lung cancer in exhaled breath </text>
+<text top="807" left="138" width="298" height="16" font="5">using gold nanoparticles. <i>Nat. Nanotech.</i> 4:669–73. </text>
+<text top="823" left="85" width="557" height="16" font="5">Rospars, J.-P., Krĭvan, V. &amp; Lánsky, P. (2000). Perireceptor and receptor events in olfaction. </text>
+<text top="839" left="138" width="503" height="16" font="5">Comparison of concentration and flux detectors: a modeling study. <i>Chem. Senses </i>25, </text>
+<text top="855" left="138" width="52" height="16" font="5">293-311. </text>
+</page>
+<page number="20" position="absolute" top="0" left="0" height="1020" width="723">
+<text top="62" left="638" width="3" height="13" font="6"> </text>
+<text top="74" left="472" width="169" height="13" font="6">Advances in Chemical Sensors </text>
+<text top="936" left="85" width="5" height="20" font="7"> </text>
+<text top="73" left="85" width="26" height="15" font="5">276 </text>
+<text top="106" left="85" width="556" height="16" font="5">Russell, R. A. (2001). Survey of Robotic Applications for Odor-Sensing Technology. <i>The </i></text>
+<text top="122" left="138" width="306" height="16" font="10"><i>International Journal of Robotics Research</i> 20: 144-162. </text>
+<text top="138" left="85" width="559" height="16" font="5">Schmidt, M., &amp; Ache, B. W. (1992). Antennular projections to the midbrain of the spiny </text>
+<text top="154" left="138" width="489" height="16" font="5">lobster. II. Sensory innervation of the olfactory lobe. <i>J. Comp. Neurol. </i>319: 291–303<i>.</i> </text>
+<text top="169" left="85" width="557" height="16" font="5">Schmidt, M., &amp; Ache, B. W. (1996). Processing of antennular input in the brain of the spiny </text>
+<text top="185" left="138" width="509" height="16" font="5">lobster,  <i>Panulirus argus. </i>I. Non-olfactory chemosensory and mechanosensory </text>
+<text top="201" left="138" width="464" height="16" font="5">pathways of the lateral and median neuropil. <i>J. Comp. Physiol. A </i>178: 579–604. </text>
+<text top="217" left="85" width="556" height="16" font="5">Schmidt, M., Van Eckeris, L. &amp; Ache, B. W. (1992). Antennular projections to the midbrain of </text>
+<text top="233" left="138" width="507" height="16" font="5">the spiny lobster. I. Sensory innervations of the lateral and medial antennular </text>
+<text top="249" left="138" width="240" height="16" font="5">neuropils. <i>J. Comp. Neurol. </i>318: 277–290. </text>
+<text top="265" left="85" width="561" height="16" font="5">Schmidt, M. &amp; Mellon Jr, D. (2011). Neuronal processing of chemical information in </text>
+<text top="281" left="138" width="505" height="16" font="5">crustaceans. Chapter 9 in<i> Chemical communication in crustaceans. </i>Eds T. Breithaupt </text>
+<text top="297" left="138" width="403" height="16" font="5">and M Thiel. Pp. 123-147, Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="313" left="85" width="560" height="16" font="5">Stacey, M. T., Mead, K. S. &amp; Koehl, M. A. R. (2003). Molecular capture by olfactory </text>
+<text top="329" left="138" width="294" height="16" font="5">antennules: mantis shrimp. <i>J. Math. Biol</i>.<i> </i>44: 1-30. </text>
+<text top="345" left="85" width="559" height="16" font="5">Tomba, A.M., Keller, T.A., &amp; Moore, P.A. (2001). Foraging in complex odor landscapes: </text>
+<text top="361" left="138" width="506" height="16" font="5">Chemical orientation strategies during stimulation by conflicting chemical cues. </text>
+<text top="377" left="138" width="359" height="16" font="10"><i>Journal of the North American Benthological Society</i> 20:211-222. </text>
+<text top="393" left="85" width="557" height="16" font="5">Vogel, S. (1994) <i>Life in Moving Fluids: The Physical Biology of Flow </i>(Second Edition) Princeton </text>
+<text top="409" left="138" width="277" height="16" font="5">University Press 484 pp. ISBN: 9780691026169 </text>
+<text top="424" left="85" width="557" height="16" font="5">Webster, D. R., Rahman, S., &amp; Dasi, L. P. (2001). On the usefulness of bilateral comparison to </text>
+<text top="440" left="138" width="433" height="16" font="5">tracking turbulent chemical odor plumes <i>Limnol. Oceanog.</i> 46, 1048-1053. </text>
+<text top="456" left="85" width="556" height="16" font="5">Weissburg, M. J. (2000) The fluid dynamical context of chemosensory behavior. <i>Biol. Bull.</i> </text>
+<text top="472" left="138" width="81" height="16" font="5">198: 188–202. </text>
+<text top="488" left="85" width="557" height="16" font="5">Weissburg, M. J. (2011) Waterborne chemical communication: stimulus dispersal dynamics </text>
+<text top="504" left="138" width="505" height="16" font="5">and orientation strategies in crustaceans. Chapter 4 in<i> Chemical communication in </i></text>
+<text top="520" left="138" width="500" height="16" font="10"><i>crustaceans.  </i>Eds T. Breithaupt and M Thiel. Pp. 63-83, Springer ISBN 978-0-387-</text>
+<text top="536" left="138" width="98" height="16" font="5">77100-7. 565 pp. </text>
+<text top="552" left="85" width="563" height="16" font="5">Weissburg, M. J. &amp; Zimmer-Faust, R. K. (1993) Life and death in moving fluids: </text>
+<text top="568" left="138" width="502" height="16" font="5">Hydrodynamic effects on chemosensory-mediated predation. <i>Ecology</i> 74: 1428-1443. </text>
+<text top="584" left="85" width="557" height="16" font="5">Weissburg M. J., &amp; Zimmer-Faust R. K. (1994) Odor plumes and how blue crabs use them in </text>
+<text top="600" left="138" width="222" height="16" font="5">finding prey. <i>J Exp Biol</i> 197, 349-375.  </text>
+<text top="616" left="85" width="415" height="16" font="5">Wäckers F., Olson, D., Rains, G., Lundby, F., &amp; Haugen,<b> </b>J.–E. (2010)</text>
+<text top="606" left="500" width="7" height="27" font="1"><b> </b></text>
+<text top="616" left="508" width="134" height="16" font="10"><i>Journal of Food Science</i> </text>
+<text top="632" left="138" width="120" height="16" font="5">76: Issue 1, S41-S47. </text>
+<text top="648" left="85" width="557" height="16" font="5">Yen,  J., Weissburg, M. J., &amp; Doall, M. H. (1998). The fluid physics of signal perception by a </text>
+<text top="664" left="138" width="343" height="16" font="5">mate-tracking copepod. <i>Philos Trans R Soc B</i> 353: 787-804. </text>
+<text top="680" left="85" width="556" height="16" font="5">Yen, J. &amp; Lasley, R. (2011). Chemical communication between copepods. Chapter 9 in<i> </i></text>
+<text top="695" left="138" width="504" height="16" font="10"><i>Chemical communication in crustaceans. </i>Eds T. Breithaupt and M Thiel. Pp. 177-197, </text>
+<text top="711" left="138" width="249" height="16" font="5">Springer ISBN 978-0-387-77100-7. 565 pp. </text>
+<text top="727" left="85" width="561" height="16" font="5">Zettler, E. &amp; Atema, J. (1999). Chemoreceptor cells as concentration slope detectors: </text>
+<text top="743" left="138" width="401" height="16" font="5">preliminary evidence from the lobster nose. <i>Biol. Bull. </i>197, 252-253. </text>
+<text top="759" left="85" width="557" height="16" font="5">Ziemba, R. E., Simpson, A., Hopper, R., &amp; Cooper, R. L. (2003). A comparison of antennule </text>
+<text top="775" left="138" width="505" height="16" font="5">structure in a surface- and a cavedwelling crayfish, genus Orconectes (Decapoda, </text>
+<text top="791" left="138" width="205" height="16" font="5">Astacidae). <i>Crustaceana</i> 76:859–69. </text>
+<text top="807" left="85" width="562" height="16" font="5">Zimmer-Faust, R. K. (1989). The relationship between chemoreception and foraging </text>
+<text top="823" left="138" width="338" height="16" font="5">behavior in crustaceans. <i>Limnol. Oceanogr. </i>34, 1364-1374. </text>
+<text top="848" left="85" width="3" height="16" font="5"> </text>
+</page>
+</pdf2xml>

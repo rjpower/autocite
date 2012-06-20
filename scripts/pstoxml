@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#set -x 
+
+TEMPIN=$(tempfile -d /ssd/pdftoxml/)
+TEMPPS=$TEMPIN.ps
+TEMPPDF=$TEMPIN.pdf
+TEMPOUT=$TEMPIN.xml
+
+function cleanup() {
+  rm -f $TEMPIN $TEMPPS $TEMPOUT $TEMPPDF
+}
+
+trap cleanup EXIT
+
+cp $1 $TEMPPS
+
+MIMETYPE=$(file --brief --mime-type $TEMPPS) 
+if [[ $MIMETYPE == "application/x-gzip" ]]; then
+  zcat $TEMPPS > $TEMPPS.raw
+  mv $TEMPPS.raw $TEMPPS
+fi
+
+timeout 10 pstopdf $TEMPPS $TEMPPDF > /dev/null
+timeout 10 pdftohtml -c -enc UTF-8 -xml -s -i $TEMPPDF > /dev/null
+cat $TEMPOUT

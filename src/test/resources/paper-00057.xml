@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="21" family="Times" color="#000000"/>
+	<fontspec id="1" size="14" family="Times" color="#000000"/>
+	<fontspec id="2" size="11" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="12" family="Times" color="#000000"/>
+	<fontspec id="5" size="9" family="Times" color="#000000"/>
+	<fontspec id="6" size="8" family="Times" color="#000000"/>
+	<fontspec id="7" size="12" family="Times" color="#000000"/>
+	<fontspec id="8" size="12" family="Times" color="#000000"/>
+	<fontspec id="9" size="10" family="Times" color="#000000"/>
+<text top="117" left="114" width="690" height="21" font="0"><b>The role of nonminimum phase zeros in the transient response of</b></text>
+<text top="147" left="346" width="225" height="21" font="0"><b>multivariable systems</b></text>
+<text top="199" left="341" width="224" height="15" font="1">Robert Schmid and Amit Pandey</text>
+<text top="251" left="96" width="352" height="12" font="2"><i><b>Abstract</b></i><b>— Nonminimum phase zeros are known to cause</b></text>
+<text top="266" left="81" width="367" height="12" font="3"><b>fundamental performance limitations in the system transient</b></text>
+<text top="281" left="81" width="367" height="12" font="3"><b>response, particularly undershoot and overshoot. Much of</b></text>
+<text top="296" left="81" width="367" height="12" font="3"><b>the available literature deals with scalar-input scalar-output</b></text>
+<text top="311" left="81" width="367" height="12" font="3"><b>systems. In this paper we consider the role of nonminimum</b></text>
+<text top="326" left="81" width="367" height="12" font="3"><b>phase zeros on the transient response of multivariable systems.</b></text>
+<text top="341" left="81" width="367" height="12" font="3"><b>We explore via examples the extent to which such zeros may</b></text>
+<text top="356" left="81" width="336" height="12" font="3"><b>imply undershoot or overshoot in the transient response.</b></text>
+<text top="388" left="206" width="23" height="14" font="4">I. I</text>
+<text top="390" left="230" width="93" height="11" font="5">NTRODUCTION</text>
+<text top="414" left="96" width="353" height="14" font="4">The role of system zeros on the control systems perfor-</text>
+<text top="432" left="81" width="367" height="14" font="4">mance of linear time-invariant (LTI) systems has been studied</text>
+<text top="450" left="81" width="368" height="14" font="4">for many decades. Numerous studies have reported funda-</text>
+<text top="467" left="81" width="368" height="14" font="4">mental performance limitations arising from nonminimum</text>
+<text top="485" left="81" width="367" height="14" font="4">phase (NMP) zeros. A recent comprehensive survey of the</text>
+<text top="503" left="81" width="367" height="14" font="4">impact of system zeros on control system performance was</text>
+<text top="521" left="81" width="76" height="14" font="4">given in [2].</text>
+<text top="540" left="96" width="353" height="14" font="4">Much of the existing literature on overshoot and under-</text>
+<text top="558" left="81" width="367" height="14" font="4">shoot is concerned with single-input single-output (SISO)</text>
+<text top="576" left="81" width="368" height="14" font="4">systems. [8] showed that an LTI SISO continuous-time</text>
+<text top="594" left="81" width="367" height="14" font="4">system has an undershooting step response if it contains at</text>
+<text top="612" left="81" width="367" height="14" font="4">least one real nonminimum phase zero. A lower bound for</text>
+<text top="629" left="81" width="367" height="14" font="4">the size of the undershoot was also given, and this result</text>
+<text top="647" left="81" width="367" height="14" font="4">was extended in [4] where SISO systems with two real</text>
+<text top="665" left="81" width="367" height="14" font="4">nonminimum phase zeros are considered and a lower bound</text>
+<text top="683" left="81" width="233" height="14" font="4">for the minimum undershoot is given.</text>
+<text top="702" left="96" width="353" height="14" font="4">Papers offering analytic results on the system overshoot</text>
+<text top="720" left="81" width="368" height="14" font="4">include [6], which considered third-order continuous-time</text>
+<text top="738" left="81" width="368" height="14" font="4">SISO systems, and gave necessary and sufﬁcient conditions</text>
+<text top="756" left="81" width="368" height="14" font="4">in terms of the closed-loop poles for which the step response</text>
+<text top="773" left="81" width="367" height="14" font="4">would be nonovershooting. In [14] it was shown that for a</text>
+<text top="791" left="81" width="367" height="14" font="4">continuous-time SISO system with two nonminimum phase</text>
+<text top="809" left="81" width="367" height="14" font="4">real zeros (right-hand complex plane), the step response must</text>
+<text top="827" left="81" width="306" height="14" font="4">overshoot if the settling time is sufﬁciently small.</text>
+<text top="846" left="96" width="352" height="14" font="4">In contrast with the extensive literature for SISO systems,</text>
+<text top="864" left="81" width="367" height="14" font="4">to date there have been few papers offering analysis or</text>
+<text top="882" left="81" width="367" height="14" font="4">design methods for undershoot or overshoot in the step</text>
+<text top="900" left="81" width="367" height="14" font="4">response of multi-input multi-output (MIMO) systems. The</text>
+<text top="918" left="81" width="368" height="14" font="4">paper [3] considered MIMO systems subject to dynamic</text>
+<text top="935" left="81" width="367" height="14" font="4">output feedback, and gave a lower bound on the system</text>
+<text top="953" left="81" width="367" height="14" font="4">undershoot and interaction for systems with at least one real</text>
+<text top="971" left="81" width="368" height="14" font="4">NMP zero. A recent contribution offering design methods</text>
+<text top="989" left="81" width="367" height="14" font="4">for MIMO systems is [10], which gave a state feedback</text>
+<text top="1007" left="81" width="367" height="14" font="4">controller to yield a nonovershooting step response for LTI</text>
+<text top="1041" left="94" width="354" height="11" font="5">Robert Schmid is with the Department of Electrical and Electronic</text>
+<text top="1055" left="81" width="367" height="11" font="5">Engineering, The University of Melbourne, Australia. Amit Pandey is</text>
+<text top="1068" left="81" width="367" height="11" font="5">with the Department of Electrical and Electronic Engineering, The Univer-</text>
+<text top="1081" left="81" width="368" height="11" font="5">sity of Auckland, New Zealand. E-mail: rschmid@unimelb.edu.au;</text>
+<text top="1096" left="81" width="173" height="10" font="5">amitpandey.ent@gmail.com</text>
+<text top="250" left="470" width="367" height="14" font="4">MIMO systems; the design method was applicable to some</text>
+<text top="268" left="470" width="367" height="14" font="4">nonminimum phase systems, and could be applied to both</text>
+<text top="286" left="470" width="367" height="14" font="4">continuous-time and discrete-time systems. Very recently it</text>
+<text top="304" left="470" width="367" height="14" font="4">was shown in [11], [12] how the method could be adapted</text>
+<text top="322" left="470" width="367" height="14" font="4">to obtain a nonundershooting step response. The design</text>
+<text top="340" left="470" width="367" height="14" font="4">method given in both these papers makes use of the classic</text>
+<text top="358" left="470" width="265" height="14" font="4">eigenstructure assignment algorithm of [9].</text>
+<text top="376" left="485" width="352" height="14" font="4">In this paper we review a number of classic results</text>
+<text top="394" left="470" width="367" height="14" font="4">indicating the effect of nonminimum phase zeros on the</text>
+<text top="412" left="470" width="368" height="14" font="4">system transient response for SISO systems, and consider</text>
+<text top="430" left="470" width="367" height="14" font="4">the extent to which these effects must also be observed for</text>
+<text top="448" left="470" width="368" height="14" font="4">MIMO systems with nonminimum phase zeros. The methods</text>
+<text top="466" left="470" width="301" height="14" font="4">of [10]-[12] will be used to obtain the examples.</text>
+<text top="499" left="561" width="32" height="14" font="4">II. P</text>
+<text top="501" left="593" width="53" height="11" font="5">ROBLEM</text>
+<text top="499" left="651" width="8" height="14" font="4">F</text>
+<text top="501" left="660" width="86" height="11" font="5">ORMULATION</text>
+<text top="525" left="485" width="352" height="14" font="4">We will consider LTI MIMO systems with state space</text>
+<text top="543" left="470" width="85" height="14" font="4">representation</text>
+<text top="579" left="479" width="19" height="15" font="4">Σ :</text>
+<text top="570" left="529" width="212" height="15" font="4">˙x(t) = A x(t) + B u(t), x(0) = x</text>
+<text top="576" left="740" width="6" height="7" font="6">0</text>
+<text top="570" left="751" width="25" height="15" font="4">∈ R</text>
+<text top="569" left="776" width="7" height="9" font="6">n</text>
+<text top="571" left="784" width="4" height="14" font="4">,</text>
+<text top="589" left="526" width="7" height="14" font="4">y</text>
+<text top="588" left="534" width="140" height="15" font="4">(t) = C x(t) + D u(t),</text>
+<text top="580" left="820" width="18" height="14" font="4">(1)</text>
+<text top="618" left="470" width="96" height="14" font="4">where, for all t</text>
+<text top="618" left="571" width="91" height="15" font="4">≥ 0, x(t) ∈ R</text>
+<text top="616" left="662" width="7" height="9" font="6">n</text>
+<text top="618" left="676" width="85" height="14" font="4">is the state, u</text>
+<text top="618" left="761" width="48" height="15" font="4">(t) ∈ R</text>
+<text top="616" left="810" width="11" height="9" font="6">m</text>
+<text top="618" left="827" width="10" height="14" font="4">is</text>
+<text top="636" left="470" width="117" height="14" font="4">the control input, y</text>
+<text top="635" left="588" width="46" height="15" font="4">(t) ∈ R</text>
+<text top="634" left="634" width="6" height="9" font="6">p</text>
+<text top="636" left="646" width="191" height="14" font="4">is the output, and A, B, C and</text>
+<text top="654" left="470" width="367" height="14" font="4">D are appropriate dimensional constant matrices. We assume</text>
+<text top="672" left="470" width="367" height="14" font="4">that B has full column rank and C has full row rank. System</text>
+<text top="689" left="470" width="367" height="15" font="4">Σ is also assumed to be right invertible, stabilizable and has</text>
+<text top="708" left="470" width="194" height="14" font="4">no invariant zeros at the origin.</text>
+<text top="726" left="485" width="353" height="14" font="4">The following method for designing a tracking controller</text>
+<text top="744" left="470" width="182" height="14" font="4">for a step reference signal r</text>
+<text top="744" left="660" width="28" height="15" font="4">∈ <b>R</b></text>
+<text top="741" left="688" width="6" height="9" font="6">p</text>
+<text top="744" left="703" width="134" height="14" font="4">is standard: choose a</text>
+<text top="762" left="470" width="228" height="14" font="4">feedback gain matrix F such that A</text>
+<text top="762" left="702" width="135" height="15" font="4">+ B F is stable. Two</text>
+<text top="780" left="470" width="57" height="14" font="4">vectors x</text>
+<text top="786" left="526" width="9" height="7" font="6">ss</text>
+<text top="779" left="541" width="25" height="15" font="4">∈ R</text>
+<text top="778" left="566" width="7" height="9" font="6">n</text>
+<text top="780" left="579" width="35" height="14" font="4">and u</text>
+<text top="786" left="614" width="9" height="7" font="6">ss</text>
+<text top="779" left="629" width="25" height="15" font="4">∈ R</text>
+<text top="778" left="654" width="11" height="9" font="6">m</text>
+<text top="780" left="670" width="100" height="14" font="4">exist that satisfy</text>
+<text top="810" left="586" width="34" height="15" font="4">0 =</text>
+<text top="810" left="635" width="22" height="14" font="4">A x</text>
+<text top="816" left="657" width="9" height="7" font="6">ss</text>
+<text top="810" left="671" width="38" height="15" font="4">+ B u</text>
+<text top="816" left="709" width="9" height="7" font="6">ss</text>
+<text top="811" left="820" width="18" height="14" font="4">(2)</text>
+<text top="833" left="587" width="7" height="14" font="4">r</text>
+<text top="832" left="609" width="12" height="15" font="4">=</text>
+<text top="833" left="635" width="23" height="14" font="4">C x</text>
+<text top="839" left="658" width="9" height="7" font="6">ss</text>
+<text top="832" left="672" width="39" height="15" font="4">+ D u</text>
+<text top="839" left="710" width="9" height="7" font="6">ss</text>
+<text top="833" left="820" width="18" height="14" font="4">(3)</text>
+<text top="864" left="470" width="56" height="14" font="4">for any r</text>
+<text top="863" left="530" width="25" height="15" font="4">∈ R</text>
+<text top="862" left="555" width="6" height="9" font="6">p</text>
+<text top="864" left="562" width="255" height="14" font="4">. Applying the state feedback control law</text>
+<text top="897" left="565" width="9" height="14" font="4">u</text>
+<text top="896" left="573" width="112" height="15" font="4">(t) = F x(t) − x</text>
+<text top="902" left="686" width="9" height="7" font="6">ss</text>
+<text top="896" left="708" width="23" height="15" font="4">+ u</text>
+<text top="902" left="732" width="9" height="7" font="6">ss</text>
+<text top="897" left="820" width="18" height="14" font="4">(4)</text>
+<text top="930" left="470" width="204" height="14" font="4">to (1) yields x converging to x</text>
+<text top="935" left="674" width="11" height="9" font="6">ss</text>
+<text top="930" left="693" width="143" height="14" font="4">and y converging to r</text>
+<text top="948" left="470" width="368" height="14" font="4">as t goes to inﬁnity. We say that the transient response</text>
+<text top="966" left="470" width="368" height="14" font="4">overshoots (respectively, undershoots) if it exhibits overshoot</text>
+<text top="983" left="470" width="331" height="14" font="4">(or undershoot) in any one of the output components.</text>
+<text top="1002" left="485" width="353" height="14" font="4">In this paper we are concerned with the system invariant</text>
+<text top="1020" left="470" width="213" height="14" font="4">zeros, which we deﬁne as follows:</text>
+<text top="1038" left="485" width="89" height="13" font="8"><i>Deﬁnition 2.1:</i></text>
+<text top="1038" left="581" width="43" height="14" font="4">[7] Let</text>
+<text top="1080" left="577" width="10" height="14" font="4">P</text>
+<text top="1085" left="586" width="9" height="7" font="6">Σ</text>
+<text top="1079" left="596" width="38" height="15" font="4">(s) :=</text>
+<text top="1069" left="647" width="11" height="14" font="4">A</text>
+<text top="1068" left="661" width="31" height="15" font="4">− s I</text>
+<text top="1069" left="709" width="11" height="14" font="4">B</text>
+<text top="1091" left="664" width="11" height="14" font="4">C</text>
+<text top="1091" left="709" width="12" height="14" font="4">D</text>
+<text top="1080" left="820" width="18" height="14" font="4">(5)</text>
+<text top="42" left="81" width="321" height="11" font="9"><b>2011 50th IEEE Conference on Decision and Control and</b></text>
+<text top="56" left="81" width="237" height="11" font="9"><b>European Control Conference (CDC-ECC)</b></text>
+<text top="70" left="81" width="231" height="11" font="9"><b>Orlando, FL, USA, December 12-15, 2011</b></text>
+<text top="1125" left="81" width="228" height="11" font="9"><b>978-1-61284-799-3/11/$26.00 ©2011 IEEE</b></text>
+<text top="1125" left="449" width="20" height="11" font="9"><b>471</b></text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="10" size="5" family="Times" color="#000000"/>
+<text top="89" left="81" width="240" height="14" font="4">denote the system matrix pencil. The z</text>
+<text top="94" left="321" width="6" height="7" font="6">0</text>
+<text top="88" left="332" width="117" height="15" font="4">∈ C is an invariant</text>
+<text top="107" left="81" width="43" height="14" font="4">zero of</text>
+<text top="106" left="130" width="69" height="15" font="4">Σ if rank P</text>
+<text top="112" left="199" width="9" height="7" font="6">Σ</text>
+<text top="106" left="208" width="13" height="15" font="4">(z</text>
+<text top="112" left="221" width="6" height="7" font="6">0</text>
+<text top="106" left="227" width="96" height="15" font="4">) &lt; normrank P</text>
+<text top="112" left="323" width="9" height="7" font="6">Σ</text>
+<text top="106" left="333" width="19" height="15" font="4">(s)</text>
+<text top="124" left="81" width="295" height="14" font="4">It is interesting to consider how many zeros</text>
+<text top="123" left="385" width="63" height="15" font="4">Σ has, in</text>
+<text top="142" left="81" width="88" height="14" font="4">general. Since</text>
+<text top="141" left="176" width="273" height="15" font="4">Σ is square, the number of invariant zeros</text>
+<text top="160" left="81" width="26" height="14" font="4">is n</text>
+<text top="159" left="111" width="337" height="15" font="4">− p + rank D. Hence, if D is of full rank, system Σ</text>
+<text top="178" left="81" width="180" height="14" font="4">has n zeros. Alternatively, if</text>
+<text top="177" left="267" width="181" height="15" font="4">Σ is strictly proper (D = 0)</text>
+<text top="196" left="81" width="175" height="14" font="4">and CB is nonsingular, then</text>
+<text top="195" left="261" width="187" height="15" font="4">Σ has n − p zeros [7]. We say</text>
+<text top="214" left="81" width="23" height="14" font="4">that</text>
+<text top="213" left="109" width="340" height="15" font="4">Σ is a <i>minimum phase </i>system if it has either no zeros,</text>
+<text top="232" left="81" width="367" height="14" font="4">or else any zeros lie within the left-hand complex plane.</text>
+<text top="250" left="81" width="367" height="14" font="4">Zeros lying in the right-hand complex plane are referred</text>
+<text top="268" left="81" width="216" height="14" font="4">to as <i>non-minimum phase zeros </i>of</text>
+<text top="267" left="303" width="146" height="15" font="4">Σ. There are numerous</text>
+<text top="286" left="81" width="367" height="14" font="4">classic SISO results in the literature that link the presence of</text>
+<text top="303" left="81" width="367" height="14" font="4">real nonminimum phase zeros with the transient behaviour of</text>
+<text top="321" left="81" width="367" height="14" font="4">the step response. In this paper we investigate the transient</text>
+<text top="339" left="81" width="367" height="14" font="4">behaviour of MIMO systems with real nonminimum phase</text>
+<text top="357" left="81" width="367" height="14" font="4">zeros. The papers [10]-[12] gave methods for designing the</text>
+<text top="375" left="81" width="367" height="14" font="4">gain matrix F to avoid overshoot and undershoot, and in</text>
+<text top="393" left="81" width="367" height="14" font="4">this paper we will use these methods to obtain closed loop</text>
+<text top="411" left="81" width="312" height="14" font="4">systems that exhibit the desired transient response.</text>
+<text top="437" left="83" width="40" height="14" font="4">III. N</text>
+<text top="439" left="123" width="323" height="11" font="5">ONOVERSHOOTING STATE FEEDBACK CONTROLLER</text>
+<text top="457" left="96" width="127" height="11" font="5">DESIGN METHOD OF</text>
+<text top="455" left="228" width="8" height="14" font="4">S</text>
+<text top="457" left="237" width="75" height="11" font="5">CHMID AND</text>
+<text top="455" left="316" width="11" height="14" font="4">N</text>
+<text top="457" left="328" width="106" height="11" font="5">TOGRAMATZIDIS</text>
+<text top="477" left="96" width="353" height="14" font="4">We now brieﬂy describe these design methods. Applying</text>
+<text top="495" left="81" width="144" height="14" font="4">the control law (4) to</text>
+<text top="494" left="233" width="215" height="15" font="4">Σ and changing coordinates with</text>
+<text top="513" left="81" width="7" height="14" font="4">ξ</text>
+<text top="512" left="88" width="93" height="15" font="4">(t) := x(t) − x</text>
+<text top="518" left="182" width="9" height="7" font="6">ss</text>
+<text top="513" left="197" width="36" height="14" font="4">yields</text>
+<text top="546" left="81" width="11" height="15" font="4">Σ</text>
+<text top="552" left="92" width="24" height="9" font="6">hom</text>
+<text top="546" left="120" width="4" height="15" font="4">:</text>
+<text top="537" left="152" width="54" height="15" font="4">˙ξ(t) =</text>
+<text top="537" left="221" width="164" height="15" font="4">(A + B F ) ξ(t), ξ(0) = x</text>
+<text top="543" left="384" width="6" height="7" font="6">0</text>
+<text top="537" left="395" width="23" height="15" font="4">− x</text>
+<text top="543" left="418" width="9" height="7" font="6">ss</text>
+<text top="555" left="154" width="7" height="14" font="4">y</text>
+<text top="555" left="162" width="43" height="15" font="4">(t) =</text>
+<text top="555" left="221" width="120" height="15" font="4">(C + D F ) ξ(t) + r</text>
+<text top="580" left="81" width="310" height="14" font="4">In terms of the distinct closed-loop eigenvalues λ</text>
+<text top="585" left="391" width="6" height="7" font="6">1</text>
+<text top="580" left="398" width="42" height="14" font="4">, . . . , λ</text>
+<text top="585" left="440" width="7" height="9" font="6">n</text>
+<text top="598" left="81" width="114" height="14" font="4">and eigenvectors v</text>
+<text top="603" left="195" width="6" height="7" font="6">1</text>
+<text top="598" left="202" width="40" height="14" font="4">, . . . , v</text>
+<text top="603" left="242" width="7" height="9" font="6">n</text>
+<text top="598" left="250" width="106" height="14" font="4">, the error term ε</text>
+<text top="597" left="361" width="64" height="15" font="4">= r − y is</text>
+<text top="634" left="152" width="7" height="14" font="4">ε</text>
+<text top="633" left="159" width="33" height="15" font="4">(t) =</text>
+<text top="619" left="203" width="7" height="9" font="6">n</text>
+<text top="655" left="197" width="19" height="9" font="6">i=1</text>
+<text top="633" left="218" width="78" height="15" font="4">(C + D F ) v</text>
+<text top="639" left="296" width="4" height="9" font="6">i</text>
+<text top="634" left="304" width="10" height="14" font="4">α</text>
+<text top="639" left="313" width="4" height="9" font="6">i</text>
+<text top="634" left="321" width="7" height="14" font="4">e</text>
+<text top="631" left="328" width="7" height="9" font="6">λ</text>
+<text top="635" left="335" width="4" height="6" font="10">i</text>
+<text top="631" left="342" width="5" height="9" font="6">t</text>
+<text top="675" left="81" width="37" height="14" font="4">where</text>
+<text top="674" left="123" width="14" height="15" font="4">[α</text>
+<text top="680" left="137" width="6" height="7" font="6">1</text>
+<text top="674" left="150" width="10" height="14" font="4">α</text>
+<text top="680" left="159" width="6" height="7" font="6">2</text>
+<text top="674" left="174" width="35" height="14" font="4">. . . α</text>
+<text top="680" left="210" width="7" height="9" font="6">n</text>
+<text top="674" left="218" width="4" height="15" font="4">]</text>
+<text top="672" left="222" width="9" height="7" font="6">⊤</text>
+<text top="674" left="237" width="28" height="15" font="4">= [v</text>
+<text top="680" left="266" width="6" height="7" font="6">1</text>
+<text top="674" left="278" width="7" height="14" font="4">v</text>
+<text top="680" left="285" width="6" height="7" font="6">2</text>
+<text top="674" left="301" width="33" height="14" font="4">. . . v</text>
+<text top="680" left="334" width="7" height="9" font="6">n</text>
+<text top="674" left="342" width="4" height="15" font="4">]</text>
+<text top="672" left="346" width="15" height="7" font="6">−1</text>
+<text top="674" left="362" width="14" height="15" font="4">(x</text>
+<text top="680" left="376" width="6" height="7" font="6">0</text>
+<text top="674" left="387" width="24" height="15" font="4">− x</text>
+<text top="680" left="411" width="11" height="9" font="6">ss</text>
+<text top="674" left="423" width="25" height="15" font="4">). If</text>
+<text top="692" left="81" width="254" height="14" font="4">we can obtain closed loop eigenvectors v</text>
+<text top="698" left="335" width="4" height="9" font="6">i</text>
+<text top="692" left="345" width="58" height="14" font="4">satisfying</text>
+<text top="725" left="120" width="78" height="15" font="4">(C + D F ) v</text>
+<text top="731" left="199" width="4" height="9" font="6">i</text>
+<text top="725" left="208" width="12" height="15" font="4">=</text>
+<text top="716" left="242" width="7" height="14" font="4">e</text>
+<text top="722" left="249" width="4" height="9" font="6">i</text>
+<text top="716" left="269" width="5" height="14" font="4">i</text>
+<text top="716" left="278" width="64" height="15" font="4">= 1, . . . , p</text>
+<text top="734" left="242" width="7" height="15" font="4">0</text>
+<text top="734" left="269" width="5" height="14" font="4">i</text>
+<text top="734" left="278" width="91" height="15" font="4">= p + 1, . . . , n</text>
+<text top="760" left="81" width="37" height="14" font="4">where</text>
+<text top="759" left="124" width="15" height="15" font="4">{e</text>
+<text top="765" left="138" width="6" height="7" font="6">1</text>
+<text top="759" left="145" width="40" height="14" font="4">, . . . , e</text>
+<text top="765" left="185" width="6" height="9" font="6">p</text>
+<text top="759" left="192" width="246" height="15" font="4">} are the canonical basis vectors for R</text>
+<text top="757" left="438" width="6" height="9" font="6">p</text>
+<text top="760" left="444" width="4" height="14" font="4">,</text>
+<text top="778" left="81" width="26" height="14" font="4">then</text>
+<text top="811" left="91" width="7" height="14" font="4">ε</text>
+<text top="810" left="98" width="17" height="15" font="4">(t)</text>
+<text top="810" left="130" width="12" height="15" font="4">=</text>
+<text top="795" left="159" width="7" height="9" font="6">n</text>
+<text top="832" left="153" width="19" height="9" font="6">i=1</text>
+<text top="810" left="173" width="78" height="15" font="4">(C + D F ) v</text>
+<text top="816" left="251" width="4" height="9" font="6">i</text>
+<text top="811" left="259" width="10" height="14" font="4">α</text>
+<text top="816" left="268" width="4" height="9" font="6">i</text>
+<text top="811" left="276" width="7" height="14" font="4">e</text>
+<text top="808" left="283" width="7" height="9" font="6">λ</text>
+<text top="812" left="290" width="4" height="6" font="10">i</text>
+<text top="808" left="297" width="5" height="9" font="6">t</text>
+<text top="859" left="130" width="12" height="15" font="4">=</text>
+<text top="844" left="159" width="6" height="9" font="6">p</text>
+<text top="881" left="153" width="19" height="9" font="6">i=1</text>
+<text top="860" left="176" width="7" height="14" font="4">e</text>
+<text top="865" left="183" width="4" height="9" font="6">i</text>
+<text top="860" left="188" width="10" height="14" font="4">α</text>
+<text top="865" left="197" width="4" height="9" font="6">i</text>
+<text top="860" left="202" width="7" height="14" font="4">e</text>
+<text top="857" left="209" width="7" height="9" font="6">λ</text>
+<text top="861" left="216" width="4" height="6" font="10">i</text>
+<text top="857" left="221" width="5" height="9" font="6">t</text>
+<text top="927" left="130" width="12" height="15" font="4">=</text>
+<text top="894" left="156" width="10" height="7" font="4"></text>
+<text top="921" left="156" width="10" height="7" font="4"></text>
+<text top="930" left="156" width="10" height="7" font="4"></text>
+<text top="939" left="156" width="10" height="7" font="4"></text>
+<text top="948" left="156" width="10" height="7" font="4"></text>
+<text top="895" left="169" width="7" height="15" font="4">1</text>
+<text top="913" left="169" width="7" height="15" font="4">0</text>
+<text top="930" left="171" width="4" height="19" font="4">..</text>
+<text top="942" left="171" width="4" height="14" font="4">.</text>
+<text top="959" left="169" width="7" height="15" font="4">0</text>
+<text top="894" left="179" width="10" height="7" font="4"></text>
+<text top="921" left="179" width="10" height="7" font="4"></text>
+<text top="930" left="179" width="10" height="7" font="4"></text>
+<text top="939" left="179" width="10" height="7" font="4"></text>
+<text top="948" left="179" width="10" height="7" font="4"></text>
+<text top="928" left="191" width="10" height="14" font="4">α</text>
+<text top="934" left="201" width="6" height="7" font="6">1</text>
+<text top="928" left="208" width="7" height="14" font="4">e</text>
+<text top="925" left="215" width="7" height="9" font="6">λ</text>
+<text top="929" left="222" width="5" height="8" font="10">1</text>
+<text top="925" left="228" width="5" height="9" font="6">t</text>
+<text top="927" left="234" width="12" height="15" font="4">+</text>
+<text top="894" left="246" width="10" height="7" font="4"></text>
+<text top="921" left="246" width="10" height="7" font="4"></text>
+<text top="930" left="246" width="10" height="7" font="4"></text>
+<text top="939" left="246" width="10" height="7" font="4"></text>
+<text top="948" left="246" width="10" height="7" font="4"></text>
+<text top="895" left="258" width="7" height="15" font="4">0</text>
+<text top="913" left="258" width="7" height="15" font="4">1</text>
+<text top="930" left="260" width="4" height="19" font="4">..</text>
+<text top="942" left="260" width="4" height="14" font="4">.</text>
+<text top="959" left="258" width="7" height="15" font="4">0</text>
+<text top="894" left="268" width="10" height="7" font="4"></text>
+<text top="921" left="268" width="10" height="7" font="4"></text>
+<text top="930" left="268" width="10" height="7" font="4"></text>
+<text top="939" left="268" width="10" height="7" font="4"></text>
+<text top="948" left="268" width="10" height="7" font="4"></text>
+<text top="928" left="281" width="10" height="14" font="4">α</text>
+<text top="934" left="291" width="6" height="7" font="6">2</text>
+<text top="928" left="297" width="7" height="14" font="4">e</text>
+<text top="925" left="304" width="7" height="9" font="6">λ</text>
+<text top="929" left="311" width="5" height="8" font="10">2</text>
+<text top="925" left="317" width="5" height="9" font="6">t</text>
+<text top="927" left="323" width="37" height="15" font="4">+. . .+</text>
+<text top="894" left="361" width="10" height="7" font="4"></text>
+<text top="921" left="361" width="10" height="7" font="4"></text>
+<text top="930" left="361" width="10" height="7" font="4"></text>
+<text top="939" left="361" width="10" height="7" font="4"></text>
+<text top="948" left="361" width="10" height="7" font="4"></text>
+<text top="895" left="374" width="7" height="15" font="4">0</text>
+<text top="913" left="374" width="7" height="15" font="4">0</text>
+<text top="930" left="376" width="4" height="19" font="4">..</text>
+<text top="942" left="376" width="4" height="14" font="4">.</text>
+<text top="959" left="374" width="7" height="15" font="4">1</text>
+<text top="894" left="384" width="10" height="7" font="4"></text>
+<text top="921" left="384" width="10" height="7" font="4"></text>
+<text top="930" left="384" width="10" height="7" font="4"></text>
+<text top="939" left="384" width="10" height="7" font="4"></text>
+<text top="948" left="384" width="10" height="7" font="4"></text>
+<text top="928" left="396" width="10" height="14" font="4">α</text>
+<text top="933" left="406" width="6" height="9" font="6">p</text>
+<text top="928" left="413" width="7" height="14" font="4">e</text>
+<text top="925" left="420" width="7" height="9" font="6">λ</text>
+<text top="929" left="427" width="6" height="6" font="10">p</text>
+<text top="925" left="433" width="5" height="9" font="6">t</text>
+<text top="986" left="81" width="63" height="14" font="4">If each λ</text>
+<text top="991" left="144" width="4" height="9" font="6">i</text>
+<text top="985" left="160" width="31" height="15" font="4">∈ R</text>
+<text top="983" left="191" width="9" height="7" font="6">−</text>
+<text top="986" left="210" width="31" height="14" font="4">for i</text>
+<text top="985" left="251" width="197" height="15" font="4">∈ {1, . . . , p}, then since each</text>
+<text top="1004" left="81" width="93" height="14" font="4">component of ǫ</text>
+<text top="1003" left="174" width="275" height="15" font="4">(t) contains only one exponential, ǫ(t) cannot</text>
+<text top="1021" left="81" width="367" height="14" font="4">change sign in any component, and hence y tracks r without</text>
+<text top="1039" left="81" width="127" height="14" font="4">overshoot from all x</text>
+<text top="1045" left="208" width="6" height="7" font="6">0</text>
+<text top="1039" left="214" width="4" height="14" font="4">.</text>
+<text top="1057" left="96" width="158" height="14" font="7"><b>Theorem 1 [10]: </b>Assume</text>
+<text top="1056" left="258" width="190" height="15" font="4">Σ is square (m = p) and has at</text>
+<text top="1075" left="81" width="41" height="14" font="4">least n</text>
+<text top="1074" left="125" width="196" height="15" font="4">− p distinct invariant zeros in C</text>
+<text top="1073" left="321" width="9" height="7" font="6">−</text>
+<text top="1075" left="331" width="29" height="14" font="4">. Let</text>
+<text top="1074" left="364" width="16" height="15" font="4">{λ</text>
+<text top="1080" left="380" width="6" height="7" font="6">1</text>
+<text top="1075" left="387" width="42" height="14" font="4">, . . . , λ</text>
+<text top="1080" left="429" width="7" height="9" font="6">n</text>
+<text top="1074" left="437" width="11" height="15" font="4">},</text>
+<text top="1092" left="81" width="15" height="15" font="4">{v</text>
+<text top="1098" left="96" width="6" height="7" font="6">1</text>
+<text top="1093" left="102" width="41" height="14" font="4">, . . . , v</text>
+<text top="1098" left="143" width="7" height="9" font="6">n</text>
+<text top="1092" left="151" width="58" height="15" font="4">} and {w</text>
+<text top="1098" left="209" width="6" height="7" font="6">1</text>
+<text top="1093" left="215" width="44" height="14" font="4">, . . . , w</text>
+<text top="1098" left="259" width="7" height="9" font="6">n</text>
+<text top="1092" left="267" width="87" height="15" font="4">} be such that</text>
+<text top="107" left="485" width="13" height="14" font="4">1)</text>
+<text top="91" left="559" width="11" height="14" font="4">A</text>
+<text top="90" left="574" width="24" height="15" font="4">− λ</text>
+<text top="96" left="598" width="4" height="9" font="6">i</text>
+<text top="91" left="605" width="7" height="14" font="4">I</text>
+<text top="91" left="630" width="11" height="14" font="4">B</text>
+<text top="109" left="580" width="11" height="14" font="4">C</text>
+<text top="109" left="629" width="12" height="14" font="4">D</text>
+<text top="91" left="677" width="7" height="14" font="4">v</text>
+<text top="96" left="685" width="4" height="9" font="6">i</text>
+<text top="109" left="676" width="11" height="14" font="4">w</text>
+<text top="114" left="686" width="4" height="9" font="6">i</text>
+<text top="99" left="711" width="12" height="15" font="4">=</text>
+<text top="90" left="744" width="7" height="15" font="4">0</text>
+<text top="109" left="742" width="7" height="14" font="4">e</text>
+<text top="114" left="749" width="4" height="9" font="6">i</text>
+<text top="100" left="820" width="18" height="14" font="4">(6)</text>
+<text top="136" left="506" width="49" height="14" font="4">where λ</text>
+<text top="141" left="555" width="4" height="9" font="6">i</text>
+<text top="135" left="564" width="25" height="15" font="4">∈ R</text>
+<text top="134" left="589" width="9" height="7" font="6">−</text>
+<text top="136" left="603" width="89" height="14" font="4">is not a zero of</text>
+<text top="135" left="696" width="141" height="15" font="4">Σ, ∀ i ∈ {1, . . . , p} and</text>
+<text top="153" left="506" width="15" height="15" font="4">{e</text>
+<text top="159" left="521" width="6" height="7" font="6">1</text>
+<text top="153" left="527" width="40" height="14" font="4">, . . . , e</text>
+<text top="159" left="568" width="6" height="9" font="6">p</text>
+<text top="153" left="574" width="239" height="15" font="4">} are the canonical basis vectors for R</text>
+<text top="152" left="813" width="6" height="9" font="6">p</text>
+<text top="154" left="820" width="4" height="14" font="4">.</text>
+<text top="190" left="485" width="13" height="14" font="4">2)</text>
+<text top="174" left="562" width="11" height="14" font="4">A</text>
+<text top="173" left="576" width="24" height="15" font="4">− λ</text>
+<text top="180" left="600" width="4" height="9" font="6">i</text>
+<text top="174" left="607" width="7" height="14" font="4">I</text>
+<text top="174" left="633" width="11" height="14" font="4">B</text>
+<text top="192" left="582" width="11" height="14" font="4">C</text>
+<text top="192" left="631" width="12" height="14" font="4">D</text>
+<text top="174" left="680" width="7" height="14" font="4">v</text>
+<text top="180" left="687" width="4" height="9" font="6">i</text>
+<text top="192" left="678" width="11" height="14" font="4">w</text>
+<text top="198" left="689" width="4" height="9" font="6">i</text>
+<text top="183" left="713" width="12" height="15" font="4">=</text>
+<text top="173" left="744" width="7" height="15" font="4">0</text>
+<text top="191" left="744" width="7" height="15" font="4">0</text>
+<text top="184" left="820" width="18" height="14" font="4">(7)</text>
+<text top="218" left="506" width="201" height="15" font="4">∀ i ∈ {n − p + 1, . . . , n} since λ</text>
+<text top="224" left="708" width="4" height="9" font="6">i</text>
+<text top="219" left="718" width="119" height="14" font="4">coincide with zeros</text>
+<text top="237" left="506" width="13" height="14" font="4">of</text>
+<text top="236" left="524" width="15" height="15" font="4">Σ;</text>
+<text top="257" left="470" width="48" height="14" font="4">Assume</text>
+<text top="256" left="523" width="15" height="15" font="4">{v</text>
+<text top="262" left="538" width="6" height="7" font="6">1</text>
+<text top="256" left="545" width="40" height="14" font="4">, . . . , v</text>
+<text top="262" left="585" width="7" height="9" font="6">n</text>
+<text top="256" left="593" width="181" height="15" font="4">} is linearly independent. Let</text>
+<text top="284" left="543" width="10" height="14" font="4">F</text>
+<text top="283" left="559" width="33" height="15" font="4">= [ w</text>
+<text top="290" left="592" width="6" height="7" font="6">1</text>
+<text top="284" left="610" width="39" height="14" font="4">. . . w</text>
+<text top="290" left="649" width="7" height="9" font="6">n</text>
+<text top="283" left="659" width="21" height="15" font="4">] [ v</text>
+<text top="290" left="680" width="6" height="7" font="6">1</text>
+<text top="284" left="697" width="35" height="14" font="4">. . . v</text>
+<text top="290" left="733" width="7" height="9" font="6">n</text>
+<text top="283" left="743" width="4" height="15" font="4">]</text>
+<text top="281" left="748" width="15" height="7" font="6">−1</text>
+<text top="312" left="470" width="128" height="14" font="4">Then, the output y</text>
+<text top="311" left="598" width="239" height="15" font="4">(t) obtained from applying u(t) =</text>
+<text top="329" left="470" width="23" height="14" font="4">F x</text>
+<text top="329" left="492" width="101" height="15" font="4">(t) + (uss − F x</text>
+<text top="335" left="593" width="9" height="7" font="6">ss</text>
+<text top="329" left="604" width="233" height="15" font="4">) tracks r without overshoot from any</text>
+<text top="347" left="470" width="9" height="14" font="4">x</text>
+<text top="353" left="478" width="6" height="7" font="6">0</text>
+<text top="347" left="489" width="25" height="15" font="4">∈ R</text>
+<text top="345" left="514" width="7" height="9" font="6">n</text>
+<text top="348" left="522" width="4" height="14" font="4">.</text>
+<text top="365" left="485" width="76" height="13" font="8"><i>Remark 3.1:</i></text>
+<text top="365" left="568" width="55" height="14" font="4">As the λ</text>
+<text top="371" left="622" width="4" height="9" font="6">i</text>
+<text top="365" left="633" width="28" height="14" font="4">for i</text>
+<text top="364" left="666" width="171" height="15" font="4">∈ {1, . . . , p} can be chosen</text>
+<text top="383" left="470" width="367" height="14" font="4">to be any distinct stable real numbers (provided they are</text>
+<text top="401" left="470" width="151" height="14" font="4">distinct from the zeros of</text>
+<text top="400" left="625" width="85" height="15" font="4">Σ, and that {v</text>
+<text top="407" left="711" width="6" height="7" font="6">1</text>
+<text top="401" left="717" width="40" height="14" font="4">, . . . , v</text>
+<text top="406" left="758" width="7" height="9" font="6">n</text>
+<text top="400" left="766" width="71" height="15" font="4">} is linearly</text>
+<text top="419" left="470" width="367" height="14" font="4">independent), the rate of convergence of y to r can be made</text>
+<text top="437" left="470" width="357" height="14" font="4">to be arbitrarily fast. F is independent of both r and x</text>
+<text top="443" left="827" width="6" height="7" font="6">0</text>
+<text top="437" left="833" width="4" height="14" font="4">.</text>
+<text top="455" left="470" width="368" height="14" font="4">Hence, the same F can be used to achieve nonovershooting</text>
+<text top="473" left="470" width="204" height="14" font="4">convergence for any r and any x</text>
+<text top="478" left="674" width="6" height="7" font="6">0</text>
+<text top="473" left="680" width="157" height="14" font="4">. We say that in this case</text>
+<text top="491" left="470" width="367" height="14" font="4">F achieves a <i>globally nonovershooting </i>response. The values</text>
+<text top="509" left="470" width="69" height="14" font="4">of r and x</text>
+<text top="514" left="539" width="6" height="7" font="6">0</text>
+<text top="509" left="552" width="247" height="14" font="4">enter the control law u only through x</text>
+<text top="514" left="799" width="9" height="7" font="6">ss</text>
+<text top="509" left="815" width="22" height="14" font="4">and</text>
+<text top="526" left="470" width="9" height="14" font="4">u</text>
+<text top="532" left="478" width="9" height="7" font="6">ss</text>
+<text top="527" left="489" width="4" height="14" font="4">.</text>
+<text top="545" left="485" width="132" height="14" font="4">The assumption of n</text>
+<text top="544" left="620" width="154" height="15" font="4">− p invariant zeros in C</text>
+<text top="542" left="775" width="9" height="7" font="6">−</text>
+<text top="545" left="791" width="46" height="14" font="4">is quite</text>
+<text top="562" left="470" width="367" height="14" font="4">strong, and [10]-[12] explored several ways to weaken this</text>
+<text top="580" left="470" width="98" height="14" font="4">assumption. For</text>
+<text top="580" left="573" width="264" height="15" font="4">Σ with at least n − 2p distinct ﬁnite stable</text>
+<text top="598" left="470" width="368" height="14" font="4">zeros, the above method can be used to constrain the output</text>
+<text top="616" left="470" width="202" height="14" font="4">to have 2 modes per component:</text>
+<text top="673" left="533" width="6" height="14" font="4">ǫ</text>
+<text top="673" left="539" width="33" height="15" font="4">(t) =</text>
+<text top="640" left="576" width="10" height="7" font="4"></text>
+<text top="666" left="576" width="10" height="7" font="4"></text>
+<text top="675" left="576" width="10" height="7" font="4"></text>
+<text top="684" left="576" width="10" height="7" font="4"></text>
+<text top="694" left="576" width="10" height="7" font="4"></text>
+<text top="641" left="589" width="10" height="14" font="4">α</text>
+<text top="647" left="599" width="6" height="7" font="6">1</text>
+<text top="647" left="604" width="10" height="9" font="6">,1</text>
+<text top="641" left="617" width="7" height="14" font="4">e</text>
+<text top="639" left="624" width="7" height="9" font="6">λ</text>
+<text top="643" left="631" width="14" height="8" font="10">1,1</text>
+<text top="639" left="645" width="5" height="9" font="6">t</text>
+<text top="641" left="654" width="24" height="15" font="4">+ α</text>
+<text top="647" left="679" width="6" height="7" font="6">1</text>
+<text top="647" left="685" width="10" height="9" font="6">,2</text>
+<text top="641" left="697" width="7" height="14" font="4">e</text>
+<text top="639" left="704" width="7" height="9" font="6">λ</text>
+<text top="643" left="711" width="14" height="8" font="10">1,2</text>
+<text top="639" left="726" width="5" height="9" font="6">t</text>
+<text top="659" left="589" width="10" height="14" font="4">α</text>
+<text top="665" left="599" width="6" height="7" font="6">2</text>
+<text top="665" left="604" width="10" height="9" font="6">,1</text>
+<text top="659" left="617" width="7" height="14" font="4">e</text>
+<text top="657" left="624" width="7" height="9" font="6">λ</text>
+<text top="661" left="631" width="14" height="8" font="10">2,1</text>
+<text top="657" left="645" width="5" height="9" font="6">t</text>
+<text top="659" left="654" width="24" height="15" font="4">+ α</text>
+<text top="665" left="679" width="6" height="7" font="6">2</text>
+<text top="665" left="685" width="10" height="9" font="6">,2</text>
+<text top="659" left="697" width="7" height="14" font="4">e</text>
+<text top="657" left="704" width="7" height="9" font="6">λ</text>
+<text top="661" left="711" width="14" height="8" font="10">2,2</text>
+<text top="657" left="726" width="5" height="9" font="6">t</text>
+<text top="676" left="658" width="4" height="19" font="4">..</text>
+<text top="688" left="658" width="4" height="14" font="4">.</text>
+<text top="705" left="588" width="10" height="14" font="4">α</text>
+<text top="711" left="598" width="16" height="9" font="6">p,1</text>
+<text top="705" left="617" width="7" height="14" font="4">e</text>
+<text top="703" left="624" width="7" height="9" font="6">λ</text>
+<text top="707" left="631" width="14" height="8" font="10">p,1</text>
+<text top="703" left="645" width="5" height="9" font="6">t</text>
+<text top="705" left="654" width="24" height="15" font="4">+ α</text>
+<text top="711" left="679" width="16" height="9" font="6">p,2</text>
+<text top="705" left="698" width="7" height="14" font="4">e</text>
+<text top="703" left="705" width="7" height="9" font="6">λ</text>
+<text top="707" left="712" width="14" height="8" font="10">p,2</text>
+<text top="703" left="726" width="5" height="9" font="6">t</text>
+<text top="640" left="734" width="10" height="7" font="4"></text>
+<text top="666" left="734" width="10" height="7" font="4"></text>
+<text top="675" left="734" width="10" height="7" font="4"></text>
+<text top="684" left="734" width="10" height="7" font="4"></text>
+<text top="694" left="734" width="10" height="7" font="4"></text>
+<text top="731" left="470" width="367" height="14" font="4">As the sum of two modes can change sign, it is clear</text>
+<text top="749" left="470" width="357" height="14" font="4">that this time overshoot can be avoided only for some x</text>
+<text top="754" left="827" width="6" height="7" font="6">0</text>
+<text top="749" left="833" width="4" height="14" font="4">.</text>
+<text top="767" left="470" width="367" height="14" font="4">More generally, for systems with fewer invariant zeros in</text>
+<text top="784" left="470" width="11" height="11" font="4">C</text>
+<text top="782" left="481" width="9" height="7" font="6">−</text>
+<text top="785" left="491" width="347" height="14" font="4">, the eigenstructure approach could be used to constrain</text>
+<text top="802" left="470" width="368" height="14" font="4">the outputs to be the sum of three or more exponentials.</text>
+<text top="820" left="470" width="367" height="14" font="4">Since overshoot corresponds to the error terms having a real</text>
+<text top="838" left="470" width="368" height="14" font="4">positive root, [10] gave necessary and sufﬁcient conditions</text>
+<text top="856" left="470" width="367" height="14" font="4">under which sum of two or more exponential functions of</text>
+<text top="874" left="470" width="53" height="14" font="4">the form</text>
+<text top="901" left="546" width="7" height="14" font="4">f</text>
+<text top="901" left="555" width="46" height="15" font="4">(t) = α</text>
+<text top="907" left="601" width="6" height="7" font="6">1</text>
+<text top="901" left="608" width="7" height="14" font="4">e</text>
+<text top="899" left="615" width="7" height="9" font="6">λ</text>
+<text top="902" left="622" width="5" height="8" font="10">1</text>
+<text top="899" left="628" width="5" height="9" font="6">t</text>
+<text top="901" left="636" width="60" height="15" font="4">+ · · · + α</text>
+<text top="907" left="696" width="7" height="9" font="6">n</text>
+<text top="901" left="705" width="7" height="14" font="4">e</text>
+<text top="899" left="712" width="7" height="9" font="6">λ</text>
+<text top="902" left="719" width="7" height="6" font="10">n</text>
+<text top="899" left="726" width="5" height="9" font="6">t</text>
+<text top="929" left="470" width="245" height="14" font="4">would have a root, in terms of the α</text>
+<text top="934" left="715" width="4" height="9" font="6">i</text>
+<text top="929" left="727" width="38" height="14" font="4">and λ</text>
+<text top="934" left="765" width="4" height="9" font="6">i</text>
+<text top="929" left="770" width="67" height="14" font="4">. Similarly</text>
+<text top="947" left="470" width="367" height="14" font="4">undershoot corresponds to the error term returning to its</text>
+<text top="965" left="470" width="160" height="14" font="4">initial value at some t &gt;</text>
+<text top="964" left="636" width="170" height="15" font="4">0, i.e. the existence of a ¯</text>
+<text top="965" left="799" width="24" height="14" font="4">t &gt;</text>
+<text top="964" left="829" width="7" height="15" font="4">0</text>
+<text top="983" left="470" width="67" height="14" font="4">such that ǫ</text>
+<text top="982" left="537" width="61" height="15" font="4">(0) = ǫ(¯</text>
+<text top="982" left="590" width="5" height="14" font="4">t</text>
+<text top="982" left="596" width="241" height="15" font="4">). The papers [11]-[12] gave necessary</text>
+<text top="1001" left="470" width="276" height="14" font="4">and sufﬁcient conditions under which such ¯</text>
+<text top="1000" left="738" width="85" height="14" font="4">t would exist.</text>
+<text top="1019" left="485" width="350" height="14" font="4">Thus the design method for obtaining the gain matrix F</text>
+<text top="1037" left="470" width="320" height="14" font="4">to avoid overshoot and/or undershoot for a given x</text>
+<text top="1042" left="790" width="6" height="7" font="6">0</text>
+<text top="1037" left="802" width="34" height="14" font="4">and r</text>
+<text top="1054" left="470" width="136" height="14" font="4">can be summarized as</text>
+<text top="1075" left="485" width="284" height="14" font="4">1) Choose a set of candidate closed loop poles</text>
+<text top="1074" left="772" width="65" height="15" font="4">L, consist-</text>
+<text top="1093" left="506" width="289" height="14" font="4">ing of all the available invariant zeros from C</text>
+<text top="1091" left="796" width="9" height="7" font="6">−</text>
+<text top="1093" left="806" width="31" height="14" font="4">, and</text>
+<text top="1125" left="449" width="20" height="11" font="9"><b>472</b></text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="11" size="6" family="Times" color="#000000"/>
+	<fontspec id="12" size="8" family="Times" color="#000000"/>
+<text top="89" left="117" width="331" height="14" font="4">the remaining modes selected from within a desired</text>
+<text top="107" left="117" width="46" height="14" font="4">interval</text>
+<text top="106" left="168" width="60" height="15" font="4">[a, b] ⊂ R</text>
+<text top="104" left="228" width="9" height="7" font="6">−</text>
+<text top="107" left="238" width="4" height="14" font="4">.</text>
+<text top="125" left="96" width="353" height="14" font="4">2) Solve pencil matrix equations (6)-(7) to obtain eigen-</text>
+<text top="143" left="117" width="43" height="14" font="4">vectors</text>
+<text top="142" left="166" width="249" height="15" font="4">V. Check that V is linearly independent.</text>
+<text top="160" left="96" width="93" height="14" font="4">3) For given x</text>
+<text top="166" left="188" width="6" height="7" font="6">0</text>
+<text top="160" left="195" width="170" height="14" font="4">, obtain coordinate vector α</text>
+<text top="159" left="369" width="25" height="15" font="4">= V</text>
+<text top="158" left="397" width="15" height="7" font="6">−1</text>
+<text top="159" left="413" width="14" height="15" font="4">(x</text>
+<text top="166" left="427" width="6" height="7" font="6">0</text>
+<text top="159" left="436" width="12" height="15" font="4">−</text>
+<text top="178" left="117" width="9" height="14" font="4">x</text>
+<text top="184" left="126" width="11" height="9" font="6">ss</text>
+<text top="177" left="138" width="188" height="15" font="4">) and hence the error term ǫ</text>
+<text top="184" left="326" width="4" height="9" font="6">i</text>
+<text top="177" left="331" width="117" height="15" font="4">(t) in each output</text>
+<text top="196" left="117" width="268" height="14" font="4">component as the sum of real exponentials.</text>
+<text top="214" left="96" width="352" height="14" font="4">4) For each component of the error term, apply the tests</text>
+<text top="232" left="117" width="141" height="14" font="4">to the corresponding α</text>
+<text top="237" left="259" width="4" height="9" font="6">i</text>
+<text top="232" left="269" width="36" height="14" font="4">and λ</text>
+<text top="237" left="305" width="4" height="9" font="6">i</text>
+<text top="232" left="316" width="133" height="14" font="4">to see if overshoot or</text>
+<text top="250" left="117" width="108" height="14" font="4">undershoot occur.</text>
+<text top="268" left="96" width="119" height="14" font="4">5) Keep searching</text>
+<text top="267" left="224" width="224" height="15" font="4">[a, b] until a satisfactory set L is</text>
+<text top="286" left="117" width="331" height="14" font="4">obtained that avoids overshoot/undershoot in all output</text>
+<text top="304" left="117" width="331" height="14" font="4">components. Then the feedback (4) law using the gain</text>
+<text top="322" left="117" width="186" height="14" font="4">matrix F associated with these</text>
+<text top="321" left="307" width="141" height="15" font="4">L will yield the desired</text>
+<text top="340" left="117" width="298" height="14" font="4">step response transient behaviour for the given x</text>
+<text top="345" left="415" width="6" height="7" font="6">0</text>
+<text top="340" left="427" width="22" height="14" font="4">and</text>
+<text top="357" left="117" width="11" height="14" font="4">r.</text>
+<text top="379" left="81" width="368" height="14" font="4">The conditions on overshoot and undershoot are independent</text>
+<text top="397" left="81" width="367" height="14" font="4">of one another, and thus if only avoiding overshooting is im-</text>
+<text top="415" left="81" width="368" height="14" font="4">portant, we may apply only the tests applicable to overshoot;</text>
+<text top="432" left="81" width="367" height="14" font="4">alternatively we may seek to avoid undershoot only. The</text>
+<text top="450" left="81" width="216" height="14" font="4">design method searches for suitable</text>
+<text top="449" left="302" width="147" height="15" font="4">L and V, but there is no</text>
+<text top="468" left="81" width="335" height="14" font="4">guarantee that they can always be found, for any given x</text>
+<text top="473" left="416" width="6" height="7" font="6">0</text>
+<text top="468" left="427" width="22" height="14" font="4">and</text>
+<text top="486" left="81" width="55" height="14" font="4">r, even if</text>
+<text top="485" left="140" width="308" height="15" font="4">[a, b] = (−∞, 0) is chosen. Nonetheless in practice</text>
+<text top="504" left="81" width="367" height="14" font="4">the search algorithm provides an effective tool for obtaining</text>
+<text top="522" left="81" width="367" height="14" font="4">a nonundershooting (or nonundershooting) linear controller</text>
+<text top="540" left="81" width="368" height="14" font="4">when they do exist, due to the simplicity of the output</text>
+<text top="558" left="81" width="368" height="14" font="4">function. Also the mathematical tests by which candidate</text>
+<text top="576" left="81" width="367" height="14" font="4">sets of closed loop poles may be tested for suitability are</text>
+<text top="594" left="81" width="367" height="14" font="4">computationally very tractable, allowing for a large number</text>
+<text top="612" left="81" width="167" height="14" font="4">of candidate sets of poles</text>
+<text top="611" left="256" width="192" height="15" font="4">L to be tested in an efﬁcient</text>
+<text top="630" left="81" width="302" height="14" font="4">manner. Very recently a public domain MATLAB</text>
+<text top="629" left="386" width="5" height="7" font="10">R</text>
+<text top="630" left="399" width="50" height="14" font="4">toolbox,</text>
+<text top="648" left="81" width="368" height="14" font="4">known as <b>NOUS</b>, (NonOvershooting and UnderShooting)</text>
+<text top="665" left="81" width="367" height="14" font="4">has been developed to implement the search method of</text>
+<text top="683" left="81" width="161" height="14" font="4">papers [10]-[11]; see [13].</text>
+<text top="712" left="98" width="38" height="14" font="4">IV. N</text>
+<text top="714" left="137" width="294" height="11" font="5">ONMINIMUM PHASE ZEROS AND UNDERSHOOT</text>
+<text top="734" left="96" width="352" height="14" font="4">In this section we note several results relating real NMP</text>
+<text top="752" left="81" width="367" height="14" font="4">zeros to the transient performance of SISO systems, and</text>
+<text top="770" left="81" width="368" height="14" font="4">employ the above design method to investigate the whether</text>
+<text top="788" left="81" width="367" height="14" font="4">such relationships must also hold for transient behaviour of</text>
+<text top="806" left="81" width="233" height="14" font="4">MIMO systems with real NMP zeros.</text>
+<text top="824" left="96" width="352" height="14" font="4">Perhaps one of the best known classic results on the</text>
+<text top="842" left="81" width="367" height="14" font="4">relation between nonminimum phase zeros and the transient</text>
+<text top="860" left="81" width="158" height="14" font="4">response is the following:</text>
+<text top="878" left="96" width="82" height="13" font="8"><i>Theorem 4.1:</i></text>
+<text top="878" left="185" width="44" height="14" font="4">[8] Let</text>
+<text top="877" left="235" width="214" height="15" font="4">Σ be an LTI stable strictly proper</text>
+<text top="896" left="81" width="367" height="14" font="4">SISO system with at least one real NMP zero. Then the step</text>
+<text top="913" left="81" width="209" height="14" font="4">response must exhibit undershoot.</text>
+<text top="931" left="81" width="367" height="14" font="4">A natural generalization of this SISO result is the following</text>
+<text top="949" left="81" width="189" height="14" font="4">conjecture for MIMO systems:</text>
+<text top="967" left="96" width="95" height="13" font="8"><i>Conjecture 4.1:</i></text>
+<text top="967" left="198" width="20" height="14" font="4">Let</text>
+<text top="966" left="226" width="223" height="15" font="4">Σ be an LTI stable strictly proper</text>
+<text top="985" left="81" width="367" height="14" font="4">square MIMO system with p inputs/outputs, and p real NMP</text>
+<text top="1003" left="81" width="367" height="14" font="4">zeros. Then the step response must exhibit undershoot in at</text>
+<text top="1021" left="81" width="173" height="14" font="4">least one output component.</text>
+<text top="1039" left="81" width="110" height="14" font="4">Clearly, the case p</text>
+<text top="1038" left="195" width="253" height="15" font="4">= 1 is given by Theorem 4.1. We show by</text>
+<text top="1057" left="81" width="367" height="14" font="4">an example that this conjecture is false for MIMO systems,</text>
+<text top="1075" left="81" width="65" height="14" font="4">in general.</text>
+<text top="1093" left="96" width="81" height="13" font="8"><i>Example 4.1:</i></text>
+<text top="1093" left="185" width="215" height="14" font="4">Consider the strictly proper system</text>
+<text top="1092" left="405" width="11" height="15" font="4">Σ</text>
+<text top="1098" left="416" width="6" height="7" font="6">1</text>
+<text top="1093" left="422" width="4" height="14" font="4">:</text>
+<text top="90" left="470" width="278" height="12" font="4">A = [0 -5 0 6 8 0;0 0 0 -2 0 0;</text>
+<text top="107" left="515" width="215" height="12" font="4">6 0 0 0 0 0;0 0 0 0 0 0;</text>
+<text top="125" left="515" width="233" height="12" font="4">0 -1 0 -6 3 0;0 0 0 6 0 9]</text>
+<text top="143" left="470" width="233" height="12" font="4">B = [1 0 0; 7 0 9; 0 4 -5;</text>
+<text top="161" left="515" width="206" height="12" font="4">0 0 7; 0 2 10; -2 -1 0]</text>
+<text top="179" left="470" width="170" height="12" font="4">C = [0 7 0 -2 -3 0;</text>
+<text top="197" left="515" width="126" height="12" font="4">0 0 -9 -1 0 0;</text>
+<text top="215" left="515" width="45" height="12" font="4">0 0 7</text>
+<text top="215" left="577" width="9" height="12" font="4">6</text>
+<text top="215" left="604" width="36" height="12" font="4">5 0]</text>
+<text top="233" left="470" width="215" height="12" font="4">D = [0 0 0;0 0 0; 0 0 0]</text>
+<text top="252" left="470" width="44" height="14" font="4">System</text>
+<text top="251" left="521" width="11" height="15" font="4">Σ</text>
+<text top="257" left="532" width="6" height="7" font="6">1</text>
+<text top="252" left="546" width="36" height="14" font="4">has n</text>
+<text top="251" left="590" width="248" height="15" font="4">= 6 states, p = 3 inputs and outputs,</text>
+<text top="270" left="470" width="35" height="14" font="4">and p</text>
+<text top="269" left="510" width="327" height="15" font="4">= 3 real NMP zeros, at 0.5551, 2.4547 and 9.0000.</text>
+<text top="288" left="470" width="367" height="14" font="4">We assume zero initial conditions and a step reference of</text>
+<text top="305" left="470" width="57" height="15" font="4">[1, 1, 1]</text>
+<text top="303" left="527" width="7" height="9" font="6">T</text>
+<text top="306" left="536" width="301" height="14" font="4">. Using the <b>NOUS </b>toolbox [13] to seek a non-</text>
+<text top="324" left="470" width="359" height="14" font="4">undershooting response, we obtained the gain matrix F as</text>
+<text top="344" left="470" width="27" height="12" font="4">F =</text>
+<text top="362" left="488" width="45" height="12" font="4">[24.1</text>
+<text top="362" left="550" width="99" height="12" font="4">-38.0 -20.9</text>
+<text top="362" left="676" width="36" height="12" font="4">27.5</text>
+<text top="362" left="730" width="99" height="12" font="4">2.1 -107.7;</text>
+<text top="380" left="488" width="108" height="12" font="4">-143.2 198.5</text>
+<text top="380" left="613" width="144" height="12" font="4">85.5 -264.3 66.3</text>
+<text top="380" left="775" width="54" height="12" font="4">681.7;</text>
+<text top="398" left="488" width="45" height="12" font="4">-88.0</text>
+<text top="398" left="550" width="45" height="12" font="4">111.9</text>
+<text top="398" left="613" width="144" height="12" font="4">45.9 -179.7 51.0</text>
+<text top="398" left="775" width="54" height="12" font="4">378.1]</text>
+<text top="417" left="470" width="211" height="14" font="4">so that the control law (4), with u</text>
+<text top="422" left="681" width="11" height="9" font="6">ss</text>
+<text top="417" left="698" width="35" height="14" font="4">and x</text>
+<text top="422" left="734" width="11" height="9" font="6">ss</text>
+<text top="417" left="751" width="86" height="14" font="4">obtained from</text>
+<text top="435" left="470" width="367" height="14" font="4">solving (2)-(3), yields transient response curves as shown in</text>
+<text top="453" left="470" width="367" height="14" font="4">Figure 1. The gain matrix F places the closed-loop poles</text>
+<text top="607" left="543" width="5" height="9" font="11">0</text>
+<text top="607" left="593" width="13" height="9" font="11">0.2</text>
+<text top="607" left="646" width="13" height="9" font="11">0.4</text>
+<text top="607" left="699" width="13" height="9" font="11">0.6</text>
+<text top="607" left="753" width="13" height="9" font="11">0.8</text>
+<text top="607" left="810" width="5" height="9" font="11">1</text>
+<text top="599" left="511" width="5" height="9" font="11">0</text>
+<text top="578" left="506" width="10" height="9" font="11">10</text>
+<text top="558" left="506" width="10" height="9" font="11">20</text>
+<text top="538" left="506" width="10" height="9" font="11">30</text>
+<text top="509" left="640" width="51" height="11" font="5">Output #1</text>
+<text top="617" left="628" width="74" height="10" font="6">Time (seconds)</text>
+<text top="599" left="500" width="0" height="10" font="12">Output Magnitude</text>
+<text top="728" left="543" width="5" height="9" font="11">0</text>
+<text top="728" left="593" width="13" height="9" font="11">0.2</text>
+<text top="728" left="646" width="13" height="9" font="11">0.4</text>
+<text top="728" left="699" width="13" height="9" font="11">0.6</text>
+<text top="728" left="753" width="13" height="9" font="11">0.8</text>
+<text top="728" left="810" width="5" height="9" font="11">1</text>
+<text top="718" left="511" width="5" height="9" font="11">0</text>
+<text top="701" left="511" width="5" height="9" font="11">2</text>
+<text top="685" left="511" width="5" height="9" font="11">4</text>
+<text top="669" left="511" width="5" height="9" font="11">6</text>
+<text top="652" left="511" width="5" height="9" font="11">8</text>
+<text top="630" left="640" width="51" height="11" font="5">Output #2</text>
+<text top="738" left="628" width="74" height="10" font="6">Time (seconds)</text>
+<text top="720" left="505" width="0" height="10" font="12">Output Magnitude</text>
+<text top="849" left="543" width="5" height="9" font="11">0</text>
+<text top="849" left="593" width="13" height="9" font="11">0.2</text>
+<text top="849" left="646" width="13" height="9" font="11">0.4</text>
+<text top="849" left="699" width="13" height="9" font="11">0.6</text>
+<text top="849" left="753" width="13" height="9" font="11">0.8</text>
+<text top="849" left="810" width="5" height="9" font="11">1</text>
+<text top="840" left="511" width="5" height="9" font="11">0</text>
+<text top="822" left="511" width="5" height="9" font="11">5</text>
+<text top="805" left="506" width="10" height="9" font="11">10</text>
+<text top="787" left="506" width="10" height="9" font="11">15</text>
+<text top="769" left="506" width="10" height="9" font="11">20</text>
+<text top="751" left="640" width="51" height="11" font="5">Output #3</text>
+<text top="859" left="628" width="74" height="10" font="6">Time (seconds)</text>
+<text top="841" left="500" width="0" height="10" font="12">Output Magnitude</text>
+<text top="912" left="569" width="32" height="11" font="5">Fig. 1.</text>
+<text top="912" left="614" width="118" height="12" font="5">Outputs from System Σ</text>
+<text top="915" left="732" width="5" height="6" font="11">1</text>
+<text top="949" left="470" width="11" height="14" font="4">at</text>
+<text top="949" left="488" width="349" height="15" font="4">{−50, −47, −42, −40, −7, −6}, and naturally the</text>
+<text top="967" left="470" width="367" height="14" font="4">closed-loop system has the same zeros as the open loop</text>
+<text top="985" left="470" width="367" height="14" font="4">system, since state feedback has been used. Thus the closed-</text>
+<text top="1003" left="470" width="340" height="14" font="4">loop system is stable, strictly proper and square, with p</text>
+<text top="1002" left="814" width="23" height="15" font="4">= 3</text>
+<text top="1021" left="470" width="367" height="14" font="4">real NMP zeros. We see that with this control law, the step</text>
+<text top="1039" left="470" width="368" height="14" font="4">response does not exhibit undershoot in any of its outputs,</text>
+<text top="1057" left="470" width="368" height="14" font="4">indicating the conjecture is not valid in general. The authors</text>
+<text top="1075" left="470" width="367" height="14" font="4">have also obtained examples to disprove the conjecture for</text>
+<text top="1093" left="470" width="68" height="14" font="4">the cases p</text>
+<text top="1092" left="542" width="138" height="15" font="4">= 2, p = 4 and p = 5.</text>
+<text top="1125" left="449" width="20" height="11" font="9"><b>473</b></text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="13" size="7" family="Times" color="#000000"/>
+	<fontspec id="14" size="7" family="Times" color="#000000"/>
+<text top="89" left="106" width="32" height="14" font="4">V. N</text>
+<text top="91" left="139" width="284" height="11" font="5">ONMINIMUM PHASE ZEROS AND OVERSHOOT</text>
+<text top="111" left="96" width="353" height="14" font="4">Recently [14] established that an LTI stable strictly proper</text>
+<text top="129" left="81" width="368" height="14" font="4">SISO system with at least two real NMP zeros must exhibit</text>
+<text top="147" left="81" width="367" height="14" font="4">overshoot in its step response if the settling time is sufﬁ-</text>
+<text top="165" left="81" width="80" height="14" font="4">ciently short.</text>
+<text top="183" left="96" width="82" height="13" font="8"><i>Theorem 5.1:</i></text>
+<text top="183" left="185" width="50" height="14" font="4">[14] Let</text>
+<text top="182" left="240" width="208" height="15" font="4">Σ be an LTI stable strictly proper</text>
+<text top="201" left="81" width="165" height="14" font="4">SISO system, and assume</text>
+<text top="200" left="254" width="194" height="15" font="4">Σ has two real NMP zeros at</text>
+<text top="219" left="81" width="7" height="14" font="4">s</text>
+<text top="218" left="96" width="26" height="15" font="4">= z</text>
+<text top="224" left="122" width="6" height="7" font="6">1</text>
+<text top="219" left="136" width="36" height="14" font="4">and s</text>
+<text top="218" left="180" width="26" height="15" font="4">= z</text>
+<text top="224" left="206" width="6" height="7" font="6">2</text>
+<text top="219" left="220" width="228" height="14" font="4">and any number of additional zeros</text>
+<text top="237" left="81" width="290" height="14" font="4">located anywhere in the complex plane. Let t</text>
+<text top="242" left="371" width="6" height="9" font="6">s</text>
+<text top="237" left="384" width="65" height="14" font="4">denote the</text>
+<text top="254" left="81" width="174" height="15" font="4">2% settling time, assume x</text>
+<text top="260" left="255" width="6" height="7" font="6">0</text>
+<text top="254" left="268" width="68" height="15" font="4">= 0 and y</text>
+<text top="260" left="337" width="12" height="7" font="6">∞</text>
+<text top="254" left="356" width="12" height="14" font="4">&gt;</text>
+<text top="254" left="375" width="74" height="15" font="4">0. Then the</text>
+<text top="273" left="81" width="71" height="14" font="4">overshoot y</text>
+<text top="278" left="152" width="12" height="9" font="6">os</text>
+<text top="273" left="170" width="153" height="14" font="4">satisﬁes the lower bound</text>
+<text top="297" left="152" width="7" height="14" font="4">y</text>
+<text top="303" left="159" width="12" height="9" font="6">os</text>
+<text top="317" left="152" width="7" height="14" font="4">y</text>
+<text top="323" left="159" width="12" height="7" font="6">∞</text>
+<text top="307" left="178" width="12" height="15" font="4">=</text>
+<text top="297" left="220" width="27" height="15" font="4">0.98</text>
+<text top="317" left="206" width="7" height="14" font="4">e</text>
+<text top="317" left="213" width="6" height="9" font="6">z</text>
+<text top="320" left="219" width="5" height="8" font="10">2</text>
+<text top="317" left="225" width="5" height="9" font="6">t</text>
+<text top="320" left="229" width="5" height="6" font="10">s</text>
+<text top="317" left="239" width="22" height="15" font="4">− 1</text>
+<text top="297" left="290" width="33" height="15" font="4">1 − z</text>
+<text top="303" left="322" width="6" height="7" font="6">1</text>
+<text top="297" left="329" width="5" height="14" font="4">t</text>
+<text top="303" left="334" width="6" height="9" font="6">s</text>
+<text top="317" left="302" width="7" height="14" font="4">z</text>
+<text top="323" left="309" width="6" height="7" font="6">1</text>
+<text top="317" left="316" width="5" height="14" font="4">t</text>
+<text top="323" left="321" width="6" height="9" font="6">s</text>
+<text top="307" left="357" width="23" height="15" font="4">− 1</text>
+<text top="308" left="431" width="18" height="14" font="4">(8)</text>
+<text top="342" left="81" width="140" height="14" font="4">For sufﬁciently small t</text>
+<text top="347" left="221" width="6" height="9" font="6">s</text>
+<text top="342" left="228" width="221" height="14" font="4">, the bound in (8) is positive, so the</text>
+<text top="360" left="81" width="303" height="14" font="4">step response necessarily exhibits overshoot. As t</text>
+<text top="365" left="384" width="6" height="9" font="6">s</text>
+<text top="359" left="395" width="54" height="15" font="4">→ 0, the</text>
+<text top="378" left="81" width="91" height="14" font="4">bound tends to</text>
+<text top="377" left="177" width="19" height="15" font="4">∞.</text>
+<text top="396" left="81" width="367" height="14" font="4">We give an example to show that this does not generalize to</text>
+<text top="414" left="81" width="99" height="14" font="4">MIMO systems.</text>
+<text top="432" left="96" width="81" height="13" font="8"><i>Example 5.1:</i></text>
+<text top="432" left="185" width="54" height="14" font="4">Consider</text>
+<text top="431" left="244" width="11" height="15" font="4">Σ</text>
+<text top="437" left="255" width="6" height="7" font="6">2</text>
+<text top="432" left="267" width="27" height="14" font="4">with</text>
+<text top="451" left="81" width="216" height="12" font="4">A = [-4,5,0,0;-7,0,-5,0;</text>
+<text top="469" left="126" width="171" height="12" font="4">0,-10,4,0;-3,0,0,0]</text>
+<text top="487" left="81" width="234" height="12" font="4">B = [-2,0;0,-2;-4,-4;-1,0]</text>
+<text top="505" left="81" width="198" height="12" font="4">C = [0,7,0,5;-2,0,0,0]</text>
+<text top="523" left="81" width="126" height="12" font="4">D = [0,0;0,0;]</text>
+<text top="540" left="81" width="44" height="14" font="4">System</text>
+<text top="539" left="131" width="11" height="15" font="4">Σ</text>
+<text top="545" left="142" width="6" height="7" font="6">2</text>
+<text top="540" left="154" width="169" height="14" font="4">has two real NMP zeros at</text>
+<text top="539" left="329" width="119" height="15" font="4">1.7857 and 14. We</text>
+<text top="558" left="81" width="317" height="14" font="4">assume zero initial conditions and a step reference of</text>
+<text top="557" left="401" width="34" height="15" font="4">[1, 1]</text>
+<text top="555" left="435" width="7" height="9" font="6">T</text>
+<text top="558" left="444" width="4" height="14" font="4">.</text>
+<text top="575" left="81" width="50" height="14" font="4">Using y</text>
+<text top="581" left="131" width="12" height="7" font="6">∞</text>
+<text top="575" left="151" width="291" height="15" font="4">= 1, we solve (8) for the 2% settling time t</text>
+<text top="581" left="442" width="6" height="9" font="6">s</text>
+<text top="593" left="81" width="74" height="14" font="4">subject to y</text>
+<text top="599" left="155" width="12" height="9" font="6">os</text>
+<text top="593" left="173" width="183" height="15" font="4">= 0. Since we may denote z</text>
+<text top="599" left="356" width="6" height="7" font="6">1</text>
+<text top="593" left="369" width="35" height="14" font="4">and z</text>
+<text top="599" left="403" width="6" height="7" font="6">2</text>
+<text top="593" left="416" width="32" height="14" font="4">to be</text>
+<text top="611" left="81" width="344" height="14" font="4">either of the two real zeros, we obtain two solutions, t</text>
+<text top="616" left="425" width="6" height="9" font="6">s</text>
+<text top="610" left="436" width="12" height="15" font="4">=</text>
+<text top="628" left="81" width="81" height="15" font="4">0.1131 and t</text>
+<text top="634" left="162" width="6" height="9" font="6">s</text>
+<text top="628" left="174" width="274" height="15" font="4">= 0.0636. By Theorem 5.1, a SISO system</text>
+<text top="647" left="81" width="367" height="14" font="4">with these two zeros must overshoot if the 2% settling time</text>
+<text top="665" left="81" width="81" height="14" font="4">is less than t</text>
+<text top="670" left="162" width="6" height="9" font="6">s</text>
+<text top="664" left="173" width="275" height="15" font="4">= 0.1131. Using the <b>NOUS </b>toolbox to seek</text>
+<text top="683" left="81" width="365" height="14" font="4">a nonovershooting response, we obtained the gain matrix F</text>
+<text top="701" left="81" width="12" height="14" font="4">as</text>
+<text top="720" left="90" width="99" height="12" font="4">F = [ -1465</text>
+<text top="720" left="206" width="36" height="12" font="4">-979</text>
+<text top="720" left="260" width="27" height="12" font="4">492</text>
+<text top="720" left="314" width="45" height="12" font="4">1376;</text>
+<text top="738" left="153" width="36" height="12" font="4">4765</text>
+<text top="738" left="215" width="72" height="12" font="4">596 -199</text>
+<text top="738" left="305" width="54" height="12" font="4">-8752]</text>
+<text top="755" left="81" width="211" height="14" font="4">so that the control law (4), with u</text>
+<text top="760" left="292" width="11" height="9" font="6">ss</text>
+<text top="755" left="310" width="35" height="14" font="4">and x</text>
+<text top="760" left="345" width="11" height="9" font="6">ss</text>
+<text top="755" left="362" width="86" height="14" font="4">obtained from</text>
+<text top="773" left="81" width="367" height="14" font="4">solving (2)-(3), yields a transient responses as follows as</text>
+<text top="791" left="81" width="368" height="14" font="4">shown in Figure 2. We see that both outputs are nonover-</text>
+<text top="809" left="81" width="367" height="14" font="4">shooting, and achieve a 2% settling time of considerably less</text>
+<text top="827" left="81" width="36" height="14" font="4">than t</text>
+<text top="832" left="117" width="6" height="9" font="6">s</text>
+<text top="826" left="128" width="321" height="15" font="4">= 0.1131. Thus the bound in [14] for SISO systems</text>
+<text top="845" left="81" width="367" height="14" font="4">with two real nonminimum phase zeros does not necessarily</text>
+<text top="863" left="81" width="154" height="14" font="4">apply to MIMO systems.</text>
+<text top="891" left="84" width="40" height="14" font="4">VI. N</text>
+<text top="893" left="125" width="170" height="11" font="5">ONMINIMUM PHASE ZEROS</text>
+<text top="891" left="296" width="4" height="14" font="4">,</text>
+<text top="893" left="304" width="141" height="11" font="5">LOCAL EXTREMA AND</text>
+<text top="911" left="210" width="108" height="11" font="5">ZERO CROSSINGS</text>
+<text top="931" left="96" width="352" height="14" font="4">In [1], the number of local extrema (turning points) in the</text>
+<text top="949" left="81" width="367" height="14" font="4">step response of a SISO system was linked to the number of</text>
+<text top="967" left="81" width="83" height="14" font="4">system zeros:</text>
+<text top="985" left="96" width="82" height="13" font="8"><i>Theorem 6.1:</i></text>
+<text top="985" left="185" width="263" height="14" font="4">[1] For an asymptotically stable, strictly</text>
+<text top="1003" left="81" width="367" height="14" font="4">proper SISO system with only real poles and real zeros, the</text>
+<text top="1021" left="81" width="335" height="14" font="4">number of extrema in the step response (not including t</text>
+<text top="1020" left="420" width="28" height="15" font="4">= 0)</text>
+<text top="1039" left="81" width="367" height="14" font="4">is greater than or equal to the number of zeros to the right</text>
+<text top="1057" left="81" width="138" height="14" font="4">of the right-most pole.</text>
+<text top="1075" left="96" width="352" height="14" font="4">The transient curve is said to have a <i>zero crossing </i>if it</text>
+<text top="1093" left="81" width="212" height="14" font="4">crosses the time axis at some t &gt;</text>
+<text top="1092" left="299" width="150" height="15" font="4">0. In [2] a simple proof</text>
+<text top="192" left="502" width="21" height="8" font="11">−0.05</text>
+<text top="192" left="580" width="5" height="8" font="11">0</text>
+<text top="192" left="641" width="16" height="8" font="11">0.05</text>
+<text top="192" left="711" width="11" height="8" font="11">0.1</text>
+<text top="192" left="776" width="16" height="8" font="11">0.15</text>
+<text top="179" left="499" width="14" height="8" font="11">−40</text>
+<text top="161" left="499" width="14" height="8" font="11">−30</text>
+<text top="144" left="499" width="14" height="8" font="11">−20</text>
+<text top="126" left="499" width="14" height="8" font="11">−10</text>
+<text top="108" left="508" width="5" height="8" font="11">0</text>
+<text top="90" left="626" width="47" height="10" font="6">Output #1</text>
+<text top="202" left="615" width="68" height="9" font="13">Time (seconds)</text>
+<text top="179" left="493" width="0" height="9" font="14">Output Magnitude</text>
+<text top="315" left="502" width="21" height="8" font="11">−0.05</text>
+<text top="315" left="580" width="5" height="8" font="11">0</text>
+<text top="315" left="641" width="16" height="8" font="11">0.05</text>
+<text top="315" left="711" width="11" height="8" font="11">0.1</text>
+<text top="315" left="776" width="16" height="8" font="11">0.15</text>
+<text top="295" left="503" width="9" height="8" font="11">−6</text>
+<text top="280" left="503" width="9" height="8" font="11">−4</text>
+<text top="265" left="503" width="9" height="8" font="11">−2</text>
+<text top="251" left="508" width="5" height="8" font="11">0</text>
+<text top="236" left="508" width="5" height="8" font="11">2</text>
+<text top="213" left="626" width="47" height="10" font="6">Output #2</text>
+<text top="325" left="615" width="68" height="9" font="13">Time (seconds)</text>
+<text top="302" left="497" width="0" height="9" font="14">Output Magnitude</text>
+<text top="360" left="569" width="32" height="11" font="5">Fig. 2.</text>
+<text top="360" left="614" width="118" height="12" font="5">Outputs from System Σ</text>
+<text top="364" left="732" width="5" height="6" font="11">2</text>
+<text top="410" left="470" width="367" height="14" font="4">was given to show that a SISO system with a NMP real zero</text>
+<text top="428" left="470" width="321" height="14" font="4">must have a zero crossing. More generally, [5] gave</text>
+<text top="446" left="485" width="82" height="13" font="8"><i>Theorem 6.2:</i></text>
+<text top="446" left="574" width="263" height="14" font="4">[5] For an asymptotically stable, strictly</text>
+<text top="464" left="470" width="367" height="14" font="4">proper SISO system with only real poles and real zeros, the</text>
+<text top="482" left="470" width="367" height="14" font="4">number of zero crossings is equal to the number of positive</text>
+<text top="500" left="470" width="35" height="14" font="4">zeros.</text>
+<text top="518" left="485" width="352" height="14" font="4">We give an example to show that both these results do not</text>
+<text top="536" left="470" width="182" height="14" font="4">generalize to MIMO systems.</text>
+<text top="554" left="485" width="81" height="13" font="8"><i>Example 6.1:</i></text>
+<text top="554" left="573" width="54" height="14" font="4">Consider</text>
+<text top="553" left="633" width="11" height="15" font="4">Σ</text>
+<text top="559" left="643" width="6" height="7" font="6">3</text>
+<text top="554" left="655" width="27" height="14" font="4">with</text>
+<text top="573" left="470" width="377" height="12" font="4">A = [0 0 -3 0;0 0 0 4;0 6 -10 0;0 -10 0 0]</text>
+<text top="591" left="470" width="126" height="12" font="4">B = [-5 -5; -5</text>
+<text top="591" left="613" width="108" height="12" font="4">0;0 -2; 0 1]</text>
+<text top="609" left="470" width="224" height="12" font="4">C = [-4 0 -5 0;-4 0 -4 0]</text>
+<text top="627" left="470" width="117" height="12" font="4">D = [0 0;0 0]</text>
+<text top="644" left="470" width="44" height="14" font="4">System</text>
+<text top="643" left="519" width="11" height="15" font="4">Σ</text>
+<text top="649" left="530" width="6" height="7" font="6">3</text>
+<text top="644" left="541" width="165" height="14" font="4">has two real NMP zeros at</text>
+<text top="643" left="711" width="126" height="15" font="4">12.8151 and 2.1849.</text>
+<text top="662" left="470" width="367" height="14" font="4">We assume zero initial conditions and a step reference of</text>
+<text top="679" left="470" width="38" height="15" font="4">[1, 1]</text>
+<text top="677" left="508" width="7" height="9" font="6">T</text>
+<text top="680" left="517" width="320" height="14" font="4">. Using the <b>NOUS </b>toolbox to seek a monotonic</text>
+<text top="698" left="470" width="269" height="14" font="4">response, we obtained the gain matrix F as</text>
+<text top="717" left="470" width="27" height="12" font="4">F =</text>
+<text top="735" left="479" width="54" height="12" font="4">[-6.11</text>
+<text top="735" left="559" width="45" height="12" font="4">23.14</text>
+<text top="735" left="631" width="108" height="12" font="4">6.16 -25.37;</text>
+<text top="753" left="497" width="36" height="12" font="4">9.24</text>
+<text top="753" left="550" width="54" height="12" font="4">-15.62</text>
+<text top="753" left="622" width="45" height="12" font="4">-0.75</text>
+<text top="753" left="685" width="54" height="12" font="4">18.84]</text>
+<text top="770" left="470" width="211" height="14" font="4">so that the control law (4), with u</text>
+<text top="775" left="681" width="11" height="9" font="6">ss</text>
+<text top="770" left="698" width="35" height="14" font="4">and x</text>
+<text top="775" left="734" width="11" height="9" font="6">ss</text>
+<text top="770" left="751" width="86" height="14" font="4">obtained from</text>
+<text top="788" left="470" width="361" height="14" font="4">solving (2)-(3), yields a transient responses as in Figure 3.</text>
+<text top="806" left="485" width="353" height="14" font="4">We see that with this control law, the step response</text>
+<text top="824" left="470" width="367" height="14" font="4">is monotonic in both outputs. The gain matrix F places</text>
+<text top="842" left="470" width="147" height="14" font="4">the closed-loop poles at</text>
+<text top="841" left="622" width="215" height="15" font="4">{−41, −40, −35, −5} and thus the</text>
+<text top="860" left="470" width="367" height="14" font="4">closed-loop system is stable and strictly proper with only real</text>
+<text top="878" left="470" width="367" height="14" font="4">poles and zeros. This example shows that for MIMO systems,</text>
+<text top="896" left="470" width="367" height="14" font="4">the presence of real NMP system zeros does not imply the</text>
+<text top="914" left="470" width="326" height="14" font="4">outputs must exhibit local extrema or zero crossings.</text>
+<text top="944" left="593" width="45" height="14" font="4">VII. C</text>
+<text top="946" left="639" width="75" height="11" font="5">ONCLUSION</text>
+<text top="967" left="485" width="352" height="14" font="4">We have surveyed several results from the control sys-</text>
+<text top="985" left="470" width="367" height="14" font="4">tems literature on performance limitations arising from the</text>
+<text top="1003" left="470" width="367" height="14" font="4">presence of real minimum phase zeros. Examples have been</text>
+<text top="1021" left="470" width="367" height="14" font="4">given to show that these limitations can sometimes be cir-</text>
+<text top="1039" left="470" width="367" height="14" font="4">cumvented for MIMO systems when a suitable state feedback</text>
+<text top="1057" left="470" width="367" height="14" font="4">controller is used. The examples offer further insight into</text>
+<text top="1075" left="470" width="367" height="14" font="4">the role played by real nonminimum phase zeros on the</text>
+<text top="1093" left="470" width="367" height="14" font="4">transient performance of MIMO systems. Ongoing work by</text>
+<text top="1125" left="449" width="20" height="11" font="9"><b>474</b></text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="15" size="9" family="Times" color="#000000"/>
+	<fontspec id="16" size="9" family="Times" color="#000000"/>
+<text top="192" left="113" width="21" height="8" font="11">−0.05</text>
+<text top="192" left="162" width="5" height="8" font="11">0</text>
+<text top="192" left="195" width="16" height="8" font="11">0.05</text>
+<text top="192" left="236" width="11" height="8" font="11">0.1</text>
+<text top="192" left="272" width="16" height="8" font="11">0.15</text>
+<text top="192" left="312" width="11" height="8" font="11">0.2</text>
+<text top="192" left="349" width="16" height="8" font="11">0.25</text>
+<text top="192" left="389" width="11" height="8" font="11">0.3</text>
+<text top="173" left="119" width="5" height="8" font="11">0</text>
+<text top="148" left="112" width="11" height="8" font="11">0.5</text>
+<text top="124" left="119" width="5" height="8" font="11">1</text>
+<text top="90" left="237" width="47" height="10" font="6">Output #1</text>
+<text top="202" left="226" width="68" height="9" font="13">Time (seconds)</text>
+<text top="179" left="106" width="0" height="9" font="14">Output Magnitude</text>
+<text top="315" left="113" width="21" height="8" font="11">−0.05</text>
+<text top="315" left="162" width="5" height="8" font="11">0</text>
+<text top="315" left="195" width="16" height="8" font="11">0.05</text>
+<text top="315" left="236" width="11" height="8" font="11">0.1</text>
+<text top="315" left="272" width="16" height="8" font="11">0.15</text>
+<text top="315" left="312" width="11" height="8" font="11">0.2</text>
+<text top="315" left="349" width="16" height="8" font="11">0.25</text>
+<text top="315" left="389" width="11" height="8" font="11">0.3</text>
+<text top="296" left="119" width="5" height="8" font="11">0</text>
+<text top="271" left="112" width="11" height="8" font="11">0.5</text>
+<text top="247" left="119" width="5" height="8" font="11">1</text>
+<text top="213" left="237" width="47" height="10" font="6">Output #2</text>
+<text top="325" left="226" width="68" height="9" font="13">Time (seconds)</text>
+<text top="302" left="106" width="0" height="9" font="14">Output Magnitude</text>
+<text top="360" left="180" width="32" height="11" font="5">Fig. 3.</text>
+<text top="360" left="225" width="118" height="12" font="5">Outputs from System Σ</text>
+<text top="364" left="343" width="5" height="6" font="11">3</text>
+<text top="409" left="81" width="368" height="14" font="4">the authors is aimed at addressing the question of whether</text>
+<text top="427" left="81" width="367" height="14" font="4">a globally monotonic response can be obtained in terms of</text>
+<text top="445" left="81" width="265" height="14" font="4">structural properties of the system matrices</text>
+<text top="444" left="351" width="82" height="15" font="4">(A, B, C, D).</text>
+<text top="473" left="223" width="10" height="14" font="4">R</text>
+<text top="475" left="233" width="73" height="11" font="5">EFERENCES</text>
+<text top="497" left="93" width="355" height="11" font="5">[1] M. El-Khoury, O.D. Crisalle, and R. Longchamp, Inﬂuence of zero</text>
+<text top="511" left="114" width="334" height="11" font="5">locations on the number of step-response extrema, <i>Automatica</i>, vol.</text>
+<text top="524" left="114" width="124" height="11" font="5">29, pp. 1571-1574, 1993.</text>
+<text top="538" left="93" width="355" height="11" font="5">[2] J.B. Hoagg and D.S. Bernstein, Nonminimum-Phase Zeros, <i>IEEE</i></text>
+<text top="551" left="114" width="130" height="11" font="15"><i>Control Systems Magazine</i></text>
+<text top="551" left="244" width="90" height="11" font="5">, pp. 45–57, 2007.</text>
+<text top="91" left="482" width="355" height="11" font="5">[3] K. H. Johansson, Interaction bounds in multivariable control systems,</text>
+<text top="104" left="503" width="55" height="11" font="15"><i>Automatica</i></text>
+<text top="104" left="558" width="154" height="11" font="5">, Vol 38, pp. 1045–1051, 2002.</text>
+<text top="118" left="482" width="355" height="11" font="5">[4] K. Lau, R.H. Middleton and J.H. Braslavsky, Undershoot and Settling</text>
+<text top="131" left="503" width="334" height="11" font="5">Time Trade-offs for Nonminimum phase systems, <i>IEEE Transactions</i></text>
+<text top="145" left="503" width="106" height="11" font="15"><i>on Automatic Control</i></text>
+<text top="145" left="609" width="156" height="11" font="5">, vol. 48, pp. 1389–1393, 2003.</text>
+<text top="158" left="482" width="355" height="11" font="5">[5] B.A. Leon de la Barra, On undershoot in SISO systems, <i>IEEE</i></text>
+<text top="171" left="503" width="171" height="11" font="15"><i>Transactions on Automatic Control</i></text>
+<text top="171" left="674" width="142" height="11" font="5">, vol. 39, pp. 578-581, 1994.</text>
+<text top="185" left="482" width="355" height="11" font="5">[6] Lin, S.K and C.J. Fang, Nonovershooting and Monotone Nondecreas-</text>
+<text top="198" left="503" width="334" height="11" font="5">ing Step Responses of a Third-Order SISO Linear Systems, <i>IEEE</i></text>
+<text top="212" left="503" width="169" height="11" font="15"><i>Transactions on Automatic Control</i></text>
+<text top="212" left="672" width="165" height="11" font="5">, vol. 42(9), pp. 1299–1303, 1997.</text>
+<text top="225" left="482" width="355" height="11" font="5">[7] J. Maciejowski, <i>Multivariable Feedback Design</i>, Addison-Wesley,</text>
+<text top="239" left="503" width="27" height="11" font="5">1989.</text>
+<text top="252" left="482" width="355" height="11" font="5">[8] R.H. Middleton, Trade-offs in linear control system design, <i>Automat-</i></text>
+<text top="266" left="503" width="14" height="11" font="15"><i>ica</i></text>
+<text top="266" left="517" width="141" height="11" font="5">, vol 27, 1991, pp. 281–292.</text>
+<text top="279" left="482" width="355" height="11" font="5">[9] B.C. Moore, On the Flexibility Offered by State Feedback in Multi-</text>
+<text top="292" left="503" width="334" height="11" font="5">variable systems Beyond Closed Loop Eigenvalue Assignment, <i>IEEE</i></text>
+<text top="306" left="503" width="171" height="11" font="15"><i>Transactions on Automatic Control</i></text>
+<text top="306" left="674" width="158" height="11" font="5">, vol. 21(5), pp. 689–692, 1976.</text>
+<text top="319" left="476" width="361" height="11" font="5">[10] R. Schmid and L. Ntogramatzidis, A uniﬁed method for the design</text>
+<text top="333" left="503" width="334" height="11" font="5">of non-overshooting linear multivariable state-feedback tracking con-</text>
+<text top="346" left="503" width="198" height="11" font="5">trollers, <i>Automatica</i>, pp. 312–321, 2010.</text>
+<text top="360" left="476" width="361" height="11" font="5">[11] R. Schmid and L. Ntogramatzidis, Nonundershooting linear multi-</text>
+<text top="373" left="503" width="334" height="11" font="5">variable tracking controllers, <i>Proceedings 18th IFAC World Congress</i>,</text>
+<text top="387" left="503" width="89" height="11" font="5">Milan, Italy 2011.</text>
+<text top="400" left="476" width="361" height="11" font="5">[12] R. Schmid and L. Ntogramatzidis, The design of nonovershooting</text>
+<text top="414" left="503" width="334" height="11" font="5">and nonundershooting multivariable tracking controllers, submitted</text>
+<text top="427" left="503" width="146" height="11" font="5">to <i>Systems &amp; Control Letters</i>.</text>
+<text top="440" left="476" width="304" height="11" font="5">[13] A. Pandey and R. Schmid, <b>NOUS</b>: a MATLAB</text>
+<text top="439" left="782" width="5" height="7" font="10">R</text>
+<text top="440" left="800" width="36" height="11" font="5">toolbox</text>
+<text top="454" left="503" width="14" height="11" font="5">for</text>
+<text top="454" left="532" width="14" height="11" font="5">the</text>
+<text top="454" left="562" width="31" height="11" font="5">design</text>
+<text top="454" left="609" width="10" height="11" font="5">of</text>
+<text top="454" left="634" width="79" height="11" font="5">nonovershooting</text>
+<text top="454" left="729" width="17" height="11" font="5">and</text>
+<text top="454" left="762" width="75" height="11" font="5">nonundershoot-</text>
+<text top="467" left="503" width="15" height="11" font="5">ing</text>
+<text top="467" left="538" width="62" height="11" font="5">multivariable</text>
+<text top="467" left="620" width="39" height="11" font="5">tracking</text>
+<text top="467" left="679" width="54" height="11" font="5">controllers,</text>
+<text top="467" left="752" width="42" height="11" font="5">available</text>
+<text top="467" left="814" width="23" height="11" font="5">from</text>
+<text top="481" left="503" width="321" height="11" font="5">http://people.eng.unimelb.edu.au/rschmid/documents/NOUS1.0.zip</text>
+<text top="494" left="476" width="361" height="11" font="5">[14] J. Stewart and D.E. Davison, On Overshoot and Nonminimum</text>
+<text top="508" left="503" width="334" height="11" font="5">phase Zeros, <i>IEEE Transactions on Automatic Control</i>, vol. 51(8),</text>
+<text top="521" left="503" width="107" height="11" font="5">pp. 1378–1382, 2006.</text>
+<text top="1125" left="449" width="20" height="11" font="9"><b>475</b></text>
+</page>
+</pdf2xml>

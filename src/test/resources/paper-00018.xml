@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="0" size="9" family="Times" color="#000000"/>
+	<fontspec id="1" size="16" family="Times" color="#000000"/>
+	<fontspec id="2" size="18" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="13" family="Times" color="#000000"/>
+	<fontspec id="5" size="7" family="Times" color="#000000"/>
+	<fontspec id="6" size="7" family="Times" color="#000000"/>
+	<fontspec id="7" size="11" family="Times" color="#000000"/>
+	<fontspec id="8" size="11" family="Times" color="#000000"/>
+	<fontspec id="9" size="11" family="Times" color="#000000"/>
+	<fontspec id="10" size="7" family="Times" color="#000000"/>
+	<fontspec id="11" size="14" family="Times" color="#000000"/>
+	<fontspec id="12" size="8" family="Times" color="#ffffff"/>
+	<fontspec id="13" size="8" family="Times" color="#000000"/>
+<text top="63" left="66" width="449" height="12" font="0">Progress in NUCLEAR SCIENCE and TECHNOLOGY, Vol. 2, pp.700-705 (2011)</text>
+<text top="1167" left="74" width="5" height="12" font="0">c</text>
+<text top="1168" left="91" width="322" height="12" font="0">2011 Atomic Energy Society of Japan, All Rights Reserved.</text>
+<text top="1191" left="434" width="22" height="8" font="0">700</text>
+<text top="114" left="112" width="83" height="25" font="1"><b>ARTICLE </b></text>
+<text top="141" left="446" width="5" height="28" font="2"><b> </b></text>
+<text top="165" left="446" width="5" height="28" font="2"><b> </b></text>
+<text top="189" left="75" width="682" height="28" font="2"><b>HPC Challenges for Deterministic Neutronics Simulations Using APOLLO3</b></text>
+<text top="187" left="756" width="10" height="18" font="3"><b>®</b></text>
+<text top="189" left="767" width="57" height="28" font="2"><b> Code </b></text>
+<text top="208" left="446" width="5" height="28" font="2"><b> </b></text>
+<text top="232" left="380" width="126" height="20" font="4">Christophe CALVIN</text>
+<text top="230" left="506" width="7" height="13" font="5"> *</text>
+<text top="232" left="513" width="4" height="20" font="4"> </text>
+<text top="248" left="446" width="4" height="20" font="4"> </text>
+<text top="265" left="116" width="2" height="12" font="6"><i> </i></text>
+<text top="266" left="121" width="659" height="18" font="7"><i>CEA/DEN/DANS/DM2S/SERMA, Commissariat à l’Energie Atomique, CEA/Saclay, 91191 Gif-sur-Yvette Cedex, France </i></text>
+<text top="286" left="446" width="3" height="18" font="8"> </text>
+<text top="307" left="446" width="3" height="18" font="8"> </text>
+<text top="324" left="145" width="625" height="18" font="8">The aim of this paper is to present some major HPC challenges for deterministic neutronics simulations and how </text>
+<text top="339" left="128" width="268" height="18" font="8">these challenges are addressed in the APOLLO3</text>
+<text top="338" left="396" width="7" height="12" font="5">®</text>
+<text top="339" left="403" width="367" height="18" font="8"> code. Different levels of HPC are illustrated on different kind of </text>
+<text top="355" left="128" width="429" height="18" font="8">applications and parallel paradigms techniques in the frame of the APOLLO3</text>
+<text top="353" left="557" width="7" height="12" font="5">®</text>
+<text top="355" left="564" width="206" height="18" font="8"> code. Results obtained for fuel load </text>
+<text top="370" left="128" width="646" height="18" font="8">management using genetic algorithm, domain decomposition for transport solvers, GPU acceleration for the </text>
+<text top="386" left="128" width="641" height="18" font="8">Boltzmann equation solution are given using from few cores to massively parallel computing using more than 10,000 </text>
+<text top="401" left="128" width="35" height="18" font="8">cores. </text>
+<text top="421" left="136" width="143" height="18" font="9"><i><b>KEYWORDS: APOLLO3</b></i></text>
+<text top="419" left="279" width="7" height="12" font="10"><i><b>®</b></i></text>
+<text top="420" left="286" width="471" height="18" font="9"><i><b>, neutronics, transport and simplified transport solvers, domain decomposition me-</b></i></text>
+<text top="437" left="136" width="380" height="18" font="9"><i><b>thods, genetic algorithm, hybrid programming, HPC, MPI, GPGPU </b></i></text>
+<text top="454" left="446" width="3" height="18" font="8"> </text>
+<text top="470" left="446" width="3" height="18" font="8"> </text>
+<text top="485" left="68" width="104" height="22" font="11"><b>I. Introduction</b></text>
+<text top="484" left="173" width="5" height="14" font="12"><a href="pdfxml.html#1">a</a></text>
+<text top="514" left="85" width="355" height="20" font="4">The aim of this paper is to present some major challenges </text>
+<text top="532" left="68" width="372" height="20" font="4">using High Performance Computing (HPC) for deterministic </text>
+<text top="550" left="68" width="368" height="20" font="4">neutronics simulations and how these challenges are ad-</text>
+<text top="568" left="68" width="153" height="20" font="4">dressed in the APOLLO3</text>
+<text top="567" left="221" width="7" height="13" font="5">®</text>
+<text top="568" left="228" width="39" height="20" font="4"> code. </text>
+<text top="485" left="178" width="4" height="22" font="11"><a href="pdfxml.html#1"><b> </b></a></text>
+<text top="586" left="85" width="67" height="20" font="4">APOLLO3</text>
+<text top="585" left="152" width="7" height="13" font="5">®</text>
+<text top="586" left="159" width="283" height="20" font="4">  is a common project of CEA, AREVA and </text>
+<text top="604" left="68" width="372" height="20" font="4">EDF for the development of new generation system for core </text>
+<text top="622" left="68" width="112" height="20" font="4">physics analysis.   </text>
+<text top="640" left="85" width="351" height="20" font="4">We can consider different targets of use for high per-</text>
+<text top="658" left="68" width="374" height="20" font="4">formance computing in Reactor Physics. Depending on the </text>
+<text top="676" left="68" width="368" height="20" font="4">target, different level and techniques can be used. Neverthe-</text>
+<text top="694" left="68" width="372" height="20" font="4">less, the different techniques will allow us to fall back on to </text>
+<text top="712" left="68" width="192" height="20" font="4">higher level of simulation, like: </text>
+<text top="731" left="95" width="7" height="18" font="4">•</text>
+<text top="730" left="102" width="334" height="20" font="4">  Parameterized calculations: this is the basic tech-</text>
+<text top="748" left="122" width="319" height="20" font="4">nique for optimization. HPC is a great opportunity </text>
+<text top="766" left="122" width="318" height="20" font="4">to take into account more parameters and to reduce </text>
+<text top="784" left="122" width="314" height="20" font="4">&#34;time to market&#34;. This allows the use of optimiza-</text>
+<text top="802" left="122" width="321" height="20" font="4">tion techniques, like neural networks, in order to </text>
+<text top="821" left="122" width="312" height="20" font="4">find automatically and optimize set of parameters.   </text>
+<text top="839" left="95" width="7" height="18" font="4">•</text>
+<text top="839" left="102" width="340" height="20" font="4">  High resolution physics: greater memory capacity </text>
+<text top="857" left="122" width="314" height="20" font="4">and greater CPU power are required for more re-</text>
+<text top="875" left="122" width="325" height="20" font="4">fined models in each discipline. For instance </text>
+<text top="893" left="122" width="314" height="20" font="4">deterministic transport instead of few groups’ diffu-</text>
+<text top="911" left="122" width="91" height="20" font="4">sion approach. </text>
+<text top="929" left="95" width="7" height="18" font="4">•</text>
+<text top="929" left="102" width="342" height="20" font="4">  A more realistic physics by using systematically </text>
+<text top="947" left="122" width="319" height="20" font="4">real physical model instead of simplified model or </text>
+<text top="965" left="122" width="319" height="20" font="4">pre-tabulated values. This implies, not only greater </text>
+<text top="983" left="122" width="314" height="20" font="4">CPU power, but robust and easy use coupled sys-</text>
+<text top="1001" left="122" width="26" height="20" font="4">tem </text>
+<text top="1019" left="95" width="7" height="18" font="4">•</text>
+<text top="1019" left="102" width="338" height="20" font="4">  Real time simulation: this already exists, but we can </text>
+<text top="1037" left="122" width="323" height="20" font="4">imagine improving modeling in order to obtain </text>
+<text top="1055" left="122" width="319" height="20" font="4">more realistic simulators and decreases the number </text>
+<text top="1073" left="122" width="98" height="20" font="4">of assumptions. </text>
+<text top="1091" left="85" width="286" height="20" font="4">All these improvements are needed in order to: </text>
+<text top="1123" left="68" width="372" height="20" font="4">                                                                                                   </text>
+<text top="1140" left="68" width="311" height="18" font="8">*Corresponding author, E-mail: christophe.calvin@cea.fr </text>
+<text top="486" left="484" width="7" height="18" font="4">•</text>
+<text top="486" left="491" width="281" height="20" font="4">  Increase Margin by reducing uncertainties; </text>
+<text top="504" left="484" width="7" height="18" font="4">•</text>
+<text top="504" left="491" width="133" height="20" font="4">  Optimize designs; </text>
+<text top="522" left="484" width="7" height="18" font="4">•</text>
+<text top="522" left="491" width="118" height="20" font="4">  Improve safety; </text>
+<text top="540" left="484" width="7" height="18" font="4">•</text>
+<text top="540" left="491" width="210" height="20" font="4">  Optimize operating conditions; </text>
+<text top="558" left="484" width="7" height="18" font="4">•</text>
+<text top="558" left="491" width="196" height="20" font="4">  Increase physics knowledge. </text>
+<text top="576" left="474" width="311" height="20" font="4">In Section II, we will present briefly the APOLLO3</text>
+<text top="575" left="785" width="7" height="13" font="5">®</text>
+<text top="576" left="793" width="40" height="20" font="4"> code. </text>
+<text top="594" left="457" width="374" height="20" font="4">Major challenges that can be addressed in Reactor Physics </text>
+<text top="612" left="457" width="374" height="20" font="4">thanks to HPC  and the description  of how parallelism and </text>
+<text top="630" left="457" width="253" height="20" font="4">HPC is taken into account in APOLLO3</text>
+<text top="629" left="710" width="7" height="13" font="5">®</text>
+<text top="630" left="718" width="107" height="20" font="4"> code will be de-</text>
+<text top="648" left="457" width="372" height="20" font="4">scribed in Section III. Finally, we will present some </text>
+<text top="666" left="457" width="156" height="20" font="4">illustration in Section IV. </text>
+<text top="684" left="474" width="4" height="20" font="4"> </text>
+<text top="702" left="457" width="98" height="22" font="11"><b>II. APOLLO3</b></text>
+<text top="700" left="555" width="8" height="14" font="13"><b>®</b></text>
+<text top="702" left="563" width="45" height="22" font="11"><b> Code </b></text>
+<text top="730" left="474" width="356" height="20" font="4">During the last decade, there has been a growing interest </text>
+<text top="748" left="457" width="373" height="20" font="4">in the nuclear industry for improved nuclear code systems. </text>
+<text top="766" left="457" width="372" height="20" font="4">Based on an assessment of the design of different reactor </text>
+<text top="784" left="457" width="368" height="20" font="4">concept (PWR, BWR, GFR, SFR, SCWR…) and of operat-</text>
+<text top="802" left="457" width="372" height="20" font="4">ing margins to cover uncertainties, there has been a growing </text>
+<text top="820" left="457" width="368" height="20" font="4">interest for the development of a  new deterministic mul-</text>
+<text top="838" left="457" width="372" height="20" font="4">ti-purpose code  including Lattice, Core and Lattice-Core </text>
+<text top="856" left="457" width="87" height="20" font="4">calculations.   </text>
+<text top="874" left="474" width="351" height="20" font="4">In addition, the evolution of the computer mainframe in-</text>
+<text top="892" left="457" width="374" height="20" font="4">dustry has proceeded along different lines with respect to </text>
+<text top="910" left="457" width="374" height="20" font="4">hardware development. Thus, it is possible to benefit from </text>
+<text top="928" left="457" width="368" height="20" font="4">the constant increase in high performance computing re-</text>
+<text top="946" left="457" width="372" height="20" font="4">sources and particularly in the ability to perform calculations </text>
+<text top="965" left="457" width="374" height="20" font="4">on parallel computers. It will give new guidelines for the </text>
+<text top="983" left="457" width="375" height="20" font="4">development of future codes and for the extension of the </text>
+<text top="1001" left="457" width="373" height="20" font="4">methods to solve large-scale deterministic problems. Within </text>
+<text top="1019" left="457" width="372" height="20" font="4">the neutronic modeling framework, important evolutions are </text>
+<text top="1037" left="457" width="373" height="20" font="4">required with regard to energy mesh structure, extension of </text>
+<text top="1055" left="457" width="375" height="20" font="4">numerical methods, new applications... It appears that the </text>
+<text top="1073" left="457" width="372" height="20" font="4">boundary condition (external and internal) should become an </text>
+<text top="1091" left="457" width="368" height="20" font="4">essential aspect for the implementation of multi-solver me-</text>
+<text top="1109" left="457" width="372" height="20" font="4">thods and parallelized calculations. A complete and coherent </text>
+<text top="1127" left="457" width="368" height="20" font="4">nuclear system must be considered from nuclear data treat-</text>
+<text top="1162" left="69" width="118" height="18" font="8">                                   </text>
+<text top="1162" left="258" width="3" height="18" font="8"> </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="14" size="6" family="Times" color="#000000"/>
+	<fontspec id="15" size="13" family="Times" color="#000000"/>
+	<fontspec id="16" size="17" family="Times" color="#000000"/>
+	<fontspec id="17" size="17" family="Times" color="#f68817"/>
+	<fontspec id="18" size="17" family="Times" color="#ffffff"/>
+	<fontspec id="19" size="14" family="Times" color="#3f5eb4"/>
+	<fontspec id="20" size="14" family="Times" color="#ed2422"/>
+	<fontspec id="21" size="14" family="Times" color="#93165d"/>
+	<fontspec id="22" size="8" family="Times" color="#000000"/>
+	<fontspec id="23" size="18" family="Times" color="#ffffff"/>
+<text top="63" left="66" width="411" height="12" font="0">HPC Challenges for Deterministic Neutronics Simulations Using APOLLO3</text>
+<text top="61" left="479" width="8" height="6" font="14">R</text>
+<text top="63" left="494" width="28" height="12" font="0">Code</text>
+<text top="64" left="802" width="22" height="8" font="0">701</text>
+<text top="1188" left="66" width="139" height="12" font="0">VOL. 2, OCTOBER 2011</text>
+<text top="53" left="68" width="4" height="20" font="4"> </text>
+<text top="1190" left="68" width="4" height="20" font="4"> </text>
+<text top="472" left="68" width="372" height="20" font="4">ment tools to calculation codes (deterministic and </text>
+<text top="490" left="68" width="368" height="20" font="4">Monte-Carlo codes). According to the codes and the applica-</text>
+<text top="508" left="68" width="372" height="20" font="4">tions, the uncertainties data treatment plays an important </text>
+<text top="526" left="68" width="38" height="20" font="4">role.   </text>
+<text top="544" left="85" width="358" height="20" font="4">Up to now, CEA, with EDF and AREVA support,  is </text>
+<text top="562" left="68" width="376" height="20" font="4">renewing its main application codes (deterministic codes </text>
+<text top="580" left="68" width="267" height="20" font="4">&#34;APOLLO2, CRONOS2, and ERANOS2”,</text>
+<text top="579" left="335" width="16" height="13" font="5">1-6)</text>
+<text top="580" left="351" width="91" height="20" font="4">  Monte Carlo </text>
+<text top="598" left="68" width="124" height="20" font="4">code TRIPOLI-4™<a href="pdfxml.html#6">,</a></text>
+<text top="597" left="192" width="8" height="13" font="5"><a href="pdfxml.html#6">7)</a></text>
+<text top="598" left="200" width="239" height="20" font="4"><a href="pdfxml.html#6">  </a>depletion and fuel cycle MENDEL, </text>
+<text top="616" left="68" width="185" height="20" font="4">successor of DARWIN code<a href="pdfxml.html#6">,</a></text>
+<text top="615" left="253" width="8" height="13" font="5"><a href="pdfxml.html#6">9)</a></text>
+<text top="616" left="261" width="182" height="20" font="4"><a href="pdfxml.html#6">  </a>its nuclear data processing </text>
+<text top="634" left="68" width="116" height="20" font="4">system GALILEE<a href="pdfxml.html#6">,</a></text>
+<text top="633" left="184" width="8" height="13" font="5"><a href="pdfxml.html#6">8)</a></text>
+<text top="634" left="192" width="244" height="20" font="4"><a href="pdfxml.html#6">  </a>in order to have a complete and ad-</text>
+<text top="652" left="68" width="384" height="20" font="4">vanced nuclear modeling system (s<a href="pdfxml.html#2">ee <b>Fig. 1</b>)</a> and </text>
+<text top="670" left="68" width="67" height="20" font="4">CONRAD<a href="pdfxml.html#6">,</a></text>
+<text top="669" left="135" width="13" height="13" font="5"><a href="pdfxml.html#6">10)</a></text>
+<text top="670" left="148" width="296" height="20" font="4"><a href="pdfxml.html#6">  </a>a nuclear reaction analysis tool in order to </text>
+<text top="688" left="68" width="123" height="20" font="4">create evaluations.   </text>
+<text top="706" left="85" width="351" height="20" font="4">In order to reach a new stage in the modeling of the nuc-</text>
+<text top="724" left="68" width="372" height="20" font="4">lear systems a new generation of codes will be developed on </text>
+<text top="742" left="68" width="372" height="20" font="4">an approach where core/lattice, deterministic/Monte-Carlo, </text>
+<text top="760" left="68" width="326" height="20" font="4">reference/industrial calculation routes are compatible. </text>
+<text top="778" left="85" width="67" height="20" font="4">APOLLO3</text>
+<text top="777" left="152" width="7" height="13" font="5"><a href="pdfxml.html#6">®</a></text>
+<text top="778" left="159" width="4" height="20" font="4"><a href="pdfxml.html#6">,</a></text>
+<text top="777" left="163" width="13" height="13" font="5"><a href="pdfxml.html#6">11)</a></text>
+<text top="778" left="176" width="267" height="20" font="4"><a href="pdfxml.html#6">  </a>is a common project of CEA, AREVA </text>
+<text top="796" left="68" width="373" height="20" font="4">and EDF for the development of new generation system for </text>
+<text top="814" left="68" width="372" height="20" font="4">core physics analysis. Therefore, requirements both for R&amp;D </text>
+<text top="832" left="68" width="374" height="20" font="4">and industrial applications were taken into account for the </text>
+<text top="850" left="68" width="376" height="20" font="4">design of the new system architecture. The new system </text>
+<text top="868" left="68" width="67" height="20" font="4">APOLLO3</text>
+<text top="867" left="135" width="7" height="13" font="5">®</text>
+<text top="868" left="142" width="307" height="20" font="4">  is the continuation of the “APOLLO2, </text>
+<text top="886" left="68" width="255" height="20" font="4">CRONOS2, and ERANOS2” code family.</text>
+<text top="885" left="323" width="16" height="13" font="5">1-6)</text>
+<text top="886" left="339" width="100" height="20" font="4"> The experience </text>
+<text top="904" left="68" width="368" height="20" font="4">on APOLLO2, CRONOS2, ERANOS2 codes and their ap-</text>
+<text top="922" left="68" width="372" height="20" font="4">plications provides an initial and complete set of calculation </text>
+<text top="940" left="68" width="372" height="20" font="4">routes for the neutronic evaluation; this experience draws the </text>
+<text top="958" left="68" width="383" height="20" font="4">ways of improving the models (flux solvers and </text>
+<text top="976" left="68" width="375" height="20" font="4">self-shielding methods with new acceleration or effective </text>
+<text top="994" left="68" width="175" height="20" font="4">parallelization methods…).   </text>
+<text top="1012" left="85" width="343" height="20" font="4">In order to meet these objectives, the main APOLLO3</text>
+<text top="1011" left="428" width="7" height="13" font="5">®</text>
+<text top="1012" left="436" width="4" height="20" font="4"> </text>
+<text top="1030" left="68" width="192" height="20" font="4">requirements are the following: </text>
+<text top="1048" left="68" width="7" height="18" font="4">•</text>
+<text top="1048" left="75" width="366" height="20" font="4">  Flexibility: from best-estimate calculations to industrial </text>
+<text top="1066" left="95" width="47" height="20" font="4">design; </text>
+<text top="1084" left="68" width="7" height="18" font="4">•</text>
+<text top="1084" left="75" width="361" height="20" font="4">  Coupling with codes from other disciplines (ther-</text>
+<text top="1101" left="95" width="354" height="20" font="4">mal-mechanics, thermal-hydraulics) with SALOME </text>
+<text top="1119" left="95" width="56" height="20" font="4">platform<a href="pdfxml.html#6">;</a></text>
+<text top="1117" left="151" width="13" height="13" font="5"><a href="pdfxml.html#6">12)</a></text>
+<text top="1119" left="164" width="4" height="20" font="4"><a href="pdfxml.html#6"> </a></text>
+<text top="1137" left="68" width="7" height="18" font="4">•</text>
+<text top="1137" left="75" width="369" height="20" font="4">  Easy coupling with Monte-Carlo codes: in particular </text>
+<text top="105" left="484" width="90" height="20" font="4">with TRIPOL<a href="pdfxml.html#6">I</a></text>
+<text top="104" left="574" width="8" height="13" font="5"><a href="pdfxml.html#6">7)</a></text>
+<text top="105" left="582" width="243" height="20" font="4"><a href="pdfxml.html#6">  </a>through a dedicated shared data inter-</text>
+<text top="122" left="484" width="33" height="20" font="4">face; </text>
+<text top="141" left="457" width="7" height="18" font="4">•</text>
+<text top="141" left="464" width="365" height="20" font="4">  Extended application domain: criticality, shielding of all </text>
+<text top="158" left="484" width="331" height="20" font="4">types of reactors (PWR, BWR, GFR, SFR, SCWR…); </text>
+<text top="176" left="457" width="7" height="18" font="4">•</text>
+<text top="176" left="464" width="370" height="20" font="4">  Uncertainties assessment with  perturbation methods </text>
+<text top="193" left="484" width="257" height="20" font="4">and non-intrusive methods (i.e. URANIE<a href="pdfxml.html#6">);</a></text>
+<text top="192" left="741" width="13" height="13" font="5"><a href="pdfxml.html#6">13)</a></text>
+<text top="193" left="754" width="4" height="20" font="4"><a href="pdfxml.html#6"> </a></text>
+<text top="212" left="457" width="7" height="18" font="4">•</text>
+<text top="212" left="464" width="347" height="20" font="4">  Ability to perform calculations on parallel computers; </text>
+<text top="230" left="457" width="7" height="18" font="4">•</text>
+<text top="230" left="464" width="272" height="20" font="4">  User friendly: user interface, databases… </text>
+<text top="248" left="457" width="7" height="18" font="4">•</text>
+<text top="248" left="464" width="87" height="20" font="4">  Portability </text>
+<text top="266" left="457" width="4" height="20" font="4"> </text>
+<text top="283" left="457" width="397" height="22" font="11"><b>III.  High Performance Computing within </b></text>
+<text top="302" left="487" width="78" height="22" font="11"><b>APOLLO3</b></text>
+<text top="300" left="565" width="8" height="14" font="13"><b>®</b></text>
+<text top="302" left="573" width="45" height="22" font="11"><b> Code </b></text>
+<text top="330" left="457" width="241" height="21" font="15"><b>1.  The Different Level of Parallelism </b></text>
+<text top="348" left="474" width="355" height="20" font="4">In deterministic simulation, we can consider three main </text>
+<text top="366" left="457" width="129" height="20" font="4">levels of parallelism: </text>
+<text top="393" left="457" width="7" height="18" font="4">•</text>
+<text top="393" left="464" width="364" height="20" font="4">  The first level concerns multiparameterized calculations. </text>
+<text top="410" left="484" width="349" height="20" font="4">This level is typically implanted using a distributed </text>
+<text top="428" left="484" width="341" height="20" font="4">computing approach, since each calculation is an inde-</text>
+<text top="445" left="484" width="349" height="20" font="4">pendent one from the other. Classical example is a </text>
+<text top="462" left="484" width="345" height="20" font="4">multiparameter assembly’s calculation, where one has to </text>
+<text top="479" left="484" width="347" height="20" font="4">compute different kinds of reactor assemblies for core </text>
+<text top="497" left="484" width="105" height="20" font="4">code calculation. </text>
+<text top="515" left="457" width="7" height="18" font="4">•</text>
+<text top="515" left="464" width="361" height="20" font="4">  The second is what we can call multi-domain calcula-</text>
+<text top="532" left="484" width="345" height="20" font="4">tions. It is implemented using a coarse grain parallelism </text>
+<text top="549" left="484" width="349" height="20" font="4">approach. For example, it concerns  all the treatment </text>
+<text top="567" left="484" width="341" height="20" font="4">dealing cross sections, depletion process, ther-</text>
+<text top="584" left="484" width="348" height="20" font="4">mal-hydraulic feedback, etc. In this level, usually we </text>
+<text top="601" left="484" width="346" height="20" font="4">can consider that the spatial dependency of the data is </text>
+<text top="619" left="484" width="349" height="20" font="4">very tight and a massively parallel approach is well </text>
+<text top="636" left="484" width="341" height="20" font="4">suited. Concerning the case where the spatial depen-</text>
+<text top="653" left="484" width="350" height="20" font="4">dency of the data is strong, domain decomposition </text>
+<text top="670" left="484" width="341" height="20" font="4">techniques are used. It concerns, for example, the trans-</text>
+<text top="687" left="484" width="151" height="20" font="4">port equation resolution. </text>
+<text top="706" left="457" width="7" height="18" font="4">•</text>
+<text top="706" left="464" width="361" height="20" font="4">  The third level is based on a fine grain parallelism mod-</text>
+<text top="723" left="484" width="346" height="20" font="4">el and mainly concerns the fine grain parallelization of </text>
+<text top="740" left="484" width="341" height="20" font="4">solvers by exploiting intrinsic parallelism of the in-</text>
+<text top="758" left="484" width="167" height="20" font="4">volved numerical methods. </text>
+<text top="784" left="474" width="355" height="20" font="4">In the following we will illustrate these different levels by </text>
+<text top="802" left="457" width="210" height="20" font="4">describing some typical examples. </text>
+<text top="820" left="457" width="4" height="20" font="4"> </text>
+<text top="837" left="457" width="314" height="21" font="15"><b>2.  First Level: Multiparameterized Calculations </b></text>
+<text top="855" left="474" width="355" height="20" font="4">The main interest of this level is to use the brute force of </text>
+<text top="873" left="457" width="374" height="20" font="4">HPC to solve problems with huge  amount of independent </text>
+<text top="891" left="457" width="374" height="20" font="4">calculation in a “human” time. (Some examples have been </text>
+<text top="909" left="457" width="372" height="20" font="4">presented by  Prof. Turinsky in his talk  during the </text>
+<text top="927" left="457" width="372" height="20" font="4">M&amp;C-SNA conference in 2007 in Monterey). Different uses </text>
+<text top="945" left="457" width="372" height="20" font="4">of HPC for reducing uncertainties in simulator predictions of </text>
+<text top="963" left="457" width="368" height="20" font="4">limiting nuclear plant attributes or how to gain margins us-</text>
+<text top="981" left="457" width="298" height="20" font="4">ing optimization techniques are discussed below. </text>
+<text top="999" left="474" width="351" height="20" font="4">One way to reduce uncertainties is of course to use deter-</text>
+<text top="1017" left="457" width="372" height="20" font="4">ministic (forward and adjoint) approaches. Another way is to </text>
+<text top="1035" left="457" width="375" height="20" font="4">use a less-intrusive method and is based on a stochastic </text>
+<text top="1053" left="457" width="373" height="20" font="4">(sampling) approach. Of course this approach is challenged </text>
+<text top="1071" left="457" width="372" height="20" font="4">in regard to computational resources required. This sampling </text>
+<text top="1089" left="457" width="373" height="20" font="4">approach is also very interesting in case of problem where </text>
+<text top="1107" left="457" width="372" height="20" font="4">deterministic approach is too complex. One can cite coupled </text>
+<text top="1125" left="457" width="352" height="20" font="4">problems (thermo-hydraulic–neutronic) or depletion ones. </text>
+<text top="110" left="89" width="2" height="13" font="5"> </text>
+<text top="174" left="204" width="5" height="26" font="16"> </text>
+<text top="174" left="293" width="5" height="26" font="17"> </text>
+<text top="249" left="147" width="93" height="26" font="18">APOLLO3 </text>
+<text top="282" left="208" width="86" height="26" font="18">DARWIN </text>
+<text top="217" left="209" width="85" height="25" font="18">GALILEE </text>
+<text top="171" left="132" width="77" height="22" font="19">Neutronics </text>
+<text top="170" left="298" width="68" height="22" font="20">Shielding </text>
+<text top="336" left="221" width="71" height="22" font="21">Criticality </text>
+<text top="249" left="260" width="81" height="26" font="18">TRIPOLI </text>
+<text top="142" left="196" width="3" height="14" font="22"> </text>
+<text top="141" left="199" width="3" height="15" font="0"> </text>
+<text top="114" left="203" width="85" height="27" font="23">CONRAD</text>
+<text top="122" left="288" width="3" height="15" font="0"> </text>
+<text top="105" left="289" width="5" height="27" font="23"> </text>
+<text top="114" left="294" width="3" height="15" font="0"> </text>
+<text top="403" left="69" width="371" height="18" font="3"><b>Fig.  1</b>  CEA global development program dedicated to fine </text>
+<text top="419" left="81" width="213" height="18" font="8">neutronic modeling of nuclear systems </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="24" size="12" family="Times" color="#120f0e"/>
+<text top="64" left="66" width="22" height="8" font="0">702</text>
+<text top="63" left="712" width="111" height="12" font="0">Christophe CALVIN</text>
+<text top="1190" left="485" width="338" height="12" font="0">PROGRESS IN NUCLEAR SCIENCE AND TECHNOLOGY</text>
+<text top="53" left="68" width="4" height="20" font="4"> </text>
+<text top="1190" left="68" width="4" height="20" font="4"> </text>
+<text top="106" left="85" width="351" height="20" font="4">Concerning optimization problems, one very good exam-</text>
+<text top="124" left="68" width="373" height="20" font="4">ple is fuel optimization. Grand challenge problem attributes </text>
+<text top="142" left="68" width="52" height="20" font="4">include: </text>
+<text top="160" left="68" width="7" height="18" font="4">•</text>
+<text top="160" left="75" width="112" height="20" font="4">  Multiobjective </text>
+<text top="178" left="68" width="7" height="18" font="4">•</text>
+<text top="178" left="75" width="89" height="20" font="4">  Multicycle </text>
+<text top="197" left="68" width="7" height="18" font="4">•</text>
+<text top="197" left="75" width="145" height="20" font="4">  Lattice optimization </text>
+<text top="215" left="68" width="7" height="18" font="4">•</text>
+<text top="215" left="75" width="147" height="20" font="4">  Bundle optimization </text>
+<text top="233" left="68" width="7" height="18" font="4">•</text>
+<text top="233" left="75" width="199" height="20" font="4">  Loading pattern optimization </text>
+<text top="252" left="68" width="7" height="18" font="4">•</text>
+<text top="252" left="75" width="365" height="20" font="4">  Excess reactivity control optimization (e.g., BWR: CRP </text>
+<text top="269" left="95" width="91" height="20" font="4">and core flow) </text>
+<text top="286" left="68" width="4" height="20" font="4"> </text>
+<text top="303" left="68" width="292" height="21" font="15"><b>3.  Second Level: Multi-Domain Calculations </b></text>
+<text top="321" left="85" width="355" height="20" font="4">This level is the most classical one. In most of parallel </text>
+<text top="339" left="68" width="368" height="20" font="4">scientific applications this one is used through domain de-</text>
+<text top="357" left="68" width="373" height="20" font="4">composition techniques. To be more precise, one could say </text>
+<text top="375" left="68" width="371" height="20" font="4">that this domain is mainly based on spatial decomposition. </text>
+<text top="393" left="68" width="372" height="20" font="4">Applied to neutronics applications, all the calculations which </text>
+<text top="411" left="68" width="375" height="20" font="4">are spatially independent are included. For instance, in a </text>
+<text top="429" left="68" width="373" height="20" font="4">typical two-stage calculation, at the core level, all the steps </text>
+<text top="447" left="68" width="373" height="20" font="4">concerning cross-sections loading and management, thermal </text>
+<text top="465" left="68" width="373" height="20" font="4">feedback, isotopic depletion, etc. are local to the cell of the </text>
+<text top="483" left="68" width="373" height="20" font="4">geometrical domain, and thus could be done in parallel. To </text>
+<text top="501" left="68" width="372" height="20" font="4">summarize in a standard deterministic 3D core calculation, </text>
+<text top="519" left="68" width="372" height="20" font="4">all the steps are spatially independent and thus could be done </text>
+<text top="537" left="68" width="372" height="20" font="4">naturally in parallel, except one, the flux calculation. Even if </text>
+<text top="555" left="68" width="374" height="20" font="4">all the precedent steps could be done in parallel, the main </text>
+<text top="573" left="68" width="368" height="20" font="4">problem is still the data flow management and the data dis-</text>
+<text top="591" left="68" width="372" height="20" font="4">tribution between the processes. One has to think about it in </text>
+<text top="609" left="68" width="373" height="20" font="4">the architecture code design in order to have optimum data </text>
+<text top="627" left="68" width="213" height="20" font="4">structures to mitigate this problem. </text>
+<text top="645" left="85" width="358" height="20" font="4">Concerning the flux calculation itself, classical domain </text>
+<text top="663" left="68" width="251" height="20" font="4">decomposition techniques can be  used<a href="pdfxml.html#6">.</a></text>
+<text top="662" left="319" width="13" height="13" font="5"><a href="pdfxml.html#6">14)</a></text>
+<text top="663" left="332" width="112" height="20" font="4"><a href="pdfxml.html#6">  </a>Concerning the </text>
+<text top="681" left="68" width="239" height="20" font="4">Boltzmann transport equation solver<a href="pdfxml.html#6">,</a></text>
+<text top="680" left="307" width="13" height="13" font="5"><a href="pdfxml.html#6">15)</a></text>
+<text top="681" left="320" width="125" height="20" font="4"><a href="pdfxml.html#6">  </a>other parallelism </text>
+<text top="699" left="68" width="368" height="20" font="4">degree can be found, since the other dimensions of the equa-</text>
+<text top="717" left="68" width="372" height="20" font="4">tions can be used, for instance the angular or energetic ones. </text>
+<text top="735" left="68" width="372" height="20" font="4">Many solvers have been implemented in parallel, exploiting </text>
+<text top="753" left="68" width="242" height="20" font="4">either angular or  energetic parallelism,</text>
+<text top="752" left="310" width="26" height="13" font="5">16-17)</text>
+<text top="753" left="336" width="74" height="20" font="4">  spatial one</text>
+<text top="752" left="410" width="26" height="13" font="5">18-22)</text>
+<text top="753" left="436" width="4" height="20" font="4"> </text>
+<text top="771" left="68" width="47" height="20" font="4">or both<a href="pdfxml.html#6">.</a></text>
+<text top="770" left="115" width="13" height="13" font="5"><a href="pdfxml.html#6">23)</a></text>
+<text top="771" left="128" width="4" height="20" font="4"><a href="pdfxml.html#6"> </a></text>
+<text top="789" left="85" width="351" height="20" font="4">Another degree of parallelism can be used when exploit-</text>
+<text top="807" left="68" width="379" height="20" font="4">ing multilevel techniques. For  instance, fine transport </text>
+<text top="825" left="68" width="368" height="20" font="4">solution on one assembly coupled with full 3D coarse solu-</text>
+<text top="843" left="68" width="374" height="20" font="4">tion. Typical  examples of such techniques can be found in </text>
+<text top="861" left="68" width="124" height="20" font="4">the COBAYA cod<a href="pdfxml.html#6">e</a></text>
+<text top="860" left="192" width="13" height="13" font="5"><a href="pdfxml.html#6">24)</a></text>
+<text top="861" left="205" width="238" height="20" font="4"><a href="pdfxml.html#6">  </a>or applied to the MINOS diffusion </text>
+<text top="879" left="68" width="372" height="20" font="4">solver within an original approach based on a  component </text>
+<text top="897" left="68" width="96" height="20" font="4">mode synthesi<a href="pdfxml.html#6">s.</a></text>
+<text top="896" left="164" width="13" height="13" font="5"><a href="pdfxml.html#6">18)</a></text>
+<text top="897" left="177" width="4" height="20" font="4"><a href="pdfxml.html#6"> </a></text>
+<text top="915" left="68" width="4" height="20" font="4"> </text>
+<text top="932" left="68" width="299" height="21" font="15"><b>4.  Third Level: Fine Grain Parallelism Model </b></text>
+<text top="950" left="85" width="356" height="20" font="4">This level is usually used on shared memory architecture </text>
+<text top="968" left="68" width="372" height="20" font="4">and exploits intrinsic parallelism of  the algorithms.  These </text>
+<text top="986" left="68" width="373" height="20" font="4">techniques had a great infatuation in early 2000’s with HPF </text>
+<text top="1004" left="68" width="200" height="20" font="4">language and after that OpenMP.</text>
+<text top="1002" left="268" width="38" height="13" font="5">21-<a href="pdfxml.html#6">22,25)</a></text>
+<text top="1004" left="306" width="134" height="20" font="4"><a href="pdfxml.html#6"> </a>It becomes more and </text>
+<text top="1022" left="68" width="372" height="20" font="4">more interesting in today’s computing environment with the </text>
+<text top="1040" left="68" width="372" height="20" font="4">many-core architectures which have to be combined with the </text>
+<text top="1058" left="68" width="372" height="20" font="4">second level of parallelism in order to improve the overall </text>
+<text top="1076" left="68" width="182" height="20" font="4">performances of the algorithm</text>
+<text top="1076" left="250" width="4" height="20" font="24">.</text>
+<text top="1076" left="254" width="4" height="20" font="4"> </text>
+<text top="1094" left="85" width="355" height="20" font="4">A variation of this model concerns the use of accelerators. </text>
+<text top="1112" left="68" width="373" height="20" font="4">With the performance exponential increase of these devices, </text>
+<text top="1130" left="68" width="373" height="20" font="4">like GPGPU, it becomes more and more interesting to try to </text>
+<text top="106" left="457" width="373" height="20" font="4">utilize this large amount of computational power, despite of </text>
+<text top="124" left="457" width="287" height="20" font="4">specific programming language and paradigm.   </text>
+<text top="142" left="474" width="358" height="20" font="4">Finally, all these levels can be combined to exploit as </text>
+<text top="160" left="457" width="372" height="20" font="4">much as possible all the parallelism degree in the application </text>
+<text top="178" left="457" width="338" height="20" font="4">and the whole performance of the targeted architectures. </text>
+<text top="196" left="474" width="351" height="20" font="4">In the next section, we will present some practical exam-</text>
+<text top="214" left="457" width="189" height="20" font="4">ples of these parallelism levels. </text>
+<text top="232" left="474" width="4" height="20" font="4"> </text>
+<text top="249" left="457" width="378" height="22" font="11"><b>IV. Example of HPC Application Using APOLLO3®   </b></text>
+<text top="277" left="457" width="197" height="21" font="15"><b>1.  Fuel Loading Optimization </b></text>
+<text top="295" left="474" width="355" height="20" font="4">As an example of multiparameterized calculations, one can </text>
+<text top="313" left="457" width="371" height="20" font="4">cite an exercise achieved for fuel loading pattern optimization </text>
+<text top="331" left="457" width="143" height="20" font="4">with genetic algorith<a href="pdfxml.html#6">m.</a></text>
+<text top="329" left="600" width="13" height="13" font="5"><a href="pdfxml.html#6">26)</a></text>
+<text top="331" left="612" width="219" height="20" font="4"><a href="pdfxml.html#6">  </a>A tool based on URANIE/VIZIR </text>
+<text top="349" left="457" width="93" height="20" font="4">and APOLLO3</text>
+<text top="347" left="550" width="7" height="13" font="5">®</text>
+<text top="349" left="558" width="267" height="20" font="4"> code has been designed and has been suc-</text>
+<text top="367" left="457" width="372" height="20" font="4">cessfully applied to the optimization of fuel loading pattern in </text>
+<text top="385" left="457" width="368" height="20" font="4">the case of highly  heterogeneous LWR cores. This tool al-</text>
+<text top="403" left="457" width="378" height="20" font="4">lows the evaluation of more than ten million different </text>
+<text top="421" left="457" width="372" height="20" font="4">configurations  in less than 24 hours  using more than 4,000 </text>
+<text top="439" left="457" width="374" height="20" font="4">processors. An illustration of different kinds of solutions is </text>
+<text top="457" left="457" width="122" height="20" font="4">provided i<a href="pdfxml.html#3">n <b>Fig. 2</b>.</a>   </text>
+<text top="475" left="474" width="355" height="20" font="4">This radial configuration associated to a square array core </text>
+<text top="493" left="457" width="374" height="20" font="4">composed of under-moderated assemblies leads to a harder </text>
+<text top="511" left="457" width="371" height="20" font="4">neutron spectrum inside the core and thus allows us to reach a </text>
+<text top="529" left="457" width="368" height="20" font="4">high conversion rate. However, the presence of fertile assem-</text>
+<text top="547" left="457" width="375" height="20" font="4">blies produces a radial power peak or radial shape factor </text>
+<text top="565" left="457" width="368" height="20" font="4">(Fxy) of 1.7 on some fissile assemblies. Moreover the drain-</text>
+<text top="583" left="457" width="373" height="20" font="4">ing coefficient (DC) defined as the reactivity discrepancy at </text>
+<text top="601" left="457" width="368" height="20" font="4">the beginning of the cycle, between nominal core configura-</text>
+<text top="619" left="457" width="372" height="20" font="4">tion and the one where accidentally it has almost completely </text>
+<text top="637" left="457" width="375" height="20" font="4">lost its water (moderator density equal to 0.007) is worth </text>
+<text top="655" left="457" width="372" height="20" font="4">290 pcm. In term of safety constraints the Fxy must be lower </text>
+<text top="673" left="457" width="373" height="20" font="4">than 1.5, that corresponds to a feasible linear power density </text>
+<text top="691" left="457" width="306" height="20" font="4">of 450 W/cm and the DC must be strictly negative. </text>
+<text top="709" left="474" width="356" height="20" font="4">The main advantage of this kind of approach is to allow </text>
+<text top="727" left="457" width="373" height="20" font="4">engineers to test many different kinds of configurations and </text>
+<text top="745" left="457" width="372" height="20" font="4">relax some constraints which are not possible without genetic </text>
+<text top="763" left="457" width="371" height="20" font="4">algorithms and HPC. An example of different solutions found </text>
+<text top="1073" left="458" width="362" height="18" font="3"><b>Fig.  2</b>  Example of set of solution found by the genetic algo-</text>
+<text top="1089" left="471" width="363" height="18" font="8">rithm depending on different strategies (Pareto front): </text>
+<text top="1104" left="471" width="353" height="18" font="8">optimization of two parameters (Fxy on vertical axis and DC on </text>
+<text top="1120" left="471" width="350" height="18" font="8">horizontal axis) – “All”, “S0” to “S3” represent different strate-</text>
+<text top="1135" left="471" width="325" height="18" font="8">gies depending on the number of samples and sample sizes. </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="25" size="9" family="Times" color="#000000"/>
+<text top="63" left="66" width="411" height="12" font="0">HPC Challenges for Deterministic Neutronics Simulations Using APOLLO3</text>
+<text top="61" left="479" width="8" height="6" font="14">R</text>
+<text top="63" left="494" width="28" height="12" font="0">Code</text>
+<text top="64" left="802" width="22" height="8" font="0">703</text>
+<text top="1188" left="66" width="139" height="12" font="0">VOL. 2, OCTOBER 2011</text>
+<text top="53" left="68" width="4" height="20" font="4"> </text>
+<text top="1190" left="68" width="4" height="20" font="4"> </text>
+<text top="476" left="68" width="108" height="20" font="4">is given in<a href="pdfxml.html#4"> <b>Fig. 3</b>.</a> </text>
+<text top="494" left="68" width="4" height="20" font="4"> </text>
+<text top="511" left="68" width="372" height="21" font="15"><b>2.  3D Core Heterogeneous Calculation Using Domain </b></text>
+<text top="529" left="87" width="99" height="20" font="15"><b>Decomposition </b></text>
+<text top="547" left="79" width="362" height="20" font="4">Highly heterogeneous core calculations as cell by cell are </text>
+<text top="565" left="68" width="373" height="20" font="4">currently too expensive for industrial applications, even if a </text>
+<text top="583" left="68" width="147" height="20" font="4">simplified transport (SP</text>
+<text top="590" left="215" width="7" height="13" font="5">N</text>
+<text top="583" left="222" width="219" height="20" font="4">) approximation is used. A way to </text>
+<text top="601" left="68" width="379" height="20" font="4">decrease the computation time and the local memory </text>
+<text top="619" left="68" width="373" height="20" font="4">requirement is to use a domain decomposition method. It is </text>
+<text top="637" left="68" width="372" height="20" font="4">particularly well fitted for parallel computers;  calculations </text>
+<text top="655" left="68" width="380" height="20" font="4">are distributed on several subdomains, and as many </text>
+<text top="673" left="68" width="373" height="20" font="4">processors as subdomains can be used. We propose here an </text>
+<text top="691" left="68" width="377" height="20" font="4">iterative  method using non-overlapping subdomains and </text>
+<text top="709" left="68" width="167" height="20" font="4">Robin interface conditions. </text>
+<text top="727" left="79" width="217" height="20" font="4">This method could be applied to SP</text>
+<text top="734" left="296" width="7" height="13" font="5">N</text>
+<text top="727" left="303" width="137" height="20" font="4"> approximation, but is </text>
+<text top="745" left="68" width="375" height="20" font="4">presently limited to the diffusion model and to Cartesian </text>
+<text top="763" left="68" width="376" height="20" font="4">grids. It has been implemented in the framework of the </text>
+<text top="781" left="68" width="150" height="20" font="4">existing MINOS solver<a href="pdfxml.html#6">,</a></text>
+<text top="779" left="218" width="13" height="13" font="5"><a href="pdfxml.html#6">27)</a></text>
+<text top="781" left="231" width="212" height="20" font="4"><a href="pdfxml.html#6">  </a>which uses a mixed dual finite </text>
+<text top="799" left="68" width="374" height="20" font="4">element method for the resolution of diffusion equation in </text>
+<text top="817" left="68" width="248" height="20" font="4">3D Cartesian homogenized geometries.   </text>
+<text top="835" left="79" width="361" height="20" font="4">The domain decomposition method is applied to the mixed </text>
+<text top="853" left="68" width="380" height="20" font="4">dual formulation of the diffusion equation, which is </text>
+<text top="871" left="68" width="372" height="20" font="4">discretized using Raviart-Thomas finite elements, and which </text>
+<text top="889" left="68" width="255" height="20" font="4">is implemented into the MINOS solve<a href="pdfxml.html#6">r.</a></text>
+<text top="887" left="323" width="13" height="13" font="5"><a href="pdfxml.html#6">27)</a></text>
+<text top="889" left="336" width="107" height="20" font="4"><a href="pdfxml.html#6">  </a>The method is </text>
+<text top="907" left="68" width="372" height="20" font="4">based on non-overlapping subdomains. The idea is to iterate </text>
+<text top="925" left="68" width="374" height="20" font="4">the resolution of local problems on each subdomain, using </text>
+<text top="943" left="68" width="372" height="20" font="4">Robin interface condition. At a given iteration, this condition </text>
+<text top="961" left="68" width="374" height="20" font="4">consists in to impose the corresponding boundary value of </text>
+<text top="979" left="68" width="377" height="20" font="4">the solution obtained on the adjacent subdomain at the </text>
+<text top="997" left="68" width="109" height="20" font="4">previous iteration.</text>
+<text top="995" left="177" width="26" height="13" font="5">18-20)</text>
+<text top="997" left="203" width="11" height="20" font="4">   </text>
+<text top="1015" left="79" width="364" height="20" font="4">The flow chart of the parallel algorithm is presented in </text>
+<text top="1032" left="68" width="43" height="20" font="15"><a href="pdfxml.html#4"><b>Fig. 4.</b></a> </text>
+<text top="1051" left="79" width="364" height="20" font="4">The test is a 3D PWR 900 MWe core with two energy </text>
+<text top="1069" left="68" width="378" height="20" font="4">groups. The mesh size is 289×289×40.  The speed up </text>
+<text top="1087" left="68" width="372" height="20" font="4">obtained is presented in<a href="pdfxml.html#4"> <b>Fig. 5</b>. </a>As one can see, we obtained </text>
+<text top="1105" left="68" width="372" height="20" font="4">very good speedup up to 32 processors. Beyond this number, </text>
+<text top="1123" left="68" width="376" height="20" font="4">the mesh size is too small compared to the number of </text>
+<text top="604" left="457" width="375" height="20" font="4">processors.  However, the CPU time still decreases,  and it </text>
+<text top="622" left="457" width="372" height="20" font="4">tooks less than 10 seconds onto 128 processors to compute a </text>
+<text top="640" left="457" width="304" height="20" font="4">full heterogeneous 3D power map of a PWR core. </text>
+<text top="658" left="468" width="4" height="20" font="4"> </text>
+<text top="676" left="457" width="372" height="21" font="15"><b>3.  3D Massively Parallel Sn Transport  Using Hybrid </b></text>
+<text top="693" left="476" width="192" height="20" font="15"><b>MPI/OpenMP Parallelization </b></text>
+<text top="711" left="468" width="48" height="20" font="4">Minar<a href="pdfxml.html#6">et</a></text>
+<text top="709" left="515" width="13" height="13" font="5"><a href="pdfxml.html#6">28)</a></text>
+<text top="711" left="528" width="304" height="20" font="4"><a href="pdfxml.html#6">  </a>is a 2D/3D transport solver developed in the </text>
+<text top="729" left="457" width="123" height="20" font="4">frame of APOLLO3</text>
+<text top="727" left="581" width="7" height="13" font="5">®</text>
+<text top="729" left="588" width="241" height="20" font="4"> code. The transport equation is solved </text>
+<text top="747" left="457" width="372" height="20" font="4">using a Sn approximation on unstructured mesh – triangular </text>
+<text top="765" left="457" width="379" height="20" font="4">in 2D and prismatic mesh in 3D and is based on </text>
+<text top="783" left="457" width="217" height="20" font="4">discontinuous Galerkin FE method. </text>
+<text top="801" left="468" width="365" height="20" font="4">A natural way to parallelize this kind of method is to </text>
+<text top="819" left="457" width="374" height="20" font="4">benefit of angular direction idependence. Thus in 3D, the </text>
+<text top="837" left="457" width="358" height="20" font="4">maximum parallelism degree is  more than 4,000 for S</text>
+<text top="844" left="815" width="10" height="13" font="5">64</text>
+<text top="837" left="825" width="4" height="20" font="4"> </text>
+<text top="855" left="457" width="378" height="20" font="4">approximation.  Thus, one can affect a set of angular </text>
+<text top="873" left="457" width="373" height="20" font="4">directions  by MPI process, up to one angular direction per </text>
+<text top="891" left="457" width="375" height="20" font="4">MPI process. The parallel flow chart of the algorithm is </text>
+<text top="909" left="457" width="120" height="20" font="4">presented i<a href="pdfxml.html#4">n <b>Fig. 6</b>.</a> </text>
+<text top="927" left="468" width="363" height="20" font="4">Moreover, we can parallelize the computation along each </text>
+<text top="945" left="457" width="372" height="20" font="4">angular direction for the assembly and the inversion of each </text>
+<text top="963" left="457" width="375" height="20" font="4">4x4 system for each triangle (s<a href="pdfxml.html#4">ee <b>Fig. 7</b>)</a>. This fine grain </text>
+<text top="981" left="457" width="350" height="20" font="4">parallelization is achieved using OpenMP multithreading. </text>
+<text top="999" left="468" width="362" height="20" font="4">Using this two level parallelism, we have planned, by the </text>
+<text top="1017" left="457" width="372" height="20" font="4">end of year 2010, to compute a full 3D GENIV reactor core </text>
+<text top="1035" left="457" width="372" height="20" font="4">between 30 and 300 energy groups using more than 10,000 </text>
+<text top="1053" left="457" width="372" height="20" font="4">cores in few hours on the last new French  petaflop </text>
+<text top="1071" left="457" width="162" height="20" font="4">supercomputer TERA100. </text>
+<text top="1089" left="457" width="4" height="20" font="4"> </text>
+<text top="401" left="69" width="366" height="18" font="3"><b>Fig.  3</b>  Illustration of different solutions: Pareto front on the left </text>
+<text top="417" left="81" width="353" height="18" font="8">– loading pattern on the middle – corresponding power map on </text>
+<text top="433" left="81" width="49" height="18" font="8">the right </text>
+<text top="269" left="494" width="302" height="18" font="3"><b>Fig.  4</b>  Flow chart of the parallel MINOS algorithm   </text>
+<text top="537" left="458" width="362" height="18" font="3"><b>Fig.  5</b>  Speedup obtained on BULL cluster (Intel Nehalem pro-</text>
+<text top="554" left="471" width="172" height="18" font="8">cessor and Infiniband network) </text>
+<text top="507" left="633" width="56" height="16" font="0"># of cores </text>
+<text top="416" left="480" width="0" height="16" font="25">S</text>
+<text top="408" left="480" width="0" height="16" font="25">peedUp</text>
+<text top="366" left="480" width="0" height="16" font="25"> </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1262" width="893">
+	<fontspec id="26" size="4" family="Times" color="#000000"/>
+	<fontspec id="27" size="3" family="Times" color="#000000"/>
+	<fontspec id="28" size="5" family="Times" color="#000000"/>
+	<fontspec id="29" size="4" family="Times" color="#000000"/>
+	<fontspec id="30" size="8" family="Times" color="#000000"/>
+	<fontspec id="31" size="15" family="Times" color="#000000"/>
+<text top="64" left="66" width="22" height="8" font="0">704</text>
+<text top="63" left="712" width="111" height="12" font="0">Christophe CALVIN</text>
+<text top="1190" left="485" width="338" height="12" font="0">PROGRESS IN NUCLEAR SCIENCE AND TECHNOLOGY</text>
+<text top="53" left="68" width="4" height="20" font="4"> </text>
+<text top="1190" left="68" width="4" height="20" font="4"> </text>
+<text top="719" left="68" width="372" height="21" font="15"><b>4.  GPGPU Programming to Solve the Boltzman Neutron </b></text>
+<text top="736" left="87" width="133" height="20" font="15"><b>Transport Equation </b></text>
+<text top="754" left="85" width="355" height="20" font="4">In this application, we are interested in how accelerate the </text>
+<text top="772" left="68" width="382" height="20" font="4">resolution of the Boltzman equation using GPGPU </text>
+<text top="790" left="68" width="373" height="20" font="4">accelerators. We study the very fine grain parallelization of </text>
+<text top="808" left="68" width="252" height="20" font="4">GPGPU applied to  the MINOS solve<a href="pdfxml.html#6">r.</a></text>
+<text top="807" left="320" width="13" height="13" font="5"><a href="pdfxml.html#6">29)</a></text>
+<text top="808" left="333" width="111" height="20" font="4"><a href="pdfxml.html#6">  </a>In the MINOS </text>
+<text top="826" left="68" width="40" height="20" font="4">solver<a href="pdfxml.html#6">,</a></text>
+<text top="825" left="109" width="13" height="13" font="5"><a href="pdfxml.html#6">27)</a></text>
+<text top="826" left="122" width="322" height="20" font="4"><a href="pdfxml.html#6">  </a>the eigenvalue algorithm is based on the power </text>
+<text top="844" left="68" width="373" height="20" font="4">iterations method. At each step, one has to invert the mass </text>
+<text top="862" left="68" width="377" height="20" font="4">matrices using a Cholesky algorithm. All the numerical </text>
+<text top="880" left="68" width="376" height="20" font="4">kernels have been implemented using basic BLAS1 type </text>
+<text top="898" left="68" width="372" height="20" font="4">operations. Thus, we use GPU acceleration without changing </text>
+<text top="916" left="68" width="374" height="20" font="4">the global MINOS algorithm, using CUBLAS and specific </text>
+<text top="934" left="68" width="373" height="20" font="4">implementation of basic computing kernels in CUDA. First </text>
+<text top="952" left="68" width="374" height="20" font="4">experimentations show  an acceleration up to 20 times the </text>
+<text top="970" left="68" width="328" height="20" font="4">CPU time. The final implementation in the APOLLO3</text>
+<text top="969" left="396" width="7" height="13" font="5">®</text>
+<text top="970" left="404" width="36" height="20" font="4"> code </text>
+<text top="988" left="68" width="377" height="20" font="4">leads to decrease the final acceleration due to  lack of </text>
+<text top="1006" left="68" width="373" height="20" font="4">generality and specific optimization in the original GPGPU </text>
+<text top="1024" left="68" width="376" height="20" font="4">implementation mockup. But we obtained up to factor 5 </text>
+<text top="1042" left="68" width="387" height="20" font="4">acceleration on real industrial applications using </text>
+<text top="1060" left="68" width="120" height="20" font="4">MINOS-APOLLO3</text>
+<text top="1059" left="188" width="7" height="13" font="5">®</text>
+<text top="1060" left="195" width="120" height="20" font="4"> solver (s<a href="pdfxml.html#5">ee <b>Fig. 8</b>).</a> </text>
+<text top="1078" left="85" width="355" height="20" font="4">Finally we have mixed the domain decomposition method </text>
+<text top="1096" left="68" width="378" height="20" font="4">described earlier implemented using MPI with GPGPU </text>
+<text top="1114" left="68" width="373" height="20" font="4">acceleration. Each subdomain is held by a MPI process and </text>
+<text top="1132" left="68" width="379" height="20" font="4">we applied GPGPU acceleration on each subdomaine </text>
+<text top="359" left="457" width="376" height="20" font="4">calculation. We observe that the overall overhead of the </text>
+<text top="377" left="457" width="376" height="20" font="4">application incrases and thus the speedup decreases in a </text>
+<text top="395" left="457" width="329" height="20" font="4">much more significant way due to mainly two factors: </text>
+<text top="413" left="497" width="336" height="20" font="4">1. The subdomain computation is accelerated using </text>
+<text top="431" left="524" width="311" height="20" font="4">GPGPU and thus the communication time is </text>
+<text top="449" left="524" width="268" height="20" font="4">proportionally greater than using CPU only; </text>
+<text top="467" left="497" width="332" height="20" font="4">2. The overhead increases due to GPU – CPU memory </text>
+<text top="485" left="524" width="306" height="20" font="4">transfer; since the MPI communication has to be </text>
+<text top="503" left="524" width="305" height="20" font="4">achived by the CPU, each data exchange between </text>
+<text top="521" left="524" width="309" height="20" font="4">subdomain leads to data tranfer from GPU to </text>
+<text top="539" left="524" width="305" height="20" font="4">CPU, and between CPU using MPI and finally </text>
+<text top="557" left="524" width="150" height="20" font="4">between CPU and GPU. </text>
+<text top="575" left="474" width="356" height="20" font="4">Nevertheless, these first experimentations show that it is </text>
+<text top="593" left="457" width="375" height="20" font="4">possible to use GPGPU in an industrial code in order to </text>
+<text top="611" left="457" width="377" height="20" font="4">obtain interesting acceleration while maintaining generic </text>
+<text top="629" left="457" width="372" height="20" font="4">programming and original algorithms. Now, if we want  to </text>
+<text top="647" left="457" width="378" height="20" font="4">obtain greater speedup, especially by  mixing MPI and </text>
+<text top="665" left="457" width="383" height="20" font="4">GPGPU, one has  to modify both algorithms and </text>
+<text top="683" left="457" width="102" height="20" font="4">implementation. </text>
+<text top="701" left="457" width="4" height="20" font="4"> </text>
+<text top="718" left="457" width="103" height="22" font="11"><b>V. Conclusion </b></text>
+<text top="747" left="474" width="351" height="20" font="4">We have presented in this paper some major HPC  chal-</text>
+<text top="765" left="457" width="377" height="20" font="4">lenges for deterministic neutronics simulations and how </text>
+<text top="783" left="457" width="298" height="20" font="4">these challenges are addressed in the APOLLO3</text>
+<text top="782" left="755" width="7" height="13" font="5">®</text>
+<text top="783" left="762" width="66" height="20" font="4"> code. We </text>
+<text top="801" left="457" width="372" height="20" font="4">have illustrated with real applications and practical examples </text>
+<text top="819" left="457" width="373" height="20" font="4">how HPC could help achieving high fidelity simulations or </text>
+<text top="837" left="457" width="368" height="20" font="4">dealing with very large problems which could not be ad-</text>
+<text top="855" left="457" width="246" height="20" font="4">dressed otherwise. We use in APOLLO3</text>
+<text top="854" left="703" width="7" height="13" font="5">®</text>
+<text top="855" left="710" width="118" height="20" font="4">, different levels of </text>
+<text top="873" left="457" width="373" height="20" font="4">parallelism, from distributed calculations, to very fine grain </text>
+<text top="891" left="457" width="373" height="20" font="4">parallelism, depending on the problem to deal with and the </text>
+<text top="909" left="457" width="383" height="20" font="4">target architecture. Moreover, we have shown that </text>
+<text top="927" left="457" width="67" height="20" font="4">APOLLO3</text>
+<text top="926" left="524" width="7" height="13" font="5">®</text>
+<text top="927" left="531" width="294" height="20" font="4">  code is ready to address both hybrid architec-</text>
+<text top="945" left="457" width="373" height="20" font="4">ture and programming model, in order to solve the present </text>
+<text top="963" left="457" width="368" height="20" font="4">end coming reactor physics challenges using the last petaf-</text>
+<text top="981" left="457" width="206" height="20" font="4">lops and post petaflops machines. </text>
+<text top="999" left="457" width="4" height="20" font="4"> </text>
+<text top="1016" left="457" width="73" height="20" font="15"><b>References </b></text>
+<text top="1044" left="467" width="361" height="18" font="8">1)  S. Loubiere, R. Sanchez, M. Coste, A. Hebert, Z. Stankovski, </text>
+<text top="1060" left="487" width="343" height="18" font="8">C. Van Der Gucht,  I. Zmijarevic,  “APOLLO2  Twelve Years </text>
+<text top="1077" left="487" width="342" height="18" font="8">Later,” <i>Proc. Int. Conf. on Math. and Computations, Reactor </i></text>
+<text top="1093" left="487" width="341" height="18" font="7"><i>Physics and Environmental Analysis in Nucl. Applications, </i></text>
+<text top="1110" left="487" width="300" height="18" font="7"><i>M&amp;C 1999</i>, Madrid, Spain, Sept. 1999, p.1298 (1999). </text>
+<text top="1126" left="467" width="358" height="18" font="8">2)  R. Sanchez, J. Mondot, Z. Stankovski, A. Cossic, I. Zmijarev-</text>
+<text top="273" left="513" width="45" height="8" font="26">Hete3D Diffusion</text>
+<text top="273" left="610" width="28" height="8" font="26">RJH2 SP1</text>
+<text top="273" left="698" width="28" height="8" font="26">RJH2 SP3</text>
+<text top="266" left="484" width="3" height="7" font="27">0</text>
+<text top="241" left="478" width="9" height="7" font="27">500</text>
+<text top="215" left="475" width="12" height="7" font="27">1000</text>
+<text top="190" left="475" width="12" height="7" font="27">1500</text>
+<text top="165" left="475" width="12" height="7" font="27">2000</text>
+<text top="140" left="475" width="12" height="7" font="27">2500</text>
+<text top="110" left="559" width="106" height="10" font="28">GPU Acceleration on MINOS</text>
+<text top="126" left="540" width="126" height="8" font="26">Tesla S1070 vs Nehalem X5570 @ 2.93 GHz</text>
+<text top="184" left="793" width="30" height="8" font="26">CPU solver</text>
+<text top="193" left="793" width="30" height="8" font="26">GPU solver</text>
+<text top="225" left="469" width="0" height="8" font="29">Ti</text>
+<text top="220" left="469" width="0" height="8" font="29">m</text>
+<text top="214" left="469" width="0" height="8" font="29">e i</text>
+<text top="208" left="469" width="0" height="8" font="29">n s</text>
+<text top="200" left="469" width="0" height="8" font="29">ec</text>
+<text top="193" left="469" width="0" height="8" font="29">onds</text>
+<text top="291" left="460" width="324" height="18" font="3"><b>Fig.  8</b>  GPUGPU acceleration of the MINOS-APOLLO3</text>
+<text top="290" left="785" width="7" height="12" font="5">®</text>
+<text top="291" left="791" width="31" height="18" font="8"> solv-</text>
+<text top="307" left="473" width="354" height="18" font="8">er on 3 different tests cases: from left to right: 3D PWR core, </text>
+<text top="323" left="473" width="190" height="18" font="8">2D and 3D JHR experimental core </text>
+<text top="111" left="71" width="300" height="16" font="0">1-  Attribution of a set of directions at each processor   </text>
+<text top="125" left="71" width="348" height="16" font="0">2-  For each outer iteration and each energy group for each mo-</text>
+<text top="139" left="98" width="323" height="16" font="0">ment we evaluate the external source (fission and scattering </text>
+<text top="161" left="98" width="102" height="16" font="0">from other groups) </text>
+<text top="154" left="217" width="12" height="14" font="30"><i>ext</i></text>
+<text top="167" left="215" width="11" height="14" font="30"><i>lm</i></text>
+<text top="155" left="206" width="9" height="24" font="31"><i>S</i></text>
+<text top="161" left="233" width="3" height="16" font="0"> </text>
+<text top="181" left="71" width="154" height="16" font="0">3-  For each inner iteration </text>
+<text top="194" left="72" width="3" height="16" font="0"> </text>
+<text top="359" left="434" width="3" height="16" font="0"> </text>
+<text top="370" left="72" width="3" height="16" font="0"> </text>
+<text top="412" left="71" width="362" height="18" font="3"><b>Fig.  6</b>  Flow chart for the exchange of the angular flux and mo-</text>
+<text top="428" left="84" width="36" height="18" font="8">ments </text>
+<text top="652" left="70" width="366" height="18" font="3"><b>Fig.  7</b>  Fine grain parallelization along one angular direction. At </text>
+<text top="667" left="82" width="353" height="18" font="8">each step all the triangles of the same color can be computed in </text>
+<text top="683" left="82" width="47" height="18" font="8">parallel. </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1262" width="893">
+<text top="63" left="66" width="411" height="12" font="0">HPC Challenges for Deterministic Neutronics Simulations Using APOLLO3</text>
+<text top="61" left="479" width="8" height="6" font="14">R</text>
+<text top="63" left="494" width="28" height="12" font="0">Code</text>
+<text top="64" left="802" width="22" height="8" font="0">705</text>
+<text top="1188" left="66" width="139" height="12" font="0">VOL. 2, OCTOBER 2011</text>
+<text top="53" left="68" width="4" height="20" font="4"> </text>
+<text top="1190" left="68" width="4" height="20" font="4"> </text>
+<text top="106" left="98" width="342" height="18" font="8">ic, “APOLLO II: A user-oriented, portable, modular code for </text>
+<text top="122" left="98" width="341" height="18" font="8">multigroup transport assembly calculations,” <i>Nucl. Sci. Eng.</i>, </text>
+<text top="139" left="98" width="118" height="18" font="3"><b>100</b>, 352-362 (1988). </text>
+<text top="156" left="78" width="362" height="18" font="8">3)  G. Rimpault <i>et al</i>., “The ERANOS data and code system for </text>
+<text top="172" left="98" width="342" height="18" font="8">fast reactor neutronic analyses,” <i>Proc. of the Int. Conf. on the </i></text>
+<text top="188" left="98" width="342" height="18" font="7"><i>New Frontier of Nuclear Technology: Reactor Physics, Safety </i></text>
+<text top="205" left="98" width="344" height="18" font="7"><i>and High-Performance Computing, PHYSOR</i>, Seoul, South </text>
+<text top="221" left="98" width="190" height="18" font="8">Korea, 7–10 October 2002 (2002). </text>
+<text top="238" left="78" width="357" height="18" font="8">4)  J-M.  Ruggieri,  J.  Tommasi,  J-F. Lebrat,  “ERANOS  2.1:  In-</text>
+<text top="255" left="98" width="341" height="18" font="8">ternational Code System for GEN IV Fast Reactor Analysis,” </text>
+<text top="271" left="98" width="206" height="18" font="7"><i>Proc. ICAPP ’06</i>, Reno, USA (2006). </text>
+<text top="287" left="78" width="363" height="18" font="8">5)  G. Rimpault, “Algorithmic Features of the ECCO Cell Code </text>
+<text top="304" left="98" width="341" height="18" font="8">for Treating Heterogeneous Fast Reactor Subassemblies,” </text>
+<text top="320" left="98" width="338" height="18" font="7"><i>Proc. Int. Topical Meeting on Reactor Physics and Computa-</i></text>
+<text top="337" left="98" width="179" height="18" font="7"><i>tions</i>, Portland, Oregon (1995).   </text>
+<text top="354" left="78" width="361" height="18" font="8">6)  R.  Sanchez,  C.  Magnaud,  J-J.  Lautard,  D.  Caruge  <i>et al.</i>, </text>
+<text top="370" left="98" width="338" height="18" font="8">“SAPHYR : A Code System from Reactor Design to Refer-</text>
+<text top="386" left="98" width="345" height="18" font="8">ence Calculations,”  <i>Proc</i>.  <i>Int.  Conf.  on Supercomputing in </i></text>
+<text top="403" left="98" width="303" height="18" font="7"><i>Nuclear Applications</i>, Paris, France, September (2003). </text>
+<text top="420" left="78" width="364" height="18" font="8">7)  C.  M. Diop <i>et  al.</i>,  ”TRIPOLI-4: A 3D Continuous Energy </text>
+<text top="436" left="98" width="343" height="18" font="8">Monte Carlo Transport Code,”    <i>Proc. Int. Conf. On Physics </i></text>
+<text top="452" left="98" width="341" height="18" font="7"><i>and Technology of Reactors and Applications,</i>  <i>PHYTRA-1</i>, </text>
+<text top="469" left="98" width="160" height="18" font="8">Marrakech, Morocco (2007). </text>
+<text top="485" left="78" width="363" height="18" font="8">8)  M. Coste-Delclaux,  “GALILEE: A Nuclear Data Processing </text>
+<text top="502" left="98" width="341" height="18" font="8">System for Transport, Depletion and Shielding Codes,“ <i>Proc. </i></text>
+<text top="518" left="98" width="338" height="18" font="7"><i>Int. conf. PHYSOR’08 Advances in Reactor Physics</i>, Interla-</text>
+<text top="535" left="98" width="137" height="18" font="8">ken, Switzerland (2008). </text>
+<text top="552" left="78" width="362" height="18" font="8">9)  A. Tsilanizara <i>et al</i>., “DARWIN: An Evolution Code System </text>
+<text top="568" left="98" width="338" height="18" font="8">for a Large Range of Applications,” <i>Proc. Int. Conf on Radia-</i></text>
+<text top="584" left="98" width="331" height="18" font="7"><i>tion Shielding, ICRS-9</i>, October 199, Tsukaba, Japan (1999). </text>
+<text top="601" left="72" width="364" height="18" font="8">10)  C. De Saint Jean <i>et al</i>., “Status of CONRAD, a nuclear reac-</text>
+<text top="618" left="98" width="341" height="18" font="8">tion analysis tool,”<i>  Proc. Int.  Conf.  on Nuclear Data for </i></text>
+<text top="634" left="98" width="338" height="18" font="7"><i>Science and Technology 2007, ND 2007</i>, Nice, France (2007). </text>
+<text top="651" left="72" width="371" height="18" font="8">11)  H. Golfier <i>et al</i>.,  “APOLLO3: a common project of CEA, </text>
+<text top="667" left="98" width="342" height="18" font="8">AREVA and EDF for the development of a new deterministic </text>
+<text top="684" left="98" width="341" height="18" font="8">multi-purpose code for core physics analysis,” <i>Proc. Int. Conf. </i></text>
+<text top="700" left="98" width="342" height="18" font="7"><i>on Mathematics, Computational Methods &amp; Reactor Physics, </i></text>
+<text top="716" left="98" width="327" height="18" font="7"><i>M&amp;C 2009</i>, Saratoga Springs, New York, May 3-7 (2009).   </text>
+<text top="733" left="72" width="364" height="18" font="8">12)  Open Cascade,  “Salome: The open source integration plat-</text>
+<text top="750" left="98" width="341" height="18" font="8">form for numerical simulation,”<i> </i></text>
+<text top="766" left="98" width="224" height="18" font="8">http://www.salome-platform.org, (2005). </text>
+<text top="783" left="72" width="364" height="18" font="8">13)  F. Gaudier,  M. Marques,  B. Spindler,  B. Tourniare,  “Uncer-</text>
+<text top="799" left="98" width="347" height="18" font="8">tainty  assessments in severe accident scenario using the </text>
+<text top="816" left="98" width="342" height="18" font="8">URANIE software,”<i> Proc. 35th ESREDA Seminar</i>, November </text>
+<text top="832" left="98" width="179" height="18" font="8">19-21, Marseille, France (2008). </text>
+<text top="849" left="72" width="368" height="18" font="8">14)  B. F. Smith, P. Bjorstad, W. Gropp, <i>Domain decomposition - </i></text>
+<text top="865" left="98" width="346" height="18" font="7"><i>parallel multilevel methods for elliptic partial differential </i></text>
+<text top="881" left="98" width="319" height="18" font="7"><i>equations,</i> Cambridge University Press, New York (1996). </text>
+<text top="898" left="72" width="370" height="18" font="8">15)  R. Roy,  Z. Stankovski,  “Parallelization of neutron transport </text>
+<text top="914" left="98" width="345" height="18" font="8">solvers,”  <i>Recent advances in parallel virtual machine and </i></text>
+<text top="931" left="98" width="335" height="18" font="7"><i>message passing interface</i>, LCNS, vol.1332, 494-501 (1997). </text>
+<text top="948" left="72" width="370" height="18" font="8">16)  M.  Zeyao,  F. Lianxiang,  “Parallel flux sweep algorithm for </text>
+<text top="964" left="98" width="341" height="18" font="8">neutron transport on unstructured grid,”  <i>J.  Supercomput</i>.,<i> </i></text>
+<text top="980" left="98" width="107" height="18" font="3"><b>30</b>[1], 5-17 (2004). </text>
+<text top="106" left="461" width="364" height="18" font="8">17)  Z. Stankovski, A. Puill, L. Dullier, “Advanced plutonium as-</text>
+<text top="122" left="487" width="341" height="18" font="8">sembly parallel calculations using the APOLLO2 code,” <i>Proc. </i></text>
+<text top="139" left="487" width="341" height="18" font="7"><i>Int. Conf on Mathematics and Computations, M&amp;C1997</i> </text>
+<text top="156" left="487" width="43" height="18" font="8">(1997). </text>
+<text top="172" left="461" width="369" height="18" font="8">18)  P. Guérin, A-M. Baudron, J-J. Lautard, “A component mode </text>
+<text top="188" left="487" width="338" height="18" font="8">synthesis method for 3D cell by cell SPn core calculation us-</text>
+<text top="205" left="487" width="343" height="18" font="8">ing the mixed dual finite element solver MINOS,” <i>Proc. Int. </i></text>
+<text top="221" left="487" width="345" height="18" font="7"><i>Conf on Mathematics and Computations, M&amp;C2005</i>, Avignon, </text>
+<text top="238" left="487" width="83" height="18" font="8">France (2005). </text>
+<text top="255" left="461" width="371" height="18" font="8">19)  P. Guérin,  A-M.  Baudron,  J-J.  Lautard,  “Component mode </text>
+<text top="271" left="487" width="338" height="18" font="8">synthesis methods applied to 3D heterogeneous core calcula-</text>
+<text top="287" left="487" width="341" height="18" font="8">tions, using the mixed dual finite element solver MINOS,” </text>
+<text top="304" left="487" width="341" height="18" font="7"><i>Proc. Int. conf. PHYSOR’06  Advances in Reactor Physics, </i></text>
+<text top="321" left="487" width="151" height="18" font="8">Vancouver, Canada<i> (2006)</i>. </text>
+<text top="337" left="461" width="364" height="18" font="8">20)  P. Guérin, A-M. Baudron, J-J. Lautard, “Domain decomposi-</text>
+<text top="354" left="487" width="341" height="18" font="8">tion methods for core calculations using the MINOS solver,” </text>
+<text top="370" left="487" width="345" height="18" font="7"><i>Proc. Int. Conf on Mathematics and Computations, M&amp;C2007</i>, </text>
+<text top="386" left="487" width="131" height="18" font="8">Monterey, USA (2007). </text>
+<text top="403" left="461" width="368" height="18" font="8">21)  J. Ragusa, “Implementation of multithreaded computing in the </text>
+<text top="420" left="487" width="338" height="18" font="8">neutronics FEM solver Minos,” <i>Proc. Int. Conf on Mathemat-</i></text>
+<text top="436" left="487" width="341" height="18" font="7"><i>ics and Computations, M&amp;C2003</i>,  Gatlinburg, Tennessee, </text>
+<text top="453" left="487" width="76" height="18" font="8">USA, (2003). </text>
+<text top="469" left="461" width="368" height="18" font="8">22)  J. Ragusa, “Application of multithread computing and domain </text>
+<text top="485" left="487" width="341" height="18" font="8">decomposition to the 3-D neutronics FEM code CRONOS,” </text>
+<text top="502" left="487" width="341" height="18" font="7"><i>Int.  Conf. on Supercomputing in Nuclear Applications, </i></text>
+<text top="518" left="487" width="174" height="18" font="7"><i>SNA2003</i>, Paris, France (2003). </text>
+<text top="535" left="461" width="369" height="18" font="8">23)  G. E. Sjoden, <i>PENTRAN: a parallel 3D S(N) transport code </i></text>
+<text top="551" left="487" width="338" height="18" font="7"><i>with complete phase space decomposition, adaptive diffe-</i></text>
+<text top="568" left="487" width="346" height="18" font="7"><i>rencing,  and iterative solution methods</i>,  PhD  thesis. The </text>
+<text top="585" left="487" width="341" height="18" font="8">Pennsylvania State University, Source DAI-B 58/05, p.2652, </text>
+<text top="601" left="487" width="83" height="18" font="8">301 pp (1997). </text>
+<text top="618" left="461" width="364" height="18" font="8">24)  J-J.Herrero,  C.  Ahnert,  J-M  Aragones,  “Spatial domain de-</text>
+<text top="634" left="487" width="344" height="18" font="8">composition for LWR cores at the pin scale,”  <i>ANS Winter </i></text>
+<text top="650" left="487" width="89" height="18" font="7"><i>meeting</i> (2007). </text>
+<text top="667" left="461" width="368" height="18" font="8">25)  F. Coulomb, “Parallelization of the DSN multigroup neutron </text>
+<text top="684" left="487" width="341" height="18" font="8">transport equation on the CRAYT3D using CRAFT,”  <i>Proc. </i></text>
+<text top="700" left="487" width="341" height="18" font="7"><i>8th  SIAM Conference on Parallel Processing for Scientific </i></text>
+<text top="716" left="487" width="277" height="18" font="7"><i>Computing, </i>Minneapolis, Minnesota, USA (1997). </text>
+<text top="733" left="461" width="369" height="18" font="8">26)  J-M. Do <i>et al</i>., “Fuel loading pattern for heterogeneous EPR </text>
+<text top="750" left="487" width="338" height="18" font="8">core configuration using a distributed evolutionary algo-</text>
+<text top="766" left="487" width="341" height="18" font="8">rithm,”  <i>Proc.</i>  <i>Int. Conf on Mathematics and Computations, </i></text>
+<text top="782" left="487" width="297" height="18" font="7"><i>M&amp;C2009</i>, Saratoga Springs, New York, USA (2009). </text>
+<text top="799" left="461" width="371" height="18" font="8">27)  A.  M. Baudron,  J.  J. Lautard, “MINOS: A Simplified Pn </text>
+<text top="815" left="487" width="341" height="18" font="8">Solver for Core Calculation,” <i>Nucl. Sci. Eng.</i>, <b>155</b>[2], 250-263 </text>
+<text top="832" left="487" width="43" height="18" font="8">(2007). </text>
+<text top="849" left="461" width="364" height="18" font="8">28)  J. J. Lautard, J. Y. Moller, “Minaret: a 3D solver for unstruc-</text>
+<text top="865" left="487" width="343" height="18" font="8">tured calculation within the APOLLO3® system,” <i>Proc. Int. </i></text>
+<text top="881" left="487" width="343" height="18" font="7"><i>Conf on Mathematics and Computations, M&amp;C2011</i>, Rio de </text>
+<text top="898" left="487" width="124" height="18" font="8">Janeiro, Brazil (2011). </text>
+<text top="914" left="461" width="364" height="18" font="8">29)  C. Calvin, E. Jamelot, J. Dubois,  S. Petiton, “GPGPU Pro-</text>
+<text top="931" left="487" width="351" height="18" font="8">gramming to Solve the Boltzman Neutron Transport </text>
+<text top="948" left="487" width="342" height="18" font="8">Equation,” <i>14th SIAM Conference on Parallel Processing for </i></text>
+<text top="964" left="487" width="289" height="18" font="7"><i>Scientific Computing</i>, Seattle, USA, February (2010).</text>
+<text top="997" left="98" width="3" height="18" font="8"> </text>
+</page>
+</pdf2xml>

@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="2" size="13" family="Helvetica" color="#3b8cc3"/>
+<text top="176" left="75" width="531" height="17" font="0">An IO block array in a radiation-hardened SOI SRAM-based FPGA</text>
+<text top="292" left="75" width="642" height="14" font="1">This article has been downloaded from IOPscience. Please scroll down to see the full text article.</text>
+<text top="322" left="75" width="199" height="14" font="1">2012 J. Semicond. 33 015010</text>
+<text top="352" left="75" width="332" height="14" font="1">(http://iopscience.iop.org/1674-4926/33/1/015010)</text>
+<text top="510" left="75" width="118" height="14" font="1">Download details:</text>
+<text top="532" left="75" width="186" height="14" font="1">IP Address: 216.165.108.65</text>
+<text top="555" left="75" width="344" height="14" font="1">The article was downloaded on 22/01/2012 at 05:00</text>
+<text top="615" left="75" width="295" height="14" font="1">Please note that <a href="http://iopscience.iop.org/page/terms">terms and conditions apply.</a></text>
+<text top="390" left="75" width="529" height="14" font="1">View <a href="http://iopscience.iop.org/1674-4926/33/1">the table of contents for this issue</a>, or go to the <a href="http://iopscience.iop.org/1674-4926">journal homepage for more</a></text>
+<text top="85" left="15" width="40" height="14" font="2"><a href="http://iopscience.iop.org/">Home</a></text>
+<text top="85" left="75" width="48" height="14" font="2"><a href="http://iopscience.iop.org/search">Search</a></text>
+<text top="85" left="143" width="73" height="14" font="2"><a href="http://iopscience.iop.org/collections">Collections</a></text>
+<text top="85" left="233" width="57" height="14" font="2"><a href="http://iopscience.iop.org/journals">Journals</a></text>
+<text top="85" left="306" width="39" height="14" font="2"><a href="http://iopscience.iop.org/page/aboutioppublishing">About</a></text>
+<text top="85" left="360" width="72" height="14" font="2"><a href="http://iopscience.iop.org/contact">Contact us</a></text>
+<text top="85" left="448" width="101" height="14" font="2"><a href="http://iopscience.iop.org/myiopscience">My IOPscience</a></text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1211" width="892">
+	<fontspec id="3" size="12" family="Times" color="#000000"/>
+	<fontspec id="4" size="19" family="Times" color="#000000"/>
+	<fontspec id="5" size="15" family="Times" color="#000000"/>
+	<fontspec id="6" size="13" family="Times" color="#000000"/>
+	<fontspec id="7" size="9" family="Times" color="#000000"/>
+	<fontspec id="8" size="11" family="Times" color="#000000"/>
+	<fontspec id="9" size="12" family="Times" color="#000000"/>
+	<fontspec id="10" size="8" family="Times" color="#000000"/>
+	<fontspec id="11" size="15" family="Times" color="#000000"/>
+<text top="43" left="64" width="81" height="15" font="3">Vol. 33, No. 1</text>
+<text top="43" left="363" width="166" height="15" font="3">Journal of Semiconductors</text>
+<text top="43" left="747" width="83" height="15" font="3">January 2012</text>
+<text top="83" left="64" width="629" height="19" font="4"><b>An IO block array in a radiation-hardened SOI SRAM-based FPGA</b></text>
+<text top="127" left="149" width="75" height="16" font="5">Zhao Yan(</text>
+<text top="126" left="224" width="31" height="15" font="6">赵岩</text>
+<text top="127" left="255" width="6" height="16" font="5">)</text>
+<text top="124" left="261" width="7" height="11" font="7"></text>
+<text top="127" left="269" width="86" height="16" font="5">, Wu Lihua(</text>
+<text top="126" left="355" width="46" height="15" font="6">吴利华</text>
+<text top="127" left="401" width="116" height="16" font="5">), Han Xiaowei(</text>
+<text top="126" left="517" width="46" height="15" font="6">韩小炜</text>
+<text top="127" left="563" width="69" height="16" font="5">), Li Yan(</text>
+<text top="126" left="633" width="31" height="15" font="6">李艳</text>
+<text top="127" left="664" width="10" height="16" font="5">),</text>
+<text top="151" left="149" width="101" height="16" font="5">Zhang Qianli(</text>
+<text top="150" left="250" width="46" height="15" font="6">张倩莉</text>
+<text top="151" left="296" width="105" height="16" font="5">), Chen Liang(</text>
+<text top="150" left="401" width="31" height="15" font="6">陈亮</text>
+<text top="151" left="432" width="137" height="16" font="5">), Zhang Guoquan(</text>
+<text top="150" left="569" width="46" height="15" font="6">张国全</text>
+<text top="151" left="615" width="114" height="16" font="5">), Li Jianzhong(</text>
+<text top="150" left="729" width="46" height="15" font="6">李建忠</text>
+<text top="151" left="776" width="10" height="16" font="5">),</text>
+<text top="175" left="149" width="68" height="16" font="5">Yang Bo(</text>
+<text top="174" left="217" width="31" height="15" font="6">杨波</text>
+<text top="175" left="248" width="107" height="16" font="5">), Gao Jiantou(</text>
+<text top="174" left="355" width="46" height="15" font="6">高见头</text>
+<text top="175" left="401" width="96" height="16" font="5">), Wang Jian(</text>
+<text top="174" left="497" width="31" height="15" font="6">王剑</text>
+<text top="175" left="528" width="80" height="16" font="5">), Li Ming(</text>
+<text top="174" left="608" width="31" height="15" font="6">李明</text>
+<text top="175" left="639" width="107" height="16" font="5">), Liu Guizhai(</text>
+<text top="174" left="746" width="46" height="15" font="6">刘贵宅</text>
+<text top="175" left="792" width="10" height="16" font="5">),</text>
+<text top="199" left="149" width="92" height="16" font="5">Zhang Feng(</text>
+<text top="198" left="241" width="31" height="15" font="6">张峰</text>
+<text top="199" left="272" width="110" height="16" font="5">), Guo Xufeng(</text>
+<text top="198" left="382" width="46" height="15" font="6">郭旭峰</text>
+<text top="199" left="428" width="88" height="16" font="5">), Zhao Kai(</text>
+<text top="198" left="516" width="31" height="15" font="6">赵凯</text>
+<text top="199" left="547" width="137" height="16" font="5">), Stanley L. Chen(</text>
+<text top="198" left="684" width="46" height="15" font="6">陈陵都</text>
+<text top="199" left="730" width="10" height="16" font="5">),</text>
+<text top="223" left="149" width="66" height="16" font="5">Yu Fang(</text>
+<text top="222" left="215" width="31" height="15" font="6">于芳</text>
+<text top="223" left="246" width="137" height="16" font="5">), and Liu Zhongli(</text>
+<text top="222" left="383" width="46" height="15" font="6">刘忠立</text>
+<text top="223" left="430" width="6" height="16" font="5">)</text>
+<text top="262" left="149" width="448" height="12" font="8">Institute of Semiconductors, Chinese Academy of Sciences, Beijing 100083, China</text>
+<text top="297" left="149" width="680" height="13" font="9"><b>Abstract: </b>We present an input/output block (IOB) array used in the radiation-hardened SRAM-based field-</text>
+<text top="314" left="149" width="542" height="14" font="3">programmable gate array (FPGA) VS1000, which is designed and fabricated with a 0.5</text>
+<text top="314" left="706" width="123" height="14" font="3">m partially depleted</text>
+<text top="332" left="149" width="680" height="14" font="3">silicon-on-insulator (SOI) logic process at the CETC 58th Institute. Corresponding with the characteristics of the</text>
+<text top="350" left="149" width="680" height="14" font="3">FPGA, each IOB includes a local routing pool and two IO cells composed of a signal path circuit, configurable</text>
+<text top="368" left="149" width="680" height="14" font="3">input/output buffers and an ESD protection network. A boundary-scan path circuit can be used between the pro-</text>
+<text top="386" left="149" width="680" height="14" font="3">grammable buffers and the input/output circuit or as a transparent circuit when the IOB is applied in different modes.</text>
+<text top="404" left="149" width="680" height="14" font="3">Programmable IO buffers can be used at TTL/CMOS standard levels. The local routing pool enhances the flexibility</text>
+<text top="422" left="149" width="680" height="14" font="3">and routability of the connection between the IOB array and the core logic. Radiation-hardened designs, including</text>
+<text top="440" left="149" width="680" height="14" font="3">A-type and H-type body-tied transistors and special D-type registers, improve the anti-radiation performance. The</text>
+<text top="458" left="149" width="680" height="14" font="3">ESD protection network, which provides a high-impulse discharge path on a pad, prevents the breakdown of the</text>
+<text top="476" left="149" width="680" height="14" font="3">core logic caused by the immense current. These design strategies facilitate the design of FPGAs with different ca-</text>
+<text top="494" left="149" width="680" height="14" font="3">pacities or architectures to form a series of FPGAs. The functionality and performance of the IOB array is proved</text>
+<text top="512" left="149" width="680" height="14" font="3">after a functional test. The radiation test indicates that the proposed VS1000 chip with an IOB array has a total</text>
+<text top="529" left="149" width="367" height="14" font="3">dose tolerance of 100 krad(Si), a dose survivability rate of 1.5</text>
+<text top="529" left="533" width="15" height="14" font="3">10</text>
+<text top="526" left="548" width="12" height="10" font="10">11</text>
+<text top="529" left="565" width="264" height="14" font="3">rad(Si)/s, and a neutron fluence immunity of</text>
+<text top="547" left="149" width="7" height="14" font="3">1</text>
+<text top="547" left="174" width="15" height="14" font="3">10</text>
+<text top="544" left="189" width="12" height="10" font="10">14</text>
+<text top="547" left="206" width="30" height="14" font="3">n/cm</text>
+<text top="544" left="236" width="6" height="10" font="10">2</text>
+<text top="547" left="243" width="4" height="14" font="3">.</text>
+<text top="584" left="149" width="515" height="13" font="9"><b>Key words: </b>partially-depleted SOI; FPGA; IOB; radiation-hardened; ESD protection</text>
+<text top="605" left="149" width="238" height="13" font="9"><b>DOI: </b>10.1088/1674-4926/33/1/015010</text>
+<text top="605" left="433" width="105" height="13" font="9"><b>EEACC: </b>1265A</text>
+<text top="653" left="64" width="119" height="16" font="11"><b>1. Introduction</b></text>
+<text top="687" left="89" width="346" height="14" font="3">Field-programmable gate arrays (FPGAs) are widely used</text>
+<text top="705" left="64" width="371" height="14" font="3">in systems design with ever increasing complexity because</text>
+<text top="723" left="64" width="371" height="14" font="3">of their lower depreciated mask costs and fast time-to-</text>
+<text top="741" left="64" width="371" height="14" font="3">market compared with application-specific integrated circuits</text>
+<text top="759" left="64" width="371" height="14" font="3">(ASICs). All these advantages are based on its configurabil-</text>
+<text top="777" left="64" width="16" height="14" font="3">ity</text>
+<text top="773" left="80" width="25" height="10" font="10">Œ1; 2</text>
+<text top="777" left="105" width="330" height="14" font="3">. SOI SRAM based FPGA is particularly appropriate for</text>
+<text top="794" left="64" width="371" height="14" font="3">use in aerospace and military applications because of its higher</text>
+<text top="812" left="64" width="371" height="14" font="3">silicon density, smaller parasitic capacitance, better latch-up</text>
+<text top="830" left="64" width="371" height="14" font="3">immunity and better radiation-hardened performance. Several</text>
+<text top="848" left="64" width="371" height="14" font="3">factors have to be considered in choosing a particular type</text>
+<text top="866" left="64" width="371" height="14" font="3">of FPGA for a specific application. One key consideration is</text>
+<text top="884" left="64" width="371" height="14" font="3">whether the mapping of the application of the input/output</text>
+<text top="902" left="64" width="371" height="14" font="3">pins to the input/output block (IOB) of FPGA can meet the</text>
+<text top="920" left="64" width="371" height="14" font="3">requirements of functionality and performance. Another chal-</text>
+<text top="938" left="64" width="371" height="14" font="3">lenge facing IOBs is that the electrostatic discharge (ESD) pro-</text>
+<text top="956" left="64" width="371" height="14" font="3">tection network must be credible especially for use in SOI-</text>
+<text top="974" left="64" width="371" height="14" font="3">CMOS technology. Most FPGA IOBs cannot confirm the pres-</text>
+<text top="992" left="64" width="371" height="14" font="3">ence of an input/output pin, the TTL/CMOS level standard</text>
+<text top="1010" left="64" width="371" height="14" font="3">and the connection with the core logic before configuration.</text>
+<text top="1028" left="64" width="371" height="14" font="3">boundary-scan path circuit is also necessary for FPGA testing</text>
+<text top="1046" left="64" width="371" height="14" font="3">and programming. All the aforementioned features show the</text>
+<text top="1063" left="64" width="371" height="14" font="3">difference between the designs of the SOI-CMOS FPGA IOB</text>
+<text top="1081" left="64" width="371" height="14" font="3">array and ASICs. Thus, when proposing an IOB array design</text>
+<text top="650" left="458" width="371" height="14" font="3">for a FPGA family, both the potential application conditions</text>
+<text top="667" left="458" width="371" height="14" font="3">and the different IO cell organizations in the individual FPGA</text>
+<text top="685" left="458" width="265" height="14" font="3">family members are taken into consideration</text>
+<text top="682" left="723" width="13" height="10" font="10">Œ3</text>
+<text top="685" left="737" width="92" height="14" font="3">. By combining</text>
+<text top="703" left="458" width="371" height="14" font="3">the advantages and challenges of FPGA with those of SOI, an</text>
+<text top="721" left="458" width="371" height="14" font="3">IOB array used for a FPGA chip, named VS1000, is fabricated</text>
+<text top="739" left="458" width="60" height="14" font="3">with a 0.5</text>
+<text top="739" left="533" width="296" height="14" font="3">m SOI-CMOS logic process and presented in the</text>
+<text top="757" left="458" width="82" height="14" font="3">current paper.</text>
+<text top="798" left="458" width="309" height="16" font="11"><b>2. Overall architecture of the IOB array</b></text>
+<text top="830" left="484" width="211" height="14" font="3">As shown in Fig. 1, VS1000 is a 14</text>
+<text top="830" left="712" width="118" height="14" font="3">14 logic block (LB)</text>
+<text top="848" left="458" width="371" height="14" font="3">array. An IOB is fixed at the end of each column and each row.</text>
+<text top="866" left="458" width="371" height="14" font="3">Each IOB includes two or three IOCs. As basic components of</text>
+<text top="884" left="458" width="371" height="14" font="3">the IOB array, the IOCs can be classified into four types ac-</text>
+<text top="902" left="458" width="181" height="14" font="3">cording to their functionalities</text>
+<text top="899" left="640" width="13" height="10" font="10">Œ3</text>
+<text top="902" left="657" width="172" height="14" font="3">and are described in Table 1.</text>
+<text top="920" left="484" width="346" height="14" font="3">The power IO supplies power to the input/output buffers</text>
+<text top="938" left="458" width="351" height="14" font="3">of the I/O pad, the internal core circuit and the ground rail.</text>
+<text top="956" left="484" width="346" height="14" font="3">A dedicated-function IO is only used for programming</text>
+<text top="974" left="458" width="371" height="14" font="3">(which includes a configuration clock pin (CCLK), an initial-</text>
+<text top="992" left="458" width="371" height="14" font="3">ization pin (INITN), a done pin (DONE), mode pin (MOD) and</text>
+<text top="1010" left="458" width="371" height="14" font="3">a program pin (PROGRAM)) or JTAG, (which includes a test</text>
+<text top="1028" left="458" width="371" height="14" font="3">clock pin (TCK), a test data input pin (TDI), a test mode se-</text>
+<text top="1046" left="458" width="371" height="14" font="3">lect pin (TMS) and a test data output pin (TDO)). Thus, it has</text>
+<text top="1063" left="458" width="371" height="14" font="3">no configurable resources and cannot be configured for other</text>
+<text top="1081" left="458" width="59" height="14" font="3">functions.</text>
+<text top="1113" left="77" width="300" height="13" font="8"> Corresponding author. Email: zhaoyan20@semi.ac.cn</text>
+<text top="1130" left="87" width="125" height="12" font="8">Received 27 June 2011</text>
+<text top="1129" left="616" width="213" height="13" font="8">c 2012 Chinese Institute of Electronics</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-1</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1211" width="892">
+	<fontspec id="12" size="12" family="Times" color="#000000"/>
+<text top="47" left="64" width="150" height="15" font="3">J. Semicond. 2012, 33(1)</text>
+<text top="47" left="738" width="91" height="15" font="3">Zhao Yan <i>et al.</i></text>
+<text top="83" left="341" width="211" height="12" font="8">Table 1. Class of VS1000 FPGA IOCs.</text>
+<text top="102" left="134" width="27" height="12" font="8">Type</text>
+<text top="102" left="301" width="48" height="12" font="8">Function</text>
+<text top="102" left="394" width="63" height="12" font="8">Description</text>
+<text top="102" left="636" width="50" height="12" font="8">Pin name</text>
+<text top="119" left="134" width="52" height="12" font="8">Power IO</text>
+<text top="119" left="301" width="19" height="12" font="8">vcc</text>
+<text top="119" left="394" width="117" height="12" font="8">5 V power supply pin</text>
+<text top="119" left="636" width="28" height="12" font="8">VCC</text>
+<text top="136" left="301" width="20" height="12" font="8">gnd</text>
+<text top="136" left="394" width="82" height="12" font="8">0 V ground pin</text>
+<text top="136" left="636" width="29" height="12" font="8">GND</text>
+<text top="152" left="134" width="121" height="12" font="8">Dedicated-function IO</text>
+<text top="152" left="301" width="45" height="12" font="8">configio</text>
+<text top="152" left="394" width="183" height="12" font="8">Input/output pin used for program</text>
+<text top="152" left="636" width="36" height="12" font="8">CCLK</text>
+<text top="169" left="301" width="48" height="12" font="8">configod</text>
+<text top="169" left="394" width="216" height="12" font="8">Open-drain pin used for program circuit</text>
+<text top="169" left="636" width="81" height="12" font="8">INITN, DONE</text>
+<text top="185" left="301" width="45" height="12" font="8">configin</text>
+<text top="185" left="394" width="183" height="12" font="8">Input pin used for program circuit</text>
+<text top="185" left="636" width="74" height="12" font="8">MOD, PROG</text>
+<text top="201" left="301" width="31" height="12" font="8">jtagin</text>
+<text top="201" left="394" width="99" height="12" font="8">Input pin of JTAG</text>
+<text top="201" left="636" width="90" height="12" font="8">TCK, TDI, TMS</text>
+<text top="218" left="301" width="37" height="12" font="8">jtagout</text>
+<text top="218" left="394" width="108" height="12" font="8">Output pin of JTAG</text>
+<text top="218" left="636" width="28" height="12" font="8">TDO</text>
+<text top="234" left="134" width="97" height="12" font="8">Programmable IO</text>
+<text top="234" left="301" width="22" height="12" font="8">user</text>
+<text top="234" left="394" width="141" height="12" font="8">Programmable tri-state IO</text>
+<text top="234" left="636" width="34" height="12" font="8">USER</text>
+<text top="251" left="134" width="91" height="12" font="8">Dual-purpose IO</text>
+<text top="251" left="301" width="40" height="12" font="8">dualout</text>
+<text top="251" left="394" width="188" height="12" font="8">User pin, output of program circuit</text>
+<text top="251" left="636" width="62" height="12" font="8">HDC, LDC</text>
+<text top="267" left="301" width="34" height="12" font="8">dualio</text>
+<text top="267" left="394" width="182" height="12" font="8">User pin, input of program circuit</text>
+<text top="267" left="636" width="24" height="12" font="8">DIN</text>
+<text top="284" left="301" width="23" height="12" font="8">gclk</text>
+<text top="284" left="394" width="200" height="12" font="8">User pin, input of global clock signal</text>
+<text top="284" left="636" width="37" height="12" font="8">GCLK</text>
+<text top="300" left="301" width="47" height="12" font="8">gclkdout</text>
+<text top="300" left="394" width="186" height="12" font="8">User, global input, program output</text>
+<text top="300" left="636" width="37" height="12" font="8">DOUT</text>
+<text top="606" left="136" width="228" height="12" font="8">Fig. 1. Simplified diagram of the VS1000.</text>
+<text top="654" left="89" width="346" height="14" font="3">A programmable IO is a general-purpose user-defined in-</text>
+<text top="672" left="64" width="371" height="14" font="3">put/output data interface when FPGA is in operation mode. The</text>
+<text top="690" left="64" width="371" height="14" font="3">majority of the IOCs in the IOB array belong to this type. It pro-</text>
+<text top="708" left="64" width="371" height="14" font="3">vides multiple versatile modes for the user to configure in each</text>
+<text top="726" left="64" width="371" height="14" font="3">FPGA application. Each individual user IO can be configured</text>
+<text top="744" left="64" width="371" height="14" font="3">to comply with a special input/output standard in an applica-</text>
+<text top="762" left="64" width="27" height="14" font="3">tion.</text>
+<text top="781" left="89" width="346" height="14" font="3">A dual-purpose IO can work either as a general-purpose</text>
+<text top="799" left="64" width="371" height="14" font="3">user IO or a special-function IO. These IOs include some pro-</text>
+<text top="816" left="64" width="371" height="14" font="3">gram circuit input/output pins and a global clock input pin. For</text>
+<text top="834" left="64" width="371" height="14" font="3">example, in addition to being used as a user pin, the data out</text>
+<text top="852" left="64" width="371" height="14" font="3">pin (DOUT) works either as the output pin of a program cir-</text>
+<text top="870" left="64" width="371" height="14" font="3">cuit or the input pin of a global clock tree which is distributed</text>
+<text top="888" left="64" width="371" height="14" font="3">throughout the entire chip. If the pin is configured as an IO</text>
+<text top="906" left="64" width="298" height="14" font="3">function, the other routing path will be turned off.</text>
+<text top="925" left="89" width="346" height="14" font="3">The number of IOCs in each bank, as well as their types</text>
+<text top="943" left="64" width="339" height="14" font="3">and locations, are all specified in the FPGA architecture.</text>
+<text top="987" left="64" width="262" height="16" font="11"><b>3. Circuit design of the IOB array</b></text>
+<text top="1020" left="89" width="346" height="14" font="3">Although all four types of IOCs are different in their func-</text>
+<text top="1038" left="64" width="371" height="14" font="3">tionalities, their circuit structures can be divided into four seg-</text>
+<text top="1056" left="64" width="371" height="14" font="3">ments: the signal path, the local routing pool, the IO buffer, and</text>
+<text top="1074" left="64" width="371" height="14" font="3">the ESD protection network. Furthermore, a special design is</text>
+<text top="1092" left="64" width="316" height="14" font="3">necessary to improve the anti-radiation performance.</text>
+<text top="1111" left="89" width="346" height="14" font="3">The signal circuit of a typical IOC is composed of the data</text>
+<text top="1129" left="64" width="371" height="14" font="3">input/output path, the boundary-scan path, and the input/output</text>
+<text top="358" left="458" width="371" height="14" font="3">buffer. The data path provides the user with the input and out-</text>
+<text top="376" left="458" width="371" height="14" font="3">put path and registers. The boundary-scan path can be used to</text>
+<text top="394" left="458" width="371" height="14" font="3">shift serial data into the register chain and load it into sepa-</text>
+<text top="412" left="458" width="371" height="14" font="3">rate associated latches in the testing mode. The local routing</text>
+<text top="430" left="458" width="371" height="14" font="3">pool is a programmable interconnected network between the</text>
+<text top="448" left="458" width="371" height="14" font="3">data path and the chip routing channel. It is shared by adjacent</text>
+<text top="466" left="458" width="371" height="14" font="3">IOCs in the same IOB. The configurable IO buffers provide</text>
+<text top="484" left="458" width="371" height="14" font="3">dual IO standards for both the TTL and CMOS levels. More-</text>
+<text top="502" left="458" width="371" height="14" font="3">over, the ESD network provides the discharge path for the enor-</text>
+<text top="520" left="458" width="127" height="14" font="3">mous electric charge.</text>
+<text top="582" left="458" width="147" height="13" font="9"><b>3.1. Signal path circuit</b></text>
+<text top="616" left="484" width="346" height="14" font="3">Figure 2 shows the structure of the data path in the VS1000</text>
+<text top="634" left="458" width="371" height="14" font="3">FPGA. The signal path circuit includes three parts: the data</text>
+<text top="652" left="458" width="371" height="14" font="3">path, the boundary-scan path, and the pad with an input/output</text>
+<text top="669" left="458" width="39" height="14" font="3">buffer.</text>
+<text top="693" left="484" width="346" height="14" font="3">The data path is close to the core logic of the VS1000</text>
+<text top="711" left="458" width="371" height="14" font="3">FPGA and includes three configurable logic circuit paths: the</text>
+<text top="729" left="458" width="371" height="14" font="3">input data path; the output data path; and the tri-state data path.</text>
+<text top="747" left="458" width="371" height="14" font="3">Either the input or output data path has an individual regis-</text>
+<text top="764" left="458" width="371" height="14" font="3">ter which latches or stores input/output data instead of using a</text>
+<text top="782" left="458" width="371" height="14" font="3">register in the logic block so that it can shorten the data set-up</text>
+<text top="800" left="458" width="371" height="14" font="3">time for the input data path and the clock-to-output time for</text>
+<text top="818" left="458" width="371" height="14" font="3">the output data path. Furthermore, it provides a high data rate</text>
+<text top="836" left="458" width="371" height="14" font="3">in data transmission applications. Each register can be config-</text>
+<text top="854" left="458" width="371" height="14" font="3">ured as an edge-triggered D-typed register or a level-sensitive</text>
+<text top="872" left="458" width="371" height="14" font="3">latch whose clock, enable signal, and set-reset polarities are</text>
+<text top="890" left="458" width="107" height="14" font="3">also configurable.</text>
+<text top="913" left="484" width="346" height="14" font="3">The boundary-scan path is a point of intersection of the in-</text>
+<text top="931" left="458" width="371" height="14" font="3">put/output path in an IOC and the boundary-scan chain in an</text>
+<text top="949" left="458" width="371" height="14" font="3">IOB array. A boundary-scan chain is used in FPGAs mainly</text>
+<text top="967" left="458" width="78" height="14" font="3">for test paths</text>
+<text top="964" left="536" width="13" height="10" font="10">Œ4</text>
+<text top="967" left="550" width="279" height="14" font="3">, which enhances the flexibility of FPGAs. As</text>
+<text top="985" left="458" width="371" height="14" font="3">shown in Fig. 2, the boundary-scan path is composed of three</text>
+<text top="1003" left="458" width="371" height="14" font="3">registers, three latches and a configurable multiplexer. During</text>
+<text top="1021" left="458" width="371" height="14" font="3">the JTAG mode, the boundary-scan path logic can shift data</text>
+<text top="1039" left="458" width="371" height="14" font="3">on the boundary-scan chain of the entire IOB array and cap-</text>
+<text top="1057" left="458" width="371" height="14" font="3">ture/update data from/into the pad/core logic through the dif-</text>
+<text top="1075" left="458" width="371" height="14" font="3">ferent control signals and configurations. During the normal</text>
+<text top="1093" left="458" width="371" height="14" font="3">mode, the boundary-scan path can be by-passed. This structure</text>
+<text top="1111" left="458" width="371" height="14" font="3">ensures that VS1000 meets the test requirements in the JTAG</text>
+<text top="1129" left="458" width="37" height="14" font="3">mode.</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-2</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1211" width="892">
+<text top="47" left="64" width="150" height="15" font="3">J. Semicond. 2012, 33(1)</text>
+<text top="47" left="738" width="91" height="15" font="3">Zhao Yan <i>et al.</i></text>
+<text top="421" left="324" width="245" height="12" font="8">Fig. 2. Simplified signal path circuit diagram.</text>
+<text top="466" left="64" width="196" height="13" font="9"><b>3.2. Programmable IO buffers</b></text>
+<text top="496" left="89" width="346" height="14" font="3">The IO pad can achieve both the 5 V TTL and 5 V CMOS</text>
+<text top="514" left="64" width="371" height="14" font="3">standard work voltages of the VS1000 FPGA through pro-</text>
+<text top="532" left="64" width="371" height="14" font="3">gramming. A programmable multiplexer can choose two input</text>
+<text top="550" left="64" width="371" height="14" font="3">signals, which come from the TTL-CMOS and CMOS input</text>
+<text top="568" left="64" width="371" height="14" font="3">drivers. Generally, a 5 V TTL output high level VOH &gt; 2.4</text>
+<text top="586" left="64" width="371" height="14" font="3">V, the output low level VOL &lt; 0.4 V, the input high level</text>
+<text top="604" left="64" width="371" height="14" font="3">VIH &gt; 2.0 V, and the input low level VIL &lt; 0.8 V. Given</text>
+<text top="622" left="64" width="286" height="14" font="3">that the threshold voltage of NMOS in the 0.5</text>
+<text top="622" left="365" width="70" height="14" font="3">m SOI pro-</text>
+<text top="640" left="64" width="371" height="14" font="3">cess is higher than 0.8 V, the 2.4 V input high level would</text>
+<text top="657" left="64" width="371" height="14" font="3">make a conventional TTL-CMOS, which is composed of a</text>
+<text top="675" left="64" width="371" height="14" font="3">cascaded CMOS inverter chain that produces quiescent cur-</text>
+<text top="693" left="64" width="371" height="14" font="3">rent. Therefore, in the proposed TTL-CMOS design, an NMOS</text>
+<text top="711" left="64" width="371" height="14" font="3">MN3 (Fig. 3) is added to ensure that when the input voltage is</text>
+<text top="729" left="64" width="371" height="14" font="3">between 2.4 and 3.4 V, the PMOS MP3 is closed. Although</text>
+<text top="747" left="64" width="371" height="14" font="3">MN3 would reduce the work frequency, the simulation result</text>
+<text top="765" left="64" width="366" height="14" font="3">shows it can still meet the 100 MHz work frequency (Fig. 4).</text>
+<text top="785" left="89" width="346" height="14" font="3">The output drive of the VS1000 IO is realized based on the</text>
+<text top="803" left="64" width="371" height="14" font="3">buffer introduced in Ref. [5] (Fig. 3). The output drive is com-</text>
+<text top="821" left="64" width="371" height="14" font="3">posed of two couples of buffers, and each buffer has a PMOS</text>
+<text top="839" left="64" width="371" height="14" font="3">and NMOS pull-up structure which can achieve the TTL level</text>
+<text top="857" left="64" width="371" height="14" font="3">and CMOS level output. Table 2 shows the configuration in-</text>
+<text top="875" left="64" width="182" height="14" font="3">formation of the output buffer.</text>
+<text top="919" left="64" width="172" height="13" font="9"><b>3.3. IOB local routing pool</b></text>
+<text top="949" left="89" width="346" height="14" font="3">As shown in Fig. 5, the routable signals to and from the</text>
+<text top="967" left="64" width="371" height="14" font="3">IOCs are connected through a shared programmable intercon-</text>
+<text top="985" left="64" width="371" height="14" font="3">nected network, called the IOB local routing pool, to the exter-</text>
+<text top="1003" left="64" width="371" height="14" font="3">nal routing channel surrounding the IOB array. The IOB local</text>
+<text top="1021" left="64" width="371" height="14" font="3">routing pool is designed to increase the IO pin routing flexi-</text>
+<text top="1039" left="64" width="371" height="14" font="3">bility and resolve the congestion caused by pin-locking in the</text>
+<text top="1057" left="64" width="371" height="14" font="3">FPGA application. Since each IOB is composed of IOCs of dif-</text>
+<text top="1075" left="64" width="371" height="14" font="3">ferent types, an automation tool, whose layout is based on the</text>
+<text top="1093" left="64" width="371" height="14" font="3">architectural specification of the target FPGA, is used to gen-</text>
+<text top="1111" left="64" width="371" height="14" font="3">erate the routing switch pattern. In Fig. 5, the LRP is composed</text>
+<text top="1129" left="64" width="371" height="14" font="3">of four interconnections: the glrp, located between the global</text>
+<text top="882" left="537" width="214" height="12" font="8">Fig. 3. Block diagram of the IO buffers.</text>
+<text top="933" left="458" width="371" height="14" font="3">IOB input pin and the IOC clock input pin; the ilrp, located be-</text>
+<text top="951" left="458" width="371" height="14" font="3">tween the IOB and IOC input pins; the olrp, located between</text>
+<text top="969" left="458" width="371" height="14" font="3">the IOB and IOC output pins; and the plrp, located between the</text>
+<text top="987" left="458" width="199" height="14" font="3">power rail and the IOC input pin.</text>
+<text top="1027" left="458" width="202" height="13" font="9"><b>3.4. Radiation-hardened design</b></text>
+<text top="1057" left="484" width="346" height="14" font="3">The SOI technologies have been regarded as contenders</text>
+<text top="1075" left="458" width="371" height="14" font="3">for long-time applications, in which electronics are exposed to</text>
+<text top="1093" left="458" width="53" height="14" font="3">radiation</text>
+<text top="1090" left="511" width="13" height="10" font="10">Œ6</text>
+<text top="1093" left="525" width="304" height="14" font="3">. This is a consequence of the lower susceptibility to</text>
+<text top="1111" left="458" width="371" height="14" font="3">the transient effects produced by the reduced charge-collection</text>
+<text top="1129" left="458" width="224" height="14" font="3">volume relative to bulk technologies</text>
+<text top="1125" left="682" width="13" height="10" font="10">Œ7</text>
+<text top="1129" left="696" width="133" height="14" font="3">. The VS1000 chip is</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-3</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1211" width="892">
+<text top="47" left="64" width="150" height="15" font="3">J. Semicond. 2012, 33(1)</text>
+<text top="47" left="738" width="91" height="15" font="3">Zhao Yan <i>et al.</i></text>
+<text top="83" left="109" width="280" height="12" font="8">Table 2. Configuration information of output buffer.</text>
+<text top="111" left="73" width="40" height="12" font="8">MODE</text>
+<text top="102" left="201" width="89" height="12" font="8">Configurable bit</text>
+<text top="111" left="342" width="63" height="12" font="8">Description</text>
+<text top="119" left="166" width="167" height="12" font="8">cfgod cfgttl cfgbit0 cfgbit1</text>
+<text top="136" left="73" width="58" height="12" font="8">TTL mode</text>
+<text top="136" left="166" width="7" height="12" font="8">x</text>
+<text top="136" left="206" width="7" height="12" font="8">0</text>
+<text top="136" left="246" width="7" height="12" font="8">x</text>
+<text top="136" left="294" width="7" height="12" font="8">x</text>
+<text top="136" left="342" width="68" height="12" font="8">TTL voltage</text>
+<text top="152" left="342" width="34" height="12" font="8">output</text>
+<text top="169" left="73" width="71" height="12" font="8">CMOS mode</text>
+<text top="169" left="166" width="7" height="12" font="8">x</text>
+<text top="169" left="206" width="7" height="12" font="8">1</text>
+<text top="169" left="246" width="7" height="12" font="8">x</text>
+<text top="169" left="294" width="7" height="12" font="8">x</text>
+<text top="169" left="342" width="81" height="12" font="8">CMOS voltage</text>
+<text top="185" left="342" width="34" height="12" font="8">output</text>
+<text top="201" left="73" width="74" height="12" font="8">Fast slew rate</text>
+<text top="201" left="166" width="7" height="12" font="8">x</text>
+<text top="201" left="206" width="7" height="12" font="8">x</text>
+<text top="201" left="246" width="7" height="12" font="8">0</text>
+<text top="201" left="294" width="7" height="12" font="8">0</text>
+<text top="201" left="342" width="84" height="12" font="8">Fast slew rate</text>
+<text top="218" left="342" width="34" height="12" font="8">output</text>
+<text top="234" left="73" width="56" height="12" font="8">Slow slew</text>
+<text top="251" left="73" width="20" height="12" font="8">rate</text>
+<text top="234" left="166" width="7" height="12" font="8">x</text>
+<text top="234" left="206" width="7" height="12" font="8">x</text>
+<text top="234" left="246" width="7" height="12" font="8">0</text>
+<text top="234" left="294" width="7" height="12" font="8">1</text>
+<text top="234" left="342" width="79" height="12" font="8">Slow slew rate</text>
+<text top="251" left="342" width="34" height="12" font="8">output</text>
+<text top="267" left="73" width="60" height="12" font="8">Open drain</text>
+<text top="284" left="73" width="30" height="12" font="8">mode</text>
+<text top="267" left="166" width="7" height="12" font="8">0</text>
+<text top="267" left="206" width="7" height="12" font="8">x</text>
+<text top="267" left="246" width="7" height="12" font="8">x</text>
+<text top="267" left="294" width="7" height="12" font="8">x</text>
+<text top="267" left="342" width="60" height="12" font="8">Open drain</text>
+<text top="284" left="342" width="34" height="12" font="8">output</text>
+<text top="541" left="64" width="371" height="12" font="8">Fig. 4. Waveform of the IO input TTL-CMOS buffer operating at</text>
+<text top="558" left="64" width="55" height="12" font="8">100 MHz.</text>
+<text top="938" left="124" width="251" height="12" font="8">Fig. 5. Structure of the IOB local routing pool.</text>
+<text top="985" left="64" width="144" height="14" font="3">designed based on a 0.5</text>
+<text top="985" left="222" width="212" height="14" font="3">m PD-SOI process. Contrary to the</text>
+<text top="1003" left="64" width="371" height="14" font="3">early assertion that the DC kink effect is largely responsible</text>
+<text top="1021" left="64" width="371" height="14" font="3">for PD-SOI’s advantage over conventional bulk-Si technolo-</text>
+<text top="1039" left="64" width="371" height="14" font="3">gies, the higher performance of PD-SOI is predominantly due</text>
+<text top="1057" left="64" width="371" height="14" font="3">to the dynamic effects during its switching events, especially</text>
+<text top="1075" left="64" width="371" height="14" font="3">at a high supply voltage, along with a dynamic kink effect that</text>
+<text top="1093" left="64" width="371" height="14" font="3">charges (or discharges) the floating body to its dynamic steady-</text>
+<text top="1111" left="64" width="90" height="14" font="3">state condition</text>
+<text top="1108" left="154" width="13" height="10" font="10">Œ8</text>
+<text top="1111" left="168" width="267" height="14" font="3">. Every viable SOI device needs to have a</text>
+<text top="1129" left="64" width="371" height="14" font="3">good radiation-hardened design before it can be used in inte-</text>
+<text top="257" left="458" width="371" height="12" font="8">Fig. 6. (a) A-type body-tied structure. (b) T- type body-tied structure.</text>
+<text top="273" left="458" width="164" height="12" font="8">(c) H-type body-tied structure.</text>
+<text top="323" left="458" width="371" height="14" font="3">grated circuit applications. When a high transient photocurrent</text>
+<text top="341" left="458" width="371" height="14" font="3">is generated in the radiation environment, the floating-body ef-</text>
+<text top="359" left="458" width="371" height="14" font="3">fect in PD SOI induces the kink effect and triggers the parasit-</text>
+<text top="377" left="458" width="90" height="14" font="3">ical BJT effect</text>
+<text top="374" left="548" width="13" height="10" font="10">Œ9</text>
+<text top="377" left="562" width="267" height="14" font="3">. To avoid this, an efficient method is intro-</text>
+<text top="395" left="458" width="371" height="14" font="3">duced in Ref. [9], which ties the bodies of SOI transistors to</text>
+<text top="413" left="458" width="371" height="14" font="3">a stable voltage. As shown in Fig. 6, three types of body-tied</text>
+<text top="431" left="458" width="371" height="14" font="3">embodiment transistors can be used in the design: the T-type,</text>
+<text top="449" left="458" width="371" height="14" font="3">A-type, and H-type. A stable body provides the ability to trans-</text>
+<text top="467" left="458" width="371" height="14" font="3">fer transient photocurrent quickly and improve the radiation-</text>
+<text top="485" left="458" width="371" height="14" font="3">hardened performance. In addition, the smaller body-tied resis-</text>
+<text top="502" left="458" width="371" height="14" font="3">tor is better in rapidly transferring transient photocurrent. Thus,</text>
+<text top="520" left="458" width="371" height="14" font="3">the transfer transistor in the current I/O is constructed using an</text>
+<text top="538" left="458" width="371" height="14" font="3">H-type body-tied structure instead of a T-type body-tied struc-</text>
+<text top="556" left="458" width="371" height="14" font="3">ture. Considering the area effect, the load and drive transistors</text>
+<text top="574" left="458" width="371" height="14" font="3">in our I/O are constructed using an A-type body-tied structure.</text>
+<text top="593" left="484" width="346" height="14" font="3">Aside from radiation hardening by technology (RHBT),</text>
+<text top="611" left="458" width="371" height="14" font="3">radiation hardening by design (RHBD) is also used during the</text>
+<text top="629" left="458" width="371" height="14" font="3">development of the VS1000 IOB array to enhance the radiation</text>
+<text top="647" left="458" width="371" height="14" font="3">performance. A register design should be a free single event,</text>
+<text top="665" left="458" width="371" height="14" font="3">not only during the static data storage phase, but also during the</text>
+<text top="683" left="458" width="371" height="14" font="3">high frequency switching operation. We use a dual interlocked</text>
+<text top="701" left="458" width="371" height="14" font="3">cell (DICE) structure register, which has been proven to have a</text>
+<text top="719" left="458" width="224" height="14" font="3">high radiation-hardened performance</text>
+<text top="716" left="682" width="19" height="10" font="10">Œ10</text>
+<text top="719" left="702" width="127" height="14" font="3">, in the VS1000 chip</text>
+<text top="737" left="458" width="371" height="14" font="3">equipped with the IOB array. A Muller C-element is added, as</text>
+<text top="754" left="458" width="371" height="14" font="3">the last stage of the DICE register (Fig. 7) further improves the</text>
+<text top="772" left="458" width="371" height="14" font="3">anti-SEU ability of the DICE register. For example, assuming</text>
+<text top="790" left="458" width="371" height="14" font="3">that the out pin q of the register is 1 in some static storage cy-</text>
+<text top="808" left="458" width="371" height="14" font="3">cle, i.e., both qn0 and qn1 are 0, when a high-energy particle</text>
+<text top="826" left="458" width="371" height="14" font="3">upsets qn0 or qn1 temporarily changes to 1, q will be kept at</text>
+<text top="844" left="458" width="371" height="14" font="3">1. For the dual interlocked structure, qn0 or qn1 will recover</text>
+<text top="862" left="458" width="371" height="14" font="3">after the energy of the high-energy particle has been released.</text>
+<text top="880" left="458" width="304" height="14" font="3">Thus, the register possesses a high SEU resistance.</text>
+<text top="920" left="458" width="177" height="13" font="9"><b>3.5. ESD protection scheme</b></text>
+<text top="949" left="484" width="346" height="14" font="3">Most VS1000 chips have a digital circuit. Thus, the ESD</text>
+<text top="967" left="458" width="371" height="14" font="3">protection is designed in the IOB and power rail instead of in</text>
+<text top="985" left="458" width="371" height="14" font="3">the core logic. The internal circuit is assumed fully isolated</text>
+<text top="1003" left="458" width="371" height="14" font="3">from the I/O pad. Except for the I/O ESD protection design</text>
+<text top="1021" left="458" width="371" height="14" font="3">itself, the focus of the ESD chip design in the VS1000 chip is</text>
+<text top="1039" left="458" width="371" height="14" font="3">to ensure a proper I/O pad ring layout design that accounts for</text>
+<text top="1057" left="458" width="371" height="14" font="3">the voltage drop in the power rail, the number of clamps, and</text>
+<text top="1075" left="458" width="371" height="14" font="3">the RC delay and to make sure that the current path for every</text>
+<text top="1093" left="458" width="371" height="14" font="3">pin-to-pin combination is addressed. In addition, a proper I/O</text>
+<text top="1111" left="458" width="371" height="14" font="3">pad ring should clamp the supply rail voltage and include the</text>
+<text top="1129" left="458" width="326" height="14" font="3">current path to safely divert the ESD discharge current</text>
+<text top="1125" left="784" width="19" height="10" font="10">Œ11</text>
+<text top="1129" left="804" width="4" height="14" font="3">.</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-4</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1211" width="892">
+<text top="47" left="64" width="150" height="15" font="3">J. Semicond. 2012, 33(1)</text>
+<text top="47" left="738" width="91" height="15" font="3">Zhao Yan <i>et al.</i></text>
+<text top="699" left="137" width="619" height="12" font="8">Fig. 7. (a) Dual interlocked cell (DICE) register with a Muller C-element. (b) Muller C-element and the truth table.</text>
+<text top="1022" left="310" width="273" height="12" font="8">Fig. 8. Dual diode-based ESD protection structure.</text>
+<text top="1067" left="89" width="345" height="14" font="3">ESD protection networks consisting of forward biased</text>
+<text top="1085" left="64" width="371" height="14" font="3">diodes and transient triggered active MOSFET rail clamps</text>
+<text top="1103" left="64" width="324" height="14" font="3">have been proven effective in advanced CMOS bulk</text>
+<text top="1100" left="388" width="19" height="10" font="10">Œ12</text>
+<text top="1103" left="413" width="22" height="14" font="3">and</text>
+<text top="1121" left="64" width="24" height="14" font="3">SOI</text>
+<text top="1118" left="88" width="19" height="10" font="10">Œ13</text>
+<text top="1121" left="112" width="323" height="14" font="3">products, which can be easily ported from bulk to SOI</text>
+<text top="1067" left="458" width="371" height="14" font="3">technologies. In VS1000, dual diodes based on the ESD protec-</text>
+<text top="1085" left="458" width="71" height="14" font="3">tion scheme</text>
+<text top="1082" left="529" width="19" height="10" font="10">Œ14</text>
+<text top="1085" left="552" width="277" height="14" font="3">are used to protect I/O pads (Fig. 8). The diodes</text>
+<text top="1103" left="458" width="371" height="14" font="3">are forward-biased and provide a low resistive discharge path</text>
+<text top="1121" left="458" width="371" height="14" font="3">for ESD stress. In addition, the discharge path of pad 1 versus</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-5</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1211" width="892">
+<text top="47" left="64" width="150" height="15" font="3">J. Semicond. 2012, 33(1)</text>
+<text top="47" left="738" width="91" height="15" font="3">Zhao Yan <i>et al.</i></text>
+<text top="528" left="64" width="371" height="12" font="8">Fig. 9. (a) Cross-section of the poly-bound SOI diode. (b) Layout of</text>
+<text top="544" left="64" width="143" height="12" font="8">the poly-bound SOI diode.</text>
+<text top="605" left="64" width="371" height="14" font="3">pad 2, pad 1 versus VSS, and pad 1 versus VDD is marked. A</text>
+<text top="623" left="64" width="371" height="14" font="3">power supply rail is necessary for the dual diode-based struc-</text>
+<text top="641" left="64" width="371" height="14" font="3">ture. Although the I/O pad diode may break down, the diode</text>
+<text top="659" left="64" width="371" height="14" font="3">cannot divert the whole ESD discharge current because the</text>
+<text top="677" left="64" width="371" height="14" font="3">reverse-biased current capability is low. Thus, a series resis-</text>
+<text top="695" left="64" width="371" height="14" font="3">tance and a secondary dual-diode stage are used to increase the</text>
+<text top="713" left="64" width="273" height="14" font="3">ESD performance of the dual-diode structure.</text>
+<text top="734" left="89" width="346" height="14" font="3">Continuous changes in the SOI technologies and the emer-</text>
+<text top="752" left="64" width="371" height="14" font="3">gence of new structure types with thinner silicon films, e.g.,</text>
+<text top="770" left="64" width="371" height="14" font="3">partially-depleted SOI (PDSOI), fully-depleted SOI (FDSOI),</text>
+<text top="788" left="64" width="371" height="14" font="3">and double-gate SOI (DGSOI), have negative effects on the</text>
+<text top="806" left="64" width="371" height="14" font="3">ESD performance. Thus, in the VS1000 chip, poly-bound</text>
+<text top="824" left="64" width="371" height="14" font="3">diodes are used to protect against ESD in SOI technology,</text>
+<text top="842" left="64" width="371" height="14" font="3">which is an improvement over the previous findings of com-</text>
+<text top="860" left="64" width="182" height="14" font="3">bined bulk and SOI structures</text>
+<text top="856" left="245" width="19" height="10" font="10">Œ15</text>
+<text top="860" left="266" width="169" height="14" font="3">. Figure 9(a) shows a cross-</text>
+<text top="877" left="64" width="371" height="14" font="3">section of the poly-bound SOI diode, where the diode is formed</text>
+<text top="895" left="64" width="371" height="14" font="3">as if it were a PMOS, except that the implant on one side is</text>
+<text top="913" left="64" width="94" height="14" font="3">changed from P</text>
+<text top="910" left="158" width="9" height="12" font="10">C</text>
+<text top="913" left="172" width="26" height="14" font="3">to N</text>
+<text top="910" left="198" width="9" height="12" font="10">C</text>
+<text top="913" left="212" width="223" height="14" font="3">and both the halos and extensions are</text>
+<text top="931" left="64" width="371" height="14" font="3">blocked on both sides of the structure. Figure 9(b) shows the</text>
+<text top="949" left="64" width="371" height="14" font="3">layout of the poly-bound SOI diode in VS1000. In an SOI pro-</text>
+<text top="967" left="64" width="371" height="14" font="3">cess flow, the structure is formed by first integrating a buried</text>
+<text top="985" left="64" width="222" height="14" font="3">oxide and then forming the anode (P</text>
+<text top="982" left="286" width="9" height="12" font="10">C</text>
+<text top="985" left="296" width="102" height="14" font="3">) and cathode (N</text>
+<text top="982" left="399" width="9" height="12" font="10">C</text>
+<text top="985" left="409" width="26" height="14" font="3">) re-</text>
+<text top="1003" left="64" width="371" height="14" font="3">gions in the substrate (or handle-wafer region) using a standard</text>
+<text top="1021" left="64" width="256" height="14" font="3">source and drain implants. As a result, an N</text>
+<text top="1018" left="320" width="9" height="12" font="10">C</text>
+<text top="1021" left="330" width="104" height="14" font="3">/P-substrate junc-</text>
+<text top="1039" left="64" width="371" height="14" font="3">tion diode can be created. A deep N-well can also be introduced</text>
+<text top="1057" left="64" width="371" height="14" font="3">to isolate the structure by adding a high-energy implant to the</text>
+<text top="1075" left="64" width="165" height="14" font="3">process flow and create a P</text>
+<text top="1072" left="228" width="9" height="12" font="10">C</text>
+<text top="1075" left="239" width="196" height="14" font="3">/N-well junction diode. Contacts</text>
+<text top="1093" left="64" width="371" height="14" font="3">are then added to connect the diode to the I/O circuit for protec-</text>
+<text top="1111" left="64" width="371" height="14" font="3">tion. In this case, the gate poly defines the diode and the length</text>
+<text top="1129" left="64" width="330" height="14" font="3">of the diode base is equal to the length of the gate poly.</text>
+<text top="277" left="476" width="335" height="12" font="8">Fig. 10. (a) VS1000 IOB array layout. (b) VS1000 chip photo.</text>
+<text top="460" left="481" width="326" height="12" font="8">Fig. 11. (a) VS1000 IOB test layout. (b) VS1000 IOB photo.</text>
+<text top="502" left="458" width="264" height="16" font="11"><b>4. Implementation and test results</b></text>
+<text top="535" left="458" width="179" height="13" font="9"><b>4.1. Layout implementation</b></text>
+<text top="563" left="484" width="346" height="14" font="3">The current VS1000 FPGA design is implemented with a</text>
+<text top="581" left="458" width="19" height="14" font="3">0.5</text>
+<text top="581" left="492" width="337" height="14" font="3">m partial-depletion SOI CMOS 1P3M processed at the</text>
+<text top="599" left="458" width="371" height="14" font="3">CETC 58th Institute. The layout of the entire chip, including</text>
+<text top="617" left="458" width="371" height="14" font="3">the IOB array, is fully custom-designed. The key constraints</text>
+<text top="635" left="458" width="371" height="14" font="3">of the IOB array layout floor plan come from the requirements</text>
+<text top="653" left="458" width="371" height="14" font="3">of the LB array width. Several wide power and ground rails</text>
+<text top="671" left="458" width="371" height="14" font="3">simultaneously encompass the entire VS1000 chip, which also</text>
+<text top="689" left="458" width="371" height="14" font="3">constrain the IOB array layout. According to the full chip floor</text>
+<text top="707" left="458" width="371" height="14" font="3">plan, the proposed design has a metal M3 as the supply ring</text>
+<text top="724" left="458" width="371" height="14" font="3">rails, M2 as the supply line in the horizontal direction, and</text>
+<text top="742" left="458" width="371" height="14" font="3">metal M3 as the supply in the vertical direction, so that the</text>
+<text top="760" left="458" width="371" height="14" font="3">supply layout in the IOB array and core logic forms a full-chip</text>
+<text top="778" left="458" width="371" height="14" font="3">power network. The IOB array layout is shown in Fig. 10(a),</text>
+<text top="796" left="458" width="144" height="14" font="3">whose size is about 10.2</text>
+<text top="796" left="619" width="45" height="14" font="3">9.5 mm</text>
+<text top="793" left="664" width="6" height="10" font="10">2</text>
+<text top="796" left="674" width="155" height="14" font="3">with a CQFP208 package.</text>
+<text top="814" left="458" width="297" height="14" font="3">The full chip die photo is illustrated in Fig. 10(b).</text>
+<text top="849" left="458" width="180" height="13" font="9"><b>4.2. Fault and function tests</b></text>
+<text top="877" left="484" width="346" height="14" font="3">We design IOC test chips (Fig. 11) before the FPGA full</text>
+<text top="895" left="458" width="371" height="14" font="3">chip tapeout. Every IOC has a certain functional block because</text>
+<text top="913" left="458" width="371" height="14" font="3">all programmable points are connected to a power supply or</text>
+<text top="931" left="458" width="371" height="14" font="3">to the ground. A test on these test chips is conducted to make</text>
+<text top="949" left="458" width="371" height="14" font="3">sure that the basic functions of the IOB work well based on the</text>
+<text top="967" left="458" width="153" height="14" font="3">DIP14 package (Table 3).</text>
+<text top="985" left="484" width="346" height="14" font="3">After the FPGA tapeout, we test the VS1000 chip via a</text>
+<text top="1003" left="458" width="371" height="14" font="3">wafer test to select good dies. The final test is conducted to</text>
+<text top="1021" left="458" width="371" height="14" font="3">ensure that the selected dies are working well after packaging</text>
+<text top="1039" left="458" width="371" height="14" font="3">and to test the performance of VS1000 in a PCB board. All test</text>
+<text top="1057" left="458" width="371" height="14" font="3">experiments are performed using a Teradyne J750 test system</text>
+<text top="1075" left="458" width="371" height="14" font="3">at the CETC 58th Institute. VS1000 used a one clock-source</text>
+<text top="1093" left="458" width="371" height="14" font="3">during the wafer and final tests, resulting in a difference be-</text>
+<text top="1111" left="458" width="371" height="14" font="3">tween the maximal work frequencies of the two tests. Table 4</text>
+<text top="1129" left="458" width="298" height="14" font="3">provides the test results interrelated with the IOB.</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-6</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1211" width="892">
+<text top="47" left="64" width="150" height="15" font="3">J. Semicond. 2012, 33(1)</text>
+<text top="47" left="738" width="91" height="15" font="3">Zhao Yan <i>et al.</i></text>
+<text top="75" left="151" width="196" height="12" font="8">Table 3. Test results of the IOB dies.</text>
+<text top="94" left="76" width="74" height="12" font="8">Test die name</text>
+<text top="94" left="184" width="63" height="12" font="8">Description</text>
+<text top="94" left="351" width="55" height="12" font="8">Test result</text>
+<text top="111" left="76" width="39" height="12" font="8">cmosio</text>
+<text top="111" left="184" width="149" height="12" font="8">5 V CMOS level tri-state</text>
+<text top="127" left="184" width="56" height="12" font="8">control IO</text>
+<text top="111" left="351" width="56" height="12" font="8">Work well</text>
+<text top="144" left="76" width="22" height="12" font="8">ttlio</text>
+<text top="144" left="184" width="149" height="12" font="8">5 V TTL level tri-state con-</text>
+<text top="160" left="184" width="36" height="12" font="8">trol IO</text>
+<text top="144" left="351" width="56" height="12" font="8">Work well</text>
+<text top="176" left="76" width="44" height="12" font="8">cmossio</text>
+<text top="176" left="184" width="149" height="12" font="8">5 V CMOS level tri-state</text>
+<text top="193" left="184" width="149" height="12" font="8">control IO with slow slew</text>
+<text top="209" left="184" width="20" height="12" font="8">rate</text>
+<text top="176" left="351" width="56" height="12" font="8">Work well</text>
+<text top="226" left="76" width="27" height="12" font="8">ttlsio</text>
+<text top="226" left="184" width="149" height="12" font="8">5 V TTL level tri-state con-</text>
+<text top="242" left="184" width="144" height="12" font="8">trol IO with slow slew rate</text>
+<text top="226" left="351" width="56" height="12" font="8">Work well</text>
+<text top="259" left="76" width="52" height="12" font="8">cmosodio</text>
+<text top="259" left="184" width="136" height="12" font="8">CMOS open drain output</text>
+<text top="259" left="351" width="56" height="12" font="8">Work well</text>
+<text top="275" left="76" width="35" height="12" font="8">ttlodio</text>
+<text top="275" left="184" width="123" height="12" font="8">TTL open drain output</text>
+<text top="275" left="351" width="56" height="12" font="8">Work well</text>
+<text top="292" left="76" width="26" height="12" font="8">ioff0</text>
+<text top="292" left="184" width="149" height="12" font="8">IO register in synchronous</text>
+<text top="308" left="184" width="78" height="12" font="8">clear ‘0’ mode</text>
+<text top="292" left="351" width="56" height="12" font="8">Work well</text>
+<text top="324" left="76" width="26" height="12" font="8">ioff1</text>
+<text top="324" left="184" width="149" height="12" font="8">IO register in synchronous</text>
+<text top="341" left="184" width="67" height="12" font="8">set ‘1’ mode</text>
+<text top="324" left="351" width="56" height="12" font="8">Work well</text>
+<text top="357" left="76" width="26" height="12" font="8">ioff2</text>
+<text top="357" left="184" width="149" height="12" font="8">IO register in asynchronous</text>
+<text top="374" left="184" width="78" height="12" font="8">clear ‘0’ mode</text>
+<text top="357" left="351" width="56" height="12" font="8">Work well</text>
+<text top="390" left="76" width="26" height="12" font="8">ioff3</text>
+<text top="390" left="184" width="149" height="12" font="8">IO register in asynchronous</text>
+<text top="407" left="184" width="67" height="12" font="8">set ‘1’ mode</text>
+<text top="390" left="351" width="56" height="12" font="8">Work well</text>
+<text top="423" left="76" width="37" height="12" font="8">iolatch</text>
+<text top="423" left="184" width="134" height="12" font="8">IO register in latch mode</text>
+<text top="423" left="351" width="56" height="12" font="8">Work well</text>
+<text top="473" left="122" width="254" height="12" font="8">Table 4. Partial test results of the VS1000 chip.</text>
+<text top="492" left="74" width="55" height="12" font="8">Parameter</text>
+<text top="492" left="242" width="33" height="12" font="8">Wafer</text>
+<text top="508" left="242" width="19" height="12" font="8">test</text>
+<text top="492" left="307" width="28" height="12" font="8">Final</text>
+<text top="508" left="307" width="19" height="12" font="8">test</text>
+<text top="492" left="373" width="43" height="12" font="8">Applied</text>
+<text top="508" left="373" width="19" height="12" font="8">test</text>
+<text top="525" left="74" width="105" height="12" font="8">Static current (mA)</text>
+<text top="525" left="242" width="13" height="12" font="8">10</text>
+<text top="525" left="307" width="13" height="12" font="8">10</text>
+<text top="525" left="373" width="13" height="12" font="8">—</text>
+<text top="542" left="74" width="80" height="12" font="8">Functional test</text>
+<text top="542" left="242" width="24" height="12" font="8">Pass</text>
+<text top="542" left="307" width="24" height="12" font="8">Pass</text>
+<text top="542" left="373" width="24" height="12" font="8">Pass</text>
+<text top="558" left="74" width="97" height="12" font="8">Maximal program</text>
+<text top="575" left="74" width="94" height="12" font="8">frequency (MHz)</text>
+<text top="558" left="242" width="13" height="12" font="8">25</text>
+<text top="558" left="307" width="13" height="12" font="8">25</text>
+<text top="558" left="373" width="13" height="12" font="8">—</text>
+<text top="591" left="74" width="137" height="12" font="8">Maximal work frequency</text>
+<text top="607" left="74" width="37" height="12" font="8">(MHz)</text>
+<text top="591" left="242" width="13" height="12" font="8">25</text>
+<text top="591" left="307" width="13" height="12" font="8">25</text>
+<text top="591" left="373" width="20" height="12" font="8">100</text>
+<text top="624" left="74" width="148" height="12" font="8">CMOS input high level (V)</text>
+<text top="624" left="242" width="17" height="12" font="8">4.2</text>
+<text top="624" left="307" width="17" height="12" font="8">4.2</text>
+<text top="624" left="373" width="17" height="12" font="8">4.2</text>
+<text top="640" left="74" width="134" height="12" font="8">TTL input high level (V)</text>
+<text top="640" left="242" width="17" height="12" font="8">2.0</text>
+<text top="640" left="307" width="17" height="12" font="8">2.0</text>
+<text top="640" left="373" width="17" height="12" font="8">2.0</text>
+<text top="657" left="74" width="144" height="12" font="8">CMOS input low level (V)</text>
+<text top="657" left="242" width="17" height="12" font="8">0.8</text>
+<text top="657" left="307" width="17" height="12" font="8">0.8</text>
+<text top="657" left="373" width="17" height="12" font="8">0.8</text>
+<text top="673" left="74" width="131" height="12" font="8">TTL input low level (V)</text>
+<text top="673" left="242" width="17" height="12" font="8">0.8</text>
+<text top="673" left="307" width="17" height="12" font="8">0.8</text>
+<text top="673" left="373" width="17" height="12" font="8">0.8</text>
+<text top="723" left="168" width="163" height="12" font="8">Table 5. Radiation test results.</text>
+<text top="742" left="104" width="74" height="12" font="8">Radiation test</text>
+<text top="742" left="242" width="105" height="12" font="8">Radiation tolerance</text>
+<text top="759" left="104" width="22" height="12" font="8">TID</text>
+<text top="759" left="242" width="68" height="12" font="8">100 krad(Si)</text>
+<text top="776" left="104" width="51" height="12" font="8">Dose rate</text>
+<text top="776" left="242" width="17" height="12" font="8">1.5</text>
+<text top="776" left="274" width="13" height="12" font="8">10</text>
+<text top="772" left="288" width="12" height="10" font="10">11</text>
+<text top="776" left="304" width="46" height="12" font="8">rad(Si)/s</text>
+<text top="793" left="104" width="87" height="12" font="8">Neutron fluence</text>
+<text top="793" left="242" width="7" height="12" font="8">1</text>
+<text top="793" left="264" width="13" height="12" font="8">10</text>
+<text top="789" left="278" width="12" height="10" font="10">14</text>
+<text top="793" left="294" width="27" height="12" font="8">n/cm</text>
+<text top="789" left="321" width="6" height="10" font="10">2</text>
+<text top="838" left="64" width="118" height="13" font="9"><b>4.3. Radiation test</b></text>
+<text top="867" left="89" width="346" height="14" font="3">FPGA is the only active device placed on the radiation test</text>
+<text top="885" left="64" width="371" height="14" font="3">board so that the radiant effects of other devices do not interfere</text>
+<text top="903" left="64" width="371" height="14" font="3">with the test results. Radiation tests include the total ionizing</text>
+<text top="921" left="64" width="371" height="14" font="3">dose (TID), dose rate, and neutron fluence tests. We program</text>
+<text top="938" left="64" width="371" height="14" font="3">the VS1000 and read back through the JTAG pins during the</text>
+<text top="956" left="64" width="371" height="14" font="3">radiation test. A user pin is also used as the input or output</text>
+<text top="974" left="64" width="371" height="14" font="3">pin during the radiation tests. FPGA is considered a failure if</text>
+<text top="992" left="64" width="371" height="14" font="3">we detect an error in the readback bitstream or in the output</text>
+<text top="1010" left="64" width="321" height="14" font="3">signals. The radiation test results are listed in Table 5.</text>
+<text top="1051" left="64" width="114" height="16" font="11"><b>5. Conclusions</b></text>
+<text top="1083" left="89" width="346" height="14" font="3">In the current paper, a radiation-hardened IOB array used</text>
+<text top="70" left="458" width="344" height="14" font="3">for FPGA VS1000 is designed and fabricated with a 0.5</text>
+<text top="70" left="818" width="12" height="14" font="3">m</text>
+<text top="88" left="458" width="371" height="14" font="3">partial-depletion SOI logic process. The organization of the</text>
+<text top="103" left="458" width="371" height="14" font="3">array, the data path structure, the boundary-scan path struc-</text>
+<text top="121" left="458" width="371" height="14" font="3">ture, the local routing pool for IOB, configurable TTL-CMOS</text>
+<text top="139" left="458" width="371" height="14" font="3">IO buffers and the ESD protection network are also presented.</text>
+<text top="157" left="458" width="371" height="14" font="3">Two types of body-tied embodiment transistors, the A-type and</text>
+<text top="175" left="458" width="371" height="14" font="3">H-type, are applied in the IOB array, together with a DICE</text>
+<text top="193" left="458" width="371" height="14" font="3">structure register with a Muller C-element. The combination</text>
+<text top="211" left="458" width="371" height="14" font="3">improved the radiation-hardened performance. A dual diode-</text>
+<text top="229" left="458" width="371" height="14" font="3">based ESD protection scheme with a poly-bound diode is used</text>
+<text top="247" left="458" width="371" height="14" font="3">to protect the I/O pads. The IOB array is used in the VS1000</text>
+<text top="265" left="458" width="371" height="14" font="3">chip but is not limited to a specific FPGA structure. The IOB</text>
+<text top="282" left="458" width="371" height="14" font="3">dies and VS1000 full chip tests show that the IOB circuit can</text>
+<text top="300" left="458" width="371" height="14" font="3">actualize its programmable function and meet the requirements</text>
+<text top="318" left="458" width="371" height="14" font="3">of the input/output level and frequency. The radiation test re-</text>
+<text top="336" left="458" width="371" height="14" font="3">sults show that the IOB array has a total dose tolerance of</text>
+<text top="354" left="458" width="266" height="14" font="3">100 krad(Si), a dose rate survivability of 1.5</text>
+<text top="354" left="742" width="15" height="14" font="3">10</text>
+<text top="351" left="757" width="12" height="10" font="10">11</text>
+<text top="354" left="774" width="55" height="14" font="3">rad(Si)/s,</text>
+<text top="372" left="458" width="220" height="14" font="3">and a neutron fluence immunity of 1</text>
+<text top="372" left="696" width="15" height="14" font="3">10</text>
+<text top="369" left="711" width="12" height="10" font="10">14</text>
+<text top="372" left="728" width="30" height="14" font="3">n/cm</text>
+<text top="369" left="758" width="6" height="10" font="10">2</text>
+<text top="372" left="764" width="65" height="14" font="3">, which re-</text>
+<text top="390" left="458" width="194" height="14" font="3">sult from the RHBT and RHBD.</text>
+<text top="443" left="458" width="83" height="16" font="11"><b>References</b></text>
+<text top="475" left="461" width="147" height="12" font="8">[1] http: //www.xilinx.com</text>
+<text top="492" left="461" width="146" height="12" font="8">[2] http: //www.altera.com</text>
+<text top="508" left="461" width="368" height="12" font="8">[3] Ding Guangxin, Chen Lingdu, Liu Zhongli. Design of IO block</text>
+<text top="525" left="484" width="345" height="12" font="8">array in a tile-based FPGA. Journal of Semiconductors, 2009,</text>
+<text top="541" left="484" width="77" height="12" font="8">30(8): 085008</text>
+<text top="557" left="461" width="368" height="12" font="8">[4] Ma X J, Tong J R. Boundary-scan test circuit designed for FPGA.</text>
+<text top="574" left="484" width="345" height="12" font="8">5th IEEE International Conference on ASIC Proceedings, 2003,</text>
+<text top="590" left="484" width="40" height="12" font="8">2: 1190</text>
+<text top="607" left="461" width="368" height="12" font="8">[5] Ding Guangxin. Design of programing and IO circuit in platform</text>
+<text top="623" left="484" width="345" height="12" font="8">FPGA. PhD Thesis, Institute of Semiconductors, CAS, 2009 (in</text>
+<text top="640" left="484" width="48" height="12" font="8">Chinese)</text>
+<text top="656" left="461" width="368" height="12" font="8">[6] Alles M L, Ball D R, Masssengill L W. Scaling and soft errors:</text>
+<text top="673" left="484" width="345" height="12" font="8">Moore of the same for SOI ? IEEE International SOI Conference,</text>
+<text top="689" left="484" width="54" height="12" font="8">2008: 129</text>
+<text top="705" left="461" width="368" height="12" font="8">[7] Schrimpf R D, Alles M L, Fleetword D M. Design and evalua-</text>
+<text top="722" left="484" width="345" height="12" font="8">tion of SOI devices for radiation environments (Invited). IEEE</text>
+<text top="738" left="484" width="207" height="12" font="8">International SOI Conference, 2010: 1</text>
+<text top="755" left="461" width="368" height="12" font="8">[8] Pelella M M, Maszara W, Sundararajan S. Advantages and chal-</text>
+<text top="771" left="484" width="345" height="12" font="8">lenges of high performance CMOS on SOI. IEEE International</text>
+<text top="788" left="484" width="134" height="12" font="8">SOI Conference, 2001: 1</text>
+<text top="804" left="461" width="368" height="12" font="8">[9] Colinge J P. Silicon-on-insulator technology. Boston, Mas-</text>
+<text top="820" left="484" width="276" height="12" font="8">sachusetts, USA: Kluwer Academic Publishs, 1993</text>
+<text top="837" left="455" width="375" height="12" font="8">[10] Wang W Z. High performance radiation hardened register cell</text>
+<text top="853" left="484" width="345" height="12" font="8">design on standard CMOS process. IEEE Conference on Electron</text>
+<text top="870" left="484" width="236" height="12" font="8">Devices and Solid-State Circuits, 2003: 513</text>
+<text top="886" left="455" width="374" height="12" font="8">[11] Vashchenko V A, Shibkov A. ESD design for analog circuits.</text>
+<text top="903" left="484" width="287" height="12" font="8">New York: Springer Science + Business Media, 2010</text>
+<text top="919" left="455" width="375" height="12" font="8">[12] Worley E, Gupta R, Jones B. Sub-micron chip ESD protection</text>
+<text top="936" left="484" width="345" height="12" font="8">schemes which avoid avalanching junctions. EOS/ESD Symp</text>
+<text top="952" left="484" width="79" height="12" font="8">Proc, 1995: 13</text>
+<text top="968" left="455" width="375" height="12" font="8">[13] Juliano P, Anderson W. ESD protection design challenges for a</text>
+<text top="985" left="484" width="253" height="12" font="8">high pin-count alpha microprocessor in a 0.13</text>
+<text top="985" left="750" width="79" height="12" font="8">m CMOS SOI</text>
+<text top="1001" left="484" width="237" height="12" font="8">technology. EOS/ESD Symp Proc, 2003: 59</text>
+<text top="1018" left="455" width="375" height="12" font="8">[14] X-FAB Semiconductor Foundries. Basic ESD Design Guide-</text>
+<text top="1034" left="484" width="106" height="12" font="8">lines. 2005, 003: 50</text>
+<text top="1051" left="455" width="375" height="12" font="8">[15] Salman A, Pelella M, Beebe S. ESD protection for SOI technol-</text>
+<text top="1067" left="484" width="345" height="12" font="8">ogy using an under-the-box (substrate) diode structure. Electrical</text>
+<text top="1083" left="484" width="300" height="12" font="8">Overstress/Electrostatic Discharge Symposium, 2004: 1</text>
+<text top="1171" left="418" width="57" height="14" font="3">015010-7</text>
+</page>
+</pdf2xml>

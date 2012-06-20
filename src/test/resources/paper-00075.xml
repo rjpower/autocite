@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="33" family="Times" color="#231f20"/>
+	<fontspec id="1" size="14" family="Times" color="#231f20"/>
+	<fontspec id="2" size="9" family="Times" color="#231f20"/>
+	<fontspec id="3" size="11" family="Times" color="#231f20"/>
+	<fontspec id="4" size="11" family="Times" color="#231f20"/>
+	<fontspec id="5" size="12" family="Times" color="#231f20"/>
+	<fontspec id="6" size="12" family="Times" color="#231f20"/>
+	<fontspec id="7" size="8" family="Times" color="#231f20"/>
+<text top="167" left="82" width="754" height="33" font="0">A Scalable GPU-based Approach to Accelerate the</text>
+<text top="209" left="196" width="525" height="33" font="0">Multiple-Choice Knapsack Problem</text>
+<text top="270" left="265" width="85" height="15" font="1">Bharath Suri</text>
+<text top="264" left="350" width="6" height="16" font="2">1</text>
+<text top="270" left="396" width="141" height="15" font="1">Unmesh D. Bordoloi</text>
+<text top="264" left="537" width="6" height="16" font="2">2</text>
+<text top="270" left="583" width="69" height="15" font="1">Petru Eles</text>
+<text top="264" left="651" width="6" height="16" font="2">2</text>
+<text top="280" left="289" width="6" height="16" font="2">1</text>
+<text top="286" left="296" width="88" height="15" font="1">Delopt, India</text>
+<text top="280" left="407" width="6" height="16" font="2">2</text>
+<text top="286" left="414" width="215" height="15" font="1">Link¨opings Universitet, Sweden</text>
+<text top="305" left="221" width="213" height="15" font="1">e-mail: bharath s@delopt.co.in,</text>
+<text top="301" left="440" width="251" height="21" font="1">{unmesh.bordoloi, petru.eles}@liu.se</text>
+<text top="353" left="88" width="362" height="17" font="3"><i><b>Abstract</b></i><b>—Variants of the 0-1 knapsack problem manifest</b></text>
+<text top="371" left="74" width="377" height="12" font="4"><b>themselves at the core of several system-level optimization</b></text>
+<text top="386" left="74" width="377" height="12" font="4"><b>problems. The running times of such system-level optimization</b></text>
+<text top="401" left="74" width="376" height="12" font="4"><b>techniques are adversely affected because the knapsack problem</b></text>
+<text top="416" left="74" width="377" height="12" font="4"><b>is NP-hard. In this paper, we propose a new GPU-based approach</b></text>
+<text top="431" left="74" width="376" height="12" font="4"><b>to accelerate the multiple-choice knapsack problem, which is</b></text>
+<text top="446" left="74" width="377" height="12" font="4"><b>a general version of the 0-1 knapsack problem. Apart from</b></text>
+<text top="461" left="74" width="377" height="12" font="4"><b>exploiting the parallelism offered by the GPUs, we also employ</b></text>
+<text top="476" left="74" width="376" height="12" font="4"><b>a variety of GPU-speciﬁc optimizations to further accelerate the</b></text>
+<text top="491" left="74" width="377" height="12" font="4"><b>running times of the knapsack problem. Moreover, our technique</b></text>
+<text top="506" left="74" width="377" height="12" font="4"><b>is scalable in the sense that even when running large instances of</b></text>
+<text top="521" left="74" width="377" height="12" font="4"><b>the multiple-choice knapsack problems, we can efﬁciently utilize</b></text>
+<text top="536" left="74" width="377" height="12" font="4"><b>the GPU compute resources and memory bandwidth to achieve</b></text>
+<text top="551" left="74" width="120" height="12" font="4"><b>signiﬁcant speedups.</b></text>
+<text top="581" left="203" width="23" height="14" font="5">I. I</text>
+<text top="583" left="227" width="93" height="11" font="2">NTRODUCTION</text>
+<text top="606" left="88" width="362" height="14" font="5">Given a set of items, each associated with a proﬁt and a</text>
+<text top="624" left="74" width="377" height="14" font="5">weight, the 0-1 knapsack problem deals with how to choose a</text>
+<text top="642" left="74" width="376" height="14" font="5">subset of items such that the proﬁt is maximized and the total</text>
+<text top="660" left="74" width="377" height="14" font="5">weight of the chosen items is less than the capacity of the</text>
+<text top="678" left="74" width="377" height="14" font="5">knapsack. There exists several variants and extensions of this</text>
+<text top="696" left="74" width="376" height="14" font="5">knapsack problem. In this paper, we focus on the multiple-</text>
+<text top="714" left="74" width="377" height="14" font="5">choice knapsack (MCK) problem because it is a general</text>
+<text top="731" left="74" width="377" height="14" font="5">version of the 0-1 knapsack problem. The MCK problem deals</text>
+<text top="749" left="74" width="376" height="14" font="5">with the case where the items are grouped into disjoint classes</text>
+<text top="767" left="74" width="295" height="14" font="5">and it will be formally introduced in Section II.</text>
+<text top="786" left="88" width="362" height="14" font="5">The knapsack problem manifests itself in many domains</text>
+<text top="804" left="74" width="376" height="14" font="5">like cryptography, ﬁnancial domain, bioinformatics as well as</text>
+<text top="821" left="74" width="376" height="14" font="5">electronic design automation. Several algorithms and tools in</text>
+<text top="839" left="74" width="377" height="14" font="5">the domain of system-level design and analysis techniques are</text>
+<text top="857" left="74" width="377" height="14" font="5">variants of the knapsack problem. For instance, it has been</text>
+<text top="875" left="74" width="376" height="14" font="5">shown that a voltage assignment problem and a code-size</text>
+<text top="893" left="74" width="376" height="14" font="5">reduction problem on multi-processor platform are variants</text>
+<text top="911" left="74" width="377" height="14" font="5">of the 0-1 knapsack problem [8] and the MCK problem [2],</text>
+<text top="929" left="74" width="377" height="14" font="5">respectively. The knapsack problem is known to be NP-hard</text>
+<text top="947" left="74" width="376" height="14" font="5">and hence the running times of large instances of the problem</text>
+<text top="965" left="74" width="377" height="14" font="5">are signiﬁcantly high. Moreover, the knapsack problem is</text>
+<text top="983" left="74" width="376" height="14" font="5">found at the core of optimization loops in system-level</text>
+<text top="1001" left="74" width="377" height="14" font="5">problems [6] which also leads to high running times. While</text>
+<text top="1019" left="74" width="376" height="14" font="5">heuristics [7], approximation schemes [7] and meta-heuristics</text>
+<text top="1037" left="74" width="376" height="14" font="5">[1] have been proposed to solve the problem in polynomial-</text>
+<text top="1055" left="74" width="376" height="14" font="5">time, such techniques do not return the optimal solution.</text>
+<text top="1073" left="74" width="376" height="14" font="5">A dynamic programming algorithm to solve the problem</text>
+<text top="1090" left="74" width="376" height="14" font="5">optimally is known [7], but it has a pseudo-polynomial</text>
+<text top="1108" left="74" width="82" height="14" font="5">running time.</text>
+<text top="355" left="483" width="362" height="14" font="6"><b>Our contributions and related work: </b>To mitigate the high</text>
+<text top="373" left="468" width="377" height="14" font="5">running times for solving the knapsack problem, in this paper,</text>
+<text top="391" left="468" width="377" height="14" font="5">we propose a GPU-based technique. In particular, we map the</text>
+<text top="409" left="468" width="377" height="14" font="5">dynamic programming algorithm on the GPU and show that</text>
+<text top="427" left="468" width="376" height="14" font="5">signiﬁcant speedups can be achieved in terms of the running</text>
+<text top="445" left="468" width="36" height="14" font="5">times.</text>
+<text top="463" left="483" width="362" height="14" font="5">Recently, a thread of research work has focused on mapping</text>
+<text top="481" left="468" width="376" height="14" font="5">various dynamic programming algorithms on to GPUs. A</text>
+<text top="499" left="468" width="376" height="14" font="5">dynamic programming algorithm builds a table via a number</text>
+<text top="517" left="468" width="377" height="14" font="5">of iterations, where each iteration ﬁlls one row of the table.</text>
+<text top="535" left="468" width="376" height="14" font="5">Due to data dependencies across the iterations, results from</text>
+<text top="553" left="468" width="376" height="14" font="5">the previous iterations must be ready before proceeding to the</text>
+<text top="571" left="468" width="377" height="14" font="5">next iteration. This calls for a synchronization between two</text>
+<text top="589" left="468" width="376" height="14" font="5">iterations. Typically, CPU-based synchronization approaches</text>
+<text top="607" left="468" width="376" height="14" font="5">have been used for implementations of dynamic program-</text>
+<text top="624" left="468" width="376" height="14" font="5">ming algorithms on the GPU and this hampers the potential</text>
+<text top="642" left="468" width="376" height="14" font="5">speedups. Recent techniques have proposed a GPU-based syn-</text>
+<text top="660" left="468" width="376" height="14" font="5">chronization technique in order to avoid CPU synchronization</text>
+<text top="678" left="468" width="376" height="14" font="5">[13], [12]. However, such methods put a limit on the total of</text>
+<text top="696" left="468" width="376" height="14" font="5">number of threads that can run on each GPU multi-processor</text>
+<text top="714" left="468" width="377" height="14" font="5">concurrently and this can limit the scalability. In contrast,</text>
+<text top="732" left="468" width="376" height="14" font="5">our proposed technique is scalable even with a GPU-based</text>
+<text top="750" left="468" width="377" height="14" font="5">synchronization technique. Moreover, we propose a multi-</text>
+<text top="768" left="468" width="376" height="14" font="5">phased synchronization scheme that signiﬁcantly reduces the</text>
+<text top="786" left="468" width="313" height="14" font="5">number of threads that are otherwise busy waiting.</text>
+<text top="804" left="483" width="362" height="14" font="5">We would like to mention that GPUs have been deployed</text>
+<text top="822" left="468" width="376" height="14" font="5">to accelerate system-level design problems based on knapsack</text>
+<text top="840" left="468" width="377" height="14" font="5">problems [3]. Recently, Boyer et al. [4] reported some results</text>
+<text top="858" left="468" width="376" height="14" font="5">of solving the knapsack problem on GPUs. However, our</text>
+<text top="876" left="468" width="377" height="14" font="5">scheme has several advantages over both approaches. First,</text>
+<text top="894" left="468" width="376" height="14" font="5">they have not leveraged GPU-based synchronization. Second,</text>
+<text top="912" left="468" width="377" height="14" font="5">unlike above techniques, we conﬁgure the thread block size in</text>
+<text top="929" left="468" width="377" height="14" font="5">synergy with methods to exploit with on-chip memory. More-</text>
+<text top="947" left="468" width="377" height="14" font="5">over, the papers above did not address the scalability issue.</text>
+<text top="965" left="468" width="377" height="14" font="5">Finally, we compare our GPU results with implementations on</text>
+<text top="983" left="468" width="376" height="14" font="5">powerful multi-core platforms. We also note that our efforts are</text>
+<text top="1001" left="468" width="376" height="14" font="5">orthogonal to work on using FPGAs for dynamic programming</text>
+<text top="1019" left="468" width="170" height="14" font="5">and knapsack problems [9].</text>
+<text top="1049" left="498" width="33" height="14" font="5">II. T</text>
+<text top="1051" left="531" width="17" height="11" font="2">HE</text>
+<text top="1049" left="552" width="13" height="14" font="5">M</text>
+<text top="1051" left="566" width="52" height="11" font="2">ULTIPLE</text>
+<text top="1049" left="619" width="16" height="14" font="5">-C</text>
+<text top="1051" left="635" width="39" height="11" font="2">HOICE</text>
+<text top="1049" left="679" width="11" height="14" font="5">K</text>
+<text top="1051" left="691" width="124" height="11" font="2">NAPSACK PROBLEM</text>
+<text top="1073" left="483" width="362" height="14" font="5">In this section, we formally introduce the MCK problem.</text>
+<text top="1090" left="468" width="36" height="14" font="5">Given</text>
+<text top="1090" left="511" width="329" height="16" font="5">m classes of items, with each class consisting of n</text>
+<text top="1096" left="840" width="4" height="11" font="7">i</text>
+<text top="1108" left="468" width="151" height="14" font="5">items, each item in class</text>
+<text top="1108" left="624" width="182" height="16" font="5">i associated with a value of v</text>
+<text top="1114" left="806" width="11" height="11" font="7">ik</text>
+<text top="1108" left="823" width="22" height="14" font="5">and</text>
+<text top="1126" left="468" width="74" height="14" font="5">a weight of</text>
+<text top="1126" left="549" width="11" height="16" font="5">w</text>
+<text top="1131" left="559" width="11" height="11" font="7">ik</text>
+<text top="1126" left="571" width="185" height="14" font="5">, and a knapsack of capacity</text>
+<text top="1126" left="763" width="82" height="16" font="5">C, the MCK</text>
+<text top="1152" left="245" width="203" height="11" font="2">978-3-9810801-8-6/DATE12/2012 EDAA</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="8" size="12" family="Times" color="#231f20"/>
+	<fontspec id="9" size="5" family="Times" color="#231f20"/>
+<text top="163" left="74" width="376" height="14" font="5">problem is to choose exactly one item from each class such</text>
+<text top="181" left="74" width="376" height="14" font="5">that we maximize the value (proﬁt), while having the total</text>
+<text top="199" left="74" width="271" height="14" font="5">weight of the chosen items at most equal to</text>
+<text top="199" left="350" width="15" height="16" font="5">C.</text>
+<text top="218" left="88" width="362" height="14" font="5">We now succinctly describe a well-known dynamic pro-</text>
+<text top="236" left="74" width="376" height="14" font="5">gramming algorithm [7] that solves the multiple-choice knap-</text>
+<text top="254" left="74" width="377" height="14" font="5">sack problem in pseudo-polynomial time [7]. For a problem of</text>
+<text top="272" left="74" width="50" height="14" font="5">capacity</text>
+<text top="271" left="129" width="321" height="16" font="5">C with m classes, the dynamic programming algo-</text>
+<text top="290" left="74" width="150" height="14" font="5">rithm builds a table with</text>
+<text top="289" left="229" width="221" height="16" font="5">m + 1 rows and C + 1 columns.The</text>
+<text top="308" left="74" width="106" height="14" font="5">algorithm iterates</text>
+<text top="307" left="184" width="266" height="16" font="5">m times corresponding to the m items, and</text>
+<text top="326" left="74" width="159" height="14" font="5">computes the values of all</text>
+<text top="325" left="238" width="212" height="16" font="5">C + 1 cells of one row of the table</text>
+<text top="343" left="74" width="182" height="14" font="5">in each iteration.At each cell</text>
+<text top="343" left="262" width="188" height="16" font="5">j in the ith row, the equation</text>
+<text top="361" left="74" width="7" height="16" font="5">z</text>
+<text top="367" left="80" width="4" height="11" font="7">i</text>
+<text top="358" left="85" width="84" height="19" font="5">(j) ← max(z</text>
+<text top="367" left="170" width="4" height="11" font="7">i</text>
+<text top="358" left="175" width="32" height="19" font="5">(j), z</text>
+<text top="367" left="207" width="20" height="11" font="7">i−1</text>
+<text top="358" left="227" width="41" height="19" font="5">(j − w</text>
+<text top="367" left="268" width="11" height="11" font="7">ik</text>
+<text top="358" left="279" width="30" height="19" font="5">) + v</text>
+<text top="367" left="310" width="11" height="11" font="7">ik</text>
+<text top="358" left="321" width="129" height="19" font="5">) computes the proﬁt</text>
+<text top="379" left="74" width="7" height="16" font="5">z</text>
+<text top="384" left="80" width="4" height="11" font="7">i</text>
+<text top="376" left="85" width="168" height="19" font="5">(j) based on the weights w</text>
+<text top="384" left="253" width="11" height="11" font="7">ik</text>
+<text top="379" left="270" width="87" height="14" font="5">and the values</text>
+<text top="379" left="362" width="7" height="16" font="5">v</text>
+<text top="384" left="369" width="11" height="11" font="7">ik</text>
+<text top="376" left="381" width="69" height="19" font="5">). The time</text>
+<text top="403" left="74" width="183" height="14" font="5">complexity of the algorithm is</text>
+<text top="403" left="261" width="146" height="16" font="5">O(m · n· C), where n =</text>
+<text top="392" left="415" width="11" height="11" font="7">m</text>
+<text top="419" left="411" width="19" height="11" font="7">i=1</text>
+<text top="403" left="432" width="9" height="16" font="5">n</text>
+<text top="408" left="441" width="4" height="11" font="7">i</text>
+<text top="403" left="446" width="4" height="14" font="5">.</text>
+<text top="440" left="176" width="37" height="14" font="5">III. P</text>
+<text top="442" left="215" width="58" height="11" font="2">ROPOSED</text>
+<text top="440" left="277" width="11" height="14" font="5">A</text>
+<text top="442" left="289" width="58" height="11" font="2">PPROACH</text>
+<text top="466" left="88" width="362" height="14" font="5">In this section, we present our proposed approach. This is</text>
+<text top="484" left="74" width="376" height="14" font="5">a short paper and for the sake of brevity, we will assume</text>
+<text top="502" left="74" width="377" height="14" font="5">that the reader is familiar with the CUDA programming</text>
+<text top="520" left="74" width="377" height="14" font="5">platform. For a complete description of CUDA, we refer the</text>
+<text top="538" left="74" width="377" height="14" font="5">reader to NVIDIA’s guide [10]. Our approach has four major</text>
+<text top="556" left="74" width="347" height="14" font="5">components and they will be described in the following.</text>
+<text top="586" left="74" width="190" height="14" font="8"><i>A. Identifying data parallelism</i></text>
+<text top="611" left="88" width="362" height="14" font="5">To accelerate the dynamic programming algorithm using</text>
+<text top="629" left="74" width="377" height="14" font="5">GPUs, it is important to identify the dependencies and deter-</text>
+<text top="647" left="74" width="376" height="14" font="5">mine the data-parallel portions of the algorithm. From Section</text>
+<text top="665" left="74" width="306" height="14" font="5">II, we see that computation of any cell in a row (</text>
+<text top="664" left="379" width="7" height="16" font="5">z</text>
+<text top="670" left="386" width="4" height="11" font="7">i</text>
+<text top="665" left="391" width="59" height="14" font="5">) depends</text>
+<text top="683" left="74" width="376" height="14" font="5">on the weights and values of the items in that class and values</text>
+<text top="700" left="74" width="221" height="14" font="5">in the previous row of the table (</text>
+<text top="700" left="294" width="7" height="16" font="5">z</text>
+<text top="706" left="301" width="20" height="11" font="7">i−1</text>
+<text top="700" left="322" width="128" height="14" font="5">). Thus, there exists</text>
+<text top="718" left="74" width="376" height="14" font="5">no dependency along the row being computed and we can</text>
+<text top="736" left="74" width="377" height="14" font="5">compute a single row concurrently via separate threads. With</text>
+<text top="754" left="74" width="293" height="14" font="5">each thread computing a cell in a row, we launch</text>
+<text top="754" left="370" width="80" height="16" font="5">C +1 threads</text>
+<text top="772" left="74" width="376" height="14" font="5">to compute a row concurrently. Note that the threads must</text>
+<text top="790" left="74" width="270" height="14" font="5">not start computation of the values of row</text>
+<text top="790" left="350" width="100" height="16" font="5">i + 1 before all</text>
+<text top="808" left="74" width="126" height="14" font="5">the cells in the row</text>
+<text top="808" left="206" width="244" height="16" font="5">i have been computed. To ensure this,</text>
+<text top="826" left="74" width="377" height="14" font="5">a straightforward approach is to perform synchronization on</text>
+<text top="844" left="74" width="298" height="14" font="5">the host CPU that enforces all threads of row</text>
+<text top="844" left="379" width="71" height="16" font="5">i to run to</text>
+<text top="862" left="74" width="377" height="14" font="5">completion and then, launch the GPU kernel once again for</text>
+<text top="880" left="74" width="108" height="14" font="5">the next iteration</text>
+<text top="879" left="189" width="261" height="16" font="5">i + 1. However, this implies that with a</text>
+<text top="898" left="74" width="150" height="14" font="5">problem instance having</text>
+<text top="897" left="229" width="221" height="16" font="5">m classes of items, we must launch</text>
+<text top="916" left="74" width="62" height="14" font="5">the kernel</text>
+<text top="915" left="142" width="308" height="16" font="5">m times to compute the entire table which leads</text>
+<text top="934" left="74" width="377" height="14" font="5">to performance deterioration [13]. We overcome this situation</text>
+<text top="951" left="74" width="377" height="14" font="5">by using GPU-based global synchronization as discussed in</text>
+<text top="969" left="74" width="84" height="14" font="5">Section III-C.</text>
+<text top="999" left="74" width="252" height="14" font="8"><i>B. Shared memory and thread block size</i></text>
+<text top="1024" left="88" width="192" height="14" font="5">During the computation of the</text>
+<text top="1024" left="287" width="163" height="16" font="5">ith row, each thread must</text>
+<text top="1042" left="74" width="377" height="14" font="5">fetch the required input values and weights, i.e., the set</text>
+<text top="1056" left="74" width="20" height="19" font="5">{(v</text>
+<text top="1065" left="94" width="14" height="11" font="7">i,1</text>
+<text top="1060" left="109" width="17" height="16" font="5">, w</text>
+<text top="1065" left="126" width="14" height="11" font="7">i,1</text>
+<text top="1056" left="140" width="52" height="19" font="5">), . . . , (v</text>
+<text top="1065" left="192" width="15" height="11" font="7">i,n</text>
+<text top="1067" left="208" width="4" height="10" font="9">i</text>
+<text top="1060" left="213" width="17" height="16" font="5">, w</text>
+<text top="1065" left="230" width="15" height="11" font="7">i,n</text>
+<text top="1067" left="246" width="4" height="10" font="9">i</text>
+<text top="1056" left="251" width="199" height="19" font="5">)}, corresponding to the ith class</text>
+<text top="1078" left="74" width="377" height="14" font="5">in the given problem instance. Each time a thread fetches these</text>
+<text top="1096" left="74" width="376" height="14" font="5">data from the <i>Global Memory</i>, there is an additional latency</text>
+<text top="1114" left="74" width="377" height="14" font="5">(see [10]). In order to hide such penalties during memory</text>
+<text top="1132" left="74" width="377" height="14" font="5">accesses, we ﬁrst note that all threads require the same set</text>
+<text top="1150" left="74" width="5" height="14" font="5">(</text>
+<text top="1146" left="78" width="20" height="19" font="5">{(v</text>
+<text top="1155" left="99" width="14" height="11" font="7">i,1</text>
+<text top="1149" left="113" width="17" height="16" font="5">, w</text>
+<text top="1155" left="131" width="14" height="11" font="7">i,1</text>
+<text top="1146" left="145" width="52" height="19" font="5">), . . . , (v</text>
+<text top="1155" left="197" width="15" height="11" font="7">i,n</text>
+<text top="1157" left="213" width="4" height="10" font="9">i</text>
+<text top="1149" left="218" width="17" height="16" font="5">, w</text>
+<text top="1155" left="235" width="15" height="11" font="7">i,n</text>
+<text top="1157" left="250" width="4" height="10" font="9">i</text>
+<text top="1146" left="256" width="194" height="19" font="5">)}) of data. Hence, we pre-fetch</text>
+<text top="163" left="468" width="377" height="14" font="5">the entire set into the on-chip <i>Shared Memory </i>before the</text>
+<text top="181" left="468" width="201" height="14" font="5">computation by the threads start.</text>
+<text top="200" left="483" width="362" height="14" font="5">On-chip <i>Shared Memory </i>is shared only between the threads</text>
+<text top="218" left="468" width="377" height="14" font="5">of the same thread block [10]. Hence, pre-fetching data into</text>
+<text top="236" left="468" width="377" height="14" font="5">shared memory hides latencies for threads within a thread</text>
+<text top="254" left="468" width="376" height="14" font="5">block but each thread block must fetch the data at least once.</text>
+<text top="271" left="468" width="376" height="14" font="5">Hence, larger thread blocks (i.e., less thread blocks overall)</text>
+<text top="289" left="468" width="377" height="14" font="5">imply that more threads share the on-chip <i>Shared Memory</i></text>
+<text top="307" left="468" width="377" height="14" font="5">and the number of times that data is fetched from the <i>Global</i></text>
+<text top="325" left="468" width="376" height="14" font="8"><i>Memory </i>is less, thereby improving the performance. Thus, it</text>
+<text top="343" left="468" width="376" height="14" font="5">appears as if choosing the largest thread block size allowed</text>
+<text top="361" left="468" width="377" height="14" font="5">by CUDA hardware would be the optimum choice from the</text>
+<text top="379" left="468" width="170" height="14" font="5">perspective of performance.</text>
+<text top="415" left="468" width="377" height="14" font="6"><b>Thread block size: </b>We choose the number of thread blocks</text>
+<text top="433" left="468" width="63" height="14" font="5">launched (</text>
+<text top="433" left="531" width="313" height="16" font="5">B ) and the number of threads in each thread block</text>
+<text top="451" left="468" width="5" height="14" font="5">(</text>
+<text top="451" left="473" width="372" height="16" font="5">T ), such that the total number of active threads results in</text>
+<text top="469" left="468" width="376" height="14" font="5">maximum utilization. We illustrate our choice in the context</text>
+<text top="487" left="468" width="376" height="14" font="5">of nVIDIA Tesla M2050 but note that the same principle can</text>
+<text top="505" left="468" width="377" height="14" font="5">be applied to other devices. nVIDIA Tesla M2050 has 14</text>
+<text top="523" left="468" width="376" height="14" font="5">multi-processors and allows a maximum of 1536 active threads</text>
+<text top="541" left="468" width="376" height="14" font="5">per multi-processor. We choose 768 threads per thread block</text>
+<text top="559" left="468" width="377" height="14" font="5">and a total of 28 thread blocks. Such a conﬁguration assigns</text>
+<text top="577" left="468" width="377" height="14" font="5">two thread blocks or equally, 1536 threads per multi-processor</text>
+<text top="595" left="468" width="376" height="14" font="5">leading to a 100% utilization or occupation, as encouraged by</text>
+<text top="613" left="468" width="203" height="14" font="5">CUDA [10]. Hence, in this set-up,</text>
+<text top="612" left="675" width="170" height="16" font="5">B = 28 and T = 768. With</text>
+<text top="631" left="468" width="377" height="14" font="5">a constant number of thread blocks irrespective of the problem</text>
+<text top="648" left="468" width="377" height="14" font="5">size, we ensure that <i>Global Memory </i>accesses remains limited</text>
+<text top="666" left="468" width="371" height="14" font="5">even for large problem sizes while ensuring high utilization.</text>
+<text top="685" left="483" width="362" height="14" font="5">Typically, such a limit the number of thread blocks, and</text>
+<text top="703" left="468" width="377" height="14" font="5">hence the total number of threads, imposes a limit on the</text>
+<text top="721" left="468" width="376" height="14" font="5">problem size CUDA can tackle. As an illustration, let us</text>
+<text top="739" left="468" width="211" height="14" font="5">assume that the thread block size is</text>
+<text top="738" left="683" width="161" height="16" font="5">T . Considering a knapsack</text>
+<text top="756" left="468" width="68" height="14" font="5">of capacity</text>
+<text top="756" left="542" width="302" height="16" font="5">C, we know the size of the row in the dynamic</text>
+<text top="774" left="468" width="130" height="14" font="5">programming table is</text>
+<text top="774" left="602" width="242" height="16" font="5">C + 1. If each thread computes one cell</text>
+<text top="792" left="468" width="126" height="14" font="5">of the table, we need</text>
+<text top="792" left="599" width="29" height="16" font="5">ceil(</text>
+<text top="789" left="630" width="24" height="11" font="7">C+1</text>
+<text top="800" left="638" width="7" height="11" font="7">T</text>
+<text top="789" left="656" width="189" height="19" font="5">) thread blocks to compute one</text>
+<text top="811" left="468" width="203" height="14" font="5">row. For problem instances where</text>
+<text top="810" left="675" width="96" height="16" font="5">C is large, ceil(</text>
+<text top="808" left="773" width="24" height="11" font="7">C+1</text>
+<text top="819" left="780" width="7" height="11" font="7">T</text>
+<text top="807" left="799" width="46" height="19" font="5">) &gt; B .</text>
+<text top="828" left="468" width="377" height="14" font="5">Hence, to ensure scalability, we compute multiple cells with</text>
+<text top="846" left="468" width="316" height="14" font="5">single thread and this is described in Section III-D.</text>
+<text top="874" left="468" width="191" height="14" font="8"><i>C. GPU-based synchronization</i></text>
+<text top="898" left="483" width="362" height="14" font="5">Recall from Section III-A that we need to synchronize the</text>
+<text top="916" left="468" width="376" height="14" font="5">threads between two kernel launches. We utilize a GPU-based</text>
+<text top="934" left="468" width="376" height="14" font="5">synchronization approach instead where the kernel is launched</text>
+<text top="952" left="468" width="320" height="14" font="5">only once to compute the complete table instead of</text>
+<text top="952" left="793" width="51" height="16" font="5">m times</text>
+<text top="970" left="468" width="265" height="14" font="5">as required by CPU-based synchronization.</text>
+<text top="988" left="483" width="362" height="14" font="5">We use inter-block communication via <i>Global Memory </i>to</text>
+<text top="1006" left="468" width="377" height="14" font="5">achieve synchronization. Each thread updates a variable in</text>
+<text top="1024" left="468" width="377" height="14" font="8"><i>Global Memory </i>upon completing its computation. A small</text>
+<text top="1042" left="468" width="157" height="14" font="5">number of threads of size</text>
+<text top="1042" left="629" width="215" height="16" font="5">S, where S is the size of the warp,</text>
+<text top="1060" left="468" width="376" height="14" font="5">in each thread block are kept idling in an inﬁnite loop until</text>
+<text top="1078" left="468" width="377" height="14" font="5">this variable in the <i>Global Memory </i>has been updated by all the</text>
+<text top="1096" left="468" width="376" height="14" font="5">other thread blocks as well. A warp in CUDA is essentially the</text>
+<text top="1114" left="468" width="376" height="14" font="5">smallest set of threads that are scheduled in parallel by CUDA.</text>
+<text top="1132" left="468" width="37" height="14" font="5">While</text>
+<text top="1131" left="509" width="336" height="16" font="5">S threads are idling for global synchronization, the rest</text>
+<text top="1150" left="468" width="377" height="14" font="5">of threads in the thread block can proceed to pre-fetch data</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="10" size="10" family="Times" color="#414142"/>
+	<fontspec id="11" size="10" family="Times" color="#231f20"/>
+	<fontspec id="12" size="5" family="Times" color="#231f20"/>
+	<fontspec id="13" size="10" family="Times" color="#231f20"/>
+	<fontspec id="14" size="8" family="Times" color="#414142"/>
+	<fontspec id="15" size="4" family="Times" color="#414142"/>
+	<fontspec id="16" size="6" family="Times" color="#231f20"/>
+	<fontspec id="17" size="9" family="Times" color="#231f20"/>
+	<fontspec id="18" size="7" family="Times" color="#231f20"/>
+<text top="321" left="76" width="49" height="16" font="10">   </text>
+<text top="324" left="183" width="8" height="11" font="11"><i>%</i></text>
+<text top="322" left="191" width="2" height="7" font="12"><i>
+</i></text>
+<text top="324" left="194" width="7" height="11" font="11"><i>7</i></text>
+<text top="321" left="204" width="17" height="16" font="13"></text>
+<text top="163" left="146" width="7" height="10" font="14"><i>%</i></text>
+<text top="161" left="154" width="1" height="6" font="15"><i>
+</i></text>
+<text top="163" left="157" width="6" height="10" font="14"><i>7</i></text>
+<text top="163" left="289" width="7" height="10" font="14"><i>%</i></text>
+<text top="161" left="297" width="1" height="6" font="15"><i>
+</i></text>
+<text top="163" left="299" width="6" height="10" font="14"><i>7</i></text>
+<text top="342" left="74" width="35" height="11" font="2">Fig. 1.</text>
+<text top="342" left="128" width="322" height="11" font="2">Multiple cells computed by each thread in coalesced fashion.</text>
+<text top="355" left="74" width="376" height="11" font="2">Computation of cells in a single row is divided into several iterations, and in</text>
+<text top="369" left="74" width="174" height="11" font="2">each iteration the threads from 0 to</text>
+<text top="366" left="252" width="164" height="16" font="2">B T − 1 compute adjacent cells.</text>
+<text top="398" left="74" width="376" height="14" font="5">for the next iteration thereby reducing the bottleneck involved</text>
+<text top="416" left="74" width="377" height="14" font="5">in global synchronization. We note here that according to</text>
+<text top="434" left="74" width="377" height="14" font="5">CUDA schedulers, the active thread blocks do not yield the</text>
+<text top="452" left="74" width="115" height="14" font="5">execution. Thus, if</text>
+<text top="452" left="194" width="256" height="16" font="5">S threads of a thread block is waiting on</text>
+<text top="470" left="74" width="376" height="14" font="5">a global variable, not only this thread block but all other non-</text>
+<text top="488" left="74" width="376" height="14" font="5">active thread blocks will be deadlocked as well. However, as</text>
+<text top="506" left="74" width="376" height="14" font="5">described in the previous section, we conﬁgure the number</text>
+<text top="524" left="74" width="377" height="14" font="5">of thread blocks on each multi-processor such that there are</text>
+<text top="542" left="74" width="377" height="14" font="5">only active thread blocks in our kernels. This does not limit us</text>
+<text top="560" left="74" width="377" height="14" font="5">from solving large instances of the problem, though, because</text>
+<text top="578" left="74" width="376" height="14" font="5">we utilize each thread to compute multiple cells of the dynamic</text>
+<text top="596" left="74" width="376" height="14" font="5">programming table. This will be described in the next section.</text>
+<text top="622" left="74" width="255" height="14" font="8"><i>D. Single Thread Mutli-cell Computation</i></text>
+<text top="647" left="88" width="362" height="14" font="5">We have discussed in Section III-B and Section III-C, that</text>
+<text top="665" left="74" width="377" height="14" font="5">we conﬁgure our thread block size on each multi-processor</text>
+<text top="683" left="74" width="377" height="14" font="5">to a small number with limited number of threads. This is</text>
+<text top="701" left="74" width="377" height="14" font="5">in order to ensure (i) high processor utilization and optimize</text>
+<text top="719" left="74" width="376" height="14" font="5">memory accesses and (ii) facilitate GPU-based synchroniza-</text>
+<text top="736" left="74" width="377" height="14" font="5">tion. Even with this restricted thread block size, we are able</text>
+<text top="754" left="74" width="377" height="14" font="5">to solve large problem instances by employing each thread</text>
+<text top="772" left="74" width="377" height="14" font="5">to compute multiple cells in the dynamic programming table.</text>
+<text top="790" left="74" width="205" height="14" font="5">Our approach is described below.</text>
+<text top="809" left="88" width="73" height="14" font="5">Considering</text>
+<text top="809" left="169" width="279" height="16" font="5">B thread blocks and each block having T</text>
+<text top="827" left="74" width="174" height="14" font="5">threads, we have a total of</text>
+<text top="826" left="254" width="196" height="16" font="5">B T threads. For simplicity of</text>
+<text top="845" left="74" width="376" height="14" font="5">elucidation, let us consider a problem instance where each</text>
+<text top="863" left="74" width="154" height="14" font="5">thread computes exactly</text>
+<text top="862" left="236" width="89" height="16" font="5">L cells, L =</text>
+<text top="860" left="336" width="24" height="11" font="7">C+1</text>
+<text top="871" left="337" width="21" height="11" font="7">B T</text>
+<text top="863" left="362" width="88" height="14" font="5">. An intuitive</text>
+<text top="881" left="74" width="261" height="14" font="5">approach is employ each thread to compute</text>
+<text top="880" left="338" width="112" height="16" font="5">L adjacent cells of</text>
+<text top="899" left="74" width="252" height="14" font="5">the table. For instance, thread-0 computes</text>
+<text top="895" left="330" width="120" height="19" font="5">0 . . . L−1, thread-1</text>
+<text top="917" left="74" width="57" height="14" font="5">computes</text>
+<text top="916" left="134" width="316" height="16" font="5">L . . . 2L−1 and so on. In this approach, computation</text>
+<text top="934" left="74" width="359" height="14" font="5">of a row of the dynamic programming table is done in</text>
+<text top="934" left="440" width="10" height="16" font="5">L</text>
+<text top="952" left="74" width="136" height="14" font="5">iterations. During the</text>
+<text top="949" left="217" width="7" height="19" font="5">1</text>
+<text top="950" left="225" width="10" height="11" font="7">st</text>
+<text top="952" left="244" width="206" height="14" font="5">iteration, thread-0 computes cell</text>
+<text top="967" left="74" width="377" height="19" font="5">0, thread-1 computes cell L, thread-2 computes cell 2L and</text>
+<text top="988" left="74" width="377" height="14" font="5">so on, in parallel to exploit the parallelism Section III-A.</text>
+<text top="1006" left="74" width="68" height="14" font="5">During the</text>
+<text top="1002" left="149" width="7" height="19" font="5">2</text>
+<text top="1004" left="156" width="14" height="11" font="7">nd</text>
+<text top="1006" left="178" width="204" height="14" font="5">iteration, thread-0 computes cell</text>
+<text top="1002" left="389" width="61" height="19" font="5">1, thread-</text>
+<text top="1024" left="74" width="100" height="14" font="5">1 computes cell</text>
+<text top="1024" left="180" width="270" height="16" font="5">L + 1, thread-2 computes cell 2L + 1 and</text>
+<text top="1042" left="74" width="377" height="14" font="5">so on. Note, however, that in this approach, threads with</text>
+<text top="1060" left="74" width="376" height="14" font="5">consecutive <i>id</i>s must access non-adjacent memory locations</text>
+<text top="1078" left="74" width="377" height="14" font="5">and this results in a non-coalesced access pattern [10]. This</text>
+<text top="1096" left="74" width="376" height="14" font="5">severely reduces the global memory throughput and impedes</text>
+<text top="1114" left="74" width="376" height="14" font="5">performance. We propose an approach to maintain high global</text>
+<text top="1132" left="74" width="377" height="14" font="5">memory throughput by coalescing global memory access. This</text>
+<text top="1150" left="74" width="332" height="14" font="5">is illustrated in Figure 1. We see that any thread,</text>
+<text top="1149" left="414" width="36" height="16" font="5">X, is</text>
+<text top="158" left="477" width="63" height="11" font="17"><b>Set Number</b></text>
+<text top="158" left="580" width="42" height="11" font="17"><b>Number</b></text>
+<text top="158" left="655" width="10" height="11" font="17"><b>of</b></text>
+<text top="171" left="580" width="42" height="11" font="17"><b>classes (</b></text>
+<text top="168" left="622" width="15" height="16" font="2">m<b>)</b></text>
+<text top="158" left="683" width="46" height="11" font="17"><b>Capacity</b></text>
+<text top="171" left="683" width="4" height="11" font="17"><b>(</b></text>
+<text top="168" left="687" width="14" height="16" font="2">C<b>)</b></text>
+<text top="158" left="743" width="44" height="11" font="17"><b>Problem</b></text>
+<text top="171" left="743" width="26" height="11" font="17"><b>size (</b></text>
+<text top="168" left="769" width="38" height="16" font="2">m×C<b>)</b></text>
+<text top="185" left="477" width="25" height="11" font="2">Set 1</text>
+<text top="185" left="580" width="6" height="11" font="2">5</text>
+<text top="185" left="683" width="30" height="11" font="2">12665</text>
+<text top="185" left="743" width="30" height="11" font="2">63325</text>
+<text top="199" left="477" width="25" height="11" font="2">Set 2</text>
+<text top="199" left="580" width="12" height="11" font="2">10</text>
+<text top="199" left="683" width="30" height="11" font="2">15700</text>
+<text top="199" left="743" width="36" height="11" font="2">157000</text>
+<text top="213" left="477" width="25" height="11" font="2">Set 3</text>
+<text top="213" left="580" width="12" height="11" font="2">20</text>
+<text top="213" left="683" width="30" height="11" font="2">94280</text>
+<text top="213" left="743" width="42" height="11" font="2">1885600</text>
+<text top="227" left="477" width="25" height="11" font="2">Set 4</text>
+<text top="227" left="580" width="12" height="11" font="2">50</text>
+<text top="227" left="683" width="36" height="11" font="2">390500</text>
+<text top="227" left="743" width="48" height="11" font="2">19525000</text>
+<text top="241" left="477" width="25" height="11" font="2">Set 5</text>
+<text top="241" left="580" width="18" height="11" font="2">100</text>
+<text top="241" left="683" width="36" height="11" font="2">303500</text>
+<text top="241" left="743" width="48" height="11" font="2">30350000</text>
+<text top="263" left="633" width="46" height="11" font="2">TABLE I</text>
+<text top="276" left="601" width="7" height="11" font="2">P</text>
+<text top="278" left="609" width="102" height="9" font="18">ROBLEM INSTANCES</text>
+<text top="306" left="468" width="149" height="14" font="5">responsible for the cells</text>
+<text top="306" left="623" width="68" height="16" font="5">X in the 1</text>
+<text top="303" left="691" width="10" height="11" font="7">st</text>
+<text top="306" left="708" width="54" height="14" font="5">iteration,</text>
+<text top="306" left="767" width="77" height="16" font="5">X + B T in</text>
+<text top="324" left="468" width="18" height="14" font="5">the</text>
+<text top="320" left="491" width="7" height="19" font="5">2</text>
+<text top="321" left="498" width="14" height="11" font="7">nd</text>
+<text top="324" left="517" width="188" height="14" font="5">iteration and so on until all the</text>
+<text top="324" left="710" width="134" height="16" font="5">C + 1 cells in the row</text>
+<text top="342" left="468" width="377" height="14" font="5">are computed. This means that in each iteration threads with</text>
+<text top="360" left="468" width="50" height="14" font="5">adjacent</text>
+<text top="359" left="521" width="323" height="16" font="5">ids will compute adjacent cells and accessing adjacent</text>
+<text top="378" left="468" width="340" height="14" font="5">memory locations leading to coalesced memory access.</text>
+<text top="417" left="551" width="36" height="14" font="5">IV. E</text>
+<text top="419" left="588" width="173" height="11" font="2">XPERIMENTS AND RESULTS</text>
+<text top="448" left="468" width="376" height="14" font="6"><b>Experimental setup: </b>Our proposed GPU-based implementa-</text>
+<text top="466" left="468" width="376" height="14" font="5">tion, henceforth referred to as the CUDA-SYNC, was executed</text>
+<text top="484" left="468" width="377" height="14" font="5">on a nVIDIA Tesla M2050 GPU, which consists of 14 multi-</text>
+<text top="501" left="468" width="376" height="14" font="5">processors and a total of 448 processing elements running at</text>
+<text top="519" left="468" width="376" height="14" font="5">1147 MHz. The GPU was connected to host system via on-</text>
+<text top="537" left="468" width="376" height="14" font="5">board PCI-express (16x) slot. The host machines consisted of</text>
+<text top="555" left="468" width="377" height="14" font="5">2 Xeon E5520 CPUs, where each CPU has 4 cores — a total</text>
+<text top="573" left="468" width="377" height="14" font="5">of 8 cores. Apart from CUDA-SYNC, we also implemented</text>
+<text top="591" left="468" width="376" height="14" font="5">three other versions on the CUDA in order to illustrate the</text>
+<text top="609" left="468" width="377" height="14" font="5">improvements achieved from our proposed techniques. First,</text>
+<text top="627" left="468" width="377" height="14" font="5">we have CUDA-GLOBAL where we have not implemented</text>
+<text top="645" left="468" width="376" height="14" font="5">any pre-fetching to on-chip <i>Shared Memory</i>, GPU synchro-</text>
+<text top="663" left="468" width="376" height="14" font="5">nization or multi-cell computation techniques. In this regard,</text>
+<text top="681" left="468" width="377" height="14" font="5">CUDA-GLOBAL is similar to the existing techniques [3], [4].</text>
+<text top="699" left="468" width="376" height="14" font="5">Second, we have implemented CUDA-SHARED where we</text>
+<text top="717" left="468" width="376" height="14" font="5">allow <i>Shared Memory </i>usage but neither GPU synchronization</text>
+<text top="735" left="468" width="376" height="14" font="5">or multi-cell computation has been included. Finally, we have</text>
+<text top="752" left="468" width="377" height="14" font="5">also implemented CUDA-MULTI cell that allows multiple</text>
+<text top="770" left="468" width="376" height="14" font="5">cells to be computed by the same thread but do not include</text>
+<text top="788" left="468" width="377" height="14" font="5">GPU-based synchronization. We compare the running times of</text>
+<text top="806" left="468" width="377" height="14" font="5">each of these implementations with CUDA-SYNC and show</text>
+<text top="824" left="468" width="269" height="14" font="5">that CUDA-SYNC outperforms all of them.</text>
+<text top="843" left="483" width="362" height="14" font="5">Apart from the GPU implementations, an OpenCL (spec</text>
+<text top="861" left="468" width="376" height="14" font="5">v1.1) implementation of the dynamic programming algorithm</text>
+<text top="879" left="468" width="376" height="14" font="5">that was executed on the host to compare how an imple-</text>
+<text top="897" left="468" width="376" height="14" font="5">mentation on multi-core platform performs against a GPU.</text>
+<text top="915" left="468" width="376" height="14" font="5">In this implementation, we computed the rows of the dynamic</text>
+<text top="933" left="468" width="377" height="14" font="5">programming algorithms in parallel in the 8 cores. All the</text>
+<text top="951" left="468" width="376" height="14" font="5">cores of the host were clocked at 2.27 GHz. We also had a</text>
+<text top="969" left="468" width="377" height="14" font="5">sequential version (CPU) of the algorithm that ran on a single</text>
+<text top="987" left="468" width="135" height="14" font="5">core of the host CPU.</text>
+<text top="1006" left="483" width="362" height="14" font="5">To evaluate the performance of the above implementations,</text>
+<text top="1024" left="468" width="376" height="14" font="5">random problem instances of 5 different sizes were gener-</text>
+<text top="1042" left="468" width="376" height="14" font="5">ated. Table I shows the ﬁve different problem sets that were</text>
+<text top="1060" left="468" width="377" height="14" font="5">generated for the experiments. In each set, we generated 5</text>
+<text top="1078" left="468" width="377" height="14" font="5">instances and the running times were averaged over these 5</text>
+<text top="1096" left="468" width="376" height="14" font="5">instances. The values and weights in the problem instances</text>
+<text top="1114" left="468" width="376" height="14" font="5">were randomly generated, with no correlation between the</text>
+<text top="1132" left="468" width="376" height="14" font="5">value and weight of an item [11], [5]. In all the instances,</text>
+<text top="1150" left="468" width="229" height="14" font="5">the number of choices in each class (</text>
+<text top="1149" left="697" width="9" height="16" font="5">n</text>
+<text top="1155" left="706" width="4" height="11" font="7">i</text>
+<text top="1150" left="710" width="134" height="14" font="5">) was between 10 and</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="19" size="6" family="Times" color="#010202"/>
+	<fontspec id="20" size="6" family="Times" color="#010202"/>
+	<fontspec id="21" size="9" family="Times" color="#231f20"/>
+<text top="392" left="74" width="35" height="11" font="2">Fig. 2.</text>
+<text top="392" left="130" width="320" height="11" font="2">Comparison of our proposed CUDA-SYNC algorithm against</text>
+<text top="406" left="74" width="219" height="11" font="2">sequential CPU and 8-core implementations.</text>
+<text top="639" left="103" width="7" height="8" font="19"><b> 0</b></text>
+<text top="612" left="98" width="12" height="8" font="19"><b> 50</b></text>
+<text top="586" left="93" width="16" height="8" font="19"><b> 100</b></text>
+<text top="559" left="93" width="16" height="8" font="19"><b> 150</b></text>
+<text top="533" left="93" width="16" height="8" font="19"><b> 200</b></text>
+<text top="506" left="93" width="16" height="8" font="19"><b> 250</b></text>
+<text top="480" left="93" width="16" height="8" font="19"><b> 300</b></text>
+<text top="453" left="93" width="16" height="8" font="19"><b> 350</b></text>
+<text top="427" left="93" width="16" height="8" font="19"><b> 400</b></text>
+<text top="647" left="193" width="5" height="8" font="19"><b>1</b></text>
+<text top="647" left="273" width="5" height="8" font="19"><b>2</b></text>
+<text top="647" left="354" width="5" height="8" font="19"><b>3</b></text>
+<text top="574" left="83" width="0" height="8" font="20"><b>Running times (in ms)</b></text>
+<text top="660" left="240" width="70" height="8" font="19"><b>Problem instance</b></text>
+<text top="434" left="115" width="50" height="8" font="19"><b>CUDA-SYNC</b></text>
+<text top="442" left="115" width="50" height="8" font="19"><b>MULTICORE</b></text>
+<text top="678" left="74" width="32" height="11" font="2">Fig. 3.</text>
+<text top="678" left="117" width="333" height="11" font="2">Comparison of our proposed CUDA-SYNC algorithm against multi-</text>
+<text top="692" left="74" width="103" height="11" font="2">core implementation.</text>
+<text top="717" left="74" width="202" height="14" font="5">1024. The values and weights (</text>
+<text top="717" left="276" width="11" height="16" font="5">w</text>
+<text top="722" left="287" width="11" height="11" font="7">ik</text>
+<text top="717" left="298" width="152" height="14" font="5">) were assigned random</text>
+<text top="735" left="74" width="179" height="14" font="5">values between 1 and 10000.</text>
+<text top="754" left="74" width="51" height="14" font="6"><b>Results:</b></text>
+<text top="754" left="139" width="311" height="14" font="5">We now discuss the results from the experiments</text>
+<text top="772" left="74" width="377" height="14" font="5">conducted. In case of GPU-based implementations, the run-</text>
+<text top="789" left="74" width="376" height="14" font="5">ning times reported here also includes the time required to</text>
+<text top="807" left="74" width="376" height="14" font="5">transfer the input data to the GPU and the time required to</text>
+<text top="825" left="74" width="265" height="14" font="5">fetch the results from the GPU to the host.</text>
+<text top="844" left="88" width="362" height="14" font="5">Figure 2 shows the comparison between the running times</text>
+<text top="862" left="74" width="377" height="14" font="5">of the sequential algorithm (CPU), our proposed CUDA-</text>
+<text top="880" left="74" width="376" height="14" font="5">SYNC algorithm and the multi-core (8-core) implementation.</text>
+<text top="898" left="74" width="377" height="14" font="5">For smaller problem instances (1 and 2), the running times</text>
+<text top="916" left="74" width="376" height="14" font="5">of the GPU and multicore implementations are not visible,</text>
+<text top="934" left="74" width="376" height="14" font="5">since they coincide with the x-axis. CUDA-SYNC achieves</text>
+<text top="952" left="74" width="192" height="14" font="5">a tremendous speedup of 220</text>
+<text top="948" left="273" width="177" height="19" font="5">× over the sequential CPU</text>
+<text top="970" left="74" width="377" height="14" font="5">implementation. Note that the bars for CPU running times</text>
+<text top="987" left="74" width="376" height="14" font="5">for problem instance 3, 4 and 5 are truncated so as to ﬁt them</text>
+<text top="1005" left="74" width="377" height="14" font="5">into the ﬁgure and the running times are labeled at the top.</text>
+<text top="1023" left="74" width="377" height="14" font="5">Notice that the speedup is higher for larger problem instances.</text>
+<text top="1042" left="88" width="362" height="14" font="5">In Figure 3, we plot the running times of the multi-core</text>
+<text top="1060" left="74" width="377" height="14" font="5">implementation with CUDA for problem sets 1 to 3 because</text>
+<text top="1078" left="74" width="377" height="14" font="5">they were not visible in Figure 2. We report that our CUDA</text>
+<text top="1096" left="74" width="258" height="14" font="5">implementation achieves a speedup of 3-4</text>
+<text top="1092" left="336" width="114" height="19" font="5">× on average over</text>
+<text top="1114" left="74" width="377" height="14" font="5">multi-core implementation. This is despite the fact that all</text>
+<text top="1132" left="74" width="377" height="14" font="5">the eight cores of our multi-core platform run at signiﬁcantly</text>
+<text top="1150" left="74" width="377" height="14" font="5">higher frequency than the GPU processing elements. This</text>
+<text top="358" left="502" width="7" height="8" font="19"><b> 0</b></text>
+<text top="330" left="493" width="16" height="8" font="19"><b> 200</b></text>
+<text top="302" left="493" width="16" height="8" font="19"><b> 400</b></text>
+<text top="273" left="493" width="16" height="8" font="19"><b> 600</b></text>
+<text top="245" left="493" width="16" height="8" font="19"><b> 800</b></text>
+<text top="217" left="488" width="21" height="8" font="19"><b> 1000</b></text>
+<text top="188" left="488" width="21" height="8" font="19"><b> 1200</b></text>
+<text top="160" left="488" width="21" height="8" font="19"><b> 1400</b></text>
+<text top="367" left="591" width="5" height="8" font="19"><b>3</b></text>
+<text top="367" left="670" width="5" height="8" font="19"><b>4</b></text>
+<text top="367" left="749" width="5" height="8" font="19"><b>5</b></text>
+<text top="293" left="477" width="0" height="8" font="20"><b>Running times (in ms)</b></text>
+<text top="379" left="637" width="70" height="8" font="19"><b>Problem instance</b></text>
+<text top="153" left="527" width="63" height="8" font="19"><b>CUDA-GLOBAL</b></text>
+<text top="162" left="527" width="63" height="8" font="19"><b>CUDA-SHARED</b></text>
+<text top="170" left="515" width="75" height="8" font="19"><b>CUDA-MULTICELL</b></text>
+<text top="179" left="539" width="50" height="8" font="19"><b>CUDA-SYNC</b></text>
+<text top="402" left="468" width="32" height="11" font="2">Fig. 4.</text>
+<text top="402" left="513" width="332" height="11" font="2">Comparison of our proposed CUDA-SYNC algorithm against other</text>
+<text top="415" left="468" width="151" height="11" font="2">CUDA-based implementations.</text>
+<text top="440" left="468" width="376" height="14" font="5">is due to the signiﬁcant parallelism that our implementation</text>
+<text top="458" left="468" width="376" height="14" font="5">can extract from the dynamic programming algorithm as well</text>
+<text top="476" left="468" width="376" height="14" font="5">as the fact that we have been able to implement various</text>
+<text top="493" left="468" width="287" height="14" font="5">optimizations like GPU-based synchronization.</text>
+<text top="511" left="483" width="362" height="14" font="5">In Figure 4, we compare CUDA-SYNC against all the</text>
+<text top="529" left="468" width="377" height="14" font="5">other CUDA implementations.For clarity, we have plotted</text>
+<text top="547" left="468" width="376" height="14" font="5">results only for the larger problem instances. CUDA-SYNC</text>
+<text top="565" left="468" width="376" height="14" font="5">outperforms all the other GPU implementations. This shows</text>
+<text top="583" left="468" width="376" height="14" font="5">the impact of each feature in our framework that carefully</text>
+<text top="601" left="468" width="376" height="14" font="5">exploits the dynamic programming characteristics in synergy</text>
+<text top="619" left="468" width="376" height="14" font="5">with CUDA architectural features. CUDA-SYNC, for example,</text>
+<text top="637" left="468" width="376" height="14" font="5">is 20% faster than CUDA-GLOBAL (which is similar to</text>
+<text top="655" left="468" width="265" height="14" font="5">existing techniques [3], [4]) on an average.</text>
+<text top="680" left="614" width="10" height="14" font="5">R</text>
+<text top="682" left="625" width="73" height="11" font="2">EFERENCES</text>
+<text top="703" left="474" width="371" height="11" font="2">[1] N. K. Bambha, S. S. Bhattacharyya, J. Teich, and E. Zitzler. Systematic</text>
+<text top="717" left="495" width="349" height="11" font="2">integration of parameterized local search into evolutionary algorithms.</text>
+<text top="730" left="495" width="255" height="11" font="21"><i>IEEE Trans. Evolutionary Computation</i>, 8(2), 2004.</text>
+<text top="743" left="474" width="371" height="11" font="2">[2] S. Baruah and N. Fisher. Code-size minimization in multiprocessor</text>
+<text top="757" left="495" width="349" height="11" font="2">real-time systems. In <i>International Parallel and Distributed Processing</i></text>
+<text top="770" left="495" width="89" height="11" font="21"><i>Symposium</i>, 2005.</text>
+<text top="784" left="474" width="371" height="11" font="2">[3] U.D. Bordoloi and S. Chakraborty. Accelerating system-level design</text>
+<text top="797" left="495" width="349" height="11" font="2">tasks using commodity graphics hardware: A case study. In <i>International</i></text>
+<text top="811" left="495" width="171" height="11" font="21"><i>Conference on VLSI Design</i>, 2009.</text>
+<text top="824" left="474" width="371" height="11" font="2">[4] V. Boyer, D. El Baz, and M. Elkihel. Solving knapsack problems on</text>
+<text top="838" left="495" width="256" height="11" font="2">GPU. <i>Comput. Oper. Res.</i>, 39:42–47, January 2012.</text>
+<text top="851" left="474" width="371" height="11" font="2">[5] B. Han, J. Leblet, and G. Simon. Hard multidimensional multiple choice</text>
+<text top="864" left="495" width="349" height="11" font="2">knapsack problems, an empirical study. <i>Comput. Oper. Res.</i>, 37:172–</text>
+<text top="878" left="495" width="52" height="11" font="2">181, 2010.</text>
+<text top="891" left="474" width="371" height="11" font="2">[6] H. P. Huynh and T. Mitra. Instruction-set customization for real-time</text>
+<text top="905" left="495" width="124" height="11" font="2">systems. In <i>DATE</i>, 2007.</text>
+<text top="918" left="474" width="371" height="11" font="2">[7] H. Kellerer, U. Pferschy, and D. Pisinger. <i>Knapsack problems</i>. Springer,</text>
+<text top="932" left="495" width="27" height="11" font="2">2004.</text>
+<text top="945" left="474" width="371" height="11" font="2">[8] H. Liu, Z. Shao, M. Wang, J. Du, C. J. Xue, and Z. Jia. Combining</text>
+<text top="959" left="495" width="349" height="11" font="2">coarse-grained software pipelining with DVS for scheduling real-time</text>
+<text top="972" left="495" width="349" height="11" font="2">periodic dependent tasks on multi-core embedded systems. <i>J. Signal</i></text>
+<text top="986" left="495" width="120" height="11" font="21"><i>Process. Syst.</i>, 57, 2009.</text>
+<text top="999" left="474" width="371" height="11" font="2">[9] Z. Nawaz, T. P. Stefanov, and K.L.M. Bertels. Efﬁcient hardware gener-</text>
+<text top="1012" left="495" width="349" height="11" font="2">ation for dynamic programming problems. In <i>International Conference</i></text>
+<text top="1026" left="495" width="209" height="11" font="21"><i>on Field-Programmable Technology</i>, 2009.</text>
+<text top="1039" left="468" width="307" height="11" font="2">[10] NVIDIA. CUDA Programming Guide version 4.0, 2011.</text>
+<text top="1053" left="468" width="377" height="11" font="2">[11] D. Pisinger. Core problems in knapsack algorithms. <i>Oper. Res.</i>, 47:570–</text>
+<text top="1066" left="495" width="52" height="11" font="2">575, 1999.</text>
+<text top="1080" left="468" width="377" height="11" font="2">[12] S. Xiao, A. M. Aji, and W. Feng. On the robust mapping of dynamic</text>
+<text top="1093" left="495" width="349" height="11" font="2">programming onto a graphics processing unit. In <i>International Confer-</i></text>
+<text top="1107" left="495" width="237" height="11" font="21"><i>ence on Parallel and Distributed Systems</i>, 2009.</text>
+<text top="1120" left="468" width="376" height="11" font="2">[13] S. Xiao and W. Feng. Inter-block GPU communication via fast barrier</text>
+<text top="1133" left="495" width="349" height="11" font="2">synchronization. In <i>International Conference on Parallel and Distributed</i></text>
+<text top="1147" left="495" width="72" height="11" font="21"><i>Systems</i>, 2010.</text>
+</page>
+</pdf2xml>

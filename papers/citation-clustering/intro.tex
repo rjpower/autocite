@@ -1,0 +1,29 @@
+\section{Introduction}
+\label{sec:intro}
+
+The bibliography section of every paper is of great importance, but
+simultaneously it is an almost universal annoyance. Even when an author has a
+good idea of the set of papers most related to their work, they still
+have to go through the effort of hunting down the proper citations, playing an
+awkward game of guess-the-conference with Google Scholar.  Some authors
+solve this problem by constructing vast personal \bibtex repositories and
+maintaining a rigid naming convention to avoid conflicts.  While this scheme can
+be effective if one tends to work in a narrow area and re-uses most references
+multiple times, it breaks down if one writes about a variety of topics, and of
+course, it must be replicated by each new academic at the beginning of their
+career.
+
+Academic search engines such as \cite{CiteSeer}, \cite{Scholar},
+\cite{MSAcademic} have greatly simplified both the preliminary work of
+investigating an area of study, as well the hunting down of bibliography entries
+once a paper has been written.  Unfortunately, these services fall down when it
+comes to identifying a set of papers most related to a reference document -- it
+is left up to user to identify ``interesting'' keywords and to manually search
+for relevant papers, find or create the needed reference entry and to update
+their \bibtex file.
+
+ \name relieves most of the burden associated with citations, by automatically
+generating an appropriate \bibtex file based on the content similarity against a
+large document corpus.  While determining the exact set of references an author
+desires is an almost impossible goal, in our testing \name consistently finds
+almost all the desired references for a paper and yields few false positives.

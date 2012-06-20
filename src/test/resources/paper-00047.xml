@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="0" size="11" family="Times" color="#000000"/>
+	<fontspec id="1" size="11" family="Times" color="#000000"/>
+	<fontspec id="2" size="25" family="Helvetica" color="#000000"/>
+	<fontspec id="3" size="34" family="Helvetica" color="#000000"/>
+	<fontspec id="4" size="14" family="Times" color="#000000"/>
+	<fontspec id="5" size="16" family="Times" color="#000000"/>
+	<fontspec id="6" size="11" family="Times" color="#ff0000"/>
+	<fontspec id="7" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="12" family="Times" color="#000000"/>
+	<fontspec id="9" size="11" family="Times" color="#000000"/>
+	<fontspec id="10" size="1" family="Times" color="#000000"/>
+	<fontspec id="11" size="12" family="Times" color="#000000"/>
+	<fontspec id="12" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="13" size="14" family="Times" color="#000000"/>
+	<fontspec id="14" size="11" family="Times" color="#000000"/>
+	<fontspec id="15" size="10" family="Times" color="#000000"/>
+	<fontspec id="16" size="10" family="Times" color="#000000"/>
+	<fontspec id="17" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="18" size="12" family="Helvetica" color="#000000"/>
+<text top="55" left="354" width="463" height="12" font="0"><i>International Conference on VLSI, Communication &amp; Instrumentation (ICVCI) 2011  </i></text>
+<text top="71" left="359" width="457" height="12" font="0"><i>Proceedings published by International Journal of Computer Applications ® (IJCA)  </i></text>
+<text top="1197" left="807" width="10" height="12" font="1">1 </text>
+<text top="112" left="95" width="697" height="25" font="2"><b>Novel method to implement high frequency All Digital </b></text>
+<text top="149" left="249" width="381" height="25" font="2"><b>Phase-Locked Loop on FPGA</b></text>
+<text top="143" left="630" width="10" height="33" font="3"><b> </b></text>
+<text top="197" left="81" width="4" height="15" font="4"> </text>
+<text top="234" left="81" width="4" height="15" font="4"> </text>
+<text top="270" left="81" width="4" height="15" font="4"> </text>
+<text top="307" left="81" width="4" height="15" font="4"> </text>
+<text top="344" left="81" width="4" height="15" font="4"> </text>
+<text top="382" left="81" width="102" height="16" font="5"><b>ABSTRACT </b></text>
+<text top="402" left="81" width="346" height="12" font="1">A  programmable  FPGA  based  implementation  of  a  high </text>
+<text top="418" left="81" width="346" height="12" font="1">frequency  All  Digital  Phase  Locked  Loop  (ADPLL)  based </text>
+<text top="432" left="81" width="346" height="12" font="1">clock  generator  is presented. The novelty of the  design lies in </text>
+<text top="448" left="81" width="346" height="12" font="1">its pipelined  loop  filter  for  improving  the  maximum  tracked </text>
+<text top="464" left="81" width="345" height="12" font="1">output frequency upto 70 M Hz. The whole implementation of </text>
+<text top="479" left="81" width="346" height="12" font="1">ADPLL  consumes  very  low  dynamic  power  of  32mW  at </text>
+<text top="495" left="81" width="346" height="12" font="1">highest  frequency .  The  digital  controlled  oscillator  (DCO) </text>
+<text top="510" left="81" width="345" height="12" font="1">generates  a  clock  signal  with  high  frequency.  The  presented </text>
+<text top="526" left="81" width="346" height="12" font="1">ADPLL has fast acquisition and large pull in range for output </text>
+<text top="541" left="81" width="61" height="12" font="1">frequencies</text>
+<text top="541" left="143" width="3" height="12" font="6"> </text>
+<text top="541" left="150" width="277" height="12" font="1">ranging  from  10M hz  to  70  M hz.  Loop  filter  is </text>
+<text top="557" left="81" width="346" height="12" font="1">designed  to  support  high  speed  operation.  The  whole  design </text>
+<text top="573" left="81" width="345" height="12" font="1">including DCO has been done in synthesizable Verilog. It does  </text>
+<text top="588" left="81" width="345" height="12" font="1">not contain any library specific cells. The presented design has  </text>
+<text top="603" left="81" width="346" height="12" font="1">been  implemented  in  a  xc3s400a-4fg320  Xylinx  Spartan </text>
+<text top="619" left="81" width="346" height="12" font="1">FPGA. The maximum lock in time for the ADPLL is 39 clock </text>
+<text top="635" left="81" width="41" height="12" font="1">cycles. </text>
+<text top="661" left="81" width="14" height="16" font="5"><b>1.</b></text>
+<text top="660" left="95" width="5" height="17" font="7"><b> </b></text>
+<text top="661" left="108" width="149" height="16" font="5"><b>INTRODUCTION </b></text>
+<text top="683" left="81" width="346" height="12" font="1">The phase locked loop helps keep parts of our world orderly. A </text>
+<text top="701" left="81" width="345" height="12" font="1">phase-locked loop (PLL) is a  circuit synchronising the output </text>
+<text top="719" left="81" width="345" height="12" font="1">signal  of  a  controllable  oscillator  with  a  reference  signal  in </text>
+<text top="736" left="81" width="345" height="12" font="1">frequency as well as  in phase [1].  PLL can act as a frequency </text>
+<text top="754" left="81" width="271" height="12" font="1">multiplier in a feedback loop as shown in figure 1.</text>
+<text top="753" left="354" width="4" height="13" font="8"> </text>
+<text top="774" left="81" width="4" height="13" font="8"> </text>
+<text top="940" left="434" width="4" height="13" font="8"> </text>
+<text top="955" left="133" width="256" height="12" font="9"><b>Fig.1. Frequency synthesizer based on PLL.  </b></text>
+<text top="973" left="81" width="345" height="12" font="1">Designing  in  a  Hardware  Description  Language  (HDL) </text>
+<text top="991" left="81" width="345" height="12" font="1">enables  fast  simulation  and  high  level  aspects  can  be  easily </text>
+<text top="1009" left="81" width="345" height="12" font="1">tested and changed. Since no technology dependant constructs </text>
+<text top="1027" left="81" width="345" height="12" font="1">have  been  used  in  design,  the  presented  design  can  be </text>
+<text top="1044" left="81" width="345" height="12" font="1">synthesized on a target ASIC  with small changes in the code. </text>
+<text top="1062" left="81" width="345" height="12" font="1">The  flexibility  to  generate  multiple  frequency  clock  signals  </text>
+<text top="1080" left="81" width="345" height="12" font="1">from a reference clock can help save design effort and reduce </text>
+<text top="1098" left="81" width="71" height="12" font="1">design cost.  </text>
+<text top="1116" left="81" width="345" height="12" font="1">The  architecture  implemented  in  this  paper  is  explained  in </text>
+<text top="1134" left="81" width="57" height="12" font="1">section II. </text>
+<text top="1150" left="81" width="1" height="3" font="10"> </text>
+<text top="382" left="455" width="14" height="16" font="5"><b>2.</b></text>
+<text top="381" left="469" width="5" height="17" font="7"><b> </b></text>
+<text top="382" left="475" width="323" height="16" font="5"><b>IMPLEMENTED ARCHITECTURE OF </b></text>
+<text top="407" left="475" width="65" height="16" font="5"><b>ADPLL </b></text>
+<text top="430" left="455" width="12" height="13" font="11"><i>a.</i></text>
+<text top="430" left="466" width="4" height="14" font="12"><i> </i></text>
+<text top="430" left="482" width="208" height="13" font="11"><i>Phase Frequency Detector (PFD) </i></text>
+<text top="446" left="455" width="346" height="12" font="1">Phase  detector  generates  error  signals  depending  upon  the </text>
+<text top="464" left="455" width="345" height="12" font="1">phase  error  in  locked  state  and  frequency  error  in  unlocked </text>
+<text top="482" left="455" width="346" height="12" font="1">state. We have used a synchronous version of   PFD presented </text>
+<text top="500" left="455" width="345" height="12" font="1">in [1]. This synchronous PFD can be easily implemented on an </text>
+<text top="519" left="455" width="265" height="12" font="1">FPGA as all signals are synchronized to a clock. </text>
+<text top="552" left="455" width="12" height="13" font="11"><i>b.</i></text>
+<text top="551" left="466" width="4" height="14" font="12"><i> </i></text>
+<text top="552" left="482" width="72" height="13" font="11"><i>Loop Filter </i></text>
+<text top="567" left="455" width="345" height="12" font="1">Loop filter takes error signals from PFD as input, these signals  </text>
+<text top="585" left="455" width="345" height="12" font="1">are  processed  to  generate  control  signals  for  dco.  Loop  filter </text>
+<text top="603" left="455" width="345" height="12" font="1">effectively  performs  the  following  calculations  once  on  each </text>
+<text top="622" left="455" width="282" height="12" font="1">cycle of dco clock period for duration of mismatch.  </text>
+<text top="657" left="585" width="111" height="15" font="4">                      (1)</text>
+<text top="653" left="695" width="4" height="20" font="13"> </text>
+<text top="697" left="455" width="345" height="12" font="1">Decision about addition or subtraction is taken on the basis of </text>
+<text top="715" left="455" width="346" height="12" font="1">error, i.e up or down. The implemented  loopfilter  is presented </text>
+<text top="734" left="455" width="66" height="12" font="1">in figure 4.  </text>
+<text top="765" left="455" width="345" height="12" font="1">This  implementation  is  designed  for  low  hardware </text>
+<text top="783" left="455" width="345" height="12" font="1">requirements  and  high  frequency  of  operation.  Fixed  point </text>
+<text top="801" left="455" width="345" height="12" font="1">arithmetic  is  used  to  accommodate  fractional  values.  The </text>
+<text top="820" left="455" width="346" height="12" font="1">register  error  denoted  in  figure  as  ‘Error_reg’  is  included  to </text>
+<text top="838" left="455" width="345" height="12" font="1">enhance  maximum  frequency  of  operation.  Including  this </text>
+<text top="856" left="455" width="345" height="12" font="1">register requires change in generated control signals denoted in </text>
+<text top="870" left="455" width="346" height="15" font="14">figure as ‘clear’  and ‘update’ so that equation  1 is  calculated </text>
+<text top="890" left="455" width="346" height="12" font="1">for equal number of clkdco cycles for which phase error exist. </text>
+<text top="908" left="455" width="346" height="12" font="1">The required change is  that update and clear signals must be </text>
+<text top="926" left="455" width="346" height="12" font="1">delayed  by  one  clkdco  cycle  which  has  been  represented  in </text>
+<text top="946" left="455" width="187" height="12" font="1">figure 2 and figure 3 respectively . </text>
+<text top="1078" left="775" width="3" height="11" font="15"> </text>
+<text top="1107" left="527" width="201" height="12" font="9"><b>Fig.2. Generation of update signal </b></text>
+<text top="1107" left="727" width="3" height="11" font="16"><b> </b></text>
+<text top="210" left="158" width="126" height="17" font="17">Dr Anu Gupta , </text>
+<text top="229" left="144" width="152" height="14" font="18">Faculty, B.I.T.S Pilani, </text>
+<text top="210" left="384" width="158" height="17" font="17">Mohammad Waqar </text>
+<text top="230" left="425" width="83" height="17" font="17">Ahamed,  </text>
+<text top="251" left="387" width="150" height="14" font="18">Student B.I. T.S Pilani, </text>
+<text top="211" left="657" width="122" height="17" font="17">Abhishek Dhir ,</text>
+<text top="213" left="778" width="9" height="15" font="4">  </text>
+<text top="230" left="644" width="150" height="14" font="18">Student B.I. T.S Pilani, </text>
+<text top="287" left="239" width="111" height="17" font="17">Ravish Soni,  </text>
+<text top="308" left="215" width="150" height="14" font="18">Student B.I. T.S Pilani, </text>
+<text top="282" left="525" width="184" height="17" font="17">Neeraj Kumar Sharma,</text>
+<text top="283" left="709" width="4" height="15" font="4"> </text>
+<text top="305" left="543" width="151" height="14" font="18">Student  B.I. T.S Pilani </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="19" size="7" family="Times" color="#000000"/>
+	<fontspec id="20" size="12" family="Times" color="#000000"/>
+<text top="55" left="354" width="463" height="12" font="0"><i>International Conference on VLSI, Communication &amp; Instrumentation (ICVCI) 2011  </i></text>
+<text top="71" left="359" width="457" height="12" font="0"><i>Proceedings published by International Journal of Computer Applications ® (IJCA)  </i></text>
+<text top="1197" left="807" width="10" height="12" font="1">2 </text>
+<text top="264" left="419" width="6" height="11" font="15">  </text>
+<text top="291" left="159" width="189" height="12" font="9"><b>Fig.3. Generation of clear signal </b></text>
+<text top="291" left="347" width="4" height="13" font="8"> </text>
+<text top="311" left="252" width="4" height="13" font="8"> </text>
+<text top="344" left="81" width="345" height="12" font="1">To  simplify  hardware  further  we  use  the  assumption  that </text>
+<text top="362" left="81" width="4" height="12" font="1">f</text>
+<text top="368" left="86" width="24" height="8" font="19">clkdco</text>
+<text top="362" left="109" width="20" height="12" font="1">&gt;&gt;f</text>
+<text top="368" left="130" width="11" height="8" font="19">ref</text>
+<text top="362" left="140" width="287" height="12" font="1"> so delaying update and clear signals will not affect </text>
+<text top="380" left="81" width="346" height="12" font="1">performance  by  large  amount;  we  observed  the  same  in  our </text>
+<text top="400" left="81" width="42" height="12" font="1">results. </text>
+<text top="429" left="415" width="3" height="17" font="20"> </text>
+<text top="468" left="81" width="345" height="12" font="1">Since  Tc,q  and  Tsetup  are  fixed  so  to  decrease  the  required </text>
+<text top="483" left="81" width="346" height="12" font="1">clock time period we need to have  low T combinational to be </text>
+<text top="499" left="81" width="345" height="12" font="1">able to operate our system at high frequency. For this reason </text>
+<text top="514" left="81" width="346" height="12" font="1">we  have  implemented  multiplier  architecture  with  partial </text>
+<text top="530" left="81" width="346" height="12" font="1">product  generation  with  'Radix-4  modified  Booth  recoding', </text>
+<text top="546" left="81" width="345" height="12" font="1">partial  product  accumulation  with  'Wallace  tree'  and  Final </text>
+<text top="561" left="81" width="341" height="12" font="1">stage  addition  with  'Brent-Kung  adder'.  Implemented  adder-</text>
+<text top="576" left="81" width="346" height="12" font="1">subtractor architecture is Kogge-Stone adder. We were able to </text>
+<text top="592" left="81" width="346" height="12" font="1">achieve  maximum  operating  frequency  upto  71  MHz  for  our </text>
+<text top="608" left="81" width="42" height="12" font="1">design. </text>
+<text top="634" left="81" width="10" height="13" font="11"><i>c.</i></text>
+<text top="634" left="91" width="4" height="14" font="12"><i> </i></text>
+<text top="634" left="95" width="35" height="13" font="11"><i>DCO </i></text>
+<text top="650" left="81" width="345" height="12" font="1">We have implemented dco proposed in [2] which comprises of </text>
+<text top="668" left="81" width="345" height="12" font="1">two parts.  A  ring  oscillator  with  variable  delay  as  shown  in </text>
+<text top="686" left="81" width="345" height="12" font="1">figure  5.  The  second  part  consists  of  control  unit  that </text>
+<text top="704" left="81" width="345" height="12" font="1">constantly  switches  number  of  delay  elements  in  the  ring </text>
+<text top="720" left="81" width="345" height="12" font="1">between  two  adjacent  integral  values  to  obtain  fractional </text>
+<text top="738" left="81" width="345" height="12" font="1">number of effective delay elements. This implementation has  </text>
+<text top="756" left="81" width="345" height="12" font="1">high  frequency  resolution.  Switching  between  two  adjacent </text>
+<text top="772" left="81" width="346" height="15" font="14">values  causes  maximum  peak  to  peak  jitter  of  2τde  [2]. </text>
+<text top="794" left="81" width="284" height="12" font="1">Complete architecture of DCO is shown in figure 6. </text>
+<text top="1023" left="444" width="4" height="13" font="8"> </text>
+<text top="1054" left="202" width="105" height="12" font="9"><b>Fig.4. Loop Filter </b></text>
+<text top="1087" left="81" width="12" height="13" font="11"><i>d.</i></text>
+<text top="1086" left="92" width="4" height="14" font="12"><i> </i></text>
+<text top="1087" left="101" width="229" height="13" font="11"><i>Fractional Frequency Divider (FFD) </i></text>
+<text top="1120" left="81" width="345" height="12" font="1">For  high  frequency  resolution  and  flexibility the  feedback  of </text>
+<text top="1138" left="81" width="345" height="12" font="1">DCO  has  been  implemented  using  a  reprogrammable </text>
+<text top="110" left="455" width="346" height="12" font="1">fractional frequency divider presented in  [2]. Scaling factor of </text>
+<text top="128" left="455" width="345" height="12" font="1">this  accumulator  switches  periodically  between  two  adjacent </text>
+<text top="146" left="455" width="346" height="12" font="1">integers  realizing  a  fractional  scaling  factor  on  average.  Its </text>
+<text top="164" left="455" width="346" height="12" font="1">implementation is shown in figure 6. The M ost Significant Bit </text>
+<text top="181" left="455" width="346" height="12" font="1">(M SB) of register shown in figure 6 is the output of FFD. The </text>
+<text top="199" left="455" width="346" height="12" font="1">M SB  also  controls  selection  of  N  or  N-M  values.  If M SB  is </text>
+<text top="217" left="455" width="345" height="12" font="1">zero,  negative  value  N-M   is  selected.  If  M SB  is  one,  the </text>
+<text top="235" left="455" width="345" height="12" font="1">positive value N is selected. On average M SB bit is high for N  </text>
+<text top="253" left="455" width="346" height="12" font="1">out of M  cycles of clkdco. The register N and N-M  are made </text>
+<text top="271" left="455" width="346" height="12" font="1">reprogrammable using a separate clock signal ‘reprogram’.The </text>
+<text top="289" left="455" width="345" height="12" font="1">values of these registers can be varied so as to attain different </text>
+<text top="307" left="455" width="345" height="12" font="1">clkdco  frequencies  for  different  ref  frequencies  as  per </text>
+<text top="325" left="455" width="72" height="12" font="1">requirement. </text>
+<text top="358" left="455" width="345" height="12" font="1">The complete architecture of implemented ADPLL is shown in </text>
+<text top="376" left="455" width="50" height="12" font="1">figure 8. </text>
+<text top="612" left="795" width="4" height="13" font="8"> </text>
+<text top="642" left="466" width="322" height="12" font="9"><b>Fig.5. Ring oscillator with variable and-or delay matrix </b></text>
+<text top="842" left="782" width="4" height="13" font="8"> </text>
+<text top="872" left="542" width="172" height="12" font="9"><b>Fig.6. Block diagram of DCO </b></text>
+<text top="1087" left="743" width="3" height="11" font="15"> </text>
+<text top="1117" left="523" width="211" height="12" font="9"><b>Fig.7. Fractional Frequency Divider </b></text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="55" left="354" width="463" height="12" font="0"><i>International Conference on VLSI, Communication &amp; Instrumentation (ICVCI) 2011  </i></text>
+<text top="71" left="359" width="457" height="12" font="0"><i>Proceedings published by International Journal of Computer Applications ® (IJCA)  </i></text>
+<text top="1197" left="807" width="10" height="12" font="1">3 </text>
+<text top="367" left="481" width="4" height="13" font="8"> </text>
+<text top="398" left="136" width="235" height="12" font="9"><b>Fig.8. Complete Architecture of ADPLL </b></text>
+<text top="431" left="81" width="100" height="16" font="5"><b>3.RESULTS </b></text>
+<text top="451" left="83" width="341" height="12" font="9"><b>Table.1. Implementation results and results reported in [1] </b></text>
+<text top="505" left="114" width="3" height="11" font="15"> </text>
+<text top="505" left="166" width="61" height="11" font="15">Technology </text>
+<text top="505" left="251" width="31" height="11" font="15">Slices </text>
+<text top="484" left="311" width="54" height="11" font="15">Maximum </text>
+<text top="497" left="319" width="39" height="11" font="15">tracked </text>
+<text top="512" left="321" width="35" height="11" font="15">output  </text>
+<text top="525" left="312" width="52" height="11" font="15">frequency </text>
+<text top="484" left="387" width="30" height="11" font="15">Maxi-</text>
+<text top="497" left="390" width="29" height="11" font="15">mum </text>
+<text top="512" left="390" width="29" height="11" font="15">Lock </text>
+<text top="525" left="390" width="29" height="11" font="15">Time </text>
+<text top="547" left="81" width="67" height="11" font="15">Implemented </text>
+<text top="560" left="97" width="37" height="11" font="15">Design </text>
+<text top="540" left="167" width="59" height="11" font="15">XC3S400A </text>
+<text top="553" left="178" width="37" height="11" font="15">Xylinx </text>
+<text top="567" left="179" width="34" height="11" font="15">FPGA<b> </b></text>
+<text top="553" left="257" width="21" height="11" font="15">392<b> </b></text>
+<text top="553" left="317" width="43" height="11" font="15">70 MHz </text>
+<text top="547" left="396" width="15" height="11" font="15">39 </text>
+<text top="560" left="387" width="33" height="11" font="15">cycles </text>
+<text top="584" left="96" width="38" height="11" font="15">Design </text>
+<text top="597" left="83" width="63" height="11" font="15">presented in </text>
+<text top="612" left="107" width="17" height="11" font="15">[1] </text>
+<text top="584" left="163" width="65" height="11" font="15">V400BG432 </text>
+<text top="597" left="178" width="37" height="11" font="15">Xylinx </text>
+<text top="612" left="179" width="34" height="11" font="15">FPGA </text>
+<text top="597" left="257" width="21" height="11" font="15">672 </text>
+<text top="597" left="317" width="43" height="11" font="15">40 MHz </text>
+<text top="591" left="396" width="15" height="11" font="15">30 </text>
+<text top="605" left="387" width="33" height="11" font="15">cycles </text>
+<text top="630" left="81" width="3" height="12" font="1"> </text>
+<text top="662" left="81" width="346" height="12" font="1">Table  1  shows  improvement  in  maximum  tracked  output </text>
+<text top="680" left="81" width="345" height="12" font="1">frequency  due  to  the  changes  made  in  loop  filter.  The </text>
+<text top="698" left="81" width="346" height="12" font="1">maximum number of reference  cycles to lock  output signal is  </text>
+<text top="715" left="81" width="346" height="12" font="1">more  than  reported  in  [1].  We  have  obtained  lock  time  of  as </text>
+<text top="733" left="81" width="346" height="12" font="1">low  as  4  cycles  for  some  reference  frequencies,  lock  time </text>
+<text top="751" left="81" width="346" height="12" font="1">results  may   improve  by  selecting  a  different  free  running </text>
+<text top="769" left="81" width="346" height="12" font="1">frequency of DCO and division factor  of frequency divider. In </text>
+<text top="787" left="81" width="346" height="12" font="1">all  calculations  input  and  reference  signals  were  considered </text>
+<text top="805" left="81" width="346" height="12" font="1">lock if the phase error for 5 consequent cycles  is less than π/4 </text>
+<text top="824" left="81" width="217" height="12" font="1">and output follows reference thereafter. </text>
+<text top="856" left="81" width="346" height="12" font="1">Figure 9 indicates higher clock jitter at lower frequencies, with </text>
+<text top="874" left="81" width="346" height="12" font="1">maximum  jitter  of  21%  near  1100  KHz  reference  frequency </text>
+<text top="892" left="81" width="346" height="12" font="1">when frequency division factor of  feedback frequency divider  </text>
+<text top="908" left="81" width="345" height="12" font="1">is configured as 16. The percentage jitter flattens to 16% as we </text>
+<text top="928" left="81" width="154" height="12" font="1">move to higher frequencies.  </text>
+<text top="960" left="81" width="346" height="12" font="1">Figure  10  indicates  that  lock  time  (in  microseconds)  is  </text>
+<text top="977" left="81" width="345" height="12" font="1">maximum near 1000 KHz which is very near to frequency of </text>
+<text top="996" left="81" width="90" height="12" font="1">maximum jitter. </text>
+<text top="413" left="495" width="282" height="12" font="9"><b>Fig.9. CLKDIV cycle to cycle jitter vs Reference </b></text>
+<text top="431" left="603" width="62" height="12" font="9"><b>Frequency</b></text>
+<text top="432" left="665" width="3" height="11" font="15"> </text>
+<text top="449" left="633" width="3" height="11" font="15"> </text>
+<text top="717" left="828" width="4" height="13" font="8"> </text>
+<text top="732" left="510" width="250" height="12" font="9"><b>Fig.10. Lock Time vs Reference Frequency </b></text>
+<text top="1062" left="821" width="4" height="13" font="8"> </text>
+<text top="1076" left="486" width="298" height="12" font="9"><b>Fig.11. Lock Time in Cycles vs and/or gate delay of </b></text>
+<text top="1094" left="525" width="220" height="12" font="9"><b>delay matrix for clkdco= 16.384 MHz </b></text>
+<text top="1112" left="633" width="3" height="11" font="15"> </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="21" size="16" family="Times" color="#000000"/>
+<text top="55" left="354" width="463" height="12" font="0"><i>International Conference on VLSI, Communication &amp; Instrumentation (ICVCI) 2011  </i></text>
+<text top="71" left="359" width="457" height="12" font="0"><i>Proceedings published by International Journal of Computer Applications ® (IJCA)  </i></text>
+<text top="1197" left="807" width="10" height="12" font="1">4 </text>
+<text top="110" left="81" width="346" height="12" font="1">Figure 11 was plotted for a fixed reference frequency  of 1024 </text>
+<text top="128" left="81" width="346" height="12" font="1">KHz  and  changing  the  delays  of  and/or  gate.  The  results </text>
+<text top="146" left="81" width="346" height="12" font="1">indicate that locking time can change  widely with temperature </text>
+<text top="164" left="81" width="345" height="12" font="1">as and or gate delays change. Using a coarse lock circuit may </text>
+<text top="181" left="81" width="345" height="12" font="1">help  to  improve  performance  under  variation  of  and/or  gate </text>
+<text top="200" left="81" width="36" height="12" font="1">delay. </text>
+<text top="233" left="81" width="345" height="12" font="1">For figure 9-11 the values were measured at random intervals  </text>
+<text top="251" left="81" width="157" height="12" font="1">and plots were interpolated.  </text>
+<text top="284" left="110" width="300" height="12" font="9"><b>Table.2. Quiescent and Dynamic power of circuit at </b></text>
+<text top="299" left="199" width="124" height="12" font="9"><b>different frequencies </b></text>
+<text top="300" left="322" width="3" height="11" font="16"><b> </b></text>
+<text top="337" left="123" width="82" height="11" font="15">DCO Frequency </text>
+<text top="337" left="269" width="43" height="11" font="15">50 MHz </text>
+<text top="337" left="371" width="42" height="11" font="15">70 MHz </text>
+<text top="363" left="107" width="113" height="11" font="15">Total Quiescent Power </text>
+<text top="363" left="323" width="45" height="11" font="15">0.050 W </text>
+<text top="389" left="109" width="109" height="11" font="15">Total Dynamic Power </text>
+<text top="389" left="268" width="45" height="11" font="15">0.023 W </text>
+<text top="389" left="369" width="45" height="11" font="15">0.032 W </text>
+<text top="415" left="81" width="4" height="13" font="8"> </text>
+<text top="442" left="81" width="346" height="13" font="8">Figure  12  shows  CLKDIV  signal  being  tracked  to </text>
+<text top="462" left="81" width="345" height="13" font="8">Refe rence  signals.  The  DCO  frequency  is  16  t imes </text>
+<text top="482" left="81" width="128" height="13" font="8">CLKDIV frequency. </text>
+<text top="567" left="448" width="4" height="13" font="8"> </text>
+<text top="595" left="104" width="314" height="12" font="9"><b>Fig.12. Waveform of CLKD IV signal being tracked to </b></text>
+<text top="613" left="212" width="95" height="12" font="9"><b>Reference signal</b></text>
+<text top="614" left="306" width="3" height="11" font="16"><b> </b></text>
+<text top="631" left="259" width="3" height="11" font="15"> </text>
+<text top="649" left="81" width="14" height="16" font="5"><b>4.</b></text>
+<text top="648" left="95" width="5" height="17" font="7"><b> </b></text>
+<text top="649" left="101" width="127" height="16" font="5"><b>CONCLUSION  </b></text>
+<text top="669" left="81" width="346" height="12" font="1">A  programmable  high  frequency  ADPLL  based  clock </text>
+<text top="687" left="81" width="346" height="12" font="1">synthesizer was successfully synthesized  on FPGA. Very few </text>
+<text top="704" left="81" width="345" height="12" font="1">papers  are  available  on  FPGA  based  implementation  of </text>
+<text top="722" left="81" width="346" height="12" font="1">ADPLL.  The  implemented  design  supports  70  MHz tracked </text>
+<text top="740" left="81" width="346" height="12" font="1">output  frequency   (clkdco)  on  FPGA  which  is  more  than  all </text>
+<text top="758" left="81" width="345" height="12" font="1">papers known to author. The novelty of implemented design is  </text>
+<text top="776" left="81" width="346" height="12" font="1">the  pipelined  loop  filter.  The  proposed  design  can  easily  be </text>
+<text top="794" left="81" width="346" height="12" font="1">adapted  for  different  processes  without  the  need  to  redesign </text>
+<text top="812" left="81" width="345" height="12" font="1">any  of  its  components  since  it  does  not  use  any  technology </text>
+<text top="110" left="455" width="345" height="12" font="1">specific construct. Dynamic power dissipated by the circuit is </text>
+<text top="128" left="455" width="345" height="12" font="1">32  mW  at  70 MHz.    It  has  fast  acquisition  and  large  pull  in </text>
+<text top="146" left="455" width="345" height="12" font="1">range  which  can  be  varied  by  changing  the  programmable </text>
+<text top="164" left="455" width="346" height="12" font="1">feedback  division  factor  of  our  design.  The  whole  design </text>
+<text top="181" left="455" width="346" height="12" font="1">including dco has been implemented in synthesizable verilog.  </text>
+<text top="199" left="455" width="346" height="12" font="1">It  has  been  successfully  implemented  in  xc3s400a-4fg320 </text>
+<text top="217" left="455" width="346" height="12" font="1">Xylinx  Spartan  FPGA.  M aximum  lock  in  time  is  39  cycles  </text>
+<text top="235" left="455" width="346" height="12" font="1">which  may  be  improved  further.  The  locking  time  is  very </text>
+<text top="253" left="455" width="346" height="12" font="1">sensitive  to  variations  in temperature. The  maximum  tracked </text>
+<text top="272" left="455" width="162" height="12" font="1">output frequency is 70 MHz.  </text>
+<text top="305" left="455" width="14" height="16" font="5"><b>5.</b></text>
+<text top="305" left="469" width="5" height="17" font="7"><b> </b></text>
+<text top="305" left="482" width="126" height="16" font="5"><b>REFERENCES </b></text>
+<text top="324" left="455" width="350" height="12" font="1">[1]    Ronald  Best,  Phase-Locked  Loops, M cGraw-Hill,USA,  6</text>
+<text top="322" left="805" width="7" height="8" font="19">th</text>
+<text top="324" left="812" width="3" height="12" font="1"> </text>
+<text top="340" left="482" width="46" height="12" font="1">Edition. </text>
+<text top="365" left="455" width="360" height="12" font="1">[2]    Stefo,  R.;  Schreiter,  J.;  Schlussler,  J.-U.;  Schuffny,  R.;  , </text>
+<text top="380" left="482" width="331" height="12" font="1">&#34;High  resolution  ADPLL  frequency synthesizer  for FPGA-</text>
+<text top="396" left="482" width="23" height="12" font="1">and </text>
+<text top="396" left="519" width="70" height="12" font="1">ASIC-based </text>
+<text top="396" left="604" width="79" height="12" font="1">applications,&#34; </text>
+<text top="396" left="697" width="118" height="12" font="0"><i>Field-Programmable </i></text>
+<text top="411" left="482" width="333" height="12" font="0"><i>Technology  (FPT),  2003.  Proceedings.  2003  IEEE </i></text>
+<text top="427" left="482" width="333" height="12" font="0"><i>International  Conference  on</i>  ,  vol.,  no.,  pp.  28-  34,  15-17 </text>
+<text top="442" left="482" width="59" height="12" font="1">Dec. 2003 </text>
+<text top="467" left="455" width="360" height="12" font="1">[3]  Walters, S.M .; Troudet, T.; , &#34;Digital phase-locked loop with </text>
+<text top="483" left="482" width="333" height="12" font="1">jitter bounded,&#34; <i>Circuits and Systems, IEEE Transactions on </i> </text>
+<text top="497" left="482" width="196" height="12" font="1">, vol.36, no.7, pp.980-987, Jul 1989 </text>
+<text top="522" left="455" width="360" height="12" font="1">[4]  Tarar,  M .A.;  Sun,  J.;  Sampson,  A.;  Wilcox,  R.;  Zhizhang </text>
+<text top="538" left="482" width="329" height="12" font="1">Chen;  ,  &#34;The  Implementation  of  a  New  All-Digital  Phase-</text>
+<text top="554" left="482" width="333" height="12" font="1">Locked  Loop  on  an  FPGA  and  Its  Testing  in  a  Complete </text>
+<text top="570" left="482" width="51" height="12" font="1">Wireless </text>
+<text top="570" left="557" width="66" height="12" font="1">Transceiver </text>
+<text top="570" left="649" width="167" height="12" font="1">Architecture,&#34;<i>Communication </i></text>
+<text top="584" left="482" width="333" height="12" font="0"><i>Networks  and  Services  Research  Conference,  2009.  CNSR </i></text>
+<text top="600" left="482" width="331" height="12" font="0"><i>'09. Seventh Annual</i> , vol., no., pp.238-244, 11-13 M ay 2009 </text>
+<text top="625" left="455" width="360" height="12" font="1">[5]    Kumm,  M .;  Klingbeil,  H.;  Zipf,  P.;  ,  &#34;An  FPGA-Based </text>
+<text top="640" left="482" width="333" height="12" font="1">Linear  All-Digital  Phase-Locked  Loop ,&#34; <i>Circuits  and </i></text>
+<text top="656" left="482" width="333" height="12" font="0"><i>Systems  I:  Regular  Papers,  IEEE  Transactions  on</i> ,  vol.57, </text>
+<text top="671" left="482" width="173" height="12" font="1">no.9, pp.2487-2497, Sept. 2010 </text>
+<text top="696" left="455" width="360" height="12" font="1">[6]  Qiang  Zhang;  Kai  Huang;  Zuojun  Liu;  Zhigang  Li;  ,  </text>
+<text top="711" left="482" width="333" height="12" font="1">&#34;Research  and  Application  of  All  Digital  Phase-Locked </text>
+<text top="727" left="482" width="333" height="12" font="1">Loop,&#34; <i>Intelligent  Networks  and  Intelligent  Systems,  2009. </i></text>
+<text top="743" left="482" width="333" height="12" font="0"><i>ICINIS '09. Second International Conference on</i> , vol., no., </text>
+<text top="758" left="482" width="149" height="12" font="1">pp.122-125, 1-3 Nov. 2009</text>
+<text top="753" left="630" width="4" height="18" font="21"> </text>
+<text top="860" left="108" width="3" height="11" font="15"> </text>
+</page>
+</pdf2xml>

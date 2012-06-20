@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1186" width="892">
+	<fontspec id="0" size="24" family="Times" color="#131413"/>
+	<fontspec id="1" size="12" family="Times" color="#131413"/>
+	<fontspec id="2" size="9" family="Times" color="#131413"/>
+	<fontspec id="3" size="10" family="Times" color="#131413"/>
+	<fontspec id="4" size="15" family="Times" color="#131413"/>
+<text top="164" left="77" width="499" height="23" font="0">Seamless Dynamic Runtime Reconfiguration</text>
+<text top="194" left="77" width="319" height="23" font="0">in a Software-Defined Radio</text>
+<text top="245" left="77" width="106" height="13" font="1">Michael Dickens</text>
+<text top="244" left="186" width="4" height="16" font="2">&amp;</text>
+<text top="245" left="194" width="135" height="13" font="1">J. Nicholas Laneman</text>
+<text top="244" left="333" width="4" height="16" font="2">&amp;</text>
+<text top="245" left="341" width="93" height="13" font="1">Brian P. Dunn</text>
+<text top="366" left="77" width="459" height="12" font="3">Received: 29 September 2011 / Revised: 11 October 2011 / Accepted: 15 November 2011</text>
+<text top="376" left="77" width="252" height="17" font="3"># Springer Science+Business Media, LLC 2011</text>
+<text top="426" left="77" width="357" height="13" font="1">Abstract We discuss implementation aspects of a</text>
+<text top="444" left="77" width="357" height="14" font="1">software-defined radio system that allows for dynamic</text>
+<text top="463" left="77" width="357" height="14" font="1">waveform reconfiguration during runtime without interrupt-</text>
+<text top="481" left="77" width="357" height="14" font="1">ing data-flow processing. Traditional software-defined</text>
+<text top="500" left="77" width="357" height="14" font="1">radio systems execute a waveform statically, exactly as it</text>
+<text top="519" left="77" width="357" height="14" font="1">is programmed. Reconfiguration is provided by executing a</text>
+<text top="537" left="77" width="357" height="14" font="1">different waveform, which requires the system to stop</text>
+<text top="556" left="77" width="357" height="14" font="1">processing data while reconfiguration occurs, and also may</text>
+<text top="575" left="77" width="357" height="14" font="1">incur an unacceptable delay for some applications. Recent</text>
+<text top="593" left="77" width="357" height="14" font="1">research has demonstrated basic reconfiguration by</text>
+<text top="612" left="77" width="357" height="14" font="1">programming multiple branches into a waveform and</text>
+<text top="631" left="77" width="357" height="14" font="1">dynamically switching between branches. This technique</text>
+<text top="649" left="77" width="357" height="14" font="1">requires redundant resources and in general cannot be</text>
+<text top="668" left="77" width="357" height="14" font="1">expanded to encompass all possible waveforms of interest,</text>
+<text top="687" left="77" width="357" height="14" font="1">but, if implemented carefully, could be made to seamlessly</text>
+<text top="705" left="77" width="357" height="14" font="1">process data. We propose a system that allows for dynamic</text>
+<text top="724" left="77" width="357" height="14" font="1">insertion and removal of entire waveforms, individual</text>
+<text top="743" left="77" width="357" height="14" font="1">constituent blocks, and block algorithm implementations</text>
+<text top="761" left="77" width="357" height="14" font="1">tailored to specific processors. Our system performs this</text>
+<text top="780" left="77" width="357" height="14" font="1">reconfiguration while maintaining processing state, seam-</text>
+<text top="799" left="77" width="357" height="14" font="1">lessly without interrupting data-processing, and with only</text>
+<text top="425" left="459" width="357" height="14" font="1">the resources necessary for the given waveform and</text>
+<text top="444" left="459" width="357" height="14" font="1">processors. In order to leverage this new level of reconfi-</text>
+<text top="463" left="459" width="357" height="14" font="1">gurability, we created a new system component: a supervi-</text>
+<text top="481" left="459" width="357" height="14" font="1">sor. This system supervisor monitors the state of each</text>
+<text top="500" left="459" width="357" height="14" font="1">processor and waveform execution, and moves computa-</text>
+<text top="519" left="459" width="357" height="14" font="1">tions among available processors as their loads, capabilities,</text>
+<text top="537" left="459" width="357" height="14" font="1">and block algorithm implementations allow. An example</text>
+<text top="556" left="459" width="357" height="14" font="1">using a simple supervisor is provided to demonstrate the</text>
+<text top="575" left="459" width="169" height="14" font="1">effectiveness of our system.</text>
+<text top="612" left="459" width="321" height="13" font="1">Keywords Software defined radio . Reconfiguration .</text>
+<text top="631" left="459" width="265" height="14" font="1">Dynamic reconfiguration . Dynamic runtime</text>
+<text top="649" left="459" width="353" height="14" font="1">reconfiguration . Seamless reconfiguration . Software-based</text>
+<text top="668" left="459" width="210" height="14" font="1">reconfiguration . OpenCL . GPGPU</text>
+<text top="725" left="459" width="197" height="13" font="1">1 Introduction and Motivation</text>
+<text top="761" left="459" width="357" height="14" font="1">As software-defined radio (SDR) becomes more main-</text>
+<text top="780" left="459" width="357" height="14" font="1">stream, devices using SDR will become more sophisticated.</text>
+<text top="799" left="459" width="357" height="14" font="1">Already, such devices are moving from bulky handhelds</text>
+<text top="817" left="459" width="357" height="14" font="1">with specialized processors and programming, to ones</text>
+<text top="836" left="459" width="242" height="14" font="1">small enough to fit into a pocket</text>
+<text top="832" left="712" width="105" height="19" font="1">— while using</text>
+<text top="855" left="459" width="357" height="14" font="1">reprogrammable software executing on multi-core general-</text>
+<text top="874" left="459" width="357" height="14" font="1">purpose processors. In the not-so-distant future, devices</text>
+<text top="892" left="459" width="357" height="14" font="1">will likely be using many-core processors and advanced</text>
+<text top="911" left="459" width="357" height="14" font="1">graphics processing units (GPUs), with the ability to do</text>
+<text top="930" left="459" width="240" height="14" font="1">real-time SDR for complex waveforms.</text>
+<text top="948" left="476" width="340" height="14" font="1">Device functionality is moving from a few static wave-</text>
+<text top="967" left="459" width="357" height="14" font="1">forms, to smartphone capabilities including web-browsing,</text>
+<text top="986" left="459" width="357" height="14" font="1">augmented reality, and communications including voice,</text>
+<text top="1004" left="459" width="89" height="14" font="1">video, and data</text>
+<text top="1000" left="551" width="265" height="19" font="1">– possibly all at the same time. These devices</text>
+<text top="1023" left="459" width="352" height="14" font="1">will be monitoring the whitespace and other devices</text>
+<text top="1019" left="812" width="5" height="19" font="1">’</text>
+<text top="1042" left="459" width="357" height="14" font="1">communications, and cognitively altering their own commu-</text>
+<text top="1060" left="459" width="357" height="14" font="1">nications to both use available bandwidth as well as to avoid</text>
+<text top="860" left="77" width="67" height="12" font="3">M. Dickens (</text>
+<text top="857" left="144" width="18" height="17" font="3">*)</text>
+<text top="849" left="164" width="5" height="23" font="4">:</text>
+<text top="860" left="172" width="57" height="12" font="3">B. P. Dunn</text>
+<text top="875" left="77" width="74" height="12" font="3">RFware, LLC,</text>
+<text top="890" left="77" width="114" height="12" font="3">South Bend, IN, USA</text>
+<text top="905" left="77" width="128" height="12" font="3">e-mail: mlk@rfware.com</text>
+<text top="935" left="77" width="60" height="12" font="3">M. Dickens</text>
+<text top="950" left="77" width="134" height="12" font="3">e-mail: mdickens@nd.edu</text>
+<text top="972" left="77" width="57" height="12" font="3">B. P. Dunn</text>
+<text top="987" left="77" width="134" height="12" font="3">e-mail: brian@rfware.com</text>
+<text top="1017" left="77" width="60" height="12" font="3">M. Dickens</text>
+<text top="1006" left="139" width="5" height="23" font="4">:</text>
+<text top="1017" left="146" width="76" height="12" font="3">J. N. Laneman</text>
+<text top="1032" left="77" width="138" height="12" font="3">University of Notre Dame,</text>
+<text top="1047" left="77" width="116" height="12" font="3">Notre Dame, IN, USA</text>
+<text top="1062" left="77" width="99" height="12" font="3">e-mail: jnl@nd.edu</text>
+<text top="51" left="77" width="101" height="12" font="3">J Sign Process Syst</text>
+<text top="68" left="77" width="170" height="12" font="3">DOI 10.1007/s11265-011-0645-3</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1186" width="892">
+	<fontspec id="5" size="12" family="Times" color="#3a2a97"/>
+<text top="89" left="77" width="169" height="14" font="1">bandwidth in use by others [</text>
+<text top="89" left="246" width="7" height="14" font="5"><a href="pdfxml.html#7">1</a></text>
+<text top="85" left="253" width="7" height="19" font="1"><a href="pdfxml.html#7">–</a></text>
+<text top="89" left="260" width="7" height="14" font="5"><a href="pdfxml.html#7">3</a></text>
+<text top="89" left="268" width="166" height="14" font="1"><a href="pdfxml.html#7">]. </a>Such systems cannot rely</text>
+<text top="108" left="77" width="357" height="14" font="1">on a few static waveforms; they must instead provide</text>
+<text top="126" left="77" width="357" height="14" font="1">dynamic reconfiguration of waveforms during runtime in</text>
+<text top="145" left="77" width="357" height="14" font="1">order to maximize both device utility and battery life.</text>
+<text top="164" left="77" width="357" height="14" font="1">Further, some high priority functions will require high</text>
+<text top="182" left="77" width="357" height="14" font="1">quality of service communications capabilities. Given these</text>
+<text top="201" left="77" width="357" height="14" font="1">requirements, there will be a need to move computations</text>
+<text top="220" left="77" width="357" height="14" font="1">between processors on such devices, without impacting data</text>
+<text top="239" left="77" width="150" height="14" font="1">reception or transmission</text>
+<text top="235" left="231" width="203" height="19" font="1">– i.e., providing seamless runtime</text>
+<text top="257" left="77" width="279" height="14" font="1">data processing and waveform reconfiguration.</text>
+<text top="276" left="94" width="340" height="14" font="1">To demonstrate the practicality of such processing in a</text>
+<text top="295" left="77" width="173" height="14" font="1">SDR, we have taken Surfer [</text>
+<text top="295" left="250" width="7" height="14" font="5"><a href="pdfxml.html#7">4</a></text>
+<text top="295" left="257" width="135" height="14" font="1">], our SDR framework</text>
+<text top="291" left="396" width="37" height="19" font="1">— the</text>
+<text top="313" left="77" width="357" height="14" font="1">collection of executables and libraries, header, resource,</text>
+<text top="332" left="77" width="205" height="14" font="1">and data files for a given project</text>
+<text top="328" left="288" width="146" height="19" font="1">— and augmented it in</text>
+<text top="351" left="77" width="214" height="14" font="1">such a way that it can support both</text>
+<text top="347" left="295" width="139" height="19" font="1">“all-in-one” processing</text>
+<text top="369" left="77" width="357" height="14" font="1">blocks and a new block abstraction allowing for seamless</text>
+<text top="388" left="77" width="357" height="14" font="1">processing. As part of the changes, we developed a new</text>
+<text top="407" left="77" width="66" height="14" font="1">component</text>
+<text top="403" left="148" width="286" height="19" font="1">— a supervisor — that keeps track of the load</text>
+<text top="425" left="77" width="94" height="14" font="1">on the device</text>
+<text top="422" left="171" width="262" height="19" font="1">’s processors as well as various SDR</text>
+<text top="444" left="77" width="357" height="14" font="1">waveform execution parameters, and can modify waveform</text>
+<text top="463" left="77" width="357" height="14" font="1">execution to meet user-specified requirements. We discuss</text>
+<text top="481" left="77" width="169" height="14" font="1">these changes in Section</text>
+<text top="481" left="255" width="7" height="14" font="5"><a href="pdfxml.html#3">3</a></text>
+<text top="481" left="263" width="171" height="14" font="1"><a href="pdfxml.html#3">, </a>after providing relevant</text>
+<text top="500" left="77" width="237" height="14" font="1">background information in Section</text>
+<text top="500" left="324" width="7" height="14" font="5"><a href="pdfxml.html#2">2</a></text>
+<text top="500" left="342" width="92" height="14" font="1">on how SDR</text>
+<text top="519" left="77" width="312" height="14" font="1">processing works in a general sense. In Section</text>
+<text top="519" left="397" width="7" height="14" font="5"><a href="pdfxml.html#7">4</a></text>
+<text top="519" left="404" width="29" height="14" font="1">, we</text>
+<text top="537" left="77" width="357" height="14" font="1">describe a simple application and show the effectiveness of</text>
+<text top="556" left="77" width="357" height="14" font="1">our technique through a simple load threshold detection</text>
+<text top="575" left="77" width="357" height="14" font="1">supervisor. Conclusions and acknowledgements are then</text>
+<text top="593" left="77" width="117" height="14" font="1">provided in Section</text>
+<text top="593" left="197" width="7" height="14" font="5"><a href="pdfxml.html#7">5</a></text>
+<text top="593" left="208" width="225" height="14" font="1">and Acknowledgements, respectively.</text>
+<text top="650" left="77" width="91" height="13" font="1">2 Background</text>
+<text top="687" left="77" width="357" height="14" font="1">In this section, we discuss how current SDR frameworks</text>
+<text top="705" left="77" width="357" height="14" font="1">perform data processing, in as broad terms as possible. Our</text>
+<text top="724" left="77" width="357" height="14" font="1">goal is to provide enough relevant information such the</text>
+<text top="743" left="77" width="178" height="14" font="1">changes described in Section</text>
+<text top="743" left="260" width="7" height="14" font="5"><a href="pdfxml.html#3">3</a></text>
+<text top="743" left="273" width="160" height="14" font="1">can be compared with the</text>
+<text top="762" left="77" width="357" height="14" font="1">current methods; we are not trying to fully describe how</text>
+<text top="780" left="77" width="83" height="14" font="1">GNU Radio [</text>
+<text top="780" left="160" width="7" height="14" font="5"><a href="pdfxml.html#7">5</a></text>
+<text top="780" left="167" width="67" height="14" font="1">] or SCA [</text>
+<text top="780" left="234" width="7" height="14" font="5"><a href="pdfxml.html#7">6</a></text>
+<text top="780" left="241" width="192" height="14" font="1">] does its processing, but rather</text>
+<text top="799" left="77" width="357" height="14" font="1">to look at the way processing takes place in a general sense.</text>
+<text top="836" left="77" width="267" height="14" font="1">2.1 Waveform as Graph, with Block Details</text>
+<text top="874" left="77" width="357" height="14" font="1">Each SDR waveform can be described by an acyclic graph,</text>
+<text top="892" left="77" width="357" height="14" font="1">whether performing packet or frame processing of data.</text>
+<text top="911" left="77" width="357" height="14" font="1">Such a processing abstraction allows for a graphical</text>
+<text top="930" left="77" width="282" height="14" font="1">interface (GUI) to describe a given waveform</text>
+<text top="926" left="364" width="70" height="19" font="1">— e.g., the</text>
+<text top="948" left="77" width="158" height="14" font="1">GNU Radio Companion <a href="pdfxml.html#7">[</a></text>
+<text top="948" left="234" width="7" height="14" font="5"><a href="pdfxml.html#7">7</a></text>
+<text top="948" left="242" width="84" height="14" font="1"><a href="pdfxml.html#7">], </a>MathWorks</text>
+<text top="945" left="326" width="75" height="19" font="1">’ Simulink <a href="pdfxml.html#7">[</a></text>
+<text top="948" left="400" width="7" height="14" font="5"><a href="pdfxml.html#7">8</a></text>
+<text top="948" left="408" width="26" height="14" font="1"><a href="pdfxml.html#7">], </a>or</text>
+<text top="967" left="77" width="125" height="14" font="1">National Instruments</text>
+<text top="963" left="202" width="80" height="19" font="1">’ LabVIEW <a href="pdfxml.html#7">[</a></text>
+<text top="967" left="282" width="7" height="14" font="5"><a href="pdfxml.html#7">9</a></text>
+<text top="967" left="290" width="144" height="14" font="1"><a href="pdfxml.html#7">]. </a>Such high-level GUIs</text>
+<text top="986" left="77" width="357" height="14" font="1">are excellent for visualization purposes, and for users who</text>
+<text top="1004" left="77" width="357" height="14" font="1">are not interested in the underlying implementation details.</text>
+<text top="1023" left="77" width="357" height="14" font="1">GUI representations of SDR waveforms hide implementa-</text>
+<text top="1042" left="77" width="357" height="14" font="1">tion details from the user, including how data is buffered</text>
+<text top="1060" left="77" width="357" height="14" font="1">between signal-processing blocks, the state of each block,</text>
+<text top="89" left="459" width="357" height="14" font="1">and where computations are actually performed. Sometimes</text>
+<text top="108" left="459" width="357" height="14" font="1">it is useful to delve into the inner workings of an SDR</text>
+<text top="126" left="459" width="357" height="14" font="1">framework to better understand its functionality and to</text>
+<text top="145" left="459" width="357" height="14" font="1">experiment with modifications that might offer more robust</text>
+<text top="164" left="459" width="78" height="14" font="1">performance.</text>
+<text top="182" left="476" width="38" height="14" font="1">Figure</text>
+<text top="182" left="518" width="7" height="14" font="5"><a href="pdfxml.html#2">1</a></text>
+<text top="182" left="530" width="286" height="14" font="1">shows a generic signal-processing block, includ-</text>
+<text top="201" left="459" width="357" height="14" font="1">ing input and output buffers, the actual processing algorithm</text>
+<text top="220" left="459" width="357" height="14" font="1">implementation, the block state, and the programming glue</text>
+<text top="239" left="459" width="357" height="14" font="1">that holds the parts together. Some blocks will be input only</text>
+<text top="257" left="459" width="357" height="14" font="1">(e.g., sinks, consumers), while others are output only (e.g.,</text>
+<text top="276" left="459" width="357" height="14" font="1">sources, producers); some do not need state (e.g., synchro-</text>
+<text top="295" left="459" width="357" height="14" font="1">nous 2-stream adder) but most do (e.g., a FIR filter requires</text>
+<text top="313" left="459" width="357" height="14" font="1">the N filter coefficients and the last N-1 input samples, and</text>
+<text top="332" left="459" width="357" height="14" font="1">possibly other variables depending on the actual implemen-</text>
+<text top="351" left="459" width="258" height="14" font="1">tation). The size and number of each block</text>
+<text top="347" left="717" width="99" height="19" font="1">’s buffers can be</text>
+<text top="369" left="459" width="357" height="14" font="1">related to those blocks preceding and following it; each buffer</text>
+<text top="388" left="459" width="357" height="14" font="1">holds items of some specific type, entering and exiting at</text>
+<text top="407" left="459" width="233" height="14" font="1">related, possibly identical, sample rates.</text>
+<text top="425" left="476" width="340" height="14" font="1">Each block is generally coded as a group of related</text>
+<text top="444" left="459" width="357" height="14" font="1">variables and functions using those variables (e.g., a C++</text>
+<text top="463" left="459" width="357" height="14" font="1">class enclosing variables for state, and methods for</text>
+<text top="481" left="459" width="357" height="14" font="1">handling processing and determining other relevant prop-</text>
+<text top="500" left="459" width="357" height="14" font="1">erties of the specific block). In some SDR frameworks, the</text>
+<text top="519" left="459" width="357" height="14" font="1">block itself determines when it is ready to be scheduled to</text>
+<text top="537" left="459" width="86" height="14" font="1">do processing</text>
+<text top="534" left="554" width="263" height="19" font="1">— when there is enough input data and</text>
+<text top="556" left="459" width="301" height="14" font="1">output buffer space, among the basic requirements</text>
+<text top="552" left="764" width="52" height="19" font="1">— while</text>
+<text top="575" left="459" width="357" height="14" font="1">in others it is handled by some external process. Some SDR</text>
+<text top="593" left="459" width="357" height="14" font="1">frameworks evaluate the waveform as a whole a-priori to</text>
+<text top="612" left="459" width="315" height="14" font="1">determine block scheduling timing and buffer sizes.</text>
+<text top="631" left="476" width="235" height="14" font="1">In the block configuration from Fig.</text>
+<text top="631" left="720" width="7" height="14" font="5"><a href="pdfxml.html#2">1</a></text>
+<text top="631" left="727" width="89" height="14" font="1">, all forms of</text>
+<text top="649" left="459" width="357" height="14" font="1">dynamic runtime configuration require the equivalent of a</text>
+<text top="668" left="459" width="172" height="14" font="1">switch, such as that in Fig.</text>
+<text top="668" left="638" width="7" height="14" font="5"><a href="pdfxml.html#3">2</a></text>
+<text top="668" left="646" width="171" height="14" font="1"><a href="pdfxml.html#3">, </a>to handle selection of the</text>
+<text top="687" left="459" width="357" height="14" font="1">block or waveform. Seamless data processing can be</text>
+<text top="705" left="459" width="357" height="14" font="1">provided by switching between anywhere from individual</text>
+<text top="724" left="459" width="357" height="14" font="1">blocks to whole waveforms. Note that the individual or</text>
+<text top="743" left="459" width="357" height="14" font="1">group block state must be kept in sync between all blocks</text>
+<text top="762" left="459" width="357" height="14" font="1">using the switch, or must be copied between blocks at</text>
+<text top="780" left="459" width="357" height="14" font="1">switch time. Neither method makes efficient use of memory</text>
+<text top="799" left="459" width="357" height="14" font="1">resources and both add extra complexity to the waveform</text>
+<text top="818" left="459" width="34" height="14" font="1">graph</text>
+<text top="814" left="501" width="315" height="19" font="1">— whether in GUI or script form. Although the</text>
+<text top="1062" left="459" width="320" height="11" font="3">Figure 1 General diagram of a SDR signal-processing block.</text>
+<text top="51" left="716" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1186" width="892">
+<text top="351" left="77" width="357" height="14" font="1">former method could be practically implemented for any</text>
+<text top="369" left="77" width="357" height="14" font="1">specific block, there is a more efficient abstraction that we</text>
+<text top="388" left="77" width="357" height="14" font="1">use to provide seamless data processing that will be</text>
+<text top="407" left="77" width="123" height="14" font="1">discussed in Section</text>
+<text top="407" left="204" width="7" height="14" font="5"><a href="pdfxml.html#3">3</a></text>
+<text top="407" left="212" width="4" height="14" font="1"><a href="pdfxml.html#3">.</a></text>
+<text top="444" left="77" width="248" height="14" font="1">2.2 Data Processing and Reconfiguration</text>
+<text top="481" left="77" width="357" height="14" font="1">In SDR frameworks, data processing occurs when a pre-</text>
+<text top="500" left="77" width="357" height="14" font="1">specified C++ method or C-style function is called (e.g., in</text>
+<text top="519" left="77" width="90" height="14" font="1">GNU Radio the</text>
+<text top="515" left="170" width="264" height="19" font="1">“general_work” method). This method resides</text>
+<text top="537" left="77" width="357" height="14" font="1">within the signal processing block class or is assigned statically,</text>
+<text top="556" left="77" width="357" height="14" font="1">such that using some other instantiation of the same algorithm</text>
+<text top="575" left="77" width="357" height="14" font="1">requires creating a new block and re-connecting the graph (e.g.,</text>
+<text top="593" left="77" width="151" height="14" font="1">via the switch from Fig.</text>
+<text top="593" left="234" width="7" height="14" font="5"><a href="pdfxml.html#3">2</a></text>
+<text top="593" left="242" width="192" height="14" font="1"><a href="pdfxml.html#3">). </a>In current SDR frameworks,</text>
+<text top="612" left="77" width="357" height="14" font="1">dynamic reconfiguration takes place via the switch, or by</text>
+<text top="631" left="77" width="357" height="14" font="1">stopping graph execution (whether telling the blocks to stop</text>
+<text top="649" left="77" width="357" height="14" font="1">or by stopping the external controller), replacing the block of</text>
+<text top="668" left="77" width="357" height="14" font="1">interest, and then restarting the graph. Although for some</text>
+<text top="687" left="77" width="357" height="14" font="1">applications the latter reconfiguration style can be made to</text>
+<text top="705" left="77" width="357" height="14" font="1">work robustly, it is not, in general, seamless with respect to</text>
+<text top="724" left="77" width="357" height="14" font="1">data processing continuity and cannot be applied to real-time</text>
+<text top="743" left="77" width="357" height="14" font="1">signal processing in a completely general sense. Making use</text>
+<text top="762" left="77" width="357" height="14" font="1">of a switch can allow real-time signal processing, but does not</text>
+<text top="780" left="77" width="357" height="14" font="1">use resources efficiently, adds complexity to the waveform</text>
+<text top="799" left="77" width="357" height="14" font="1">script or GUI, and can work only with those blocks within the</text>
+<text top="818" left="77" width="37" height="14" font="1">switch</text>
+<text top="814" left="118" width="315" height="19" font="1">— adding in new versions of the same block requires</text>
+<text top="836" left="77" width="268" height="14" font="1">modifying the GUI or script. Again, in Section</text>
+<text top="836" left="348" width="7" height="14" font="5"><a href="pdfxml.html#3">3</a></text>
+<text top="836" left="359" width="74" height="14" font="1">we provide a</text>
+<text top="855" left="77" width="357" height="14" font="1">more robust abstraction that not only preserves the GUI or</text>
+<text top="874" left="77" width="357" height="14" font="1">script, but also allows for seamless reconfiguration during</text>
+<text top="892" left="77" width="357" height="14" font="1">real-time signal processing while providing more efficient use</text>
+<text top="911" left="77" width="74" height="14" font="1">of resources.</text>
+<text top="948" left="77" width="104" height="14" font="1">2.3 Surfer Basics</text>
+<text top="986" left="77" width="357" height="14" font="1">We developed Surfer with a number of goals in mind; one</text>
+<text top="1004" left="77" width="357" height="14" font="1">in particular is to remove unnecessary complexity from the</text>
+<text top="1023" left="77" width="51" height="14" font="1">end-user</text>
+<text top="1019" left="128" width="306" height="19" font="1">’s experience, while maintaining high functionality</text>
+<text top="1042" left="77" width="357" height="14" font="1">and user-selectable flexibility in processing. Instead of</text>
+<text top="1060" left="77" width="357" height="14" font="1">using a single thread for all processing, or a thread per</text>
+<text top="89" left="459" width="357" height="14" font="1">block, Surfer takes a middle-ground approach by queuing</text>
+<text top="108" left="459" width="238" height="14" font="1">blocks for processing in block runners</text>
+<text top="104" left="703" width="113" height="19" font="1">— with one block</text>
+<text top="126" left="459" width="357" height="14" font="1">runner per thread. A key feature of Surfer is the use of</text>
+<text top="145" left="459" width="357" height="14" font="1">thresholds on both input and output buffers that determine</text>
+<text top="164" left="459" width="357" height="14" font="1">when the block should be processed; using thresholds</text>
+<text top="182" left="459" width="357" height="14" font="1">results in constant overhead time per block, with that</text>
+<text top="201" left="459" width="357" height="14" font="1">overhead processing spread across all active runners. Each</text>
+<text top="220" left="459" width="357" height="14" font="1">Surfer block can have specific affinity for a given runner or</text>
+<text top="239" left="459" width="357" height="14" font="1">ordered list of runners, choose the runner with the lowest</text>
+<text top="257" left="459" width="357" height="14" font="1">load, or just use the first available. Block runners can</text>
+<text top="276" left="459" width="357" height="14" font="1">provide functionality on a variety of processors, from the</text>
+<text top="295" left="459" width="357" height="14" font="1">local CPU to an attached DSP and GPU (e.g., via OpenCL</text>
+<text top="313" left="459" width="5" height="14" font="1"><a href="pdfxml.html#7">[</a></text>
+<text top="313" left="464" width="15" height="14" font="5"><a href="pdfxml.html#7">10</a></text>
+<text top="313" left="479" width="123" height="14" font="1">], NVIDIA CUDA <a href="pdfxml.html#7">[</a></text>
+<text top="313" left="602" width="14" height="14" font="5"><a href="pdfxml.html#7">11</a></text>
+<text top="313" left="617" width="150" height="14" font="1"><a href="pdfxml.html#7">], </a>or AMD ATI Stream [</text>
+<text top="313" left="767" width="15" height="14" font="5"><a href="pdfxml.html#7">12</a></text>
+<text top="313" left="782" width="13" height="14" font="1"><a href="pdfxml.html#7">]).</a></text>
+<text top="370" left="459" width="225" height="13" font="1">3 Changes for Seamless Processing</text>
+<text top="407" left="459" width="357" height="14" font="1">We augmented Surfer to allow it to handle data processing</text>
+<text top="425" left="459" width="357" height="14" font="1">seamlessly during runtime, keeping in mind an overarching</text>
+<text top="444" left="459" width="357" height="14" font="1">goal of Surfer development: abstracting complexity away from</text>
+<text top="463" left="459" width="357" height="14" font="1">the user. This section describes the concepts we implemented in</text>
+<text top="481" left="459" width="357" height="14" font="1">this augmentation, including the splitting off of the processing</text>
+<text top="500" left="459" width="357" height="14" font="1">from the signal processing block, the need for a new state</text>
+<text top="519" left="459" width="357" height="14" font="1">construct that allows state memory to be shared across networks</text>
+<text top="537" left="459" width="357" height="14" font="1">and between physical processors, and a new system monitor</text>
+<text top="556" left="459" width="357" height="14" font="1">that allows for automated control of the augmented system.</text>
+<text top="575" left="459" width="357" height="14" font="1">First we provide a brief synopsis of our use of OpenCL for</text>
+<text top="593" left="459" width="277" height="14" font="1">accessing a GPU for signal-processing purposes.</text>
+<text top="631" left="459" width="75" height="14" font="1">3.1 OpenCL</text>
+<text top="668" left="459" width="81" height="14" font="1">OpenCL, the</text>
+<text top="664" left="548" width="268" height="19" font="1">“Open Computing Language”, is an open</text>
+<text top="687" left="459" width="357" height="14" font="1">standard for implementing general-purpose computations</text>
+<text top="705" left="459" width="357" height="14" font="1">on heterogeneous computing devices. We chose to use it</text>
+<text top="724" left="459" width="357" height="14" font="1">because it provides better cross-platform compatibility than</text>
+<text top="743" left="459" width="357" height="14" font="1">NVIDIA CUDA or ATI Stream alone, while still providing</text>
+<text top="762" left="459" width="357" height="14" font="1">high functionality. Optimized signal-processing capabilities</text>
+<text top="780" left="459" width="357" height="14" font="1">using CUDA or Stream could be created as alternatives to</text>
+<text top="799" left="459" width="227" height="14" font="1">those provided by Surfer in OpenCL.</text>
+<text top="818" left="476" width="340" height="14" font="1">OpenCL performs computations via commands placed</text>
+<text top="836" left="459" width="357" height="14" font="1">into a queue that is owned by a context containing one or</text>
+<text top="855" left="459" width="357" height="14" font="1">more processing devices. Each queue supports commands</text>
+<text top="874" left="459" width="357" height="14" font="1">for transferring data to and from any device within its</text>
+<text top="892" left="459" width="321" height="14" font="1">context, as well as commands to execute a kernel</text>
+<text top="888" left="788" width="29" height="19" font="1">— a</text>
+<text top="911" left="459" width="357" height="14" font="1">program compiled specifically for one or more devices.</text>
+<text top="930" left="459" width="357" height="14" font="1">Data transfer can be accomplished directly (e.g., similar to</text>
+<text top="948" left="459" width="144" height="14" font="1">the UNIX C functions</text>
+<text top="945" left="612" width="205" height="19" font="1">‘bcopy’ or ‘memcpy’), or via a</text>
+<text top="967" left="459" width="357" height="14" font="1">memory map. Data buffers can be allocated on the host or</text>
+<text top="986" left="459" width="355" height="14" font="1">OpenCL device, and data easily transferred between them.</text>
+<text top="1004" left="476" width="340" height="14" font="1">Most queue commands return an event that can be used as a</text>
+<text top="1023" left="459" width="193" height="14" font="1">dependency for other commands</text>
+<text top="1019" left="657" width="160" height="19" font="1">— for example, that a data</text>
+<text top="1042" left="459" width="357" height="14" font="1">transfer must occur before the kernel using that data is</text>
+<text top="1060" left="459" width="357" height="14" font="1">executed. Most commands can also take a list of events (e.g.,</text>
+<text top="293" left="77" width="357" height="11" font="3">Figure 2 Reconfiguration via synchronized switches, with each block</text>
+<text top="308" left="77" width="307" height="12" font="3">providing alternative implementations of a given algorithm.</text>
+<text top="51" left="77" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1186" width="892">
+<text top="89" left="77" width="357" height="14" font="1">as returned from other queued commands) that must finish</text>
+<text top="108" left="77" width="357" height="14" font="1">before the command is executed. Command queuing can be</text>
+<text top="126" left="77" width="357" height="14" font="1">done asynchronously, and in this way OpenCL allows for</text>
+<text top="145" left="77" width="357" height="14" font="1">multiple commands to be queued in rapid succession so long</text>
+<text top="164" left="77" width="297" height="14" font="1">as their event dependencies are correctly specified.</text>
+<text top="182" left="94" width="340" height="14" font="1">OpenCL signal-processing in a SDR for a given block</text>
+<text top="201" left="77" width="231" height="14" font="1">follows the following chain of events:</text>
+<text top="236" left="77" width="167" height="19" font="1">&amp; init OpenCL constructs;</text>
+<text top="255" left="77" width="205" height="19" font="1">&amp; compile kernel from program;</text>
+<text top="273" left="77" width="136" height="19" font="1">&amp; execute the kernel:</text>
+<text top="301" left="100" width="298" height="19" font="1">1. data transfer(s) from host to OpenCL device;</text>
+<text top="319" left="100" width="124" height="19" font="1">2. kernel execution</text>
+<text top="338" left="100" width="298" height="19" font="1">3. data transfer(s) from OpenCL device to host.</text>
+<text top="369" left="77" width="357" height="14" font="1">The above chain of events can be separated into 3 distinct</text>
+<text top="388" left="77" width="357" height="14" font="1">parts: initialization, kernel creation, and task execution.</text>
+<text top="406" left="77" width="357" height="14" font="1">OpenCL constructs in this case are the context and queue,</text>
+<text top="425" left="77" width="357" height="14" font="1">both of which might be used for multiple blocks. Hence we</text>
+<text top="444" left="77" width="357" height="14" font="1">created an OpenCL-based block runner that contains these</text>
+<text top="462" left="77" width="357" height="14" font="1">constructs. A OpenCL runner must be paired with any</text>
+<text top="481" left="77" width="264" height="14" font="1">block executing OpenCL signal-processing.</text>
+<text top="500" left="94" width="340" height="14" font="1">Because the kernel can depend on runtime parameters,</text>
+<text top="518" left="77" width="357" height="14" font="1">kernel compilation cannot take place until the waveform</text>
+<text top="537" left="77" width="357" height="14" font="1">graph is fully defined. Once the kernel is compiled,</text>
+<text top="556" left="77" width="357" height="14" font="1">assuming that the graph remains unchanged then this kernel</text>
+<text top="574" left="77" width="221" height="14" font="1">does not need to be compiled again.</text>
+<text top="593" left="94" width="340" height="14" font="1">Once the OpenCL constructs and kernel are created, the</text>
+<text top="612" left="77" width="357" height="14" font="1">actual steps to execute the kernel form a repeatable task.</text>
+<text top="630" left="77" width="357" height="14" font="1">Hence we created a class for the specific purpose of issuing</text>
+<text top="649" left="77" width="357" height="14" font="1">such repetitive tasks. This class allows the user to easily</text>
+<text top="668" left="77" width="357" height="14" font="1">define event dependencies and all other relevant parameters.</text>
+<text top="687" left="77" width="357" height="14" font="1">Once set up, task execution is entirely encompassed within the</text>
+<text top="705" left="77" width="348" height="14" font="1">class, and the kernel execution is reduced to calling the task</text>
+<text top="701" left="424" width="10" height="19" font="1">’s</text>
+<text top="720" left="77" width="231" height="19" font="1">“execute” method (with no arguments).</text>
+<text top="743" left="94" width="340" height="14" font="1">OpenCL uses a runtime compiler that takes a string</text>
+<text top="761" left="77" width="357" height="14" font="1">argument containing the program to be compiled; at least in</text>
+<text top="780" left="77" width="357" height="14" font="1">theory a single program source can be used for any device</text>
+<text top="799" left="77" width="357" height="14" font="1">that adheres to the OpenCL standard. Because OpenCL</text>
+<text top="817" left="77" width="357" height="14" font="1">programs are strings, they can be manipulated as needed for</text>
+<text top="836" left="77" width="357" height="14" font="1">specific needs during runtime (e.g., for an N:1 multiplexer</text>
+<text top="855" left="77" width="357" height="14" font="1">block, setting the value of N without having to pass it in as</text>
+<text top="873" left="77" width="357" height="14" font="1">an argument). We make use of this runtime compilation</text>
+<text top="892" left="77" width="357" height="14" font="1">feature by setting program items such as data types and the</text>
+<text top="911" left="77" width="221" height="14" font="1">number of input and output streams.</text>
+<text top="948" left="77" width="151" height="14" font="1">3.2 Computation Flavors</text>
+<text top="985" left="77" width="201" height="14" font="1">As implied when referring to Fig.</text>
+<text top="985" left="282" width="7" height="14" font="5"><a href="pdfxml.html#3">2</a></text>
+<text top="985" left="289" width="144" height="14" font="1">, some sort of switch is</text>
+<text top="1004" left="77" width="357" height="14" font="1">required to select the waveform, block, or computation being</text>
+<text top="1023" left="77" width="357" height="14" font="1">performed. Instead of switching between waveforms or</text>
+<text top="1041" left="77" width="357" height="14" font="1">blocks, we moved the switch inside the block itself, and</text>
+<text top="1060" left="77" width="357" height="14" font="1">separated the signal processing algorithm implementation</text>
+<text top="89" left="459" width="357" height="14" font="1">into its own class. In place of the signal processing, we</text>
+<text top="108" left="459" width="357" height="14" font="1">added a lookup-table containing instantiated signal process-</text>
+<text top="126" left="459" width="357" height="14" font="1">ing algorithm implementations that all provide the same</text>
+<text top="145" left="459" width="246" height="14" font="1">application-programming interface (API)</text>
+<text top="141" left="712" width="104" height="19" font="1">— we call these</text>
+<text top="164" left="459" width="295" height="14" font="1">flavors. This new block construct is shown in Fig.</text>
+<text top="164" left="758" width="7" height="14" font="5"><a href="pdfxml.html#4">3</a></text>
+<text top="164" left="769" width="47" height="14" font="1">with six</text>
+<text top="182" left="459" width="357" height="14" font="1">possible flavors. Each flavor is given a string name (e.g.,</text>
+<text top="197" left="459" width="357" height="19" font="1">“generic”) and the list of names is made available external to</text>
+<text top="220" left="459" width="357" height="14" font="1">the block so that any name in the list can be selected as the</text>
+<text top="239" left="459" width="357" height="14" font="1">flavor to handle processing. The lookup table stores this</text>
+<text top="257" left="459" width="357" height="14" font="1">selection as a pointer to the instantiated flavor, such that</text>
+<text top="276" left="459" width="339" height="14" font="1">accessing it does not require searching through the table.</text>
+<text top="295" left="476" width="340" height="14" font="1">The idea behind flavors is that each provides identical</text>
+<text top="313" left="459" width="357" height="14" font="1">functionality, such that given the same state and data input,</text>
+<text top="332" left="459" width="357" height="14" font="1">each will produce the same output data to within machine</text>
+<text top="351" left="459" width="357" height="14" font="1">precision. All flavors interface with Surfer on the local</text>
+<text top="369" left="459" width="357" height="14" font="1">CPU on which Surfer is executing, and then also with the</text>
+<text top="388" left="459" width="357" height="14" font="1">remote processing device to do the actual processing.</text>
+<text top="407" left="459" width="357" height="14" font="1">Flavors are classes specifically designed for processing,</text>
+<text top="425" left="459" width="336" height="14" font="1">and not allowed to store state or any other local data</text>
+<text top="422" left="801" width="15" height="19" font="1">—</text>
+<text top="444" left="459" width="357" height="14" font="1">those must remain in the state as found in the block that</text>
+<text top="463" left="459" width="357" height="14" font="1">owns the flavors. Note that the actual state and buffer data</text>
+<text top="481" left="459" width="202" height="14" font="1">need not reside on the local CPU</text>
+<text top="478" left="661" width="155" height="19" font="1">’s memory, but rather can</text>
+<text top="500" left="459" width="357" height="14" font="1">reside entirely on remote devices. From the flavors in the</text>
+<text top="519" left="459" width="33" height="14" font="1">block</text>
+<text top="515" left="492" width="324" height="19" font="1">’s table, any one can be selected to do processing —</text>
+<text top="537" left="459" width="357" height="14" font="1">even switching between them for each time the block</text>
+<text top="556" left="459" width="167" height="14" font="1">performs data processing</text>
+<text top="552" left="637" width="180" height="19" font="1">— because state is stored</text>
+<text top="575" left="459" width="357" height="14" font="1">separately from processing. Flavors make efficient use of</text>
+<text top="593" left="459" width="357" height="14" font="1">resources because they contain only the code that has to be</text>
+<text top="612" left="459" width="357" height="14" font="1">switched and nothing more; any method or variable</text>
+<text top="631" left="459" width="266" height="14" font="1">common to all flavors is found in the block</text>
+<text top="627" left="725" width="47" height="19" font="1">’s class.</text>
+<text top="649" left="476" width="298" height="14" font="1">Surfer provides at least one flavor for each block</text>
+<text top="646" left="779" width="38" height="19" font="1">— the</text>
+<text top="664" left="459" width="357" height="19" font="1">“generic” implementation for the host CPU — and an</text>
+<text top="687" left="459" width="357" height="14" font="1">OpenCL implementation for blocks that can be efficiently</text>
+<text top="705" left="459" width="357" height="14" font="1">programmed in that language. The user can add flavors,</text>
+<text top="724" left="459" width="308" height="14" font="1">either replacing or adding to those in any block</text>
+<text top="720" left="767" width="49" height="19" font="1">’s table.</text>
+<text top="743" left="459" width="333" height="14" font="1">Each block using flavors contains a default flavor</text>
+<text top="739" left="801" width="15" height="19" font="1">—</text>
+<text top="762" left="459" width="251" height="14" font="1">generally the first one added to the table</text>
+<text top="758" left="715" width="101" height="19" font="1">— as well as an</text>
+<text top="780" left="459" width="357" height="14" font="1">optional user-supplied priority list ordering the available</text>
+<text top="799" left="459" width="357" height="14" font="1">flavors. Each flavor can, but does not have to, be assigned</text>
+<text top="818" left="459" width="242" height="14" font="1">to a specific block runner of its type</text>
+<text top="814" left="709" width="107" height="19" font="1">— e.g., OpenCL</text>
+<text top="836" left="459" width="357" height="14" font="1">flavors can only be executed within an OpenCL block</text>
+<text top="1062" left="459" width="277" height="11" font="3">Figure 3 Split block with separate selectable flavors.</text>
+<text top="51" left="716" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1186" width="892">
+<text top="89" left="77" width="357" height="14" font="1">runner, since they require different handling than a flavor</text>
+<text top="108" left="77" width="357" height="14" font="1">executing on the local CPU. In this way, Surfer allows for</text>
+<text top="126" left="77" width="262" height="14" font="1">either runtime or a-priori block scheduling.</text>
+<text top="145" left="94" width="340" height="14" font="1">Both Surfer and flavor compilation and execution are</text>
+<text top="164" left="77" width="357" height="14" font="1">highly dependent on system-provided libraries, headers, and</text>
+<text top="182" left="77" width="357" height="14" font="1">frameworks implementing and providing access to the</text>
+<text top="201" left="77" width="347" height="14" font="1">classes, functions, and variables specific to the flavor</text>
+<text top="197" left="424" width="10" height="19" font="1">’s</text>
+<text top="220" left="77" width="357" height="14" font="1">programming. As such, usability is determined at three</text>
+<text top="239" left="77" width="357" height="14" font="1">points: (1) at configure time: whether or not the required</text>
+<text top="257" left="77" width="357" height="14" font="1">system-provided libraries, headers, and frameworks are</text>
+<text top="276" left="77" width="357" height="14" font="1">available; (2) at compile time: whether the items found in</text>
+<text top="295" left="77" width="357" height="14" font="1">(1) work with this implementation; and (3) at run time:</text>
+<text top="313" left="77" width="357" height="14" font="1">whether the flavor initializes correctly. An example of run</text>
+<text top="332" left="77" width="357" height="14" font="1">time checking is flavors that provide a specific variant on the</text>
+<text top="351" left="77" width="357" height="14" font="1">overall flavor, e.g., an FFT that works solely for powers-of-2</text>
+<text top="369" left="77" width="357" height="14" font="1">lengths. In this case, even when all other checks pass, if the</text>
+<text top="388" left="77" width="357" height="14" font="1">user specified a non-power-of-2 length FFT then this flavor</text>
+<text top="407" left="77" width="357" height="14" font="1">will fail instantiation and hence will not be available for this</text>
+<text top="425" left="77" width="32" height="14" font="1">block</text>
+<text top="422" left="109" width="325" height="19" font="1">’s flavor table. As flavor usability is determined on a</text>
+<text top="444" left="77" width="357" height="14" font="1">block-by-block basis, it is possible for different block</text>
+<text top="463" left="77" width="357" height="14" font="1">instantiations of the same block type to have different</text>
+<text top="481" left="77" width="290" height="14" font="1">flavors available for them to use during runtime.</text>
+<text top="500" left="94" width="340" height="14" font="1">As a more extensive example relevant to this work,</text>
+<text top="519" left="77" width="357" height="14" font="1">during its configure stage of building Surfer tests for the</text>
+<text top="537" left="77" width="357" height="14" font="1">OpenCL library and primary header. If the library is found,</text>
+<text top="556" left="77" width="357" height="14" font="1">the configure script tries to link against it to make sure that</text>
+<text top="575" left="77" width="357" height="14" font="1">the library is readable and usable by the user. If the header</text>
+<text top="593" left="77" width="357" height="14" font="1">is found, the configure script tries to use it to determine the</text>
+<text top="612" left="77" width="357" height="14" font="1">version of OpenCL. Assuming all tests pass, then macros</text>
+<text top="631" left="77" width="357" height="14" font="1">will be created that define OpenCL as being available for</text>
+<text top="649" left="77" width="357" height="14" font="1">use when compiling, as well as the version. OpenCL</text>
+<text top="668" left="77" width="357" height="14" font="1">currently comes in version 1.0 or 1.1, with the latter being a</text>
+<text top="687" left="77" width="357" height="14" font="1">superset of the former. Thus, during compilation, the</text>
+<text top="705" left="77" width="357" height="14" font="1">OpenCL version macro is used to determine which</text>
+<text top="724" left="77" width="357" height="14" font="1">OpenCL features to utilize. Assuming compilation suc-</text>
+<text top="743" left="77" width="357" height="14" font="1">ceeds, then when a block that includes an OpenCL flavor is</text>
+<text top="762" left="77" width="145" height="14" font="1">instantiated by the user</text>
+<text top="758" left="222" width="212" height="19" font="1">’s application, before the flavor is</text>
+<text top="780" left="77" width="114" height="14" font="1">added to its block</text>
+<text top="776" left="191" width="243" height="19" font="1">’s lookup table it will be initialized to</text>
+<text top="799" left="77" width="338" height="14" font="1">make sure the necessary OpenCL function calls succeed</text>
+<text top="795" left="419" width="15" height="19" font="1">—</text>
+<text top="818" left="77" width="357" height="14" font="1">and if all three steps are successful then the OpenCL flavor</text>
+<text top="836" left="77" width="234" height="14" font="1">becomes available for processing data.</text>
+<text top="855" left="94" width="340" height="14" font="1">The flavor abstraction for signal processing comes with</text>
+<text top="874" left="77" width="357" height="14" font="1">very little overhead in terms of additional programming</text>
+<text top="892" left="77" width="357" height="14" font="1">complexity or latency. The actual processing method/</text>
+<text top="911" left="77" width="357" height="14" font="1">function call is handled through the lookup table, and</text>
+<text top="930" left="77" width="357" height="14" font="1">hence incurs an additional pointer dereference, but other-</text>
+<text top="948" left="77" width="357" height="14" font="1">wise the additional complexity is borne by the programmer/</text>
+<text top="967" left="77" width="357" height="14" font="1">developer of the block and/or flavor. The point where</text>
+<text top="986" left="77" width="357" height="14" font="1">potential overhead does occur is when a new flavor must be</text>
+<text top="1004" left="77" width="357" height="14" font="1">initialized; this task can be done in the same thread as that</text>
+<text top="1023" left="77" width="357" height="14" font="1">handling processing, or pushed off to a separate thread and</text>
+<text top="1042" left="77" width="357" height="14" font="1">done asynchronously to processing. This event occurs only</text>
+<text top="1060" left="77" width="357" height="14" font="1">once while that flavor is in active use, and hence the</text>
+<text top="89" left="459" width="333" height="14" font="1">overhead latency associated with using this flavor</text>
+<text top="85" left="801" width="15" height="19" font="1">—</text>
+<text top="108" left="459" width="336" height="14" font="1">assuming it is used for a significant number of times</text>
+<text top="104" left="801" width="15" height="19" font="1">—</text>
+<text top="126" left="459" width="357" height="14" font="1">will be much less than the actual time spent processing.</text>
+<text top="145" left="459" width="357" height="14" font="1">Hence there can be an additional up-front cost to using</text>
+<text top="164" left="459" width="343" height="14" font="1">flavors, but this cost will be negligible in long-term use.</text>
+<text top="182" left="476" width="340" height="14" font="1">Each flavor is allowed to store variables specific to its</text>
+<text top="201" left="459" width="357" height="14" font="1">use locally, but also has use of the overall block state in</text>
+<text top="220" left="459" width="357" height="14" font="1">order to allow dynamic reconfiguration. In order to function</text>
+<text top="239" left="459" width="357" height="14" font="1">correctly, many blocks must use both state and local</text>
+<text top="257" left="459" width="357" height="14" font="1">variables. As an example of local variables that do not</text>
+<text top="276" left="459" width="300" height="14" font="1">impact the block state, different FFT flavors use</text>
+<text top="272" left="765" width="51" height="19" font="1">“twiddle</text>
+<text top="295" left="459" width="40" height="14" font="1">factors</text>
+<text top="291" left="499" width="90" height="19" font="1">” or “plans” <a href="pdfxml.html#7">[</a></text>
+<text top="295" left="589" width="15" height="14" font="5"><a href="pdfxml.html#7">13</a></text>
+<text top="295" left="604" width="212" height="14" font="1">] to speed up their computations.</text>
+<text top="313" left="459" width="357" height="14" font="1">These variables and their storage are flavor-specific, while</text>
+<text top="332" left="459" width="357" height="14" font="1">the FFT length and any other user-specified block param-</text>
+<text top="351" left="459" width="357" height="14" font="1">eters (e.g., for a multiple-dimensional FFT which dimen-</text>
+<text top="369" left="459" width="245" height="14" font="1">sion is first) are part of the overall state.</text>
+<text top="407" left="459" width="197" height="14" font="1">3.3 Dynamic Structure Variables</text>
+<text top="444" left="459" width="357" height="14" font="1">Given multiple flavors that provide execution on different</text>
+<text top="463" left="459" width="357" height="14" font="1">processors and/or using different compilers, the block state</text>
+<text top="481" left="459" width="357" height="14" font="1">must be made transportable between processor memories</text>
+<text top="500" left="459" width="357" height="14" font="1">and cross-processor interpretable. A standard C++ class</text>
+<text top="519" left="459" width="357" height="14" font="1">instantiation/C structure can be copied between threads of</text>
+<text top="537" left="459" width="357" height="14" font="1">the same application, and even shared between different</text>
+<text top="556" left="459" width="357" height="14" font="1">processes executing on the same processor/OS. But, in</text>
+<text top="575" left="459" width="357" height="14" font="1">general, neither can safely be used by different processors/</text>
+<text top="593" left="459" width="357" height="14" font="1">OSs, whether copied or shared in some common memory,</text>
+<text top="612" left="459" width="357" height="14" font="1">due to differences in alignment requirements, type sizes,</text>
+<text top="631" left="459" width="357" height="14" font="1">and endianness. Hence, a new state construct was put in</text>
+<text top="649" left="459" width="357" height="14" font="1">place to address these deficiencies; we designed this new</text>
+<text top="668" left="459" width="276" height="14" font="1">construct to meet the following requirements:</text>
+<text top="701" left="459" width="357" height="19" font="1">&amp; To allow for simple copying, all variables and their</text>
+<text top="724" left="481" width="335" height="14" font="1">padding and alignment must be stored within a</text>
+<text top="742" left="481" width="162" height="14" font="1">contiguous memory space;</text>
+<text top="757" left="459" width="357" height="19" font="1">&amp; Each variable must be able to be aligned independent of</text>
+<text top="780" left="481" width="292" height="14" font="1">all other variables as well as the memory space;</text>
+<text top="795" left="459" width="357" height="19" font="1">&amp; The memory space must be resizable to accommodate</text>
+<text top="817" left="481" width="335" height="14" font="1">changing array-style user parameters, e.g., the number</text>
+<text top="836" left="481" width="231" height="14" font="1">of filter coefficients and string names;</text>
+<text top="851" left="459" width="357" height="19" font="1">&amp; Both the C++ and C interfaces to variables must be</text>
+<text top="873" left="481" width="335" height="14" font="1">consistent independent of where the actual memory</text>
+<text top="892" left="481" width="221" height="14" font="1">space is allocated or how it is sized;</text>
+<text top="907" left="459" width="357" height="19" font="1">&amp; All variables must be available for accessing before and</text>
+<text top="929" left="481" width="335" height="14" font="1">after resizing (not necessarily during), and all variable</text>
+<text top="948" left="481" width="332" height="14" font="1">values must remain the same before and after resizing;</text>
+<text top="963" left="459" width="357" height="19" font="1">&amp; Any variable can be dynamically added to and removed</text>
+<text top="985" left="481" width="335" height="14" font="1">from the structure, without affecting the other variables;</text>
+<text top="1000" left="459" width="357" height="19" font="1">&amp; The C++ API should match that for scalars and standard</text>
+<text top="1023" left="481" width="335" height="14" font="1">library (std::) vectors and strings, such that these</text>
+<text top="1041" left="481" width="335" height="14" font="1">variables are as close as possible to drop-in replacements</text>
+<text top="1060" left="481" width="182" height="14" font="1">for the standard C++ ones; and</text>
+<text top="51" left="77" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1186" width="892">
+<text top="85" left="77" width="357" height="19" font="1">&amp; The resulting C structure must provide all of the</text>
+<text top="108" left="99" width="335" height="14" font="1">information needed within its contiguous memory</text>
+<text top="126" left="99" width="335" height="14" font="1">space, such that all variables can be found and</text>
+<text top="145" left="99" width="211" height="14" font="1">interpreted on the host processor</text>
+<text top="141" left="318" width="116" height="19" font="1">— independent of</text>
+<text top="164" left="99" width="264" height="14" font="1">any differences in endianness or type sizes.</text>
+<text top="191" left="94" width="340" height="14" font="1">Given the nature of this construct, we call variables using it</text>
+<text top="210" left="77" width="357" height="14" font="1">dynamic structure variables. An example of a block state</text>
+<text top="228" left="77" width="246" height="14" font="1">using this construct is provided in Fig.</text>
+<text top="228" left="330" width="7" height="14" font="5"><a href="pdfxml.html#6">4</a></text>
+<text top="228" left="338" width="96" height="14" font="1"><a href="pdfxml.html#6">, </a>including five</text>
+<text top="247" left="77" width="357" height="14" font="1">variables of different types and how each relates via a handle</text>
+<text top="266" left="77" width="357" height="14" font="1">(pointer to pointer) to the actual memory allocated for it. The</text>
+<text top="284" left="77" width="357" height="14" font="1">structure header information and glue necessary for variable</text>
+<text top="303" left="77" width="357" height="14" font="1">interpretation are shown in their correct locations, but are not</text>
+<text top="322" left="77" width="357" height="14" font="1">further described here. Individual variable alignment inside</text>
+<text top="340" left="77" width="357" height="14" font="1">the structure is provided knowing that many SIMD</text>
+<text top="359" left="77" width="357" height="14" font="1">commands require their arguments to be aligned, but for</text>
+<text top="378" left="77" width="357" height="14" font="1">many block states it can be ignored. The user accesses each</text>
+<text top="396" left="77" width="338" height="14" font="1">variable in C++ through its dynamic structure counterpart</text>
+<text top="393" left="419" width="15" height="19" font="1">—</text>
+<text top="415" left="77" width="277" height="14" font="1">internally via doubly-dereferencing the handle</text>
+<text top="411" left="359" width="75" height="19" font="1">— and does</text>
+<text top="434" left="77" width="357" height="14" font="1">not in general have access to the middle-layer pointers</text>
+<text top="452" left="77" width="357" height="14" font="1">because they are subject to change as variables are added,</text>
+<text top="471" left="77" width="357" height="14" font="1">removed, or resized. No matter where the actual memory</text>
+<text top="490" left="77" width="197" height="14" font="1">space is allocated, the variable</text>
+<text top="486" left="273" width="161" height="19" font="1">’s value (scalar or array)</text>
+<text top="509" left="77" width="357" height="14" font="1">remains the same through first copying the current value to</text>
+<text top="527" left="77" width="357" height="14" font="1">the new location and then updating the pointer value; the</text>
+<text top="546" left="77" width="289" height="14" font="1">handle value always remains valid once it is set.</text>
+<text top="583" left="77" width="88" height="14" font="1">3.4 Supervisor</text>
+<text top="621" left="77" width="357" height="14" font="1">In order to leverage the dynamic functionality provided by</text>
+<text top="639" left="77" width="357" height="14" font="1">flavors in an automated manner, information must be</text>
+<text top="658" left="77" width="357" height="14" font="1">collected on both the flavor functionality (e.g., throughput,</text>
+<text top="677" left="77" width="357" height="14" font="1">latency, energy use, overhead time) and system state (e.g.,</text>
+<text top="695" left="77" width="357" height="14" font="1">CPU load, network utilization). Surfer already provides the</text>
+<text top="714" left="77" width="357" height="14" font="1">basic capabilities for collecting this data; we added modules</text>
+<text top="733" left="77" width="357" height="14" font="1">for collecting the CPU use for a specific process down to</text>
+<text top="751" left="77" width="357" height="14" font="1">individual threads in the process. We also introduced a</text>
+<text top="770" left="77" width="357" height="14" font="1">system supervisor as the focal point for collecting and</text>
+<text top="789" left="77" width="357" height="14" font="1">utilizing this data. Surfer creates a default supervisor at boot</text>
+<text top="284" left="459" width="357" height="14" font="1">time that collects no data but also does not modify</text>
+<text top="303" left="459" width="357" height="14" font="1">waveform execution. The user can overload this default</text>
+<text top="322" left="459" width="161" height="14" font="1">with a different supervisor</text>
+<text top="318" left="625" width="191" height="19" font="1">— e.g., one that monitors CPU</text>
+<text top="340" left="459" width="357" height="14" font="1">load and then can changes the flavor of certain blocks based</text>
+<text top="359" left="459" width="357" height="14" font="1">on user preferences. In creating a new supervisor, the user can</text>
+<text top="378" left="459" width="357" height="14" font="1">select from Surfer-provided functionality-monitor modules,</text>
+<text top="396" left="459" width="205" height="14" font="1">or use ones created outside Surfer.</text>
+<text top="415" left="476" width="340" height="14" font="1">Although a supervisor does not directly schedule blocks</text>
+<text top="434" left="459" width="357" height="14" font="1">for processing, it can indirectly influence this processing</text>
+<text top="452" left="459" width="357" height="14" font="1">through the changing of input and output buffer threshold</text>
+<text top="471" left="459" width="357" height="14" font="1">values. More importantly, the supervisor can switch flavors</text>
+<text top="490" left="459" width="357" height="14" font="1">for any block where there are multiple flavors available,</text>
+<text top="509" left="459" width="357" height="14" font="1">and where the user has specified affinity to multiple flavors</text>
+<text top="527" left="459" width="357" height="14" font="1">(e.g., choose a flavor whose processor has a lower load than</text>
+<text top="546" left="459" width="103" height="14" font="1">the current flavor</text>
+<text top="542" left="563" width="253" height="19" font="1">’s, or to move back to a flavor with higher</text>
+<text top="565" left="459" width="357" height="14" font="1">affinity once its processor load is below a given threshold).</text>
+<text top="1029" left="77" width="357" height="11" font="3">Figure 4 Conceptual example of a block state using dynamic</text>
+<text top="1043" left="77" width="96" height="12" font="3">structure variables.</text>
+<text top="1029" left="459" width="357" height="11" font="3">Figure 6 Plot showing CPU load as Surfer and a CPU hogging</text>
+<text top="1043" left="459" width="150" height="12" font="3">process execute concurrently.</text>
+<text top="231" left="459" width="357" height="11" font="3">Figure 5 Simple example application to demonstrate seamless</text>
+<text top="245" left="459" width="204" height="12" font="3">runtime processing and reconfiguration.</text>
+<text top="51" left="716" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1186" width="892">
+	<fontspec id="6" size="10" family="Times" color="#3a2a97"/>
+<text top="90" left="77" width="148" height="13" font="1">4 Application Example</text>
+<text top="126" left="77" width="39" height="14" font="1">Figure</text>
+<text top="126" left="123" width="7" height="14" font="5"><a href="pdfxml.html#6">5</a></text>
+<text top="126" left="138" width="296" height="14" font="1">shows a simple application graph that demon-</text>
+<text top="145" left="77" width="357" height="14" font="1">strates that even a basic supervisor monitoring the CPU</text>
+<text top="164" left="77" width="357" height="14" font="1">load can provide good performance and seamless</text>
+<text top="182" left="77" width="357" height="14" font="1">processing using the new Surfer flavors. Approximately</text>
+<text top="201" left="77" width="357" height="14" font="1">9 seconds worth of narrowband FM (NBFM) data was</text>
+<text top="220" left="77" width="194" height="14" font="1">taken using an Ettus USRP1 [</text>
+<text top="220" left="271" width="15" height="14" font="5"><a href="pdfxml.html#7">14</a></text>
+<text top="220" left="286" width="148" height="14" font="1">] and GNU Radio, and</text>
+<text top="239" left="77" width="357" height="14" font="1">stored into a file. The NBFM data is decimated within the</text>
+<text top="257" left="77" width="357" height="14" font="1">USRP1 from 64 Mega-samples/second (MS/s) down to</text>
+<text top="276" left="77" width="357" height="14" font="1">250 kS/s. Each stored sample is a complex-valued (I&amp;Q)</text>
+<text top="295" left="77" width="357" height="14" font="1">integer with 2 bytes per value or 4 bytes/sample, requiring</text>
+<text top="313" left="77" width="357" height="14" font="1">1 M-byte/s throughput for real-time processing. This file is</text>
+<text top="332" left="77" width="357" height="14" font="1">then used as the data source for the example, where the</text>
+<text top="351" left="77" width="357" height="14" font="1">FM signal is rate limited to 250 kS/s and then decoded via</text>
+<text top="369" left="77" width="357" height="14" font="1">a quadrature demodulator. The resulting audio signal is</text>
+<text top="388" left="77" width="357" height="14" font="1">downsampled by a factor of 10, to 25 kS/s, via a low-pass</text>
+<text top="407" left="77" width="357" height="14" font="1">FIR filter using 1,651 taps and with a cutoff frequency of</text>
+<text top="425" left="77" width="357" height="14" font="1">2.7 kHz. The resulting audio signal was then stored back</text>
+<text top="444" left="77" width="357" height="14" font="1">to another file. For downsampling when using the host</text>
+<text top="463" left="77" width="357" height="14" font="1">CPU, we intentionally used a non-optimized FIR filter that</text>
+<text top="481" left="77" width="357" height="14" font="1">requires more CPU utilization than an optimal one (i.e.,</text>
+<text top="500" left="77" width="357" height="14" font="1">rather than using SIMD specialized instruction sets such</text>
+<text top="519" left="77" width="357" height="14" font="1">as SSE, AltiVec, or NEON). Both the quadrature demod-</text>
+<text top="537" left="77" width="357" height="14" font="1">ulator and downsampler have flavors allowing execution</text>
+<text top="556" left="77" width="284" height="14" font="1">on the local CPU as well as the host-computer</text>
+<text top="552" left="361" width="72" height="19" font="1">’s GPU (via</text>
+<text top="575" left="77" width="357" height="14" font="1">OpenCL), and their Surfer blocks were configured to</text>
+<text top="593" left="77" width="357" height="14" font="1">prefer using the local CPU to OpenCL. A supervisor was</text>
+<text top="612" left="77" width="357" height="14" font="1">monitoring the CPU load of the host computer, and was</text>
+<text top="631" left="77" width="357" height="14" font="1">programmed with a threshold of 60% max CPU load</text>
+<text top="649" left="77" width="153" height="14" font="1">before switching flavors.</text>
+<text top="668" left="94" width="340" height="14" font="1">With a graphical CPU load display running, we started</text>
+<text top="687" left="77" width="213" height="14" font="1">Surfer executing the graph in Fig.</text>
+<text top="687" left="297" width="7" height="14" font="5"><a href="pdfxml.html#6">5</a></text>
+<text top="687" left="304" width="130" height="14" font="1">, and then separately</text>
+<text top="705" left="77" width="357" height="14" font="1">started an external process that fully loaded the host CPUs</text>
+<text top="724" left="77" width="237" height="14" font="1">for a short duration. As shown in Fig.</text>
+<text top="724" left="320" width="7" height="14" font="5"><a href="pdfxml.html#6">6</a></text>
+<text top="724" left="327" width="107" height="14" font="1">, shortly after the</text>
+<text top="743" left="77" width="357" height="14" font="1">external process reached our user-set threshold of 60% CPU</text>
+<text top="762" left="77" width="357" height="14" font="1">utilization, the supervisor started moving blocks from</text>
+<text top="780" left="77" width="292" height="14" font="1">executing on the local CPU to using OpenCL</text>
+<text top="776" left="376" width="58" height="19" font="1">— which</text>
+<text top="799" left="77" width="357" height="14" font="1">generates a smaller CPU load for Surfer. During the switch</text>
+<text top="818" left="77" width="357" height="14" font="1">in flavors, as well as the entire time the external process is</text>
+<text top="836" left="77" width="357" height="14" font="1">running, Surfer continues processing data both seamlessly</text>
+<text top="855" left="77" width="357" height="14" font="1">and in real time. Once the external process finished</text>
+<text top="874" left="77" width="357" height="14" font="1">execution and the CPU load dropped below 60%, the Surfer</text>
+<text top="892" left="77" width="357" height="14" font="1">supervisor started switching flavors back from OpenCL to</text>
+<text top="911" left="77" width="357" height="14" font="1">the local CPU. This switch resulted in the local CPU</text>
+<text top="930" left="77" width="193" height="14" font="1">executing all of the application</text>
+<text top="926" left="269" width="164" height="19" font="1">’s flavors again, hence the</text>
+<text top="948" left="77" width="357" height="14" font="1">resumed moderate load. Throughout this example, the host</text>
+<text top="967" left="77" width="357" height="14" font="1">OS is running other user and system tasks, and hence there is</text>
+<text top="986" left="77" width="357" height="14" font="1">a difference between the total CPU load and that incurred by</text>
+<text top="1004" left="77" width="357" height="14" font="1">Surfer alone. There is also a short lag before the supervisor</text>
+<text top="1023" left="77" width="357" height="14" font="1">switches flavors, due to the load detection algorithm. Note</text>
+<text top="1042" left="77" width="357" height="14" font="1">that Surfer maintains real-time throughput during the entire</text>
+<text top="89" left="459" width="357" height="14" font="1">waveform execution time. This example demonstrates that</text>
+<text top="108" left="459" width="357" height="14" font="1">the technique we developed for allowing runtime dynamic</text>
+<text top="126" left="459" width="337" height="14" font="1">reconfiguration can successfully process data seamlessly.</text>
+<text top="183" left="459" width="89" height="13" font="1">5 Conclusions</text>
+<text top="220" left="459" width="357" height="14" font="1">We have developed an SDR framework with the capability</text>
+<text top="239" left="459" width="357" height="14" font="1">of performing seamless dynamic runtime reconfiguration.</text>
+<text top="257" left="459" width="357" height="14" font="1">We accomplished this task by taking the standard signal-</text>
+<text top="276" left="459" width="357" height="14" font="1">processing block programming, and separating the actual</text>
+<text top="295" left="459" width="357" height="14" font="1">processing into its own class. In the place of the processing</text>
+<text top="313" left="459" width="357" height="14" font="1">functionality, a lookup table is used to store the possible</text>
+<text top="332" left="459" width="357" height="14" font="1">processing flavors. Each flavor for a given block meets the</text>
+<text top="351" left="459" width="357" height="14" font="1">same API requirements, such that given a specific state and</text>
+<text top="369" left="459" width="357" height="14" font="1">inputs, each will generate the same outputs (within machine</text>
+<text top="388" left="459" width="357" height="14" font="1">tolerance). The flavor abstraction allows for the ability of</text>
+<text top="407" left="459" width="357" height="14" font="1">SDR-based devices to seamlessly switch processors where</text>
+<text top="425" left="459" width="242" height="14" font="1">the actual signal processing takes place.</text>
+<text top="461" left="459" width="104" height="11" font="3">Acknowledgements</text>
+<text top="461" left="576" width="240" height="12" font="3">This work has been supported by RFware, LLC,</text>
+<text top="475" left="459" width="341" height="12" font="3">NIJ Grant 2006-IJ-CX-K034, and an NVIDIA Professor Partnership.</text>
+<text top="523" left="459" width="69" height="13" font="1">References</text>
+<text top="565" left="466" width="351" height="12" font="3">1. Chapin, J. M., &amp; Lehr, W. H. (2007). Cognitive radios for dynamic</text>
+<text top="580" left="480" width="79" height="12" font="3">spectrum access</text>
+<text top="577" left="563" width="253" height="17" font="3">– the path to market success for dynamic spectrum</text>
+<text top="595" left="480" width="309" height="12" font="3">access technology. IEEE Communications Magazine, 45(5), 96</text>
+<text top="592" left="789" width="28" height="17" font="3">–103.</text>
+<text top="610" left="466" width="351" height="12" font="3">2. Haykin, S. (2005). Cognitive radio: brain-empowered wireless</text>
+<text top="625" left="480" width="336" height="12" font="3">communications. IEEE Journal on Selected Areas in Communica-</text>
+<text top="640" left="480" width="83" height="12" font="3">tions, 23(2), 201</text>
+<text top="637" left="564" width="28" height="17" font="3">–220.</text>
+<text top="655" left="466" width="351" height="12" font="3">3. Sun, Z., Bradford, G. J., &amp; Laneman, J. N. (2010). Sequence</text>
+<text top="670" left="480" width="336" height="12" font="3">Detection Algorithms for Dynamic Spectrum Access Networks, in</text>
+<text top="685" left="480" width="336" height="12" font="3">Proc. IEEE Int. Dynamic Spectrum Access Networks (DySPAN)</text>
+<text top="700" left="480" width="126" height="12" font="3">Symp., Singapore, April.</text>
+<text top="715" left="466" width="351" height="12" font="3">4. Dickens, M. L., Dunn, B. P., &amp; Laneman, J. N. (2010).</text>
+<text top="729" left="481" width="336" height="12" font="3">Thresholding for optimal data processing in a software defined</text>
+<text top="744" left="481" width="336" height="12" font="3">Radio Kernel, in Proc. of the Karlsruhe Workshop on Software</text>
+<text top="759" left="481" width="226" height="12" font="3">Radios (WSR), Karlsruhe, Germany, March.</text>
+<text top="774" left="466" width="123" height="12" font="3">5. GNU Radio Website.</text>
+<text top="774" left="592" width="98" height="12" font="6"><a href="http://gnuradio.org/">http://gnuradio.org/</a></text>
+<text top="774" left="690" width="126" height="12" font="3"><a href="http://gnuradio.org/">. </a>accessed October 2011.</text>
+<text top="789" left="466" width="290" height="12" font="3">6. Software Communications Architecture Website.</text>
+<text top="789" left="764" width="52" height="12" font="6"><a href="http://sca.jpeojtrs.mil/">http://sca.</a></text>
+<text top="804" left="481" width="61" height="12" font="6"><a href="http://sca.jpeojtrs.mil/">jpeojtrs.mil/</a></text>
+<text top="804" left="542" width="128" height="12" font="3"><a href="http://sca.jpeojtrs.mil/">. </a>accessed October 2011.</text>
+<text top="819" left="466" width="186" height="12" font="3">7. GNU Radio Companion Website.</text>
+<text top="819" left="655" width="158" height="12" font="6"><a href="http://www.joshknows.com/grc">http://www.joshknows.com/grc</a></text>
+<text top="819" left="813" width="3" height="12" font="3">,</text>
+<text top="834" left="480" width="121" height="12" font="3">accessed October 2011.</text>
+<text top="849" left="466" width="202" height="12" font="3">8. The MathWorks, Simulink Website.</text>
+<text top="849" left="672" width="144" height="12" font="6"><a href="http://www.mathworks.com/products/simulink">http://www.mathworks.com/</a></text>
+<text top="864" left="480" width="91" height="12" font="6"><a href="http://www.mathworks.com/products/simulink">products/simulink</a></text>
+<text top="864" left="571" width="128" height="12" font="3">. accessed October 2011.</text>
+<text top="879" left="466" width="312" height="12" font="3">9. National Instruments Corporation, LabVIEW Website.</text>
+<text top="879" left="786" width="30" height="12" font="6"><a href="http://www.ni.com/labview">http://</a></text>
+<text top="894" left="480" width="108" height="12" font="6"><a href="http://www.ni.com/labview">www.ni.com/labview</a></text>
+<text top="894" left="587" width="128" height="12" font="3"><a href="http://www.ni.com/labview">. </a>accessed October 2011.</text>
+<text top="909" left="459" width="228" height="12" font="3">10. The Khronos Group, OpenCL Website.</text>
+<text top="909" left="693" width="124" height="12" font="6"><a href="http://www.khronos.org/opencl">http://www.khronos.org/</a></text>
+<text top="924" left="480" width="34" height="12" font="6"><a href="http://www.khronos.org/opencl">opencl</a></text>
+<text top="924" left="514" width="128" height="12" font="3"><a href="http://www.khronos.org/opencl">, </a>accessed October 2011.</text>
+<text top="939" left="459" width="148" height="12" font="3">11. NVIDIA, CUDA Website.</text>
+<text top="939" left="610" width="207" height="12" font="6"><a href="http://www.nvidia.com/object/cuda_home.html">http://www.nvidia.com/object/cuda_home.</a></text>
+<text top="954" left="480" width="22" height="12" font="6"><a href="http://www.nvidia.com/object/cuda_home.html">html</a></text>
+<text top="954" left="502" width="124" height="12" font="3"><a href="http://www.nvidia.com/object/cuda_home.html">, </a>accessed October 2011.</text>
+<text top="969" left="459" width="268" height="12" font="3">12. Advanced Micro Devices, ATI Stream Website.</text>
+<text top="969" left="732" width="85" height="12" font="6"><a href="http://www.amd.com/stream">http://www.amd.</a></text>
+<text top="984" left="480" width="58" height="12" font="6"><a href="http://www.amd.com/stream">com/stream</a></text>
+<text top="984" left="539" width="128" height="12" font="3"><a href="http://www.amd.com/stream">. </a>accessed October 2011.</text>
+<text top="998" left="459" width="357" height="12" font="3">13. Frigo, M., &amp; Johnson, S. G. (2005). The Design and Implementation</text>
+<text top="1013" left="480" width="243" height="12" font="3">of FFTW3. Proceedings of the IEEE, 93(2), 216</text>
+<text top="1010" left="723" width="28" height="17" font="3">–231.</text>
+<text top="1028" left="459" width="194" height="12" font="3">14. Ettus Research Products Website.</text>
+<text top="1028" left="658" width="155" height="12" font="6"><a href="http://www.ettus.com/products">http://www.ettus.com/products</a></text>
+<text top="1028" left="813" width="3" height="12" font="3">.</text>
+<text top="1043" left="480" width="121" height="12" font="3">accessed October 2011.</text>
+<text top="51" left="77" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1186" width="892">
+<text top="296" left="77" width="357" height="11" font="3">Michael L. Dickens is a Ph.D. candidate in Electrical Engineering at the</text>
+<text top="311" left="77" width="357" height="12" font="3">University of Notre Dame. He received a B.S. from MIT in 1991, and a M.</text>
+<text top="325" left="77" width="357" height="12" font="3">S. degree from the University of Notre Dame in 2001, both in Electrical</text>
+<text top="340" left="77" width="357" height="12" font="3">Engineering. He has more than 10 years of industry experience, having</text>
+<text top="355" left="77" width="357" height="12" font="3">worked at the Oak Ridge National Labs (Oak Ridge, TN), Bolt Beranek</text>
+<text top="370" left="77" width="72" height="12" font="3">and Newman (</text>
+<text top="367" left="148" width="285" height="17" font="3">“BBN”, Cambridge, MA) including in the Internetworking</text>
+<text top="385" left="77" width="357" height="12" font="3">Division, and most recently the MITRE Corporation (Bedford, MA). His</text>
+<text top="400" left="77" width="347" height="12" font="3">research interests span all aspects of programming for software radios</text>
+<text top="397" left="427" width="6" height="17" font="3">–</text>
+<text top="415" left="77" width="357" height="12" font="3">from operating system boot codes to kernels, signal-processing imple-</text>
+<text top="430" left="77" width="300" height="12" font="3">mentations to user interfaces. He is a member of Tau Beta Pi.</text>
+<text top="692" left="77" width="357" height="11" font="3">J. Nicholas Laneman is Founding Director of the Wireless</text>
+<text top="706" left="77" width="357" height="12" font="3">Institute in the College of Engineering and an Associate Professor</text>
+<text top="721" left="77" width="329" height="12" font="3">of Electrical Engineering at the University of Notre Dame.</text>
+<text top="721" left="419" width="15" height="12" font="3">He</text>
+<text top="736" left="77" width="357" height="12" font="3">has served as a regular consultant to industry, government, and</text>
+<text top="87" left="459" width="357" height="12" font="3">intellectual property firms for the past decade. Dr. Laneman has a</text>
+<text top="102" left="459" width="357" height="12" font="3">Ph.D. in signal processing and communications from MIT (2002)</text>
+<text top="117" left="459" width="357" height="12" font="3">and his research and teaching focus on software radio, wireless</text>
+<text top="132" left="459" width="357" height="12" font="3">communications, and information theory. He is author or co-</text>
+<text top="147" left="459" width="357" height="12" font="3">author on over 100 publications, many of which are highly cited,</text>
+<text top="162" left="459" width="357" height="12" font="3">and co-inventor on 5 US patents, with a several patents pending.</text>
+<text top="177" left="459" width="357" height="12" font="3">Dr. Laneman received a 2006 Presidential Early-Career Award for</text>
+<text top="192" left="459" width="357" height="12" font="3">Scientists and Engineers (PECASE), a 2006 National Science</text>
+<text top="207" left="459" width="357" height="12" font="3">Foundation (NSF) CAREER Award, a 2003 Oak Ridge Associ-</text>
+<text top="221" left="459" width="357" height="12" font="3">ated Universities (ORAU) Ralph E. Powe Junior Faculty En-</text>
+<text top="236" left="459" width="357" height="12" font="3">hancement Award, and the 2001 MIT EECS Harold L. Hazen</text>
+<text top="251" left="459" width="357" height="12" font="3">Graduate Teaching Award. He is a member of IEEE, ASEE, and</text>
+<text top="266" left="459" width="55" height="12" font="3">Sigma Xi.</text>
+<text top="677" left="459" width="357" height="11" font="3">Brian P. Dunn earned a Ph.D. in Electrical Engineering from the</text>
+<text top="691" left="459" width="357" height="12" font="3">University of Notre Dame in 2010 and a B.S. in Electrical</text>
+<text top="706" left="459" width="357" height="12" font="3">Engineering from Purdue University in 2003. After founding</text>
+<text top="721" left="459" width="357" height="12" font="3">RFware LLC in 2008 he went on to join SpiderCloud Wireless as</text>
+<text top="736" left="459" width="129" height="12" font="3">a Senior DSP Engineer.</text>
+<text top="51" left="716" width="101" height="12" font="3">J Sign Process Syst</text>
+</page>
+</pdf2xml>

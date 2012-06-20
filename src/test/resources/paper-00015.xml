@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="0" size="19" family="Times" color="#000000"/>
+	<fontspec id="1" size="14" family="Times" color="#000000"/>
+	<fontspec id="2" size="12" family="Times" color="#000000"/>
+	<fontspec id="3" size="15" family="Times" color="#000000"/>
+	<fontspec id="4" size="9" family="Times" color="#000000"/>
+	<fontspec id="5" size="6" family="Times" color="#000000"/>
+	<fontspec id="6" size="11" family="Times" color="#000000"/>
+<text top="129" left="150" width="592" height="19" font="0">Language Model Weight Adaptation Based on Cross-entropy for</text>
+<text top="156" left="302" width="288" height="19" font="0">Statistical Machine Translation</text>
+<text top="214" left="209" width="474" height="15" font="1">Yinggong Zhao, Yangsheng Ji, Ning Xi, Shujian Huang and Jiajun Chen</text>
+<text top="248" left="134" width="624" height="13" font="2">State Key Laboratory for Novel Software Technology at Nanjing University, Nanjing 210093, P.R.China</text>
+<text top="265" left="291" width="310" height="14" font="2">{zhaoyg, jiys, xin, huangsj, chenjj}@nlp.nju.edu.cn</text>
+<text top="334" left="170" width="553" height="14" font="2">Abstract. In this paper, we investigate the language model (LM) adaptation issue for Statis-</text>
+<text top="352" left="170" width="553" height="13" font="2">tical Machine Translation (SMT). In order to overcome the weight bias on the LM obtained</text>
+<text top="370" left="170" width="553" height="13" font="2">from the development data, a simple but effective method is proposed to adapt the LM for</text>
+<text top="388" left="170" width="553" height="13" font="2">diverse test datasets by employing the cross entropy of translation hypotheses as a metric to</text>
+<text top="406" left="170" width="553" height="13" font="2">measure the similarity between different datasets. Experimental results show that the cross</text>
+<text top="424" left="170" width="553" height="13" font="2">entropy of a test dataset is closely correlated with the bias in estimating the language models</text>
+<text top="442" left="170" width="424" height="13" font="2">and our adaptation strategy signiﬁcantly outperforms a strong baseline.</text>
+<text top="484" left="170" width="553" height="14" font="2">Keywords: Statistical machine translation, Language model, Weight adaptation, Cross-</text>
+<text top="503" left="170" width="46" height="13" font="2">entropy</text>
+<text top="548" left="127" width="9" height="16" font="3">1</text>
+<text top="548" left="154" width="97" height="16" font="3">Introduction</text>
+<text top="579" left="127" width="638" height="15" font="1">Language modeling is applied in many natural language processing (NLP) applications, including</text>
+<text top="599" left="127" width="638" height="15" font="1">automatic speech recognition (ASR) and SMT. In reality, we often encounter the scenario in which</text>
+<text top="619" left="127" width="638" height="15" font="1">the performance of language model learned from given dataset changes drastically among different</text>
+<text top="640" left="127" width="638" height="15" font="1">datasets. Many adaptation techniques have been proposed to tackle this problem in the ﬁeld of</text>
+<text top="660" left="127" width="638" height="15" font="1">ASR. A similar situation arises with respect to SMT. In SMT we build language model from large</text>
+<text top="680" left="127" width="638" height="15" font="1">amounts of monolingual data but incorporate it in the translation task of the dataset that is not well</text>
+<text top="701" left="127" width="638" height="15" font="1">covered by the model. This inconsistency inevitably affects the SMT training procedure, making</text>
+<text top="721" left="127" width="221" height="15" font="1">adaptation techniques a necessity.</text>
+<text top="741" left="149" width="617" height="15" font="1">Different from other tasks, language model is incorporated under a log-linear framework in</text>
+<text top="762" left="127" width="559" height="15" font="1">SMT. Speciﬁcally, for each source sentence f , we search for the ﬁnal translation e</text>
+<text top="758" left="686" width="6" height="11" font="4">∗</text>
+<text top="762" left="699" width="67" height="15" font="1">among all</text>
+<text top="782" left="127" width="325" height="15" font="1">possible candidates under the following equation:</text>
+<text top="818" left="351" width="27" height="15" font="1">P (e</text>
+<text top="814" left="378" width="6" height="11" font="4">∗</text>
+<text top="818" left="385" width="99" height="15" font="1">|f ) = arg max</text>
+<text top="831" left="465" width="6" height="11" font="4">e</text>
+<text top="818" left="486" width="55" height="15" font="1">P r(e|f )</text>
+<text top="819" left="746" width="19" height="15" font="1">(1)</text>
+<text top="860" left="127" width="534" height="15" font="1">Under log-linear model, the posterior probability P r(e|f ) can be decomposed as:</text>
+<text top="897" left="382" width="85" height="15" font="1">P r(e|f ) = p</text>
+<text top="903" left="468" width="7" height="11" font="4">λ</text>
+<text top="897" left="476" width="35" height="15" font="1">(e|f )</text>
+<text top="946" left="324" width="13" height="15" font="1">=</text>
+<text top="935" left="361" width="31" height="15" font="1">exp(</text>
+<text top="930" left="410" width="12" height="11" font="4">M</text>
+<text top="942" left="410" width="27" height="11" font="4">m=1</text>
+<text top="935" left="438" width="16" height="15" font="1">(λ</text>
+<text top="940" left="454" width="11" height="11" font="4">m</text>
+<text top="934" left="469" width="18" height="15" font="1">· h</text>
+<text top="940" left="487" width="11" height="11" font="4">m</text>
+<text top="935" left="499" width="50" height="15" font="1">(e, f )))</text>
+<text top="968" left="361" width="6" height="11" font="4">e</text>
+<text top="960" left="374" width="31" height="15" font="1">exp(</text>
+<text top="955" left="423" width="12" height="11" font="4">M</text>
+<text top="968" left="423" width="27" height="11" font="4">m=1</text>
+<text top="960" left="451" width="16" height="15" font="1">(λ</text>
+<text top="965" left="467" width="11" height="11" font="4">m</text>
+<text top="959" left="483" width="18" height="15" font="1">· h</text>
+<text top="965" left="500" width="11" height="11" font="4">m</text>
+<text top="960" left="512" width="54" height="15" font="1">(e , f )))</text>
+<text top="946" left="746" width="19" height="15" font="1">(2)</text>
+<text top="988" left="127" width="53" height="15" font="1">where h</text>
+<text top="994" left="181" width="11" height="11" font="4">m</text>
+<text top="988" left="193" width="213" height="15" font="1">(e, f ) is a feature function and λ</text>
+<text top="994" left="406" width="11" height="11" font="4">m</text>
+<text top="988" left="422" width="238" height="15" font="1">is related weight for m = 1, . . . , M .</text>
+<text top="1009" left="149" width="617" height="15" font="1">Under the above framework, we tune the model weight on an independent development dataset,</text>
+<text top="1029" left="127" width="638" height="15" font="1">and then we use the obtained weight to translate diverse datasets whose domain or related informa-</text>
+<text top="1049" left="127" width="638" height="15" font="1">tion might be previously unknown. It is noticeable that the weight obtained from Minimum Error</text>
+<text top="1070" left="127" width="638" height="15" font="1">Rate Training (MERT) matches the development dataset well, whereas it would be bias-estimated</text>
+<text top="1118" left="144" width="495" height="12" font="6">Copyright 2011 by Yinggong Zhao, Yangsheng Ji, Ning Xi, Shujian Huang and Jiajun Chen</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="133" left="127" width="638" height="15" font="1">for others. Although the value of each feature’s weight represents its importance in the decoding</text>
+<text top="153" left="127" width="638" height="15" font="1">procedure, such type of importance might vary for different datasets under a speciﬁc language</text>
+<text top="173" left="127" width="638" height="15" font="1">model. In this article we concentrate on the bias-estimation of language model weight, i.e., the</text>
+<text top="194" left="127" width="638" height="15" font="1">difference between the oracle and actual LM weight as shown in section 3. We measure the simi-</text>
+<text top="214" left="127" width="638" height="15" font="1">larity between datasets based on cross-entropy of translation output according to a given language</text>
+<text top="234" left="127" width="638" height="15" font="1">model, adapt the LM weight based on the ratio of the cross-entropy and obtain the ﬁnal results</text>
+<text top="255" left="127" width="638" height="15" font="1">through a second-pass translation. Our LM weight adaptation method is also related with density</text>
+<text top="275" left="127" width="638" height="15" font="1">ratio estimation, as mentioned in (Tsuboi et al., 2008), in which reweighting approach is proposed</text>
+<text top="295" left="127" width="506" height="15" font="1">to overcome the bias due to the different distribution of test and training data.</text>
+<text top="316" left="149" width="617" height="15" font="1">The remainder of this paper is organized as follows: Related work of LM adaptation is present-</text>
+<text top="336" left="127" width="638" height="15" font="1">ed in Section 2. In Section 3 we discuss the problem of LM weight bias-estimation in machine</text>
+<text top="356" left="127" width="638" height="15" font="1">translation. And in Section 4, cross-entropy is proposed as a metric for measuring the similarity</text>
+<text top="377" left="127" width="638" height="15" font="1">between different datasets and we further present our adaptation method. Experimental results are</text>
+<text top="397" left="127" width="638" height="15" font="1">shown in Section 5. We conclude and present several directions for future work in the last section.</text>
+<text top="430" left="127" width="9" height="16" font="3">2</text>
+<text top="430" left="154" width="107" height="16" font="3">Related Work</text>
+<text top="456" left="127" width="638" height="15" font="1">Nowadays LM adaptation in SMT has been paid lots of attentions. There are two main categories</text>
+<text top="476" left="127" width="110" height="15" font="1">for this problem.</text>
+<text top="496" left="149" width="617" height="15" font="1">The ﬁrst one is data selection, i.e., when given a test dataset and a large general corpus, which</text>
+<text top="517" left="127" width="638" height="15" font="1">tries to extract sentences from the whole corpus that are relevant to the test dataset under some met-</text>
+<text top="537" left="127" width="638" height="15" font="1">ric. There are two main approaches for the measurement: One is to apply tf-idf metric (Hildebrand</text>
+<text top="557" left="127" width="638" height="15" font="1">et al., 2005; L¨u et al., 2007; Zhao et al., 2004), which arises from information retrieval; while for</text>
+<text top="578" left="127" width="638" height="15" font="1">the other approach cross-entropy (perplexity) is adopted for selection, as reported in (Axelrod et</text>
+<text top="598" left="127" width="231" height="15" font="1">al., 2011; Moore and Lewis, 2010).</text>
+<text top="618" left="149" width="617" height="15" font="1">The second is model weighting. The main idea is to assign appropriate weight to each model</text>
+<text top="639" left="127" width="638" height="15" font="1">according to the similarity between the model corpus and test dataset. In this approach, the models</text>
+<text top="659" left="127" width="638" height="15" font="1">could be built from domain-speciﬁc corpus (Koehn and Schroeder, 2007) when domain of the test</text>
+<text top="679" left="127" width="638" height="15" font="1">dataset is known, or from datasets that belong to different sources (Foster and Kuhn, 2007; L¨u</text>
+<text top="700" left="127" width="638" height="15" font="1">et al., 2007) when it is unavailable in advance. Such weighting method even could be apply to</text>
+<text top="720" left="127" width="638" height="15" font="1">either each sentence from the training corpus (Matsoukas et al., 2009) or phrase pair from the</text>
+<text top="740" left="127" width="638" height="15" font="1">phrase-table (Foster et al., 2010). Besides, the work of (Mohit et al., 2009; Mohit et al., 2010)</text>
+<text top="761" left="127" width="638" height="15" font="1">also belongs to such scenario, in which they attempt to build a classiﬁer to predict whether or</text>
+<text top="781" left="127" width="638" height="15" font="1">not a phrase is difﬁcult, then the LM weight is updated for each phrase segment according to its</text>
+<text top="801" left="127" width="63" height="15" font="1">difﬁculty.</text>
+<text top="821" left="149" width="617" height="15" font="1">The methods mentioned above try to overcome the difference between the training and the test</text>
+<text top="842" left="127" width="638" height="15" font="1">data. However, the bias between the development and the test data is also an open issue. Not</text>
+<text top="862" left="127" width="638" height="15" font="1">much attention has been paid to the such weight adaptation. In Li et al. (2010), the model weight</text>
+<text top="882" left="127" width="638" height="15" font="1">is tuned on a subset of the development set, which is extracted based on the relevance to the test</text>
+<text top="903" left="127" width="22" height="15" font="1">set.</text>
+<text top="923" left="149" width="617" height="15" font="1">In this paper, different from (Li et al., 2010), we focus on the adaptation of LM weight only, as</text>
+<text top="943" left="127" width="638" height="15" font="1">LM is one of the key components of SMT and has its own characteristic. In our work, we adopt</text>
+<text top="964" left="127" width="638" height="15" font="1">cross-entropy as a metric, just as (Axelrod et al., 2011; Moore and Lewis, 2010), to measure the</text>
+<text top="984" left="127" width="638" height="15" font="1">similarity between different datasets. However, only LM weight is adjusted during the adaptation,</text>
+<text top="1004" left="127" width="638" height="15" font="1">and no extra model needs to be built. Although our method is quite simple and straightforward,</text>
+<text top="1025" left="127" width="638" height="15" font="1">the improvements obtained from the adaptation show that the bias-estimation of LM weight due</text>
+<text top="1045" left="127" width="621" height="15" font="1">to the difference between development and test dataset is also quite an important issue in SMT.</text>
+<text top="1078" left="127" width="9" height="16" font="3">3</text>
+<text top="1078" left="154" width="533" height="16" font="3">Language Model Weight Mismatch in Statistical Machine Translation</text>
+<text top="1104" left="127" width="638" height="15" font="1">As model weight is tuned on development dataset only but applied to various test datasets, the</text>
+<text top="1124" left="127" width="638" height="15" font="1">mismatch between development and test is inevitable. To verify the LM weight bias-estimation</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="7" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="6" family="Helvetica" color="#000000"/>
+<text top="133" left="127" width="638" height="15" font="1">for different dataset pairs, we conduct the following experiment in this section: for development</text>
+<text top="153" left="127" width="638" height="15" font="1">dataset pair D(development) and T (test), we ﬁrstly learn the weight via MERT on D. Then with</text>
+<text top="173" left="127" width="638" height="15" font="1">all other feature weights ﬁxed, we translate T and record the change of BLEU score compared</text>
+<text top="194" left="127" width="638" height="15" font="1">with baseline during the step-by-step modiﬁcation of the LM weight by starting from the initial</text>
+<text top="214" left="127" width="258" height="15" font="1">weight with a constant value each time.</text>
+<text top="234" left="149" width="617" height="15" font="1">Based on the above approach, we use four dataset pairs for comparison under a large scale</text>
+<text top="255" left="127" width="638" height="15" font="1">experiment setting (Section 5.1). Figure 1 shows the relation between the BLEU score of the test</text>
+<text top="275" left="127" width="638" height="15" font="1">datasets and the corresponding LM weight. Speciﬁcally speaking, each point (x, y) in the ﬁgure</text>
+<text top="295" left="127" width="638" height="15" font="1">means that under new LM weight x ∗ baseline-LM -weight, the BLEU score of test dataset under</text>
+<text top="316" left="127" width="638" height="15" font="1">new weight changes y points compared with baseline. We could observe that for some datasets pair</text>
+<text top="336" left="127" width="638" height="15" font="1">like MT03 as development and MT08 as test, the weight is seriously bias-estimated. The detailed</text>
+<text top="356" left="127" width="638" height="15" font="1">comparison is shown in table 1, in which the oracle performance represents the maximal BLEU</text>
+<text top="377" left="127" width="638" height="15" font="1">score obtained when we manually modify the LM weight. The signiﬁcant difference between</text>
+<text top="397" left="127" width="638" height="15" font="1">baseline and oracle result (about 3 BLEU points) shows much room for potential improvement.</text>
+<text top="417" left="127" width="638" height="15" font="1">Meanwhile, the weight ﬁts well for dataset pair MT03(development) and MT04(test), since the</text>
+<text top="438" left="127" width="282" height="15" font="1">baseline performance is close to the oracle.</text>
+<text top="458" left="149" width="617" height="15" font="1">Based on the above observation, we ﬁnd that the LM weight mismatch is a common phe-</text>
+<text top="478" left="127" width="638" height="15" font="1">nomenon in SMT. And the bias-estimation is different for various dataset pairs. Thus it is nec-</text>
+<text top="499" left="127" width="638" height="15" font="1">essary to propose a metric that could measure the similarity between datasets and an adaptation</text>
+<text top="519" left="127" width="403" height="15" font="1">strategy on LM weight, as we will discuss in the next section.</text>
+<text top="789" left="311" width="12" height="8" font="7">0.2</text>
+<text top="789" left="341" width="12" height="8" font="7">0.4</text>
+<text top="789" left="371" width="12" height="8" font="7">0.6</text>
+<text top="789" left="402" width="12" height="8" font="7">0.8</text>
+<text top="789" left="435" width="5" height="8" font="7">1</text>
+<text top="789" left="462" width="12" height="8" font="7">1.2</text>
+<text top="789" left="492" width="12" height="8" font="7">1.4</text>
+<text top="789" left="522" width="12" height="8" font="7">1.6</text>
+<text top="789" left="553" width="12" height="8" font="7">1.8</text>
+<text top="789" left="586" width="5" height="8" font="7">2</text>
+<text top="782" left="300" width="14" height="8" font="7">−12</text>
+<text top="755" left="300" width="14" height="8" font="7">−10</text>
+<text top="728" left="305" width="10" height="8" font="7">−8</text>
+<text top="702" left="305" width="10" height="8" font="7">−6</text>
+<text top="675" left="305" width="10" height="8" font="7">−4</text>
+<text top="648" left="305" width="10" height="8" font="7">−2</text>
+<text top="621" left="310" width="5" height="8" font="7">0</text>
+<text top="594" left="310" width="5" height="8" font="7">2</text>
+<text top="568" left="310" width="5" height="8" font="7">4</text>
+<text top="799" left="369" width="166" height="8" font="7">Language model weight variation percentage</text>
+<text top="711" left="294" width="0" height="8" font="8">BLEU score variation</text>
+<text top="782" left="315" width="2" height="8" font="7"> </text>
+<text top="568" left="587" width="2" height="8" font="7"> </text>
+<text top="578" left="503" width="81" height="8" font="7">Dev:MT03 Test:MT08</text>
+<text top="588" left="503" width="81" height="8" font="7">Dev:MT08 Test:MT03</text>
+<text top="599" left="503" width="81" height="8" font="7">Dev:MT03 Test:MT04</text>
+<text top="609" left="503" width="81" height="8" font="7">Dev:MT04 Test:MT03</text>
+<text top="837" left="132" width="628" height="14" font="2">Figure 1: The variation of BLEU score (in value) vs. variation of language model weight (in percentage)</text>
+<text top="888" left="321" width="31" height="13" font="2">DEV</text>
+<text top="888" left="373" width="36" height="13" font="2">TEST</text>
+<text top="888" left="428" width="51" height="13" font="2">Baseline</text>
+<text top="888" left="516" width="40" height="13" font="2">Oracle</text>
+<text top="907" left="317" width="37" height="13" font="2">MT03</text>
+<text top="907" left="373" width="37" height="13" font="2">MT04</text>
+<text top="907" left="437" width="34" height="13" font="2">37.54</text>
+<text top="907" left="497" width="78" height="13" font="2">37.55(+0.01)</text>
+<text top="925" left="317" width="37" height="13" font="2">MT04</text>
+<text top="925" left="373" width="37" height="13" font="2">MT03</text>
+<text top="925" left="437" width="34" height="13" font="2">38.76</text>
+<text top="925" left="497" width="78" height="13" font="2">38.96(+0.20)</text>
+<text top="944" left="317" width="37" height="13" font="2">MT03</text>
+<text top="944" left="373" width="37" height="13" font="2">MT08</text>
+<text top="944" left="437" width="34" height="13" font="2">24.86</text>
+<text top="944" left="497" width="78" height="13" font="2">28.66(+3.80)</text>
+<text top="962" left="317" width="37" height="13" font="2">MT08</text>
+<text top="962" left="373" width="37" height="13" font="2">MT03</text>
+<text top="962" left="437" width="34" height="13" font="2">35.86</text>
+<text top="962" left="497" width="78" height="13" font="2">38.77(+2.91)</text>
+<text top="1013" left="127" width="638" height="14" font="2">Table 1: Comparison between baseline and oracle performance under language model weight for different</text>
+<text top="1031" left="127" width="78" height="13" font="2">dataset pairs.</text>
+<text top="1074" left="127" width="9" height="16" font="3">4</text>
+<text top="1074" left="154" width="522" height="16" font="3">Dynamic Language Model Weight Adaptation Under Cross Entropy</text>
+<text top="1104" left="127" width="638" height="15" font="1">Entropy is used as a metric to show how much information one dataset contains. Given sentence</text>
+<text top="1124" left="127" width="14" height="15" font="1">X</text>
+<text top="1129" left="141" width="4" height="11" font="4">i</text>
+<text top="1124" left="151" width="34" height="15" font="1">= (x</text>
+<text top="1129" left="185" width="6" height="11" font="4">1</text>
+<text top="1124" left="192" width="17" height="15" font="1">, x</text>
+<text top="1129" left="208" width="6" height="11" font="4">2</text>
+<text top="1124" left="215" width="46" height="15" font="1">, . . . , x</text>
+<text top="1129" left="261" width="8" height="11" font="4">n</text>
+<text top="1124" left="270" width="496" height="15" font="1">), the corresponding cross-entropy under speciﬁc language model lm could</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="133" left="127" width="108" height="15" font="1">be calculated as:</text>
+<text top="156" left="319" width="35" height="15" font="1">H(X</text>
+<text top="161" left="354" width="4" height="11" font="4">i</text>
+<text top="156" left="359" width="41" height="15" font="1">) = −</text>
+<text top="145" left="403" width="8" height="15" font="1">1</text>
+<text top="167" left="402" width="10" height="15" font="1">n</text>
+<text top="156" left="416" width="34" height="15" font="1">log P</text>
+<text top="162" left="451" width="15" height="11" font="4">lm</text>
+<text top="156" left="466" width="16" height="15" font="1">(x</text>
+<text top="161" left="482" width="6" height="11" font="4">1</text>
+<text top="156" left="489" width="17" height="15" font="1">, x</text>
+<text top="161" left="506" width="6" height="11" font="4">2</text>
+<text top="156" left="513" width="46" height="15" font="1">, . . . , x</text>
+<text top="161" left="559" width="8" height="11" font="4">n</text>
+<text top="156" left="567" width="6" height="15" font="1">)</text>
+<text top="156" left="746" width="19" height="15" font="1">(3)</text>
+<text top="190" left="127" width="638" height="15" font="1">Given two datasets and one language model, we could use cross-entropy to identify which dataset</text>
+<text top="210" left="127" width="638" height="15" font="1">matches the language model better. As the language model is built on target language in SMT</text>
+<text top="230" left="127" width="638" height="15" font="1">task, we can adopt the entropy of the translation outputs for each dataset as a measurement of</text>
+<text top="251" left="127" width="638" height="15" font="1">the dataset. Given a language model and two datasets (development and test), the model weights</text>
+<text top="271" left="127" width="638" height="15" font="1">are tuned through MERT on development dataset. Then we compute their cross-entropy after</text>
+<text top="291" left="127" width="638" height="15" font="1">translating both datasets under current weight. Speciﬁcally, for a dataset X that contains multiple</text>
+<text top="312" left="127" width="497" height="15" font="1">sentences, we acquire its cross-entropy according to the following equation:</text>
+<text top="362" left="338" width="77" height="15" font="1">H(X) = −</text>
+<text top="357" left="434" width="4" height="11" font="4">i</text>
+<text top="357" left="459" width="5" height="11" font="4">j</text>
+<text top="349" left="468" width="34" height="15" font="1">log P</text>
+<text top="354" left="503" width="15" height="11" font="4">lm</text>
+<text top="349" left="519" width="20" height="15" font="1">(X</text>
+<text top="344" left="540" width="5" height="11" font="4">j</text>
+<text top="357" left="539" width="4" height="11" font="4">i</text>
+<text top="349" left="547" width="6" height="15" font="1">)</text>
+<text top="384" left="436" width="4" height="11" font="4">i</text>
+<text top="384" left="461" width="5" height="11" font="4">j</text>
+<text top="376" left="470" width="66" height="15" font="1">length(X</text>
+<text top="371" left="538" width="5" height="11" font="4">j</text>
+<text top="384" left="537" width="4" height="11" font="4">i</text>
+<text top="376" left="545" width="6" height="15" font="1">)</text>
+<text top="363" left="746" width="19" height="15" font="1">(4)</text>
+<text top="418" left="127" width="78" height="15" font="1">in which, X</text>
+<text top="412" left="206" width="5" height="11" font="4">j</text>
+<text top="425" left="205" width="4" height="11" font="4">i</text>
+<text top="418" left="217" width="84" height="15" font="1">denotes the j</text>
+<text top="423" left="300" width="12" height="11" font="4">th</text>
+<text top="418" left="317" width="236" height="15" font="1">best translation or reference for the i</text>
+<text top="423" left="553" width="12" height="11" font="4">th</text>
+<text top="418" left="569" width="196" height="15" font="1">sentence in the dataset. As the</text>
+<text top="440" left="127" width="588" height="15" font="1">decoder generates translation outputs together with corresponding feature vectors, log P</text>
+<text top="445" left="715" width="15" height="11" font="4">lm</text>
+<text top="440" left="731" width="20" height="15" font="1">(X</text>
+<text top="435" left="752" width="5" height="11" font="4">j</text>
+<text top="447" left="751" width="4" height="11" font="4">i</text>
+<text top="440" left="759" width="6" height="15" font="1">)</text>
+<text top="460" left="127" width="399" height="15" font="1">could be viewed as equivalent to the language model feature.</text>
+<text top="480" left="149" width="617" height="15" font="1">According to the property of cross-entropy, we can know how the dataset ﬁts the language</text>
+<text top="501" left="127" width="638" height="15" font="1">model. Empirically speaking, a small cross-entropy value indicates a well-matching between</text>
+<text top="521" left="127" width="638" height="15" font="1">the language model and dataset. The language model could thus play a more important role in</text>
+<text top="541" left="127" width="638" height="15" font="1">the translating procedure, which further reveals a large value relatively. Hence, if the test data</text>
+<text top="562" left="127" width="638" height="15" font="1">matches language model better than the development data, the language model weight might be</text>
+<text top="582" left="127" width="638" height="15" font="1">under-estimated; otherwise it would be over-estimated. So we could conclude that cross-entropy</text>
+<text top="602" left="127" width="496" height="15" font="1">difference can be used as a metric for how well the LM weight is estimated.</text>
+<text top="623" left="149" width="617" height="15" font="1">However, we encounter two problems: Firstly, how can we estimate the degree to which the</text>
+<text top="643" left="127" width="638" height="15" font="1">LM weight is bias-estimated and the second is how we can adjust the weight appropriately. Here</text>
+<text top="663" left="127" width="638" height="15" font="1">we hold the straightforward opinion that the difference of the cross-entropy between test and</text>
+<text top="684" left="127" width="638" height="15" font="1">development data can be a metric for the LM bias-estimation. For the adaptation on the language</text>
+<text top="704" left="127" width="638" height="15" font="1">model weight, we propose an effective method that merely uses cross-entropy. Let D be the</text>
+<text top="724" left="127" width="604" height="15" font="1">development dataset and T be the test dataset. The adaptation approach is shown as follows:</text>
+<text top="751" left="143" width="456" height="15" font="1">1. Train a log-linear model based on D and obtain feature weight W .</text>
+<text top="778" left="143" width="620" height="15" font="1">2. Translate D using W and calculate the cross-entropy of D as H(D), similarly translate T</text>
+<text top="798" left="163" width="116" height="15" font="1">and obtain H(T ).</text>
+<text top="824" left="143" width="207" height="15" font="1">3. Modify the LM weight in W</text>
+<text top="830" left="350" width="15" height="11" font="4">lm</text>
+<text top="824" left="370" width="21" height="15" font="1">by:</text>
+<text top="869" left="399" width="15" height="15" font="1">W</text>
+<text top="875" left="415" width="15" height="11" font="4">lm</text>
+<text top="869" left="435" width="33" height="15" font="1">= W</text>
+<text top="875" left="468" width="15" height="11" font="4">lm</text>
+<text top="858" left="486" width="42" height="15" font="1">H(D)</text>
+<text top="880" left="487" width="39" height="15" font="1">H(T )</text>
+<text top="915" left="163" width="157" height="15" font="1">and get new weight W .</text>
+<text top="941" left="143" width="357" height="15" font="1">4. Translate T again under W and get the ﬁnal result.</text>
+<text top="968" left="149" width="617" height="15" font="1">In the third step, we use the ratio of the entropy of the development and the test dataset for</text>
+<text top="989" left="127" width="638" height="15" font="1">weight adjustment, as it could reﬂect the variance between these two datasets. It is known that in</text>
+<text top="1009" left="127" width="638" height="15" font="1">development dataset each sentence owns references, the reason we use entropy of translation out-</text>
+<text top="1029" left="127" width="638" height="15" font="1">puts rather than references for development is that in real application we usually translate datasets</text>
+<text top="1050" left="127" width="638" height="15" font="1">without references, although it is included for standard SMT evaluation datasets. In fact we could</text>
+<text top="1070" left="127" width="638" height="15" font="1">observe that the adaptation result based on the cross-entropy of translation outputs is consistent</text>
+<text top="1090" left="127" width="490" height="15" font="1">with that based on cross-entropy of the references, as shown in section 5.2.</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="132" left="127" width="9" height="16" font="3">5</text>
+<text top="132" left="154" width="98" height="16" font="3">Experiments</text>
+<text top="158" left="127" width="22" height="16" font="3">5.1</text>
+<text top="158" left="168" width="156" height="16" font="3">Experiment Settings</text>
+<text top="186" left="127" width="638" height="15" font="1">We implement a hierarchical phrase-based decoder according to Chiang (2005). The development</text>
+<text top="206" left="127" width="638" height="15" font="1">data includes NIST 2003 (MT03), NIST 2004 (MT04), NIST 2005 (MT05), NIST 2006 (MT06)</text>
+<text top="227" left="127" width="638" height="15" font="1">and NIST 2008 (MT08). Besides the above four datasets, the test datasets contain all portions of</text>
+<text top="247" left="127" width="638" height="15" font="1">MT06, including newswire (MT06nw), newsgroup (MT06wg) and weblog (MT06wl), and two</text>
+<text top="267" left="127" width="638" height="15" font="1">portions of MT08, including newswire (MT08nw) and webgroup (MT08wg). The statistics are</text>
+<text top="288" left="127" width="611" height="15" font="1">shown in Table 2. All results are measured in case-insensitive BLEU4 (Papineni et al., 2002).</text>
+<text top="323" left="144" width="40" height="12" font="6">Dataset</text>
+<text top="323" left="211" width="34" height="12" font="6">MT03</text>
+<text top="323" left="266" width="34" height="12" font="6">MT04</text>
+<text top="323" left="321" width="34" height="12" font="6">MT05</text>
+<text top="323" left="376" width="34" height="12" font="6">MT06</text>
+<text top="323" left="431" width="34" height="12" font="6">MT08</text>
+<text top="323" left="484" width="46" height="12" font="6">MT06bc</text>
+<text top="323" left="548" width="50" height="12" font="6">MT06nw</text>
+<text top="323" left="616" width="47" height="12" font="6">MT06ng</text>
+<text top="323" left="681" width="50" height="12" font="6">MT08nw</text>
+<text top="323" left="749" width="50" height="12" font="6">MT08wg</text>
+<text top="340" left="136" width="55" height="12" font="6">#Sentence</text>
+<text top="340" left="218" width="20" height="12" font="6">919</text>
+<text top="340" left="268" width="30" height="12" font="6">1,788</text>
+<text top="340" left="323" width="30" height="12" font="6">1,082</text>
+<text top="340" left="378" width="30" height="12" font="6">1,664</text>
+<text top="340" left="433" width="30" height="12" font="6">1,357</text>
+<text top="340" left="497" width="20" height="12" font="6">565</text>
+<text top="340" left="563" width="20" height="12" font="6">616</text>
+<text top="340" left="630" width="20" height="12" font="6">483</text>
+<text top="340" left="696" width="20" height="12" font="6">691</text>
+<text top="340" left="764" width="20" height="12" font="6">666</text>
+<text top="357" left="146" width="36" height="12" font="6">#Word</text>
+<text top="357" left="210" width="37" height="12" font="6">24,900</text>
+<text top="357" left="265" width="37" height="12" font="6">50,061</text>
+<text top="357" left="319" width="37" height="12" font="6">30,512</text>
+<text top="357" left="374" width="37" height="12" font="6">38,984</text>
+<text top="357" left="429" width="37" height="12" font="6">33,259</text>
+<text top="357" left="489" width="37" height="12" font="6">11,884</text>
+<text top="357" left="555" width="37" height="12" font="6">17,971</text>
+<text top="357" left="625" width="30" height="12" font="6">9,146</text>
+<text top="357" left="688" width="37" height="12" font="6">18,124</text>
+<text top="357" left="756" width="37" height="12" font="6">15,145</text>
+<text top="406" left="290" width="314" height="14" font="2">Table 2: Statistics on development and test datasets.</text>
+<text top="433" left="149" width="617" height="15" font="1">In the experiments, the training corpus includes LDC2002E18, LDC2003E07, LDC2003E14,</text>
+<text top="453" left="127" width="638" height="15" font="1">LDC2004E12, LDC2004T08, LDC2005E83, LDC2005T06, LDC2005T10, LDC2006E26, LD-</text>
+<text top="474" left="127" width="638" height="15" font="1">C2006E34, LDC2006E85, LDC2006E92, and LDC2007T09, which consists of about 8.5M sen-</text>
+<text top="494" left="127" width="638" height="15" font="1">tence pairs. The word alignment result is trained by GIZA++ in both directions and reﬁned under</text>
+<text top="514" left="127" width="638" height="15" font="1">intersect-diag-grow heuristics. The plain phrases are extracted from the all bilingual training data,</text>
+<text top="535" left="127" width="638" height="15" font="1">while hierarchical rules are only extracted from selected datasets, including LDC2003E14, LD-</text>
+<text top="555" left="127" width="638" height="15" font="1">C2003E07, LDC2005T10, LDC2006E34, LDC2006E85, and LDC2006E92, which covers nearly</text>
+<text top="575" left="127" width="638" height="15" font="1">467K sentence pairs. We further train the 5-gram language model over the English part of training</text>
+<text top="596" left="127" width="379" height="15" font="1">data plus Xinhua portion of the English Gigaword corpus.</text>
+<text top="621" left="127" width="22" height="16" font="3">5.2</text>
+<text top="621" left="168" width="307" height="16" font="3">Adaptation on 1-best Translation Result</text>
+<text top="649" left="127" width="638" height="15" font="1">In this part, we will evaluate the performance of our method introduced in section 4. Under each</text>
+<text top="669" left="127" width="638" height="15" font="1">development dataset, we calculate the cross-entropy of all test datasets, which are displayed in</text>
+<text top="690" left="127" width="628" height="15" font="1">table 3. The results of both baseline and under our adapted method are also presented in table 5.</text>
+<text top="725" left="146" width="25" height="11" font="4">DEV</text>
+<text top="725" left="234" width="30" height="11" font="4">MT03</text>
+<text top="725" left="351" width="30" height="11" font="4">MT04</text>
+<text top="725" left="469" width="30" height="11" font="4">MT05</text>
+<text top="725" left="586" width="30" height="11" font="4">MT06</text>
+<text top="725" left="704" width="30" height="11" font="4">MT08</text>
+<text top="739" left="144" width="29" height="11" font="4">TEST</text>
+<text top="739" left="199" width="41" height="11" font="4">Baseline</text>
+<text top="739" left="258" width="41" height="11" font="4">Adapted</text>
+<text top="739" left="316" width="41" height="11" font="4">Baseline</text>
+<text top="739" left="375" width="41" height="11" font="4">Adapted</text>
+<text top="739" left="434" width="41" height="11" font="4">Baseline</text>
+<text top="739" left="493" width="41" height="11" font="4">Adapted</text>
+<text top="739" left="551" width="41" height="11" font="4">Baseline</text>
+<text top="739" left="611" width="41" height="11" font="4">Adapted</text>
+<text top="739" left="669" width="41" height="11" font="4">Baseline</text>
+<text top="739" left="728" width="41" height="11" font="4">Adapted</text>
+<text top="754" left="144" width="30" height="11" font="4">MT03</text>
+<text top="754" left="203" width="33" height="11" font="4">1.8842</text>
+<text top="754" left="262" width="33" height="11" font="4">1.8842</text>
+<text top="754" left="321" width="33" height="11" font="4">1.8507</text>
+<text top="754" left="379" width="33" height="11" font="4">1.8701</text>
+<text top="754" left="438" width="33" height="11" font="4">1.9953</text>
+<text top="754" left="497" width="33" height="11" font="4">1.9958</text>
+<text top="754" left="556" width="33" height="11" font="4">1.8058</text>
+<text top="754" left="614" width="33" height="11" font="4">1.7992</text>
+<text top="754" left="673" width="33" height="11" font="4">1.8800</text>
+<text top="754" left="732" width="33" height="11" font="4">1.8564</text>
+<text top="769" left="144" width="30" height="11" font="4">MT04</text>
+<text top="769" left="203" width="33" height="11" font="4">1.7556</text>
+<text top="769" left="262" width="33" height="11" font="4">1.7353</text>
+<text top="769" left="321" width="33" height="11" font="4">1.7264</text>
+<text top="769" left="379" width="33" height="11" font="4">1.7264</text>
+<text top="769" left="438" width="33" height="11" font="4">1.8720</text>
+<text top="769" left="497" width="33" height="11" font="4">1.8482</text>
+<text top="769" left="556" width="33" height="11" font="4">1.6900</text>
+<text top="769" left="614" width="33" height="11" font="4">1.6679</text>
+<text top="769" left="673" width="33" height="11" font="4">1.7600</text>
+<text top="769" left="732" width="33" height="11" font="4">1.7191</text>
+<text top="784" left="144" width="30" height="11" font="4">MT05</text>
+<text top="784" left="203" width="33" height="11" font="4">1.8880</text>
+<text top="784" left="262" width="33" height="11" font="4">1.8884</text>
+<text top="784" left="321" width="33" height="11" font="4">1.8621</text>
+<text top="784" left="379" width="33" height="11" font="4">1.8776</text>
+<text top="784" left="438" width="33" height="11" font="4">2.0022</text>
+<text top="784" left="497" width="33" height="11" font="4">2.0022</text>
+<text top="784" left="556" width="33" height="11" font="4">1.8109</text>
+<text top="784" left="614" width="33" height="11" font="4">1.8091</text>
+<text top="784" left="673" width="33" height="11" font="4">1.8759</text>
+<text top="784" left="732" width="33" height="11" font="4">1.8513</text>
+<text top="799" left="144" width="30" height="11" font="4">MT06</text>
+<text top="799" left="203" width="33" height="11" font="4">1.9287</text>
+<text top="799" left="262" width="33" height="11" font="4">1.9361</text>
+<text top="799" left="321" width="33" height="11" font="4">1.8997</text>
+<text top="799" left="379" width="33" height="11" font="4">1.9185</text>
+<text top="799" left="438" width="33" height="11" font="4">2.0459</text>
+<text top="799" left="497" width="33" height="11" font="4">2.0571</text>
+<text top="799" left="556" width="33" height="11" font="4">1.8408</text>
+<text top="799" left="614" width="33" height="11" font="4">1.8408</text>
+<text top="799" left="673" width="33" height="11" font="4">1.9224</text>
+<text top="799" left="732" width="33" height="11" font="4">1.9012</text>
+<text top="813" left="144" width="30" height="11" font="4">MT08</text>
+<text top="813" left="203" width="33" height="11" font="4">2.1462</text>
+<text top="813" left="262" width="33" height="11" font="4">2.1787</text>
+<text top="813" left="321" width="33" height="11" font="4">2.1176</text>
+<text top="813" left="379" width="33" height="11" font="4">2.1550</text>
+<text top="813" left="438" width="33" height="11" font="4">2.2890</text>
+<text top="813" left="497" width="33" height="11" font="4">2.3488</text>
+<text top="813" left="556" width="33" height="11" font="4">2.0376</text>
+<text top="813" left="614" width="33" height="11" font="4">2.0587</text>
+<text top="813" left="673" width="33" height="11" font="4">2.1224</text>
+<text top="813" left="732" width="33" height="11" font="4">2.1224</text>
+<text top="828" left="138" width="41" height="11" font="4">MT06bc</text>
+<text top="828" left="203" width="33" height="11" font="4">1.8324</text>
+<text top="828" left="262" width="33" height="11" font="4">1.8260</text>
+<text top="828" left="321" width="33" height="11" font="4">1.8262</text>
+<text top="828" left="379" width="33" height="11" font="4">1.8150</text>
+<text top="828" left="438" width="33" height="11" font="4">1.9425</text>
+<text top="828" left="497" width="33" height="11" font="4">1.9292</text>
+<text top="828" left="556" width="33" height="11" font="4">1.7657</text>
+<text top="828" left="614" width="33" height="11" font="4">1.7536</text>
+<text top="828" left="673" width="33" height="11" font="4">1.8352</text>
+<text top="828" left="732" width="33" height="11" font="4">1.7995</text>
+<text top="843" left="136" width="44" height="11" font="4">MT06nw</text>
+<text top="843" left="203" width="33" height="11" font="4">1.8480</text>
+<text top="843" left="262" width="33" height="11" font="4">1.8412</text>
+<text top="843" left="321" width="33" height="11" font="4">1.8175</text>
+<text top="843" left="379" width="33" height="11" font="4">1.8294</text>
+<text top="843" left="438" width="33" height="11" font="4">1.9535</text>
+<text top="843" left="497" width="33" height="11" font="4">1.9469</text>
+<text top="843" left="556" width="33" height="11" font="4">1.7607</text>
+<text top="843" left="614" width="33" height="11" font="4">1.7502</text>
+<text top="843" left="673" width="33" height="11" font="4">1.8378</text>
+<text top="843" left="732" width="33" height="11" font="4">1.8108</text>
+<text top="858" left="138" width="42" height="11" font="4">MT06ng</text>
+<text top="858" left="203" width="33" height="11" font="4">2.2962</text>
+<text top="858" left="262" width="33" height="11" font="4">2.3440</text>
+<text top="858" left="321" width="33" height="11" font="4">2.2660</text>
+<text top="858" left="379" width="33" height="11" font="4">2.3069</text>
+<text top="858" left="438" width="33" height="11" font="4">2.4436</text>
+<text top="858" left="497" width="33" height="11" font="4">2.5170</text>
+<text top="858" left="556" width="33" height="11" font="4">2.1692</text>
+<text top="858" left="614" width="33" height="11" font="4">2.2047</text>
+<text top="858" left="673" width="33" height="11" font="4">2.2637</text>
+<text top="858" left="732" width="33" height="11" font="4">2.2737</text>
+<text top="873" left="136" width="44" height="11" font="4">MT08nw</text>
+<text top="873" left="203" width="33" height="11" font="4">2.0602</text>
+<text top="873" left="262" width="33" height="11" font="4">2.0786</text>
+<text top="873" left="321" width="33" height="11" font="4">2.0208</text>
+<text top="873" left="379" width="33" height="11" font="4">2.0556</text>
+<text top="873" left="438" width="33" height="11" font="4">2.1913</text>
+<text top="873" left="497" width="33" height="11" font="4">2.2304</text>
+<text top="873" left="556" width="33" height="11" font="4">1.9548</text>
+<text top="873" left="614" width="33" height="11" font="4">1.9665</text>
+<text top="873" left="673" width="33" height="11" font="4">2.0271</text>
+<text top="873" left="732" width="33" height="11" font="4">2.0166</text>
+<text top="887" left="136" width="44" height="11" font="4">MT08wg</text>
+<text top="887" left="203" width="33" height="11" font="4">2.2649</text>
+<text top="887" left="262" width="33" height="11" font="4">2.3191</text>
+<text top="887" left="321" width="33" height="11" font="4">2.2544</text>
+<text top="887" left="379" width="33" height="11" font="4">2.2995</text>
+<text top="887" left="438" width="33" height="11" font="4">2.4204</text>
+<text top="887" left="497" width="33" height="11" font="4">2.5120</text>
+<text top="887" left="556" width="33" height="11" font="4">2.1511</text>
+<text top="887" left="614" width="33" height="11" font="4">2.1815</text>
+<text top="887" left="673" width="33" height="11" font="4">2.2527</text>
+<text top="887" left="732" width="33" height="11" font="4">2.2664</text>
+<text top="935" left="149" width="595" height="14" font="2">Table 3: .Cross entropy of test datasets on different development datasets, under large scale setting.</text>
+<text top="961" left="149" width="617" height="15" font="1">From table 5, we may ﬁnd that the cross-entropy is quite close for some dataset pairs like MT03</text>
+<text top="982" left="127" width="638" height="15" font="1">and MT05 , which indicates that the adapted score would change little compared with baseline.</text>
+<text top="1002" left="127" width="638" height="15" font="1">While for the pair like MT03 and MT08, the remarkable difference means that we can achieve</text>
+<text top="1022" left="127" width="638" height="15" font="1">signiﬁcant improvement (1.60 BLEU points for MT08 test and MT03 development, and 0.99</text>
+<text top="1043" left="127" width="638" height="15" font="1">BLEU points for the reverse). We also obtain similar results on the other dataset pairs, including</text>
+<text top="1063" left="127" width="638" height="15" font="1">all separate portions of MT06 and MT08 whose genre information is available. Table 6 displays</text>
+<text top="1083" left="127" width="638" height="15" font="1">the oracle test performance in each dataset pair. We can observe that oracle performance for</text>
+<text top="1104" left="127" width="638" height="15" font="1">MT05(test) under MT03(development) is 37.54, while the baseline is 37.33, which is consistent</text>
+<text top="1124" left="127" width="345" height="15" font="1">with the ratio of cross-entropy between two datasets.</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="130" left="164" width="69" height="13" font="2">DEV:TEST</text>
+<text top="130" left="258" width="46" height="13" font="2">Method</text>
+<text top="130" left="325" width="43" height="13" font="2">1-gram</text>
+<text top="130" left="386" width="43" height="13" font="2">2-gram</text>
+<text top="130" left="447" width="43" height="13" font="2">3-gram</text>
+<text top="130" left="508" width="43" height="13" font="2">4-gram</text>
+<text top="130" left="583" width="18" height="13" font="2">BP</text>
+<text top="130" left="635" width="39" height="13" font="2">BLEU</text>
+<text top="130" left="699" width="28" height="13" font="2">TER</text>
+<text top="149" left="159" width="79" height="13" font="2">MT03:MT08</text>
+<text top="149" left="256" width="51" height="13" font="2">Baseline</text>
+<text top="149" left="326" width="41" height="13" font="2">0.7866</text>
+<text top="149" left="387" width="41" height="13" font="2">0.4155</text>
+<text top="149" left="448" width="41" height="13" font="2">0.2276</text>
+<text top="149" left="509" width="41" height="13" font="2">0.1278</text>
+<text top="149" left="570" width="46" height="13" font="2">-0.2282</text>
+<text top="149" left="634" width="41" height="13" font="2">0.2486</text>
+<text top="149" left="693" width="41" height="13" font="2">0.5904</text>
+<text top="168" left="159" width="79" height="13" font="2">MT03:MT08</text>
+<text top="168" left="256" width="51" height="13" font="2">Adapted</text>
+<text top="168" left="326" width="41" height="13" font="2">0.7708</text>
+<text top="168" left="387" width="41" height="13" font="2">0.4033</text>
+<text top="168" left="448" width="41" height="13" font="2">0.2186</text>
+<text top="168" left="509" width="41" height="13" font="2">0.1222</text>
+<text top="168" left="570" width="46" height="13" font="2">-0.1318</text>
+<text top="168" left="634" width="41" height="13" font="2">0.2646</text>
+<text top="168" left="693" width="41" height="13" font="2">0.5910</text>
+<text top="186" left="159" width="79" height="13" font="2">MT08:MT03</text>
+<text top="186" left="256" width="51" height="13" font="2">Baseline</text>
+<text top="186" left="326" width="41" height="13" font="2">0.7703</text>
+<text top="186" left="387" width="41" height="13" font="2">0.4611</text>
+<text top="186" left="448" width="41" height="13" font="2">0.2773</text>
+<text top="186" left="509" width="41" height="13" font="2">0.1679</text>
+<text top="186" left="572" width="41" height="13" font="2">0.0000</text>
+<text top="186" left="634" width="41" height="13" font="2">0.3586</text>
+<text top="186" left="693" width="41" height="13" font="2">0.5912</text>
+<text top="205" left="159" width="79" height="13" font="2">MT08:MT03</text>
+<text top="205" left="256" width="51" height="13" font="2">Adapted</text>
+<text top="205" left="326" width="41" height="13" font="2">0.7851</text>
+<text top="205" left="387" width="41" height="13" font="2">0.4733</text>
+<text top="205" left="448" width="41" height="13" font="2">0.2860</text>
+<text top="205" left="509" width="41" height="13" font="2">0.1735</text>
+<text top="205" left="572" width="41" height="13" font="2">0.0000</text>
+<text top="205" left="634" width="41" height="13" font="2">0.3685</text>
+<text top="205" left="693" width="41" height="13" font="2">0.5682</text>
+<text top="255" left="127" width="638" height="14" font="2">Table 4: Detailed analysis of BLEU scores, including n-gram precision and length penalty and TER scores,</text>
+<text top="273" left="127" width="252" height="13" font="2">based on dataset pair of MT03 and MT08.</text>
+<text top="299" left="146" width="25" height="11" font="4">DEV</text>
+<text top="299" left="236" width="30" height="11" font="4">MT03</text>
+<text top="299" left="357" width="30" height="11" font="4">MT04</text>
+<text top="299" left="478" width="30" height="11" font="4">MT05</text>
+<text top="299" left="599" width="30" height="11" font="4">MT06</text>
+<text top="299" left="721" width="30" height="11" font="4">MT08</text>
+<text top="314" left="144" width="29" height="11" font="4">TEST</text>
+<text top="314" left="199" width="41" height="11" font="4">Baseline</text>
+<text top="314" left="260" width="41" height="11" font="4">Adapted</text>
+<text top="314" left="320" width="41" height="11" font="4">Baseline</text>
+<text top="314" left="381" width="41" height="11" font="4">Adapted</text>
+<text top="314" left="441" width="41" height="11" font="4">Baseline</text>
+<text top="314" left="502" width="41" height="11" font="4">Adapted</text>
+<text top="314" left="563" width="41" height="11" font="4">Baseline</text>
+<text top="314" left="624" width="41" height="11" font="4">Adapted</text>
+<text top="314" left="684" width="41" height="11" font="4">Baseline</text>
+<text top="314" left="745" width="41" height="11" font="4">Adapted</text>
+<text top="329" left="144" width="30" height="11" font="4">MT03</text>
+<text top="329" left="206" width="27" height="11" font="4">39.14</text>
+<text top="329" left="259" width="41" height="11" font="4">39.14 (|)</text>
+<text top="329" left="327" width="27" height="11" font="4">38.77</text>
+<text top="329" left="379" width="44" height="11" font="4">38.45 (↓)</text>
+<text top="329" left="448" width="27" height="11" font="4">38.61</text>
+<text top="329" left="502" width="41" height="11" font="4">38.69 (|)</text>
+<text top="329" left="570" width="27" height="11" font="4">37.31</text>
+<text top="329" left="623" width="41" height="11" font="4">37.44 (|)</text>
+<text top="329" left="691" width="27" height="11" font="4">35.86</text>
+<text top="329" left="743" width="44" height="11" font="4">36.85 (↑)</text>
+<text top="344" left="144" width="30" height="11" font="4">MT04</text>
+<text top="344" left="206" width="27" height="11" font="4">37.52</text>
+<text top="344" left="258" width="44" height="11" font="4">36.74 (↓)</text>
+<text top="344" left="327" width="27" height="11" font="4">37.93</text>
+<text top="344" left="381" width="41" height="11" font="4">37.93 (|)</text>
+<text top="344" left="448" width="27" height="11" font="4">36.72</text>
+<text top="344" left="500" width="44" height="11" font="4">36.12 (↓)</text>
+<text top="344" left="570" width="27" height="11" font="4">35.81</text>
+<text top="344" left="622" width="44" height="11" font="4">36.84 (↑)</text>
+<text top="344" left="691" width="27" height="11" font="4">34.66</text>
+<text top="344" left="744" width="41" height="11" font="4">36.23(↑)</text>
+<text top="359" left="144" width="30" height="11" font="4">MT05</text>
+<text top="359" left="206" width="27" height="11" font="4">37.33</text>
+<text top="359" left="259" width="41" height="11" font="4">37.37 (|)</text>
+<text top="359" left="327" width="27" height="11" font="4">36.94</text>
+<text top="359" left="381" width="41" height="11" font="4">37.24(↑)</text>
+<text top="359" left="448" width="27" height="11" font="4">36.87</text>
+<text top="359" left="500" width="44" height="11" font="4">36.87 (↑)</text>
+<text top="359" left="570" width="27" height="11" font="4">35.93</text>
+<text top="359" left="625" width="38" height="11" font="4">36.07(|)</text>
+<text top="359" left="691" width="27" height="11" font="4">34.15</text>
+<text top="359" left="743" width="44" height="11" font="4">35.29 (↑)</text>
+<text top="373" left="144" width="30" height="11" font="4">MT06</text>
+<text top="373" left="206" width="27" height="11" font="4">33.58</text>
+<text top="373" left="258" width="44" height="11" font="4">34.04 (↑)</text>
+<text top="373" left="327" width="27" height="11" font="4">33.63</text>
+<text top="373" left="379" width="44" height="11" font="4">35.13 (↑)</text>
+<text top="373" left="448" width="27" height="11" font="4">33.44</text>
+<text top="373" left="502" width="41" height="11" font="4">33.49 (|)</text>
+<text top="373" left="570" width="27" height="11" font="4">36.36</text>
+<text top="373" left="622" width="44" height="11" font="4">36.36 (↑)</text>
+<text top="373" left="691" width="27" height="11" font="4">35.04</text>
+<text top="373" left="743" width="44" height="11" font="4">35.87 (↑)</text>
+<text top="388" left="144" width="30" height="11" font="4">MT08</text>
+<text top="388" left="206" width="27" height="11" font="4">24.86</text>
+<text top="388" left="258" width="44" height="11" font="4">26.46 (↑)</text>
+<text top="388" left="327" width="27" height="11" font="4">24.18</text>
+<text top="388" left="379" width="44" height="11" font="4">27.03 (↑)</text>
+<text top="388" left="448" width="27" height="11" font="4">25.43</text>
+<text top="388" left="500" width="44" height="11" font="4">26.65 (↑)</text>
+<text top="388" left="570" width="27" height="11" font="4">27.74</text>
+<text top="388" left="622" width="44" height="11" font="4">28.86 (↑)</text>
+<text top="388" left="691" width="27" height="11" font="4">29.29</text>
+<text top="388" left="744" width="41" height="11" font="4">29.29 (|)</text>
+<text top="403" left="138" width="41" height="11" font="4">MT06bc</text>
+<text top="403" left="206" width="27" height="11" font="4">24.22</text>
+<text top="403" left="258" width="44" height="11" font="4">27.20 (↑)</text>
+<text top="403" left="327" width="27" height="11" font="4">23.77</text>
+<text top="403" left="379" width="44" height="11" font="4">27.70 (↑)</text>
+<text top="403" left="448" width="27" height="11" font="4">24.64</text>
+<text top="403" left="500" width="44" height="11" font="4">26.26 (↑)</text>
+<text top="403" left="570" width="27" height="11" font="4">27.37</text>
+<text top="403" left="622" width="44" height="11" font="4">28.14 (↑)</text>
+<text top="403" left="691" width="27" height="11" font="4">28.87</text>
+<text top="403" left="743" width="44" height="11" font="4">28.43 (↓)</text>
+<text top="418" left="136" width="44" height="11" font="4">MT06nw</text>
+<text top="418" left="206" width="27" height="11" font="4">40.36</text>
+<text top="418" left="258" width="44" height="11" font="4">39.91 (↓)</text>
+<text top="418" left="327" width="27" height="11" font="4">39.97</text>
+<text top="418" left="379" width="44" height="11" font="4">40.74 (↑)</text>
+<text top="418" left="448" width="27" height="11" font="4">39.85</text>
+<text top="418" left="502" width="41" height="11" font="4">39.72 (|)</text>
+<text top="418" left="570" width="27" height="11" font="4">39.57</text>
+<text top="418" left="622" width="44" height="11" font="4">40.26 (↑)</text>
+<text top="418" left="691" width="27" height="11" font="4">37.71</text>
+<text top="418" left="743" width="44" height="11" font="4">39.72 (↑)</text>
+<text top="433" left="138" width="42" height="11" font="4">MT06ng</text>
+<text top="433" left="206" width="27" height="11" font="4">33.81</text>
+<text top="433" left="259" width="41" height="11" font="4">33.65 (|)</text>
+<text top="433" left="327" width="27" height="11" font="4">34.23</text>
+<text top="433" left="379" width="44" height="11" font="4">34.71 (↑)</text>
+<text top="433" left="448" width="27" height="11" font="4">33.79</text>
+<text top="433" left="500" width="44" height="11" font="4">33.45 (↓)</text>
+<text top="433" left="570" width="27" height="11" font="4">36.72</text>
+<text top="433" left="623" width="41" height="11" font="4">36.53 (|)</text>
+<text top="433" left="691" width="27" height="11" font="4">35.58</text>
+<text top="433" left="743" width="44" height="11" font="4">36.61 (↑)</text>
+<text top="447" left="136" width="44" height="11" font="4">MT08nw</text>
+<text top="447" left="206" width="27" height="11" font="4">29.40</text>
+<text top="447" left="258" width="44" height="11" font="4">30.66 (↑)</text>
+<text top="447" left="327" width="27" height="11" font="4">28.95</text>
+<text top="447" left="379" width="44" height="11" font="4">31.32 (↑)</text>
+<text top="447" left="448" width="27" height="11" font="4">29.67</text>
+<text top="447" left="500" width="44" height="11" font="4">30.31 (↑)</text>
+<text top="447" left="570" width="27" height="11" font="4">32.47</text>
+<text top="447" left="622" width="44" height="11" font="4">33.31 (↑)</text>
+<text top="447" left="691" width="27" height="11" font="4">33.03</text>
+<text top="447" left="743" width="44" height="11" font="4">33.23 (↑)</text>
+<text top="462" left="136" width="44" height="11" font="4">MT08wg</text>
+<text top="462" left="206" width="27" height="11" font="4">18.78</text>
+<text top="462" left="258" width="44" height="11" font="4">21.09 (↑)</text>
+<text top="462" left="327" width="27" height="11" font="4">17.81</text>
+<text top="462" left="379" width="44" height="11" font="4">21.04 (↑)</text>
+<text top="462" left="448" width="27" height="11" font="4">19.74</text>
+<text top="462" left="500" width="44" height="11" font="4">20.91 (↑)</text>
+<text top="462" left="570" width="27" height="11" font="4">21.35</text>
+<text top="462" left="622" width="44" height="11" font="4">23.06 (↑)</text>
+<text top="462" left="691" width="27" height="11" font="4">22.72</text>
+<text top="462" left="743" width="44" height="11" font="4">23.13 (↑)</text>
+<text top="509" left="127" width="638" height="14" font="2">Table 5: Comparison between baseline and LM weight adaption method using 1-best translation on dif-</text>
+<text top="527" left="127" width="638" height="13" font="2">ferent dataset pairs, under large scale setting. Symbol(↑) indicates improvement over 0.2 BLEU points,</text>
+<text top="545" left="127" width="638" height="13" font="2">(↑) indicates improvement over 0.2 BLEU points, (↓) means decline over 0.2 BLEU points, (|) shows no</text>
+<text top="563" left="127" width="111" height="13" font="2">noticeable change.</text>
+<text top="603" left="149" width="617" height="15" font="1">We also calculate the entropy on translations after adaptation of all dataset pairs, which is</text>
+<text top="623" left="127" width="638" height="15" font="1">also listed in table 3. From the results in table 3, we ﬁnd that the cross entropy usually changes</text>
+<text top="644" left="127" width="638" height="15" font="1">according to the ratio of cross-entropy of development and test datasets. Speciﬁcally, the cross</text>
+<text top="664" left="127" width="638" height="15" font="1">entropy of test dataset increases as LM weight decreases, as shown in ﬁgure 2, in which we use</text>
+<text top="684" left="127" width="638" height="15" font="1">the same dataset pairs as in section 3. The reason for the phenomenon in ﬁgure 2 is that when the</text>
+<text top="705" left="127" width="638" height="15" font="1">LM weight increases, the language model turns to play a more important role in the whole SMT</text>
+<text top="725" left="127" width="638" height="15" font="1">system. As a result, the decoder prefers to select the translations with higher LM scores, which</text>
+<text top="745" left="127" width="354" height="15" font="1">are also with shorter length and smaller cross-entropy.</text>
+<text top="766" left="149" width="617" height="15" font="1">Furthermore, we want to know what the improvements could be under our adaptation method.</text>
+<text top="786" left="127" width="638" height="15" font="1">Here we take the pair MT03 and MT08 as example, the details of the results are shown in table 4.</text>
+<text top="806" left="127" width="638" height="15" font="1">We may observe that for the pair of MT03 as development and MT08 as test, the length penalty is</text>
+<text top="827" left="127" width="638" height="15" font="1">quite large. Meanwhile our adaptation method could notably reduce such penalty and get signiﬁ-</text>
+<text top="847" left="127" width="638" height="15" font="1">cant improvement based on BLEU metric. Although the n-gram precision decrease in some sense,</text>
+<text top="894" left="354" width="37" height="13" font="2">MT03</text>
+<text top="894" left="409" width="37" height="13" font="2">MT04</text>
+<text top="894" left="464" width="37" height="13" font="2">MT05</text>
+<text top="894" left="520" width="37" height="13" font="2">MT06</text>
+<text top="894" left="575" width="37" height="13" font="2">MT08</text>
+<text top="913" left="289" width="37" height="13" font="2">MT03</text>
+<text top="913" left="356" width="34" height="13" font="2">39.14</text>
+<text top="913" left="411" width="34" height="13" font="2">38.92</text>
+<text top="913" left="466" width="34" height="13" font="2">38.77</text>
+<text top="913" left="522" width="34" height="13" font="2">38.24</text>
+<text top="913" left="577" width="34" height="13" font="2">38.44</text>
+<text top="931" left="289" width="37" height="13" font="2">MT04</text>
+<text top="931" left="356" width="34" height="13" font="2">37.56</text>
+<text top="931" left="411" width="34" height="13" font="2">37.93</text>
+<text top="931" left="466" width="34" height="13" font="2">36.78</text>
+<text top="931" left="522" width="34" height="13" font="2">37.53</text>
+<text top="931" left="577" width="34" height="13" font="2">37.48</text>
+<text top="950" left="289" width="37" height="13" font="2">MT05</text>
+<text top="950" left="356" width="34" height="13" font="2">37.54</text>
+<text top="950" left="411" width="34" height="13" font="2">37.55</text>
+<text top="950" left="466" width="34" height="13" font="2">36.87</text>
+<text top="950" left="522" width="34" height="13" font="2">36.99</text>
+<text top="950" left="577" width="34" height="13" font="2">37.21</text>
+<text top="969" left="289" width="37" height="13" font="2">MT06</text>
+<text top="969" left="356" width="34" height="13" font="2">36.30</text>
+<text top="969" left="411" width="34" height="13" font="2">36.42</text>
+<text top="969" left="466" width="34" height="13" font="2">35.03</text>
+<text top="969" left="522" width="34" height="13" font="2">36.36</text>
+<text top="969" left="577" width="34" height="13" font="2">36.43</text>
+<text top="987" left="289" width="37" height="13" font="2">MT08</text>
+<text top="987" left="356" width="34" height="13" font="2">28.58</text>
+<text top="987" left="411" width="34" height="13" font="2">28.55</text>
+<text top="987" left="466" width="34" height="13" font="2">27.50</text>
+<text top="987" left="522" width="34" height="13" font="2">29.04</text>
+<text top="987" left="577" width="34" height="13" font="2">29.29</text>
+<text top="1006" left="282" width="51" height="13" font="2">MT06bc</text>
+<text top="1006" left="356" width="34" height="13" font="2">40.98</text>
+<text top="1006" left="411" width="34" height="13" font="2">41.41</text>
+<text top="1006" left="466" width="34" height="13" font="2">40.18</text>
+<text top="1006" left="522" width="34" height="13" font="2">40.29</text>
+<text top="1006" left="577" width="34" height="13" font="2">40.60</text>
+<text top="1024" left="280" width="56" height="13" font="2">MT06nw</text>
+<text top="1024" left="356" width="34" height="13" font="2">36.74</text>
+<text top="1024" left="411" width="34" height="13" font="2">36.75</text>
+<text top="1024" left="466" width="34" height="13" font="2">35.40</text>
+<text top="1024" left="522" width="34" height="13" font="2">36.74</text>
+<text top="1024" left="577" width="34" height="13" font="2">36.60</text>
+<text top="1043" left="282" width="52" height="13" font="2">MT06ng</text>
+<text top="1043" left="356" width="34" height="13" font="2">28.15</text>
+<text top="1043" left="411" width="34" height="13" font="2">28.31</text>
+<text top="1043" left="466" width="34" height="13" font="2">27.22</text>
+<text top="1043" left="522" width="34" height="13" font="2">28.77</text>
+<text top="1043" left="577" width="34" height="13" font="2">28.77</text>
+<text top="1061" left="280" width="56" height="13" font="2">MT08nw</text>
+<text top="1061" left="356" width="34" height="13" font="2">32.82</text>
+<text top="1061" left="411" width="34" height="13" font="2">33.03</text>
+<text top="1061" left="466" width="34" height="13" font="2">31.79</text>
+<text top="1061" left="522" width="34" height="13" font="2">33.71</text>
+<text top="1061" left="577" width="34" height="13" font="2">33.22</text>
+<text top="1080" left="280" width="56" height="13" font="2">MT08wg</text>
+<text top="1080" left="356" width="34" height="13" font="2">22.83</text>
+<text top="1080" left="411" width="34" height="13" font="2">22.79</text>
+<text top="1080" left="466" width="34" height="13" font="2">21.26</text>
+<text top="1080" left="522" width="34" height="13" font="2">23.24</text>
+<text top="1080" left="577" width="34" height="13" font="2">23.22</text>
+<text top="1130" left="208" width="476" height="14" font="2">Table 6: Oracle performance of different dataset pairs under large scale setting.</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="366" left="311" width="12" height="8" font="7">0.4</text>
+<text top="366" left="347" width="12" height="8" font="7">0.6</text>
+<text top="366" left="383" width="12" height="8" font="7">0.8</text>
+<text top="366" left="423" width="5" height="8" font="7">1</text>
+<text top="366" left="456" width="12" height="8" font="7">1.2</text>
+<text top="366" left="492" width="12" height="8" font="7">1.4</text>
+<text top="366" left="528" width="12" height="8" font="7">1.6</text>
+<text top="366" left="565" width="12" height="8" font="7">1.8</text>
+<text top="359" left="303" width="12" height="8" font="7">1.6</text>
+<text top="333" left="303" width="12" height="8" font="7">1.7</text>
+<text top="308" left="303" width="12" height="8" font="7">1.8</text>
+<text top="283" left="303" width="12" height="8" font="7">1.9</text>
+<text top="258" left="310" width="5" height="8" font="7">2</text>
+<text top="232" left="303" width="12" height="8" font="7">2.1</text>
+<text top="207" left="303" width="12" height="8" font="7">2.2</text>
+<text top="182" left="303" width="12" height="8" font="7">2.3</text>
+<text top="157" left="303" width="12" height="8" font="7">2.4</text>
+<text top="375" left="395" width="116" height="8" font="7">LM weight variation percentage</text>
+<text top="297" left="297" width="0" height="8" font="8">Cross−entropy of test data</text>
+<text top="358" left="316" width="2" height="8" font="7"> </text>
+<text top="144" left="587" width="2" height="8" font="7"> </text>
+<text top="155" left="495" width="88" height="8" font="7">DEV:MT03 TEST:MT08</text>
+<text top="165" left="495" width="88" height="8" font="7">DEV:MT08 TEST:MT03</text>
+<text top="175" left="495" width="88" height="8" font="7">DEV:MT03 TEST:MT04</text>
+<text top="185" left="495" width="88" height="8" font="7">DEV:MT04 TEST:MT03</text>
+<text top="414" left="148" width="596" height="14" font="2">Figure 2: The cross entropy of test vs. LM weight variation in percentage for different dataset pairs</text>
+<text top="459" left="127" width="638" height="15" font="1">the gain from the length penalty decrease could counteract reduction on the precision. While for</text>
+<text top="480" left="127" width="638" height="15" font="1">the case in which MT08 as development and MT03 as test, the length penalty of both baseline</text>
+<text top="500" left="127" width="638" height="15" font="1">and adapted results are equal, while n-gram precision of adapted method is higher than that of</text>
+<text top="520" left="127" width="638" height="15" font="1">baseline, which leads to improvements on ﬁnal performance. Meanwhile, we also apply another</text>
+<text top="541" left="127" width="638" height="15" font="1">SMT metric TER (Snover et al., 2006) to evaluate the results of the dataset pair MT03 and MT08,</text>
+<text top="561" left="127" width="638" height="15" font="1">as shown in table 4. When we use MT03 as development and MT08 as test, the TER result shows</text>
+<text top="581" left="127" width="638" height="15" font="1">no improvement. This is consistent with observation from above discussion, as improvement for</text>
+<text top="602" left="127" width="638" height="15" font="1">BLEU mainly comes from length penalty, not n-gram precision. Meanwhile, when we use MT08</text>
+<text top="622" left="127" width="638" height="15" font="1">as development and MT03 as test, we achieve signiﬁcant improvement on the TER score. This</text>
+<text top="642" left="127" width="616" height="15" font="1">inconsistency shows some potential difference between the TER metric and the BLEU metric.</text>
+<text top="663" left="149" width="617" height="15" font="1">However, for some dataset pairs, the adapted result is not so good as the baseline. The reason</text>
+<text top="683" left="127" width="638" height="15" font="1">might be that the closeness of test and development measured through cross-entropy is more sig-</text>
+<text top="703" left="127" width="638" height="15" font="1">niﬁcant than the real difference. Taking MT03(development) and MT04(test) for example, from</text>
+<text top="724" left="127" width="638" height="15" font="1">ﬁgure 1 we could ﬁnd that the baseline is almost the same as oracle (0.01 BLEU points differ-</text>
+<text top="744" left="127" width="638" height="15" font="1">ence), while the ratio of the cross-entropy from table 3 is larger than our intuition, making the LM</text>
+<text top="764" left="127" width="638" height="15" font="1">weight over-adapted and the performance decreased. Nevertheless, the results in table 5 show that</text>
+<text top="785" left="127" width="638" height="15" font="1">our method works well for most dataset pairs (33 of 50 groups increase, while only 6 of 50 groups</text>
+<text top="805" left="127" width="638" height="15" font="1">decrease). Although our adaption method is in a sense empirical, we believe it reﬂects the inherent</text>
+<text top="825" left="127" width="202" height="15" font="1">relations in the LM adaptation.</text>
+<text top="846" left="149" width="617" height="15" font="1">Furthermore, we want to know the inﬂuence of the cross-entropy variation on BLEU score im-</text>
+<text top="866" left="127" width="638" height="15" font="1">provements. In ﬁgure 3, the X-axis represents the absolute value of relative change between devel-</text>
+<text top="888" left="127" width="195" height="15" font="1">opment and test dataset (i.e., |</text>
+<text top="883" left="324" width="32" height="11" font="4">H(D)</text>
+<text top="897" left="325" width="30" height="11" font="4">H(T )</text>
+<text top="887" left="362" width="404" height="16" font="1">− 1|), and the Y-axis displays the improvements of the BLEU</text>
+<text top="908" left="127" width="638" height="15" font="1">score under adaptation. We would observe that all ﬁve groups of points are well linear, show-</text>
+<text top="929" left="127" width="638" height="15" font="1">ing strong correlations between adaptation improvements and cross-entropy difference. Based on</text>
+<text top="949" left="127" width="638" height="15" font="1">above results, we can draw the conclusion that even if cross-entropy may not be the only factor</text>
+<text top="969" left="127" width="562" height="15" font="1">that determines the bias-estimation of LM weight, it is still one of the most important.</text>
+<text top="995" left="127" width="22" height="16" font="3">5.3</text>
+<text top="995" left="168" width="369" height="16" font="3">1-best VS. N-best Translation Result Adaptation</text>
+<text top="1022" left="127" width="638" height="15" font="1">In the above part, we utilize mere 1-best translation results for entropy calculation. We wonder</text>
+<text top="1043" left="127" width="638" height="15" font="1">what the result would be if more outputs are used. With MT03 as development, MT05 and MT08</text>
+<text top="1063" left="127" width="638" height="15" font="1">as test respectively, we run adaptation under number from 1 to 20 best translations. Results in</text>
+<text top="1083" left="127" width="638" height="15" font="1">ﬁgure 4 show that the number of translation outputs shows little impact on the adaptation results,</text>
+<text top="1104" left="127" width="638" height="15" font="1">since the deviation between maximal and minimal score is quite small(less than 0.2 BLEU score</text>
+<text top="1124" left="127" width="531" height="15" font="1">points). And in the following parts, we adopt 1-best translation as default setting.</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="240" left="289" width="5" height="8" font="7">0</text>
+<text top="240" left="307" width="16" height="8" font="7">0.05</text>
+<text top="240" left="334" width="12" height="8" font="7">0.1</text>
+<text top="240" left="356" width="16" height="8" font="7">0.15</text>
+<text top="214" left="282" width="5" height="8" font="7">0</text>
+<text top="190" left="282" width="5" height="8" font="7">1</text>
+<text top="166" left="282" width="5" height="8" font="7">2</text>
+<text top="132" left="324" width="21" height="8" font="7">MT03</text>
+<text top="241" left="410" width="5" height="8" font="7">0</text>
+<text top="241" left="438" width="12" height="8" font="7">0.1</text>
+<text top="241" left="470" width="12" height="8" font="7">0.2</text>
+<text top="225" left="397" width="5" height="8" font="7">0</text>
+<text top="204" left="397" width="5" height="8" font="7">1</text>
+<text top="182" left="397" width="5" height="8" font="7">2</text>
+<text top="161" left="397" width="5" height="8" font="7">3</text>
+<text top="132" left="439" width="21" height="8" font="7">MT04</text>
+<text top="239" left="519" width="5" height="8" font="7">0</text>
+<text top="239" left="537" width="16" height="8" font="7">0.05</text>
+<text top="239" left="563" width="12" height="8" font="7">0.1</text>
+<text top="239" left="585" width="16" height="8" font="7">0.15</text>
+<text top="221" left="502" width="16" height="8" font="7">−0.5</text>
+<text top="205" left="514" width="5" height="8" font="7">0</text>
+<text top="189" left="507" width="12" height="8" font="7">0.5</text>
+<text top="173" left="514" width="5" height="8" font="7">1</text>
+<text top="157" left="507" width="12" height="8" font="7">1.5</text>
+<text top="136" left="554" width="21" height="8" font="7">MT05</text>
+<text top="374" left="310" width="5" height="8" font="7">0</text>
+<text top="374" left="339" width="16" height="8" font="7">0.05</text>
+<text top="374" left="376" width="12" height="8" font="7">0.1</text>
+<text top="374" left="408" width="16" height="8" font="7">0.15</text>
+<text top="350" left="306" width="5" height="8" font="7">0</text>
+<text top="327" left="299" width="12" height="8" font="7">0.5</text>
+<text top="304" left="306" width="5" height="8" font="7">1</text>
+<text top="281" left="299" width="12" height="8" font="7">1.5</text>
+<text top="253" left="354" width="21" height="8" font="7">MT06</text>
+<text top="375" left="486" width="5" height="8" font="7">0</text>
+<text top="375" left="525" width="12" height="8" font="7">0.1</text>
+<text top="375" left="569" width="12" height="8" font="7">0.2</text>
+<text top="349" left="473" width="5" height="8" font="7">0</text>
+<text top="328" left="466" width="12" height="8" font="7">0.5</text>
+<text top="306" left="473" width="5" height="8" font="7">1</text>
+<text top="285" left="466" width="12" height="8" font="7">1.5</text>
+<text top="263" left="473" width="5" height="8" font="7">2</text>
+<text top="253" left="522" width="21" height="8" font="7">MT08</text>
+<text top="414" left="127" width="638" height="14" font="2">Figure 3: The variation of BLEU score (in value) vs. cross-entropy ratio between development and test</text>
+<text top="432" left="127" width="242" height="13" font="2">dataset under each development datasets</text>
+<text top="466" left="146" width="25" height="11" font="4">DEV</text>
+<text top="466" left="236" width="30" height="11" font="4">MT03</text>
+<text top="466" left="357" width="30" height="11" font="4">MT04</text>
+<text top="466" left="478" width="30" height="11" font="4">MT05</text>
+<text top="466" left="599" width="30" height="11" font="4">MT06</text>
+<text top="466" left="721" width="30" height="11" font="4">MT08</text>
+<text top="481" left="144" width="29" height="11" font="4">TEST</text>
+<text top="481" left="199" width="41" height="11" font="4">Baseline</text>
+<text top="481" left="260" width="41" height="11" font="4">Adapted</text>
+<text top="481" left="320" width="41" height="11" font="4">Baseline</text>
+<text top="481" left="381" width="41" height="11" font="4">Adapted</text>
+<text top="481" left="441" width="41" height="11" font="4">Baseline</text>
+<text top="481" left="502" width="41" height="11" font="4">Adapted</text>
+<text top="481" left="563" width="41" height="11" font="4">Baseline</text>
+<text top="481" left="624" width="41" height="11" font="4">Adapted</text>
+<text top="481" left="684" width="41" height="11" font="4">Baseline</text>
+<text top="481" left="745" width="41" height="11" font="4">Adapted</text>
+<text top="495" left="144" width="30" height="11" font="4">MT03</text>
+<text top="495" left="206" width="27" height="11" font="4">39.14</text>
+<text top="495" left="259" width="41" height="11" font="4">39.14 (|)</text>
+<text top="495" left="327" width="27" height="11" font="4">38.76</text>
+<text top="495" left="381" width="41" height="11" font="4">38.82 (|)</text>
+<text top="495" left="448" width="27" height="11" font="4">38.59</text>
+<text top="495" left="502" width="41" height="11" font="4">38.49 (|)</text>
+<text top="495" left="570" width="27" height="11" font="4">37.32</text>
+<text top="495" left="623" width="41" height="11" font="4">37.47 (|)</text>
+<text top="495" left="691" width="27" height="11" font="4">35.87</text>
+<text top="495" left="743" width="44" height="11" font="4">36.70 (↑)</text>
+<text top="510" left="144" width="30" height="11" font="4">MT04</text>
+<text top="510" left="206" width="27" height="11" font="4">37.52</text>
+<text top="510" left="258" width="44" height="11" font="4">37.04 (↓)</text>
+<text top="510" left="327" width="27" height="11" font="4">37.93</text>
+<text top="510" left="381" width="41" height="11" font="4">37.93 (|)</text>
+<text top="510" left="448" width="27" height="11" font="4">36.72</text>
+<text top="510" left="500" width="44" height="11" font="4">36.50 (↓)</text>
+<text top="510" left="570" width="27" height="11" font="4">35.80</text>
+<text top="510" left="622" width="44" height="11" font="4">36.53 (↑)</text>
+<text top="510" left="691" width="27" height="11" font="4">34.66</text>
+<text top="510" left="743" width="44" height="11" font="4">35.73 (↑)</text>
+<text top="525" left="144" width="30" height="11" font="4">MT05</text>
+<text top="525" left="206" width="27" height="11" font="4">37.33</text>
+<text top="525" left="258" width="44" height="11" font="4">37.11 (↓)</text>
+<text top="525" left="327" width="27" height="11" font="4">36.92</text>
+<text top="525" left="379" width="44" height="11" font="4">37.18 (↑)</text>
+<text top="525" left="448" width="27" height="11" font="4">36.87</text>
+<text top="525" left="502" width="41" height="11" font="4">36.87 (|)</text>
+<text top="525" left="570" width="27" height="11" font="4">35.90</text>
+<text top="525" left="622" width="44" height="11" font="4">36.22 (↑)</text>
+<text top="525" left="691" width="27" height="11" font="4">34.15</text>
+<text top="525" left="743" width="44" height="11" font="4">35.36 (↑)</text>
+<text top="540" left="144" width="30" height="11" font="4">MT06</text>
+<text top="540" left="206" width="27" height="11" font="4">33.58</text>
+<text top="540" left="259" width="41" height="11" font="4">33.85(↑)</text>
+<text top="540" left="327" width="27" height="11" font="4">33.62</text>
+<text top="540" left="379" width="44" height="11" font="4">34.51 (↑)</text>
+<text top="540" left="448" width="27" height="11" font="4">33.41</text>
+<text top="540" left="502" width="41" height="11" font="4">33.55 (|)</text>
+<text top="540" left="570" width="27" height="11" font="4">36.36</text>
+<text top="540" left="623" width="41" height="11" font="4">36.36 (|)</text>
+<text top="540" left="691" width="27" height="11" font="4">35.04</text>
+<text top="540" left="743" width="44" height="11" font="4">35.77 (↑)</text>
+<text top="555" left="144" width="30" height="11" font="4">MT08</text>
+<text top="555" left="206" width="27" height="11" font="4">24.86</text>
+<text top="555" left="259" width="41" height="11" font="4">26.23(↑)</text>
+<text top="555" left="327" width="27" height="11" font="4">24.18</text>
+<text top="555" left="379" width="44" height="11" font="4">26.30 (↑)</text>
+<text top="555" left="448" width="27" height="11" font="4">25.43</text>
+<text top="555" left="500" width="44" height="11" font="4">26.32 (↑)</text>
+<text top="555" left="570" width="27" height="11" font="4">27.75</text>
+<text top="555" left="622" width="44" height="11" font="4">28.93 (↑)</text>
+<text top="555" left="691" width="27" height="11" font="4">29.29</text>
+<text top="555" left="744" width="41" height="11" font="4">29.29 (|)</text>
+<text top="569" left="138" width="41" height="11" font="4">MT06bc</text>
+<text top="569" left="206" width="27" height="11" font="4">24.22</text>
+<text top="569" left="258" width="44" height="11" font="4">26.06 (↑)</text>
+<text top="569" left="327" width="27" height="11" font="4">23.77</text>
+<text top="569" left="381" width="41" height="11" font="4">26.44(↑)</text>
+<text top="569" left="448" width="27" height="11" font="4">24.64</text>
+<text top="569" left="500" width="44" height="11" font="4">26.18 (↑)</text>
+<text top="569" left="570" width="27" height="11" font="4">27.40</text>
+<text top="569" left="622" width="44" height="11" font="4">28.61 (↑)</text>
+<text top="569" left="691" width="27" height="11" font="4">28.87</text>
+<text top="569" left="743" width="44" height="11" font="4">28.48 (↓)</text>
+<text top="584" left="136" width="44" height="11" font="4">MT06nw</text>
+<text top="584" left="206" width="27" height="11" font="4">40.36</text>
+<text top="584" left="259" width="41" height="11" font="4">39.48(↓)</text>
+<text top="584" left="327" width="27" height="11" font="4">39.97</text>
+<text top="584" left="379" width="44" height="11" font="4">39.46 (↓)</text>
+<text top="584" left="448" width="27" height="11" font="4">39.78</text>
+<text top="584" left="502" width="41" height="11" font="4">39.63 (|)</text>
+<text top="584" left="570" width="27" height="11" font="4">39.57</text>
+<text top="584" left="622" width="44" height="11" font="4">40.54 (↑)</text>
+<text top="584" left="691" width="27" height="11" font="4">37.71</text>
+<text top="584" left="743" width="44" height="11" font="4">39.75 (↑)</text>
+<text top="599" left="138" width="42" height="11" font="4">MT06ng</text>
+<text top="599" left="206" width="27" height="11" font="4">33.81</text>
+<text top="599" left="259" width="41" height="11" font="4">34.08(↑)</text>
+<text top="599" left="327" width="27" height="11" font="4">34.23</text>
+<text top="599" left="379" width="44" height="11" font="4">34.72 (↑)</text>
+<text top="599" left="448" width="27" height="11" font="4">33.76</text>
+<text top="599" left="503" width="38" height="11" font="4">33.80(|)</text>
+<text top="599" left="570" width="27" height="11" font="4">36.73</text>
+<text top="599" left="623" width="41" height="11" font="4">36.74 (|)</text>
+<text top="599" left="691" width="27" height="11" font="4">35.59</text>
+<text top="599" left="743" width="44" height="11" font="4">36.08 (↑)</text>
+<text top="614" left="136" width="44" height="11" font="4">MT08nw</text>
+<text top="614" left="206" width="27" height="11" font="4">29.40</text>
+<text top="614" left="258" width="44" height="11" font="4">30.64 (↑)</text>
+<text top="614" left="327" width="27" height="11" font="4">28.95</text>
+<text top="614" left="381" width="41" height="11" font="4">30.85(↑)</text>
+<text top="614" left="448" width="27" height="11" font="4">29.67</text>
+<text top="614" left="502" width="41" height="11" font="4">30.32(↑)</text>
+<text top="614" left="570" width="27" height="11" font="4">32.49</text>
+<text top="614" left="622" width="44" height="11" font="4">33.10 (↑)</text>
+<text top="614" left="691" width="27" height="11" font="4">33.05</text>
+<text top="614" left="744" width="41" height="11" font="4">33.20 (|)</text>
+<text top="628" left="136" width="44" height="11" font="4">MT08wg</text>
+<text top="628" left="206" width="27" height="11" font="4">18.78</text>
+<text top="628" left="258" width="44" height="11" font="4">20.35 (↑)</text>
+<text top="628" left="327" width="27" height="11" font="4">17.81</text>
+<text top="628" left="381" width="41" height="11" font="4">20.03(↑)</text>
+<text top="628" left="448" width="27" height="11" font="4">19.74</text>
+<text top="628" left="502" width="41" height="11" font="4">20.88(↑)</text>
+<text top="628" left="570" width="27" height="11" font="4">21.35</text>
+<text top="628" left="622" width="44" height="11" font="4">22.65 (↑)</text>
+<text top="628" left="691" width="27" height="11" font="4">22.73</text>
+<text top="628" left="743" width="44" height="11" font="4">22.99 (↑)</text>
+<text top="676" left="127" width="638" height="14" font="2">Table 7: Comparison between baseline and LM weight adaption method using references on different</text>
+<text top="694" left="127" width="230" height="13" font="2">dataset pairs, under large scale setting.</text>
+<text top="730" left="127" width="22" height="16" font="3">5.4</text>
+<text top="730" left="168" width="291" height="16" font="3">Adaptation on Translation References</text>
+<text top="758" left="127" width="638" height="15" font="1">In practice, entropy of translation outputs, rather than references, is used for adaptation. Nev-</text>
+<text top="778" left="127" width="638" height="15" font="1">ertheless, we want to know whether there exists some difference between these two approaches.</text>
+<text top="799" left="127" width="638" height="15" font="1">Table 7 shows the results under adaptation on entropy of references, while the related entropy is</text>
+<text top="819" left="127" width="638" height="15" font="1">shown in Table 8. We could ﬁnd that adapted results and the cross-entropy are both consistent</text>
+<text top="839" left="127" width="638" height="15" font="1">with those of using 1-best translation, as in SMT the model weight is tuned in the way that tries to</text>
+<text top="860" left="127" width="408" height="15" font="1">make translation outputs as close as possible to the references.</text>
+<text top="895" left="138" width="40" height="12" font="6">Dataset</text>
+<text top="895" left="199" width="34" height="12" font="6">MT03</text>
+<text top="895" left="254" width="34" height="12" font="6">MT04</text>
+<text top="895" left="309" width="34" height="12" font="6">MT05</text>
+<text top="895" left="364" width="34" height="12" font="6">MT06</text>
+<text top="895" left="419" width="34" height="12" font="6">MT08</text>
+<text top="895" left="472" width="46" height="12" font="6">MT06bc</text>
+<text top="895" left="536" width="50" height="12" font="6">MT06nw</text>
+<text top="895" left="604" width="47" height="12" font="6">MT06ng</text>
+<text top="895" left="669" width="50" height="12" font="6">MT08nw</text>
+<text top="895" left="737" width="50" height="12" font="6">MT08wg</text>
+<text top="912" left="136" width="43" height="12" font="6">Entropy</text>
+<text top="912" left="198" width="37" height="12" font="6">2.3450</text>
+<text top="912" left="252" width="37" height="12" font="6">2.2456</text>
+<text top="912" left="307" width="37" height="12" font="6">2.3019</text>
+<text top="912" left="362" width="37" height="12" font="6">2.3854</text>
+<text top="912" left="417" width="37" height="12" font="6">2.5778</text>
+<text top="912" left="477" width="37" height="12" font="6">2.2105</text>
+<text top="912" left="543" width="37" height="12" font="6">2.3690</text>
+<text top="912" left="609" width="37" height="12" font="6">2.6281</text>
+<text top="912" left="676" width="37" height="12" font="6">2.4955</text>
+<text top="912" left="744" width="37" height="12" font="6">2.6791</text>
+<text top="961" left="255" width="384" height="14" font="2">Table 8: Cross entropy of each dataset calculated on references.</text>
+<text top="994" left="127" width="22" height="16" font="3">5.5</text>
+<text top="994" left="168" width="257" height="16" font="3">Adaptation on Random Test Data</text>
+<text top="1022" left="127" width="638" height="15" font="1">In our experiment, we always use the standard NIST datasets to evaluate the adaptation method.</text>
+<text top="1043" left="127" width="638" height="15" font="1">We also want to validate our method under more datasets in this section. Using MT03 as devel-</text>
+<text top="1063" left="127" width="638" height="15" font="1">opment, we build six extra test datasets by randomly selecting 50, 100, 300, 600, 1200 and 2000</text>
+<text top="1083" left="127" width="638" height="15" font="1">sentences respectively from the collections of MT04, MT05, MT06 and MT08. Related results are</text>
+<text top="1104" left="127" width="638" height="15" font="1">shown in Table 9, in which improvements still could be achieved but not so signiﬁcant as the re-</text>
+<text top="1124" left="127" width="638" height="15" font="1">sults in table 5. Based on experimental results, we know that some datasets like MT04 and MT05</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="9" size="5" family="Helvetica" color="#000000"/>
+	<fontspec id="10" size="5" family="Helvetica" color="#000000"/>
+<text top="332" left="180" width="4" height="7" font="9">0</text>
+<text top="332" left="239" width="4" height="7" font="9">5</text>
+<text top="332" left="295" width="8" height="7" font="9">10</text>
+<text top="332" left="354" width="8" height="7" font="9">15</text>
+<text top="332" left="412" width="8" height="7" font="9">20</text>
+<text top="326" left="172" width="8" height="7" font="9">37</text>
+<text top="308" left="166" width="14" height="7" font="9">37.1</text>
+<text top="289" left="166" width="14" height="7" font="9">37.2</text>
+<text top="271" left="166" width="14" height="7" font="9">37.3</text>
+<text top="252" left="166" width="14" height="7" font="9">37.4</text>
+<text top="234" left="166" width="14" height="7" font="9">37.5</text>
+<text top="216" left="166" width="14" height="7" font="9">37.6</text>
+<text top="197" left="166" width="14" height="7" font="9">37.7</text>
+<text top="179" left="166" width="14" height="7" font="9">37.8</text>
+<text top="160" left="166" width="14" height="7" font="9">37.9</text>
+<text top="142" left="172" width="8" height="7" font="9">38</text>
+<text top="341" left="290" width="18" height="7" font="9">nbest</text>
+<text top="241" left="161" width="0" height="7" font="10">BLEU</text>
+<text top="134" left="189" width="222" height="7" font="9">Adaptation under different N−best Calculation, MT03:DEV, MT05:Test</text>
+<text top="326" left="181" width="2" height="7" font="9"> </text>
+<text top="142" left="415" width="2" height="7" font="9"> </text>
+<text top="152" left="218" width="27" height="7" font="9">baseline</text>
+<text top="163" left="218" width="26" height="7" font="9">adapted</text>
+<text top="332" left="485" width="4" height="7" font="9">0</text>
+<text top="332" left="544" width="4" height="7" font="9">5</text>
+<text top="332" left="600" width="8" height="7" font="9">10</text>
+<text top="332" left="659" width="8" height="7" font="9">15</text>
+<text top="332" left="717" width="8" height="7" font="9">20</text>
+<text top="326" left="477" width="8" height="7" font="9">24</text>
+<text top="295" left="471" width="14" height="7" font="9">24.5</text>
+<text top="265" left="477" width="8" height="7" font="9">25</text>
+<text top="234" left="471" width="14" height="7" font="9">25.5</text>
+<text top="203" left="477" width="8" height="7" font="9">26</text>
+<text top="173" left="471" width="14" height="7" font="9">26.5</text>
+<text top="142" left="477" width="8" height="7" font="9">27</text>
+<text top="341" left="596" width="18" height="7" font="9">nbest</text>
+<text top="241" left="467" width="0" height="7" font="10">BLEU</text>
+<text top="134" left="494" width="222" height="7" font="9">Adaptation under different N−best Calculation, MT03:DEV, MT08:Test</text>
+<text top="326" left="486" width="2" height="7" font="9"> </text>
+<text top="142" left="720" width="2" height="7" font="9"> </text>
+<text top="150" left="521" width="27" height="7" font="9">baseline</text>
+<text top="160" left="521" width="26" height="7" font="9">adapted</text>
+<text top="377" left="127" width="638" height="14" font="2">Figure 4: The adaptation results under entropy calculation on different number of translation outputs, with</text>
+<text top="395" left="127" width="416" height="13" font="2">MT03 as Development and MT05 as Test(Left), MT08 as Test(Right)</text>
+<text top="428" left="309" width="51" height="13" font="2">Random</text>
+<text top="428" left="378" width="51" height="13" font="2">Baseline</text>
+<text top="428" left="461" width="51" height="13" font="2">Adapted</text>
+<text top="428" left="543" width="40" height="13" font="2">Oracle</text>
+<text top="447" left="327" width="15" height="13" font="2">50</text>
+<text top="447" left="387" width="34" height="13" font="2">34.52</text>
+<text top="447" left="447" width="78" height="13" font="2">35.03(+0.51)</text>
+<text top="447" left="547" width="34" height="13" font="2">35.05</text>
+<text top="465" left="324" width="22" height="13" font="2">100</text>
+<text top="465" left="387" width="34" height="13" font="2">34.79</text>
+<text top="465" left="449" width="75" height="13" font="2">34.33(-0.46)</text>
+<text top="465" left="547" width="34" height="13" font="2">34.94</text>
+<text top="484" left="324" width="22" height="13" font="2">300</text>
+<text top="484" left="387" width="34" height="13" font="2">33.06</text>
+<text top="484" left="447" width="78" height="13" font="2">33.38(+0.32)</text>
+<text top="484" left="547" width="34" height="13" font="2">33.82</text>
+<text top="502" left="324" width="22" height="13" font="2">600</text>
+<text top="502" left="387" width="34" height="13" font="2">33.48</text>
+<text top="502" left="447" width="78" height="13" font="2">33.72(+0.24)</text>
+<text top="502" left="547" width="34" height="13" font="2">34.91</text>
+<text top="521" left="320" width="30" height="13" font="2">1200</text>
+<text top="521" left="387" width="34" height="13" font="2">33.64</text>
+<text top="521" left="447" width="78" height="13" font="2">33.92(+0.28)</text>
+<text top="521" left="547" width="34" height="13" font="2">35.03</text>
+<text top="539" left="320" width="30" height="13" font="2">2000</text>
+<text top="539" left="387" width="34" height="13" font="2">33.72</text>
+<text top="539" left="447" width="78" height="13" font="2">34.04(+0.32)</text>
+<text top="539" left="547" width="34" height="13" font="2">35.22</text>
+<text top="590" left="127" width="638" height="14" font="2">Table 9: Results with MT03 as development and random selected datasets as test, under large scale setting</text>
+<text top="628" left="127" width="638" height="15" font="1">are close to the development MT03, while some others are different. One basic assumption for our</text>
+<text top="648" left="127" width="638" height="15" font="1">adaptation method is that the dataset is composed of several documents, each belongs to a speciﬁc</text>
+<text top="668" left="127" width="638" height="15" font="1">domain. Hence for the random datasets, their distribution is a mixture of multiple sources, making</text>
+<text top="688" left="127" width="572" height="15" font="1">the adaptation performance not so signiﬁcant as that on normal MT evaluation datasets.</text>
+<text top="724" left="127" width="9" height="16" font="3">6</text>
+<text top="724" left="154" width="86" height="16" font="3">Conclusion</text>
+<text top="752" left="127" width="638" height="15" font="1">In this article, we address the problem of LM weight mismatch between tuning and testing. In</text>
+<text top="773" left="127" width="638" height="15" font="1">particular, cross-entropy on n-best translation hypotheses is adopted as a metric to indicate the</text>
+<text top="793" left="127" width="638" height="15" font="1">bias-estimation in language modeling. Furthermore, an adaptation approach is proposed to adjust</text>
+<text top="813" left="127" width="638" height="15" font="1">the LM weight using the ratio of cross-entropy between different datasets. Experimental results</text>
+<text top="834" left="127" width="638" height="15" font="1">show that our cross-entropy based adaptation strategy signiﬁcantly alleviates the bias problem of</text>
+<text top="854" left="127" width="638" height="15" font="1">language modeling and signiﬁcant improvements could be achieved when the test data is quite</text>
+<text top="874" left="127" width="208" height="15" font="1">different from the development.</text>
+<text top="895" left="149" width="617" height="15" font="1">In this paper, we only tackle the adaptation on corpus level. In future we are going to explore</text>
+<text top="915" left="127" width="638" height="15" font="1">LM adaptation on document and sentence level. Besides, we also intend to apply adaptation to</text>
+<text top="935" left="127" width="638" height="15" font="1">multiple LMs. Although our method works well on most dataset pairs, there still exist some pairs</text>
+<text top="956" left="127" width="638" height="15" font="1">on which our method fails. Therefore, it will be interesting to further investigate the factors that</text>
+<text top="976" left="127" width="253" height="15" font="1">determine the adaptation performance.</text>
+<text top="1011" left="127" width="140" height="16" font="3">Acknowledgments</text>
+<text top="1040" left="127" width="638" height="15" font="1">We thank Shujie Liu for his meaningful suggestions. We would also like to thank the anonymous</text>
+<text top="1060" left="127" width="638" height="15" font="1">reviewers for their helpful comments. This work is supported by the National Natural Science</text>
+<text top="1081" left="127" width="638" height="15" font="1">Foundation of China (No.61003112) and the National Fundamental Research Program of China</text>
+<text top="1101" left="127" width="119" height="15" font="1">(2010CB327903).</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="132" left="127" width="83" height="16" font="3">References</text>
+<text top="162" left="127" width="638" height="15" font="1">Amittai Axelrod, Xiaodong He and Jianfeng Gao. 2011. Domain Adaptation via Pseudo In-</text>
+<text top="182" left="149" width="617" height="15" font="1">Domain Data Selection. In Proceedings of the 2011 Conference on Empirical Methods in</text>
+<text top="203" left="149" width="196" height="14" font="1">Natural Language Processing</text>
+<text top="203" left="345" width="219" height="15" font="1">, 355-362, Edinburgh, July, 2011.</text>
+<text top="229" left="127" width="638" height="15" font="1">David Chiang. 2005. A Hierarchical Phrase-based Model for Statistical Machine Translation. In</text>
+<text top="250" left="149" width="340" height="14" font="1">Proceedings of the 43rd Annual Meeting of the ACL</text>
+<text top="249" left="489" width="67" height="15" font="1">, 263-270.</text>
+<text top="276" left="127" width="638" height="15" font="1">Almut Hildebrand, Matthias Eck, Stephan Vogel, and Alex Waibel. 2005. Adaptation of the</text>
+<text top="296" left="149" width="617" height="15" font="1">Translation Model for Statistical Machine translation based on Information Retrieval. In Pro-</text>
+<text top="316" left="149" width="121" height="14" font="1">ceedings of EAMT</text>
+<text top="316" left="270" width="137" height="15" font="1">, Budapest, Hungary.</text>
+<text top="343" left="127" width="638" height="15" font="1">George Foster and Roland Kuhn. 2007. Mixture-Model Adaptation for SMT. In Proceedings of</text>
+<text top="363" left="149" width="404" height="14" font="1">the Second ACL Workshop on Statistical Machine Translation</text>
+<text top="363" left="553" width="170" height="15" font="1">, Prague, Czech Republic.</text>
+<text top="389" left="127" width="638" height="15" font="1">George Foster, Cyril Goutte and Roland Kuhn. 2010. Discriminative Instance Weighting for</text>
+<text top="410" left="149" width="617" height="15" font="1">Domain Adaptation in Statistical Machine Translation. In Proceedings of the 2010 Conference</text>
+<text top="430" left="149" width="367" height="14" font="1">on Empirical Methods in Natural Language Processing</text>
+<text top="430" left="515" width="250" height="15" font="1">, 451-459, MIT, Massachusetts, USA,</text>
+<text top="450" left="149" width="94" height="15" font="1">October 2010.</text>
+<text top="476" left="127" width="638" height="15" font="1">Philipp Koehn and Josh Schroeder. 2007. Experiments in Domain Adaptation for Statistical Ma-</text>
+<text top="497" left="149" width="617" height="15" font="1">chine Translation. In Proceedings of the Second Workshop on Statistical Machine Translation,</text>
+<text top="517" left="149" width="187" height="15" font="1">224-227, Prague, June 2007.</text>
+<text top="543" left="127" width="638" height="15" font="1">Mu Li, Yinggong Zhao, Dongdong Zhang and Ming Zhou. 2010. Adaptive Development Data</text>
+<text top="564" left="149" width="617" height="15" font="1">Selection for Log-linear Model in Statistical Machine Translation. In Proceedings of the 23rd</text>
+<text top="584" left="149" width="460" height="14" font="1">International Conference on Computational Linguistics (Coling 2010)</text>
+<text top="584" left="609" width="67" height="15" font="1">, 662-670.</text>
+<text top="610" left="127" width="638" height="15" font="1">Yajuan L¨u, Jin Huang and Qun Liu. 2007. Improving Statistical Machine Translation Performance</text>
+<text top="631" left="149" width="617" height="15" font="1">by Training Data Selection and Optimization. In Proceedings of the 2007 Joint Conference on</text>
+<text top="651" left="149" width="617" height="14" font="1">Empirical Methods in Natural Language Processing and Computational Natural Language</text>
+<text top="672" left="149" width="60" height="14" font="1">Learning</text>
+<text top="671" left="209" width="67" height="15" font="1">, 343-350.</text>
+<text top="698" left="127" width="638" height="15" font="1">Spyros Matsoukas, Antti-Veikko Rosti and Bing Zhang. 2009. Discriminative Corpus Weight</text>
+<text top="718" left="149" width="617" height="15" font="1">Estimation for Machine Translation. In Proc. of the Conference on Empirical Methods in</text>
+<text top="738" left="149" width="196" height="14" font="1">Natural Language Processing</text>
+<text top="738" left="345" width="63" height="15" font="1">, 160-167</text>
+<text top="765" left="127" width="638" height="15" font="1">Behrang Mohit, Frank Liberato and Rebecca Hwa. 2009. Language Model Adaptation for D-</text>
+<text top="785" left="149" width="617" height="15" font="1">ifﬁcult To Translate Phrases. In Proceedings of the 13th Annual Conference of the EAMT,</text>
+<text top="805" left="149" width="59" height="15" font="1">160-167.</text>
+<text top="832" left="127" width="638" height="15" font="1">Behrang Mohit, Rebecca Hwa and Alon Lavie. 2010. Using Variable Decoding Weight for Lan-</text>
+<text top="852" left="149" width="617" height="15" font="1">guage Model in Statistical Machine Translation In The Proceedings of the 9th Conference of</text>
+<text top="872" left="149" width="371" height="14" font="1">the Association for Machine Translation in the Americas</text>
+<text top="872" left="520" width="69" height="15" font="1">, Colorado</text>
+<text top="899" left="127" width="638" height="15" font="1">Robert C. Moore and William Lewis. 2010. Intelligent Selection of Language Model Training</text>
+<text top="919" left="149" width="607" height="15" font="1">Data. In Proceedings of the ACL 2010 Conference Short Papers, 220-224, Uppsala, Sweden.</text>
+<text top="945" left="127" width="638" height="15" font="1">Franz Och. 2003. Minimum Error Rate Training in Statistical Machine Translation. In Pro-</text>
+<text top="966" left="149" width="612" height="14" font="1">ceedings of the 41th Annual Meeting of the Association for Computational Linguistic (ACL)</text>
+<text top="965" left="761" width="4" height="15" font="1">,</text>
+<text top="986" left="149" width="104" height="15" font="1">Sapporo, Japan.</text>
+<text top="1012" left="127" width="638" height="15" font="1">Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a Method for</text>
+<text top="1032" left="149" width="617" height="15" font="1">Automatic Evaluation of Machine Translation. In Proceedings of the 40th Annual Meeting of</text>
+<text top="1053" left="149" width="340" height="14" font="1">the Association for Computational Linguistic (ACL)</text>
+<text top="1053" left="489" width="67" height="15" font="1">, 311-318.</text>
+<text top="1079" left="127" width="638" height="15" font="1">Matthew Snover, Bonnie Dorr, Richard Schwartz, Linnea Micciulla and John Makhoul. 2006. A</text>
+<text top="1099" left="149" width="617" height="15" font="1">Study of Translation Edit Rate with Targeted Human Annotation. In Proceedings of Associa-</text>
+<text top="1120" left="149" width="300" height="14" font="1">tion for Machine Translation in the Americas.</text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="133" left="127" width="638" height="15" font="1">Yuta Tsuboi, Hisashi Kashima, Shohei Hido, Steffen Bickel and Masashi Sugiyama. 2008. Direct</text>
+<text top="153" left="149" width="617" height="15" font="1">Density Ratio Estimation for Large-scale Covariate Shift Adaptation. In Proceedings of the</text>
+<text top="174" left="149" width="363" height="14" font="1">Eighth SIAM International Conference on Data Mining</text>
+<text top="173" left="512" width="135" height="15" font="1">, pp. 443–454, 2008.</text>
+<text top="200" left="127" width="638" height="15" font="1">Bing Zhao, Matthias Eck and Stephan Vogel. 2004. Language Model Adaptation for Statistical</text>
+<text top="220" left="149" width="617" height="15" font="1">Machine Translation with Structured Query Models. In Proceedings of International Confer-</text>
+<text top="241" left="149" width="300" height="14" font="1">ence on Computational Linguistics(COLING)</text>
+<text top="240" left="448" width="117" height="15" font="1">, Geneva, August.</text>
+</page>
+</pdf2xml>

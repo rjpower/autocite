@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="11" family="Times" color="#000000"/>
+	<fontspec id="1" size="11" family="Times" color="#000000"/>
+	<fontspec id="2" size="14" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="25" family="Times" color="#000000"/>
+	<fontspec id="5" size="25" family="Helvetica" color="#000000"/>
+	<fontspec id="6" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="16" family="Times" color="#000000"/>
+	<fontspec id="9" size="11" family="Times" color="#000000"/>
+	<fontspec id="10" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="11" size="12" family="Times" color="#000000"/>
+<text top="54" left="477" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="752" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="810" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="797" width="17" height="12" font="3">20 </text>
+<text top="108" left="136" width="110" height="30" font="4"><b>“Yukti”: </b></text>
+<text top="113" left="246" width="543" height="25" font="5"><b>A Dynamic Agent based IDS with Suspect </b></text>
+<text top="149" left="217" width="492" height="25" font="5"><b>Engine to Detect Diverse XSS Attacks </b></text>
+<text top="198" left="157" width="105" height="17" font="6">K.Sivakumar </text>
+<text top="218" left="138" width="145" height="14" font="7">Department of E&amp;CE  </text>
+<text top="236" left="166" width="87" height="14" font="7">IIT, Roorkee </text>
+<text top="253" left="191" width="36" height="14" font="7">India </text>
+<text top="277" left="207" width="5" height="17" font="6"> </text>
+<text top="302" left="207" width="5" height="17" font="6"> </text>
+<text top="198" left="412" width="99" height="17" font="6">Anil.K.Sarje </text>
+<text top="218" left="390" width="145" height="14" font="7">Department of E&amp;CE  </text>
+<text top="236" left="418" width="87" height="14" font="7">IIT, Roorkee </text>
+<text top="253" left="443" width="36" height="14" font="7">India </text>
+<text top="277" left="459" width="5" height="17" font="6"> </text>
+<text top="198" left="683" width="62" height="17" font="6">K.Garg </text>
+<text top="218" left="621" width="187" height="14" font="7">Manipal Inst.of Technology  </text>
+<text top="236" left="685" width="57" height="14" font="7">Manipal </text>
+<text top="253" left="695" width="36" height="14" font="7">India </text>
+<text top="277" left="707" width="5" height="17" font="6"> </text>
+<text top="328" left="81" width="98" height="16" font="8"><b>ABSTRACT</b></text>
+<text top="331" left="179" width="3" height="12" font="3"> </text>
+<text top="347" left="81" width="354" height="12" font="3">Injecting malicious script through links, URLs (Unified resource </text>
+<text top="363" left="81" width="354" height="12" font="3">locator)  or  as  user  inputs  and  getting  it  executed  (when  inputs </text>
+<text top="378" left="81" width="354" height="12" font="3">are not validated) in the client side is called cross site  scripting </text>
+<text top="394" left="81" width="354" height="12" font="3">(XSS) attack. It is called XSS because the script that is executed </text>
+<text top="409" left="81" width="354" height="12" font="3">here  is  not  originated  from  the  same  client  or  from  a  trusted </text>
+<text top="422" left="81" width="354" height="15" font="9">server.  Our  solution  “Yukti”  is  devised  to  detect  these </text>
+<text top="440" left="81" width="354" height="12" font="3">application specific XSS attacks at network level by deep packet </text>
+<text top="456" left="81" width="354" height="12" font="3">inspection  in  the  live  environment.  Existing  solutions  do  static </text>
+<text top="471" left="81" width="354" height="12" font="3">security  code  review  or  scans  the  application  for  known  attack </text>
+<text top="484" left="81" width="354" height="15" font="9">patterns.    “Yukti’  is  dynamic  as  the  suspect  engine  in  the </text>
+<text top="502" left="81" width="354" height="12" font="3">solution is unique and has the capability to suspect a new attack </text>
+<text top="518" left="81" width="354" height="12" font="3">pattern. If the suspect is analyzed to be true, the rule that would </text>
+<text top="533" left="81" width="354" height="12" font="3">detect  the  attack  is  built  into  rule  base  dynamically.  This  paper </text>
+<text top="549" left="81" width="354" height="12" font="3">discusses  the  design,  components,  architecture,  dependencies, </text>
+<text top="564" left="81" width="354" height="12" font="3">techniques, implementation and analysis of results obtained. Our </text>
+<text top="580" left="81" width="354" height="12" font="3">results  show  that  out  of  huge  test  cases  (70000-  both  XSS  and </text>
+<text top="595" left="81" width="354" height="12" font="3">Non XSS) the solution is able to detect 28546 numbers of XSS </text>
+<text top="611" left="81" width="354" height="12" font="3">attacks  initially  (before  appending  new  rules  in  detection </text>
+<text top="626" left="81" width="354" height="12" font="3">engine).  After  appending  new  rules  based  on  recommendations </text>
+<text top="642" left="81" width="354" height="12" font="3">from  suspect  engine,  it  is  able  to  detect  32363  XSS.  Yukti </text>
+<text top="658" left="81" width="354" height="12" font="3">demonstrates  considerable  improvement  in  the  performance </text>
+<text top="673" left="81" width="354" height="12" font="3">when analyzed with leading IDS engine SNORT while detecting </text>
+<text top="689" left="81" width="69" height="12" font="3">XSS attacks </text>
+<text top="714" left="81" width="116" height="16" font="8"><b>General Terms</b></text>
+<text top="717" left="197" width="3" height="12" font="3"> </text>
+<text top="734" left="81" width="348" height="12" font="3">Web Security, Vulnerability Assessment &amp; Intrusion Detection. </text>
+<text top="760" left="81" width="78" height="16" font="8"><b>Keywords</b></text>
+<text top="763" left="159" width="3" height="12" font="3"> </text>
+<text top="779" left="81" width="354" height="12" font="3">Cross  Site  Scripting,  XSS,  Web  Application  Security, </text>
+<text top="797" left="81" width="354" height="12" font="3">Application  Intrusion  Detection,  Security  Attacks  and </text>
+<text top="815" left="81" width="153" height="12" font="3">Vulnerability Management. </text>
+<text top="849" left="81" width="14" height="16" font="8"><b>1.</b></text>
+<text top="848" left="95" width="5" height="17" font="10"><b> </b></text>
+<text top="849" left="105" width="148" height="16" font="8"><b>INTRODUCTION </b></text>
+<text top="868" left="81" width="354" height="12" font="3">Vulnerability  is  a  weakness  in  software,  operating  system  or </text>
+<text top="884" left="81" width="354" height="12" font="3">hardware  that  can  be  exploited  by  an  attacker.  An  exploit  is  a </text>
+<text top="899" left="81" width="354" height="12" font="3">technique  or  software  code  (often  in  the  form  of  scripts)  that </text>
+<text top="915" left="81" width="354" height="12" font="3">takes  advantage  of  a  vulnerability  or  security  weakness  in  a </text>
+<text top="930" left="81" width="354" height="12" font="3">piece of target software [12, 13, 14, and 16]. Vulnerabilities are </text>
+<text top="946" left="81" width="354" height="12" font="3">of  significant  interest  when  a  program  containing  the  flaw </text>
+<text top="961" left="81" width="354" height="12" font="3">operates  in  a  networked  environment  or  has  access  to  the </text>
+<text top="977" left="81" width="354" height="12" font="3">Internet.  When  vulnerabilities  are  discovered,  disclosed  and </text>
+<text top="992" left="81" width="354" height="12" font="3">exploited,  they  give  rise  to  individual  and  large-scale  attacks </text>
+<text top="1008" left="81" width="206" height="12" font="3">challenging the security of the Web.   </text>
+<text top="1033" left="81" width="354" height="12" font="3">Cross-site  scripting  attacks  occur  when  dynamically  generated </text>
+<text top="1048" left="81" width="354" height="12" font="3">web  pages  display  input  that  is  not  properly  validated  [1,  7,  8, </text>
+<text top="1064" left="81" width="354" height="12" font="3">and 10]. This allows an attacker to embed malicious JavaScript </text>
+<text top="326" left="486" width="354" height="12" font="3">code  into  the  generated  page  and  execute  the  script  on  the </text>
+<text top="342" left="486" width="354" height="12" font="3">machine  of  any  user  who  access  that  site.  According  to  [8,  13, </text>
+<text top="357" left="486" width="354" height="12" font="3">and  15]  there  are  three  fundamental  types  of  XSS:  stored, </text>
+<text top="373" left="486" width="286" height="12" font="3">reflected and DOM (Document object Model) based.</text>
+<text top="372" left="772" width="4" height="13" font="11"> </text>
+<text top="397" left="486" width="354" height="12" font="3">Stored XSS works if a HTML page  includes data stored on the </text>
+<text top="413" left="486" width="354" height="12" font="3">Web  server  (e.g.  from  a  database)  that  originally  comes  from </text>
+<text top="428" left="486" width="354" height="12" font="3">user  input.    Some  part  of  a  HTTP  request  (usually  a  URL </text>
+<text top="444" left="486" width="354" height="12" font="3">parameter,  cookie  or  the  referrer  location)  is  reflected  by  the </text>
+<text top="460" left="486" width="354" height="12" font="3">web  server  into  the  HTML  content  that  is  returned  to  the </text>
+<text top="475" left="486" width="354" height="12" font="3">requesting  browser  in  reflected  XSS.  Reflected  means  that  the </text>
+<text top="491" left="486" width="354" height="12" font="3">input is written back unaltered.  DOM-based XSS is very similar </text>
+<text top="506" left="486" width="354" height="12" font="3">to the second type. A key difference is that the attack code is not </text>
+<text top="522" left="486" width="354" height="12" font="3">embedded  into  the  HTML  content  sent  back  by  the  server. </text>
+<text top="537" left="486" width="354" height="12" font="3">Instead,  it  is  embedded  in  the  URL  of  the  requested  page  and </text>
+<text top="553" left="486" width="354" height="12" font="3">executed in the user's browser by faulty script code contained in </text>
+<text top="568" left="486" width="230" height="12" font="3">the HTML content returned by the server. </text>
+<text top="593" left="486" width="354" height="12" font="3">Attackers often perform XSS exploitation by crafting malicious </text>
+<text top="608" left="486" width="354" height="12" font="3">URLs  and  tricking  users  to  clicking  them.  These  links  cause </text>
+<text top="624" left="486" width="354" height="12" font="3">client side scripting languages (VBScript, JavaScript, etc.) of the </text>
+<text top="636" left="486" width="354" height="15" font="9">attacker’s choice to execute on the victim’s browser. There are </text>
+<text top="655" left="486" width="354" height="12" font="3">numerous ways to inject JavaScript (any script) code into URLs </text>
+<text top="670" left="486" width="286" height="12" font="3">for the purpose of a XSS attack [1, 6, 8, 10, and 11]. </text>
+<text top="692" left="486" width="354" height="15" font="9">In this paper we build our solution named “Yukti” and discuss </text>
+<text top="710" left="486" width="354" height="12" font="3">about the state of art component Suspect Engine. Yukti provides </text>
+<text top="726" left="486" width="354" height="12" font="3">the  mechanism  to  dynamically  detect  XSS  attacks  at  packet </text>
+<text top="741" left="486" width="276" height="12" font="3">level using centrally grown incremental rule base.  </text>
+<text top="766" left="486" width="354" height="12" font="3">Works related to XSS detection are discussed in section 2.  Ours </text>
+<text top="781" left="486" width="354" height="12" font="3">contribution in building the solution is discussed in section 3. In </text>
+<text top="797" left="486" width="354" height="12" font="3">section 4, implementation of the solution and theory behind the </text>
+<text top="813" left="486" width="354" height="12" font="3">state  of  the  art  Suspect  Engine  are  discussed.  Analyses  of  the </text>
+<text top="828" left="486" width="354" height="12" font="3">results are made in section 5. Limitations &amp; Future scope to our </text>
+<text top="844" left="486" width="352" height="12" font="3">approach is listed in sections 6. Conclusion is drawn in section7. </text>
+<text top="869" left="486" width="14" height="16" font="8"><b>2.</b></text>
+<text top="869" left="500" width="5" height="17" font="10"><b> </b></text>
+<text top="869" left="510" width="155" height="16" font="8"><b>RELATED WORK </b></text>
+<text top="889" left="486" width="354" height="12" font="3">Kirda et al [1] identify, that the   code in JavaScript is vulnerable </text>
+<text top="904" left="486" width="354" height="12" font="3">to  XSS  attacks  and  a  client  side  solution  is  necessary  to  detect </text>
+<text top="920" left="486" width="354" height="12" font="3">the vulnerabilities. The authors suggest a personal web fire wall </text>
+<text top="935" left="486" width="361" height="12" font="3">NOXES  that  acts  as  a  web  proxy.  It  utilizes  automatically   </text>
+<text top="951" left="486" width="354" height="12" font="3">generated rules in addition to manual ones for policing.  NOXES </text>
+<text top="967" left="486" width="354" height="12" font="3">provides an additional layer of protection which allows users to </text>
+<text top="982" left="486" width="310" height="12" font="3">exert control over connections that browsers are making. </text>
+<text top="1006" left="486" width="354" height="12" font="3">According  to  Vogt  [2],  dynamic  Data  tainting  is  necessary  in </text>
+<text top="1022" left="486" width="354" height="12" font="3">JavaScript  Engine  of  Mozilla  Fire  Fox,  such  that  sensitive </text>
+<text top="1038" left="486" width="354" height="12" font="3">information  shall  not  be  transferred  by  XSS  code  without  the </text>
+<text top="1050" left="486" width="354" height="15" font="9">user’s  consent.  In  [3]  the  authors  recognize  that  the  injected </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="12" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="13" size="11" family="Symbol" color="#000000"/>
+	<fontspec id="14" size="11" family="Helvetica" color="#000000"/>
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">21 </text>
+<text top="108" left="81" width="354" height="15" font="9">malicious JavaScript through the user’s web browsers (Mozilla) </text>
+<text top="127" left="81" width="354" height="12" font="3">could create enormous damage to the site. They have proposed a </text>
+<text top="142" left="81" width="354" height="12" font="3">solution  by  auditing  Java  Script  dynamically  during  execution, </text>
+<text top="158" left="81" width="354" height="12" font="3">combined  with  IDS  (Intrusion  Detection  System)  to  detect </text>
+<text top="173" left="81" width="144" height="12" font="3">malicious JavaScript code </text>
+<text top="198" left="81" width="354" height="12" font="3">In [4] the researchers have exposed the SQL injection and XSS </text>
+<text top="213" left="81" width="354" height="12" font="3">attacks in the IE Framework. IE (Internet Explorer) is the target </text>
+<text top="229" left="81" width="354" height="12" font="3">of  most  of  the  attacks.  The    authors    propose  a  complete </text>
+<text top="244" left="81" width="354" height="12" font="3">crawling  of  the  site  and  recommend  a  Black  Box  testing  using </text>
+<text top="260" left="81" width="354" height="12" font="3">WAVES  (Web  application  Vulnerability  and  Error  Scanner) </text>
+<text top="275" left="81" width="251" height="12" font="3">after doing a Reverse Engineering of the site.  </text>
+<text top="300" left="81" width="354" height="12" font="3"> In  [9]  the  authors  view  the  client’s  information  as  the  main </text>
+<text top="315" left="81" width="354" height="12" font="3">target  for  XSS  attacks  (such  as,  the  cookie  and  the  data  in  the </text>
+<text top="331" left="81" width="354" height="12" font="3">hidden  field).  Such  attacks  use  cookies-based  session </text>
+<text top="344" left="81" width="354" height="15" font="9">management  to  steal  dynamic  information  without  the  user’s </text>
+<text top="362" left="81" width="354" height="12" font="3">knowledge. Client side (rather than Server side) automated IDS </text>
+<text top="377" left="81" width="354" height="12" font="3">via  central  repository  are  the  suggested  solution.  IDS  use  two </text>
+<text top="393" left="81" width="354" height="12" font="3">servers,  one  for  detection/collection  (Proxy)  and  the  other  for </text>
+<text top="408" left="81" width="53" height="12" font="3">Database.</text>
+<text top="407" left="134" width="4" height="13" font="11"> </text>
+<text top="433" left="81" width="354" height="12" font="3">According to Kruegel et al [10], it is not possible to maintain the </text>
+<text top="449" left="81" width="354" height="12" font="3">misuse type IDS (IDS are categorized basically into misuse and </text>
+<text top="464" left="81" width="354" height="12" font="3">anomaly  detection)  due  to  large  dynamic  signatures  in  an </text>
+<text top="480" left="81" width="354" height="12" font="3">everyday attack scenario. The authors in [11] have identified the </text>
+<text top="495" left="81" width="354" height="12" font="3">XSS  vulnerabilities  in  server  pages.  Two  basic  techniques  to </text>
+<text top="511" left="81" width="354" height="12" font="3">accomplish  XSS  attacks  in  server  pages  include  insertion  of </text>
+<text top="526" left="81" width="354" height="12" font="3">malicious  code  in  the  database  and  executing  a  link  containing </text>
+<text top="542" left="81" width="354" height="12" font="3">the  malicious  code  itself.  The  approach  used  by  the  authors  to </text>
+<text top="557" left="81" width="354" height="12" font="3">detect  and  confirm  the  attack  includes  static  analysis  to  detect </text>
+<text top="573" left="81" width="354" height="12" font="3">web  application  vulnerabilities  and  dynamic  analysis  to  check </text>
+<text top="588" left="81" width="123" height="12" font="3">actual vulnerabilities.  </text>
+<text top="587" left="204" width="4" height="13" font="11"> </text>
+<text top="613" left="81" width="354" height="12" font="3">After making an in depth survey on the existing solutions [1, 5, </text>
+<text top="628" left="81" width="354" height="12" font="3">6] we have learned that a portable solution to detect XSS attack </text>
+<text top="644" left="81" width="354" height="12" font="3">at  both  server  and  client  end  is  necessary.  Following  section </text>
+<text top="659" left="81" width="277" height="12" font="3">discusses our contribution in building the solution. </text>
+<text top="685" left="81" width="14" height="16" font="8"><b>3.</b></text>
+<text top="685" left="95" width="5" height="17" font="10"><b> </b></text>
+<text top="685" left="105" width="192" height="16" font="8"><b>OUR CONTRIBUTION </b></text>
+<text top="702" left="81" width="354" height="15" font="9">We  have  christened  our  solution  as  “Yukti”  a  Sanskrit  word </text>
+<text top="720" left="81" width="354" height="12" font="3">means  trick,  tactics,  strategy,  deduction  from  circumstances, </text>
+<text top="736" left="81" width="354" height="12" font="3">combination,  union,  induction,  junction,  reasoning,  plan  and </text>
+<text top="751" left="81" width="354" height="12" font="3">proof.  In  adherence  to  the  name,  our  solution  includes  all  the </text>
+<text top="767" left="81" width="354" height="12" font="3">said  activities.  The  concept,  components,  architecture, </text>
+<text top="782" left="81" width="354" height="12" font="3">implementation  and  analysis  of  the  solution  are  discussed  in </text>
+<text top="798" left="81" width="171" height="12" font="3">detail in the following section.  </text>
+<text top="813" left="81" width="3" height="12" font="3"> </text>
+<text top="830" left="81" width="23" height="16" font="8"><b>3.1</b></text>
+<text top="829" left="104" width="5" height="17" font="10"><b> </b></text>
+<text top="830" left="114" width="137" height="16" font="8"><b>Solution Concept </b></text>
+<text top="849" left="81" width="354" height="12" font="3">We,  in  our  solution,  have  developed  a  detection  methodology </text>
+<text top="865" left="81" width="354" height="12" font="3">that is based on dynamic intrusion detection coupled with agent </text>
+<text top="881" left="81" width="354" height="12" font="3">based  sensors  that  are  deployed  at  both  server  end  and  client </text>
+<text top="896" left="81" width="354" height="12" font="3">end.  Yukti  provides  the  mechanism  to  dynamically  detect  XSS </text>
+<text top="912" left="81" width="250" height="12" font="3">using centrally grown incremental rule base.   </text>
+<text top="937" left="81" width="33" height="15" font="2"><i>3.1.1</i></text>
+<text top="936" left="114" width="5" height="15" font="12"><i> </i></text>
+<text top="937" left="125" width="153" height="15" font="2"><i>How Different Is Yukti </i></text>
+<text top="952" left="88" width="6" height="16" font="13"></text>
+<text top="956" left="94" width="4" height="12" font="14"> </text>
+<text top="956" left="101" width="34" height="12" font="3">Yukti </text>
+<text top="972" left="102" width="334" height="12" font="3">Suspect Engine is the unique component in our solution that </text>
+<text top="987" left="102" width="334" height="12" font="3">suspects  an  attack  and  puts  it  into  analysis.  Suspect  Engine </text>
+<text top="1003" left="102" width="239" height="12" font="3">helps to reduce false positives dynamically. </text>
+<text top="1015" left="88" width="6" height="16" font="13"></text>
+<text top="1019" left="94" width="4" height="12" font="14"> </text>
+<text top="1019" left="101" width="137" height="12" font="3">Existing Other Solutions </text>
+<text top="1035" left="102" width="334" height="12" font="3">Such feature is not yet found in any of the existing solutions. </text>
+<text top="1050" left="102" width="334" height="12" font="3">False  positives  are  eliminated  manually  after  report </text>
+<text top="1066" left="102" width="91" height="12" font="3">generation only. </text>
+<text top="108" left="493" width="6" height="16" font="13"></text>
+<text top="111" left="499" width="4" height="12" font="14"> </text>
+<text top="112" left="506" width="34" height="12" font="3">Yukti </text>
+<text top="128" left="506" width="334" height="12" font="3">Jpcap (external library) is used to capture the packets alone. </text>
+<text top="143" left="506" width="334" height="12" font="3">We  have  written  our  own  custom  code  for  interpreting  and </text>
+<text top="159" left="506" width="334" height="12" font="3">extraction.  It  gives  better  control  over  filtering  the  required </text>
+<text top="174" left="506" width="300" height="12" font="3">request, response traffic based on different parameters. </text>
+<text top="186" left="493" width="6" height="16" font="13"></text>
+<text top="190" left="499" width="4" height="12" font="14"> </text>
+<text top="191" left="506" width="137" height="12" font="3">Existing Other Solutions </text>
+<text top="206" left="506" width="334" height="12" font="3">Much  dependent  on  external  libraries  in  turn  lesser  control </text>
+<text top="222" left="506" width="67" height="12" font="3">over traffic. </text>
+<text top="237" left="506" width="3" height="12" font="3"> </text>
+<text top="249" left="493" width="6" height="16" font="13"></text>
+<text top="253" left="499" width="4" height="12" font="14"> </text>
+<text top="254" left="506" width="34" height="12" font="3">Yukti </text>
+<text top="269" left="506" width="275" height="12" font="3">Detection through deep packet inspection for XSS </text>
+<text top="281" left="493" width="6" height="16" font="13"></text>
+<text top="285" left="499" width="4" height="12" font="14"> </text>
+<text top="286" left="506" width="137" height="12" font="3">Existing Other Solutions </text>
+<text top="301" left="506" width="334" height="12" font="3">Detection  is  through  static  code  review  (HP  Fortify, </text>
+<text top="317" left="506" width="334" height="12" font="3">Appscan  Source  and  etc.)  or  application  vulnerability </text>
+<text top="332" left="506" width="334" height="12" font="3">assessment using security testing (Appscan, HP Webinspect, </text>
+<text top="348" left="506" width="334" height="12" font="3">Acunetix,  Hailstorm  and  etc.).  Some  modern  threat </text>
+<text top="363" left="506" width="334" height="12" font="3">management devices do packet inspection with very limited </text>
+<text top="379" left="506" width="179" height="12" font="3">XSS detection capability (Snort) </text>
+<text top="394" left="493" width="3" height="12" font="3"> </text>
+<text top="406" left="493" width="6" height="16" font="13"></text>
+<text top="410" left="499" width="4" height="12" font="14"> </text>
+<text top="411" left="506" width="34" height="12" font="3">Yukti </text>
+<text top="426" left="506" width="334" height="12" font="3">Dynamic  rules  (rule  building  capability)  and  specially </text>
+<text top="442" left="506" width="334" height="12" font="3">crafted regex using phrase structures are used to detect XSS </text>
+<text top="457" left="506" width="48" height="12" font="3">attacks.  </text>
+<text top="469" left="493" width="6" height="16" font="13"></text>
+<text top="473" left="499" width="4" height="12" font="14"> </text>
+<text top="474" left="506" width="137" height="12" font="3">Existing Other Solutions </text>
+<text top="489" left="507" width="334" height="12" font="3">Static  rule  sets  and  regex  are  used  for  XSS  vulnerability </text>
+<text top="505" left="507" width="53" height="12" font="3">detection </text>
+<text top="521" left="507" width="3" height="12" font="3"> </text>
+<text top="533" left="493" width="6" height="16" font="13"></text>
+<text top="537" left="499" width="4" height="12" font="14"> </text>
+<text top="537" left="507" width="34" height="12" font="3">Yukti </text>
+<text top="552" left="506" width="334" height="12" font="3">Zero day XSS based attacks can be detected with the help of </text>
+<text top="568" left="506" width="240" height="12" font="3">Suspect Engine and Knowledge aggregator. </text>
+<text top="580" left="493" width="6" height="16" font="13"></text>
+<text top="584" left="499" width="4" height="12" font="14"> </text>
+<text top="584" left="506" width="137" height="12" font="3">Existing Other Solutions </text>
+<text top="600" left="507" width="334" height="12" font="3">Zero day XSS attacks are either undetected or detected only </text>
+<text top="613" left="507" width="334" height="15" font="9">with help of special paid services offered by vendor’s 24X7 </text>
+<text top="631" left="507" width="78" height="12" font="3">research team </text>
+<text top="647" left="507" width="3" height="12" font="3"> </text>
+<text top="659" left="493" width="6" height="16" font="13"></text>
+<text top="663" left="499" width="4" height="12" font="14"> </text>
+<text top="663" left="507" width="34" height="12" font="3">Yukti </text>
+<text top="679" left="506" width="334" height="12" font="3">Attacker profiler is a value added component in our solution </text>
+<text top="694" left="506" width="336" height="12" font="3">to keep track of the origin of attack, whereabouts of attacker.  </text>
+<text top="706" left="493" width="6" height="16" font="13"></text>
+<text top="710" left="499" width="4" height="12" font="14"> </text>
+<text top="711" left="506" width="137" height="12" font="3">Existing Other Solutions </text>
+<text top="726" left="506" width="334" height="12" font="3">Yet to find such a comprehensive component attached to an </text>
+<text top="742" left="506" width="155" height="12" font="3">existing XSS detection tool. </text>
+<text top="757" left="486" width="7" height="12" font="3">. </text>
+<text top="783" left="486" width="23" height="16" font="8"><b>3.2</b></text>
+<text top="782" left="509" width="5" height="17" font="10"><b> </b></text>
+<text top="783" left="519" width="170" height="16" font="8"><b>Solution Components </b></text>
+<text top="803" left="486" width="354" height="12" font="3">As given in Fig 1, Yukti Intrusion Detection Server (YIDS) and </text>
+<text top="818" left="486" width="357" height="12" font="3">Agent  (YIDA)      are  the  basic  building  blocks  of  our  solution.  </text>
+<text top="834" left="486" width="354" height="12" font="3">Many other components were appended to the solution based on </text>
+<text top="849" left="486" width="354" height="12" font="3">the necessity. Components of Yukti are listed in Fig 2. YIDS is </text>
+<text top="865" left="486" width="354" height="12" font="3">the  core  component.  It  is  comprised  of  YID  Manager  (YIDM), </text>
+<text top="880" left="486" width="318" height="12" font="3">Agent Manager, Suspect Manager and Database Manager. </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="15" size="11" family="Times" color="#000000"/>
+	<fontspec id="16" size="14" family="Times" color="#000000"/>
+	<fontspec id="17" size="12" family="Times" color="#000000"/>
+	<fontspec id="18" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="19" size="14" family="Times" color="#000000"/>
+	<fontspec id="20" size="12" family="Symbol" color="#000000"/>
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">22 </text>
+<text top="370" left="431" width="3" height="12" font="15"><b> </b></text>
+<text top="385" left="170" width="177" height="12" font="15"><b>Fig 1: Building Block of Yukti </b></text>
+<text top="418" left="81" width="33" height="15" font="2"><i>3.2.1</i></text>
+<text top="418" left="114" width="5" height="15" font="12"><i> </i></text>
+<text top="418" left="125" width="44" height="15" font="2"><i>YIDM </i></text>
+<text top="437" left="81" width="354" height="12" font="3">YIDM  includes  Packet  Capturing  Engine  (PCE),  Intrusion </text>
+<text top="452" left="81" width="354" height="12" font="3">Detection  Engine  (IDE),  Rule  Engine  (RUE),  Knowledge </text>
+<text top="467" left="81" width="354" height="12" font="3">Aggregator  and  Dashboard.  Agent  Manager  includes  Agent </text>
+<text top="483" left="81" width="354" height="12" font="3">Registration,  Inactive  Agent  intimation,  Agent  Memory </text>
+<text top="499" left="81" width="354" height="12" font="3">Manager and Log Manager.  Suspect Manager includes Suspect </text>
+<text top="514" left="81" width="354" height="12" font="3">Receiver,  Suspect  Analyzer,  Rule  Engine  and  Graphical </text>
+<text top="530" left="81" width="354" height="12" font="3">Interface.  Database  Manager  includes  Memory  Alert,  Data </text>
+<text top="545" left="81" width="241" height="12" font="3">Backup and Database cleanup components.  </text>
+<text top="570" left="81" width="3" height="12" font="3"> </text>
+<text top="602" left="81" width="3" height="12" font="3"> </text>
+<text top="635" left="81" width="3" height="12" font="3"> </text>
+<text top="668" left="81" width="3" height="12" font="3"> </text>
+<text top="701" left="81" width="3" height="12" font="3"> </text>
+<text top="734" left="81" width="3" height="12" font="3"> </text>
+<text top="767" left="81" width="3" height="12" font="3"> </text>
+<text top="800" left="81" width="3" height="12" font="3"> </text>
+<text top="833" left="81" width="3" height="12" font="3"> </text>
+<text top="865" left="81" width="3" height="12" font="3"> </text>
+<text top="898" left="81" width="3" height="12" font="3"> </text>
+<text top="931" left="81" width="3" height="12" font="3"> </text>
+<text top="964" left="81" width="3" height="12" font="3"> </text>
+<text top="997" left="81" width="3" height="12" font="3"> </text>
+<text top="1030" left="81" width="3" height="12" font="3"> </text>
+<text top="1063" left="176" width="164" height="12" font="15"><b>Fig 2: Components of Yukti </b></text>
+<text top="111" left="486" width="354" height="12" font="3">Rule  engine  is  comprised  of  comprehensive  rule  database  with </text>
+<text top="127" left="486" width="354" height="12" font="3">more  than  132  rules.  It  is  a  component  developed  out  of  our’s </text>
+<text top="142" left="486" width="354" height="12" font="3">continual  research  on  XSS  exploits.  PCE,  IDE  and  RUE  are </text>
+<text top="158" left="486" width="354" height="12" font="3">explained  in  detail  in  the  implementation  section.  Knowledge </text>
+<text top="173" left="486" width="354" height="12" font="3">aggregator  is  the  feature  through  which  YIDM  administrator </text>
+<text top="189" left="486" width="354" height="12" font="3">gets  the  latest  information  on  recent  XSS  exploits  and  attack </text>
+<text top="204" left="486" width="354" height="12" font="3">signatures.  Aggregator  is  interfaced  with  different  RSS  feeders </text>
+<text top="220" left="486" width="354" height="12" font="3">and  security  advisories  providers.  Dashboard  is  the  feature  that </text>
+<text top="235" left="486" width="354" height="12" font="3">displays the attack statistics like the number of packets captured, </text>
+<text top="251" left="486" width="354" height="12" font="3">categories of packets, number of attacks detected and number of </text>
+<text top="266" left="486" width="354" height="12" font="3">suspect  packets.  Graphical  representations  of  the  statistics  are </text>
+<text top="282" left="486" width="207" height="12" font="3">also available for easy understanding. </text>
+<text top="307" left="486" width="33" height="15" font="2"><i>3.2.2</i></text>
+<text top="306" left="519" width="5" height="15" font="12"><i> </i></text>
+<text top="307" left="530" width="107" height="15" font="2"><i>Agent Manager </i></text>
+<text top="334" left="486" width="354" height="12" font="3">Agent  Manager  is  a  feature,  we  have  included  after  feeling  its </text>
+<text top="350" left="486" width="354" height="12" font="3">necessity.  Registration  process  is  enabled  once  an  agent  is </text>
+<text top="365" left="486" width="354" height="12" font="3">deployed  in  the  host.  This  helps  the  YIDS  to  keep  track  of  the </text>
+<text top="381" left="486" width="354" height="12" font="3">number  of  hosts  connected  to  it.  Further,  agents  that  do  not </text>
+<text top="396" left="486" width="354" height="12" font="3">communicate for a long period are verified for their active status </text>
+<text top="412" left="486" width="354" height="12" font="3">at  regular  intervals.  In  case  any  agent  does  not  respond,  its </text>
+<text top="428" left="486" width="354" height="12" font="3">inactive  status  is  intimated  to  YIDS  administrator  through  the </text>
+<text top="443" left="486" width="195" height="12" font="3">Agent Manager for further actions.  </text>
+<text top="467" left="486" width="354" height="12" font="3">It  is  necessary  to  keep  the  memory  occupied  by  the  agents  as </text>
+<text top="483" left="486" width="354" height="12" font="3">little as possible. Archived suspects, attack profiles increase the </text>
+<text top="499" left="486" width="354" height="12" font="3">memory usage of agent. Hence the outdated archives are called </text>
+<text top="511" left="486" width="354" height="15" font="9">back by the agent  manager and stored in the server’s  database. </text>
+<text top="530" left="486" width="354" height="12" font="3">Every  activity  carried  out  by  the  agent  is  recorded  in  the  agent </text>
+<text top="545" left="486" width="354" height="12" font="3">itself.  At  regular  interval  they  are  pushed  back  to  the  agent </text>
+<text top="558" left="486" width="354" height="15" font="9">manager  by  the  agent’s  log  pusher.  These  logs  are  very  useful </text>
+<text top="576" left="486" width="354" height="12" font="3">for  tracing  back  the  attacks  and  suspects.  Log  management </text>
+<text top="592" left="486" width="266" height="12" font="3">features of Agent Manager Handles this activity. </text>
+<text top="617" left="486" width="33" height="15" font="2"><i>3.2.3</i></text>
+<text top="616" left="519" width="5" height="15" font="12"><i> </i></text>
+<text top="617" left="530" width="123" height="15" font="2"><i> Suspect Manager </i></text>
+<text top="644" left="486" width="354" height="12" font="3">Suspect Manager(SM) is the unique component introduced by us </text>
+<text top="660" left="486" width="354" height="12" font="3">in  this  solution.  When  an  agent  suspects  a  XSS  intrusion,  it </text>
+<text top="675" left="486" width="354" height="12" font="3">sends  the  suspected  information  to  Suspect  Receiver  of  SM. </text>
+<text top="691" left="486" width="354" height="12" font="3">Suspect  analyzer  is  a  mix  of  automated  and  manual  analysis </text>
+<text top="706" left="486" width="354" height="12" font="3">engine.  More details of the analyzer are provided in Section 3.4 </text>
+<text top="722" left="486" width="117" height="12" font="3">under suspect mode.  </text>
+<text top="747" left="486" width="33" height="15" font="2"><i>3.2.4</i></text>
+<text top="746" left="519" width="5" height="15" font="12"><i> </i></text>
+<text top="747" left="530" width="132" height="15" font="2"><i>Database Manager </i></text>
+<text top="774" left="486" width="354" height="12" font="3">Database  Manager  of  YIDM  is  used  to  learn  the  health  of  the </text>
+<text top="790" left="486" width="354" height="12" font="3">database memory.  As it is vital for storing archives and current </text>
+<text top="805" left="486" width="354" height="12" font="3">information,  necessary  alerts  are  triggered  when  memory  is </text>
+<text top="821" left="486" width="354" height="12" font="3">nearing  to  90%  of  the  total  capacity.  Facilities  to  take  regular </text>
+<text top="837" left="486" width="277" height="12" font="3">backup and clean up are provided by DB manager. </text>
+<text top="862" left="486" width="33" height="15" font="2"><i>3.2.5</i></text>
+<text top="861" left="519" width="5" height="15" font="12"><i> </i></text>
+<text top="862" left="530" width="41" height="15" font="2"><i>YIDA </i></text>
+<text top="889" left="486" width="354" height="12" font="3">YID  Agent (YIDA) is  comprised of  Autonomous agent engine, </text>
+<text top="905" left="486" width="354" height="12" font="3">Suspect Detector, Ticketer, Rule Buffer, Attack Profiler and Log </text>
+<text top="920" left="486" width="354" height="12" font="3">Pusher. Ticketer is a ticketing utility embedded within the agent </text>
+<text top="936" left="486" width="354" height="12" font="3">to have a ticket raised in case of suspect and send it to the YIDS. </text>
+<text top="951" left="486" width="354" height="12" font="3">More  information  on  components  and  operations  of  YIDA  are </text>
+<text top="967" left="486" width="233" height="12" font="3">discussed in section 3.4 and in section 4.2. </text>
+<text top="992" left="486" width="23" height="16" font="8"><b>3.3</b></text>
+<text top="992" left="509" width="5" height="17" font="10"><b> </b></text>
+<text top="992" left="519" width="176" height="16" font="8"><b>Solution Architecture  </b></text>
+<text top="1012" left="486" width="354" height="12" font="3">YIDS  is  the  central  storage,  command  and  control  station  as </text>
+<text top="1027" left="486" width="354" height="12" font="3">show  in  Fig  3.    YIDS  have  an  in  built  YIDA  to  protect  itself </text>
+<text top="1043" left="486" width="354" height="12" font="3">from XSS attacks. For a simple version we have MySql database </text>
+<text top="1059" left="486" width="354" height="12" font="3">in the same system itself. In large environments database can be </text>
+<text top="593" left="107" width="78" height="17" font="16"><b>YID Server  </b></text>
+<text top="632" left="74" width="11" height="13" font="17"><b>1.</b></text>
+<text top="631" left="85" width="4" height="14" font="18"><b> </b></text>
+<text top="632" left="87" width="93" height="13" font="17"><b>YID Manager </b></text>
+<text top="649" left="74" width="11" height="13" font="17"><b>2.</b></text>
+<text top="649" left="85" width="4" height="14" font="18"><b> </b></text>
+<text top="649" left="87" width="104" height="13" font="17"><b>Agent Manager </b></text>
+<text top="669" left="74" width="11" height="13" font="17"><b>3.</b></text>
+<text top="669" left="85" width="4" height="14" font="18"><b> </b></text>
+<text top="669" left="87" width="115" height="13" font="17"><b>Suspect Manager </b></text>
+<text top="689" left="74" width="11" height="13" font="17"><b>4.</b></text>
+<text top="689" left="85" width="4" height="14" font="18"><b> </b></text>
+<text top="689" left="87" width="125" height="13" font="17"><b>Database Manager </b></text>
+<text top="725" left="74" width="4" height="17" font="19"> </text>
+<text top="593" left="291" width="75" height="17" font="16"><b>YID Agent  </b></text>
+<text top="628" left="231" width="7" height="18" font="20"></text>
+<text top="633" left="238" width="4" height="14" font="7"> </text>
+<text top="633" left="245" width="176" height="13" font="17"><b>Autonomous Agent Engine </b></text>
+<text top="647" left="231" width="7" height="18" font="20"></text>
+<text top="651" left="238" width="4" height="14" font="7"> </text>
+<text top="652" left="245" width="112" height="13" font="17"><b>Suspect Detector </b></text>
+<text top="668" left="231" width="7" height="18" font="20"></text>
+<text top="672" left="238" width="4" height="14" font="7"> </text>
+<text top="672" left="245" width="62" height="13" font="17"><b> Ticketer </b></text>
+<text top="689" left="231" width="7" height="18" font="20"></text>
+<text top="693" left="238" width="4" height="14" font="7"> </text>
+<text top="694" left="245" width="83" height="13" font="17"><b>Rule Buffer  </b></text>
+<text top="710" left="231" width="7" height="18" font="20"></text>
+<text top="714" left="238" width="4" height="14" font="7"> </text>
+<text top="714" left="245" width="114" height="13" font="17"><b>Attacker Profiler </b></text>
+<text top="730" left="231" width="7" height="18" font="20"></text>
+<text top="735" left="238" width="4" height="14" font="7"> </text>
+<text top="735" left="245" width="78" height="13" font="17"><b>Log Pusher </b></text>
+<text top="771" left="231" width="4" height="17" font="19"> </text>
+<text top="764" left="116" width="109" height="17" font="16"><b>1. YID Manager </b></text>
+<text top="766" left="225" width="4" height="13" font="17"><b> </b></text>
+<text top="781" left="74" width="7" height="18" font="20"></text>
+<text top="786" left="81" width="4" height="14" font="7"> </text>
+<text top="786" left="87" width="166" height="13" font="17"><b>Packet Capturing Engine </b></text>
+<text top="802" left="74" width="7" height="18" font="20"></text>
+<text top="807" left="81" width="4" height="14" font="7"> </text>
+<text top="807" left="87" width="177" height="13" font="17"><b>Intrusion Detection Engine </b></text>
+<text top="823" left="74" width="7" height="18" font="20"></text>
+<text top="827" left="81" width="4" height="14" font="7"> </text>
+<text top="828" left="87" width="86" height="13" font="17"><b>Rule Engine  </b></text>
+<text top="844" left="74" width="7" height="18" font="20"></text>
+<text top="848" left="81" width="4" height="14" font="7"> </text>
+<text top="849" left="87" width="156" height="13" font="17"><b>Knowledge Aggregator  </b></text>
+<text top="865" left="74" width="7" height="18" font="20"></text>
+<text top="869" left="81" width="4" height="14" font="7"> </text>
+<text top="870" left="87" width="80" height="13" font="17"><b>Dash Board </b></text>
+<text top="923" left="101" width="4" height="13" font="17"><b> </b></text>
+<text top="958" left="74" width="4" height="17" font="19"> </text>
+<text top="764" left="292" width="126" height="17" font="16"><b>2.Agent Manager  </b></text>
+<text top="799" left="283" width="7" height="18" font="20"></text>
+<text top="804" left="290" width="4" height="14" font="7"> </text>
+<text top="804" left="297" width="125" height="13" font="17"><b>Agent Registration </b></text>
+<text top="818" left="283" width="7" height="18" font="20"></text>
+<text top="822" left="290" width="4" height="14" font="7"> </text>
+<text top="822" left="297" width="103" height="13" font="17"><b>Inactive Agents </b></text>
+<text top="839" left="283" width="7" height="18" font="20"></text>
+<text top="843" left="290" width="4" height="14" font="7"> </text>
+<text top="843" left="297" width="102" height="13" font="17"><b>Memory Mgmt </b></text>
+<text top="860" left="283" width="7" height="18" font="20"></text>
+<text top="864" left="290" width="4" height="14" font="7"> </text>
+<text top="864" left="297" width="117" height="13" font="17"><b>Log Management </b></text>
+<text top="917" left="297" width="4" height="13" font="17"><b> </b></text>
+<text top="953" left="283" width="4" height="17" font="19"> </text>
+<text top="922" left="94" width="142" height="17" font="16"><b>3. Suspect Manager  </b></text>
+<text top="957" left="74" width="7" height="18" font="20"></text>
+<text top="961" left="81" width="4" height="14" font="7"> </text>
+<text top="962" left="87" width="112" height="13" font="17"><b>Suspect Receiver </b></text>
+<text top="975" left="74" width="7" height="18" font="20"></text>
+<text top="980" left="81" width="4" height="14" font="7"> </text>
+<text top="980" left="87" width="115" height="13" font="17"><b>Suspect Analyzer </b></text>
+<text top="996" left="74" width="7" height="18" font="20"></text>
+<text top="1000" left="81" width="4" height="14" font="7"> </text>
+<text top="1001" left="87" width="83" height="13" font="17"><b>Rule Engine </b></text>
+<text top="1017" left="74" width="7" height="18" font="20"></text>
+<text top="1022" left="81" width="4" height="14" font="7"> </text>
+<text top="1022" left="87" width="131" height="13" font="17"><b>Graphical Interface </b></text>
+<text top="1075" left="128" width="4" height="13" font="17"><b> </b></text>
+<text top="1095" left="128" width="4" height="13" font="17"><b> </b></text>
+<text top="1130" left="74" width="4" height="17" font="19"> </text>
+<text top="922" left="262" width="142" height="17" font="16"><b>4.DatabaseManager </b></text>
+<text top="957" left="262" width="7" height="18" font="20"></text>
+<text top="961" left="269" width="4" height="14" font="7"> </text>
+<text top="962" left="275" width="96" height="13" font="17"><b>Memory Alert </b></text>
+<text top="978" left="262" width="7" height="18" font="20"></text>
+<text top="982" left="269" width="4" height="14" font="7"> </text>
+<text top="983" left="275" width="87" height="13" font="17"><b>Data Backup </b></text>
+<text top="999" left="262" width="7" height="18" font="20"></text>
+<text top="1003" left="269" width="4" height="14" font="7"> </text>
+<text top="1004" left="275" width="121" height="13" font="17"><b>Database Cleanup </b></text>
+<text top="1056" left="316" width="4" height="13" font="17"><b> </b></text>
+<text top="1076" left="316" width="4" height="13" font="17"><b> </b></text>
+<text top="1112" left="262" width="4" height="17" font="19"> </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="21" size="16" family="Times" color="#000000"/>
+	<fontspec id="22" size="10" family="Helvetica" color="#000000"/>
+	<fontspec id="23" size="10" family="Helvetica" color="#000000"/>
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">23 </text>
+<text top="111" left="81" width="354" height="12" font="3">resident  on  a  separate  server.  YIDAs  are  the  autonomous </text>
+<text top="127" left="81" width="357" height="12" font="3">software agents that are deployed into the nodes to be protected.   </text>
+<text top="411" left="430" width="3" height="12" font="3"> </text>
+<text top="423" left="81" width="3" height="12" font="3"> </text>
+<text top="439" left="170" width="172" height="12" font="15"><b>Fig 3: Architecture of YUKTI</b></text>
+<text top="436" left="343" width="4" height="17" font="19"> </text>
+<text top="472" left="81" width="354" height="12" font="3">We  recommend  deploying  YIDA  in  the  Business  Server  or </text>
+<text top="487" left="81" width="354" height="12" font="3">Application  server  to  detect  any  persistent  and  reflected  XSS </text>
+<text top="503" left="81" width="354" height="12" font="3">attack  at  first  instant.    Placing  the  YIDA  at  client  node  would </text>
+<text top="518" left="81" width="321" height="12" font="3">detect DOM based XSS attacks and non-persistent attacks. </text>
+<text top="544" left="81" width="23" height="16" font="8"><b>3.4</b></text>
+<text top="544" left="104" width="5" height="17" font="10"><b> </b></text>
+<text top="544" left="114" width="297" height="16" font="8"><b>YIDA – YIDM Transaction Sequence  </b></text>
+<text top="564" left="81" width="183" height="12" font="3">YIDA works in two modes, viz.,  </text>
+<text top="588" left="135" width="10" height="12" font="3">1.</text>
+<text top="588" left="145" width="4" height="12" font="14"> </text>
+<text top="588" left="162" width="73" height="12" font="3">Detect Mode </text>
+<text top="613" left="135" width="10" height="12" font="3">2.</text>
+<text top="612" left="145" width="4" height="12" font="14"> </text>
+<text top="613" left="162" width="80" height="12" font="3">Suspect Mode </text>
+<text top="637" left="81" width="354" height="12" font="3">The  YIDA  registers  itself  to  the  YIDM.  Upon  registration </text>
+<text top="653" left="81" width="354" height="12" font="3">YIDM  pushes  the  updated  rule  sets  to  the  YIDA.  The  IDE  in </text>
+<text top="668" left="81" width="354" height="12" font="3">autonomous  agent  engine  of  YIDA  sniffs  the  packet  passing </text>
+<text top="684" left="81" width="354" height="12" font="3">through  (both  inward  and  outward),  i.e.  both  request  and </text>
+<text top="699" left="81" width="354" height="12" font="3">response to and fro from the host device. The advantage here is </text>
+<text top="715" left="81" width="354" height="12" font="3">YIDA  does  not  need  to  hold  a  database  for  storing  rule  sets. </text>
+<text top="730" left="81" width="313" height="12" font="3">These rule sets are made available as a flat file to YIDA.  </text>
+<text top="755" left="81" width="354" height="12" font="3">Whenever   detection engine is able to detect the attack, they are </text>
+<text top="770" left="81" width="354" height="12" font="3">highlighted  in  the  interface  menu.  User  can  know  more </text>
+<text top="786" left="81" width="354" height="12" font="3">information about the attack, rule applied by clicking the packet </text>
+<text top="801" left="81" width="354" height="12" font="3">highlighted  in  red  in  the  interface  menu.  In  addition  to  the </text>
+<text top="814" left="81" width="354" height="15" font="9">detection,  the  details  of  attacker’s  IP,  whereabouts,  whois </text>
+<text top="832" left="81" width="354" height="12" font="3">information  are  collected  by  submitting  the  IP  to  an  external </text>
+<text top="848" left="81" width="354" height="12" font="3">whois  server  [19].  This  information  is  stored  by  pushing  into </text>
+<text top="861" left="81" width="305" height="15" font="9">attacker’s profile database in YIDS for future reference. </text>
+<text top="888" left="81" width="354" height="12" font="3">As  given  in  the  Fig  4  ,  in  the  suspect  mode,  when  YIDA  is </text>
+<text top="904" left="81" width="354" height="12" font="3">unable  to  confirm  that  (packet  decode)  as  an  attack,  a  ticket  is </text>
+<text top="919" left="81" width="354" height="12" font="3">created. Ticket includes the copy of the packet trace and is sent </text>
+<text top="932" left="81" width="354" height="15" font="9">to the YIDM’s suspect  manager. The YIDM administrator gets </text>
+<text top="950" left="81" width="354" height="12" font="3">the alert for the ticket. The ticket is analyzed for any new type of </text>
+<text top="966" left="81" width="354" height="12" font="3">XSS  attack  signature.  With  the  help  of  Knowledge  Aggregator </text>
+<text top="981" left="81" width="354" height="12" font="3">and  his  personal  experience,  administrator  (or  an  authorized </text>
+<text top="997" left="81" width="354" height="12" font="3">user) categorizes it as an attack or not. If it is an attack signature, </text>
+<text top="1009" left="81" width="354" height="15" font="9">it is appended to the YIDM’s rule data base. An updated rule set </text>
+<text top="1028" left="81" width="354" height="12" font="3">is pushed to all the YIDAs.  With these current rule sets any new </text>
+<text top="1043" left="81" width="354" height="12" font="3">or variants of XSS attacks could be detected by any participant </text>
+<text top="1059" left="81" width="354" height="12" font="3">agent. In addition to knowing the concepts and components it is </text>
+<text top="111" left="486" width="354" height="12" font="3">interesting to know about the implementation. Following section </text>
+<text top="127" left="486" width="354" height="12" font="3">discusses  the  key  entities  related  to  implementation  of  the </text>
+<text top="142" left="486" width="50" height="12" font="3">solution. </text>
+<text top="198" left="503" width="23" height="12" font="22">YIDM</text>
+<text top="198" left="543" width="42" height="12" font="22">Agent Mgr</text>
+<text top="198" left="716" width="21" height="12" font="22">YIDA</text>
+<text top="198" left="664" width="31" height="12" font="22">DB Mgr</text>
+<text top="198" left="600" width="51" height="12" font="22">Suspect Mgr</text>
+<text top="198" left="755" width="49" height="12" font="22">Victim Node</text>
+<text top="236" left="622" width="50" height="12" font="23"><b>Push Rules</b></text>
+<text top="275" left="725" width="57" height="12" font="23"><b>Sniff Packets</b></text>
+<text top="467" left="722" width="63" height="12" font="23"><b>Detect Attacks</b></text>
+<text top="336" left="544" width="154" height="12" font="23"><b>Push the ticket to Suspect Manager</b></text>
+<text top="317" left="758" width="79" height="12" font="23"><b>Suspicious Attack</b></text>
+<text top="371" left="535" width="70" height="12" font="23"><b>Suspect verified</b></text>
+<text top="414" left="546" width="152" height="12" font="23"><b>On Confirmation Update Rule Base</b></text>
+<text top="440" left="596" width="108" height="12" font="23"><b>Push Updated Rule Base</b></text>
+<text top="526" left="492" width="342" height="12" font="15"><b>Fig 4: Sequence diagram for YIDA-YIDM in suspect mode </b></text>
+<text top="554" left="486" width="14" height="16" font="8"><b>4.</b></text>
+<text top="553" left="500" width="5" height="17" font="10"><b> </b></text>
+<text top="554" left="510" width="276" height="16" font="8"><b>SOLUTION IMPLEMENTATION </b></text>
+<text top="573" left="486" width="354" height="12" font="3">Given  below  are  the  requirements  for  our  development </text>
+<text top="589" left="486" width="354" height="12" font="3">environment:  The  entire  solution  is  built  using  Java.  The </text>
+<text top="604" left="486" width="354" height="12" font="3">portability,  network  adaptability,  interoperability  and  platform </text>
+<text top="620" left="486" width="354" height="12" font="3">independence  features  of  Java  has  enabled  us  to  develop  this </text>
+<text top="635" left="486" width="50" height="12" font="3">solution. </text>
+<text top="656" left="513" width="6" height="16" font="13"></text>
+<text top="660" left="519" width="4" height="12" font="14"> </text>
+<text top="661" left="540" width="104" height="12" font="3">Jdk 1.6 and above  </text>
+<text top="673" left="513" width="6" height="16" font="13"></text>
+<text top="677" left="519" width="4" height="12" font="14"> </text>
+<text top="677" left="540" width="34" height="12" font="3">Jpcap </text>
+<text top="689" left="513" width="6" height="16" font="13"></text>
+<text top="693" left="519" width="4" height="12" font="14"> </text>
+<text top="694" left="540" width="55" height="12" font="3">Winpcap  </text>
+<text top="706" left="513" width="6" height="16" font="13"></text>
+<text top="710" left="519" width="4" height="12" font="14"> </text>
+<text top="710" left="540" width="117" height="12" font="3">Mysql 5.0 and above </text>
+<text top="723" left="513" width="6" height="16" font="13"></text>
+<text top="726" left="519" width="4" height="12" font="14"> </text>
+<text top="727" left="540" width="188" height="12" font="3">Mysql Connecter - java 5.1.10 bin </text>
+<text top="739" left="513" width="6" height="16" font="13"></text>
+<text top="743" left="519" width="4" height="12" font="14"> </text>
+<text top="743" left="540" width="109" height="12" font="3">Apache Tomcat v6  </text>
+<text top="769" left="486" width="23" height="16" font="8"><b>4.1</b></text>
+<text top="769" left="509" width="5" height="17" font="10"><b> </b></text>
+<text top="769" left="519" width="256" height="16" font="8"><b>Packet Inspection Flow Diagram </b></text>
+<text top="789" left="486" width="354" height="12" font="3">The  flow  chart  given  in  Fig.  5  explains  the  packet  inspection </text>
+<text top="804" left="486" width="354" height="12" font="3">activity  which  is  the  core  one  in  this  implementation.  The </text>
+<text top="820" left="486" width="354" height="12" font="3">process  is  initiated  as  a  thread  (initCapturePacket).  Packets  are </text>
+<text top="835" left="486" width="354" height="12" font="3">captured using the jpcap external library[20] that is called in by </text>
+<text top="851" left="486" width="354" height="12" font="3">our  application.  IDSengine  receives  the  packets  and  are </text>
+<text top="866" left="486" width="354" height="12" font="3">extracted  for  protocol  filtration  by  the  PacketExtractor.  Copies </text>
+<text top="882" left="486" width="354" height="12" font="3">of the packets are stored in packet database. Packet contents are </text>
+<text top="897" left="486" width="354" height="12" font="3">factored to detect whether they have any XSS signatures. This is </text>
+<text top="913" left="486" width="354" height="12" font="3">done  by  comparing  every  rule  in  rule  base  with  the  decoded </text>
+<text top="928" left="486" width="354" height="12" font="3">contents of the packet. An alert is rendered by XSSFinder if an </text>
+<text top="944" left="486" width="122" height="12" font="3">exact match is found.  </text>
+<text top="969" left="486" width="354" height="12" font="3">Based  on  the  source  and  destination  IP  address  of  the  packet, </text>
+<text top="984" left="486" width="354" height="12" font="3">they  are  categorized  as  request  or  response.  After  classification </text>
+<text top="999" left="486" width="354" height="12" font="3">they are stored in request and response table respectively. These </text>
+<text top="1015" left="486" width="354" height="12" font="3">packets are numbered and displayed in the table format (header </text>
+<text top="1031" left="486" width="354" height="12" font="3">and  rows)  in  the  display  menu.  The  packets  that  carry  the </text>
+<text top="1046" left="486" width="354" height="12" font="3">signature  (those  are  parsed  true  while  comparing)  are </text>
+<text top="1062" left="486" width="354" height="12" font="3">highlighted  in  red  color.  By  clicking  the  highlighted  row  the </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="24" size="11" family="Times" color="#000000"/>
+	<fontspec id="25" size="7" family="Times" color="#000000"/>
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">24 </text>
+<text top="111" left="81" width="354" height="12" font="3">administrator  or  user  can  view  the  decoded  contents  of  the </text>
+<text top="127" left="81" width="354" height="12" font="3">packet  header  and  messages.  The  signature  part  was  also </text>
+<text top="142" left="81" width="354" height="12" font="3">highlighted for better viewing. Different decoding and encoding </text>
+<text top="158" left="81" width="354" height="12" font="3">methods are applied depending upon the location (user input or </text>
+<text top="173" left="81" width="173" height="12" font="3">URL) the XSS signature exists. </text>
+<text top="198" left="81" width="354" height="12" font="3">When XSSFinder cannot find an exact  match, but detects some </text>
+<text top="213" left="81" width="354" height="12" font="3">traces  of  the  XSS  signature,  then  it  goes  into  the  suspect  mode </text>
+<text top="229" left="81" width="354" height="12" font="3">and  suspect  engine  is  called.  With  the  help  of  personal </text>
+<text top="244" left="81" width="354" height="12" font="3">intelligence  and  knowledge  obtained  from  the  knowledge </text>
+<text top="260" left="81" width="354" height="12" font="3">aggregator the administrator or user decides whether the suspect </text>
+<text top="275" left="81" width="354" height="12" font="3">is a true XSS attack signature or not. If it is decided true a new </text>
+<text top="291" left="81" width="354" height="12" font="3">regex will be created for the attack and sent to the rule base for </text>
+<text top="306" left="81" width="352" height="12" font="3">updating and distribution to all agents (not shown in the figure).  </text>
+<text top="902" left="449" width="3" height="12" font="3"> </text>
+<text top="924" left="133" width="249" height="12" font="15"><b>Fig 5:  Packet Inspection Activity Diagram </b></text>
+<text top="957" left="81" width="354" height="12" font="3">By  applying  the  updated  rule  set  XSSfinder  detects  any  such </text>
+<text top="972" left="81" width="354" height="12" font="3">attacks  if  it  is  repeated  in  future.  We  have  used  rule  base,  rule </text>
+<text top="988" left="81" width="354" height="12" font="3">set  interchangeably  in  many  places  because  we  mean  rule  base </text>
+<text top="1003" left="81" width="354" height="12" font="3">when the rules are in database. When these rules are transferred </text>
+<text top="1019" left="81" width="354" height="12" font="3">to  a  flat  file  and  used  by  the  agent,  we  call  it  as  a  rule  set. </text>
+<text top="1034" left="81" width="354" height="12" font="3">Important  dependencies  are  discussed  in  this  implementation </text>
+<text top="1050" left="81" width="354" height="12" font="3">section.  The  following  section  discusses  the  state  of  the  art </text>
+<text top="1065" left="81" width="169" height="12" font="3">suspect engine of our solution. </text>
+<text top="112" left="486" width="23" height="16" font="8"><b>4.2</b></text>
+<text top="112" left="509" width="5" height="17" font="10"><b> </b></text>
+<text top="112" left="519" width="249" height="16" font="8"><b>State of the Art –Suspect Engine</b></text>
+<text top="115" left="769" width="3" height="12" font="15"><b> </b></text>
+<text top="141" left="486" width="354" height="12" font="3">The  unique  suspect  engine  in  our  detection  system  uses  the </text>
+<text top="156" left="486" width="354" height="12" font="3">following  state  of  the  art  phrase-structure.    It  helps  to  achieve </text>
+<text top="172" left="486" width="354" height="12" font="3">greater  accuracy  in  categorizing  the  arriving  packets  into </text>
+<text top="187" left="486" width="354" height="12" font="3">suspects or not. Table 3 lists some of the regex that are used to </text>
+<text top="203" left="486" width="45" height="12" font="3">identify </text>
+<text top="203" left="544" width="52" height="12" font="3">suspects. </text>
+<text top="203" left="608" width="22" height="12" font="3">We </text>
+<text top="203" left="642" width="29" height="12" font="3">have </text>
+<text top="203" left="683" width="33" height="12" font="3">taken </text>
+<text top="203" left="728" width="20" height="12" font="3">the </text>
+<text top="203" left="760" width="43" height="12" font="3">suspect </text>
+<text top="203" left="816" width="24" height="12" font="3">rule </text>
+<text top="216" left="486" width="354" height="15" font="9">“SCRIPT_ALERT“ to explain  the grammar and its production. </text>
+<text top="234" left="486" width="68" height="12" font="3">The regex    </text>
+<text top="258" left="486" width="347" height="12" font="3">[&lt;](s).?(c).?(r).?(i).?(p).?(t)[&gt;](.*\\s)*?(alert)[(]['\&#34;`]?.*?['\&#34;`]?[)]</text>
+<text top="274" left="486" width="22" height="12" font="3">[;]? </text>
+<text top="298" left="486" width="287" height="12" font="3">is broken into smaller groups as given in the Table 1 </text>
+<text top="323" left="523" width="281" height="12" font="15"><b>Table 1   Breaking the regex into smaller groups </b></text>
+<text top="364" left="610" width="110" height="12" font="15"><b>SCRIPT_ALERT  </b></text>
+<text top="387" left="544" width="76" height="12" font="15"><b>GROUP NO </b></text>
+<text top="387" left="647" width="134" height="12" font="15"><b>REGEX RULE DATA </b></text>
+<text top="410" left="544" width="50" height="12" font="15"><b>GRP-01 </b></text>
+<text top="410" left="647" width="34" height="12" font="3">[&lt;](s) </text>
+<text top="434" left="544" width="50" height="12" font="15"><b>GRP-02 </b></text>
+<text top="433" left="647" width="28" height="12" font="3">.?(c) </text>
+<text top="457" left="544" width="50" height="12" font="15"><b>GRP-03 </b></text>
+<text top="457" left="647" width="26" height="12" font="3">.?(r) </text>
+<text top="480" left="544" width="50" height="12" font="15"><b>GRP-04 </b></text>
+<text top="480" left="647" width="26" height="12" font="3">.?(i) </text>
+<text top="503" left="544" width="50" height="12" font="15"><b>GRP-05 </b></text>
+<text top="503" left="647" width="29" height="12" font="3">.?(p) </text>
+<text top="527" left="544" width="50" height="12" font="15"><b>GRP-06 </b></text>
+<text top="526" left="647" width="42" height="12" font="3">.?(t)[&gt;] </text>
+<text top="550" left="544" width="50" height="12" font="15"><b>GRP-07 </b></text>
+<text top="550" left="647" width="48" height="12" font="3">(.*\\s)*? </text>
+<text top="573" left="544" width="50" height="12" font="15"><b>GRP-08 </b></text>
+<text top="573" left="647" width="36" height="12" font="3">(alert) </text>
+<text top="597" left="544" width="50" height="12" font="15"><b>GRP-09 </b></text>
+<text top="596" left="647" width="48" height="12" font="3">[(]['\&#34;`]? </text>
+<text top="620" left="544" width="50" height="12" font="15"><b>GRP-10 </b></text>
+<text top="619" left="647" width="20" height="12" font="3">.*? </text>
+<text top="643" left="544" width="50" height="12" font="15"><b>GRP-11 </b></text>
+<text top="643" left="647" width="35" height="12" font="3">['\&#34;`]? </text>
+<text top="666" left="544" width="50" height="12" font="15"><b>GRP-12 </b></text>
+<text top="666" left="647" width="36" height="12" font="3">[)][;]? </text>
+<text top="682" left="486" width="3" height="12" font="3"> </text>
+<text top="707" left="486" width="354" height="12" font="3">The operations between each group are as given below.  This is </text>
+<text top="722" left="486" width="200" height="12" font="3">derived from our continual research. </text>
+<text top="747" left="486" width="351" height="12" font="3">( GRP-01 ˅ GRP-02 <b>˅ </b>GRP-03 <b>˅</b> GRP-04 ˅ GRP-05 ) <b>˄</b> ( GRP-</text>
+<text top="762" left="486" width="354" height="12" font="3">06 <b>˅</b> GRP-07 ) <b>˄</b> ( GRP-08 ) <b>˄</b> ( GRP-09 <b>˅ </b>GRP-10 <b>˅</b> GRP-11 <b>˅ </b></text>
+<text top="778" left="486" width="56" height="12" font="3">GRP-12 ) </text>
+<text top="802" left="486" width="303" height="12" font="3">The grammar G for the for the expression is defined as  </text>
+<text top="827" left="486" width="33" height="12" font="3">G={V</text>
+<text top="832" left="520" width="13" height="8" font="25">N  ,</text>
+<text top="827" left="533" width="10" height="12" font="3">V</text>
+<text top="832" left="543" width="8" height="8" font="25">T </text>
+<text top="827" left="551" width="84" height="12" font="3">, S, P} , Where </text>
+<text top="851" left="486" width="10" height="12" font="3">V</text>
+<text top="857" left="496" width="9" height="8" font="25">N </text>
+<text top="851" left="505" width="28" height="12" font="3">= {A</text>
+<text top="857" left="533" width="5" height="8" font="25">1</text>
+<text top="851" left="537" width="17" height="12" font="3">, A</text>
+<text top="857" left="554" width="5" height="8" font="25">2</text>
+<text top="851" left="558" width="17" height="12" font="3">, A</text>
+<text top="857" left="575" width="5" height="8" font="25">3</text>
+<text top="848" left="580" width="31" height="15" font="9">,… A</text>
+<text top="857" left="610" width="9" height="8" font="25">12</text>
+<text top="851" left="619" width="221" height="12" font="3">} is a finite set of non-terminal symbols </text>
+<text top="867" left="486" width="331" height="12" font="3">of a vocabulary V, which can be replaced by other symbols.. </text>
+<text top="891" left="486" width="10" height="12" font="3">V</text>
+<text top="897" left="496" width="5" height="8" font="25">T</text>
+<text top="891" left="501" width="29" height="12" font="3"> = {a</text>
+<text top="897" left="530" width="5" height="8" font="25">1</text>
+<text top="891" left="535" width="14" height="12" font="3">, a</text>
+<text top="897" left="549" width="5" height="8" font="25">2</text>
+<text top="891" left="553" width="14" height="12" font="3">, a</text>
+<text top="897" left="567" width="5" height="8" font="25">3</text>
+<text top="889" left="572" width="27" height="15" font="9">,… a</text>
+<text top="897" left="599" width="9" height="8" font="25">12</text>
+<text top="891" left="608" width="6" height="12" font="3">}</text>
+<text top="897" left="614" width="2" height="8" font="25"> </text>
+<text top="891" left="618" width="223" height="12" font="3">is a finite set of terminal symbols of V, </text>
+<text top="907" left="486" width="234" height="12" font="3">which cannot be replaced by other symbols</text>
+<text top="912" left="720" width="2" height="8" font="25"> </text>
+<text top="931" left="486" width="106" height="12" font="3"> S is a start symbol </text>
+<text top="956" left="486" width="354" height="12" font="3">P is the set of productions (grammatical rules) each of the form </text>
+<text top="972" left="486" width="10" height="12" font="3">w</text>
+<text top="977" left="496" width="5" height="8" font="25">1</text>
+<text top="972" left="500" width="31" height="12" font="3">  w</text>
+<text top="977" left="531" width="5" height="8" font="25">2</text>
+<text top="972" left="535" width="40" height="12" font="3">, where</text>
+<text top="977" left="575" width="5" height="8" font="25">  </text>
+<text top="972" left="580" width="10" height="12" font="3">w</text>
+<text top="977" left="590" width="5" height="8" font="25">1</text>
+<text top="972" left="594" width="212" height="12" font="3"> is a single non-terminal symbol and w</text>
+<text top="977" left="807" width="5" height="8" font="25">2</text>
+<text top="972" left="811" width="29" height="12" font="3">  is a </text>
+<text top="987" left="486" width="310" height="12" font="3">single terminal or a terminal followed by a non-terminal. </text>
+<text top="1012" left="486" width="59" height="12" font="3">P = {S a</text>
+<text top="1017" left="545" width="5" height="8" font="25">1</text>
+<text top="1012" left="549" width="10" height="12" font="3">A</text>
+<text top="1017" left="559" width="5" height="8" font="25">1</text>
+<text top="1009" left="563" width="16" height="15" font="9">│a</text>
+<text top="1017" left="579" width="5" height="8" font="25">2</text>
+<text top="1012" left="583" width="10" height="12" font="3">A</text>
+<text top="1017" left="593" width="5" height="8" font="25">2</text>
+<text top="1009" left="598" width="19" height="15" font="9">│ a</text>
+<text top="1017" left="616" width="5" height="8" font="25">3</text>
+<text top="1012" left="621" width="10" height="12" font="3">A</text>
+<text top="1017" left="631" width="5" height="8" font="25">3</text>
+<text top="1009" left="635" width="19" height="15" font="9">│ a</text>
+<text top="1017" left="654" width="5" height="8" font="25">4</text>
+<text top="1012" left="659" width="10" height="12" font="3">A</text>
+<text top="1017" left="668" width="5" height="8" font="25">4</text>
+<text top="1009" left="673" width="19" height="15" font="9">│ a</text>
+<text top="1017" left="692" width="5" height="8" font="25">5</text>
+<text top="1012" left="696" width="10" height="12" font="3">A</text>
+<text top="1017" left="706" width="5" height="8" font="25">5</text>
+<text top="1012" left="710" width="22" height="12" font="3"> │ a</text>
+<text top="1017" left="733" width="5" height="8" font="25">6</text>
+<text top="1012" left="737" width="10" height="12" font="3">A</text>
+<text top="1017" left="747" width="5" height="8" font="25">6</text>
+<text top="1009" left="752" width="19" height="15" font="9">│ a</text>
+<text top="1017" left="771" width="5" height="8" font="25">7</text>
+<text top="1012" left="775" width="10" height="12" font="3">A</text>
+<text top="1017" left="785" width="5" height="8" font="25">7</text>
+<text top="1012" left="789" width="7" height="12" font="3">, </text>
+<text top="1036" left="540" width="10" height="12" font="3">A</text>
+<text top="1042" left="550" width="5" height="8" font="25">1</text>
+<text top="1033" left="554" width="23" height="15" font="9"> a</text>
+<text top="1042" left="577" width="5" height="8" font="25">2</text>
+<text top="1036" left="582" width="10" height="12" font="3">A</text>
+<text top="1042" left="591" width="5" height="8" font="25">2</text>
+<text top="1033" left="596" width="19" height="15" font="9">│ a</text>
+<text top="1042" left="614" width="5" height="8" font="25">3</text>
+<text top="1036" left="619" width="10" height="12" font="3">A</text>
+<text top="1042" left="629" width="5" height="8" font="25">3</text>
+<text top="1033" left="633" width="19" height="15" font="9">│ a</text>
+<text top="1042" left="652" width="5" height="8" font="25">4</text>
+<text top="1036" left="657" width="10" height="12" font="3">A</text>
+<text top="1042" left="666" width="5" height="8" font="25">4</text>
+<text top="1033" left="671" width="19" height="15" font="9">│ a</text>
+<text top="1042" left="690" width="5" height="8" font="25">5</text>
+<text top="1036" left="695" width="10" height="12" font="3">A</text>
+<text top="1042" left="704" width="5" height="8" font="25">5</text>
+<text top="1036" left="709" width="23" height="12" font="3"> │ a</text>
+<text top="1042" left="731" width="5" height="8" font="25">6</text>
+<text top="1036" left="736" width="10" height="12" font="3">A</text>
+<text top="1042" left="745" width="5" height="8" font="25">6</text>
+<text top="1033" left="750" width="19" height="15" font="9">│ a</text>
+<text top="1042" left="769" width="5" height="8" font="25">7</text>
+<text top="1036" left="773" width="10" height="12" font="3">A</text>
+<text top="1042" left="783" width="5" height="8" font="25">7</text>
+<text top="1036" left="787" width="7" height="12" font="3">, </text>
+<text top="1061" left="540" width="10" height="12" font="3">A</text>
+<text top="1066" left="550" width="5" height="8" font="25">2</text>
+<text top="1058" left="554" width="23" height="15" font="9"> a</text>
+<text top="1066" left="577" width="5" height="8" font="25">1</text>
+<text top="1061" left="582" width="10" height="12" font="3">A</text>
+<text top="1066" left="591" width="5" height="8" font="25">1</text>
+<text top="1058" left="596" width="19" height="15" font="9">│ a</text>
+<text top="1066" left="614" width="5" height="8" font="25">3</text>
+<text top="1061" left="619" width="10" height="12" font="3">A</text>
+<text top="1066" left="629" width="5" height="8" font="25">3</text>
+<text top="1058" left="633" width="19" height="15" font="9">│ a</text>
+<text top="1066" left="652" width="5" height="8" font="25">4</text>
+<text top="1061" left="657" width="10" height="12" font="3">A</text>
+<text top="1066" left="666" width="5" height="8" font="25">4</text>
+<text top="1058" left="671" width="19" height="15" font="9">│ a</text>
+<text top="1066" left="690" width="5" height="8" font="25">5</text>
+<text top="1061" left="695" width="10" height="12" font="3">A</text>
+<text top="1066" left="704" width="5" height="8" font="25">5</text>
+<text top="1061" left="709" width="23" height="12" font="3"> │ a</text>
+<text top="1066" left="731" width="5" height="8" font="25">6</text>
+<text top="1061" left="736" width="10" height="12" font="3">A</text>
+<text top="1066" left="745" width="5" height="8" font="25">6</text>
+<text top="1058" left="750" width="19" height="15" font="9">│ a</text>
+<text top="1066" left="769" width="5" height="8" font="25">7</text>
+<text top="1061" left="773" width="10" height="12" font="3">A</text>
+<text top="1066" left="783" width="5" height="8" font="25">7</text>
+<text top="1061" left="787" width="7" height="12" font="3">, </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">25 </text>
+<text top="111" left="135" width="10" height="12" font="3">A</text>
+<text top="116" left="145" width="5" height="8" font="25">3</text>
+<text top="108" left="149" width="23" height="15" font="9"> a</text>
+<text top="116" left="172" width="5" height="8" font="25">1</text>
+<text top="111" left="176" width="10" height="12" font="3">A</text>
+<text top="116" left="186" width="5" height="8" font="25">1</text>
+<text top="108" left="190" width="19" height="15" font="9">│ a</text>
+<text top="116" left="209" width="5" height="8" font="25">2</text>
+<text top="111" left="214" width="10" height="12" font="3">A</text>
+<text top="116" left="224" width="5" height="8" font="25">2</text>
+<text top="108" left="228" width="19" height="15" font="9">│ a</text>
+<text top="116" left="247" width="5" height="8" font="25">4</text>
+<text top="111" left="252" width="10" height="12" font="3">A</text>
+<text top="116" left="261" width="5" height="8" font="25">4</text>
+<text top="108" left="266" width="19" height="15" font="9">│ a</text>
+<text top="116" left="285" width="5" height="8" font="25">5</text>
+<text top="111" left="289" width="10" height="12" font="3">A</text>
+<text top="116" left="299" width="5" height="8" font="25">5</text>
+<text top="111" left="304" width="23" height="12" font="3"> │ a</text>
+<text top="116" left="326" width="5" height="8" font="25">6</text>
+<text top="111" left="331" width="10" height="12" font="3">A</text>
+<text top="116" left="340" width="5" height="8" font="25">6</text>
+<text top="108" left="345" width="19" height="15" font="9">│ a</text>
+<text top="116" left="363" width="5" height="8" font="25">7</text>
+<text top="111" left="368" width="10" height="12" font="3">A</text>
+<text top="116" left="378" width="5" height="8" font="25">7</text>
+<text top="111" left="382" width="7" height="12" font="3">, </text>
+<text top="136" left="135" width="13" height="12" font="3"> A</text>
+<text top="141" left="148" width="5" height="8" font="25">4</text>
+<text top="133" left="152" width="23" height="15" font="9"> a</text>
+<text top="141" left="175" width="5" height="8" font="25">1</text>
+<text top="136" left="180" width="10" height="12" font="3">A</text>
+<text top="141" left="189" width="5" height="8" font="25">1</text>
+<text top="133" left="194" width="19" height="15" font="9">│ a</text>
+<text top="141" left="213" width="5" height="8" font="25">2</text>
+<text top="136" left="217" width="10" height="12" font="3">A</text>
+<text top="141" left="227" width="5" height="8" font="25">2</text>
+<text top="133" left="232" width="19" height="15" font="9">│ a</text>
+<text top="141" left="250" width="5" height="8" font="25">4</text>
+<text top="136" left="255" width="10" height="12" font="3">A</text>
+<text top="141" left="265" width="5" height="8" font="25">4</text>
+<text top="133" left="269" width="19" height="15" font="9">│ a</text>
+<text top="141" left="288" width="5" height="8" font="25">5</text>
+<text top="136" left="293" width="10" height="12" font="3">A</text>
+<text top="141" left="302" width="5" height="8" font="25">5</text>
+<text top="136" left="307" width="22" height="12" font="3"> │ a</text>
+<text top="141" left="329" width="5" height="8" font="25">6</text>
+<text top="136" left="334" width="10" height="12" font="3">A</text>
+<text top="141" left="343" width="5" height="8" font="25">6</text>
+<text top="133" left="348" width="19" height="15" font="9">│ a</text>
+<text top="141" left="367" width="5" height="8" font="25">7</text>
+<text top="136" left="372" width="10" height="12" font="3">A</text>
+<text top="141" left="381" width="5" height="8" font="25">7</text>
+<text top="136" left="386" width="7" height="12" font="3">, </text>
+<text top="160" left="135" width="10" height="12" font="3">A</text>
+<text top="165" left="145" width="5" height="8" font="25">5</text>
+<text top="157" left="149" width="23" height="15" font="9"> a</text>
+<text top="165" left="172" width="5" height="8" font="25">1</text>
+<text top="160" left="176" width="10" height="12" font="3">A</text>
+<text top="165" left="186" width="5" height="8" font="25">1</text>
+<text top="157" left="190" width="19" height="15" font="9">│ a</text>
+<text top="165" left="209" width="5" height="8" font="25">2</text>
+<text top="160" left="214" width="10" height="12" font="3">A</text>
+<text top="165" left="224" width="5" height="8" font="25">2</text>
+<text top="157" left="228" width="19" height="15" font="9">│ a</text>
+<text top="165" left="247" width="5" height="8" font="25">3</text>
+<text top="160" left="252" width="10" height="12" font="3">A</text>
+<text top="165" left="261" width="5" height="8" font="25">3</text>
+<text top="157" left="266" width="19" height="15" font="9">│ a</text>
+<text top="165" left="285" width="5" height="8" font="25">4</text>
+<text top="160" left="289" width="10" height="12" font="3">A</text>
+<text top="165" left="299" width="5" height="8" font="25">4</text>
+<text top="160" left="304" width="23" height="12" font="3"> │ a</text>
+<text top="165" left="326" width="5" height="8" font="25">6</text>
+<text top="160" left="331" width="10" height="12" font="3">A</text>
+<text top="165" left="340" width="5" height="8" font="25">6</text>
+<text top="157" left="345" width="19" height="15" font="9">│ a</text>
+<text top="165" left="363" width="5" height="8" font="25">7</text>
+<text top="160" left="368" width="10" height="12" font="3">A</text>
+<text top="165" left="378" width="5" height="8" font="25">7</text>
+<text top="160" left="382" width="7" height="12" font="3">, </text>
+<text top="185" left="135" width="10" height="12" font="3">A</text>
+<text top="190" left="145" width="5" height="8" font="25">6</text>
+<text top="182" left="149" width="23" height="15" font="9"> a</text>
+<text top="190" left="172" width="5" height="8" font="25">7</text>
+<text top="185" left="176" width="10" height="12" font="3">A</text>
+<text top="190" left="186" width="5" height="8" font="25">7</text>
+<text top="182" left="190" width="19" height="15" font="9">│ a</text>
+<text top="190" left="209" width="5" height="8" font="25">8</text>
+<text top="185" left="214" width="10" height="12" font="3">A</text>
+<text top="190" left="224" width="5" height="8" font="25">8</text>
+<text top="185" left="228" width="7" height="12" font="3">, </text>
+<text top="209" left="135" width="10" height="12" font="3">A</text>
+<text top="215" left="145" width="5" height="8" font="25">7</text>
+<text top="206" left="149" width="23" height="15" font="9"> a</text>
+<text top="215" left="172" width="5" height="8" font="25">6</text>
+<text top="209" left="176" width="10" height="12" font="3">A</text>
+<text top="215" left="186" width="5" height="8" font="25">6</text>
+<text top="206" left="190" width="19" height="15" font="9">│ a</text>
+<text top="215" left="209" width="5" height="8" font="25">8</text>
+<text top="209" left="214" width="10" height="12" font="3">A</text>
+<text top="215" left="224" width="5" height="8" font="25">8</text>
+<text top="209" left="228" width="7" height="12" font="3">, </text>
+<text top="234" left="81" width="54" height="12" font="3">             A</text>
+<text top="239" left="135" width="5" height="8" font="25">8</text>
+<text top="231" left="139" width="23" height="15" font="9"> a</text>
+<text top="239" left="162" width="5" height="8" font="25">9</text>
+<text top="234" left="166" width="10" height="12" font="3">A</text>
+<text top="239" left="176" width="5" height="8" font="25">9</text>
+<text top="231" left="180" width="19" height="15" font="9">│ a</text>
+<text top="239" left="199" width="9" height="8" font="25">10</text>
+<text top="234" left="208" width="10" height="12" font="3">A</text>
+<text top="239" left="218" width="9" height="8" font="25">10</text>
+<text top="231" left="227" width="19" height="15" font="9">│ a</text>
+<text top="239" left="246" width="9" height="8" font="25">11</text>
+<text top="234" left="255" width="10" height="12" font="3">A</text>
+<text top="239" left="265" width="9" height="8" font="25">11</text>
+<text top="231" left="274" width="19" height="15" font="9">│ a</text>
+<text top="239" left="293" width="9" height="8" font="25">12</text>
+<text top="234" left="302" width="10" height="12" font="3">A</text>
+<text top="239" left="311" width="9" height="8" font="25">12</text>
+<text top="231" left="320" width="19" height="15" font="9">│ a</text>
+<text top="239" left="339" width="5" height="8" font="25">9</text>
+<text top="231" left="344" width="19" height="15" font="9">│ a</text>
+<text top="239" left="363" width="9" height="8" font="25">10</text>
+<text top="231" left="372" width="19" height="15" font="9">│ a</text>
+<text top="239" left="391" width="9" height="8" font="25">11</text>
+<text top="231" left="400" width="19" height="15" font="9">│ a</text>
+<text top="239" left="419" width="9" height="8" font="25">12</text>
+<text top="234" left="428" width="7" height="12" font="3">, </text>
+<text top="258" left="135" width="10" height="12" font="3">A</text>
+<text top="264" left="145" width="5" height="8" font="25">9</text>
+<text top="255" left="149" width="23" height="15" font="9"> a</text>
+<text top="264" left="172" width="9" height="8" font="25">10</text>
+<text top="258" left="181" width="10" height="12" font="3">A</text>
+<text top="264" left="190" width="9" height="8" font="25">10</text>
+<text top="255" left="199" width="19" height="15" font="9">│ a</text>
+<text top="264" left="218" width="9" height="8" font="25">11</text>
+<text top="258" left="228" width="10" height="12" font="3">A</text>
+<text top="264" left="237" width="9" height="8" font="25">11</text>
+<text top="255" left="246" width="19" height="15" font="9">│ a</text>
+<text top="264" left="265" width="9" height="8" font="25">12</text>
+<text top="258" left="274" width="10" height="12" font="3">A</text>
+<text top="264" left="284" width="9" height="8" font="25">12</text>
+<text top="255" left="293" width="19" height="15" font="9">│ a</text>
+<text top="264" left="312" width="9" height="8" font="25">10</text>
+<text top="255" left="321" width="19" height="15" font="9">│ a</text>
+<text top="264" left="340" width="9" height="8" font="25">11</text>
+<text top="255" left="349" width="19" height="15" font="9">│ a</text>
+<text top="264" left="368" width="9" height="8" font="25">12</text>
+<text top="258" left="377" width="7" height="12" font="3">, </text>
+<text top="283" left="135" width="10" height="12" font="3">A</text>
+<text top="288" left="145" width="9" height="8" font="25">10</text>
+<text top="280" left="154" width="23" height="15" font="9"> a</text>
+<text top="288" left="176" width="5" height="8" font="25">9</text>
+<text top="283" left="181" width="10" height="12" font="3">A</text>
+<text top="288" left="190" width="5" height="8" font="25">9</text>
+<text top="280" left="195" width="19" height="15" font="9">│ a</text>
+<text top="288" left="214" width="9" height="8" font="25">11</text>
+<text top="283" left="223" width="10" height="12" font="3">A</text>
+<text top="288" left="233" width="9" height="8" font="25">11</text>
+<text top="280" left="242" width="19" height="15" font="9">│ a</text>
+<text top="288" left="260" width="9" height="8" font="25">12</text>
+<text top="283" left="270" width="10" height="12" font="3">A</text>
+<text top="288" left="279" width="9" height="8" font="25">12</text>
+<text top="280" left="288" width="19" height="15" font="9">│ a</text>
+<text top="288" left="307" width="5" height="8" font="25">9</text>
+<text top="280" left="312" width="19" height="15" font="9">│ a</text>
+<text top="288" left="331" width="9" height="8" font="25">11</text>
+<text top="280" left="340" width="19" height="15" font="9">│ a</text>
+<text top="288" left="359" width="9" height="8" font="25">12</text>
+<text top="283" left="368" width="7" height="12" font="3">, </text>
+<text top="307" left="135" width="10" height="12" font="3">A</text>
+<text top="313" left="145" width="9" height="8" font="25">11</text>
+<text top="304" left="154" width="23" height="15" font="9"> a</text>
+<text top="313" left="176" width="5" height="8" font="25">9</text>
+<text top="307" left="181" width="10" height="12" font="3">A</text>
+<text top="313" left="190" width="5" height="8" font="25">9</text>
+<text top="304" left="195" width="19" height="15" font="9">│ a</text>
+<text top="313" left="214" width="9" height="8" font="25">10</text>
+<text top="307" left="223" width="10" height="12" font="3">A</text>
+<text top="313" left="233" width="9" height="8" font="25">10</text>
+<text top="304" left="242" width="19" height="15" font="9">│ a</text>
+<text top="313" left="260" width="9" height="8" font="25">12</text>
+<text top="307" left="270" width="10" height="12" font="3">A</text>
+<text top="313" left="279" width="9" height="8" font="25">12</text>
+<text top="304" left="288" width="19" height="15" font="9">│ a</text>
+<text top="313" left="307" width="5" height="8" font="25">9</text>
+<text top="304" left="312" width="19" height="15" font="9">│ a</text>
+<text top="313" left="331" width="9" height="8" font="25">10</text>
+<text top="304" left="340" width="19" height="15" font="9">│ a</text>
+<text top="313" left="359" width="9" height="8" font="25">12</text>
+<text top="307" left="368" width="7" height="12" font="3">, </text>
+<text top="332" left="135" width="10" height="12" font="3">A</text>
+<text top="337" left="145" width="9" height="8" font="25">12</text>
+<text top="329" left="154" width="23" height="15" font="9"> a</text>
+<text top="337" left="176" width="5" height="8" font="25">9</text>
+<text top="332" left="181" width="10" height="12" font="3">A</text>
+<text top="337" left="190" width="5" height="8" font="25">9</text>
+<text top="329" left="195" width="19" height="15" font="9">│ a</text>
+<text top="337" left="214" width="9" height="8" font="25">10</text>
+<text top="332" left="223" width="10" height="12" font="3">A</text>
+<text top="337" left="233" width="9" height="8" font="25">10</text>
+<text top="329" left="242" width="19" height="15" font="9">│ a</text>
+<text top="337" left="260" width="9" height="8" font="25">11</text>
+<text top="332" left="270" width="10" height="12" font="3">A</text>
+<text top="337" left="279" width="9" height="8" font="25">11</text>
+<text top="329" left="288" width="19" height="15" font="9">│ a</text>
+<text top="337" left="307" width="5" height="8" font="25">9</text>
+<text top="329" left="312" width="19" height="15" font="9">│ a</text>
+<text top="337" left="331" width="9" height="8" font="25">10</text>
+<text top="329" left="340" width="19" height="15" font="9">│ a</text>
+<text top="337" left="359" width="11" height="8" font="25">11 </text>
+<text top="332" left="370" width="10" height="12" font="3">} </text>
+<text top="356" left="81" width="132" height="12" font="3">Here in this example {A</text>
+<text top="362" left="213" width="5" height="8" font="25">1</text>
+<text top="353" left="217" width="27" height="15" font="9">… A</text>
+<text top="362" left="244" width="11" height="8" font="25">12 </text>
+<text top="356" left="255" width="180" height="12" font="3">} are our {GRP-01 … GRP-12}, </text>
+<text top="372" left="81" width="12" height="12" font="3">{a</text>
+<text top="377" left="93" width="5" height="8" font="25">1</text>
+<text top="369" left="98" width="32" height="15" font="9">,…  a</text>
+<text top="377" left="130" width="9" height="8" font="25">12</text>
+<text top="372" left="139" width="297" height="12" font="3">  }  are  {&lt;,s,c,r…..),;}  and  S  &lt;.  A  high  level </text>
+<text top="387" left="81" width="354" height="12" font="3">explanation  is  provided  above,  where  as  each  groups  follow </text>
+<text top="403" left="81" width="259" height="12" font="3">their regex syntax to parse further at next level. </text>
+<text top="429" left="81" width="14" height="16" font="8"><b>5.</b></text>
+<text top="428" left="95" width="5" height="17" font="10"><b> </b></text>
+<text top="429" left="105" width="172" height="16" font="8"><b>RESULT ANALYSIS </b></text>
+<text top="448" left="81" width="354" height="12" font="3">We have taken a large set of test cases (attack scripts) to conduct </text>
+<text top="464" left="81" width="354" height="12" font="3">an extensive analysis of our solution.  Well known XSS exploits </text>
+<text top="479" left="81" width="354" height="12" font="3">from different sources [8, 12, 16, 17 and 18] and huge collection </text>
+<text top="495" left="81" width="15" height="12" font="3">of </text>
+<text top="495" left="109" width="32" height="12" font="3">cases </text>
+<text top="495" left="153" width="44" height="12" font="3">derived </text>
+<text top="495" left="211" width="29" height="12" font="3">from </text>
+<text top="495" left="253" width="20" height="12" font="3">the </text>
+<text top="495" left="286" width="48" height="12" font="3">archives </text>
+<text top="495" left="347" width="15" height="12" font="3">of </text>
+<text top="495" left="375" width="60" height="12" font="3">xssed.com </text>
+<text top="510" left="81" width="354" height="12" font="3">(http://www.xssed.com/archive)  were  used  for  analysis.  A  web </text>
+<text top="526" left="81" width="354" height="12" font="3">application was created to access all these test cases. Test cases </text>
+<text top="541" left="81" width="354" height="12" font="3">were  hosted  in  web  environment.  They  were  accessed  as  Form </text>
+<text top="557" left="81" width="354" height="12" font="3">inputs,  email  links  and  etc.    The  process  of  passing  these  test </text>
+<text top="572" left="81" width="337" height="12" font="3">cases as an input to the web application has been automated.   </text>
+<text top="597" left="81" width="354" height="12" font="3">Results are tabulated in Table 2. First column “TestCases” gives </text>
+<text top="612" left="81" width="354" height="12" font="3">the  number  of  test  cases  that  are  given  as  input.  B–means  the </text>
+<text top="628" left="81" width="354" height="12" font="3">rule  set  before  applying  any  new  rules.  A-means  the  rule  set </text>
+<text top="641" left="81" width="354" height="15" font="9">after  applying  new  rules.  “NOD  B”  represents  the  number  of </text>
+<text top="659" left="81" width="184" height="12" font="3">attacks detected using rule set B.  </text>
+<text top="681" left="81" width="354" height="15" font="9">“RULES B” gives the number of rules that exactly matched with </text>
+<text top="696" left="81" width="354" height="15" font="9">the XSS signature in the input. “SUSP B” gives the number of </text>
+<text top="714" left="81" width="354" height="12" font="3">signatures  that  are  suspected  as  attack  while  using  rule  base  B. </text>
+<text top="727" left="81" width="354" height="15" font="9">“NOUD  B”  represents  the  number  of  undetected  cases.  “NOD </text>
+<text top="743" left="81" width="354" height="15" font="9">A”  represents  the  number  of  attacks  detected  using  rule  set  A. </text>
+<text top="758" left="81" width="354" height="15" font="9">“RULES A” gives the number of rules that exactly matched with </text>
+<text top="774" left="81" width="354" height="15" font="9">the XSS signature in the input. “SUSP A” gives the number of </text>
+<text top="792" left="81" width="358" height="12" font="3">signatures  that  are  suspected  as attack  while  using  rule base  A.  </text>
+<text top="805" left="81" width="302" height="15" font="9">“NOUD A” represents the number of undetected cases. </text>
+<text top="832" left="81" width="354" height="12" font="3">There  are  70101  test  cases  (appx.  15%  are  invalid  cases)  used </text>
+<text top="848" left="81" width="354" height="12" font="3">and  28546  were  detected  using  132  rules  in  rule  set  B.  2525 </text>
+<text top="863" left="81" width="354" height="12" font="3">cases were suspected. One important point to be noticed here is </text>
+<text top="879" left="81" width="354" height="12" font="3">that  it  is  not  that  every  time  a  new  rule  is  used  for  matching </text>
+<text top="894" left="81" width="354" height="12" font="3">purpose.  Same  rule  can  be  used  for  detecting  several  cases. </text>
+<text top="910" left="81" width="354" height="12" font="3">Accordingly  there  are  only  132  rules  available  in  the  rule  base </text>
+<text top="925" left="81" width="354" height="12" font="3">B.  Rule  1  is  used  for  detecting  1  case,  rule  2  is  used  to  detect </text>
+<text top="941" left="81" width="256" height="12" font="3">346 cases, rule 3 is used to detect 23680 cases. </text>
+<text top="965" left="81" width="354" height="12" font="3">The  summary  of  the  analysis  is,  around  28546  attacks  were </text>
+<text top="981" left="81" width="354" height="12" font="3">detected before applying any new rules whereas 32363 detection </text>
+<text top="996" left="81" width="354" height="12" font="3">were made after updating the rule base with new rules. Similarly </text>
+<text top="1012" left="81" width="354" height="12" font="3">numbers  of  suspects  were  increased  from  2525  to  6251  after </text>
+<text top="1028" left="81" width="354" height="12" font="3">applying new rules. This is due to the fact that new rules would </text>
+<text top="1043" left="81" width="354" height="12" font="3">help  in  creating  new  regular  expressions  that  are  helpful  to </text>
+<text top="1059" left="81" width="354" height="12" font="3">suspect  additionally.  Here  also  it  is  not  that  2525  suspect  rules </text>
+<text top="111" left="486" width="354" height="12" font="3">are  used  to  detect.  One  suspect  rule  (regex)  can  be  used  to </text>
+<text top="127" left="486" width="354" height="12" font="3">suspect several cases. Accordingly it was observed that there are </text>
+<text top="142" left="486" width="354" height="12" font="3">only  5  suspect  rules  .  Rule  2  is  used  to  detect  14  cases  before </text>
+<text top="158" left="486" width="354" height="12" font="3">applying any new rule. Rule 4 and 5 were used to suspect 1306 </text>
+<text top="173" left="486" width="354" height="12" font="3">and  1205  cases  respectively.    It  could  also  be  observed  that </text>
+<text top="189" left="486" width="354" height="12" font="3">slighter  modification  or  appending  new  suspect  rule  has helped </text>
+<text top="204" left="486" width="354" height="12" font="3">in suspecting more cases. Samples of suspect rules are given  in </text>
+<text top="220" left="486" width="354" height="12" font="3">Table  3.  It  has  three  columns.  First  column  lists  suspect  rule </text>
+<text top="235" left="486" width="354" height="12" font="3">number,  second  column  lists  the  the  suspect  rule  name  and  the </text>
+<text top="251" left="486" width="354" height="12" font="3">third  one  gives  the  exact  syntax  that  comprised  of  regular </text>
+<text top="266" left="486" width="354" height="12" font="3">expressions.  Initially  there  were  only  2  suspect  rules,  but  it  is </text>
+<text top="282" left="486" width="280" height="12" font="3">appended with more suspect rules to help detection </text>
+<text top="307" left="529" width="276" height="12" font="15"><b>Table 2   Suspected and Detected XSS Attacks</b>   </text>
+<text top="803" left="842" width="3" height="12" font="3"> </text>
+<text top="821" left="486" width="354" height="12" font="3">Snort  IDS  [21]  has  more  than  twenty  thousand  signatures  to </text>
+<text top="837" left="486" width="354" height="12" font="3">detect all types of attack including network and other application </text>
+<text top="852" left="486" width="354" height="12" font="3">layer attacks. In contrast it has lesser number of rules (&lt; 100 non </text>
+<text top="867" left="486" width="354" height="12" font="3">repetitive)  to  detect  XSS  attacks.  When  the  interpreted  Snort </text>
+<text top="883" left="486" width="354" height="12" font="3">rules for XSS were used to detect the test cases explained above, </text>
+<text top="899" left="486" width="354" height="12" font="3">we  found  considerable  numbers  of  false  positives  and  false </text>
+<text top="914" left="486" width="354" height="12" font="3">negatives.  The  ever  changing  camouflages  of  XSS  attacks  are </text>
+<text top="930" left="486" width="354" height="12" font="3">reason  for  increased  true  negatives.  Generalized  content </text>
+<text top="942" left="486" width="354" height="15" font="9">matching  for  the  text  like  “script”  is  causing  more  false </text>
+<text top="961" left="486" width="354" height="12" font="3">positives. Snort is again categorizing some of them as “cross site </text>
+<text top="973" left="486" width="354" height="15" font="9">attempt”. Commercial version of snort that provides subscribed </text>
+<text top="992" left="486" width="354" height="12" font="3">rule  sets  could  include  these  new  updated  signatures,  thus </text>
+<text top="1007" left="486" width="354" height="12" font="3">creating the dependency in pushing the new rules from external </text>
+<text top="1023" left="486" width="354" height="12" font="3">source. Yukti’s capability to suspect XSS attack using complex </text>
+<text top="1038" left="486" width="354" height="12" font="3">regex (unlike  simple pattern matching in Snort for XSS) makes </text>
+<text top="1054" left="486" width="354" height="12" font="3">it  unique  in  building  the  dynamic  rule  set  and  suspect  rules </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">26 </text>
+<text top="111" left="81" width="354" height="12" font="3">instantaneously  within  the  system  itself.    It  is  evident  from  the </text>
+<text top="127" left="81" width="354" height="12" font="3">results displayed in the table that our solution is able detect XSS </text>
+<text top="142" left="81" width="354" height="12" font="3">attacks effectively and can improve its performance dynamically </text>
+<text top="158" left="81" width="354" height="12" font="3">on  its  own.  Samples  of  XSS  attack  signatures  are  given  in  the </text>
+<text top="173" left="81" width="354" height="12" font="3">Table  4.    It  has  four  columns.  First  gives  the  rule  number, </text>
+<text top="111" left="486" width="354" height="12" font="3">second  rule  name,  third  column  gives  the  rule  pattern  for  the </text>
+<text top="127" left="486" width="354" height="12" font="3">XSS  attack  when  it  is  given  as  the  user  input.  Fourth  column </text>
+<text top="142" left="486" width="354" height="12" font="3">gives  the  rule  pattern  to  detect  the  XSS  attack  when  it  is </text>
+<text top="158" left="486" width="354" height="12" font="3">exploited via URI.  Fig. 6 shows the packet 24 that is suspected </text>
+<text top="173" left="486" width="86" height="12" font="3">for XSS attack. </text>
+<text top="172" left="572" width="4" height="13" font="11"> </text>
+<text top="189" left="81" width="3" height="12" font="3"> </text>
+<text top="222" left="392" width="137" height="12" font="15"><b>Table 3.  Suspect Rules </b></text>
+<text top="248" left="87" width="57" height="14" font="24"><b>SUSP NO. </b></text>
+<text top="248" left="176" width="123" height="14" font="24"><b>SUSPECT RULE NAME </b></text>
+<text top="248" left="518" width="129" height="14" font="24"><b>SUSPECT RULE (Regex) </b></text>
+<text top="267" left="111" width="10" height="14" font="9">1 </text>
+<text top="267" left="163" width="117" height="14" font="9">EVENT_VB_MSGBOX </text>
+<text top="267" left="325" width="277" height="14" font="9">(on.*?)[=](vbscript)[:](msgbox)[(]['\&#34;`]?.*?['\&#34;`]?[)] </text>
+<text top="285" left="111" width="10" height="14" font="9">2 </text>
+<text top="285" left="163" width="99" height="14" font="9">EXP_EVAL_ALERT </text>
+<text top="285" left="325" width="372" height="14" font="9">(expression)[(](eval)?[(]?['\&#34;`]?(alert)[(]['\&#34;`]?.*?['\&#34;`]?[)]['\&#34;`]?[)]?[)] </text>
+<text top="311" left="111" width="10" height="14" font="9">3 </text>
+<text top="311" left="163" width="133" height="14" font="9">ALERT_STR_CHARCODE </text>
+<text top="311" left="325" width="465" height="14" font="9">(alert)[(]['\&#34;`]?(string)[.](fromcharcode)[(][0-9]{1,2}[,][0-9]{1,2}[,][0-9]{1,2}[)]['\&#34;`]?[)] </text>
+<text top="345" left="111" width="10" height="14" font="9">4 </text>
+<text top="345" left="163" width="41" height="14" font="9">SRC_JS </text>
+<text top="328" left="325" width="306" height="14" font="9">(src)[=]['\&#34;`]?((https?|ftp|gopher|telnet|file|notes|ms-</text>
+<text top="345" left="325" width="401" height="14" font="9">help):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\.&amp;]*)[.](j)[^pg][s]?['\&#34;`]? </text>
+<text top="379" left="111" width="10" height="14" font="9">5 </text>
+<text top="379" left="163" width="143" height="14" font="9">JAVASCRIPT_EVAL_ALERT </text>
+<text top="362" left="325" width="508" height="14" font="9">(data)?(on.*?)?(background)?(src)?(href)?[=](3d)?['\&#34;`]?.?(j)?.?(a)?.?(v)?.?(a)?.?(script)?[:#]?(</text>
+<text top="379" left="325" width="327" height="14" font="9">eval)?[(]?['\&#34;`]?(alert)[(]['\&#34;`]?.*?['\&#34;`]?[)]['\&#34;`]?[)]?[;]?['\&#34;`]? </text>
+<text top="415" left="107" width="17" height="14" font="9">12 </text>
+<text top="415" left="163" width="109" height="14" font="9">JAVASCRIPT_ALERT </text>
+<text top="399" left="325" width="508" height="14" font="9">(data)?(on.*?)?(background)?(src)?(href)?[=](3d)?['\&#34;`]?\\s.\\s.?(j)?.?(a)?.?(v)?.?(ascript)?[:#]</text>
+<text top="415" left="325" width="148" height="14" font="9">?(alert)[(]['\&#34;`]?.*?['\&#34;`]?[)] </text>
+<text top="434" left="107" width="17" height="14" font="24"><b>13 </b></text>
+<text top="434" left="163" width="83" height="14" font="24"><b>SCRIPT_ALERT </b></text>
+<text top="434" left="325" width="378" height="14" font="24"><b>[&lt;](s).?(c).?(r).?(i).?(p).?(t)[&gt;](.*\\s)*?(alert)[(]['\&#34;`]?.*?['\&#34;`]?[)][;]? </b></text>
+<text top="452" left="81" width="3" height="12" font="3"> </text>
+<text top="476" left="333" width="255" height="12" font="15"><b>Table 4.  Samples of XSS Attack Signatures </b></text>
+<text top="501" left="84" width="32" height="14" font="24"><b>RULE </b></text>
+<text top="518" left="87" width="25" height="14" font="24"><b>NO. </b></text>
+<text top="518" left="156" width="70" height="14" font="24"><b>RULE NAME </b></text>
+<text top="518" left="348" width="125" height="14" font="24"><b>INPUT RULE PATTERN </b></text>
+<text top="518" left="648" width="112" height="14" font="24"><b>URL RULE PATTERN </b></text>
+<text top="541" left="95" width="10" height="14" font="9">2 </text>
+<text top="541" left="130" width="96" height="14" font="9">SCRIPT src attack </text>
+<text top="541" left="265" width="131" height="14" font="9">&lt;SCRIPT SRC=http:::.js&gt; </text>
+<text top="541" left="569" width="202" height="14" font="9">%3CSCRIPT%20SRC%3Dhttp:::.js%3E </text>
+<text top="564" left="95" width="10" height="14" font="9">3 </text>
+<text top="564" left="130" width="116" height="14" font="9">SCRIPT alert attack 1 </text>
+<text top="564" left="265" width="155" height="14" font="9">&lt;SCRIPT&gt;alert(:::)&lt;/SCRIPT&gt; </text>
+<text top="564" left="569" width="222" height="14" font="9">%3CSCRIPT%3Ealert(:::)%3C/SCRIPT%3E </text>
+<text top="587" left="95" width="10" height="14" font="9">4 </text>
+<text top="587" left="130" width="116" height="14" font="9">SCRIPT alert attack 2 </text>
+<text top="587" left="265" width="225" height="14" font="9">%3Cscript%3Ealert(:::)%3C%2Fscript%3E </text>
+<text top="587" left="569" width="263" height="14" font="9">%3Cscript%3Ealert%28:::%29%3C%2Fscript%3E </text>
+<text top="621" left="95" width="10" height="14" font="9">7 </text>
+<text top="621" left="130" width="71" height="14" font="9">XSS Attack 3 </text>
+<text top="605" left="265" width="286" height="14" font="9">%3CSCRIPT%3Ealert%28%2F:::%2F.source%29%3C%</text>
+<text top="621" left="265" width="77" height="14" font="9">2FSCRIPT%3E </text>
+<text top="621" left="569" width="267" height="14" font="9">&amp;lt;SCRIPT&amp;gt;alert(/:::/.source)&amp;lt;/SCRIPT&amp;gt; </text>
+<text top="644" left="95" width="10" height="14" font="9">8 </text>
+<text top="644" left="130" width="71" height="14" font="9">XSS Attack 4 </text>
+<text top="644" left="265" width="247" height="14" font="9">string%20fromcharcode%2888%2C83%2C83 </text>
+<text top="644" left="569" width="187" height="14" font="9">string%20fromcharcode(88,83,83 </text>
+<text top="678" left="91" width="17" height="14" font="9">11 </text>
+<text top="662" left="130" width="81" height="14" font="9">IMG XSS using </text>
+<text top="678" left="130" width="68" height="14" font="9">JavaScript 3 </text>
+<text top="662" left="265" width="282" height="14" font="9">%3CIMG+SRC%3D%22jav%09ascript%3Aalert%28:::</text>
+<text top="678" left="265" width="97" height="14" font="9">%29%3B%22%3E </text>
+<text top="678" left="569" width="266" height="14" font="9">&amp;lt;IMG SRC=\&#34;jav&amp;#x09;ascript:alert(:::);\&#34;&amp;gt; </text>
+<text top="712" left="91" width="17" height="14" font="9">40 </text>
+<text top="712" left="130" width="105" height="14" font="9">BODY XSS Attack 1 </text>
+<text top="695" left="265" width="283" height="14" font="9">%3CBODY+BACKGROUND%3D%22javascript%3Aale</text>
+<text top="712" left="265" width="116" height="14" font="9">rt%28:::%29%22%3E </text>
+<text top="695" left="569" width="55" height="14" font="9">&amp;lt;BODY </text>
+<text top="712" left="569" width="235" height="14" font="9">BACKGROUND=\&#34;javascript:alert(:::)\&#34;&amp;gt; </text>
+<text top="729" left="81" width="3" height="12" font="3"> </text>
+<text top="973" left="848" width="3" height="12" font="3"> </text>
+<text top="1003" left="336" width="250" height="12" font="15"><b>Fig 6:   Packet 24 - Identified as Suspicious </b></text>
+<text top="1035" left="81" width="3" height="12" font="3"> </text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="504" width="337" height="15" font="0"><i>IJCA Special Issue on “Network Security and Cryptography” </i></text>
+<text top="72" left="779" width="59" height="12" font="1"><i>NSC, 2011</i></text>
+<text top="70" left="837" width="4" height="15" font="2"><i> </i></text>
+<text top="1122" left="824" width="17" height="12" font="3">27 </text>
+<text top="121" left="81" width="14" height="16" font="8"><b>6.</b></text>
+<text top="121" left="95" width="5" height="17" font="10"><b> </b></text>
+<text top="121" left="105" width="316" height="16" font="8"><b>LIMITATATIONS &amp; FUTURE SCOPE </b></text>
+<text top="141" left="81" width="354" height="12" font="3">As  much  as  possible  we  have  populated  our  rule  base  with  all </text>
+<text top="156" left="81" width="354" height="12" font="3">updated  rules  to  detect  latest  variants  of  XSS  attack.  Still  we </text>
+<text top="172" left="81" width="354" height="12" font="3">find  attackers  are  trying  with  new  circumvents.  Our  solution  is </text>
+<text top="187" left="81" width="354" height="12" font="3">able  to  capture  them  as  suspects  but  not  as  an  attack  at  first </text>
+<text top="203" left="81" width="354" height="12" font="3">instant. But by analyzing the suspect and updating the rule base </text>
+<text top="218" left="81" width="354" height="12" font="3">such  attack  can  be  detected  from  next  attempt.  Reasonable </text>
+<text top="234" left="81" width="354" height="12" font="3">attempt was made to detect the attack even when attackers try to </text>
+<text top="249" left="81" width="354" height="12" font="3">do  application  evasion  techniques.  But  our  solution  has </text>
+<text top="265" left="81" width="336" height="12" font="3">limitation in detecting network evade (if exists) XSS attacks.  </text>
+<text top="289" left="81" width="354" height="12" font="3">Though  the  detection  is  done  only  to  XSS  based  attacks,  our </text>
+<text top="305" left="81" width="354" height="12" font="3">model  is  portable  and  compatible  to  accommodate  any  other </text>
+<text top="321" left="81" width="354" height="12" font="3">network  protocol  and  payload  based  attacks.  In  future  much </text>
+<text top="336" left="81" width="354" height="12" font="3">scope  is  there  to  extend  the  solution  to  include  all  such  attack </text>
+<text top="349" left="81" width="354" height="15" font="9">detection. Further “Yukti” is currently limited to XSS detection </text>
+<text top="367" left="81" width="354" height="12" font="3">in  this  phase  I,  whereas  in  phase  II,  preventing  XSS  attacks </text>
+<text top="383" left="81" width="273" height="12" font="3">using proxy based agents is included in the scope. </text>
+<text top="408" left="81" width="14" height="16" font="8"><b>7.</b></text>
+<text top="408" left="95" width="5" height="17" font="10"><b> </b></text>
+<text top="408" left="105" width="127" height="16" font="8"><b>CONCLUSION </b></text>
+<text top="428" left="81" width="354" height="12" font="3">Day  by  day  more  and  more  websites  are  identified  for  XSS </text>
+<text top="443" left="81" width="354" height="12" font="3">exploitation.  It  is  a  challenge  for  enterprises  and  individuals  to </text>
+<text top="459" left="81" width="354" height="12" font="3">keep  them  safe  from  new  circumvents  of  XSS  attacks.  The </text>
+<text top="475" left="81" width="354" height="12" font="3">damage  could  range  from  stealing  confidential  information  of </text>
+<text top="490" left="81" width="354" height="12" font="3">client  and  to  the  extent  of  penetrating  into  the  corporate </text>
+<text top="505" left="81" width="354" height="12" font="3">network.  A  scalable  solution  that  is  independent  of  type  of </text>
+<text top="518" left="81" width="354" height="15" font="9">browser, platform and architecture is need of the time. “Yukti” </text>
+<text top="537" left="81" width="354" height="12" font="3">is  designed  to  be  portable  and  scalable.  The  architecture, </text>
+<text top="552" left="81" width="354" height="12" font="3">component  requirement,  dependencies  and  implementation  that </text>
+<text top="568" left="81" width="354" height="12" font="3">are  discussed  in  this  paper  will  enable  to  build  any  new  attack </text>
+<text top="583" left="81" width="354" height="12" font="3">detection  solution  for  any  variants  of  network  and  scripting </text>
+<text top="599" left="81" width="82" height="12" font="3">based attacks.  </text>
+<text top="624" left="81" width="14" height="16" font="8"><b>8.</b></text>
+<text top="624" left="95" width="5" height="17" font="10"><b> </b></text>
+<text top="624" left="105" width="125" height="16" font="8"><b>REFERENCES </b></text>
+<text top="644" left="81" width="16" height="12" font="3">[1]</text>
+<text top="643" left="97" width="4" height="12" font="14"> </text>
+<text top="641" left="108" width="327" height="15" font="9">E.Kirda,  C.Kruegel,  G.Vigna,  and  N.Jovanovic,”Noxes:  A </text>
+<text top="659" left="108" width="327" height="12" font="3">Client-Side  Solution  for  Mitigating  Cross-Site  Scripting </text>
+<text top="672" left="108" width="276" height="15" font="9">Attacks”SAC’06 April 23-27,2006, Dijon, France. </text>
+<text top="696" left="81" width="16" height="12" font="3">[2]</text>
+<text top="696" left="97" width="4" height="12" font="14"> </text>
+<text top="694" left="108" width="327" height="15" font="9">P.Vogt, “Cross Site Scripting (XSS) attack prevention with </text>
+<text top="712" left="108" width="160" height="12" font="3">dynamic data tainting”, 2006 </text>
+<text top="734" left="81" width="16" height="12" font="3">[3]</text>
+<text top="733" left="97" width="4" height="12" font="14"> </text>
+<text top="731" left="108" width="159" height="15" font="9">O. Hallaraker and G.Vigna,” </text>
+<text top="734" left="297" width="56" height="12" font="3">Detecting </text>
+<text top="734" left="378" width="57" height="12" font="3">Malicious </text>
+<text top="746" left="108" width="327" height="15" font="9">JavaScript Code in Mozilla “, Proceedings of the 10th IEEE </text>
+<text top="765" left="108" width="327" height="12" font="3">International  Conference  on  Engineering  of  Complex </text>
+<text top="777" left="108" width="183" height="15" font="9">Computer Systems (ICECCS’05) </text>
+<text top="802" left="81" width="16" height="12" font="3">[4]</text>
+<text top="801" left="97" width="4" height="12" font="14"> </text>
+<text top="799" left="108" width="327" height="15" font="9">Y.Huang,  C.Tsai,  T.Lin,  S.  Huang,  D.T.  Kuo’,  “A  testing </text>
+<text top="814" left="108" width="327" height="15" font="9">framework  for  Web  application,  security  assessment“, </text>
+<text top="833" left="108" width="291" height="12" font="3">Computer Networks 48 (2005) 739–761, ELSEVIER </text>
+<text top="111" left="486" width="16" height="12" font="3">[5]</text>
+<text top="111" left="502" width="4" height="12" font="14"> </text>
+<text top="108" left="513" width="327" height="15" font="9">M.Egele,  M.Szydlowski,  E.  Kirda,  and  C.  Kruegel,”Using </text>
+<text top="124" left="513" width="327" height="15" font="9">Static  Program  Analysis  to  Aid  Intrusion  Detection”, </text>
+<text top="142" left="513" width="324" height="12" font="3">Austrian  Science  Foundation  (FWF)  under  grant  P18368-</text>
+<text top="158" left="513" width="27" height="12" font="3">N04 </text>
+<text top="179" left="486" width="16" height="12" font="3">[6]</text>
+<text top="179" left="502" width="4" height="12" font="14"> </text>
+<text top="176" left="513" width="327" height="15" font="9">N.Jovanovic,  C.  Kruegel  and  E.Kirda,”  Pixy:  A  Static </text>
+<text top="195" left="513" width="51" height="12" font="3">Analysis </text>
+<text top="195" left="579" width="29" height="12" font="3">Tool </text>
+<text top="195" left="623" width="19" height="12" font="3">for </text>
+<text top="195" left="658" width="56" height="12" font="3">Detecting </text>
+<text top="195" left="729" width="29" height="12" font="3">Web </text>
+<text top="195" left="773" width="67" height="12" font="3">Application </text>
+<text top="207" left="513" width="327" height="15" font="9">Vulnerabilities”,  Proceedings  of  the  2006  IEEE </text>
+<text top="223" left="513" width="257" height="15" font="9">Symposium on Security and Privacy (S&amp;P’06) </text>
+<text top="226" left="810" width="3" height="12" font="3"> </text>
+<text top="247" left="486" width="16" height="12" font="3">[7]</text>
+<text top="247" left="502" width="4" height="12" font="14"> </text>
+<text top="245" left="513" width="327" height="15" font="9">F.Valeur,  G.Vigna,  C.Kruegel,  E.Kirda,  ”An  Anomaly </text>
+<text top="263" left="513" width="327" height="12" font="3">driven  Reverse  Proxy  for  Web  Applications&#34;,  SAC’06 </text>
+<text top="278" left="513" width="327" height="12" font="3">April  2327,2006,  Dijon,  France,  ACM  1595931082/ </text>
+<text top="294" left="513" width="48" height="12" font="3">06/0004 </text>
+<text top="315" left="486" width="16" height="12" font="3">[8]</text>
+<text top="315" left="502" width="4" height="12" font="14"> </text>
+<text top="315" left="513" width="327" height="12" font="3">K. Sivakumar &amp; K. Garg  “Constructing a “Common Cross </text>
+<text top="328" left="513" width="327" height="15" font="9">Site  Scripting  Vulnerabilities  Enumeration  (CXE)”  Using </text>
+<text top="344" left="513" width="327" height="15" font="9">CWE  and  CVE”,  Lecture  Notes  in  Computer  Science, </text>
+<text top="362" left="513" width="321" height="12" font="3">Springer Berlin / Heidelberg, Volume 4812/2007, 277-291 </text>
+<text top="383" left="486" width="16" height="12" font="3">[9]</text>
+<text top="383" left="502" width="4" height="12" font="14"> </text>
+<text top="381" left="513" width="327" height="15" font="9">O.Ismaill,  M.E.Youki,  K.adobayashi,  S.  Yamaguch,  “A </text>
+<text top="399" left="513" width="51" height="12" font="3">Proposal </text>
+<text top="399" left="586" width="23" height="12" font="3">and </text>
+<text top="399" left="632" width="89" height="12" font="3">Implementation </text>
+<text top="399" left="743" width="15" height="12" font="3">of </text>
+<text top="399" left="780" width="60" height="12" font="3">Automatic </text>
+<text top="415" left="513" width="327" height="12" font="3">Detection/Collection  System  for  Cross-Site  Scripting </text>
+<text top="427" left="513" width="327" height="15" font="9">Vulnerability”  Proceedings  of  the  18th  International </text>
+<text top="446" left="513" width="327" height="12" font="3">Conference  on  Advanced  Information  Networking  and </text>
+<text top="458" left="513" width="131" height="15" font="9">Application (AINA’04) </text>
+<text top="483" left="486" width="22" height="12" font="3">[10]</text>
+<text top="482" left="509" width="4" height="12" font="14"> </text>
+<text top="480" left="513" width="327" height="15" font="9">Christopher  Kruegel,  G.  Vigna,  William  Robertson,    <a href="file:///C:\ksiva-current-research\15-papers\multimodel-attack%20-10.pdf">“A </a></text>
+<text top="498" left="513" width="327" height="12" font="3"><a href="file:///C:\ksiva-current-research\15-papers\multimodel-attack%20-10.pdf">multi-model  approach  to  the  detection  of  web-based </a></text>
+<text top="514" left="513" width="327" height="12" font="3"><a href="file:///C:\ksiva-current-research\15-papers\multimodel-attack%20-10.pdf">attacks”</a>,  Computer  Networks  48  (2005)  717–738- </text>
+<text top="529" left="513" width="71" height="12" font="3">ELSEVIER. </text>
+<text top="551" left="486" width="22" height="12" font="3">[11]</text>
+<text top="550" left="509" width="4" height="12" font="14"> </text>
+<text top="548" left="513" width="327" height="15" font="9">G.A.Lucca,  A.R.Fasolino  et  all,  “Identifying  Cross  Site </text>
+<text top="564" left="513" width="53" height="15" font="9">Scripting </text>
+<text top="564" left="583" width="84" height="15" font="9">Vulnerabilities </text>
+<text top="564" left="683" width="14" height="15" font="9">in </text>
+<text top="564" left="713" width="29" height="15" font="9">Web </text>
+<text top="564" left="759" width="82" height="15" font="9">Applications”, </text>
+<text top="582" left="513" width="330" height="12" font="3">Proceedings  of  the  Sixth  IEEE  International  Workshop  on  </text>
+<text top="594" left="513" width="169" height="15" font="9">Web Site Evolution (WSE’04) </text>
+<text top="619" left="486" width="22" height="12" font="3">[12]</text>
+<text top="618" left="509" width="4" height="12" font="14"> </text>
+<text top="616" left="513" width="327" height="15" font="9">“The  Common  Vulnerabilities  and  Exposures  Initiative,” </text>
+<text top="634" left="513" width="137" height="12" font="3">http://cve.mitre.org/cve/  </text>
+<text top="656" left="486" width="22" height="12" font="3">[13]</text>
+<text top="655" left="509" width="4" height="12" font="14"> </text>
+<text top="656" left="513" width="60" height="12" font="3"> “OWASP </text>
+<text top="653" left="590" width="21" height="15" font="9">top </text>
+<text top="653" left="628" width="20" height="15" font="9">ten </text>
+<text top="653" left="665" width="3" height="15" font="9"> </text>
+<text top="653" left="685" width="48" height="15" font="9">Security </text>
+<text top="653" left="750" width="90" height="15" font="9">vulnerabilities”, </text>
+<text top="671" left="513" width="323" height="12" font="3">https://www.owasp.org/index.php/Category:OWASP_Top_</text>
+<text top="687" left="513" width="69" height="12" font="3">Ten_Project </text>
+<text top="708" left="486" width="22" height="12" font="3">[14]</text>
+<text top="708" left="509" width="4" height="12" font="14"> </text>
+<text top="708" left="513" width="327" height="12" font="3">Department of Homeland Security National Cyber Security </text>
+<text top="721" left="513" width="327" height="15" font="9">Division’s  “Build  Security  In”  (BSI)  web  site, </text>
+<text top="740" left="513" width="180" height="12" font="3">http://buildsecurityin.us-cert.gov </text>
+<text top="761" left="486" width="22" height="12" font="3">[15]</text>
+<text top="761" left="509" width="4" height="12" font="14"> </text>
+<text top="761" left="513" width="285" height="12" font="3">National Vulnerability database  http://nvd.nist.gov/ </text>
+<text top="783" left="486" width="22" height="12" font="3">[16]</text>
+<text top="782" left="509" width="4" height="12" font="14"> </text>
+<text top="783" left="513" width="327" height="12" font="3">Real  World  XSS,  http://sandsprite.com/Sleuth/papers/ </text>
+<text top="798" left="513" width="136" height="12" font="3">RealWorld_XSS_1.html </text>
+<text top="820" left="486" width="22" height="12" font="3">[17]</text>
+<text top="819" left="509" width="4" height="12" font="14"> </text>
+<text top="820" left="513" width="249" height="12" font="3">XSS cheat sheet, http:// ha.ckers.org/xss.html </text>
+<text top="841" left="486" width="4" height="17" font="19"> </text>
+<text top="867" left="108" width="4" height="17" font="19"> </text>
+</page>
+</pdf2xml>

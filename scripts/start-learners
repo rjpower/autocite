@@ -1,0 +1,15 @@
+#!/bin/bash
+
+AUTOCITE_DIR=$PWD
+
+pkill -9 -f autocite
+pdsh -g fast-beakers -R ssh pkill -9 -f autocite &
+
+sbt package generate-scripts || exit 1
+wait
+
+pdsh -g fast-beakers -R ssh "cd $AUTOCITE_DIR && ./target/LearnWorker" &
+sleep 5
+./target/LearnMaster &
+
+disown %1 %2

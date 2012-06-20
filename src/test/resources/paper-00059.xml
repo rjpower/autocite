@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="19" family="Times" color="#323232"/>
+	<fontspec id="1" size="19" family="Times" color="#000000"/>
+	<fontspec id="2" size="14" family="Times" color="#000000"/>
+	<fontspec id="3" size="13" family="Times" color="#000000"/>
+	<fontspec id="4" size="13" family="Times" color="#000000"/>
+	<fontspec id="5" size="7" family="Times" color="#000000"/>
+	<fontspec id="6" size="13" family="Times" color="#000000"/>
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="234" left="458" width="6" height="20" font="1"><b> </b></text>
+<text top="285" left="155" width="613" height="20" font="1"><b>A SURVEY ON VARIOUS POSSIBLE VULNERABILITIES AND </b></text>
+<text top="321" left="205" width="512" height="20" font="1"><b>ATTACKS IN CLOUD COMPUTING ENVIRONMENT </b></text>
+<text top="371" left="458" width="4" height="15" font="4"> </text>
+<text top="397" left="372" width="82" height="15" font="4">Ajay Jangra</text>
+<text top="394" left="453" width="5" height="9" font="5">1</text>
+<text top="397" left="459" width="81" height="15" font="4">, Renu Bala</text>
+<text top="394" left="540" width="5" height="9" font="5">2</text>
+<text top="397" left="545" width="4" height="15" font="4"> </text>
+<text top="424" left="140" width="4" height="15" font="4"> </text>
+<text top="448" left="176" width="5" height="9" font="5">1</text>
+<text top="451" left="182" width="608" height="15" font="4">Asst. Prof., CSE Department UIET, Kurukshetra University, Kurukshetra, Haryana, India </text>
+<text top="475" left="156" width="5" height="9" font="5">2</text>
+<text top="478" left="162" width="647" height="15" font="4"> M. Tech, Researcher, CSE Department UIET, Kurukshetra University, Kurukshetra, Haryana, </text>
+<text top="504" left="464" width="38" height="15" font="4">India </text>
+<text top="531" left="481" width="4" height="15" font="4"> </text>
+<text top="558" left="458" width="4" height="15" font="4"> </text>
+<text top="611" left="140" width="87" height="15" font="4">ABSTRACT </text>
+<text top="638" left="140" width="641" height="15" font="4">Cloud computing is model that makes reference to the two essential concepts: ‘abstraction’ </text>
+<text top="664" left="140" width="641" height="15" font="4">and  ‘virtualization’  to  increase  the  capacity  and  capability  of  IT  by  providing  on  demand </text>
+<text top="691" left="140" width="641" height="15" font="4">network  access  to  shared  pool  of  computing  resources  without  investing  in  new </text>
+<text top="718" left="140" width="641" height="15" font="4">infrastructure.  But  as  more  and  more  information  about  enterprises  are  placed  in  cloud, </text>
+<text top="745" left="140" width="641" height="15" font="4">concerns  about  how  to  secure  the  cloud  environment  to  keep  the  data  secure  are  also </text>
+<text top="771" left="140" width="641" height="15" font="4">beginning  to  grow.  So  before  shifting  to  cloud  computing  user  must  know  about  various </text>
+<text top="798" left="140" width="641" height="15" font="4">threats  present  in  this  new  system.  In  this  paper,  analysis  about  various  attacks  and </text>
+<text top="825" left="140" width="641" height="15" font="4">vulnerabilities  that  pose  threats  to  cloud  is  presented.  This  paper  also  concerned  to  the </text>
+<text top="852" left="140" width="641" height="15" font="4">comparative study of attacks and different security issues arises due to the nature of cloud </text>
+<text top="878" left="140" width="80" height="15" font="4">computing. </text>
+<text top="905" left="140" width="463" height="15" font="6"><i>Keywords: Cloud Computing; Security; Vulnerabilities; Penetration. </i></text>
+<text top="905" left="648" width="4" height="15" font="6"><i> </i></text>
+<text top="955" left="785" width="4" height="15" font="3"><b> </b></text>
+<text top="992" left="140" width="644" height="15" font="3"><b>Introduction:</b> Cloud computing refers to the distributed computing on internet that uses the </text>
+<text top="1019" left="140" width="644" height="15" font="4">aspects  of  various  technologies:  Grid  Computing  (Distributed  network  that  provides </text>
+<text top="1045" left="140" width="644" height="15" font="4">dependable,  consistent  and  inexpensive  access  to  various  computational  capabilities), </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="345" height="27" font="0"><b>International Journal of Computing</b></text>
+<text top="123" left="335" width="191" height="27" font="0"><b>ISSN (Online) : 2229</b></text>
+<text top="157" left="334" width="66" height="16" font="2"><b>Volume </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="140" width="259" height="15" font="4">Internet Computing (Provides distribu</text>
+<text top="260" left="140" width="232" height="15" font="4">grow),  Autonomous  computing</text>
+<text top="287" left="140" width="644" height="15" font="4">interference),  Edge  computing  (for  load  balancing).  Today  various  small  and  medium  size </text>
+<text top="313" left="140" width="283" height="15" font="4">companies  moved  towards  cloud  enviro</text>
+<text top="340" left="140" width="644" height="15" font="4">with  the  larger  infrastructure  companies  by  simply  gaining  fast  access  to  best  business </text>
+<text top="367" left="140" width="644" height="15" font="4">application  and  drastically  boost  their  infrastructure  resources  at  negligible  cost.  While  the </text>
+<text top="393" left="140" width="644" height="15" font="4">cloud  offers  these  advantages there  are  various  issues and  risks  that reduce  the  growth of </text>
+<text top="420" left="140" width="122" height="15" font="4">cloud computing.<b> </b></text>
+<text top="461" left="140" width="270" height="15" font="4">According to the recent IDC enterprise</text>
+<text top="488" left="140" width="504" height="15" font="4">taken security as a top challenge prevents the adoption of cloud services.</text>
+<text top="703" left="140" width="295" height="15" font="4">Source: IDC Enterprise Panel August 2008</text>
+<text top="744" left="285" width="348" height="15" font="4">Figure 1 various issues/challenges to cloud model.</text>
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="425" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="336" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="233" left="141" width="548" height="15" font="4">Internet Computing (Provides distributed platform on internet), utility computing</text>
+<text top="260" left="141" width="644" height="15" font="4">grow),  Autonomous  computing  (system  manage  themselves  without  any  external </text>
+<text top="287" left="249" width="535" height="15" font="4">dge  computing  (for  load  balancing).  Today  various  small  and  medium  size </text>
+<text top="313" left="141" width="644" height="15" font="4">companies  moved  towards  cloud  environment  because  now  they  are  capable  to  compete </text>
+<text top="340" left="141" width="644" height="15" font="4">with  the  larger  infrastructure  companies  by  simply  gaining  fast  access  to  best  business </text>
+<text top="367" left="141" width="644" height="15" font="4">application  and  drastically  boost  their  infrastructure  resources  at  negligible  cost.  While  the </text>
+<text top="393" left="336" width="449" height="15" font="4">es there  are  various  issues  and risks  that reduce  the  growth of </text>
+<text top="461" left="141" width="641" height="15" font="4">According to the recent IDC enterprise survey figure 1 shows 74% IT companies has to be </text>
+<text top="488" left="141" width="508" height="15" font="4">taken security as a top challenge prevents the adoption of cloud services. </text>
+<text top="665" left="630" width="4" height="15" font="4"> </text>
+<text top="703" left="199" width="241" height="15" font="4">IDC Enterprise Panel August 2008 </text>
+<text top="744" left="285" width="352" height="15" font="4">Figure 1 various issues/challenges to cloud model. </text>
+<text top="54" left="524" width="224" height="27" font="0"><b>and Business Research </b></text>
+<text top="233" left="399" width="381" height="15" font="4">ted platform on internet), utility computing (pay-as you-</text>
+<text top="260" left="657" width="127" height="15" font="4">ut  any  external </text>
+<text top="287" left="249" width="535" height="15" font="4">dge  computing  (for  load  balancing).  Today  various  small  and  medium  size </text>
+<text top="313" left="423" width="361" height="15" font="4">nment  because  now  they  are  capable  to  compete </text>
+<text top="340" left="140" width="644" height="15" font="4">with  the  larger  infrastructure  companies  by  simply  gaining  fast  access  to  best  business </text>
+<text top="367" left="140" width="644" height="15" font="4">application  and  drastically  boost  their  infrastructure  resources  at  negligible  cost.  While  the </text>
+<text top="393" left="336" width="449" height="15" font="4">es there  are  various  issues  and  risks that reduce  the  growth of </text>
+<text top="461" left="415" width="366" height="15" font="4">survey figure 1 shows 74% IT companies has to be </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="864" left="779" width="4" height="15" font="4"> </text>
+<text top="901" left="140" width="641" height="15" font="4">Figure  2  explain  the  basic  level  communication  between  user  and  service  provider  and </text>
+<text top="928" left="140" width="641" height="15" font="4">dependency  among  various  layer  of  cloud  that  poses  great  impact  on  security  risks, </text>
+<text top="955" left="140" width="592" height="15" font="4">necessary for understanding the complexity of security aspects in cloud environment.  </text>
+<text top="995" left="140" width="641" height="15" font="4">In  figure  (2),  during  <i>communication  process  </i>consumers  are  front  end  and  cloud  service </text>
+<text top="1022" left="140" width="502" height="15" font="4">providers are back end. For resource pooling various steps are included: </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="173" width="608" height="15" font="4">  User  authentication  and  login  process:  In  this  web  browser  collects  all  necessary </text>
+<text top="260" left="191" width="590" height="15" font="4">information  about  consumer  using  various  security  technologies/protocols  like </text>
+<text top="286" left="191" width="107" height="15" font="4">SSL/SSH/TLS. </text>
+<text top="313" left="173" width="608" height="15" font="4">  Web  browser  provides  all  information  to  policy  manager  which  authenticate  the </text>
+<text top="340" left="191" width="515" height="15" font="4">consumer using public key infrastructure, certification authority and others. </text>
+<text top="367" left="173" width="608" height="15" font="4">  After  that  consumer  request  to  browser  for  required  services  using  Simple  Object </text>
+<text top="393" left="191" width="414" height="15" font="4">Access Protocol [XML or REST format + transfer protocols]. </text>
+<text top="420" left="173" width="608" height="15" font="4">  Now  web  browser  delegates  the  QOS  requirements  to  policy  manager,  which </text>
+<text top="447" left="191" width="590" height="15" font="4">evaluate  the  requirements  according  to  service  level  agreement  (SLA).  For  SLA </text>
+<text top="474" left="191" width="419" height="15" font="4">policy manager also use cloud broker and resources engine. </text>
+<text top="501" left="173" width="608" height="15" font="4">  For  resource  discovery  cloud  broker  collects  the  information  about  other  cloud  and </text>
+<text top="527" left="191" width="590" height="15" font="4">their  services  and  resource  engine  delegates  the  service  requirement  to  VM </text>
+<text top="554" left="191" width="590" height="15" font="4">schedulers  which  collaborates  the  required  service  from  various  VM  /  chunks </text>
+<text top="581" left="191" width="65" height="15" font="4">provider. </text>
+<text top="622" left="140" width="230" height="15" font="6"><i>Dependency among cloud layers</i></text>
+<text top="622" left="371" width="410" height="15" font="4">: The application layer and core layer depends upon VMs </text>
+<text top="648" left="140" width="641" height="15" font="4">layer  and  physical  machine  layer  which  further  depend  upon  virtual  network  layer  and </text>
+<text top="675" left="140" width="594" height="15" font="4">physical network layer so damage at any layer also have great impact on other layers. </text>
+<text top="716" left="140" width="221" height="15" font="6"><i>Complexity  of  security  aspects</i></text>
+<text top="716" left="361" width="420" height="15" font="4">:  When  we  think  about  security  of  organization’s  core  IT </text>
+<text top="743" left="140" width="641" height="15" font="4">infrastructure there is need to provide security at network level, host level, application level </text>
+<text top="770" left="140" width="641" height="15" font="4">and when  we talk about data security two aspects are included ‘data transmission security </text>
+<text top="796" left="140" width="186" height="15" font="4">and data storage security’. </text>
+<text top="837" left="140" width="641" height="15" font="3"><b>Security  Principles:</b>  The  fundamental  basis  for  developing  secure  cloud  environment  is </text>
+<text top="864" left="140" width="254" height="15" font="4">based on various security principles: </text>
+<text top="905" left="140" width="97" height="15" font="6"><i>Confidentiality</i></text>
+<text top="905" left="238" width="543" height="15" font="4">:  The  prevention  of  unauthorized  disclosure  of  information  that  may  be </text>
+<text top="932" left="140" width="397" height="15" font="4">intentionally or unintentionally refers to the confidentiality. </text>
+<text top="972" left="140" width="64" height="15" font="6"><i>Integrity: </i></text>
+<text top="972" left="204" width="470" height="15" font="4">The concept of cloud information integrity is based on two principles </text>
+<text top="1013" left="173" width="608" height="15" font="4">  Prevention  of  modification  of  data  from  unauthorized  users  and  preventing  the </text>
+<text top="1040" left="191" width="369" height="15" font="4">unauthorized modification of data by authorised user. </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="140" width="78" height="15" font="6"><i>Availability:</i></text>
+<text top="233" left="218" width="563" height="15" font="4">  This  Principle  ensures  the  availability  of  cloud  data  and  computing  resources </text>
+<text top="260" left="140" width="102" height="15" font="4">when needed. </text>
+<text top="300" left="140" width="103" height="15" font="6"><i>Authentication:</i></text>
+<text top="300" left="243" width="538" height="15" font="4"> It refers to the process of testing the user’s identity and ensures that users </text>
+<text top="327" left="140" width="177" height="15" font="4">are who they claim to be. </text>
+<text top="368" left="140" width="95" height="15" font="6"><i>Authorization:</i></text>
+<text top="368" left="235" width="546" height="15" font="4"> It refers to the privileges that are granted to individual or process for enabling </text>
+<text top="395" left="140" width="432" height="15" font="4">them to access any authorized data and computing resources. </text>
+<text top="436" left="140" width="100" height="15" font="6"><i>Accountability:</i></text>
+<text top="436" left="241" width="540" height="15" font="4">  This  is  related  to  the  concept  of  non-repudiation  where  the  person  cannot </text>
+<text top="463" left="140" width="641" height="15" font="4">deny  from  the  performance  of  an  action.  It  determines  the  action  and  behaviour  of  single </text>
+<text top="489" left="140" width="212" height="15" font="4">individual within cloud system. </text>
+<text top="530" left="140" width="641" height="15" font="3"><b>Analysis  of  attacks  and  vulnerabilities  in  cloud  computing  environment/system:</b>  In </text>
+<text top="557" left="140" width="641" height="15" font="4">traditional  on  premises  deployment  model  the  data  of  enterprise  must  resides  within  its </text>
+<text top="584" left="140" width="641" height="15" font="4">boundary  and  follow  their  own  access  control  and  security  policies.  Whereas  in  cloud </text>
+<text top="610" left="140" width="641" height="15" font="4">computing data reside at distributed data centres of cloud with the lack of control and without </text>
+<text top="637" left="140" width="641" height="15" font="4">the knowledge of how their data resides. Due to the nature of cloud system there are many </text>
+<text top="664" left="140" width="461" height="15" font="4">questions that arise as to weather a cloud is secure enough or not. </text>
+<text top="705" left="140" width="641" height="15" font="4">Before understanding the security management in cloud, it must be necessary to analyse the </text>
+<text top="732" left="140" width="449" height="15" font="4">various possible vulnerabilities and attacks in cloud environment. </text>
+<text top="772" left="140" width="641" height="15" font="3"><b>Network  level  attacks</b>: During  resource pooling  process  all  data  or  services flow  over  the </text>
+<text top="799" left="140" width="641" height="15" font="4">network  needs  to  be  secured  from  following  attacks  to  prevent  the  leakage  of  sensitive </text>
+<text top="826" left="140" width="246" height="15" font="4">information or other vulnerabilities:  </text>
+<text top="867" left="173" width="608" height="15" font="4">  <i>Denial  of  service/distributed  denial  of  service  attack</i>:  This  attack  can  overwhelm </text>
+<text top="893" left="191" width="590" height="15" font="4">target’s  resources  so  that  authorised  user  is  abstained  from  getting  the  normal </text>
+<text top="920" left="191" width="590" height="15" font="4">services  of  cloud.  DDOS  is  also  based  on  DOS  attack  which  can  be  distributed for </text>
+<text top="947" left="191" width="482" height="15" font="4">more significant effects. This attack is a cause of failure of availability. </text>
+<text top="974" left="173" width="608" height="15" font="4">  <i>Eavesdropping</i>  is  an  interception  of  network  traffic  to  gain  unauthorized  access.  It </text>
+<text top="1000" left="191" width="262" height="15" font="4">can results in failure of confidentiality. </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="173" width="608" height="15" font="4">  <i>Man in the Middle attack</i> is also a category of eavesdropping. The attack set up the </text>
+<text top="260" left="191" width="590" height="15" font="4">connection with both victims that makes conversation and making them believe that </text>
+<text top="286" left="191" width="561" height="15" font="4">they talk directly but infect the conversation between them is controlled by attack. </text>
+<text top="313" left="173" width="608" height="15" font="4">  <i>Replay  attack:</i>  The  attacker  intercepts  and  save  the  old  messages  and  then  send </text>
+<text top="340" left="191" width="516" height="15" font="4">them later as one of participants to gain access to unauthorized resources. </text>
+<text top="366" left="173" width="608" height="15" font="4">  <i>Back  Door:  </i>The  attacker  gain  access  to  network  through  bypassing  the  control </text>
+<text top="393" left="191" width="590" height="15" font="4">mechanisms  using  “back  door”  such  as  modem  and  asynchronous  external </text>
+<text top="420" left="191" width="79" height="15" font="4">connection </text>
+<text top="447" left="173" width="608" height="15" font="4">  <i>Impersonation</i> is vulnerability in which malicious node modify the data flow route and </text>
+<text top="474" left="191" width="229" height="15" font="4">lure the node to wrong positions. </text>
+<text top="500" left="173" width="608" height="15" font="4">  In <i>Sybil attack</i> a malicious user pretends to be distinct users after acquiring multiple </text>
+<text top="527" left="191" width="590" height="15" font="4">identities  and  tries  to  create  relationship  with  honest  user  if  malicious  user  is </text>
+<text top="554" left="191" width="590" height="15" font="4">successful  to  compromise  one  of  the  honest  user  then  attack  gain  unauthorized </text>
+<text top="581" left="191" width="287" height="15" font="4">privileges that helps in attacking process. </text>
+<text top="607" left="173" width="608" height="15" font="4">  <i>Byzantine  failure  </i>is  a  malicious  activity  which  compromised  a  server  or  a  set  of </text>
+<text top="634" left="191" width="306" height="15" font="4">server to degrade the performance of cloud. </text>
+<text top="675" left="140" width="641" height="15" font="3"><b>Attacks and vulnerabilities based on security techniques:</b> If any security technique has </text>
+<text top="702" left="140" width="443" height="15" font="4">weakness in implementation it can cause various vulnerabilities: </text>
+<text top="743" left="173" width="608" height="15" font="4">  <i>Inside  channel  attack</i>  gain  the  information  from  physical  implementation  of </text>
+<text top="770" left="191" width="590" height="15" font="4">cryptosystem  to  break  the  security.  The  information  is  like  technical  knowledge  on </text>
+<text top="796" left="191" width="540" height="15" font="4">which encryption implement, time information, power consumption and others. </text>
+<text top="823" left="173" width="608" height="15" font="4">  <i>SSL/SSH/TLS</i>  use  the  cryptography  techniques  to  secure  the  data  but  any  crucial </text>
+<text top="850" left="191" width="590" height="15" font="4">flow  in  implementation  of  cryptography  algorithm  can  make  stronger  cryptography </text>
+<text top="876" left="191" width="435" height="15" font="4">technique to weak technique which is a main target of hackers. </text>
+<text top="917" left="140" width="641" height="15" font="3"><b>Language  and  malicious  program  injection  based  attack:  </b>One  of  the  most  frequently </text>
+<text top="944" left="140" width="641" height="15" font="4">discovered vulnerabilities in cloud are a direct result of language and programmes that are </text>
+<text top="971" left="140" width="69" height="15" font="4">as follow. </text>
+<text top="1011" left="173" width="608" height="15" font="4">  <i>Buffer  overflow</i>  is  a  favourite  exploit  for  hacker  which  takes  the  advantage  of </text>
+<text top="1038" left="191" width="590" height="15" font="4">programme  that  is  waiting  for  user’s  input.  But  in  place  of  user  the  hacker  would </text>
+<text top="1065" left="191" width="529" height="15" font="4">enter the input or command which results to move the control to attack code. </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="173" width="608" height="15" font="4">  <i>Trojan horses/Malware </i>are the unauthorized program that are contained or  injected </text>
+<text top="260" left="191" width="590" height="15" font="4">by  malicious  user  within  legitimate  program  to  perform  unknown  and  unwanted </text>
+<text top="286" left="191" width="63" height="15" font="4">function. </text>
+<text top="313" left="173" width="608" height="15" font="4">  <i>XML Signature wrapping Attack </i>is well known attack on protocols like SOAP that use </text>
+<text top="340" left="191" width="590" height="15" font="4">XML  format  to  transfer  the  request  for  services.  In  this,  attack  moves  the  original </text>
+<text top="367" left="191" width="590" height="15" font="4">body  of  SOAP  message  to  newly  inserted  wrapping  element  writing  within  SOAP </text>
+<text top="393" left="191" width="590" height="15" font="4">header and create a new body which contains the operation that an attack wants to </text>
+<text top="420" left="191" width="62" height="15" font="4">perform. </text>
+<text top="684" left="748" width="4" height="15" font="4"> </text>
+<text top="708" left="324" width="325" height="15" font="4">FIG: 3 Example of SOAP message after attack </text>
+<text top="734" left="191" width="4" height="15" font="4"> </text>
+<text top="775" left="140" width="641" height="15" font="3"><b>Web application attacks:</b> Web browser is one of the way of providing the web application </text>
+<text top="802" left="140" width="641" height="15" font="4">virtually to users but at the same time they also creates vulnerabilities that has detrimental </text>
+<text top="829" left="140" width="336" height="15" font="4">impact on costumers as well as on cloud system </text>
+<text top="869" left="173" width="608" height="15" font="4">  <i>Weak  authentication  or  weak  username,  password  </i>is  one  of  the  main  target  of </text>
+<text top="896" left="191" width="417" height="15" font="4">malicious users to gain unauthorized access to the services. </text>
+<text top="923" left="173" width="608" height="15" font="4">  <i>SQL  injection  flaws</i>,  in  which  malicious  SQL  code  is  erroneously  executed  in </text>
+<text top="950" left="191" width="136" height="15" font="4">database backend. </text>
+<text top="977" left="173" width="608" height="15" font="4">  <i>Cross-site-scripting  (XSS),</i>  in  which  the  malicious  java  script  code  is  executed </text>
+<text top="1003" left="191" width="170" height="15" font="4">erroneously by browser. </text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="140" width="641" height="15" font="3"><b>Virtual Machine based vulnerabilities:</b> Following are the various VM based vulnerabilities </text>
+<text top="260" left="140" width="353" height="15" font="4">create challenges and issues for service providers. </text>
+<text top="300" left="175" width="606" height="15" font="4">  Any malicious  programme in  VM  also transferred  between  other VMs using  shared </text>
+<text top="327" left="193" width="353" height="15" font="4">clipboard technology which is an issue for security. </text>
+<text top="354" left="175" width="606" height="15" font="4">  Many  VMs  co-exist  on  same  server  share  CPU,  memory,  I/O  have  virtual </text>
+<text top="381" left="193" width="588" height="15" font="4">boundaries.  So  securing  the  virtual  boundaries  is  also  a  challenge  for  service </text>
+<text top="408" left="193" width="69" height="15" font="4">provider.  </text>
+<text top="434" left="175" width="606" height="15" font="4">  Hypervisor  is main  controller  that maps  the  physical  resources to virtual resources. </text>
+<text top="461" left="193" width="588" height="15" font="4">So  if  any  hypervisor  is  compromised,  it  is  possible  to  trace  the  VMs  operations </text>
+<text top="488" left="193" width="94" height="15" font="4">unencrypted. </text>
+<text top="529" left="140" width="4" height="15" font="3"><b> </b></text>
+<text top="570" left="140" width="639" height="15" font="3"><b>Comparison of attacks and vulnerabilities according to their impact on response time, </b></text>
+<text top="596" left="140" width="215" height="15" font="3"><b>growth level and penetration </b></text>
+<text top="637" left="173" width="608" height="15" font="4">  <i>Impact on response time</i>: According to NIST SP 800-61 report figure 4(a), 4(b), 4(c) </text>
+<text top="664" left="191" width="590" height="15" font="4">shows the negative effect of various threats on to the response time of cloud system </text>
+<text top="691" left="191" width="94" height="15" font="4">environment  </text>
+<text top="717" left="193" width="4" height="15" font="4"> </text>
+<text top="1007" left="193" width="556" height="15" font="4">FIG: 4(a) Attack’s impact on response time of internet                FIG: 4(b) attacks </text>
+<text top="1034" left="193" width="209" height="15" font="4">impact on response                 </text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="193" width="537" height="15" font="4"> Connection, public web server, firewall, customer data             time of system </text>
+<text top="260" left="193" width="153" height="15" font="4">administrator, file and </text>
+<text top="286" left="193" width="558" height="15" font="4">                                                                                                     Print server, XYZ </text>
+<text top="313" left="193" width="113" height="15" font="4">application data </text>
+<text top="340" left="193" width="4" height="15" font="4"> </text>
+<text top="367" left="193" width="4" height="15" font="4"> </text>
+<text top="680" left="667" width="4" height="15" font="4"> </text>
+<text top="704" left="268" width="438" height="15" font="4">FIG: 4(c) attack’s impact on response time of user workstations </text>
+<text top="731" left="485" width="4" height="15" font="4"> </text>
+<text top="757" left="173" width="608" height="15" font="4">  <i>Growth level of vulnerabilities</i>: According to IBM X-Force trend and risk report figure </text>
+<text top="784" left="191" width="590" height="15" font="4">5 shows about more than 8000 new vulnerabilities, a 27% rise from 2009. This report </text>
+<text top="811" left="191" width="590" height="15" font="4">presents  the  expanding  threat  landscape  in  which  various  attacks  are  launched </text>
+<text top="838" left="191" width="224" height="15" font="4">against computing environment. </text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="440" left="722" width="4" height="15" font="4"> </text>
+<text top="477" left="350" width="279" height="15" font="4">Figure5 Rise in vulnerabilities over time  </text>
+<text top="518" left="140" width="641" height="15" font="4">This report shows that about 49% vulnerabilities are targeted at web applications in 2010 in </text>
+<text top="545" left="140" width="506" height="15" font="4">which cross site scripting and SQL injection flaws are top majority issues. </text>
+<text top="585" left="140" width="641" height="15" font="4">According to ARBOR NETWORKS report figure 6 shows the dramatically increase in DDOS </text>
+<text top="612" left="140" width="525" height="15" font="4">attack about 51% rise from 2009 which broke 100 Gbps barrier for first time. </text>
+<text top="653" left="193" width="4" height="15" font="4"> </text>
+<text top="884" left="678" width="4" height="15" font="4"> </text>
+<text top="908" left="485" width="4" height="15" font="4"> </text>
+<text top="934" left="319" width="336" height="15" font="4">Figure 6 Increase in DDOS attack size over time </text>
+<text top="961" left="212" width="550" height="15" font="4">SOURCE: ARBOR NETWORKS ‘DDOS ATTACK THROUGH 2010’BY Richard </text>
+<text top="988" left="376" width="222" height="15" font="4">Wray Technical Director EMEA. </text>
+<text top="1029" left="140" width="641" height="15" font="4">Figure  7  shows  the  growth  of  application  layer  attacks  in  which  HTTP  and  DNS  are  top </text>
+<text top="1056" left="140" width="394" height="15" font="4">target of vulnerabilities about 84% and 76% respectively. </text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="372" left="638" width="4" height="15" font="4"> </text>
+<text top="409" left="331" width="260" height="15" font="4">Figure 7 Target of application attacks </text>
+<text top="450" left="212" width="550" height="15" font="4">SOURCE: ARBOR NETWORKS ‘DDOS ATTACK THROUGH 2010’BY Richard </text>
+<text top="477" left="376" width="222" height="15" font="4">Wray Technical Director EMEA. </text>
+<text top="503" left="193" width="4" height="15" font="6"><i> </i></text>
+<text top="530" left="173" width="608" height="15" font="4">  <i>Penetration  of  various  attacks</i>:  Figure  1  shows  the  dependency  among    various </text>
+<text top="557" left="191" width="129" height="15" font="4">layers of cloud i.e. </text>
+<text top="608" left="772" width="4" height="15" font="4"> </text>
+<text top="640" left="191" width="64" height="15" font="4">Where    </text>
+<text top="640" left="333" width="448" height="15" font="4">Shows that any attack on layer A also effect on layer B. Figure 8 </text>
+<text top="666" left="191" width="314" height="15" font="4">shows the penetration level of various attack  </text>
+<text top="707" left="140" width="4" height="15" font="4"> </text>
+<text top="1007" left="728" width="4" height="15" font="4"> </text>
+<text top="1031" left="329" width="316" height="15" font="4">Figure (8) Penetration level of various attacks </text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="7" size="12" family="Times" color="#000000"/>
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="233" left="140" width="4" height="15" font="4"> </text>
+<text top="274" left="140" width="390" height="15" font="3"><b>Issues and challenges in cloud computing security:  </b></text>
+<text top="315" left="173" width="608" height="15" font="4">  As  virtualized  network  offers  protection  of  data  from  local  access  but  at  the  same </text>
+<text top="341" left="191" width="590" height="15" font="4">time  VM  has more  complex  layers  of  resource  allocation.  So  various  detection  and </text>
+<text top="368" left="191" width="435" height="15" font="4">prevention schemes can also be applied with more complexity. </text>
+<text top="395" left="173" width="608" height="15" font="4">  Cryptography  techniques  are  used  to  overcome  the  vulnerabilities  but  it  is  also </text>
+<text top="422" left="191" width="590" height="15" font="4">common to find crucial flows in encryption algorithm implementation which turns the </text>
+<text top="448" left="191" width="446" height="15" font="4">strong encryption into weak one and results more vulnerabilities. </text>
+<text top="475" left="173" width="608" height="15" font="4">  Due  to  the  limited  knowledge  of  cloud  infrastructure,  it  is  difficult  to  configure  the </text>
+<text top="502" left="191" width="434" height="15" font="4">firewall correctly, managed and updated causes it to be at risk. </text>
+<text top="529" left="191" width="4" height="15" font="4"> </text>
+<text top="570" left="140" width="641" height="15" font="3"><b>Conclusion:</b> The cloud environment has scalable, expandable, virtualization and abstraction </text>
+<text top="596" left="140" width="641" height="15" font="4">as  basic  aspects  that  makes  cloud  security  become  more  complex.  Various  vulnerabilities </text>
+<text top="623" left="140" width="641" height="15" font="4">and attacks  discussed in this paper are main threats for cloud that cause many enterprises </text>
+<text top="650" left="140" width="641" height="15" font="4">which  have  plan  to  migrate  to  cloud  prefer  using  cloud  for  less  sensitive  data  and  store </text>
+<text top="676" left="140" width="641" height="15" font="4">important data within enterprise boundary. So as a result, moving towards cloud computing </text>
+<text top="703" left="140" width="641" height="15" font="4">require more safe and secure environment and our further study  will also focus on various </text>
+<text top="730" left="140" width="552" height="15" font="4">security schemes or algorithm that helps in providing secure cloud environment. </text>
+<text top="771" left="458" width="4" height="15" font="3"><b> </b></text>
+<text top="812" left="406" width="110" height="15" font="3"><b>REFERENCES </b></text>
+<text top="855" left="166" width="11" height="10" font="7">1.</text>
+<text top="854" left="176" width="4" height="13" font="7"> </text>
+<text top="853" left="191" width="590" height="15" font="4">S. Subashini, V. Kavitha, “A survey on security issues in service delivery models of </text>
+<text top="879" left="191" width="579" height="15" font="4">cloud computing”, journal of Network and Computer Application 34 (2011), pp. 1-11.<b> </b></text>
+<text top="908" left="166" width="11" height="10" font="7">2.</text>
+<text top="907" left="176" width="4" height="13" font="7"> </text>
+<text top="906" left="191" width="590" height="15" font="4">FarzadSabahi, “Cloud Computing Security Threats and Responses”, 978- 61284- 44- </text>
+<text top="933" left="191" width="256" height="15" font="4">486- 2/11 ©2011 IEEE, pp. 245-249.<b> </b></text>
+<text top="961" left="166" width="11" height="10" font="7">3.</text>
+<text top="961" left="176" width="4" height="13" font="7"> </text>
+<text top="960" left="191" width="590" height="15" font="4">Takeshi  Takahashi,  youkiKadobayashi,  Hiroyoki  Fujiwara,  “Ontological  Approach </text>
+<text top="986" left="191" width="483" height="15" font="4">towards  cybersecurity  in  cloud  compsuting”,  Proceeding  of  the  3</text>
+<text top="984" left="674" width="9" height="9" font="5">rd</text>
+<text top="986" left="683" width="98" height="15" font="4">  international </text>
+<text top="1013" left="191" width="590" height="15" font="4">conference  on  security  of  information  and  networks,  ACM  New  York,  NY,  USA </text>
+<text top="1040" left="191" width="55" height="15" font="4">©2010. </text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="8" size="13" family="Times" color="#1c4c0f"/>
+<text top="54" left="174" width="573" height="27" font="0"><b>International Journal of Computing and Business Research </b></text>
+<text top="89" left="424" width="73" height="27" font="0"><b>(IJCBR) </b></text>
+<text top="123" left="335" width="246" height="27" font="0"><b>ISSN (Online) : 2229-6166</b></text>
+<text top="123" left="582" width="5" height="27" font="1"><b> </b></text>
+<text top="157" left="334" width="249" height="16" font="2"><b>Volume 3 Issue 1 January 2012</b></text>
+<text top="158" left="583" width="4" height="15" font="3"><b> </b></text>
+<text top="178" left="140" width="4" height="15" font="4"> </text>
+<text top="197" left="140" width="4" height="15" font="4"> </text>
+<text top="216" left="140" width="4" height="15" font="4"> </text>
+<text top="235" left="166" width="11" height="10" font="7">4.</text>
+<text top="234" left="176" width="4" height="13" font="7"> </text>
+<text top="233" left="191" width="590" height="15" font="4">Ronald L. Krutz and Russell Dean Vines, “Cloud Security A comprehensive Guide to </text>
+<text top="260" left="191" width="586" height="15" font="4">Secure Cloud Computing”, Wiley India Pvt. Ltd. Delhi, 2010, ISBN: 978-81-256-2809-</text>
+<text top="286" left="191" width="17" height="15" font="4">7. </text>
+<text top="315" left="166" width="11" height="10" font="7">5.</text>
+<text top="314" left="176" width="4" height="13" font="7"> </text>
+<text top="313" left="191" width="517" height="15" font="4">Richard Wray, “DDOS Attack Trend Through 2010”, ARBOR NETWORKS. </text>
+<text top="342" left="166" width="11" height="10" font="7">6.</text>
+<text top="341" left="176" width="4" height="13" font="7"> </text>
+<text top="340" left="191" width="590" height="15" font="4">NIST SP 800-61, “Computer Security Incident Handling Guide, Recommendation of </text>
+<text top="367" left="191" width="439" height="15" font="4">National Institute of Standards and Technology”, January 2004. </text>
+<text top="395" left="166" width="11" height="10" font="7">7.</text>
+<text top="395" left="176" width="4" height="13" font="7"> </text>
+<text top="393" left="191" width="590" height="15" font="4">“IBM’s 2010 X-Force Trend And Risk Report: Increasing Security Threats in Mobile”, </text>
+<text top="420" left="191" width="124" height="15" font="4">Cloud Computing,</text>
+<text top="420" left="316" width="324" height="15" font="8">http://www-03.ibm.com/security/landscape.html</text>
+<text top="420" left="639" width="9" height="15" font="4">. </text>
+<text top="449" left="166" width="11" height="10" font="7">8.</text>
+<text top="448" left="176" width="4" height="13" font="7"> </text>
+<text top="447" left="191" width="590" height="15" font="4">Tim  Marther,  SubraKumaraswamy,  ShahedLatif,  “Cloud  Security  and  Privacy  An </text>
+<text top="474" left="191" width="590" height="15" font="4">Enterprise  Perspective  on  Risks  and  Compliance”,  O’REILLY,  January  2011,  ISBN </text>
+<text top="501" left="191" width="163" height="15" font="4">13:978-81-8404-815-5. </text>
+<text top="529" left="166" width="11" height="10" font="7">9.</text>
+<text top="528" left="176" width="4" height="13" font="7"> </text>
+<text top="527" left="191" width="590" height="15" font="4">Meiko Jensen, Jog Schwenk,NilsGruschka, Luigi Lo Iacono, “On Technical Security </text>
+<text top="554" left="191" width="590" height="15" font="4">Issues  In  Cloud  Computing”,  2009  IEEE  International  Conference  on  Cloud </text>
+<text top="581" left="191" width="424" height="15" font="4">Computing, 978-0-7695-3840-2/09 ©2009 IEEE, pp.109-116. </text>
+<text top="609" left="166" width="17" height="10" font="7">10.</text>
+<text top="609" left="183" width="4" height="13" font="7"> </text>
+<text top="608" left="191" width="590" height="15" font="4">Minqi Zhou, Rong Zhang et al, “Security and Privacy In Cloud Computing: A Survey”, </text>
+<text top="634" left="191" width="586" height="15" font="4">2010  sixth  international  conference  on    semantics,  Knowledge  and  Grids,  978-0-</text>
+<text top="661" left="191" width="291" height="15" font="4">7695-4189-1/10©2010 IEEE, pp.105-112. </text>
+<text top="690" left="166" width="17" height="10" font="7">11.</text>
+<text top="689" left="183" width="4" height="13" font="7"> </text>
+<text top="688" left="191" width="590" height="15" font="4">Bernd  Grobauer,  Tobias  Walloschek,  Elimar  Stocker,  “Understanding  Cloud </text>
+<text top="715" left="191" width="450" height="15" font="4">Computing Vulnerabilities”, 1540-7993/11©2011 IEEE, pp.50-57. </text>
+<text top="755" left="166" width="4" height="15" font="4"> </text>
+<text top="798" left="150" width="4" height="15" font="4"> </text>
+<text top="827" left="150" width="4" height="15" font="4"> </text>
+<text top="864" left="140" width="4" height="15" font="4"> </text>
+</page>
+</pdf2xml>

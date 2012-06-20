@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="33" family="Times" color="#000000"/>
+	<fontspec id="1" size="14" family="Times" color="#000000"/>
+	<fontspec id="2" size="12" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="11" family="Times" color="#000000"/>
+	<fontspec id="5" size="9" family="Times" color="#000000"/>
+	<fontspec id="6" size="8" family="Times" color="#000000"/>
+	<fontspec id="7" size="12" family="Times" color="#000000"/>
+<text top="92" left="95" width="728" height="33" font="0">FPGA Implementation of Decimal Processors for</text>
+<text top="134" left="291" width="336" height="33" font="0">Hardware Acceleration</text>
+<text top="195" left="277" width="365" height="15" font="1">Nicolas Borup, Jonas Dindorp and Alberto Nannarelli</text>
+<text top="215" left="315" width="289" height="14" font="2">Dept. Informatics and Mathematical Modelling</text>
+<text top="233" left="357" width="204" height="14" font="2">Technical University of Denmark</text>
+<text top="252" left="375" width="167" height="14" font="2">Kongens Lyngby, Denmark</text>
+<text top="305" left="73" width="376" height="12" font="3"><i><b>Abstract</b></i><b>—Applications in non-conventional number systems can</b></text>
+<text top="320" left="73" width="377" height="12" font="4"><b>beneﬁt from accelerators implemented on reconﬁgurable plat-</b></text>
+<text top="335" left="73" width="347" height="12" font="4"><b>forms, such as Field Programmable Gate-Arrays (FPGAs).</b></text>
+<text top="349" left="73" width="377" height="12" font="4"><b>In this paper, we show that applications requiring decimal</b></text>
+<text top="364" left="73" width="377" height="12" font="4"><b>operations, such as the ones necessary in accounting or ﬁnancial</b></text>
+<text top="379" left="73" width="377" height="12" font="4"><b>transactions, can be accelerated by Application Speciﬁc Proces-</b></text>
+<text top="394" left="73" width="377" height="12" font="4"><b>sors (ASPs) implemented on FPGAs. For the case of a telephone</b></text>
+<text top="409" left="73" width="377" height="12" font="4"><b>billing application, we demonstrate that by accelerating the</b></text>
+<text top="424" left="73" width="377" height="12" font="4"><b>program execution on a FPGA board connected to the computer</b></text>
+<text top="439" left="73" width="377" height="12" font="4"><b>by a standard bus, we obtain a signiﬁcant speed-up over its</b></text>
+<text top="454" left="73" width="278" height="12" font="4"><b>execution on the CPU of the hosting computer.</b></text>
+<text top="480" left="203" width="23" height="14" font="2">I. I</text>
+<text top="482" left="227" width="93" height="11" font="5">NTRODUCTION</text>
+<text top="502" left="73" width="377" height="14" font="2">A hardware accelerator is a co-processor, or an Application</text>
+<text top="520" left="73" width="377" height="14" font="2">Speciﬁc Processor (ASP), that is connected to the computer’s</text>
+<text top="538" left="73" width="333" height="14" font="2">Central Processing Unit (CPU) via a standard bus [1].</text>
+<text top="556" left="73" width="377" height="14" font="2">Normally, the accelerator is a unit optimized for a set of</text>
+<text top="574" left="73" width="377" height="14" font="2">numerical computations that can run efﬁciently all the applica-</text>
+<text top="592" left="73" width="377" height="14" font="2">tions requiring these computations. Graphics Processing Units</text>
+<text top="610" left="73" width="377" height="14" font="2">(GPUs) are an example of such accelerators. Originally intro-</text>
+<text top="627" left="73" width="377" height="14" font="2">duced to off-load CPUs from graphics, GPUs have evolved</text>
+<text top="645" left="73" width="273" height="14" font="2">into general-purpose many-core systems [2].</text>
+<text top="663" left="73" width="377" height="14" font="2">The raw power of state-of-the-art GPUs is quite impressive [3].</text>
+<text top="681" left="73" width="377" height="14" font="2">However, processing ”non-conventional” data, such as very</text>
+<text top="699" left="73" width="377" height="14" font="2">long integers and modular arithmetic used in cryptography, or</text>
+<text top="717" left="73" width="377" height="14" font="2">ﬁnancial computation requiring the decimal number system,</text>
+<text top="735" left="73" width="377" height="14" font="2">can beneﬁt from Application Speciﬁc Processors. These ASPs</text>
+<text top="753" left="73" width="377" height="14" font="2">can be implemented on Field Programmable Gate-Arrays (FP-</text>
+<text top="771" left="73" width="377" height="14" font="2">GAs). FPGA accelerators can be ﬁne tuned to match exactly</text>
+<text top="789" left="73" width="377" height="14" font="2">the algorithm, and FPGAs are easy to reconﬁgure according</text>
+<text top="806" left="73" width="111" height="14" font="2">to the application.</text>
+<text top="824" left="73" width="377" height="14" font="2">Decimal arithmetic is usually implemented by software rou-</text>
+<text top="842" left="73" width="377" height="14" font="2">tines, as binary ﬂoating-point does not always round correctly</text>
+<text top="860" left="73" width="377" height="14" font="2">[4]. However, software operations run 100–1000 times slower</text>
+<text top="878" left="73" width="377" height="14" font="2">than the corresponding binary operations implemented in</text>
+<text top="896" left="73" width="377" height="14" font="2">hardware. For these reasons, in the revised IEEE standard 754</text>
+<text top="914" left="73" width="377" height="14" font="2">[5] support for decimal representation was added, and some</text>
+<text top="932" left="73" width="377" height="14" font="2">companies are already commercializing processors which in-</text>
+<text top="950" left="73" width="172" height="14" font="2">clude decimal units [6], [7].</text>
+<text top="968" left="73" width="377" height="14" font="2">In this work, we show that we can accelerate with a decimal</text>
+<text top="985" left="73" width="377" height="14" font="2">processor implemented on FPGA the accounting typically</text>
+<text top="1003" left="73" width="377" height="14" font="2">done by telephone companies. As a case study, we consider a</text>
+<text top="1021" left="73" width="202" height="14" font="2">telephone billing application: the</text>
+<text top="1023" left="281" width="42" height="11" font="5">TELCO</text>
+<text top="1021" left="328" width="93" height="14" font="2">benchmark [8].</text>
+<text top="1039" left="73" width="377" height="14" font="2">The results show that the execution of the benchmark on the</text>
+<text top="1057" left="73" width="377" height="14" font="2">FPGA based accelerator is about 10 times faster than the</text>
+<text top="1075" left="73" width="139" height="14" font="2">execution on the CPU.</text>
+<text top="304" left="559" width="33" height="14" font="2">II. T</text>
+<text top="306" left="592" width="17" height="11" font="5">HE</text>
+<text top="304" left="613" width="66" height="14" font="2">TELCO B</text>
+<text top="306" left="680" width="73" height="11" font="5">ENCHMARK</text>
+<text top="326" left="468" width="23" height="14" font="2">The</text>
+<text top="329" left="498" width="42" height="11" font="5">TELCO</text>
+<text top="326" left="545" width="300" height="14" font="2">benchmark [8] was developed by IBM to inves-</text>
+<text top="344" left="468" width="377" height="14" font="2">tigate the balance between input and output (I/O) time and</text>
+<text top="362" left="468" width="369" height="14" font="2">calculation time in a telephone company billing application.</text>
+<text top="380" left="468" width="377" height="14" font="2">The benchmark, available in several programming languages,</text>
+<text top="398" left="468" width="377" height="14" font="2">provides an example of IEEE standard 754 [5] compliant set of</text>
+<text top="416" left="468" width="377" height="14" font="2">Decimal Floating-Point (DFP) operations: multiplication and</text>
+<text top="434" left="468" width="53" height="14" font="2">addition.</text>
+<text top="452" left="468" width="377" height="14" font="2">The benchmark program reads an input ﬁle containing a list of</text>
+<text top="470" left="468" width="377" height="14" font="2">telephone call durations. The calls are of two types (listed as L</text>
+<text top="488" left="468" width="377" height="14" font="2">and D) and to each type of call a rate (price) is applied. Once</text>
+<text top="506" left="468" width="377" height="14" font="2">the call price has been computed, one or two taxes (depending</text>
+<text top="524" left="468" width="196" height="14" font="2">on the type of call) are applied.</text>
+<text top="542" left="468" width="377" height="14" font="2">The benchmark speciﬁes the rounding modes to apply in the</text>
+<text top="559" left="468" width="377" height="14" font="2">different parts of the accounting. The price of the call must be</text>
+<text top="577" left="468" width="377" height="14" font="2">rounded to the nearest cent (round-to-even in case of a tie),</text>
+<text top="595" left="468" width="320" height="14" font="2">while the tax is computed by truncating to the cent.</text>
+<text top="613" left="468" width="377" height="14" font="2">For example, for a D-type call of 329 seconds (Brate=0.00894,</text>
+<text top="631" left="468" width="241" height="14" font="2">Btax=0.0675, Dtax=0.03410), we have:</text>
+<text top="661" left="486" width="31" height="14" font="2">Price</text>
+<text top="657" left="531" width="185" height="19" font="2">= 329 × 0.00894 = 2.94126</text>
+<text top="653" left="736" width="48" height="14" font="6">ROUND</text>
+<text top="657" left="753" width="15" height="19" font="2">→</text>
+<text top="657" left="800" width="27" height="19" font="2">2.94</text>
+<text top="683" left="488" width="28" height="14" font="2">Btax</text>
+<text top="679" left="531" width="175" height="19" font="2">= 2.94 × 0.0675 = 0.1984</text>
+<text top="675" left="735" width="50" height="14" font="6">T RUNC.</text>
+<text top="679" left="753" width="15" height="19" font="2">→</text>
+<text top="679" left="800" width="27" height="19" font="2">0.19</text>
+<text top="706" left="487" width="29" height="14" font="2">Dtax</text>
+<text top="702" left="531" width="190" height="19" font="2">= 2.94 × 0.03410 = 0.10025</text>
+<text top="698" left="735" width="50" height="14" font="6">T RUNC.</text>
+<text top="702" left="753" width="15" height="19" font="2">→</text>
+<text top="702" left="800" width="27" height="19" font="2">0.10</text>
+<text top="731" left="468" width="189" height="14" font="2">and the total cost of the call is</text>
+<text top="759" left="527" width="72" height="14" font="2">Cost of call</text>
+<text top="755" left="603" width="182" height="19" font="2">= 2.94 + 0.19 + 0.10 = 3.23.</text>
+<text top="787" left="468" width="377" height="14" font="2">The pseudo-code of the accounting algorithm is listed in Fig. 1.</text>
+<text top="805" left="468" width="377" height="14" font="2">Finally, the benchmark program computes the total for calls</text>
+<text top="823" left="468" width="140" height="14" font="2">cost and applied taxes.</text>
+<text top="850" left="539" width="38" height="14" font="2">III. T</text>
+<text top="852" left="578" width="17" height="11" font="5">HE</text>
+<text top="850" left="600" width="11" height="14" font="2">H</text>
+<text top="852" left="611" width="63" height="11" font="5">ARDWARE</text>
+<text top="850" left="679" width="11" height="14" font="2">A</text>
+<text top="852" left="690" width="84" height="11" font="5">CCELERATOR</text>
+<text top="873" left="468" width="167" height="14" font="7"><i>A. The Hardware Platform</i></text>
+<text top="896" left="468" width="377" height="14" font="2">The hardware accelerator is implemented on the Xilinx Virtex-</text>
+<text top="914" left="468" width="377" height="14" font="2">5 LX330T FPGA. This FPGA is embedded on the Alpha Data</text>
+<text top="931" left="468" width="377" height="14" font="2">ADM-XRC-5T2 board and is connected to the host PC via the</text>
+<text top="949" left="468" width="377" height="14" font="2">PCI Express bus (Fig. 2). The CPU of the host PC is the Intel</text>
+<text top="967" left="468" width="247" height="14" font="2">Core2 Duo processor clocked at 3 GHz.</text>
+<text top="985" left="468" width="377" height="14" font="2">To transfer data between the board and the PC, Direct Memory</text>
+<text top="1003" left="468" width="376" height="14" font="2">Access (DMA) is used. This allows access to the system</text>
+<text top="1021" left="468" width="377" height="14" font="2">memory for reading and writing independently of the CPU.</text>
+<text top="1039" left="468" width="377" height="14" font="2">To further improve the performance, burst mode is used which</text>
+<text top="1057" left="468" width="377" height="14" font="2">gives the DMA controller exclusive access to the bus without</text>
+<text top="1075" left="468" width="377" height="14" font="2">interruption. The implementation of the DMA functions, along</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="8" size="7" family="Times" color="#000000"/>
+	<fontspec id="9" size="7" family="Times" color="#000000"/>
+<text top="87" left="96" width="152" height="12" font="2">if (calltype = L)</text>
+<text top="105" left="122" width="188" height="14" font="2">P = duration * Brate;</text>
+<text top="123" left="96" width="36" height="12" font="2">else</text>
+<text top="140" left="122" width="188" height="14" font="2">P = duration * Drate;</text>
+<text top="158" left="96" width="243" height="12" font="2">Pr = RoundtoNearestEven(P);</text>
+<text top="176" left="96" width="126" height="14" font="2">B = Pr * Btax;</text>
+<text top="194" left="96" width="162" height="12" font="2">C = Pr + Trunc(B);</text>
+<text top="212" left="96" width="152" height="12" font="2">if (calltype = D)</text>
+<text top="207" left="257" width="7" height="19" font="2">{</text>
+<text top="230" left="122" width="126" height="14" font="2">D = Pr * Dtax;</text>
+<text top="248" left="122" width="153" height="12" font="2">C = C + Trunc(D);</text>
+<text top="261" left="113" width="7" height="19" font="2">}</text>
+<text top="293" left="153" width="32" height="11" font="5">Fig. 1.</text>
+<text top="293" left="197" width="75" height="11" font="5">Pseudo-code of</text>
+<text top="295" left="277" width="33" height="9" font="8">TELCO</text>
+<text top="293" left="315" width="56" height="11" font="5">benchmark.</text>
+<text top="346" left="73" width="377" height="14" font="2">with others, is included in a Software Development Kit (SDK)</text>
+<text top="364" left="73" width="377" height="14" font="2">provided with the Alpha Data board. The SDK includes</text>
+<text top="382" left="73" width="377" height="14" font="2">an application-programming interface (API), VHDL functions</text>
+<text top="400" left="73" width="87" height="14" font="2">and examples.</text>
+<text top="441" left="73" width="117" height="14" font="7"><i>B. Telco Processor</i></text>
+<text top="469" left="73" width="23" height="14" font="2">The</text>
+<text top="471" left="105" width="42" height="11" font="5">TELCO</text>
+<text top="469" left="156" width="295" height="14" font="2">processor (Fig. 2) includes two FIFO buffers</text>
+<text top="487" left="73" width="377" height="14" font="2">which handles the input and output to the bus. A controller</text>
+<text top="505" left="73" width="377" height="14" font="2">checks the bus to see when new data is transmitted and</text>
+<text top="523" left="73" width="377" height="14" font="2">controls the signals to the FIFO buffers. Every time a new</text>
+<text top="540" left="73" width="377" height="14" font="2">element (call duration) has been received, it is transmitted</text>
+<text top="558" left="73" width="377" height="14" font="2">to the Application Speciﬁc Processor, or ASP, implementing</text>
+<text top="576" left="73" width="377" height="14" font="2">the calculations of Fig. 1. Then, the result of the calculation</text>
+<text top="594" left="73" width="377" height="14" font="2">is transmitted from the ASP to the output FIFO buffer. The</text>
+<text top="612" left="73" width="377" height="14" font="2">controller is starting a DMA burst to the PC as soon as the</text>
+<text top="630" left="73" width="290" height="14" font="2">output FIFO buffer holds enough bits to do so.</text>
+<text top="650" left="73" width="377" height="14" font="2">The data passed to the accelerator, and back to host the PC, are</text>
+<text top="668" left="73" width="377" height="14" font="2">32 bit vectors corresponding to 8 decimal digits when encoded</text>
+<text top="686" left="73" width="207" height="14" font="2">in Binary Coded Decimal (BCD).</text>
+<text top="705" left="73" width="365" height="14" font="2">The structure of the ASP, detailed next, is shown in Fig. 3.</text>
+<text top="746" left="73" width="245" height="14" font="7"><i>C. Telco Application Speciﬁc Processor</i></text>
+<text top="774" left="73" width="377" height="14" font="2">The ASP of Fig. 3 can be considered as divided into three</text>
+<text top="792" left="73" width="68" height="14" font="2">main parts:</text>
+<text top="816" left="89" width="166" height="14" font="2">- Calculation of call price.</text>
+<text top="834" left="89" width="327" height="14" font="2">- Calculation (in parallel) of Btax and Dtax (if any).</text>
+<text top="852" left="89" width="189" height="14" font="2">- Calculation of the total cost.</text>
+<text top="876" left="73" width="377" height="14" font="7"><i>1) Calculation of call price: </i>Although we can transfer 8-digit</text>
+<text top="894" left="73" width="302" height="14" font="2">BCD numbers, six decimal digits are sufﬁcient (</text>
+<text top="890" left="375" width="15" height="19" font="2">10</text>
+<text top="889" left="391" width="6" height="14" font="6">6</text>
+<text top="894" left="403" width="48" height="14" font="2">seconds</text>
+<text top="912" left="91" width="359" height="14" font="2">11.5 days) to represent the duration of a call n. The call</text>
+<text top="930" left="73" width="377" height="14" font="2">and tax rates are stored (hardwired) in the processor (FPGA’s</text>
+<text top="948" left="73" width="377" height="14" font="2">look-up tables). For the call rate r, selected by a multiplexer</text>
+<text top="966" left="73" width="377" height="14" font="2">depending on the type of the call, a 5-digit fractional number</text>
+<text top="984" left="73" width="74" height="14" font="2">is sufﬁcient.</text>
+<text top="1003" left="73" width="85" height="14" font="2">The product p</text>
+<text top="999" left="163" width="288" height="19" font="2">= n × r is computed by a 6×5 BCD multiplier</text>
+<text top="1021" left="73" width="377" height="14" font="2">similar to the one described later in Section III-E. The product</text>
+<text top="1039" left="73" width="377" height="14" font="2">is a 11 BCD digit number with 5 fractional digit and it must</text>
+<text top="1057" left="73" width="102" height="14" font="2">be rounded to p</text>
+<text top="1060" left="175" width="6" height="14" font="6">r</text>
+<text top="1057" left="182" width="268" height="14" font="2">, as explained in Section II, to the nearest</text>
+<text top="1075" left="73" width="29" height="14" font="2">cent.</text>
+<text top="166" left="597" width="48" height="11" font="5">Controller</text>
+<text top="167" left="773" width="18" height="9" font="8">ASP</text>
+<text top="134" left="693" width="21" height="9" font="8">FIFO</text>
+<text top="193" left="693" width="21" height="9" font="8">FIFO</text>
+<text top="92" left="698" width="25" height="9" font="8">FPGA</text>
+<text top="113" left="550" width="0" height="9" font="9">PCI−express BUS</text>
+<text top="153" left="492" width="19" height="9" font="8">CPU</text>
+<text top="249" left="468" width="32" height="11" font="5">Fig. 2.</text>
+<text top="249" left="512" width="104" height="11" font="5">Block diagram of the</text>
+<text top="251" left="621" width="33" height="9" font="8">TELCO</text>
+<text top="249" left="658" width="186" height="11" font="5">processor and the connection with the</text>
+<text top="263" left="468" width="26" height="11" font="5">CPU.</text>
+<text top="810" left="499" width="32" height="11" font="5">Fig. 3.</text>
+<text top="810" left="544" width="172" height="11" font="5">Implementation of the ASP for the</text>
+<text top="812" left="720" width="33" height="9" font="8">TELCO</text>
+<text top="810" left="757" width="56" height="11" font="5">benchmark.</text>
+<text top="873" left="468" width="377" height="14" font="7"><i>2) Calculation of Btax and Dtax: </i>The cost of the two taxes</text>
+<text top="891" left="468" width="377" height="14" font="2">(b and d) can be computed in parallel. Then, if the call is an</text>
+<text top="909" left="468" width="377" height="14" font="2">L-type, the cost d can be ignored. The tax rates are repre-</text>
+<text top="927" left="468" width="377" height="14" font="2">sented by a 5-digit fractional number, as well. The application</text>
+<text top="945" left="468" width="377" height="14" font="2">speciﬁcations state that the result of the multiplications, in this</text>
+<text top="963" left="468" width="351" height="14" font="2">case, must be truncated to the cent (2nd fractional digit).</text>
+<text top="983" left="468" width="377" height="14" font="7"><i>3) Calculation of the total cost: </i>Once the call price and the</text>
+<text top="1001" left="468" width="239" height="14" font="2">taxes have been computed, the costs p</text>
+<text top="1004" left="707" width="5" height="14" font="6">t</text>
+<text top="1001" left="712" width="133" height="14" font="2">, b (and d if any) are</text>
+<text top="1019" left="468" width="264" height="14" font="2">added to obtain the cost of the single call c</text>
+<text top="1022" left="732" width="4" height="14" font="6">i</text>
+<text top="1019" left="737" width="108" height="14" font="2">. Then the cost of</text>
+<text top="1037" left="468" width="206" height="14" font="2">the call is added to the total cost.</text>
+<text top="1057" left="468" width="377" height="14" font="2">To avoid the carry-propagation, some intermediate results are</text>
+<text top="1075" left="468" width="377" height="14" font="2">kept in carry-save representation. Detail on BCD carry-save</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="10" size="6" family="Times" color="#000000"/>
+	<fontspec id="11" size="9" family="Times" color="#ff0000"/>
+	<fontspec id="12" size="9" family="Times" color="#a52a2a"/>
+	<fontspec id="13" size="9" family="Times" color="#0000ff"/>
+	<fontspec id="14" size="10" family="Times" color="#000000"/>
+	<fontspec id="15" size="9" family="Times" color="#be00fe"/>
+	<fontspec id="16" size="12" family="Times" color="#000000"/>
+<text top="89" left="73" width="168" height="14" font="2">adders can be found in [9].</text>
+<text top="107" left="73" width="377" height="14" font="2">The output is a 8-digit BCD number (6 integer and 2 fractional</text>
+<text top="125" left="73" width="377" height="14" font="2">digits). Six decimal digits for the integer part of the total cost</text>
+<text top="143" left="73" width="377" height="14" font="2">(one million) should be adequate for the application. However,</text>
+<text top="161" left="73" width="377" height="14" font="2">if the number of calls is huge (several millions) the number</text>
+<text top="178" left="73" width="361" height="14" font="2">of digits can be easily extended in the accumulation stage.</text>
+<text top="209" left="73" width="109" height="14" font="7"><i>D. BCD Addition</i></text>
+<text top="233" left="73" width="216" height="14" font="2">The addition of two BCD numbers</text>
+<text top="262" left="231" width="7" height="14" font="2">s</text>
+<text top="259" left="242" width="50" height="19" font="2">= x + y</text>
+<text top="292" left="73" width="377" height="14" font="2">(previously aligned to the decimal point) is performed in three</text>
+<text top="310" left="73" width="168" height="14" font="2">steps. By indicating with x</text>
+<text top="312" left="241" width="4" height="14" font="6">i</text>
+<text top="306" left="251" width="84" height="19" font="2">∈ [0, 9] and y</text>
+<text top="312" left="336" width="4" height="14" font="6">i</text>
+<text top="306" left="345" width="104" height="19" font="2">∈ [0, 9] the BCD</text>
+<text top="328" left="73" width="101" height="14" font="2">digits of weight</text>
+<text top="324" left="181" width="15" height="19" font="2">10</text>
+<text top="323" left="196" width="4" height="14" font="6">i</text>
+<text top="328" left="208" width="242" height="14" font="2">of the two signiﬁcands x and y, with</text>
+<text top="346" left="73" width="6" height="14" font="2">c</text>
+<text top="348" left="80" width="4" height="14" font="6">i</text>
+<text top="342" left="89" width="251" height="19" font="2">∈ {0, 1} the carry-in to digit of weight 10</text>
+<text top="341" left="341" width="4" height="14" font="6">i</text>
+<text top="346" left="345" width="70" height="14" font="2">, and with c</text>
+<text top="348" left="416" width="19" height="14" font="6">i+1</text>
+<text top="342" left="440" width="10" height="19" font="2">∈</text>
+<text top="360" left="73" width="241" height="19" font="2">{0, 1} its carry-out, the three steps are:</text>
+<text top="385" left="88" width="207" height="14" font="2">1) A ﬁrst stage computes from x</text>
+<text top="388" left="295" width="4" height="14" font="6">i</text>
+<text top="385" left="306" width="34" height="14" font="2">and y</text>
+<text top="388" left="340" width="4" height="14" font="6">i</text>
+<text top="385" left="350" width="95" height="14" font="2">the propagate p</text>
+<text top="388" left="445" width="4" height="14" font="6">i</text>
+<text top="403" left="110" width="90" height="14" font="2">and generate g</text>
+<text top="406" left="200" width="4" height="14" font="6">i</text>
+<text top="403" left="210" width="46" height="14" font="2">signals:</text>
+<text top="439" left="100" width="8" height="14" font="2">p</text>
+<text top="442" left="108" width="4" height="14" font="6">i</text>
+<text top="436" left="117" width="12" height="19" font="2">=</text>
+<text top="426" left="151" width="45" height="19" font="2">1 if x</text>
+<text top="433" left="196" width="4" height="14" font="6">i</text>
+<text top="426" left="205" width="22" height="19" font="2">+ y</text>
+<text top="433" left="227" width="4" height="14" font="6">i</text>
+<text top="426" left="236" width="23" height="19" font="2">= 9</text>
+<text top="444" left="151" width="81" height="19" font="2">0 otherwise</text>
+<text top="439" left="271" width="7" height="14" font="2">g</text>
+<text top="442" left="278" width="4" height="14" font="6">i</text>
+<text top="436" left="287" width="12" height="19" font="2">=</text>
+<text top="426" left="322" width="45" height="19" font="2">1 if x</text>
+<text top="433" left="367" width="4" height="14" font="6">i</text>
+<text top="426" left="375" width="22" height="19" font="2">+ y</text>
+<text top="433" left="398" width="4" height="14" font="6">i</text>
+<text top="426" left="407" width="31" height="19" font="2">≥ 10</text>
+<text top="444" left="322" width="81" height="19" font="2">0 otherwise</text>
+<text top="475" left="88" width="275" height="14" font="2">2) A network to compute the carries from p</text>
+<text top="478" left="364" width="4" height="14" font="6">i</text>
+<text top="475" left="369" width="45" height="14" font="2">s and g</text>
+<text top="478" left="414" width="4" height="14" font="6">i</text>
+<text top="475" left="419" width="10" height="14" font="2">s:</text>
+<text top="504" left="190" width="6" height="14" font="2">c</text>
+<text top="507" left="196" width="19" height="14" font="6">i+1</text>
+<text top="501" left="226" width="28" height="19" font="2">= g</text>
+<text top="507" left="254" width="4" height="14" font="6">i</text>
+<text top="507" left="264" width="17" height="11" font="5">OR</text>
+<text top="501" left="291" width="13" height="19" font="2">(p</text>
+<text top="507" left="304" width="4" height="14" font="6">i</text>
+<text top="507" left="315" width="27" height="11" font="5">AND</text>
+<text top="504" left="348" width="6" height="14" font="2">c</text>
+<text top="507" left="354" width="4" height="14" font="6">i</text>
+<text top="501" left="359" width="6" height="19" font="2">)</text>
+<text top="534" left="110" width="340" height="14" font="2">This can be implemented with any binary preﬁx net-</text>
+<text top="552" left="110" width="35" height="14" font="2">work.</text>
+<text top="570" left="88" width="350" height="14" font="2">3) A ﬁnal stage to compute the ﬁnal sum (modulus 10).</text>
+<text top="599" left="215" width="7" height="14" font="2">s</text>
+<text top="602" left="222" width="4" height="14" font="6">i</text>
+<text top="595" left="231" width="30" height="19" font="2">= x</text>
+<text top="602" left="261" width="4" height="14" font="6">i</text>
+<text top="595" left="269" width="22" height="19" font="2">+ y</text>
+<text top="602" left="292" width="4" height="14" font="6">i</text>
+<text top="595" left="300" width="21" height="19" font="2">+ c</text>
+<text top="602" left="321" width="23" height="16" font="6">i 10</text>
+<text top="629" left="73" width="322" height="14" font="2">Detail of the modulus 10 adder can be found in [9].</text>
+<text top="659" left="73" width="116" height="14" font="7"><i>E. BCD Multiplier</i></text>
+<text top="683" left="73" width="377" height="14" font="2">The parallel multiplication shift-and-add algorithm is based on</text>
+<text top="701" left="73" width="69" height="14" font="2">the identity</text>
+<text top="732" left="184" width="10" height="14" font="2">P</text>
+<text top="729" left="205" width="64" height="19" font="2">= x · y =</text>
+<text top="714" left="273" width="23" height="14" font="6">n−1</text>
+<text top="750" left="275" width="19" height="14" font="6">i=0</text>
+<text top="732" left="298" width="16" height="14" font="2">xy</text>
+<text top="735" left="314" width="4" height="14" font="6">i</text>
+<text top="729" left="319" width="15" height="19" font="2">10</text>
+<text top="727" left="334" width="4" height="14" font="6">i</text>
+<text top="774" left="73" width="179" height="14" font="2">where for decimal operands y</text>
+<text top="777" left="253" width="4" height="14" font="6">i</text>
+<text top="771" left="262" width="188" height="19" font="2">∈ [0, 9] and x is a n-digit BCD</text>
+<text top="792" left="73" width="376" height="14" font="2">vector. To avoid complicated multiples of x, the multiplier y</text>
+<text top="810" left="73" width="354" height="14" font="2">is normally recoded in a way that only the multiples x,</text>
+<text top="806" left="434" width="16" height="19" font="2">2x</text>
+<text top="828" left="73" width="22" height="14" font="2">and</text>
+<text top="824" left="101" width="349" height="19" font="2">5x (and the respective negative multiples) are necessary</text>
+<text top="846" left="73" width="290" height="14" font="2">[9]. That is, the multiplier digit is recoded y</text>
+<text top="849" left="364" width="4" height="14" font="6">i</text>
+<text top="842" left="373" width="23" height="19" font="2">= y</text>
+<text top="849" left="396" width="15" height="14" font="6">Hi</text>
+<text top="842" left="415" width="22" height="19" font="2">+ y</text>
+<text top="849" left="437" width="13" height="14" font="6">Li</text>
+<text top="864" left="73" width="39" height="14" font="2">with y</text>
+<text top="867" left="112" width="10" height="14" font="6">H</text>
+<text top="860" left="128" width="111" height="19" font="2">∈ {0, 5, 10} and y</text>
+<text top="867" left="239" width="8" height="14" font="6">L</text>
+<text top="860" left="252" width="198" height="19" font="2">∈ {−2, 1, 0, 1, 2} as indicated in</text>
+<text top="882" left="73" width="377" height="14" font="2">Table I, and the partial product is formed by adding the two</text>
+<text top="900" left="73" width="176" height="14" font="2">multiples. For example, if y</text>
+<text top="902" left="249" width="4" height="14" font="6">i</text>
+<text top="896" left="260" width="190" height="19" font="2">= 8, the corresponding partial</text>
+<text top="918" left="73" width="135" height="14" font="2">product is obtained as</text>
+<text top="943" left="184" width="42" height="19" font="2">8x · 10</text>
+<text top="941" left="226" width="4" height="14" font="6">i</text>
+<text top="943" left="235" width="100" height="19" font="2">= (10x − 2x)10</text>
+<text top="941" left="335" width="4" height="14" font="6">i</text>
+<text top="991" left="126" width="6" height="16" font="5">y</text>
+<text top="996" left="133" width="4" height="12" font="10">i</text>
+<text top="994" left="159" width="6" height="11" font="5">0</text>
+<text top="994" left="183" width="6" height="11" font="5">1</text>
+<text top="994" left="207" width="6" height="11" font="5">2</text>
+<text top="994" left="233" width="6" height="11" font="5">3</text>
+<text top="994" left="260" width="6" height="11" font="5">4</text>
+<text top="994" left="286" width="6" height="11" font="5">5</text>
+<text top="994" left="310" width="6" height="11" font="5">6</text>
+<text top="994" left="334" width="6" height="11" font="5">7</text>
+<text top="994" left="361" width="6" height="11" font="5">8</text>
+<text top="994" left="391" width="6" height="11" font="5">9</text>
+<text top="1005" left="124" width="6" height="16" font="5">y</text>
+<text top="1010" left="130" width="9" height="12" font="10">H</text>
+<text top="1008" left="159" width="6" height="11" font="5">0</text>
+<text top="1008" left="183" width="6" height="11" font="5">0</text>
+<text top="1008" left="207" width="6" height="11" font="5">0</text>
+<text top="1008" left="233" width="6" height="11" font="5">5</text>
+<text top="1008" left="260" width="6" height="11" font="5">5</text>
+<text top="1008" left="286" width="6" height="11" font="5">5</text>
+<text top="1008" left="310" width="6" height="11" font="5">5</text>
+<text top="1008" left="334" width="6" height="11" font="5">5</text>
+<text top="1008" left="358" width="12" height="11" font="5">10</text>
+<text top="1008" left="388" width="12" height="11" font="5">10</text>
+<text top="1019" left="125" width="6" height="16" font="5">y</text>
+<text top="1024" left="131" width="8" height="12" font="10">L</text>
+<text top="1022" left="159" width="6" height="11" font="5">0</text>
+<text top="1022" left="183" width="6" height="11" font="5">1</text>
+<text top="1022" left="207" width="6" height="11" font="5">2</text>
+<text top="1022" left="231" width="10" height="11" font="5">-2</text>
+<text top="1022" left="258" width="10" height="11" font="5">-1</text>
+<text top="1022" left="286" width="6" height="11" font="5">0</text>
+<text top="1022" left="310" width="6" height="11" font="5">1</text>
+<text top="1022" left="334" width="6" height="11" font="5">2</text>
+<text top="1022" left="359" width="10" height="11" font="5">-2</text>
+<text top="1022" left="389" width="10" height="11" font="5">-1</text>
+<text top="1043" left="239" width="46" height="11" font="5">TABLE I</text>
+<text top="1057" left="219" width="8" height="11" font="5">R</text>
+<text top="1058" left="228" width="63" height="9" font="8">ECODING OF</text>
+<text top="1054" left="294" width="6" height="16" font="5">y</text>
+<text top="1058" left="300" width="4" height="12" font="10">i</text>
+<text top="249" left="641" width="30" height="10" font="11">Adder</text>
+<text top="273" left="646" width="23" height="10" font="11">Tree</text>
+<text top="204" left="625" width="0" height="10" font="12">precomputations</text>
+<text top="144" left="667" width="32" height="10" font="13">Partial</text>
+<text top="165" left="663" width="38" height="10" font="13">Product</text>
+<text top="186" left="655" width="55" height="10" font="13">Generation</text>
+<text top="84" left="616" width="9" height="12" font="14">X</text>
+<text top="84" left="712" width="9" height="12" font="14">Y</text>
+<text top="365" left="654" width="9" height="12" font="14">P</text>
+<text top="321" left="608" width="97" height="10" font="15">carry−save −&gt; BCD</text>
+<text top="104" left="628" width="6" height="10" font="5">n</text>
+<text top="104" left="724" width="6" height="10" font="5">n</text>
+<text top="341" left="665" width="12" height="10" font="5">2n</text>
+<text top="406" left="573" width="32" height="11" font="5">Fig. 4.</text>
+<text top="406" left="618" width="122" height="11" font="5">BCD multiplier from [9]</text>
+<text top="456" left="468" width="377" height="14" font="2">A BCD multiplier scheme is shown in Fig. 4. It consists of</text>
+<text top="474" left="468" width="73" height="14" font="2">four blocks:</text>
+<text top="496" left="483" width="362" height="14" font="2">1) <b>Precomputation </b>where the multiples of x are computed.</text>
+<text top="514" left="483" width="362" height="14" font="2">2) <b>Partial product generation </b>where each BCD digit</text>
+<text top="532" left="504" width="7" height="14" font="2">y</text>
+<text top="534" left="512" width="4" height="14" font="6">i</text>
+<text top="532" left="522" width="323" height="14" font="2">selects the corresponding multiples (partial product)</text>
+<text top="549" left="504" width="128" height="14" font="2">according to Table I.</text>
+<text top="567" left="483" width="362" height="14" font="2">3) <b>Adder Tree </b>where all the partial products are ac-</text>
+<text top="585" left="504" width="340" height="14" font="2">cumulated by using an adder tree. There are several</text>
+<text top="603" left="504" width="340" height="14" font="2">alternatives for the accumulations of partial products as</text>
+<text top="621" left="504" width="340" height="14" font="2">reported in [9], [10], [11]. We opted for the scheme of</text>
+<text top="639" left="504" width="21" height="14" font="2">[9].</text>
+<text top="657" left="483" width="89" height="14" font="2">4) <b>carry-save</b></text>
+<text top="653" left="577" width="267" height="19" font="2">→ <b>BCD </b>is a carry-propagate adder similar</text>
+<text top="675" left="504" width="169" height="14" font="2">to the one of Section III-D.</text>
+<text top="709" left="468" width="206" height="14" font="7"><i>F. The Hardware Implementation</i></text>
+<text top="733" left="468" width="377" height="14" font="2">The accelerator of Fig. 2 is implemented on the FPGA of</text>
+<text top="751" left="468" width="377" height="14" font="2">the Alpha Data board. The ASP of Fig. 3 is implemented</text>
+<text top="769" left="468" width="377" height="14" font="2">with three 8x8 BCD digit multipliers and a ﬁnal 8 BCD digit</text>
+<text top="787" left="468" width="377" height="14" font="2">carry-propagate adder (CPA). The rates and taxes are chosen</text>
+<text top="805" left="468" width="377" height="14" font="2">by setting multiplexers. The ASP is pipelined into 8 stages (3</text>
+<text top="823" left="468" width="377" height="14" font="2">stages are necessary for the multipliers), and it can sustain a</text>
+<text top="841" left="468" width="377" height="14" font="2">maximum frequency of 127 MHz. However, the accelerator is</text>
+<text top="859" left="468" width="377" height="14" font="2">clocked at 80 MHz which is the frequency of the DMA. Data</text>
+<text top="877" left="468" width="377" height="14" font="2">are read from the input FIFO buffer into the accelerator and</text>
+<text top="895" left="468" width="377" height="14" font="2">the total (partial) cost is queued in the output buffer and sent</text>
+<text top="913" left="468" width="377" height="14" font="2">back to the CPU for logging, and to verify the functionality</text>
+<text top="931" left="468" width="102" height="14" font="2">of the processor.</text>
+<text top="949" left="468" width="377" height="14" font="2">As the input FIFO buffer can be read every second clock</text>
+<text top="967" left="468" width="377" height="14" font="2">cycle, the effective maximum frequency of operation is 40</text>
+<text top="985" left="468" width="41" height="14" font="2">MHz (</text>
+<text top="981" left="509" width="335" height="19" font="2">25 ns per element) resulting in a processor latency of</text>
+<text top="999" left="468" width="108" height="19" font="2">8 × 25 = 200 ns.</text>
+<text top="1021" left="468" width="377" height="14" font="2">Because the FPGA is quite large, only a small fraction of</text>
+<text top="1039" left="468" width="377" height="14" font="2">the logic is utilized. However, as the bottleneck is the data</text>
+<text top="1057" left="468" width="377" height="14" font="2">transfer from the host computer, the available space of the</text>
+<text top="1075" left="468" width="374" height="14" font="2">device cannot be utilized to further parallelize the algorithm.</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="17" size="5" family="Times" color="#000000"/>
+	<fontspec id="18" size="9" family="Times" color="#000000"/>
+<text top="89" left="167" width="36" height="14" font="2">IV. E</text>
+<text top="91" left="204" width="91" height="11" font="5">XPERIMENTAL</text>
+<text top="89" left="299" width="10" height="14" font="2">R</text>
+<text top="91" left="310" width="47" height="11" font="5">ESULTS</text>
+<text top="111" left="73" width="239" height="14" font="2">The experiment consists in running the</text>
+<text top="113" left="317" width="42" height="11" font="5">TELCO</text>
+<text top="111" left="364" width="86" height="14" font="2">benchmark on</text>
+<text top="129" left="73" width="377" height="14" font="2">the CPU of the host PC, and in processing the list of call</text>
+<text top="147" left="73" width="99" height="14" font="2">durations on the</text>
+<text top="149" left="178" width="42" height="11" font="5">TELCO</text>
+<text top="147" left="225" width="60" height="14" font="2">processor.</text>
+<text top="165" left="73" width="377" height="14" font="2">The execution time when running the C program on the CPU</text>
+<text top="183" left="73" width="377" height="14" font="2">is 1.5 seconds for a set of one million calls (elements). This</text>
+<text top="201" left="73" width="377" height="14" font="2">value is obtained by averaging the readings of several runs as</text>
+<text top="219" left="73" width="377" height="14" font="2">the experiment conditions (CPU tasks for operating system,</text>
+<text top="237" left="73" width="377" height="14" font="2">etc.) vary at each run. The experimental results for the CPU</text>
+<text top="255" left="73" width="377" height="14" font="2">execution of the benchmark are summarized in Table II. The</text>
+<text top="272" left="73" width="200" height="14" font="2">execution time per element (e.g.</text>
+<text top="267" left="281" width="26" height="14" font="6">1.5 s</text>
+<text top="278" left="285" width="12" height="14" font="6">10</text>
+<text top="278" left="297" width="5" height="10" font="17">6</text>
+<text top="269" left="313" width="137" height="19" font="2">= 1.5 µs) is indicated</text>
+<text top="290" left="73" width="143" height="14" font="2">between () in the table.</text>
+<text top="308" left="73" width="119" height="14" font="2">For large data sets (</text>
+<text top="304" left="192" width="15" height="19" font="2">10</text>
+<text top="303" left="207" width="6" height="14" font="6">5</text>
+<text top="308" left="214" width="7" height="14" font="2">–</text>
+<text top="304" left="221" width="15" height="19" font="2">10</text>
+<text top="303" left="237" width="6" height="14" font="6">6</text>
+<text top="308" left="247" width="203" height="14" font="2">elements) the I/O time is between</text>
+<text top="322" left="73" width="377" height="19" font="2">0.3–0.4 µs per element. Consequently, we can assume that</text>
+<text top="344" left="73" width="310" height="14" font="2">the decimal calculation time for large sets is about</text>
+<text top="340" left="388" width="62" height="19" font="2">1.2 µs (or</text>
+<text top="358" left="73" width="377" height="19" font="2">1200 ns) per element. Because the I/O time is smaller than the</text>
+<text top="380" left="73" width="377" height="14" font="2">computation time, the software execution of the benchmark on</text>
+<text top="398" left="73" width="195" height="14" font="2">the CPU is <i>computation-bound</i>.</text>
+<text top="434" left="184" width="41" height="11" font="5">I/O time</text>
+<text top="434" left="260" width="55" height="11" font="5">comp. time</text>
+<text top="434" left="346" width="50" height="11" font="5">exec. time</text>
+<text top="447" left="120" width="32" height="11" font="5"># calls</text>
+<text top="444" left="172" width="24" height="16" font="5">[ms]</text>
+<text top="444" left="216" width="21" height="16" font="5">[µs]</text>
+<text top="444" left="255" width="24" height="16" font="5">[ms]</text>
+<text top="444" left="299" width="21" height="16" font="5">[µs]</text>
+<text top="444" left="338" width="24" height="16" font="5">[ms]</text>
+<text top="444" left="382" width="21" height="16" font="5">[µs]</text>
+<text top="466" left="120" width="28" height="16" font="5">1 · 10</text>
+<text top="465" left="148" width="5" height="12" font="10">5</text>
+<text top="469" left="185" width="12" height="11" font="5">40</text>
+<text top="469" left="215" width="23" height="11" font="5">(0.4)</text>
+<text top="469" left="262" width="18" height="11" font="5">210</text>
+<text top="469" left="298" width="23" height="11" font="5">(2.1)</text>
+<text top="469" left="345" width="18" height="11" font="5">250</text>
+<text top="469" left="381" width="23" height="11" font="5">(2.5)</text>
+<text top="480" left="120" width="28" height="16" font="5">5 · 10</text>
+<text top="479" left="148" width="5" height="12" font="10">5</text>
+<text top="483" left="179" width="18" height="11" font="5">180</text>
+<text top="483" left="215" width="23" height="11" font="5">(0.4)</text>
+<text top="483" left="262" width="18" height="11" font="5">660</text>
+<text top="483" left="298" width="23" height="11" font="5">(1.3)</text>
+<text top="483" left="345" width="18" height="11" font="5">840</text>
+<text top="483" left="381" width="23" height="11" font="5">(1.7)</text>
+<text top="494" left="120" width="28" height="16" font="5">1 · 10</text>
+<text top="493" left="148" width="5" height="12" font="10">6</text>
+<text top="497" left="179" width="18" height="11" font="5">300</text>
+<text top="497" left="215" width="23" height="11" font="5">(0.3)</text>
+<text top="497" left="256" width="24" height="11" font="5">1200</text>
+<text top="497" left="298" width="23" height="11" font="5">(1.2)</text>
+<text top="497" left="339" width="24" height="11" font="5">1500</text>
+<text top="497" left="381" width="23" height="11" font="5">(1.5)</text>
+<text top="522" left="237" width="50" height="11" font="5">TABLE II</text>
+<text top="536" left="147" width="8" height="11" font="5">B</text>
+<text top="537" left="156" width="199" height="9" font="8">ENCHMARK EXECUTION TIME ON HOST</text>
+<text top="536" left="358" width="19" height="11" font="5">PC.</text>
+<text top="563" left="73" width="377" height="14" font="2">Because the architecture of Fig. 2 was designed for minimal</text>
+<text top="581" left="73" width="377" height="14" font="2">support to the decimal ASP, our accelerator can only process</text>
+<text top="599" left="73" width="377" height="14" font="2">smaller sets of data to not incur in buffer overﬂow. For this</text>
+<text top="616" left="73" width="377" height="14" font="2">reason, we measured the execution time to send the data to</text>
+<text top="634" left="73" width="376" height="14" font="2">the ASP, and receive the computed results back in the CPU,</text>
+<text top="652" left="73" width="377" height="14" font="2">for data sets of 10, 100, 200 and 300 elements. The execution</text>
+<text top="670" left="73" width="309" height="14" font="2">times for the different sets are shown in Table III.</text>
+<text top="703" left="111" width="63" height="11" font="5"># calls (size)</text>
+<text top="703" left="191" width="71" height="11" font="5">execution time</text>
+<text top="700" left="267" width="21" height="16" font="5">[µs]</text>
+<text top="703" left="305" width="83" height="11" font="5">time per element</text>
+<text top="700" left="392" width="21" height="16" font="5">[µs]</text>
+<text top="727" left="136" width="12" height="11" font="5">10</text>
+<text top="727" left="230" width="18" height="11" font="5">196</text>
+<text top="727" left="349" width="21" height="11" font="5">19.6</text>
+<text top="741" left="133" width="18" height="11" font="5">100</text>
+<text top="741" left="230" width="18" height="11" font="5">162</text>
+<text top="741" left="349" width="21" height="11" font="5">1.62</text>
+<text top="754" left="133" width="18" height="11" font="5">200</text>
+<text top="754" left="230" width="18" height="11" font="5">185</text>
+<text top="754" left="349" width="21" height="11" font="5">0.93</text>
+<text top="768" left="133" width="18" height="11" font="5">300</text>
+<text top="768" left="230" width="18" height="11" font="5">198</text>
+<text top="768" left="349" width="21" height="11" font="5">0.66</text>
+<text top="793" left="235" width="53" height="11" font="5">TABLE III</text>
+<text top="806" left="84" width="7" height="11" font="5">E</text>
+<text top="808" left="92" width="320" height="9" font="8">XECUTION TIME FOR PROCESSING THE TELCO BENCHMARK ON</text>
+<text top="806" left="415" width="26" height="11" font="5">ASP.</text>
+<text top="836" left="73" width="376" height="14" font="2">Because the CPU timer only records start (data sent to ASP)</text>
+<text top="854" left="73" width="377" height="14" font="2">and stop (result sent to CPU) times, we have to estimate the</text>
+<text top="872" left="73" width="377" height="14" font="2">parts of the execution time which are spent in I/O and ASP</text>
+<text top="890" left="73" width="377" height="14" font="2">computation. By considering two different entries in Table III,</text>
+<text top="908" left="73" width="361" height="14" font="2">we can estimate the ASP computation time per element as</text>
+<text top="930" left="210" width="5" height="14" font="2">t</text>
+<text top="933" left="215" width="36" height="14" font="6">size(b)</text>
+<text top="926" left="255" width="20" height="19" font="2">− t</text>
+<text top="933" left="276" width="38" height="14" font="6">size(a)</text>
+<text top="951" left="205" width="27" height="14" font="2">size</text>
+<text top="947" left="234" width="85" height="19" font="2">(b) − size (a)</text>
+<text top="975" left="73" width="377" height="14" font="2">that for the set sizes 200 and 300 (maximum throughput) gives</text>
+<text top="994" left="132" width="106" height="19" font="2">198 µs − 185 µs</text>
+<text top="1014" left="153" width="63" height="19" font="2">300 − 200</text>
+<text top="1004" left="244" width="150" height="19" font="2">= 0.13 µs per element.</text>
+<text top="1039" left="73" width="377" height="14" font="2">From this estimate we can see that the decimal computation</text>
+<text top="1057" left="73" width="377" height="14" font="2">takes 130–180 ns per element. Because the pipelined decimal</text>
+<text top="1075" left="73" width="377" height="14" font="2">unit can sustain a maximum throughput of 40M elements per</text>
+<text top="89" left="468" width="377" height="14" font="2">second (25 ns per element), the accelerator is slowed down</text>
+<text top="106" left="468" width="377" height="14" font="2">by the I/O communication. In this case, the execution of the</text>
+<text top="124" left="468" width="240" height="14" font="2">benchmark on the FPGA is <i>I/O-bound</i>.</text>
+<text top="142" left="468" width="377" height="14" font="2">Finally, by comparing the experiments on CPU and ASP, the</text>
+<text top="160" left="468" width="227" height="14" font="2">speed-up for the computation time is</text>
+<text top="193" left="515" width="54" height="14" font="2">speed-up</text>
+<text top="198" left="569" width="28" height="14" font="6">comp</text>
+<text top="190" left="602" width="12" height="19" font="2">=</text>
+<text top="183" left="624" width="5" height="14" font="2">t</text>
+<text top="186" left="629" width="64" height="14" font="6">comp−CP U</text>
+<text top="204" left="619" width="5" height="14" font="2">t</text>
+<text top="206" left="625" width="74" height="14" font="6">comp−F P GA</text>
+<text top="190" left="705" width="12" height="19" font="2">=</text>
+<text top="180" left="723" width="27" height="19" font="2">1.20</text>
+<text top="200" left="723" width="27" height="19" font="2">0.13</text>
+<text top="190" left="755" width="42" height="19" font="2">= 9.23</text>
+<text top="228" left="468" width="346" height="14" font="2">while the actual (computation and I/O time) speed-up is</text>
+<text top="261" left="514" width="54" height="14" font="2">speed-up</text>
+<text top="266" left="568" width="34" height="14" font="6">actual</text>
+<text top="258" left="607" width="12" height="19" font="2">=</text>
+<text top="251" left="629" width="5" height="14" font="2">t</text>
+<text top="254" left="634" width="59" height="14" font="6">exec−CP U</text>
+<text top="272" left="624" width="5" height="14" font="2">t</text>
+<text top="274" left="630" width="69" height="14" font="6">exec−F P GA</text>
+<text top="258" left="706" width="12" height="19" font="2">=</text>
+<text top="247" left="723" width="27" height="19" font="2">1.20</text>
+<text top="268" left="723" width="27" height="19" font="2">0.66</text>
+<text top="258" left="756" width="43" height="19" font="2">= 1.81</text>
+<text top="314" left="599" width="32" height="14" font="2">V. C</text>
+<text top="316" left="631" width="82" height="11" font="5">ONCLUSIONS</text>
+<text top="337" left="468" width="377" height="14" font="2">In this work, we present the implementation of a hard-</text>
+<text top="354" left="468" width="377" height="14" font="2">ware accelerator for decimal arithmetic implemented on an</text>
+<text top="372" left="468" width="377" height="14" font="2">FPGA. FPGA implementations of accelerators are attractive</text>
+<text top="390" left="468" width="377" height="14" font="2">for applications requiring non-binary number systems because,</text>
+<text top="408" left="468" width="377" height="14" font="2">differently from CPUs and GPUs, the processor can feature</text>
+<text top="426" left="468" width="320" height="14" font="2">special operators (e.g. BCD adders and multipliers).</text>
+<text top="444" left="468" width="377" height="14" font="2">As a case study, we chose an accounting application requiring</text>
+<text top="462" left="468" width="183" height="14" font="2">the use of decimal arithmetic.</text>
+<text top="480" left="468" width="377" height="14" font="2">The results of the execution of the benchmark on the FPGA ac-</text>
+<text top="498" left="468" width="377" height="14" font="2">celerator are compared with those of the benchmark execution</text>
+<text top="516" left="468" width="377" height="14" font="2">on the CPU of the host PC. By considering the computation</text>
+<text top="534" left="468" width="377" height="14" font="2">time (decimal part) the accelerator speed-up is about 10 times.</text>
+<text top="552" left="468" width="377" height="14" font="2">The FPGA computation time per element is between 5–7 times</text>
+<text top="570" left="468" width="377" height="14" font="2">the one achievable at the maximum throughput. Therefore, by</text>
+<text top="587" left="468" width="377" height="14" font="2">redesigning the accelerator I/O interface to handle larger data</text>
+<text top="605" left="468" width="377" height="14" font="2">sets, we should be able to increase the ASP throughput and</text>
+<text top="623" left="468" width="334" height="14" font="2">further improve the speed-up over the CPU execution.</text>
+<text top="651" left="614" width="10" height="14" font="2">R</text>
+<text top="653" left="625" width="73" height="11" font="5">EFERENCES</text>
+<text top="676" left="474" width="370" height="11" font="5">[1] S. Patel and W. mei W. Hwu, “Accelerator Architectures,” <i>IEEE Micro</i>,</text>
+<text top="689" left="495" width="169" height="11" font="5">vol. 28, pp. 4–12, July/Aug. 2008.</text>
+<text top="703" left="474" width="370" height="11" font="5">[2] D. Luebke and G. Humphreys, “How GPUs Work,” <i>IEEE Computer</i></text>
+<text top="716" left="495" width="166" height="11" font="18"><i>magazine</i>, pp. 96–100, Feb. 2007.</text>
+<text top="730" left="474" width="67" height="11" font="5">[3] NVIDIA.</text>
+<text top="730" left="576" width="37" height="11" font="5">”Fermi.</text>
+<text top="730" left="649" width="49" height="11" font="5">NVIDIA’s</text>
+<text top="730" left="733" width="23" height="11" font="5">Next</text>
+<text top="730" left="792" width="53" height="11" font="5">Generation</text>
+<text top="743" left="495" width="33" height="11" font="5">CUDA</text>
+<text top="743" left="554" width="44" height="11" font="5">Compute</text>
+<text top="743" left="624" width="67" height="11" font="5">Architecture”.</text>
+<text top="743" left="717" width="58" height="11" font="5">Whitepaper.</text>
+<text top="743" left="801" width="43" height="11" font="5">[Online].</text>
+<text top="756" left="495" width="48" height="11" font="5">Available:</text>
+<text top="756" left="569" width="275" height="11" font="5">http://www.nvidia.com/content/PDF/fermi white papers/</text>
+<text top="770" left="495" width="272" height="11" font="5">NVIDIA Fermi Compute Architecture Whitepaper.pdf</text>
+<text top="783" left="474" width="370" height="11" font="5">[4] M. F. Cowlishaw, “Decimal ﬂoating-point: algorism for computers,” in</text>
+<text top="797" left="495" width="349" height="11" font="18"><i>Proc. of 16th Symposium on Computer Arithmetic</i>, June 2003, pp. 104–</text>
+<text top="810" left="495" width="21" height="11" font="5">111.</text>
+<text top="824" left="474" width="370" height="11" font="5">[5] <i>IEEE Standard for Floating-Point Arithmetic</i>, IEEE Computer Society</text>
+<text top="837" left="495" width="75" height="11" font="5">Std. 754, 2008.</text>
+<text top="851" left="474" width="371" height="11" font="5">[6] L. Eisen <i>et al.</i>, “IBM POWER6 accelerators: VMX and DFU,” <i>IBM</i></text>
+<text top="864" left="495" width="349" height="11" font="18"><i>Journal of Research and Development</i>, vol. 51, no. 6, pp. 663–684,</text>
+<text top="877" left="495" width="27" height="11" font="5">2007.</text>
+<text top="891" left="474" width="371" height="11" font="5">[7] S. Carlough, A. Collura, S. Mueller, and M. Kroener, “The IBM</text>
+<text top="904" left="495" width="349" height="11" font="5">zEnterprise-196 Decimal Floating-Point Accelerator,” in <i>Proc. of 20th</i></text>
+<text top="918" left="495" width="333" height="11" font="18"><i>IEEE Symposium on Computer Arithmetic</i>, July 2011, pp. 139–146.</text>
+<text top="931" left="474" width="370" height="11" font="5">[8] IBM Corporation. ”The ”telco” benchmark”. [Online]. Available:</text>
+<text top="945" left="495" width="198" height="11" font="5">http://speleotrove.com/decimal/telco.html</text>
+<text top="958" left="474" width="370" height="11" font="5">[9] T. Lang and A. Nannarelli, “A Radix-10 Combinational Multiplier,”</text>
+<text top="971" left="495" width="349" height="11" font="18"><i>Proc. of 40th Asilomar Conference on Signals, Systems, and Computers</i>,</text>
+<text top="985" left="495" width="122" height="11" font="5">pp. 313–317, Nov. 2006.</text>
+<text top="998" left="468" width="376" height="11" font="5">[10] L. Dadda, “Multi Operand Parallel Decimal Adders: a mixed Binary</text>
+<text top="1012" left="495" width="349" height="11" font="5">and BCD Approach,” <i>IEEE Transactions on Computers</i>, vol. 56, pp.</text>
+<text top="1025" left="495" width="112" height="11" font="5">1320–1328, Oct. 2007.</text>
+<text top="1039" left="468" width="376" height="11" font="5">[11] A. Vazquez, E. Antelo, and P. Montuschi, “A new family of high-</text>
+<text top="1052" left="495" width="349" height="11" font="5">performance parallel decimal multipliers,” <i>Proc. of 18th Symposium on</i></text>
+<text top="1066" left="495" width="231" height="11" font="18"><i>Computer Arithmetic</i>, pp. 195–204, June 2007.</text>
+</page>
+</pdf2xml>

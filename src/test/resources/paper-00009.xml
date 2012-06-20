@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="18" family="Times" color="#000000"/>
+	<fontspec id="1" size="12" family="Times" color="#000000"/>
+	<fontspec id="2" size="9" family="Times" color="#000000"/>
+	<fontspec id="3" size="11" family="Times" color="#000000"/>
+	<fontspec id="4" size="16" family="Helvetica" color="#585a60"/>
+	<fontspec id="5" size="11" family="Helvetica" color="#585a60"/>
+<text top="120" left="109" width="699" height="19" font="0">Formally veriﬁed optimizing compilation in ACG-based ﬂight control software</text>
+<text top="188" left="117" width="134" height="13" font="1">Ricardo Bedin Franc¸a</text>
+<text top="184" left="251" width="13" height="11" font="2">∗†</text>
+<text top="188" left="265" width="102" height="13" font="1">, Sandrine Blazy</text>
+<text top="184" left="367" width="6" height="11" font="2">‡</text>
+<text top="188" left="373" width="118" height="13" font="1">, Denis Favre-Felix</text>
+<text top="184" left="492" width="6" height="11" font="2">∗</text>
+<text top="188" left="499" width="90" height="13" font="1">, Xavier Leroy</text>
+<text top="184" left="589" width="6" height="11" font="2">§</text>
+<text top="188" left="595" width="83" height="13" font="1">, Marc Pantel</text>
+<text top="184" left="678" width="6" height="11" font="2">†</text>
+<text top="188" left="690" width="104" height="13" font="1">and Jean Souyris</text>
+<text top="184" left="794" width="6" height="11" font="2">∗</text>
+<text top="202" left="379" width="6" height="11" font="2">∗</text>
+<text top="207" left="387" width="152" height="13" font="1">AIRBUS Operations SAS</text>
+<text top="225" left="333" width="253" height="13" font="1">316 Route de Bayonne, Toulouse, France</text>
+<text top="242" left="174" width="571" height="14" font="1">{ricardo.bedin-franca,denis.favre-felix,jean.souyris}@airbus.com</text>
+<text top="257" left="301" width="6" height="11" font="2">†</text>
+<text top="261" left="307" width="310" height="13" font="1">Institut de Recherche en Informatique de Toulouse</text>
+<text top="279" left="327" width="264" height="13" font="1">2 Rue Charles Camichel, Toulouse, France</text>
+<text top="296" left="259" width="400" height="14" font="1">{ricardo.bedinfranca,marc.pantel}@enseeiht.fr</text>
+<text top="311" left="359" width="6" height="11" font="2">‡</text>
+<text top="315" left="365" width="194" height="13" font="1">IRISA - Universit´e de Rennes 1</text>
+<text top="333" left="344" width="230" height="13" font="1">Campus de Beaulieu, Rennes, France</text>
+<text top="352" left="356" width="206" height="12" font="1">sandrine.blazy@irisa.fr</text>
+<text top="365" left="390" width="6" height="11" font="2">§</text>
+<text top="370" left="401" width="127" height="13" font="1">INRIA Rocquencourt</text>
+<text top="388" left="327" width="265" height="13" font="1">Domaine de Voluceau, Le Chesnay, France</text>
+<text top="407" left="365" width="188" height="12" font="1">xavier.leroy@inria.fr</text>
+<text top="457" left="96" width="350" height="12" font="3">Abstract—This work presents an evaluation of the CompCert</text>
+<text top="472" left="81" width="364" height="12" font="3">formally speciﬁed and veriﬁed optimizing compiler for the</text>
+<text top="487" left="81" width="364" height="12" font="3">development of DO-178 level A ﬂight control software. First,</text>
+<text top="502" left="81" width="364" height="12" font="3">some fundamental characteristics of ﬂight control software</text>
+<text top="517" left="81" width="364" height="12" font="3">are presented and the case study program is described.</text>
+<text top="532" left="81" width="364" height="12" font="3">Then, the use of CompCert is justiﬁed: its main point is to</text>
+<text top="547" left="81" width="364" height="12" font="3">allow optimized code generation by relying on the formal</text>
+<text top="562" left="81" width="364" height="12" font="3">proof of correctness and additional compilation information</text>
+<text top="577" left="81" width="364" height="12" font="3">instead of the current un-optimized generation required to</text>
+<text top="592" left="81" width="364" height="12" font="3">produce predictable assembly code patterns. The evaluation</text>
+<text top="607" left="81" width="364" height="12" font="3">of its performance (measured using WCET and code size) is</text>
+<text top="622" left="81" width="364" height="12" font="3">presented and the results are compared to those obtained with</text>
+<text top="637" left="81" width="166" height="12" font="3">the currently used compiler.</text>
+<text top="661" left="96" width="350" height="12" font="3">Keywords-Safety critical systems, Optimized code generation,</text>
+<text top="676" left="81" width="184" height="12" font="3">Toolset performance evaluation</text>
+<text top="715" left="205" width="23" height="13" font="1">I. I</text>
+<text top="717" left="228" width="93" height="11" font="2">NTRODUCTION</text>
+<text top="743" left="96" width="350" height="13" font="1">Flight Control Software (FCS) development is a very</text>
+<text top="760" left="81" width="364" height="13" font="1">challenging task: not only it has the typical constraints of</text>
+<text top="778" left="81" width="364" height="13" font="1">other software projects, such as budget, delivery schedule</text>
+<text top="796" left="81" width="364" height="13" font="1">and available hardware, but also those that apply to hard real-</text>
+<text top="814" left="81" width="364" height="13" font="1">time, safety-critical software. There are speciﬁc regulations</text>
+<text top="832" left="81" width="364" height="13" font="1">for the avionics domain - in particular, the DO-178/ED12 [1]</text>
+<text top="850" left="81" width="364" height="13" font="1">that enforce rigorous development of embedded software in</text>
+<text top="868" left="81" width="106" height="13" font="1">avionics systems.</text>
+<text top="887" left="96" width="350" height="13" font="1">In this context, it is not trivial to develop software that can</text>
+<text top="905" left="81" width="364" height="13" font="1">perform optimally while complying with all requirements.</text>
+<text top="923" left="81" width="364" height="13" font="1">This paper focuses on the compilation, which is a very</text>
+<text top="941" left="81" width="364" height="13" font="1">important step in the generation of good performance critical</text>
+<text top="959" left="81" width="364" height="13" font="1">software: compilers are very complex tools that carry out</text>
+<text top="977" left="81" width="364" height="13" font="1">the delicate task of generating low-level code that behaves</text>
+<text top="995" left="81" width="364" height="13" font="1">exactly as expected from the high-level source code. Thus,</text>
+<text top="1012" left="81" width="364" height="13" font="1">the compiler has clear inﬂuence over software performance</text>
+<text top="1030" left="81" width="364" height="13" font="1">and safety, but it is commonly developed by third parties</text>
+<text top="1048" left="81" width="364" height="13" font="1">(Commercial Off-The-Shelf “COTS” software) and are not</text>
+<text top="1066" left="81" width="364" height="13" font="1">necessarily oriented towards the needs of avionics software.</text>
+<text top="457" left="487" width="350" height="13" font="1">We present experiments carried out by Airbus with the use</text>
+<text top="474" left="473" width="364" height="13" font="1">of a formally-veriﬁed compiler, CompCert, in ﬂight control</text>
+<text top="492" left="473" width="364" height="13" font="1">software development. The goal of these experiments is to</text>
+<text top="510" left="473" width="364" height="13" font="1">evaluate its performance in a realistic environment, with</text>
+<text top="528" left="473" width="364" height="13" font="1">software modules similar to actual FCS ones and the same</text>
+<text top="546" left="473" width="364" height="13" font="1">development and veriﬁcation tools as real FCS. This paper</text>
+<text top="564" left="473" width="364" height="13" font="1">extends the performance evaluation presented in [2], using</text>
+<text top="582" left="473" width="364" height="13" font="1">a new version of CompCert that includes an annotation</text>
+<text top="600" left="473" width="364" height="13" font="1">mechanism (for traceability and timing analysis purposes)</text>
+<text top="618" left="473" width="364" height="13" font="1">and using more criteria to compare a CompCert-based</text>
+<text top="636" left="473" width="364" height="13" font="1">development with the currently used approach. This paper</text>
+<text top="654" left="473" width="364" height="13" font="1">compares Worst-Case Execution Times (WCET) taking into</text>
+<text top="672" left="473" width="281" height="13" font="1">account the size and function of the modules.</text>
+<text top="689" left="487" width="350" height="13" font="1">The paper is structured as follows: Section II presents the</text>
+<text top="707" left="473" width="364" height="13" font="1">fundamentals of ﬂight control software development and the</text>
+<text top="725" left="473" width="364" height="13" font="1">method we use to assess software performance. Section III</text>
+<text top="743" left="473" width="364" height="13" font="1">presents the CompCert compiler and its features that led to</text>
+<text top="761" left="473" width="364" height="13" font="1">its choice for this work. Section IV presents the results of</text>
+<text top="779" left="473" width="364" height="13" font="1">its performance evaluation and Section V draws conclusions</text>
+<text top="797" left="473" width="159" height="13" font="1">and research perspectives.</text>
+<text top="824" left="491" width="32" height="13" font="1">II. F</text>
+<text top="826" left="523" width="39" height="11" font="2">LIGHT</text>
+<text top="824" left="566" width="10" height="13" font="1">C</text>
+<text top="826" left="577" width="52" height="11" font="2">ONTROL</text>
+<text top="824" left="633" width="8" height="13" font="1">S</text>
+<text top="826" left="642" width="61" height="11" font="2">OFTWARE</text>
+<text top="824" left="704" width="18" height="13" font="1">, C</text>
+<text top="826" left="723" width="96" height="11" font="2">OMPILERS AND</text>
+<text top="842" left="606" width="8" height="13" font="1">P</text>
+<text top="844" left="615" width="88" height="11" font="2">ERFORMANCE</text>
+<text top="865" left="472" width="267" height="13" font="1">A. An Overview of Flight Control Software</text>
+<text top="887" left="487" width="350" height="13" font="1">While older airplanes had only mechanical, direct links</text>
+<text top="905" left="472" width="364" height="13" font="1">between the pilots’ inputs and their actuators, modern air-</text>
+<text top="923" left="472" width="364" height="13" font="1">craft rely on computers and electric connections to transmit</text>
+<text top="941" left="472" width="365" height="13" font="1">these inputs. As Traverse and Bri`ere [3] describe, digital,</text>
+<text top="959" left="472" width="364" height="13" font="1">electrical ﬂight control systems are used on all aircraft</text>
+<text top="977" left="472" width="364" height="13" font="1">control surfaces since the development of the Airbus A320.</text>
+<text top="995" left="487" width="350" height="13" font="1">Hardware and software used in ﬂight control systems</text>
+<text top="1012" left="472" width="364" height="13" font="1">are subject to very strict requirements, just as any other</text>
+<text top="1030" left="472" width="364" height="13" font="1">component. Every kind of avionics software is subject to</text>
+<text top="1048" left="472" width="364" height="13" font="1">the DO-178 (currently, version B) regulations, and the DO-</text>
+<text top="1066" left="472" width="364" height="13" font="1">178B guidelines become more numerous and more stringent</text>
+<text top="736" left="29" width="0" height="17" font="4"><a href="http://hal.inria.fr/hal-00653367/fr/">hal-00653367, version 1 - 19 Dec 201</a></text>
+<text top="436" left="29" width="0" height="17" font="4"><a href="http://hal.inria.fr/hal-00653367/fr/">1</a></text>
+<text top="32" left="275" width="598" height="12" font="5">Author manuscript, published in &#34;ERTS2 2012: Embedded Real Time Software and Systems (2012)&#34;</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="116" left="81" width="364" height="13" font="1">according to the criticality of a given software program. The</text>
+<text top="134" left="81" width="364" height="13" font="1">correct operation of ﬂight control software is essential to a</text>
+<text top="152" left="81" width="364" height="13" font="1">safe ﬂight, hence they belong to “software level A” and their</text>
+<text top="170" left="81" width="364" height="13" font="1">planning, development, veriﬁcation and project management</text>
+<text top="188" left="81" width="253" height="13" font="1">must comply with very strict regulations.</text>
+<text top="207" left="96" width="350" height="13" font="1">In addition, aircraft manufacturers usually have their own</text>
+<text top="225" left="81" width="364" height="13" font="1">internal development constraints, ranging from additional</text>
+<text top="243" left="81" width="364" height="13" font="1">safety considerations (e.g. dissymetry and redundancy) to</text>
+<text top="261" left="81" width="244" height="13" font="1">industrial ones, such as delivery delays.</text>
+<text top="300" left="81" width="116" height="13" font="1">B. The Case Study</text>
+<text top="327" left="96" width="350" height="13" font="1">In order to carry out a realistic study, we have chosen</text>
+<text top="344" left="81" width="364" height="13" font="1">to use a case study that closely resembles actual ﬂight</text>
+<text top="362" left="81" width="364" height="13" font="1">control software: not only the source code is representative</text>
+<text top="380" left="81" width="364" height="13" font="1">(in functionalities and size) of ﬂight control laws, but the</text>
+<text top="398" left="81" width="364" height="13" font="1">target computer is also representative of true ﬂight control</text>
+<text top="416" left="81" width="364" height="13" font="1">hardware, so as to illustrate typical constraints on hardware</text>
+<text top="434" left="81" width="364" height="13" font="1">usage. The hardware and software used in this work are</text>
+<text top="452" left="81" width="364" height="13" font="1">similar to those described in [4]: the relevant hardware in the</text>
+<text top="470" left="81" width="364" height="13" font="1">scope of this work comprises the MPC755 microprocessor,</text>
+<text top="488" left="81" width="364" height="13" font="1">and an external RAM memory. The MPC755 is a single-core</text>
+<text top="506" left="81" width="364" height="13" font="1">microprocessor, which is much less complex than modern</text>
+<text top="524" left="81" width="364" height="13" font="1">multi-core ones but does have pipelines, an internal cache</text>
+<text top="542" left="81" width="364" height="13" font="1">and superscalar architecture, three elements that make its</text>
+<text top="560" left="81" width="364" height="13" font="1">behavior less predictable. Naive timing analysis of this mi-</text>
+<text top="578" left="81" width="364" height="13" font="1">croprocessor could lead to the “timing anomalies” described</text>
+<text top="596" left="81" width="200" height="13" font="1">by Lundqvist and Stenstr¨om [5].</text>
+<text top="615" left="96" width="350" height="13" font="1">It must be noted that the choices of hardware and software</text>
+<text top="633" left="81" width="364" height="13" font="1">are led by a combination of factors – besides performance</text>
+<text top="651" left="81" width="364" height="13" font="1">needs, there are other constraints, such as weight, size, power</text>
+<text top="669" left="81" width="364" height="13" font="1">dissipation, cost and – most importantly in the scope of this</text>
+<text top="686" left="81" width="364" height="13" font="1">paper – veriﬁability. Thus, choosing the MPC755 for this</text>
+<text top="704" left="81" width="364" height="13" font="1">case study is consistent with ﬂight control systems of mod-</text>
+<text top="722" left="81" width="364" height="13" font="1">ern aircraft. The development process described below also</text>
+<text top="740" left="81" width="364" height="13" font="1">reﬂects the intent of developing deterministic and veriﬁable</text>
+<text top="758" left="81" width="55" height="13" font="1">software.</text>
+<text top="777" left="96" width="350" height="13" font="1">The development described in the next paragraphs follows</text>
+<text top="795" left="81" width="364" height="13" font="1">the basic steps that are recommended by the DO-178B: spec-</text>
+<text top="813" left="81" width="364" height="13" font="1">iﬁcation, design, coding/integration and veriﬁcation. One</text>
+<text top="831" left="81" width="364" height="13" font="1">must take into account, though, that speciﬁcation and design</text>
+<text top="849" left="81" width="364" height="13" font="1">are treated together, due to the highly detailed software</text>
+<text top="867" left="81" width="79" height="13" font="1">speciﬁcation.</text>
+<text top="887" left="96" width="185" height="13" font="1">1) Speciﬁcation and Design:</text>
+<text top="887" left="292" width="153" height="13" font="1">The largest part of the</text>
+<text top="905" left="81" width="364" height="13" font="1">software program – the “application” subset, which contains</text>
+<text top="923" left="81" width="364" height="13" font="1">the implementation of the ﬂight control laws – is speciﬁed</text>
+<text top="941" left="81" width="364" height="13" font="1">as a set of sheets with the graphical formalism SCADE,</text>
+<text top="959" left="81" width="364" height="13" font="1">each sheet being composed of interconnected basic operators</text>
+<text top="977" left="81" width="364" height="13" font="1">(addition, ﬁlter, etc). There is no “main sheet”: they all</text>
+<text top="995" left="81" width="364" height="13" font="1">belong to the same hierarchical level and they communicate</text>
+<text top="1012" left="81" width="364" height="13" font="1">via their input and output parameters. In order to simplify the</text>
+<text top="1030" left="81" width="364" height="13" font="1">speciﬁcation and the code generation, all the symbols used</text>
+<text top="1048" left="81" width="364" height="13" font="1">in the sheets are custom-made by the developers. SCADE</text>
+<text top="1066" left="81" width="364" height="13" font="1">(V6) state machines are not used, mainly for determinism</text>
+<text top="116" left="473" width="364" height="13" font="1">purposes – conditional statements are kept inside some</text>
+<text top="134" left="473" width="99" height="13" font="1">library symbols.</text>
+<text top="152" left="487" width="350" height="13" font="1">Figure 1 depicts instances of the custom-made symbols</text>
+<text top="170" left="473" width="365" height="13" font="1">ABS, HWACQDSI, BPO and AFDX FSOUT. Each symbol</text>
+<text top="188" left="473" width="364" height="13" font="1">has inputs and outputs, which are connected to their left and</text>
+<text top="206" left="473" width="364" height="13" font="1">right sides, respectively. At the bottom of the HWACQDSI</text>
+<text top="224" left="473" width="364" height="13" font="1">and AFDX FSOUT symbols, there are some “hidden in-</text>
+<text top="242" left="473" width="364" height="13" font="1">puts”, which have the same semantics as a normal input but</text>
+<text top="260" left="473" width="364" height="13" font="1">are used to underline symbol parameters (in our example,</text>
+<text top="278" left="473" width="333" height="13" font="1">integer constants) that are not related to the data ﬂow.</text>
+<text top="600" left="548" width="44" height="11" font="2">Figure 1.</text>
+<text top="600" left="605" width="156" height="11" font="2">SCADE custom-made operators</text>
+<text top="635" left="487" width="350" height="13" font="1">The program also contains a manually-coded part that</text>
+<text top="653" left="473" width="364" height="13" font="1">goes through distinct speciﬁcation and design phases, but</text>
+<text top="670" left="473" width="364" height="13" font="1">further details about this part are beyond the scope of this</text>
+<text top="688" left="473" width="343" height="13" font="1">paper, as it makes no use of automatic code generation.</text>
+<text top="707" left="487" width="69" height="13" font="1">2) Coding:</text>
+<text top="707" left="563" width="274" height="13" font="1">The speciﬁcation is translated to source code</text>
+<text top="725" left="473" width="364" height="13" font="1">by an automatic code generator (ACG). Automatic code</text>
+<text top="743" left="473" width="364" height="13" font="1">generation, when applicable, has the advantages of being</text>
+<text top="761" left="473" width="364" height="13" font="1">less error-prone and offering much smaller coding times than</text>
+<text top="779" left="473" width="364" height="13" font="1">manual code generation. In order to lighten the burden of</text>
+<text top="797" left="473" width="364" height="13" font="1">source code veriﬁcation activities, the ACG is qualiﬁed as a</text>
+<text top="815" left="473" width="364" height="13" font="1">development tool, according to the DO-178B standards for</text>
+<text top="833" left="473" width="105" height="13" font="1">level A software.</text>
+<text top="851" left="487" width="350" height="13" font="1">In this study, we use C as a source code language, as it</text>
+<text top="869" left="473" width="364" height="13" font="1">is widely used in critical systems and there are many devel-</text>
+<text top="887" left="473" width="364" height="13" font="1">opment and veriﬁcation tools for C-coded critical systems.</text>
+<text top="905" left="473" width="364" height="13" font="1">Each symbol is represented in C as a macro: a “symbol</text>
+<text top="923" left="473" width="364" height="13" font="1">library” (a set of macros) is manually coded in order to</text>
+<text top="941" left="473" width="364" height="13" font="1">implement each SCADE operator, and the ACG-generated</text>
+<text top="959" left="473" width="364" height="13" font="1">code consists in a sequence of macro instantiations that</text>
+<text top="977" left="473" width="364" height="13" font="1">respect the data ﬂow speciﬁed in SCADE. A SCADE sheet</text>
+<text top="995" left="473" width="364" height="13" font="1">is represented by a C function that contains a sequence of</text>
+<text top="1012" left="473" width="364" height="13" font="1">macro instantiations – all the data-ﬂow constraints are taken</text>
+<text top="1030" left="473" width="364" height="13" font="1">into account by the ACG in order to make sequential C</text>
+<text top="1048" left="473" width="364" height="13" font="1">programs that are consistent with the parallel SCADE ones.</text>
+<text top="1066" left="473" width="364" height="13" font="1">It must be noted that all the sheets are activated periodically,</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="6" size="8" family="Times" color="#000000"/>
+	<fontspec id="7" size="6" family="Times" color="#000000"/>
+<text top="116" left="81" width="364" height="13" font="1">but their activation period may vary. Thus, the execution</text>
+<text top="134" left="81" width="364" height="13" font="1">cycle is divided into several sequential “tasks” and each</text>
+<text top="152" left="81" width="364" height="13" font="1">sheet may be activated in one or more tasks during a cycle.</text>
+<text top="170" left="96" width="344" height="13" font="1">The C code is ﬁnally compiled with a COTS compiler</text>
+<text top="167" left="440" width="5" height="9" font="6">1</text>
+<text top="188" left="81" width="364" height="13" font="1">and linked to produce an executable ﬁle. It must be noted</text>
+<text top="206" left="81" width="364" height="13" font="1">that the compiler – like the vast majority of compilers</text>
+<text top="223" left="81" width="364" height="13" font="1">industrially used – is seen as a “black box” by the de-</text>
+<text top="241" left="81" width="364" height="13" font="1">velopment and veriﬁcation teams. In this case, the object</text>
+<text top="259" left="81" width="364" height="13" font="1">code must be veriﬁed thoroughly, and the safest solution</text>
+<text top="277" left="81" width="364" height="13" font="1">to carry out a complete veriﬁcation taking into account the</text>
+<text top="295" left="81" width="364" height="13" font="1">use of a COTS compiler and the high reactivity of the</text>
+<text top="313" left="81" width="364" height="13" font="1">ACG process is to forbid compiler optimizations in order</text>
+<text top="331" left="81" width="364" height="13" font="1">to force the generation of constant code patterns for each</text>
+<text top="349" left="81" width="364" height="13" font="1">symbol. As our ACG-generated code is a (potentially long)</text>
+<text top="367" left="81" width="364" height="13" font="1">sequence of a limited number of symbols and the symbol</text>
+<text top="385" left="81" width="364" height="13" font="1">library code changes much less often than the application</text>
+<text top="403" left="81" width="364" height="13" font="1">in actual ﬂight control programs, it is less onerous to carry</text>
+<text top="421" left="81" width="364" height="13" font="1">out thorough veriﬁcation activities over each possible code</text>
+<text top="439" left="81" width="364" height="13" font="1">pattern for this symbols than verifying all code “sheets” in</text>
+<text top="457" left="81" width="108" height="13" font="1">each compilation.</text>
+<text top="475" left="96" width="94" height="13" font="1">3) Veriﬁcation:</text>
+<text top="475" left="198" width="247" height="13" font="1">Every development phase must be veri-</text>
+<text top="493" left="81" width="364" height="13" font="1">ﬁed and this veriﬁcation must meet the DO-178B require-</text>
+<text top="511" left="81" width="364" height="13" font="1">ments. As this paper focuses on the compilation, we shall</text>
+<text top="528" left="81" width="364" height="13" font="1">describe the main activities that verify software coding and</text>
+<text top="546" left="81" width="69" height="13" font="1">integration:</text>
+<text top="570" left="96" width="6" height="10" font="6">•</text>
+<text top="567" left="111" width="334" height="13" font="1">Source Code Veriﬁcation: The source code must be</text>
+<text top="585" left="111" width="334" height="13" font="1">traceable and compliant to the design (in our case,</text>
+<text top="603" left="111" width="334" height="13" font="1">the SCADE speciﬁcation). Also, it must respect the</text>
+<text top="621" left="111" width="239" height="13" font="1">software resource and time constraints.</text>
+<text top="642" left="96" width="6" height="10" font="6">•</text>
+<text top="639" left="111" width="334" height="13" font="1">Object Code Veriﬁcation: Object code also must be</text>
+<text top="657" left="111" width="334" height="13" font="1">traceable and compliant to the SCADE speciﬁcation</text>
+<text top="675" left="111" width="334" height="13" font="1">and the integration of software modules, as well as their</text>
+<text top="693" left="111" width="332" height="13" font="1">integration with the target computer, must be veriﬁed.</text>
+<text top="714" left="96" width="350" height="13" font="1">The DO-178B demands requirement-based veriﬁcation: a</text>
+<text top="732" left="81" width="364" height="13" font="1">program must be veriﬁed with respect to its high-level and</text>
+<text top="750" left="81" width="364" height="13" font="1">low-level requirements. In this paper, we suppose that low-</text>
+<text top="768" left="81" width="364" height="13" font="1">level veriﬁcation is carried out at symbol level (e.g. tests</text>
+<text top="786" left="81" width="364" height="13" font="1">and/or formal proofs of symbol outputs), hence the compiler</text>
+<text top="804" left="81" width="364" height="13" font="1">must not optimize away the symbol outputs, even if they are,</text>
+<text top="822" left="81" width="256" height="13" font="1">indeed, intermediate results of a function.</text>
+<text top="840" left="96" width="350" height="13" font="1">Usually, these veriﬁcation activities (especially object</text>
+<text top="858" left="81" width="364" height="13" font="1">code veriﬁcation) involve testing. For level A software, the</text>
+<text top="876" left="81" width="364" height="13" font="1">whole code must be tested with Multiple Condition/Decision</text>
+<text top="894" left="81" width="364" height="13" font="1">Coverage (MC/DC) and traceability between source code</text>
+<text top="911" left="81" width="341" height="13" font="1">and object code is necessary to validate code coverage:</text>
+<text top="935" left="96" width="6" height="10" font="6">•</text>
+<text top="933" left="111" width="334" height="13" font="1">If coverage is measured over the source code, trace-</text>
+<text top="950" left="111" width="334" height="13" font="1">ability is necessary to ensure that there is no added,</text>
+<text top="968" left="111" width="334" height="13" font="1">unveriﬁed functionality in the object code. Typical</text>
+<text top="986" left="111" width="334" height="13" font="1">cases of “added, unveriﬁed” functionalities could be</text>
+<text top="1004" left="111" width="334" height="13" font="1">found in compilers that add array bound checks or that</text>
+<text top="1022" left="111" width="331" height="13" font="1">have a complex management for switch statements.</text>
+<text top="1053" left="93" width="4" height="8" font="7">1</text>
+<text top="1055" left="98" width="347" height="11" font="2">For conﬁdentiality reasons, the currently used compiler, linker and</text>
+<text top="1068" left="81" width="127" height="11" font="2">loader names are omitted.</text>
+<text top="118" left="487" width="6" height="10" font="6">•</text>
+<text top="116" left="503" width="334" height="13" font="1">The DO-178B report for clariﬁcation [6] states that if</text>
+<text top="134" left="503" width="334" height="13" font="1">coverage is measured over the object code, traceability</text>
+<text top="152" left="503" width="334" height="13" font="1">is necessary to ensure that the measured coverage</text>
+<text top="170" left="503" width="334" height="13" font="1">is equivalent to MC/DC, as the object code (such</text>
+<text top="188" left="503" width="334" height="13" font="1">as Assembly language) may not contain the multiple</text>
+<text top="205" left="503" width="224" height="13" font="1">conditions found in the source code.</text>
+<text top="227" left="487" width="350" height="13" font="1">Traceability analysis is much less complicated if the</text>
+<text top="245" left="473" width="364" height="13" font="1">object code presents no optimization and no untraceable</text>
+<text top="263" left="473" width="364" height="13" font="1">code added by the compiler. Once again, it is useful to hinder</text>
+<text top="281" left="473" width="364" height="13" font="1">compiler optimizations in order to simplify the veriﬁcation</text>
+<text top="299" left="473" width="57" height="13" font="1">activities.</text>
+<text top="329" left="473" width="226" height="13" font="1">C. Estimating Software Performance</text>
+<text top="352" left="487" width="350" height="13" font="1">Besides being a DO-178B requirement, Worst-Case Exe-</text>
+<text top="370" left="473" width="364" height="13" font="1">cution Time (WCET) analysis is a safe and reliable timing</text>
+<text top="388" left="473" width="364" height="13" font="1">veriﬁcation in the avionics software context. Hardware and</text>
+<text top="406" left="473" width="364" height="13" font="1">software complexity make the search for an exact WCET</text>
+<text top="424" left="473" width="364" height="13" font="1">nearly impossible; usually one computes time values which</text>
+<text top="442" left="473" width="364" height="13" font="1">are as close as possible to the actual WCET, but always</text>
+<text top="460" left="473" width="364" height="13" font="1">higher than it. In our case study, the main purpose of WCET</text>
+<text top="478" left="473" width="364" height="13" font="1">analysis is to make sure that no application task oversteps</text>
+<text top="496" left="473" width="165" height="13" font="1">its allowed execution time.</text>
+<text top="514" left="487" width="350" height="13" font="1">As mentioned by Souyris et al [4], it was once possible</text>
+<text top="532" left="473" width="364" height="13" font="1">to compute the WCET of avionics software by measurement</text>
+<text top="550" left="473" width="364" height="13" font="1">and analysis, but such method is not feasible in state-of-</text>
+<text top="568" left="473" width="364" height="13" font="1">the-art programs. The current approach at Airbus relies on</text>
+<text top="586" left="473" width="41" height="13" font="1">AbsInt</text>
+<text top="583" left="513" width="5" height="9" font="6">2</text>
+<text top="586" left="519" width="128" height="13" font="1">’s automated tool a</text>
+<text top="583" left="647" width="6" height="9" font="6">3</text>
+<text top="586" left="662" width="175" height="13" font="1">[7] to compute the WCET</text>
+<text top="604" left="473" width="364" height="13" font="1">via static code analysis of the executable ﬁle. In order to</text>
+<text top="622" left="473" width="364" height="13" font="1">obtain accurate results, the tool requires a precise model</text>
+<text top="640" left="473" width="364" height="13" font="1">of the microprocessor and other relevant components; this</text>
+<text top="658" left="473" width="364" height="13" font="1">model was designed in close cooperation between Airbus</text>
+<text top="676" left="473" width="71" height="13" font="1">and AbsInt.</text>
+<text top="694" left="487" width="343" height="13" font="1">Sometimes it is important or even essential to give a</text>
+<text top="691" left="830" width="6" height="9" font="6">3</text>
+<text top="712" left="473" width="364" height="13" font="1">extra information about loop counts or register value bounds</text>
+<text top="730" left="473" width="364" height="13" font="1">to reﬁne its analysis. As described in [4], annotations are</text>
+<text top="748" left="473" width="364" height="13" font="1">necessary when memory access address ranges cannot be</text>
+<text top="765" left="473" width="286" height="13" font="1">computed precisely because of limitations in a</text>
+<text top="763" left="758" width="6" height="9" font="6">3</text>
+<text top="765" left="770" width="67" height="13" font="1">value anal-</text>
+<text top="783" left="473" width="364" height="13" font="1">ysis (e.g. ﬂoating-point). The imprecisions that arise from</text>
+<text top="801" left="473" width="364" height="13" font="1">such limitations degrade WCET analysis and can go as far</text>
+<text top="819" left="473" width="82" height="13" font="1">as stopping a</text>
+<text top="817" left="555" width="6" height="9" font="6">3</text>
+<text top="819" left="567" width="270" height="13" font="1">from completing WCET computation. Such</text>
+<text top="837" left="473" width="287" height="13" font="1">a situation is depicted in Algorithm 1: as a</text>
+<text top="835" left="759" width="6" height="9" font="6">3</text>
+<text top="837" left="774" width="63" height="13" font="1">is not yet</text>
+<text top="855" left="473" width="364" height="13" font="1">able to carry out the ﬂoating-point comparison, it cannot</text>
+<text top="873" left="473" width="364" height="13" font="1">evaluate the range of addresses that may be accessed in line</text>
+<text top="891" left="473" width="101" height="13" font="1">6. In this case, a</text>
+<text top="888" left="573" width="6" height="9" font="6">3</text>
+<text top="891" left="585" width="252" height="13" font="1">has to continue its computation assuming</text>
+<text top="909" left="472" width="364" height="13" font="1">that the access might occur in any memory address, and</text>
+<text top="927" left="472" width="364" height="13" font="1">the great deal of complexity that is added incurs a strongly</text>
+<text top="945" left="472" width="364" height="13" font="1">overestimated – if not unbounded – WCET. For instance, if</text>
+<text top="963" left="472" width="365" height="13" font="1">it is known that variable i is always within the bounds of</text>
+<text top="981" left="473" width="319" height="13" font="1">the array, this information should be provided to a</text>
+<text top="978" left="791" width="6" height="9" font="6">3</text>
+<text top="981" left="804" width="33" height="13" font="1">as an</text>
+<text top="999" left="473" width="67" height="13" font="1">annotation.</text>
+<text top="1017" left="487" width="350" height="13" font="1">In our case, annotations are needed only in a few symbols,</text>
+<text top="1035" left="473" width="354" height="13" font="1">so as to compute some addresses more precisely – with a</text>
+<text top="1032" left="827" width="6" height="9" font="6">3</text>
+<text top="1035" left="833" width="4" height="13" font="1">,</text>
+<text top="1066" left="484" width="4" height="8" font="7">2</text>
+<text top="1069" left="490" width="100" height="9" font="2">www.absint.com</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="112" left="81" width="342" height="14" font="1">Algorithm 1 Example of a code that needs annotations</text>
+<text top="134" left="90" width="9" height="11" font="2">1:</text>
+<text top="132" left="106" width="107" height="13" font="1">register double x;</text>
+<text top="132" left="320" width="126" height="13" font="1">// Assume that x ﬁts</text>
+<text top="152" left="90" width="9" height="11" font="2">2:</text>
+<text top="150" left="288" width="157" height="13" font="1">// inside the array bounds</text>
+<text top="170" left="90" width="9" height="11" font="2">3:</text>
+<text top="168" left="106" width="79" height="13" font="1">register int i;</text>
+<text top="188" left="90" width="9" height="11" font="2">4:</text>
+<text top="186" left="106" width="180" height="13" font="1">extern double lookup table[];</text>
+<text top="206" left="90" width="9" height="11" font="2">5:</text>
+<text top="204" left="106" width="60" height="13" font="1">i = (int)x;</text>
+<text top="224" left="90" width="9" height="11" font="2">6:</text>
+<text top="222" left="106" width="218" height="13" font="1">register double y = lookup table[i];</text>
+<text top="283" left="81" width="364" height="13" font="1">this kind of annotation can be assigned only to micropro-</text>
+<text top="301" left="81" width="360" height="13" font="1">cessor registers, which are depicted in the Assembly code.</text>
+<text top="320" left="96" width="350" height="13" font="1">Let us assume that Algorithm 1 is part of the C macro</text>
+<text top="338" left="81" width="364" height="13" font="1">of a symbol and that its corresponding (non-optimized)</text>
+<text top="356" left="81" width="364" height="13" font="1">Assembly code is depicted by Algorithm 2. One can notice</text>
+<text top="374" left="81" width="364" height="13" font="1">that the C variable i is stored in r31, since it is loaded with</text>
+<text top="392" left="81" width="364" height="13" font="1">the resulting value of the ﬂoating-point to integer conversion.</text>
+<text top="410" left="81" width="364" height="13" font="1">Thus, if we know that i is always between, say, 0 and 9, the</text>
+<text top="428" left="81" width="132" height="13" font="1">annotation should be:</text>
+<text top="456" left="81" width="299" height="10" font="3">instruction &#34;Checkpoint&#34; + 0x14 bytes</text>
+<text top="471" left="81" width="274" height="10" font="3">is entered with r31 = from 0 to 9;</text>
+<text top="497" left="96" width="350" height="13" font="1">In order to keep the fast pace of the ACG-based approach</text>
+<text top="515" left="81" width="364" height="13" font="1">(and avoid potential human mistakes), an automatic anno-</text>
+<text top="533" left="81" width="364" height="13" font="1">tation generator was devised to avoid manual activities and</text>
+<text top="551" left="81" width="364" height="13" font="1">keep the efﬁciency of the development process. Each symbol</text>
+<text top="569" left="81" width="364" height="13" font="1">that needs annotations will need them repeatedly for all of</text>
+<text top="587" left="81" width="364" height="13" font="1">its instances, but it is not difﬁcult to annotate automatically</text>
+<text top="605" left="81" width="364" height="13" font="1">the correct Assembly lines with a non-optimized compilation</text>
+<text top="623" left="81" width="364" height="13" font="1">that always generates similar code patterns for all instances</text>
+<text top="640" left="81" width="364" height="13" font="1">of the symbol. Whenever the macro containing Algorithm</text>
+<text top="658" left="81" width="364" height="13" font="1">1 is instantiated, an annotation would be needed at the</text>
+<text top="676" left="81" width="364" height="13" font="1">same offset 0x14 from the tag Checkpoint. Thus, one has to</text>
+<text top="694" left="81" width="364" height="13" font="1">track the possible code patterns for the symbols that need</text>
+<text top="712" left="81" width="364" height="13" font="1">annotations (to make sure that subtle variations in the code</text>
+<text top="730" left="81" width="364" height="13" font="1">patterns do not change the offset of the instruction that needs</text>
+<text top="748" left="81" width="364" height="13" font="1">an annotation) and ﬁnd the right offsets to assign those value</text>
+<text top="766" left="81" width="364" height="13" font="1">ranges. This annotation strategy is simple and effective, but</text>
+<text top="784" left="81" width="350" height="13" font="1">would not work if the compiler could optimize the code.</text>
+<text top="822" left="81" width="340" height="14" font="1">Algorithm 2 Example of a loop that needs annotations</text>
+<text top="843" left="117" width="73" height="13" font="1">Checkpoint:</text>
+<text top="861" left="96" width="99" height="13" font="1">00 fctiwz f0,f31</text>
+<text top="878" left="96" width="94" height="13" font="1">04 stfd f0,8(r1)</text>
+<text top="896" left="96" width="108" height="13" font="1">08 lwz r31,12(r1)</text>
+<text top="896" left="289" width="157" height="13" font="1">a3 cannot infer this value</text>
+<text top="914" left="96" width="197" height="13" font="1">0c addis r11,r0,lookup table@ha</text>
+<text top="932" left="96" width="190" height="13" font="1">10 addi r11,r11,lookup table@l</text>
+<text top="950" left="96" width="153" height="13" font="1">14 rlwinm r10,r31,3,0,28</text>
+<text top="950" left="302" width="144" height="13" font="1">we should help a3 here</text>
+<text top="968" left="96" width="117" height="13" font="1">18 lfdx f30,r11,r10</text>
+<text top="1012" left="96" width="350" height="13" font="1">Annotations are also used in the manually-coded subsets</text>
+<text top="1030" left="81" width="364" height="13" font="1">in order to specify – for instance – the behavior of other</text>
+<text top="1048" left="81" width="364" height="13" font="1">hardware components, but those are created manually and</text>
+<text top="1066" left="81" width="208" height="13" font="1">are not in the scope of this paper.</text>
+<text top="116" left="495" width="39" height="13" font="1">III. C</text>
+<text top="118" left="535" width="27" height="11" font="2">OMP</text>
+<text top="116" left="563" width="10" height="13" font="1">C</text>
+<text top="118" left="574" width="23" height="11" font="2">ERT</text>
+<text top="116" left="597" width="18" height="13" font="1">: T</text>
+<text top="118" left="615" width="199" height="11" font="2">OWARDS A TRUSTED COMPILER</text>
+<text top="140" left="487" width="350" height="13" font="1">One can ﬁgure out that, in extremely critical systems,</text>
+<text top="158" left="472" width="364" height="13" font="1">traditional COTS compilers must be used with great caution</text>
+<text top="176" left="472" width="364" height="13" font="1">with respect to code optimization. However, there are recent</text>
+<text top="194" left="472" width="364" height="13" font="1">advances in the compilation ﬁeld: in the scope of this work,</text>
+<text top="212" left="472" width="297" height="13" font="1">a most promising development is the CompCert</text>
+<text top="209" left="769" width="5" height="9" font="6">3</text>
+<text top="212" left="781" width="56" height="13" font="1">compiler.</text>
+<text top="230" left="473" width="364" height="13" font="1">Besides working in a more realistic environment (a large C</text>
+<text top="248" left="473" width="364" height="13" font="1">subset as input language, MPC755 as one of the possible</text>
+<text top="265" left="473" width="364" height="13" font="1">target processors) than other experimental compilers, its</text>
+<text top="283" left="473" width="364" height="13" font="1">development is taking into account the needs of critical</text>
+<text top="301" left="473" width="364" height="13" font="1">systems and its own code is available for study if its end</text>
+<text top="319" left="473" width="364" height="13" font="1">users need to know its internal details in order to devise</text>
+<text top="337" left="473" width="245" height="13" font="1">veriﬁcation strategies for their software.</text>
+<text top="355" left="487" width="350" height="13" font="1">As described in [8], CompCert is a multiple-pass,</text>
+<text top="373" left="473" width="364" height="13" font="1">moderately-optimizing compiler that is mostly programmed</text>
+<text top="391" left="473" width="364" height="13" font="1">and proved correct using the Coq proof assistant. Its op-</text>
+<text top="409" left="473" width="364" height="13" font="1">timizations are not very aggressive, though: as the com-</text>
+<text top="427" left="473" width="364" height="13" font="1">piler’s main purpose is to be “trustworthy”, it carries out</text>
+<text top="445" left="473" width="364" height="13" font="1">basic optimizations such as constant propagation, common</text>
+<text top="463" left="473" width="364" height="13" font="1">subexpression elimination and register allocation by graph</text>
+<text top="481" left="473" width="364" height="13" font="1">coloring, but no loop optimizations, for instance. As no code</text>
+<text top="499" left="473" width="364" height="13" font="1">optimizations are enabled in the currently used compiler,</text>
+<text top="517" left="473" width="364" height="13" font="1">using a few essential optimization options could already give</text>
+<text top="535" left="473" width="166" height="13" font="1">good performance beneﬁts.</text>
+<text top="553" left="487" width="350" height="13" font="1">The semantic preservation proof of CompCert guaran-</text>
+<text top="571" left="473" width="364" height="13" font="1">tees that the generated code behaves as prescribed by the</text>
+<text top="589" left="473" width="364" height="13" font="1">semantics of the source program. The observed behaviors</text>
+<text top="607" left="473" width="364" height="13" font="1">in CompCert include termination, divergence and “going</text>
+<text top="625" left="473" width="364" height="13" font="1">wrong”. To strengthen the preservation theorem, behaviors</text>
+<text top="643" left="473" width="364" height="13" font="1">also include a trace of the input-output operations performed</text>
+<text top="661" left="473" width="364" height="13" font="1">during the execution of the program. Input-output operations</text>
+<text top="678" left="473" width="364" height="13" font="1">include system calls (if an operating system is used) as well</text>
+<text top="696" left="473" width="364" height="13" font="1">as memory accesses to global variables declared “volatile”</text>
+<text top="714" left="473" width="364" height="13" font="1">(corresponding in particular to memory-mapped hardware</text>
+<text top="732" left="473" width="364" height="13" font="1">devices). The formal veriﬁcation of CompCert proves, in</text>
+<text top="750" left="473" width="364" height="13" font="1">effect, that the source program and the generated machine</text>
+<text top="768" left="473" width="364" height="13" font="1">code perform the same input-output operations, in the same</text>
+<text top="786" left="473" width="295" height="13" font="1">order, and with the same arguments and results.</text>
+<text top="816" left="473" width="225" height="13" font="1">A. CompCert annotation mechanism</text>
+<text top="840" left="487" width="350" height="13" font="1">To strengthen the guarantees implied by CompCert’s</text>
+<text top="858" left="473" width="364" height="13" font="1">formal veriﬁcation, we have introduced a generic program</text>
+<text top="876" left="473" width="364" height="13" font="1">annotation mechanism enabling programmers to mark source</text>
+<text top="894" left="473" width="364" height="13" font="1">program points and keep track of the values of local vari-</text>
+<text top="911" left="473" width="364" height="13" font="1">ables at these points. Syntactically, annotations are presented</text>
+<text top="929" left="473" width="364" height="13" font="1">as calls to a compiler built-in function, taking a string literal</text>
+<text top="947" left="473" width="351" height="13" font="1">and zero, one or several program variables as arguments:</text>
+<text top="973" left="473" width="363" height="10" font="3">__builtin_annot(&#34;x is %1 and y is %2&#34;, x, y);</text>
+<text top="999" left="487" width="350" height="13" font="1">The formal semantics of this statement is that of a pro</text>
+<text top="1017" left="473" width="36" height="13" font="1">forma</text>
+<text top="1017" left="512" width="325" height="13" font="1">“print” statement: when executed, an observable event</text>
+<text top="1035" left="473" width="364" height="13" font="1">is added to the trace of I/O operations; this event records</text>
+<text top="1066" left="484" width="4" height="8" font="7">3</text>
+<text top="1069" left="490" width="172" height="9" font="2">http://compcert.inria.fr</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="116" left="81" width="364" height="13" font="1">the text of the annotation and the values of the argument</text>
+<text top="134" left="81" width="364" height="13" font="1">variables (here, x and y). In the generated machine code,</text>
+<text top="152" left="81" width="364" height="13" font="1">however, annotations produce no instructions, just an assem-</text>
+<text top="170" left="81" width="364" height="13" font="1">bler comment or debugging information consisting of the</text>
+<text top="188" left="81" width="364" height="13" font="1">text of the annotation where the escapes %1, %2 are replaced</text>
+<text top="205" left="81" width="364" height="13" font="1">by the actual locations (in registers or memory) where the</text>
+<text top="223" left="81" width="365" height="13" font="1">argument variables x, y were placed by the compiler. For</text>
+<text top="241" left="81" width="119" height="13" font="1">example, we obtain</text>
+<text top="268" left="81" width="371" height="10" font="3"># annotation: x is r7 and y is mem(word,r1+16)</text>
+<text top="293" left="96" width="350" height="13" font="1">if x was allocated to register r7 and y was allocated to</text>
+<text top="311" left="81" width="339" height="13" font="1">a stack location at offset 16 from the stack pointer r1.</text>
+<text top="329" left="96" width="350" height="13" font="1">Despite executing no instructions, this special comment</text>
+<text top="347" left="81" width="364" height="13" font="1">is still treated, from the standpoint of formal semantics,</text>
+<text top="365" left="81" width="364" height="13" font="1">as a pro forma “print”, generating an observable event.</text>
+<text top="383" left="81" width="364" height="13" font="1">The semantic preservation proof of CompCert therefore</text>
+<text top="401" left="81" width="364" height="13" font="1">guarantees that annotations are executed in the same order</text>
+<text top="419" left="81" width="364" height="13" font="1">and with the same argument values both in the source C</text>
+<text top="437" left="81" width="279" height="13" font="1">program and in the generated assembly code.</text>
+<text top="455" left="96" width="350" height="13" font="1">A typical use of annotations is to track pieces of code</text>
+<text top="473" left="81" width="364" height="13" font="1">such as library symbols. We can put annotations at the</text>
+<text top="491" left="81" width="364" height="13" font="1">beginning and the end of every symbol, recording the</text>
+<text top="509" left="81" width="364" height="13" font="1">values of the arguments and result variables of the symbol.</text>
+<text top="527" left="81" width="364" height="13" font="1">The semantic preservation proof therefore guarantees that</text>
+<text top="545" left="81" width="364" height="13" font="1">symbols are entered and ﬁnished in the same order and</text>
+<text top="563" left="81" width="364" height="13" font="1">with the same arguments and results, both in the source and</text>
+<text top="581" left="81" width="364" height="13" font="1">generated codes. This ensures in particular that the compiler</text>
+<text top="599" left="81" width="364" height="13" font="1">did not reorder or otherwise alter the sequence of symbol</text>
+<text top="617" left="81" width="364" height="13" font="1">invocations present in the source program – a guarantee that</text>
+<text top="635" left="81" width="364" height="13" font="1">cannot be obtained by observing systems calls and volatile</text>
+<text top="652" left="81" width="140" height="13" font="1">memory accesses only.</text>
+<text top="671" left="96" width="350" height="13" font="1">This possibility of ﬁner-grained semantic preservation is</text>
+<text top="689" left="81" width="364" height="13" font="1">most welcome, since some of our veriﬁcation activities may</text>
+<text top="707" left="81" width="364" height="13" font="1">be carried out at symbol level and semantic preservation</text>
+<text top="725" left="81" width="364" height="13" font="1">needs to be ensured at this level to be useful in our context.</text>
+<text top="742" left="81" width="364" height="13" font="1">In particular, we consider using per-symbol annotations in</text>
+<text top="760" left="81" width="364" height="13" font="1">order to generalize the results of symbol-based tests: the</text>
+<text top="778" left="81" width="364" height="13" font="1">test results for a given symbol remain valid for all possible</text>
+<text top="796" left="81" width="364" height="13" font="1">code patterns generated when instantiating this symbol. This</text>
+<text top="814" left="81" width="364" height="13" font="1">approach is currently under discussion and such discussions</text>
+<text top="832" left="81" width="208" height="13" font="1">are not in the scope of this paper.</text>
+<text top="850" left="96" width="350" height="13" font="1">Another use of annotations is to communicate additional</text>
+<text top="868" left="81" width="364" height="13" font="1">information to veriﬁcation tools that operate at the machine</text>
+<text top="886" left="81" width="293" height="13" font="1">code level, such as the WCET analyzer of the a</text>
+<text top="884" left="374" width="6" height="9" font="6">3</text>
+<text top="886" left="385" width="60" height="13" font="1">tool suite.</text>
+<text top="904" left="81" width="364" height="13" font="1">Continuing the example of section II-C, we insert a source-</text>
+<text top="922" left="81" width="202" height="13" font="1">level annotation as shown below.</text>
+<text top="940" left="96" width="350" height="13" font="1">During compilation, this source-level annotation is turned</text>
+<text top="958" left="81" width="364" height="13" font="1">into a special comment in the generated assembly ﬁle, where</text>
+<text top="976" left="81" width="364" height="13" font="1">the placeholder %1 is replaced by the machine register</text>
+<text top="994" left="81" width="364" height="13" font="1">containing variable i. Algorithm 4 below shows the assembly</text>
+<text top="1012" left="81" width="364" height="13" font="1">code generated by CompCert for two successive instantia-</text>
+<text top="1030" left="81" width="272" height="13" font="1">tions of the symbol containing Algorithm 3.</text>
+<text top="1048" left="96" width="350" height="13" font="1">The two instantiations generate signiﬁcantly different as-</text>
+<text top="1066" left="81" width="364" height="13" font="1">sembly code fragments, since the second instantiation reuses</text>
+<text top="112" left="473" width="365" height="14" font="1">Algorithm 3 Adding a source-level annotation to Algo-</text>
+<text top="130" left="473" width="45" height="13" font="1">rithm 1</text>
+<text top="147" left="498" width="107" height="13" font="1">register double x;</text>
+<text top="165" left="498" width="79" height="13" font="1">register int i;</text>
+<text top="183" left="498" width="180" height="13" font="1">extern double lookup table[];</text>
+<text top="201" left="498" width="60" height="13" font="1">i = (int)x;</text>
+<text top="219" left="513" width="324" height="13" font="1">builtin annot(”a3: entered with %1 = from 0 to 9”, i);</text>
+<text top="237" left="498" width="218" height="13" font="1">register double y = lookup table[i];</text>
+<text top="280" left="473" width="365" height="14" font="1">Algorithm 4 Generated assembly code for two instantiations</text>
+<text top="301" left="487" width="104" height="13" font="1">10 fctiwz f13, f1</text>
+<text top="319" left="487" width="119" height="13" font="1">14 stfdu f13, -8(r1)</text>
+<text top="337" left="487" width="98" height="13" font="1">18 lwz r3, 4(r1)</text>
+<text top="354" left="487" width="106" height="13" font="1">1c addi r1, r1, r8</text>
+<text top="372" left="487" width="314" height="13" font="1">20 # annotation: a3: entered with r3 = from 0 to 9</text>
+<text top="390" left="487" width="159" height="13" font="1">20 rlwinm r4, r3, 3, 0, 28</text>
+<text top="408" left="487" width="218" height="13" font="1">24 addis r12, r4, (lookup table)@ha</text>
+<text top="426" left="487" width="194" height="13" font="1">28 lfd f1, (lookup table)@l(r12)</text>
+<text top="444" left="487" width="16" height="13" font="1">. . .</text>
+<text top="462" left="487" width="314" height="13" font="1">40 # annotation: a3: entered with r3 = from 0 to 9</text>
+<text top="480" left="487" width="159" height="13" font="1">20 rlwinm r6, r3, 3, 0, 28</text>
+<text top="498" left="487" width="218" height="13" font="1">44 addis r12, r6, (lookup table)@ha</text>
+<text top="516" left="487" width="194" height="13" font="1">48 lfd f2, (lookup table)@l(r12)</text>
+<text top="576" left="473" width="364" height="13" font="1">some of the intermediate results computed by the ﬁrst instan-</text>
+<text top="594" left="473" width="364" height="13" font="1">tiation (common subexpression elimination). Nonetheless,</text>
+<text top="611" left="473" width="364" height="13" font="1">the two special comments corresponding to the source-</text>
+<text top="629" left="473" width="364" height="13" font="1">level annotation are correctly placed and correctly reveal the</text>
+<text top="647" left="473" width="252" height="13" font="1">location of variable i, namely registre r3.</text>
+<text top="666" left="487" width="350" height="13" font="1">From these special comments and their locations in the</text>
+<text top="684" left="472" width="364" height="13" font="1">assembly listing, an automatic tool can easily extract the</text>
+<text top="702" left="472" width="364" height="13" font="1">information that at points 20 and 40 from the beginning of</text>
+<text top="720" left="472" width="364" height="13" font="1">the current function, register r3 (holding the array index) is</text>
+<text top="738" left="472" width="364" height="13" font="1">in the range [0, 9], and communicate this information to the</text>
+<text top="756" left="473" width="101" height="13" font="1">WCET analyzer.</text>
+<text top="774" left="487" width="350" height="13" font="1">Some aspects of this annotation mechanism are still under</text>
+<text top="792" left="473" width="235" height="13" font="1">discussion with the CompCert and a</text>
+<text top="789" left="707" width="6" height="9" font="6">3</text>
+<text top="792" left="721" width="116" height="13" font="1">developers, but an</text>
+<text top="810" left="473" width="364" height="13" font="1">experimental annotation generator has already been devel-</text>
+<text top="828" left="473" width="364" height="13" font="1">oped and the ease of its development is a testimony to the</text>
+<text top="846" left="473" width="364" height="13" font="1">usefulness of the CompCert annotation mechanism: readily-</text>
+<text top="864" left="473" width="364" height="13" font="1">available, formally-veriﬁed variable information simplify the</text>
+<text top="882" left="473" width="280" height="13" font="1">task of automating annotation generation for a</text>
+<text top="879" left="753" width="6" height="9" font="6">3</text>
+<text top="882" left="760" width="77" height="13" font="1">. One should</text>
+<text top="900" left="473" width="364" height="13" font="1">remember that, in comparison, the annotation generator for</text>
+<text top="918" left="473" width="364" height="13" font="1">the “default” compiler code must be reconﬁgured for each</text>
+<text top="935" left="473" width="364" height="13" font="1">symbol library change: a new analysis must be carried out in</text>
+<text top="953" left="473" width="364" height="13" font="1">order to verify which are the possible Assembly patterns for</text>
+<text top="971" left="473" width="364" height="13" font="1">all symbols that need annotations, and which are the offsets</text>
+<text top="989" left="473" width="170" height="13" font="1">that need these annotations.</text>
+<text top="1022" left="501" width="36" height="13" font="1">IV. P</text>
+<text top="1024" left="537" width="194" height="11" font="2">ERFORMANCE EVALUATION OF</text>
+<text top="1022" left="736" width="10" height="13" font="1">C</text>
+<text top="1024" left="747" width="27" height="11" font="2">OMP</text>
+<text top="1022" left="775" width="10" height="13" font="1">C</text>
+<text top="1024" left="785" width="23" height="11" font="2">ERT</text>
+<text top="1048" left="487" width="350" height="13" font="1">The evaluation environment is essentially the same as in</text>
+<text top="1066" left="473" width="364" height="13" font="1">our previous work [2] and is depicted in Figure 2. CompCert</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="116" left="81" width="364" height="13" font="1">is used only to generate Assembly code from the ACG-coded</text>
+<text top="134" left="81" width="364" height="13" font="1">ﬁles, as these ﬁles are by far the most voluminous part of the</text>
+<text top="152" left="81" width="364" height="13" font="1">program. Compilation of other software subsets, assembling</text>
+<text top="170" left="81" width="364" height="13" font="1">and linking were done with the compiler, assembler and</text>
+<text top="188" left="81" width="212" height="13" font="1">linker that are used in actual FCS.</text>
+<text top="652" left="116" width="44" height="11" font="2">Figure 2.</text>
+<text top="652" left="172" width="238" height="11" font="2">The development chain of the analyzed program</text>
+<text top="689" left="96" width="350" height="13" font="1">In order to ensure greater realism in the experiments,</text>
+<text top="707" left="81" width="364" height="13" font="1">about 3600 ﬁles that are functionally equivalent to a whole</text>
+<text top="725" left="81" width="364" height="13" font="1">ﬂight control program were compiled with CompCert 1.9.</text>
+<text top="743" left="81" width="364" height="13" font="1">These ﬁles represent about 3600 SCADE sheets – when</text>
+<text top="761" left="81" width="364" height="13" font="1">compiled with the default compiler, they correspond to 3.96</text>
+<text top="779" left="81" width="364" height="13" font="1">MB of Assembly code. The symbol library that was used</text>
+<text top="797" left="81" width="364" height="13" font="1">comprises 145 symbols whose sizes vary from less than 10</text>
+<text top="815" left="81" width="364" height="13" font="1">to more than 100 lines of code. CompCert’s source-level</text>
+<text top="833" left="81" width="364" height="13" font="1">annotation mechanism was used to track symbols’ inputs</text>
+<text top="851" left="81" width="364" height="13" font="1">and outputs, and also to generate additional information for</text>
+<text top="868" left="81" width="364" height="13" font="1">some variables that need range annotations. As explained in</text>
+<text top="886" left="81" width="364" height="13" font="1">section III-A, this information is available in the generated</text>
+<text top="904" left="81" width="364" height="13" font="1">assembly ﬁles, which are examined by the annotation gen-</text>
+<text top="922" left="81" width="364" height="13" font="1">erator to produce an annotation ﬁle in the suitable format</text>
+<text top="940" left="81" width="29" height="13" font="1">for a</text>
+<text top="938" left="110" width="6" height="9" font="6">3</text>
+<text top="940" left="117" width="4" height="13" font="1">.</text>
+<text top="959" left="96" width="7" height="13" font="1">a</text>
+<text top="956" left="103" width="6" height="9" font="6">3</text>
+<text top="959" left="116" width="330" height="13" font="1">was used to compute WCET at two different levels:</text>
+<text top="977" left="81" width="364" height="13" font="1">the most important benchmark is at task level, as it is</text>
+<text top="995" left="81" width="364" height="13" font="1">the measure used for timing analysis in actual programs.</text>
+<text top="1012" left="81" width="364" height="13" font="1">While a traditional WCET analysis consists in verifying</text>
+<text top="1030" left="81" width="364" height="13" font="1">that each task is performed within its allocated time, we</text>
+<text top="1048" left="81" width="364" height="13" font="1">opted to compare the average WCET of all tasks in order</text>
+<text top="1066" left="81" width="364" height="13" font="1">to have a synthesis of the results for every task. In addition,</text>
+<text top="116" left="473" width="364" height="13" font="1">we analyze individually the WCET of all SCADE sheets:</text>
+<text top="134" left="473" width="364" height="13" font="1">we do not seek interprocedural optimizations or a register</text>
+<text top="152" left="473" width="364" height="13" font="1">allocation that goes beyond one single module, hence indi-</text>
+<text top="170" left="473" width="364" height="13" font="1">vidual WCET computations are meaningful in this context</text>
+<text top="188" left="473" width="364" height="13" font="1">and are useful to ﬁnd out which kind of algorithms get</text>
+<text top="205" left="473" width="364" height="13" font="1">the most of CompCert’s optimizations. The baseline for the</text>
+<text top="223" left="473" width="364" height="13" font="1">benchmark is the WCET of an executable ﬁle generated with</text>
+<text top="241" left="473" width="364" height="13" font="1">the default compiler and the compilation options used in a</text>
+<text top="259" left="473" width="364" height="13" font="1">real ﬂight control program. Some analyzed sheets instantiate</text>
+<text top="277" left="473" width="364" height="13" font="1">symbols that need range annotations; CompCert’s annotation</text>
+<text top="295" left="473" width="364" height="13" font="1">mechanism was used together with a simple annotation</text>
+<text top="313" left="473" width="317" height="13" font="1">generation script to assign variable ranges for a</text>
+<text top="311" left="789" width="6" height="9" font="6">3</text>
+<text top="313" left="805" width="32" height="13" font="1">when</text>
+<text top="331" left="472" width="364" height="13" font="1">needed. Figure 3 depicts the ﬂow of annotation data, from</text>
+<text top="349" left="472" width="364" height="13" font="1">the C macros (where the necessary extra information is</text>
+<text top="367" left="472" width="265" height="13" font="1">speciﬁed by the user) to the execution of a</text>
+<text top="364" left="737" width="6" height="9" font="6">3</text>
+<text top="367" left="744" width="4" height="13" font="1">.</text>
+<text top="708" left="529" width="44" height="11" font="2">Figure 3.</text>
+<text top="708" left="586" width="187" height="11" font="2">Automatic annotation generation for a</text>
+<text top="706" left="774" width="5" height="8" font="7">3</text>
+<text top="742" left="487" width="350" height="13" font="1">In addition to WCET computations, code size measures</text>
+<text top="760" left="472" width="364" height="13" font="1">were carried out as an auxiliary performance indicator –</text>
+<text top="778" left="472" width="334" height="13" font="1">smaller code size often means better-performing code.</text>
+<text top="797" left="487" width="350" height="13" font="1">The results of the WCET analysis are quite encouraging,</text>
+<text top="815" left="472" width="364" height="13" font="1">as the average WCET improvement per task was 10.6%,</text>
+<text top="833" left="472" width="364" height="13" font="1">which is a signiﬁcant improvement by ﬂight control software</text>
+<text top="851" left="472" width="364" height="13" font="1">standards. As already pointed out in [2], this is mainly due</text>
+<text top="868" left="472" width="364" height="13" font="1">a better register allocation that saves many loads and stores</text>
+<text top="886" left="472" width="364" height="13" font="1">that had to be performed to keep symbol inputs and outputs</text>
+<text top="904" left="472" width="55" height="13" font="1">on stack.</text>
+<text top="923" left="487" width="350" height="13" font="1">Figure 4 depicts the WCET computed for all sheets,</text>
+<text top="941" left="472" width="364" height="13" font="1">ordering them according to the WCET obtained when they</text>
+<text top="959" left="472" width="364" height="13" font="1">were compiled with the default compiler. The WCET im-</text>
+<text top="977" left="472" width="364" height="13" font="1">provement may change from one region of the graph to</text>
+<text top="995" left="472" width="364" height="13" font="1">another (modules with a very low or very high WCET do</text>
+<text top="1012" left="472" width="364" height="13" font="1">not always have a visible improvement, whereas CompCert</text>
+<text top="1030" left="472" width="364" height="13" font="1">clearly improved the WCET of those in the middle part of</text>
+<text top="1048" left="472" width="364" height="13" font="1">the curves) and even inside a region – the WCET curve for</text>
+<text top="1066" left="472" width="271" height="13" font="1">CompCert-compiled modules is not smooth.</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="8" size="7" family="Times" color="#000000"/>
+<text top="291" left="145" width="44" height="11" font="2">Figure 4.</text>
+<text top="291" left="202" width="179" height="11" font="2">Overall result of WCET comparison</text>
+<text top="343" left="96" width="350" height="13" font="1">In order to reﬁne the general results obtained by the</text>
+<text top="361" left="81" width="364" height="13" font="1">analysis of this large number of ﬁles, special attention was</text>
+<text top="379" left="81" width="364" height="13" font="1">dedicated to ﬁles that had extreme values of WCET and</text>
+<text top="397" left="81" width="364" height="13" font="1">code size. The 10% longest and shortest ﬁles (in WCET</text>
+<text top="414" left="81" width="364" height="13" font="1">or code size) had results that differed from the average and</text>
+<text top="432" left="81" width="364" height="13" font="1">had speciﬁc statistics in order to underline those differences.</text>
+<text top="450" left="81" width="364" height="13" font="1">In addition, some “unexpected” results (e.g. the default</text>
+<text top="468" left="81" width="364" height="13" font="1">compiler performing better than CompCert) were analyzed</text>
+<text top="486" left="81" width="75" height="13" font="1">individually.</text>
+<text top="505" left="96" width="350" height="13" font="1">The WCET of all analyzed modules was computed for</text>
+<text top="523" left="81" width="364" height="13" font="1">the executable ﬁles generated by both compilers, in order to</text>
+<text top="541" left="81" width="364" height="13" font="1">compare them when compiling modules of various WCET</text>
+<text top="559" left="81" width="364" height="13" font="1">and code size value ranges – using the benchmark WCETs</text>
+<text top="577" left="81" width="364" height="13" font="1">and code sizes to classify the modules into categories. The</text>
+<text top="595" left="81" width="282" height="13" font="1">main conclusions from these experiments are:</text>
+<text top="620" left="96" width="6" height="10" font="6">•</text>
+<text top="618" left="111" width="334" height="13" font="1">In the analyzed program, even if a module is small,</text>
+<text top="636" left="111" width="334" height="13" font="1">there is usually some possibility of optimization but</text>
+<text top="654" left="111" width="334" height="13" font="1">results may vary according to the symbols that are</text>
+<text top="672" left="111" width="334" height="13" font="1">instantiated in a given module. Some symbols have</text>
+<text top="690" left="111" width="334" height="13" font="1">their code vastly improved by CompCert, whereas – in</text>
+<text top="708" left="111" width="334" height="13" font="1">some very exceptional cases – the WCET of a module</text>
+<text top="726" left="111" width="334" height="13" font="1">rises due to the overhead caused by longer function</text>
+<text top="743" left="111" width="334" height="13" font="1">prologues and epilogues. In fact, modules that present</text>
+<text top="761" left="111" width="334" height="13" font="1">very small code size are not quite a reliable source of</text>
+<text top="779" left="111" width="334" height="13" font="1">WCET analysis because even their address in memory</text>
+<text top="797" left="111" width="293" height="13" font="1">becomes a signiﬁcant factor in WCET analysis.</text>
+<text top="817" left="96" width="6" height="10" font="6">•</text>
+<text top="815" left="111" width="334" height="13" font="1">Sheets that are not among the fastest or slowest have</text>
+<text top="833" left="111" width="334" height="13" font="1">a slightly better WCET improvement than the overall</text>
+<text top="851" left="111" width="334" height="13" font="1">results. This shows that the optimizations work best</text>
+<text top="869" left="111" width="334" height="13" font="1">when there is enough code to enable their full use,</text>
+<text top="887" left="111" width="334" height="13" font="1">but the code is still compact enough to avoid register</text>
+<text top="905" left="111" width="49" height="13" font="1">spilling.</text>
+<text top="925" left="96" width="6" height="10" font="6">•</text>
+<text top="923" left="111" width="334" height="13" font="1">A sheet can have a large WCET for two main reasons:</text>
+<text top="941" left="111" width="334" height="13" font="1">either it may have many instructions to execute or it</text>
+<text top="959" left="111" width="334" height="13" font="1">may contain interactions with hardware devices that are</text>
+<text top="977" left="111" width="334" height="13" font="1">time-consuming. In the former case, CompCert usu-</text>
+<text top="995" left="111" width="334" height="13" font="1">ally performs better, except when dealing with spilled</text>
+<text top="1012" left="111" width="334" height="13" font="1">variables – the gains become less signiﬁcant because</text>
+<text top="1030" left="111" width="334" height="13" font="1">spilled variables resemble variables compiled with the</text>
+<text top="1048" left="111" width="334" height="13" font="1">default compiler. CompCert optimizations can do little</text>
+<text top="1066" left="111" width="334" height="13" font="1">or nothing to improve the WCET of a sheet if its</text>
+<text top="116" left="503" width="334" height="13" font="1">symbols spend most of their computation time doing</text>
+<text top="134" left="503" width="334" height="13" font="1">hardware acquisitions and emissions. In our case study,</text>
+<text top="152" left="503" width="334" height="13" font="1">it is more common to have interactions with hardware</text>
+<text top="170" left="503" width="334" height="13" font="1">than register spilling, hence the WCET gain over “long”</text>
+<text top="188" left="503" width="334" height="13" font="1">sheets (larger code size) is more pronounced than the</text>
+<text top="205" left="503" width="241" height="13" font="1">gain over “slow” ones (higher WCET).</text>
+<text top="226" left="487" width="6" height="10" font="6">•</text>
+<text top="223" left="503" width="334" height="13" font="1">Even with its optimizations turned off, the default com-</text>
+<text top="241" left="503" width="334" height="13" font="1">piler sometimes succeeds in selecting more efﬁcient</text>
+<text top="259" left="503" width="334" height="13" font="1">combinations of PowerPC instructions than CompCert.</text>
+<text top="277" left="503" width="334" height="13" font="1">An example is address computations for volatile mem-</text>
+<text top="295" left="503" width="334" height="13" font="1">ory accesses, which CompCert compiles rather naively.</text>
+<text top="313" left="503" width="334" height="13" font="1">We plan to improve the instruction selection phase of</text>
+<text top="331" left="503" width="248" height="13" font="1">CompCert to reduce these inefﬁciencies.</text>
+<text top="396" left="487" width="292" height="13" font="1">Table I summarizes the WCET analysis results.</text>
+<text top="430" left="610" width="96" height="11" font="2">WCET (CompCert)</text>
+<text top="430" left="724" width="83" height="11" font="2">Size (CompCert)</text>
+<text top="444" left="487" width="101" height="11" font="2">All application tasks</text>
+<text top="444" left="641" width="35" height="11" font="2">-10.6%</text>
+<text top="444" left="748" width="35" height="11" font="2">-13.8%</text>
+<text top="458" left="481" width="111" height="11" font="2">Small code size sheets</text>
+<text top="458" left="644" width="29" height="11" font="2">-2.0%</text>
+<text top="458" left="748" width="35" height="11" font="2">-14.6%</text>
+<text top="471" left="504" width="66" height="11" font="2">Small WCET</text>
+<text top="471" left="641" width="35" height="11" font="2">-10.6%</text>
+<text top="471" left="748" width="35" height="11" font="2">-12.9%</text>
+<text top="485" left="498" width="77" height="11" font="2">Average WCET</text>
+<text top="485" left="641" width="35" height="11" font="2">-12.6%</text>
+<text top="485" left="748" width="35" height="11" font="2">-14.3%</text>
+<text top="498" left="492" width="89" height="11" font="2">Average code size</text>
+<text top="498" left="641" width="35" height="11" font="2">-10.7%</text>
+<text top="498" left="748" width="35" height="11" font="2">-13.6%</text>
+<text top="512" left="498" width="77" height="11" font="2">Large code size</text>
+<text top="512" left="644" width="29" height="11" font="2">-7.7%</text>
+<text top="512" left="748" width="35" height="11" font="2">-14.2%</text>
+<text top="525" left="504" width="66" height="11" font="2">Large WCET</text>
+<text top="525" left="644" width="29" height="11" font="2">-3.8%</text>
+<text top="525" left="748" width="35" height="11" font="2">-12.4%</text>
+<text top="547" left="638" width="34" height="11" font="2">Table I</text>
+<text top="560" left="560" width="8" height="11" font="2">C</text>
+<text top="562" left="568" width="72" height="9" font="8">ODE SIZE AND</text>
+<text top="560" left="644" width="36" height="11" font="2">WCET</text>
+<text top="562" left="683" width="67" height="9" font="8">COMPARISON</text>
+<text top="625" left="473" width="182" height="13" font="1">A. Veriﬁcation considerations</text>
+<text top="649" left="487" width="350" height="13" font="1">Since the main reason to avoid most optimizing compilers</text>
+<text top="667" left="473" width="364" height="13" font="1">is the ensuing difﬁculty to verify traceability and compliance</text>
+<text top="685" left="473" width="364" height="13" font="1">of the object code, the performance evaluation was followed</text>
+<text top="703" left="473" width="364" height="13" font="1">by a study of possible veriﬁcation strategies that could use</text>
+<text top="721" left="473" width="364" height="13" font="1">CompCert’s semantic preservation in order to meet the DO-</text>
+<text top="739" left="473" width="364" height="13" font="1">178B requirements without losing the performance gains</text>
+<text top="757" left="473" width="364" height="13" font="1">obtained with its optimizations. This study is currently under</text>
+<text top="775" left="473" width="364" height="13" font="1">way but it is already clear that the “traditional” analysis</text>
+<text top="792" left="473" width="364" height="13" font="1">mentioned in [6] to verify traceability between source code</text>
+<text top="810" left="473" width="364" height="13" font="1">and object code is still feasible with CompCert, as its</text>
+<text top="828" left="473" width="364" height="13" font="1">optimizations remove computational instructions but do not</text>
+<text top="846" left="473" width="364" height="13" font="1">change signiﬁcantly the code structure (branches, etc). Also,</text>
+<text top="864" left="473" width="364" height="13" font="1">its semantic preservation theorem could be used as a strong</text>
+<text top="882" left="473" width="364" height="13" font="1">argument for traceability and compliance between source</text>
+<text top="900" left="473" width="134" height="13" font="1">code and object code.</text>
+<text top="933" left="530" width="32" height="13" font="1">V. C</text>
+<text top="935" left="563" width="114" height="11" font="2">ONCLUSIONS AND</text>
+<text top="933" left="681" width="8" height="13" font="1">F</text>
+<text top="935" left="690" width="43" height="11" font="2">UTURE</text>
+<text top="933" left="738" width="14" height="13" font="1">W</text>
+<text top="935" left="752" width="27" height="11" font="2">ORK</text>
+<text top="959" left="487" width="350" height="13" font="1">This paper presented an evaluation of the CompCert</text>
+<text top="977" left="472" width="364" height="13" font="1">compiler, based on the characteristics of Airbus ﬂight control</text>
+<text top="995" left="472" width="364" height="13" font="1">software: ACG-based code, modules with different charac-</text>
+<text top="1012" left="472" width="364" height="13" font="1">teristics. Even if we focused on its WCET analysis to assess</text>
+<text top="1030" left="472" width="364" height="13" font="1">its performance, CompCert’s formal proofs are already seen</text>
+<text top="1048" left="472" width="364" height="13" font="1">as a key to bring more conﬁdence in the compilation process,</text>
+<text top="1066" left="472" width="364" height="13" font="1">helping to make safe use of code optimizations. Moreover,</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="116" left="81" width="364" height="13" font="1">CompCert’s optimizations apply to the vast majority of the</text>
+<text top="134" left="81" width="243" height="13" font="1">modules that are representative of FCS.</text>
+<text top="152" left="96" width="350" height="13" font="1">The main ongoing work in our CompCert study is the</text>
+<text top="169" left="81" width="364" height="13" font="1">development of a new veriﬁcation strategy that must be at</text>
+<text top="187" left="81" width="364" height="13" font="1">least as safe as the current one. It is a complex subject</text>
+<text top="205" left="81" width="364" height="13" font="1">on its own but some conclusions drawn from it (e.g. the</text>
+<text top="223" left="81" width="364" height="13" font="1">need for semantic preservation at symbol level) are already</text>
+<text top="241" left="81" width="364" height="13" font="1">being taken into account – as it is likely that we will need</text>
+<text top="259" left="81" width="364" height="13" font="1">semantic preservation at symbol input level, the performance</text>
+<text top="277" left="81" width="364" height="13" font="1">measures were taken using library symbols endowed with</text>
+<text top="295" left="81" width="364" height="13" font="1">CompCert’s annotations to preserve the semantics of their</text>
+<text top="313" left="81" width="364" height="13" font="1">inputs and outputs. An important discussion point is the DO-</text>
+<text top="331" left="81" width="265" height="13" font="1">178 interpretation of a tool like CompCert.</text>
+<text top="349" left="96" width="350" height="13" font="1">The performance evaluation shall not stop at the current</text>
+<text top="367" left="81" width="364" height="13" font="1">state. As the symbol library was coded bearing in mind</text>
+<text top="384" left="81" width="364" height="13" font="1">the current compilation strategy, an interesting work will be</text>
+<text top="402" left="81" width="364" height="13" font="1">recoding it in order to favor optimizing compilation, with</text>
+<text top="420" left="81" width="364" height="13" font="1">fewer intermediate variables and use of Small Data Areas.</text>
+<text top="438" left="81" width="364" height="13" font="1">It is likely that the obtained WCET will be lower and every</text>
+<text top="456" left="81" width="334" height="13" font="1">percent counts if one intends to improve performance.</text>
+<text top="474" left="96" width="350" height="13" font="1">Another direction for future work is to further improve</text>
+<text top="492" left="81" width="364" height="13" font="1">WCET by deploying additional optimizations in CompCert</text>
+<text top="510" left="81" width="364" height="13" font="1">and proving that they preserve semantics. The WCC project</text>
+<text top="528" left="81" width="365" height="13" font="1">of Falk et al [9] provides many examples of proﬁtable</text>
+<text top="546" left="81" width="364" height="13" font="1">WCET-aware optimizations, often guided by the results of</text>
+<text top="564" left="81" width="364" height="13" font="1">WCET analysis. Proving directly the correctness of these</text>
+<text top="582" left="81" width="364" height="13" font="1">optimizations appears difﬁcult. However, equivalent seman-</text>
+<text top="600" left="81" width="364" height="13" font="1">tic preservation guarantees can be achieved at lower proof</text>
+<text top="617" left="81" width="365" height="13" font="1">costs by veriﬁed translation validation, whereas each run</text>
+<text top="635" left="81" width="364" height="13" font="1">of a non-veriﬁed optimization is veriﬁed a posteriori by</text>
+<text top="653" left="81" width="364" height="13" font="1">a validator that is proved correct once and for all. For</text>
+<text top="671" left="81" width="364" height="13" font="1">example, Tristan and Leroy [10] show a veriﬁed validator</text>
+<text top="689" left="81" width="364" height="13" font="1">for trace scheduling (instruction scheduling over extended</text>
+<text top="707" left="81" width="364" height="13" font="1">basic blocks) that could probably be adapted to handle</text>
+<text top="725" left="81" width="364" height="13" font="1">WCC’s superblock optimizations. Rival has experimented</text>
+<text top="743" left="81" width="364" height="13" font="1">the translation validation approach on a wider scope in [11]</text>
+<text top="761" left="81" width="364" height="13" font="1">but, currently, the qualiﬁcation and industrialization of such</text>
+<text top="779" left="81" width="173" height="13" font="1">a tool seems more complex.</text>
+<text top="806" left="221" width="10" height="13" font="1">R</text>
+<text top="808" left="232" width="73" height="11" font="2">EFERENCES</text>
+<text top="831" left="88" width="358" height="12" font="3">[1] DO-178B: Software Considerations in Airborne Systems and</text>
+<text top="846" left="111" width="134" height="12" font="3">Equipment Certiﬁcation</text>
+<text top="846" left="245" width="201" height="12" font="3">, Radio Technical Commission for</text>
+<text top="861" left="111" width="178" height="12" font="3">Aeronautics (RTCA) Std., 1982.</text>
+<text top="890" left="88" width="358" height="12" font="3">[2] R. B. Franc¸a, D. Favre-Felix, X. Leroy, M. Pantel, and</text>
+<text top="905" left="111" width="335" height="12" font="3">J. Souyris, “Towards Formally Veriﬁed Optimizing Compi-</text>
+<text top="920" left="111" width="335" height="12" font="3">lation in Flight Control Software,” in PPES, ser. OASIcs,</text>
+<text top="934" left="111" width="42" height="12" font="3">vol. 18.</text>
+<text top="934" left="165" width="281" height="12" font="3">Grenoble, France: Schloss Dagstuhl, 2011, pp. 59–</text>
+<text top="949" left="111" width="17" height="12" font="3">68.</text>
+<text top="978" left="88" width="358" height="12" font="3">[3] D. Bri`ere and P. Traverse, “AIRBUS A320/A330/A340 Elec-</text>
+<text top="993" left="111" width="335" height="12" font="3">trical Flight Controls: A Family of Fault-Tolerant Systems,”</text>
+<text top="1008" left="111" width="162" height="12" font="3">in FTCS, 1993, pp. 616–623.</text>
+<text top="1037" left="88" width="358" height="12" font="3">[4] J. Souyris, E. L. Pavec, G. Himbert, V. J´egu, and G. Borios,</text>
+<text top="1052" left="111" width="335" height="12" font="3">“Computing the Worst Case Execution Time of an Avionics</text>
+<text top="1067" left="111" width="335" height="12" font="3">Program by Abstract Interpretation,” in Proceedings of the</text>
+<text top="117" left="502" width="335" height="12" font="3">5th Intl Workshop on Worst-Case Execution Time (WCET)</text>
+<text top="132" left="502" width="46" height="12" font="3">Analysis</text>
+<text top="132" left="548" width="102" height="12" font="3">, 2005, pp. 21–24.</text>
+<text top="162" left="479" width="358" height="12" font="3">[5] T. Lundqvist and P. Stenstr¨om, “Timing anomalies in dynam-</text>
+<text top="177" left="502" width="335" height="12" font="3">ically scheduled microprocessors,” in RTSS ’99: Proceedings</text>
+<text top="192" left="502" width="267" height="12" font="3">of the 20th IEEE Real-Time Systems Symposium</text>
+<text top="192" left="769" width="3" height="12" font="3">.</text>
+<text top="192" left="786" width="51" height="12" font="3">Washing-</text>
+<text top="206" left="502" width="294" height="12" font="3">ton, DC, USA: IEEE Computer Society, 1999, p. 12.</text>
+<text top="236" left="479" width="358" height="12" font="3">[6] Final Report for Clariﬁcation of DO-178B “Software Consid-</text>
+<text top="251" left="502" width="331" height="12" font="3">erations in Airborne Systems and Equipment Certiﬁcation”</text>
+<text top="251" left="834" width="3" height="12" font="3">,</text>
+<text top="266" left="502" width="335" height="12" font="3">Radio Technical Commission for Aeronautics (RTCA) Std.,</text>
+<text top="281" left="502" width="30" height="12" font="3">2001.</text>
+<text top="311" left="479" width="358" height="12" font="3">[7] R. Heckmann and C. Ferdinand, “Worst-case Execution Time</text>
+<text top="326" left="502" width="335" height="12" font="3">Prediction by Static Program Analysis,” in IPDPS 2004.</text>
+<text top="341" left="502" width="233" height="12" font="3">IEEE Computer Society, 2004, pp. 26–30.</text>
+<text top="371" left="479" width="358" height="12" font="3">[8] X. Leroy, “Formal veriﬁcation of a realistic compiler,” Com-</text>
+<text top="386" left="502" width="135" height="12" font="3">munications of the ACM</text>
+<text top="386" left="637" width="198" height="12" font="3">, vol. 52, no. 7, pp. 107–115, 2009.</text>
+<text top="416" left="479" width="358" height="12" font="3">[9] H. Falk and P. Lokuciejewski, “A compiler framework for the</text>
+<text top="431" left="502" width="335" height="12" font="3">reduction of worst-case execution times,” The International</text>
+<text top="446" left="502" width="335" height="12" font="3">Journal of Time-Critical Computing Systems (Real-Time Sys-</text>
+<text top="461" left="502" width="29" height="12" font="3">tems)</text>
+<text top="461" left="532" width="198" height="12" font="3">, vol. 46, no. 2, pp. 251–300, 2010.</text>
+<text top="490" left="473" width="364" height="12" font="3">[10] J.-B. Tristan and X. Leroy, “Formal veriﬁcation of trans-</text>
+<text top="505" left="502" width="335" height="12" font="3">lation validators: A case study on instruction scheduling</text>
+<text top="520" left="502" width="335" height="12" font="3">optimizations,” in 35th symposium Principles of Programming</text>
+<text top="535" left="502" width="59" height="12" font="3">Languages</text>
+<text top="535" left="561" width="3" height="12" font="3">.</text>
+<text top="535" left="578" width="165" height="12" font="3">ACM Press, 2008, pp. 17–27.</text>
+<text top="565" left="472" width="364" height="12" font="3">[11] X. Rival, “Symbolic transfer functions-based approaches to</text>
+<text top="580" left="502" width="335" height="12" font="3">certiﬁed compilation,” in 31st Symposium Principles of Pro-</text>
+<text top="595" left="502" width="119" height="12" font="3">gramming Languages</text>
+<text top="595" left="621" width="3" height="12" font="3">.</text>
+<text top="595" left="638" width="158" height="12" font="3">ACM Press, 2004, pp. 1–13.</text>
+<text top="736" left="29" width="0" height="17" font="4">hal-00653367, version 1 - 19 Dec 201</text>
+<text top="436" left="29" width="0" height="17" font="4">1</text>
+</page>
+</pdf2xml>

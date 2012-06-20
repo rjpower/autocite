@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="0" size="10" family="Times" color="#000000"/>
+	<fontspec id="1" size="19" family="Times" color="#000000"/>
+	<fontspec id="2" size="12" family="Times" color="#000000"/>
+	<fontspec id="3" size="7" family="Times" color="#000000"/>
+	<fontspec id="4" size="11" family="Times" color="#000000"/>
+	<fontspec id="5" size="14" family="Times" color="#000000"/>
+	<fontspec id="6" size="11" family="Times" color="#000000"/>
+	<fontspec id="7" size="16" family="Times" color="#000000"/>
+	<fontspec id="8" size="16" family="Times" color="#000000"/>
+<text top="925" left="63" width="375" height="11" font="0">D. Jin and S. Lin (Eds.): Advances in EECM Vol.2, LNEE 140, pp. 525–<a href="pdfxml.html#6">530. </a></text>
+<text top="939" left="63" width="375" height="11" font="0">Springerlink.com                  © Springer-Verlag Berlin Heidelberg 2012 </text>
+<text top="89" left="108" width="436" height="19" font="1"><b>Research of Data Acquisition Controller for DO </b></text>
+<text top="115" left="251" width="149" height="19" font="1"><b>Based on FPGA </b></text>
+<text top="173" left="208" width="105" height="14" font="2">WeiSheng Zhong</text>
+<text top="170" left="314" width="5" height="9" font="3">1</text>
+<text top="173" left="319" width="114" height="14" font="2"> and YaPing Wang</text>
+<text top="170" left="432" width="5" height="9" font="3">2</text>
+<text top="173" left="437" width="4" height="14" font="2"> </text>
+<text top="204" left="184" width="5" height="8" font="3">1</text>
+<text top="207" left="189" width="276" height="12" font="4"> Nan Chang University, Nan Chang330029, China </text>
+<text top="221" left="151" width="5" height="8" font="3">2</text>
+<text top="224" left="155" width="340" height="12" font="4"> East China Institute of Technology, Nan Chang330013, China</text>
+<text top="221" left="495" width="5" height="15" font="5"> </text>
+<text top="224" left="502" width="3" height="12" font="4"> </text>
+<text top="241" left="193" width="267" height="11" font="4">ws0791jx@163.com, ypwang@ecit.cn </text>
+<text top="305" left="106" width="439" height="12" font="6"><b>Abstract.</b> Real-time sampling control of A/D converter TLC5510 is realized </text>
+<text top="321" left="106" width="440" height="12" font="4">with EP13T144C8—FPGA device of cyclone, which improved the real-time </text>
+<text top="338" left="106" width="439" height="12" font="4">property of data acquisition for DO. Frequency division of system clock and </text>
+<text top="354" left="106" width="440" height="12" font="4">control of A/D sampling are implemented respectively by VHDL language. </text>
+<text top="371" left="106" width="438" height="12" font="4">High-speed storage and sending of transform data are achieved in combination </text>
+<text top="387" left="106" width="442" height="12" font="4">design of FIFO memory. Simulation results under QuartusII development </text>
+<text top="404" left="106" width="439" height="12" font="4">platform are presented at last. The real-time investigation and control of DO </text>
+<text top="421" left="106" width="348" height="12" font="4">could be realized to raise the water quality of sewage treatment. </text>
+<text top="452" left="106" width="304" height="12" font="6"><b>Keywords: </b>FPGA, TLC5510, VHDL, DO Acquisition. </text>
+<text top="499" left="63" width="145" height="16" font="7"><b>1    Introduction </b></text>
+<text top="536" left="63" width="527" height="14" font="2">Data acquisition is an important section in industrial control system. In sewage </text>
+<text top="554" left="63" width="523" height="14" font="2">Treatment Control System of SBR, DO is a very important parameter, influencing the </text>
+<text top="571" left="63" width="525" height="14" font="2">water quality to a great extent, which require the real-time of DO data acquisition </text>
+<text top="588" left="63" width="522" height="14" font="2">consequently. Sampling process of high-speed A/D converter equipment TLC5510 was </text>
+<text top="605" left="63" width="523" height="14" font="2">controlled by FPGA with its high frequency and real-time characters. Afterwards, the </text>
+<text top="623" left="63" width="522" height="14" font="2">converted data was stored in FIFO high-speed memory inside the FPGA quickly, which </text>
+<text top="640" left="63" width="524" height="14" font="2">provide the possibility of follow-up treatment for DO sampling data. The system was </text>
+<text top="657" left="63" width="382" height="14" font="2">designed with the method of top-down in VHDL language[1].   </text>
+<text top="702" left="63" width="268" height="16" font="7"><b>2   Chip Description of TLC5510 </b></text>
+<text top="740" left="63" width="523" height="14" font="2">TLC5510, produced by TI with the CMOS craft, is an 8-bit half-flash architecture A/D </text>
+<text top="757" left="63" width="523" height="14" font="2">converter with 20MSPS sampling rate. It’s implemented extensively in the regions of </text>
+<text top="775" left="63" width="527" height="14" font="2">high-speed data convert, digital TV, medical graph, video conference and QAM </text>
+<text top="792" left="63" width="525" height="14" font="2">demodulator. There is a standard voltage divider inside the TLC5510, which could </text>
+<text top="809" left="63" width="525" height="14" font="2">acquire 2V full scale reference from 5V power source. At the same time, it could </text>
+<text top="826" left="63" width="457" height="14" font="2">simplify the peripheral circuit design with the inner sample and hold circuit.</text>
+<text top="824" left="520" width="5" height="16" font="8"> </text>
+<text top="844" left="80" width="186" height="14" font="2">The main ports are as follows: </text>
+<text top="870" left="63" width="116" height="14" font="2">CLK: Clock input; </text>
+<text top="887" left="63" width="177" height="14" font="2">ANALOG IN: Analog input; </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="24" height="12" font="4">526 </text>
+<text top="43" left="114" width="133" height="12" font="4">W. Zhong and Y. Wang </text>
+<text top="86" left="63" width="525" height="14" font="2">OE: Output enable; When OE=low, data is enabled. When OE=high, D1-D8 is in </text>
+<text top="103" left="63" width="135" height="14" font="2">high-impedance state. </text>
+<text top="121" left="63" width="279" height="14" font="2">D1-D8: Digital data out. D1=LSB, D8=MSB; </text>
+<text top="138" left="63" width="150" height="14" font="2">AGND: Analog ground; </text>
+<text top="155" left="63" width="367" height="14" font="2">DGND: Digital ground;REFB: Reference voltage in bottom; </text>
+<text top="172" left="63" width="200" height="14" font="2">REFT: Reference voltage in top; </text>
+<text top="327" left="563" width="4" height="14" font="2"> </text>
+<text top="356" left="223" width="203" height="12" font="6"><b>Fig. 1. </b>Time scheduling of TLC5510 </text>
+<text top="400" left="63" width="321" height="16" font="7"><b>3      Design of Frequency Divider Module </b></text>
+<text top="438" left="63" width="524" height="14" font="2">The system operating clock was standard signal of 50MHz, inducted outside, but the </text>
+<text top="455" left="63" width="522" height="14" font="2">maximum sampling frequency of TLC5510 is 20MHz. So the system clock was divided </text>
+<text top="472" left="63" width="524" height="14" font="2">by the 2.5 half-integer frequency divider. The divider, whose frequency coefficient is </text>
+<text top="489" left="63" width="528" height="14" font="2">2.5, consists of XOR, modulo-three counter and a divider with the frequency </text>
+<text top="507" left="63" width="522" height="14" font="2">coefficient 2. The VHDL description was simulated and shown as follows, in which the </text>
+<text top="524" left="63" width="389" height="14" font="2">inclk is the system clock, outclk is the clock resulted by divider: </text>
+<text top="631" left="578" width="8" height="19" font="2"> </text>
+<text top="664" left="212" width="225" height="12" font="6"><b>Fig. 2.</b> Simulation diagram of the divider </text>
+<text top="708" left="63" width="499" height="16" font="7"><b>4   Logic Implementation of Data Acquisition Control Based on </b></text>
+<text top="729" left="97" width="53" height="16" font="7"><b>FPGA </b></text>
+<text top="767" left="63" width="525" height="14" font="2">A state machine was designed in this paper to accomplish the logic control of data </text>
+<text top="784" left="63" width="524" height="14" font="2">acquisition according to features of TLC5510. The main process of the design is to </text>
+<text top="801" left="63" width="525" height="14" font="2">program VHDL code. The logic control of TLC5510 clock signal, data cache and </text>
+<text top="818" left="63" width="526" height="14" font="2">output of converted data were realized respectively in VHDL language. Then the </text>
+<text top="836" left="63" width="525" height="14" font="2">compilation and simulation was completed on the development platform QuartusII. </text>
+<text top="853" left="63" width="524" height="14" font="2">The whole design was downloaded to FPGA chip at last and the simulation diagram </text>
+<text top="870" left="63" width="282" height="14" font="2">and relevant VHDL codes are as follows[2-3]: </text>
+<text top="887" left="80" width="4" height="14" font="2"> </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="3" height="12" font="4"> </text>
+<text top="43" left="180" width="355" height="12" font="4">Research of Data Acquisition Controller for DO Based on FPGA </text>
+<text top="43" left="562" width="24" height="12" font="4">527 </text>
+<text top="86" left="63" width="84" height="14" font="2">library IEEE; </text>
+<text top="103" left="63" width="220" height="14" font="2">use IEEE.STD_LOGIC_1164.ALL; </text>
+<text top="121" left="63" width="114" height="14" font="2">entity TLC5510 is </text>
+<text top="138" left="63" width="170" height="14" font="2">port (RST:in STD_LOGIC; </text>
+<text top="155" left="63" width="175" height="14" font="2">     CLK: in STD_LOGIC; </text>
+<text top="172" left="63" width="321" height="14" font="2">          D: in STD_LOGIC_VECTOR(7 DOWNTO 0); </text>
+<text top="190" left="63" width="173" height="14" font="2">     OE: out STD_LOGIC; </text>
+<text top="207" left="63" width="330" height="14" font="2">     Q: out STD_LOGIC_VECTOR(7 DOWNTO 0); </text>
+<text top="224" left="63" width="213" height="14" font="2">     LOCK0: OUT STD_LOGIC; </text>
+<text top="242" left="63" width="210" height="14" font="2">     ADCLK: out STD_LOGIC); </text>
+<text top="259" left="63" width="129" height="14" font="2">end entity TLC5510; </text>
+<text top="276" left="63" width="222" height="14" font="2">architecture BEHAV of TLC5510 is </text>
+<text top="293" left="63" width="228" height="14" font="2">    type STATES is (st0,st1,st2,st3); </text>
+<text top="310" left="63" width="261" height="14" font="2">    signal CURRENT_STATE: STATES; </text>
+<text top="328" left="63" width="231" height="14" font="2">    signal NEXT_STATE: STATES; </text>
+<text top="345" left="63" width="367" height="14" font="2">        signal REGL: STD_LOGIC_VECTOR(7 DOWNTO 0); </text>
+<text top="362" left="63" width="204" height="14" font="2">    signal LOCK: STD_LOGIC; </text>
+<text top="379" left="63" width="37" height="14" font="2">begin </text>
+<text top="397" left="63" width="114" height="14" font="2">LOCK0&lt;=LOCK; </text>
+<text top="414" left="63" width="226" height="14" font="2">ADC: process (CURRENT_STATE) </text>
+<text top="431" left="63" width="85" height="14" font="2">                begin </text>
+<text top="449" left="63" width="222" height="14" font="2">        case CURRENT_STATE is </text>
+<text top="466" left="63" width="343" height="14" font="2">        when st0 =&gt;ADCLK&lt;='0';OE&lt;='1';LOCK&lt;='0'; </text>
+<text top="483" left="63" width="215" height="14" font="2">                          NEXT_STATE&lt;=st1; </text>
+<text top="500" left="63" width="343" height="14" font="2">        when st1 =&gt;ADCLK&lt;='1';OE&lt;='1';LOCK&lt;='0'; </text>
+<text top="517" left="63" width="215" height="14" font="2">                          NEXT_STATE&lt;=st2; </text>
+<text top="535" left="63" width="343" height="14" font="2">        when st2 =&gt;ADCLK&lt;='0';OE&lt;='0';LOCK&lt;='0'; </text>
+<text top="552" left="63" width="215" height="14" font="2">                          NEXT_STATE&lt;=st3; </text>
+<text top="569" left="63" width="343" height="14" font="2">        when st3 =&gt;ADCLK&lt;='0';OE&lt;='0';LOCK&lt;='1'; </text>
+<text top="586" left="63" width="185" height="14" font="2">                NEXT_STATE&lt;=st0; </text>
+<text top="604" left="63" width="280" height="14" font="2">        when others =&gt;NEXT_STATE&lt;=st0; </text>
+<text top="621" left="63" width="59" height="14" font="2">end case; </text>
+<text top="638" left="63" width="114" height="14" font="2">end process ADC; </text>
+<text top="656" left="63" width="154" height="14" font="2">REG:process(CLK,RST) </text>
+<text top="673" left="63" width="46" height="14" font="2">begin  </text>
+<text top="690" left="63" width="288" height="14" font="2">    if RST='1' then CURRENT_STATE&lt;=st0; </text>
+<text top="707" left="63" width="519" height="14" font="2">    else if (CLK'event and CLK='1')    then CURRENT_STATE&lt;=NEXT_STATE; </text>
+<text top="724" left="63" width="42" height="14" font="2">end if; </text>
+<text top="742" left="63" width="42" height="14" font="2">end if; </text>
+<text top="759" left="63" width="112" height="14" font="2">end process REG; </text>
+<text top="776" left="63" width="154" height="14" font="2">LATCH:process(LOCK) </text>
+<text top="793" left="63" width="46" height="14" font="2">begin  </text>
+<text top="811" left="63" width="333" height="14" font="2">        if LOCK='1' and LOCK'event        then REGL&lt;=D; </text>
+<text top="828" left="63" width="42" height="14" font="2">end if; </text>
+<text top="845" left="63" width="132" height="14" font="2">end process LATCH; </text>
+<text top="862" left="63" width="75" height="14" font="2">Q&lt;=REGL; </text>
+<text top="880" left="63" width="85" height="14" font="2">end BEHAV; </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="24" height="12" font="4">528 </text>
+<text top="43" left="114" width="133" height="12" font="4">W. Zhong and Y. Wang </text>
+<text top="86" left="80" width="506" height="14" font="2">In the codes above, RST, CLK are reset signal and system clock signal; D[7...0] is </text>
+<text top="103" left="63" width="524" height="14" font="2">the converted digital signal which was linked to output of A/D converter; OE is the </text>
+<text top="121" left="63" width="522" height="14" font="2">output enable signal of TLC5510; Q[7...0] is the output data; LOCK0 is the latch signal </text>
+<text top="138" left="63" width="473" height="14" font="2">of output data; ADCLK was linked to the converting clock CLK of TLC5510. </text>
+<text top="340" left="574" width="8" height="19" font="2"> </text>
+<text top="372" left="198" width="252" height="12" font="6"><b>Fig. 3.</b> Simulation diagram of data acquisition </text>
+<text top="416" left="63" width="341" height="16" font="7"><b>5      Design and Simulation of FIFO Module </b></text>
+<text top="454" left="63" width="523" height="14" font="2">FIFO is a module library with settable storage parameters, which was always used for </text>
+<text top="471" left="63" width="527" height="14" font="2">caching in high-speed digital system. FIFO is adopted as cache body in many </text>
+<text top="488" left="63" width="525" height="14" font="2">high-speed systems nowadays. The storing velocity is highly improved because the </text>
+<text top="506" left="63" width="524" height="14" font="2">time read-in and read-out of FIFO is only one clock cycle, in which the adding one </text>
+<text top="523" left="63" width="250" height="14" font="2">operation of address is unnecessary[4-5]. </text>
+<text top="540" left="80" width="509" height="14" font="2">A high-speed FIFO was customized on development platform QuartusII in this </text>
+<text top="557" left="63" width="524" height="14" font="2">paper with the macro block LPM_FIFO in LPM. Relevant parameters were adjusted </text>
+<text top="575" left="63" width="523" height="14" font="2">according to requirement and a FIFO module which met the own needs was generated </text>
+<text top="592" left="63" width="524" height="14" font="2">consequently. After that, the FIFO module could be invoked in the top design of the </text>
+<text top="609" left="63" width="530" height="14" font="2">system by using the component instantiation statements in VHDL language. </text>
+<text top="626" left="63" width="406" height="14" font="2">Component declaration and instantiation statements are as follows: </text>
+<text top="644" left="80" width="4" height="14" font="2"> </text>
+<text top="661" left="80" width="103" height="14" font="2">component fifo2 </text>
+<text top="678" left="78" width="346" height="14" font="2">      port(data:in STD_LOGIC_VECTOR(7 downto 0); </text>
+<text top="695" left="78" width="284" height="14" font="2">           wrreq,rdreq,clock,aclr:in std_logic; </text>
+<text top="713" left="78" width="221" height="14" font="2">           full,empty:out std_logic; </text>
+<text top="730" left="78" width="293" height="14" font="2">           q:out std_logic_vector(7 downto 0)); </text>
+<text top="747" left="78" width="126" height="14" font="2">    end component; </text>
+<text top="764" left="78" width="56" height="14" font="2">A:fifo2  </text>
+<text top="782" left="80" width="325" height="14" font="2">port map(DATA,wr,rd,CLK,RST,FULL,EMPTY,Q); </text>
+<text top="799" left="80" width="268" height="14" font="2">Diagram 4 is the function simulated picture. </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="3" height="12" font="4"> </text>
+<text top="43" left="180" width="355" height="12" font="4">Research of Data Acquisition Controller for DO Based on FPGA </text>
+<text top="43" left="562" width="24" height="12" font="4">529 </text>
+<text top="192" left="573" width="8" height="19" font="2"> </text>
+<text top="225" left="169" width="310" height="12" font="6"><b>Fig. 4.</b> FIFO module and the function simulated diagram </text>
+<text top="269" left="63" width="302" height="16" font="7"><b>6      Function Simulation of the System </b></text>
+<text top="307" left="63" width="523" height="14" font="2">The system was functional simulated on QuartusII. The simulation diagram is showed </text>
+<text top="324" left="63" width="528" height="14" font="2">in figure 5. The result of simulation indicated that control of high-speed data </text>
+<text top="341" left="63" width="523" height="14" font="2">acquisition and storage were realized successfully in this paper by the data acquisition </text>
+<text top="359" left="63" width="91" height="14" font="2">controller[6].  </text>
+<text top="618" left="578" width="8" height="19" font="2"> </text>
+<text top="651" left="212" width="225" height="12" font="6"><b>Fig. 5.</b> Simulation diagram of the system </text>
+<text top="694" left="63" width="126" height="16" font="7"><b>7   Conclusion </b></text>
+<text top="732" left="63" width="525" height="14" font="2">In consideration of the requirements on real-time sampling of DO data acquisition </text>
+<text top="750" left="63" width="524" height="14" font="2">system in SBR sewage treatment, the real-time sampling control of high-speed A/D </text>
+<text top="767" left="63" width="522" height="14" font="2">converter TLC5510 is realized in hardware description language VHDL on the cyclone </text>
+<text top="784" left="63" width="524" height="14" font="2">FPGA equipment EP13T144C8. The high-speed sampling performance of TLC5510 </text>
+<text top="801" left="63" width="527" height="14" font="2">was brought into full play and the real-time of DO data acquisition was highly </text>
+<text top="818" left="63" width="531" height="14" font="2">improved. Combined with follow-up signal processing circuit, the real-time </text>
+<text top="836" left="63" width="525" height="14" font="2">investigation and control of DO could be realized to raise the water quality of SBR </text>
+<text top="853" left="63" width="112" height="14" font="2">sewage treatment. </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="24" height="12" font="4">530 </text>
+<text top="43" left="114" width="133" height="12" font="4">W. Zhong and Y. Wang </text>
+<text top="87" left="63" width="88" height="16" font="7"><b>References </b></text>
+<text top="126" left="64" width="521" height="12" font="4">1.  Yang, P., Xu, Z.: Design of high-speed ADC08200 controller based on FPGA. Application of </text>
+<text top="142" left="82" width="232" height="12" font="4">Electronic Technique 35(6), 65–68 (2009) </text>
+<text top="159" left="64" width="527" height="12" font="4">2.  Li, H., Yuan, S.: Design of FPGA/CPLD based on QuartusII. Publishing House of </text>
+<text top="175" left="82" width="152" height="12" font="4">Electronics Industry (2006) </text>
+<text top="192" left="64" width="346" height="12" font="4">3.  Bhasker, J.: A VHDL premier. China Machine Press (2006) </text>
+<text top="208" left="64" width="523" height="12" font="4">4.  Zhang, P., Li, Z.: Development and application of CPLD/FPGA based on VHDL. National </text>
+<text top="225" left="82" width="175" height="12" font="4">Defence Industrial Press (2009) </text>
+<text top="241" left="64" width="523" height="12" font="4">5.  Wang, Q., Han, J., Dong, F.: Design for high-speed data acquisition control logic based on </text>
+<text top="258" left="82" width="480" height="12" font="4">AD7366/AD7367 and FPGA. Electronic Instrumentation Customer 16(1), 50–52 (2009) </text>
+<text top="274" left="64" width="525" height="12" font="4">6.  Xiao, Z., Cheng, M.: Design of data acquisition and analysis system based on FPGA. </text>
+<text top="291" left="82" width="298" height="12" font="4">Application of Integrated Circuits 35(3), 49–51 (2009) </text>
+</page>
+</pdf2xml>

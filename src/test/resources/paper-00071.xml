@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="10" family="Times" color="#000000"/>
+	<fontspec id="1" size="8" family="Times" color="#000000"/>
+	<fontspec id="2" size="15" family="Times" color="#000000"/>
+	<fontspec id="3" size="12" family="Times" color="#000000"/>
+	<fontspec id="4" size="7" family="Times" color="#000000"/>
+	<fontspec id="5" size="6" family="Times" color="#000000"/>
+	<fontspec id="6" size="11" family="Times" color="#000000"/>
+	<fontspec id="7" size="11" family="Times" color="#000000"/>
+	<fontspec id="8" size="11" family="Times" color="#000000"/>
+	<fontspec id="9" size="11" family="Times" color="#000000"/>
+	<fontspec id="10" size="12" family="Times" color="#000000"/>
+	<fontspec id="11" size="12" family="Times" color="#000000"/>
+	<fontspec id="12" size="7" family="Times" color="#000000"/>
+	<fontspec id="13" size="7" family="Times" color="#000000"/>
+	<fontspec id="14" size="12" family="Symbol" color="#000000"/>
+<text top="78" left="189" width="373" height="15" font="0"><b>International Journal of Computer Science and Communication</b></text>
+<text top="85" left="593" width="210" height="12" font="1">Vol. 3, No. 1, January-June 2012, pp. 57-59</text>
+<text top="124" left="81" width="638" height="21" font="2"><b>IMPLEMENTATION OF MODIFIED SELECTIVE MEDIAN FILTER IN FPGA – TOWARDS</b></text>
+<text top="146" left="81" width="291" height="21" font="2"><b>THE DETECTION OF BREAST CANCER</b></text>
+<text top="186" left="81" width="105" height="18" font="3"><b>B. Senthilkumar</b></text>
+<text top="185" left="186" width="6" height="12" font="4"><b>1</b></text>
+<text top="186" left="192" width="162" height="18" font="3"><b> and G. Umamaheswari</b></text>
+<text top="185" left="353" width="6" height="12" font="4"><b>2</b></text>
+<text top="212" left="81" width="4" height="12" font="5">1</text>
+<text top="212" left="86" width="599" height="18" font="6">Department of Electronics and Communication Engineering, Tamilnadu College of Engineering,</text>
+<text top="228" left="81" width="292" height="18" font="6">Coimbatore, India, <i>E-mail: <a href="mailto:sen17580@yahoo.co.in">sen17580@yahoo.co.in.</a></i></text>
+<text top="249" left="81" width="4" height="12" font="5">2</text>
+<text top="249" left="86" width="560" height="18" font="6">Department of Electronics and Communication Engineering, P.S.G College of Technology,</text>
+<text top="265" left="81" width="118" height="18" font="6">Coimbatore,  India.</text>
+<text top="335" left="108" width="701" height="18" font="6">In medical image processing, noise removal is the challenging task. Removal of noise using the existing methods</text>
+<text top="351" left="108" width="701" height="18" font="6">like Median Filter (MF), Center Weighted Median Filter (CWMF), Rank Condition Rank Selection Filter (RCRSF)</text>
+<text top="367" left="108" width="701" height="18" font="6">and SMF Selective Median Filter (SMF) provides satisfactory results. In this paper, we have made improvements in</text>
+<text top="384" left="108" width="701" height="18" font="6">SMF by providing the adaptive thresholding concept and called as Modified Selective Median Filter (MSMF). Mean</text>
+<text top="400" left="108" width="701" height="18" font="6">square  error  (MSE)  and  mean  absolute  error  (MAE)  has  been  calculated  and  the  performance  are  compared.</text>
+<text top="416" left="108" width="701" height="18" font="6">The performance of MSMF is better than the other methods and it is also implemented in field programmable gate</text>
+<text top="432" left="108" width="701" height="18" font="6">array (FPGA). We found this method works good for the noise removal in mammograms for the detection of breast</text>
+<text top="448" left="108" width="701" height="18" font="6">cancer. Furthermore, the method has been tested for the sample image mdb218 taken from mammographic image</text>
+<text top="464" left="108" width="351" height="18" font="6">analysis society (MIAS) and the results found were good.</text>
+<text top="485" left="108" width="334" height="18" font="8"><i><b>Keywords:</b></i> Noise removal, filter, breast cancer, FPGA.</text>
+<text top="315" left="423" width="65" height="17" font="9"><b>ABSTRACT</b></text>
+<text top="568" left="81" width="120" height="18" font="3"><b>1. INTRODUCTION</b></text>
+<text top="589" left="81" width="366" height="20" font="10">In computer vision, segmentation refers to the process of</text>
+<text top="607" left="81" width="366" height="20" font="10">partitioning  a  digital  image  into  multiple  segments</text>
+<text top="625" left="81" width="366" height="20" font="10">[7, 8 and 9]. The goal of noise removal is to simplify the</text>
+<text top="643" left="81" width="366" height="20" font="10">segmentation process. Several general-purpose algorithms</text>
+<text top="661" left="81" width="366" height="20" font="10">and techniques have been developed for noise removal</text>
+<text top="679" left="81" width="20" height="20" font="10">[1].</text>
+<text top="701" left="108" width="339" height="20" font="10">Since there is no perfect method to remove the noise</text>
+<text top="719" left="81" width="366" height="20" font="10">and to enhance the image, it is proposed a new algorithm</text>
+<text top="737" left="81" width="366" height="20" font="10">called  modified  selective  median  filtering. And  it  is</text>
+<text top="755" left="81" width="367" height="20" font="10">especially used to enhance the digital mammogram image</text>
+<text top="773" left="81" width="366" height="20" font="10">to  detect  microcalcifications.  Calcifications  are  the</text>
+<text top="791" left="81" width="366" height="20" font="10">indicators about the breast cancer. This noise removal</text>
+<text top="809" left="81" width="245" height="20" font="10">filter has been implemented in FPGA.</text>
+<text top="846" left="81" width="283" height="18" font="3"><b>2. MODIFIED SELECTIVE MEDIAN FILTERING</b></text>
+<text top="868" left="81" width="366" height="20" font="10">There are two possible approaches to enhance mammo-</text>
+<text top="886" left="81" width="366" height="20" font="10">graphic  features.  One  is  to  increase  the  contrast  of</text>
+<text top="904" left="81" width="366" height="20" font="10">suspicious areas and the other is to remove background</text>
+<text top="921" left="81" width="366" height="20" font="10">noise  [2,  10  and  11].  The  contrast  of  each  region  is</text>
+<text top="939" left="81" width="366" height="20" font="10">calculated with respect to its individual background [6].</text>
+<text top="957" left="81" width="366" height="20" font="10">Removing background noise while preserving the edge</text>
+<text top="975" left="81" width="366" height="20" font="10">information of suspicious areas can enhance the digital</text>
+<text top="993" left="81" width="366" height="20" font="10">mammogram [4, 5]. This approach was investigated by</text>
+<text top="1011" left="81" width="366" height="20" font="10">Lai <i>et al. </i>[3], who used four selective averaging schemes</text>
+<text top="1029" left="81" width="366" height="20" font="10">and a modification of median filtering called selective</text>
+<text top="1047" left="81" width="366" height="20" font="10">median  filtering.  A selective  median  filter  is,  given  a</text>
+<text top="1065" left="81" width="366" height="20" font="10">window <i>W</i>(<i>i</i>, <i>j</i>), centered at image coordinates (<i>i</i>, <i>j</i>), the</text>
+<text top="1083" left="81" width="326" height="20" font="10">output of the selective median filter is given in (1).</text>
+<text top="566" left="536" width="11" height="20" font="11"><i>X</i></text>
+<text top="576" left="547" width="8" height="13" font="12"><i>i</i>,<i>j</i></text>
+<text top="566" left="560" width="95" height="20" font="10">= median = {<i>X</i></text>
+<text top="576" left="655" width="10" height="13" font="12"><i>r</i>,<i>s</i></text>
+<text top="566" left="665" width="35" height="20" font="10">: (<i>r</i>, <i>s</i>)</text>
+<text top="567" left="703" width="11" height="19" font="14">∈</text>
+<text top="566" left="717" width="44" height="20" font="11"><i>N</i> (<i>i</i>, <i>j</i>),</text>
+<text top="598" left="574" width="49" height="20" font="10">and |<i>X</i></text>
+<text top="607" left="623" width="10" height="13" font="12"><i>r</i>,<i>s</i></text>
+<text top="598" left="633" width="25" height="20" font="10"> – <i>X</i></text>
+<text top="607" left="658" width="8" height="13" font="12"><i>i</i>,<i>j</i></text>
+<text top="598" left="666" width="39" height="20" font="10">| &lt; <i>T</i>}</text>
+<text top="598" left="818" width="17" height="20" font="10">(1)</text>
+<text top="625" left="493" width="89" height="20" font="10">And where <i>X</i></text>
+<text top="634" left="582" width="8" height="13" font="12"><i>i</i>,<i>j</i></text>
+<text top="625" left="590" width="248" height="20" font="10"> is the image intensity at (<i>i</i>, <i>j</i>), <i>N</i>(<i>i</i>, <i>j</i>) is</text>
+<text top="643" left="465" width="372" height="20" font="10">the area in the image covered by the window <i>W</i>(<i>i</i>, <i>j</i>), and <i>T</i></text>
+<text top="661" left="465" width="372" height="20" font="10">is a threshold. In computing the median, the set of pixels</text>
+<text top="679" left="465" width="372" height="20" font="10">is restricted to those with a difference in gray level not</text>
+<text top="697" left="465" width="372" height="20" font="10">greater than some threshold <i>T</i>. Adjusting the parameter <i>T</i></text>
+<text top="715" left="465" width="371" height="20" font="10">can control the amount of edge smearing [12, 13, 14 and</text>
+<text top="733" left="465" width="372" height="20" font="10">15]. If <i>T</i> is small, the edge-preserving power of the filter is</text>
+<text top="751" left="465" width="372" height="20" font="10">strong, but its smoothing effect is small. If <i>T</i> is large, the</text>
+<text top="769" left="465" width="371" height="20" font="10">filter behaves the other way around and used to remove</text>
+<text top="787" left="465" width="372" height="20" font="10">the background noise [1]. The adjustment of <i>T</i> in adaptive</text>
+<text top="805" left="465" width="372" height="20" font="10">manor will provide best result. And this makes a new filter</text>
+<text top="823" left="465" width="258" height="20" font="10">named modified selective median filter.</text>
+<text top="860" left="465" width="173" height="18" font="3"><b>3. FPGA IMPLEMENTATION</b></text>
+<text top="881" left="465" width="372" height="20" font="10">This  algorithm  has  been  implemented  in  Xilinx  500K</text>
+<text top="899" left="465" width="371" height="20" font="10">FPGA.  It is a bit level running algorithm with modular</text>
+<text top="917" left="465" width="372" height="20" font="10">and parallel in structure. Pixel levels of neighbor cells have</text>
+<text top="935" left="465" width="372" height="20" font="10">been taken by the deletion and insertion process in an</text>
+<text top="953" left="465" width="371" height="20" font="10">alternative  manor  [16,  17  and  18].  According  to  the</text>
+<text top="971" left="465" width="371" height="20" font="10">proposed processing sequence, it is performed from the</text>
+<text top="989" left="465" width="372" height="20" font="10">MSB to the LSB in parallelism and pipelined in the bit</text>
+<text top="1007" left="465" width="372" height="20" font="10">level with regular data flow for the deletion and insertion</text>
+<text top="1025" left="465" width="43" height="20" font="10">of bits.</text>
+<text top="1047" left="493" width="345" height="20" font="10">It is in the bit level operation from the most significant</text>
+<text top="1065" left="465" width="372" height="20" font="10">bit (MSB) to the least significant bit (LSB). When the MSB</text>
+<text top="1083" left="465" width="371" height="20" font="10">of the deletion is completed, the MSB of the insertion is</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="15" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="16" size="11" family="Helvetica" color="#000000"/>
+<text top="56" left="390" width="439" height="12" font="15">International  Journal  of  Computer  Science  and  Communication  (IJCSC)</text>
+<text top="61" left="87" width="15" height="12" font="16"><b>58</b></text>
+<text top="87" left="81" width="369" height="20" font="10">performed immediately. At the same time, the next coming</text>
+<text top="105" left="81" width="369" height="20" font="10">window can be evaluated just after the order determination</text>
+<text top="123" left="81" width="369" height="20" font="10">of the MSB of the current window. This makes the method</text>
+<text top="141" left="81" width="291" height="20" font="10">reliable and good for FPGA implementation.</text>
+<text top="179" left="81" width="72" height="18" font="3"><b>4. RESULTS</b></text>
+<text top="200" left="81" width="369" height="20" font="10">In Figure 1 the first image is the original mammogram</text>
+<text top="218" left="81" width="369" height="20" font="10">image,  the  second  image  is  the  noise  removed  image</text>
+<text top="236" left="81" width="369" height="20" font="10">using MSMF and the third is the noise removed image</text>
+<text top="254" left="81" width="369" height="20" font="10">using MSMF after implemented in FPGA. Mean square</text>
+<text top="272" left="81" width="369" height="20" font="10">error  (MSE)  and  mean  absolute  error  (MAE)  has</text>
+<text top="290" left="81" width="369" height="20" font="10">been  determined  and  the  results  are  tabulated  in</text>
+<text top="308" left="81" width="369" height="20" font="10">Table 1 and the power delay information is also given in</text>
+<text top="326" left="81" width="51" height="20" font="10">Table 2.</text>
+<text top="466" left="91" width="349" height="15" font="0"><b>Figure 1: Results of the Mammogram Image (mdb218) Taken</b></text>
+<text top="481" left="205" width="121" height="15" font="0"><b>from MIAS Database.</b></text>
+<text top="506" left="244" width="44" height="15" font="0"><b>Table 1</b></text>
+<text top="521" left="127" width="277" height="15" font="0"><b>MSE and MAE Results of Noise Removal Methods</b></text>
+<text top="547" left="89" width="48" height="18" font="7"><i>Methods</i></text>
+<text top="547" left="159" width="30" height="18" font="7"><i>MAE</i></text>
+<text top="547" left="220" width="28" height="18" font="7"><i>MSE</i></text>
+<text top="547" left="279" width="48" height="18" font="7"><i>Methods</i></text>
+<text top="547" left="354" width="30" height="18" font="7"><i>MAE</i></text>
+<text top="547" left="417" width="28" height="18" font="7"><i>MSE</i></text>
+<text top="571" left="89" width="20" height="18" font="6">MF</text>
+<text top="571" left="162" width="23" height="18" font="6">3.41</text>
+<text top="571" left="219" width="30" height="18" font="6">41.50</text>
+<text top="571" left="279" width="27" height="18" font="6">SMF</text>
+<text top="571" left="357" width="23" height="18" font="6">0.67</text>
+<text top="571" left="415" width="30" height="18" font="6">13.63</text>
+<text top="592" left="89" width="44" height="18" font="6">CWMF</text>
+<text top="592" left="162" width="23" height="18" font="6">1.07</text>
+<text top="592" left="219" width="30" height="18" font="6">14.19</text>
+<text top="592" left="279" width="39" height="18" font="6">MSMF</text>
+<text top="592" left="357" width="23" height="18" font="6">0.45</text>
+<text top="592" left="415" width="30" height="18" font="6">11.91</text>
+<text top="612" left="89" width="43" height="18" font="6">RCRSF</text>
+<text top="612" left="162" width="23" height="18" font="6">1.03</text>
+<text top="612" left="219" width="30" height="18" font="6">26.91</text>
+<text top="642" left="244" width="44" height="15" font="0"><b>Table 2</b></text>
+<text top="657" left="129" width="272" height="15" font="0"><b>Power and Delay Information of SMF and MSMF</b></text>
+<text top="683" left="92" width="48" height="18" font="7"><i>Methods</i></text>
+<text top="683" left="208" width="102" height="18" font="7"><i>Power Dissipation</i></text>
+<text top="683" left="372" width="63" height="18" font="7"><i>Delay Time</i></text>
+<text top="707" left="92" width="27" height="18" font="6">SMF</text>
+<text top="707" left="240" width="39" height="18" font="6">18mW</text>
+<text top="707" left="385" width="37" height="18" font="6">1.72ns</text>
+<text top="728" left="92" width="39" height="18" font="6">MSMF</text>
+<text top="728" left="240" width="39" height="18" font="6">16mW</text>
+<text top="728" left="385" width="37" height="18" font="6">1.52ns</text>
+<text top="758" left="108" width="342" height="20" font="10">Table 1 shows the comparison between the proposed</text>
+<text top="776" left="81" width="369" height="20" font="10">filter and the existing filters. The MAE and MSE of the</text>
+<text top="795" left="81" width="369" height="20" font="10">proposed method is less and from Table 2 it is clear that</text>
+<text top="813" left="81" width="369" height="20" font="10">the power dissipation and the delay are reduced in a much</text>
+<text top="831" left="81" width="231" height="20" font="10">better way when compared to SMF.</text>
+<text top="869" left="81" width="109" height="18" font="3"><b>5. CONCLUSION</b></text>
+<text top="890" left="81" width="369" height="20" font="10">Modified selective median filtering can correctly removes</text>
+<text top="908" left="81" width="369" height="20" font="10">the noise and provides the original images in a clear form.</text>
+<text top="927" left="81" width="369" height="20" font="10">The concept is simple and only needs the auto adjustment</text>
+<text top="945" left="81" width="369" height="20" font="10">of  thresholding.  The  result  we  found  is  good  and</text>
+<text top="963" left="81" width="369" height="20" font="10">satisfactory.  In  future,  the  time  consumption  of  this</text>
+<text top="982" left="81" width="369" height="20" font="10">algorithm has to be reduced. This work includes the FPGA</text>
+<text top="1000" left="81" width="369" height="20" font="10">implementation of this novel method with the high sample</text>
+<text top="1018" left="81" width="369" height="20" font="10">rate to support the real-time applications. Based on the</text>
+<text top="1036" left="81" width="369" height="20" font="10">evaluation result, it is concluded that the proposed bit</text>
+<text top="1055" left="81" width="369" height="20" font="10">level design can support the real time applications. The</text>
+<text top="1073" left="81" width="369" height="20" font="10">performance of this MSMF method obtains the smallest</text>
+<text top="88" left="468" width="369" height="20" font="10">MSE (11.91) and MAE (0.45) with less power consumption</text>
+<text top="106" left="468" width="369" height="20" font="10">(16mW) and less delay (1.52ns). Subjective evaluation also</text>
+<text top="124" left="468" width="369" height="20" font="10">shows that the image quality has enhanced significantly.</text>
+<text top="162" left="468" width="83" height="18" font="3"><b>REFERENCES</b></text>
+<text top="183" left="480" width="357" height="18" font="6">[1] Mehul P. Sampat, Mia K. Markey and Alan C. Bovik,</text>
+<text top="199" left="504" width="333" height="18" font="6">“Computer-Aided  Detection  and  Diagnosis  in</text>
+<text top="216" left="504" width="333" height="18" font="6">Mammography”, <i>Elsevier Academic Press</i>, pp. 1195-1217,</text>
+<text top="232" left="504" width="30" height="18" font="6">2005.</text>
+<text top="254" left="480" width="357" height="18" font="6">[2] Sheng-Chih-Yang, Chuin-Mu Wang, Yi-Nung Chung,</text>
+<text top="270" left="504" width="333" height="18" font="6">Giu-Cheng  Hsu,  San-Kan  Lee,  Pau-Choo  Chung  and</text>
+<text top="286" left="504" width="333" height="18" font="6">Chein-1  Chang, “A Computer Aided  System for  Mass</text>
+<text top="303" left="504" width="333" height="18" font="6">Detection and Classification in Digitized Mammograms”,</text>
+<text top="319" left="504" width="333" height="18" font="7"><i>Biomedical  Engineering-  Applications,  Basis  and</i></text>
+<text top="335" left="504" width="227" height="19" font="7"><i>Communications</i>, <b>17</b>, pp. 215-228, 2005.</text>
+<text top="357" left="480" width="358" height="18" font="6">[3] S. Lai, X. Li and W. Bischof, “On Techniques for Detecting</text>
+<text top="373" left="504" width="333" height="18" font="6">Circumscribed Masses in Mammograms”, <i>IEEE Trans.</i></text>
+<text top="389" left="504" width="187" height="19" font="7"><i>Med. Imag</i>, <b>8</b>, pp. 377-386, 1989.</text>
+<text top="411" left="480" width="357" height="18" font="6">[4] W.  Morrow,  R.  Paranjape,  R.  Rangayyan,  and</text>
+<text top="427" left="504" width="333" height="18" font="6">J.  Desautels,  “Regionbased  Contrast  Enhancement  of</text>
+<text top="444" left="504" width="333" height="19" font="6">Mammograms”, <i>IEEE Trans. Med. Imag.</i>, <b>11</b>, pp. 392–406,</text>
+<text top="460" left="504" width="30" height="18" font="6">1992.</text>
+<text top="482" left="480" width="357" height="18" font="6">[5] Shu-Yen Wan, William E. Higgins, “Symmetric Region</text>
+<text top="498" left="504" width="333" height="19" font="6">Growing”, <i>IEEE Trans. Image Processing, </i><b>12</b>, pp. 1007-1015,</text>
+<text top="514" left="504" width="30" height="18" font="6">2003.</text>
+<text top="536" left="480" width="357" height="18" font="6">[6] Alfonso  Rojas  Dominguez  and  Ashok  K.  Nandi,</text>
+<text top="552" left="504" width="333" height="18" font="6">“Detection of Masses in Mammograms Via Statistically</text>
+<text top="569" left="504" width="333" height="18" font="6">Based  Enhancement,  Multilevel-Thresholding</text>
+<text top="585" left="504" width="333" height="18" font="6">Segmentation  and  Region  Selection”, <i>Computerized</i></text>
+<text top="601" left="504" width="305" height="19" font="7"><i>Medical Imaging and Graphics</i>, <b>32</b>, pp. 304-315, 2008.</text>
+<text top="623" left="480" width="358" height="18" font="6">[7] S. M. Pizer, E. O. P. Amburn and J. D. Austin, “Adaptive</text>
+<text top="639" left="504" width="333" height="18" font="6">Histogram  Equalization  and  Its  Variations”, <i>Comput.</i></text>
+<text top="656" left="504" width="307" height="19" font="7"><i>Vision Graphics Image Process</i>, <b>39</b>, pp. 355-368, 1987.</text>
+<text top="677" left="480" width="357" height="18" font="6">[8] A.  Papadopoulos,  D.  I.  Fotiadis  and  L.  Costaridou,</text>
+<text top="693" left="504" width="333" height="18" font="6">“Improvement of Microcalcification Cluster Detection</text>
+<text top="710" left="504" width="333" height="18" font="6">in  Mammography  Utilizing  Image  Enhancement</text>
+<text top="726" left="504" width="333" height="19" font="6">Techniques”, <i>Computers  in  Biology  and  Medicine</i>, <b>38</b>,</text>
+<text top="742" left="504" width="120" height="18" font="6">pp. 1045-1055, 2008.</text>
+<text top="764" left="480" width="357" height="18" font="6">[9] H. D. Cheng, X. J. Shi, R. Min, L. M. Hu, X. P. Cai and H.</text>
+<text top="780" left="504" width="333" height="18" font="6">N.  Du,  “Approaches  for  Automated  Detection  and</text>
+<text top="797" left="504" width="333" height="18" font="6">Classification  of  Masses  in  Mammograms”, <i>Pattern</i></text>
+<text top="813" left="504" width="206" height="19" font="7"><i>Recognition</i>, <b>39</b> (2006), pp. 646-668.</text>
+<text top="835" left="473" width="364" height="18" font="6">[10] S. Singh and R. Al-Mansoori, “Identification of Regions</text>
+<text top="851" left="504" width="333" height="18" font="6">of Interest in Digital Mammograms”, <i>J. Intell. Systems</i>,</text>
+<text top="867" left="504" width="127" height="18" font="9"><b>10</b>, pp. 183-210, 2000.</text>
+<text top="889" left="473" width="364" height="18" font="6">[11] R. M. Rangayyan, L. Shen, Y. Shen, J. E .L. Desautels,</text>
+<text top="905" left="504" width="333" height="18" font="6">H. Bryant,  T. J. Terry,  N.    Horeczko  and  M.  S.  Rose,</text>
+<text top="922" left="504" width="333" height="18" font="6">“Improvement of Sensitivity of Breast Cancer Diagnosis</text>
+<text top="938" left="504" width="333" height="18" font="6">with Adaptive Neighbourhood Contrast Enhancement</text>
+<text top="954" left="504" width="333" height="18" font="6">of Mammograms”, <i>IEEE Trans. Inform. Technol. Biomed. </i>,</text>
+<text top="971" left="504" width="120" height="18" font="9"><b>1</b>, pp. 161-170, 1997.</text>
+<text top="992" left="473" width="364" height="18" font="6">[12] Y. J. Lee, J. M. Park and H. W. Park, “Mammographic</text>
+<text top="1008" left="504" width="333" height="18" font="6">Mass Detection by Adaptive Thresholding and Region</text>
+<text top="1025" left="504" width="333" height="19" font="6">Growing”, <i>Int.  J.  Imaging  Systems  Technol</i>., <b>11</b>,</text>
+<text top="1041" left="504" width="107" height="18" font="6">pp. 340-346, 2000.</text>
+<text top="1063" left="473" width="364" height="18" font="6">[13] N.  Petrick,  H.  P.  Chan,  B.  Sahiner  and  M. A.  Helvie,</text>
+<text top="1079" left="504" width="333" height="18" font="6">“Combined  Adaptive  Enhancement  and  Region</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="56" left="94" width="617" height="12" font="15">Implementation of Modified Selective Median Filter in FPGA – Towards the Detection of Breast Cancer</text>
+<text top="60" left="816" width="15" height="12" font="16"><b>59</b></text>
+<text top="88" left="117" width="333" height="18" font="6">Growing Segmentation of Breast Masses on Digitized</text>
+<text top="104" left="117" width="315" height="19" font="6">Mammograms”, <i>Med. Phys.</i>, <b>26</b>, pp. 1642-1654, 1999.</text>
+<text top="126" left="86" width="364" height="18" font="6">[14] T. A. Nodes and N. C. Gallagher, “Median Filters: Some</text>
+<text top="142" left="117" width="333" height="18" font="6">Modifications  and  Their  Properties”, <i>IEEE  Trans.  on</i></text>
+<text top="158" left="117" width="333" height="19" font="7"><i>Acoust.,  Speech,  and  Signal  Processing</i>, <b>ASSP-30</b>,</text>
+<text top="174" left="117" width="103" height="18" font="6">pp.739-747, 1982.</text>
+<text top="195" left="86" width="365" height="18" font="6">[15] S.  J.  Ko  and  Y.  H.  Lee,  “Center  Weighted Median</text>
+<text top="211" left="117" width="333" height="18" font="6">Filters and Their Application to Image Enhancement ”,</text>
+<text top="227" left="117" width="333" height="19" font="7"><i>IEEE  Trans.  on  Circuits  and  Systems</i>, <b>38</b>,  1991,</text>
+<text top="243" left="117" width="72" height="18" font="6">pp. 984-993.</text>
+<text top="88" left="473" width="364" height="18" font="6">[16] N.  Rama  Murthy  and  M.  N.  S.  Swamy,  “On  the</text>
+<text top="104" left="504" width="333" height="18" font="6">VLSI  Implementation  of  Real-Time  Order  Statistic</text>
+<text top="120" left="504" width="333" height="19" font="6">Filters”, <i>IEEE Trans. on Signal Processing</i>, <b>40</b>, pp. 1241-</text>
+<text top="136" left="504" width="65" height="18" font="6">1252, 1992.</text>
+<text top="157" left="473" width="364" height="18" font="6">[17] L.  E.  Lucke  and  K.  K.  Parhi,  “Parallel  Processing</text>
+<text top="173" left="504" width="333" height="18" font="6">Architecture  for  Rank  Order  and  Stack  Filters”,</text>
+<text top="189" left="504" width="333" height="19" font="7"><i>IEEE Trans. on Signal Processing</i>, <b>42</b>, pp. 1178-1189, 1994.</text>
+<text top="210" left="473" width="364" height="18" font="6">[18] D.  Richards,  “VLSI  Median  Filters”, <i>IEEE  Trans.  on</i></text>
+<text top="226" left="504" width="333" height="19" font="7"><i>Acoust</i>., <i>Speech, and Signal Processing</i>, <b>ASSP-38</b>, pp. 145-</text>
+<text top="242" left="504" width="58" height="18" font="6">153, 1990.</text>
+</page>
+</pdf2xml>

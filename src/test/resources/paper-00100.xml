@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="0" size="10" family="Times" color="#000000"/>
+	<fontspec id="1" size="2" family="Times" color="#000000"/>
+	<fontspec id="2" size="19" family="Times" color="#000000"/>
+	<fontspec id="3" size="12" family="Times" color="#000000"/>
+	<fontspec id="4" size="7" family="Times" color="#000000"/>
+	<fontspec id="5" size="11" family="Times" color="#000000"/>
+	<fontspec id="6" size="11" family="Times" color="#000000"/>
+	<fontspec id="7" size="16" family="Times" color="#000000"/>
+<text top="925" left="63" width="344" height="11" font="0">Z. Qian et al. (Eds.): Recent Advances in CSIE, LNEE 128, pp. 29<a href="pdfxml.html#6">–34</a>. </text>
+<text top="939" left="63" width="125" height="11" font="0">springerlink.com         </text>
+<text top="945" left="188" width="1" height="4" font="1"> </text>
+<text top="939" left="190" width="219" height="11" font="0">    © Springer-Verlag Berlin Heidelberg 2012 </text>
+<text top="89" left="122" width="407" height="19" font="2"><b>Design of 1.6GHz Bandwidth Four-Channels </b></text>
+<text top="115" left="166" width="319" height="19" font="2"><b>Digital-Correlator Based on FPGA </b></text>
+<text top="176" left="146" width="45" height="14" font="3">Hao Lu</text>
+<text top="173" left="191" width="5" height="9" font="4">1</text>
+<text top="176" left="196" width="106" height="14" font="3">, Zhenzhan Wang</text>
+<text top="173" left="302" width="5" height="9" font="4">2</text>
+<text top="176" left="307" width="69" height="14" font="3">, Jingyi Liu</text>
+<text top="173" left="376" width="5" height="9" font="4">2</text>
+<text top="176" left="380" width="114" height="14" font="3">, and Guoxing Gao</text>
+<text top="173" left="495" width="5" height="9" font="4">3</text>
+<text top="176" left="500" width="4" height="14" font="3"> </text>
+<text top="211" left="104" width="5" height="8" font="4">1</text>
+<text top="214" left="108" width="436" height="12" font="5"> Center for Space Science and Applied Research, Chinese Academy of Sciences </text>
+<text top="230" left="134" width="381" height="12" font="5">Graduate University of Chinese Academy of Sciences, Beijing, China </text>
+<text top="247" left="254" width="146" height="11" font="5">luhao0408@126.com </text>
+<text top="260" left="63" width="5" height="8" font="4">2</text>
+<text top="263" left="68" width="517" height="12" font="5"> Center for Space Science and Applied Research, Chinese Academy of Sciences, Beijing, China </text>
+<text top="277" left="196" width="5" height="8" font="4">3</text>
+<text top="279" left="201" width="252" height="12" font="5"> Navy Submarine Academy, Qing Dao, China </text>
+<text top="334" left="106" width="437" height="12" font="6"><b>Abstract.</b> As the core part of fully polarization radiometer, the digital correlator </text>
+<text top="350" left="106" width="441" height="12" font="5">is used to make correlation of polarization channels to get all the stokes </text>
+<text top="367" left="106" width="448" height="12" font="5">parameters. Based on the newest Field-Programmable Gate Array </text>
+<text top="383" left="106" width="447" height="12" font="5">(FPGA)-Virtex6 made by Xilinx and high-speed A / D converter </text>
+<text top="400" left="106" width="438" height="12" font="5">(ADC12D1800), design method of digital correlator is introduced in the paper </text>
+<text top="416" left="106" width="437" height="12" font="5">with bandwidth of 1.6 GHz with 12 bit resolution. The effect number of bit in the </text>
+<text top="432" left="106" width="437" height="12" font="5">system that has been completed is above 9 bit. Different with the other correlator, </text>
+<text top="449" left="106" width="438" height="12" font="5">the novel correlator is used to make dual frequency-band correlation to output </text>
+<text top="466" left="106" width="441" height="12" font="5">two group of stokes parameters. The structure of interfacing circuit, data </text>
+<text top="482" left="106" width="406" height="12" font="5">processing and control system of the main modules are presented in detail. </text>
+<text top="513" left="105" width="448" height="12" font="6"><b>Keywords:</b> FPGA, Fully Polarimetric Microwave Radiometer, ADC, </text>
+<text top="530" left="105" width="183" height="12" font="5">High-Speed Digital Correlation.   </text>
+<text top="586" left="63" width="138" height="16" font="7"><b>1   Introduction </b></text>
+<text top="626" left="63" width="523" height="14" font="3">Polarimetric radiometer has the ability of obtaining the results of ocean wind field, the </text>
+<text top="644" left="63" width="522" height="14" font="3">cloud water content, water vapor, sea surface temperature and other parameters in large </text>
+<text top="662" left="63" width="524" height="14" font="3">area. Getting atmosphere-ocean parameters with short repeat cycle is quite favorable </text>
+<text top="680" left="63" width="524" height="14" font="3">for ocean and climate research and improving the atmosphere and ocean forecasting </text>
+<text top="698" left="63" width="526" height="14" font="3">model accuracy[1]. The core data processing and design of digital correlator are </text>
+<text top="716" left="63" width="523" height="14" font="3">introduced in the paper. The radiometer has two receivers. After two channel signals </text>
+<text top="734" left="63" width="522" height="14" font="3">pass through mixer, IF amplification, respectively each signal is divided into two same </text>
+<text top="752" left="63" width="261" height="14" font="3">signals, namely I and Q, one of which is 90</text>
+<text top="748" left="324" width="5" height="9" font="4">o</text>
+<text top="752" left="329" width="257" height="14" font="3"> phase-shift with four signals correlated in </text>
+<text top="770" left="63" width="531" height="14" font="3">digital correlator.  The block diagram of fully polarimetric radiometer is shown in  </text>
+<text top="788" left="63" width="523" height="14" font="3">Fig. 1. Previous correlation always use analog correlator, but the digital correlator has </text>
+<text top="806" left="63" width="523" height="14" font="3">the advantage of highly integrated featureis without channel coupled. Another feature </text>
+<text top="824" left="63" width="522" height="14" font="3">of this design is completing two bandwidth calculations in a digital correlator to get two </text>
+<text top="842" left="63" width="523" height="14" font="3">stokes parameters. According to Nyquist sampling law, the sampling frequency must </text>
+<text top="860" left="63" width="524" height="14" font="3">be greater than twice the bandwidth of the sampled signal in order to avoid loss of </text>
+<text top="878" left="63" width="412" height="14" font="3">information, which makes the sampling circuit with high frequency. </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="17" height="12" font="5">30 </text>
+<text top="43" left="114" width="65" height="12" font="5">H. Lu et al. </text>
+<text top="226" left="530" width="4" height="14" font="3"> </text>
+<text top="269" left="176" width="297" height="12" font="6"><b>Fig. 1.</b> Block diagram of fully polarimetric radiometer </text>
+<text top="312" left="80" width="508" height="14" font="3">This paper presents a highly reliable signal sampling and correlation processing </text>
+<text top="330" left="63" width="524" height="14" font="3">system, which can complete 0.8GHz bandwidth distortion-free sampling for 1.6GHz </text>
+<text top="348" left="63" width="523" height="14" font="3">bandwidth correlation processing. The system uses high-speed ADC, ADC12D1800. </text>
+<text top="366" left="63" width="405" height="14" font="3">Data receiving and calculating is completed in FPGA-Virtex6 core.</text>
+<text top="362" left="468" width="8" height="19" font="3"> </text>
+<text top="413" left="63" width="249" height="16" font="7"><b>2   Design of System Structure </b></text>
+<text top="452" left="63" width="522" height="14" font="3">Block diagram of the digital correlator is shown in figure 2. Virtex-6 is designed in the </text>
+<text top="470" left="63" width="526" height="14" font="3">center with four ADCs symmetrical place. The two ADCs on one side complete </text>
+<text top="488" left="63" width="525" height="14" font="3">one-bandwidth polarization channels IQ sample. Two bandwidths sampled data are </text>
+<text top="506" left="63" width="523" height="14" font="3">translated to  FPGA, correlated respectively. Each ADC outputs a clock signal and an </text>
+<text top="524" left="63" width="523" height="14" font="3">OR signal, which is the signal to indicate the out of range by external light. When the </text>
+<text top="542" left="63" width="523" height="14" font="3">ADC input is out of range, the light is asserted. The clock-driven part is located in the </text>
+<text top="560" left="63" width="522" height="14" font="3">central for the same length to all the ADCs. Powers are placed in the edge of the chip to </text>
+<text top="578" left="63" width="430" height="14" font="3">reduce interference. RS485 is used for transmission with the computer. </text>
+<text top="788" left="546" width="4" height="14" font="3"> </text>
+<text top="824" left="209" width="230" height="12" font="6"><b>Fig. 2. </b>Block diagram of digital correlator </text>
+<text top="869" left="80" width="4" height="14" font="3"> </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="3" height="12" font="5"> </text>
+<text top="43" left="94" width="440" height="12" font="5">Design of 1.6GHz Bandwidth Four-Channels Digital-Correlator Based on FPGA </text>
+<text top="43" left="569" width="17" height="12" font="5">31 </text>
+<text top="89" left="63" width="162" height="16" font="7"><b>3   ADC and Clock </b></text>
+<text top="129" left="63" width="522" height="14" font="3">ADC12D1800 is an analog to digital conversion chip with maximum performance from </text>
+<text top="147" left="63" width="524" height="14" font="3">U.S. National Semiconductor Corporation. The typical power consumption is 4.4W. </text>
+<text top="165" left="63" width="524" height="14" font="3">Each channel sampling rate is 1.6GHz in the digital correlator with 12bit resolution, </text>
+<text top="183" left="63" width="384" height="14" font="3">full-power bandwidth of 2.8GHz, the input peak value of 800mV</text>
+<text top="179" left="448" width="2" height="9" font="4"> </text>
+<text top="183" left="450" width="135" height="14" font="3">[2]. Chip can be stable </text>
+<text top="201" left="63" width="522" height="14" font="3">in the negative 40 degrees to 85 degrees. Its block diagram is shown in Figure 3. After </text>
+<text top="219" left="63" width="522" height="14" font="3">sampling the 1:2 multiplexer module can be selected for the output with output divided </text>
+<text top="237" left="63" width="522" height="14" font="3">clock signal. ADC clock output can be selected with single edge or double edge output </text>
+<text top="255" left="63" width="524" height="14" font="3">of two transmission. The design uses double edge output, so that the output clock o </text>
+<text top="273" left="63" width="522" height="14" font="3">frequency is 400MHz as the following FPGA master clock. ADC has two configuration </text>
+<text top="291" left="63" width="523" height="14" font="3">modes such as pin configuration and programming configuration. Through the FPGA </text>
+<text top="309" left="63" width="524" height="14" font="3">to connect the enable, clock, data pins in third-line, programming is completed. The </text>
+<text top="327" left="63" width="523" height="14" font="3">design uses direct pin configuration, which is directly related to the low then high of </text>
+<text top="345" left="63" width="418" height="14" font="3">configuration pin. The PCB design should be given special attention. </text>
+<text top="363" left="80" width="507" height="14" font="3">Four ADC clock signals synchronization is related to the entire design accuracy. </text>
+<text top="381" left="63" width="522" height="14" font="3">Clock can be produced in two ways, first by the ADF4367, and second by the external </text>
+<text top="399" left="63" width="527" height="14" font="3">clock input. ADF4367 is a chip PLL frequency synthesizer from ADI with the </text>
+<text top="417" left="63" width="522" height="14" font="3">frequency range from 350mhz to 1800mhz, and the output frequency can be divided to </text>
+<text top="435" left="63" width="524" height="14" font="3">175mhz-900mhz. ADF4367 is controlled by the FPGA. Clocks are output from the </text>
+<text top="453" left="63" width="523" height="14" font="3">ADCLK948 to the ADCs as sampling clock with another way to the FPGA to control </text>
+<text top="471" left="63" width="524" height="14" font="3">the synchronous reset of the four ADCs. ADCLK948 principle structure is shown in </text>
+<text top="489" left="63" width="525" height="14" font="3">Figure 4 with two optional inputs, up to eight clock fan-out. The maximum input </text>
+<text top="507" left="63" width="416" height="14" font="3">frequency is 4.8GHz, which fully meets the application requirement. </text>
+<text top="636" left="532" width="4" height="14" font="3"> </text>
+<text top="678" left="216" width="217" height="12" font="6"><b>Fig. 3.</b> Block diagram of ADC function </text>
+<text top="818" left="524" width="4" height="14" font="3"> </text>
+<text top="856" left="197" width="255" height="12" font="6"><b>Fig. 4.</b> Block diagram of ADCLK948 function </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="8" size="12" family="Times" color="#000000"/>
+	<fontspec id="9" size="11" family="Times" color="#000000"/>
+	<fontspec id="10" size="18" family="Times" color="#000000"/>
+	<fontspec id="11" size="5" family="Times" color="#000000"/>
+	<fontspec id="12" size="11" family="Symbol" color="#000000"/>
+<text top="43" left="63" width="17" height="12" font="5">32 </text>
+<text top="43" left="114" width="65" height="12" font="5">H. Lu et al. </text>
+<text top="89" left="63" width="145" height="16" font="7"><b>4   FPGA Design </b></text>
+<text top="129" left="63" width="519" height="14" font="3">Virtex6 series use third-generation ASMBL architecture of 40nm manufacturing p</text>
+<text top="147" left="63" width="519" height="14" font="3">rocess with lower power consumption than the previous generation by up to 50%</text>
+<text top="165" left="63" width="519" height="14" font="3"> and cost reduction up to 20% [3]. The series was the most suitable combination </text>
+<text top="183" left="63" width="519" height="14" font="3">of optimization, including flexibility, hard IP, transceiver function and developme</text>
+<text top="201" left="63" width="519" height="14" font="3">nt tool support. The new devices are operated at 1.0v core voltage, as well as opt</text>
+<text top="219" left="63" width="519" height="14" font="3">ional 0.9v low-power version. SXT series of Virtex-6 have ultra-high performance</text>
+<text top="237" left="63" width="519" height="14" font="3"> DSP, which is suitable for high-speed large-scale computing applications. XC6V</text>
+<text top="255" left="63" width="519" height="14" font="3">SX315T-1FFG1156C is used in this design with the maximum clock frequency u</text>
+<text top="273" left="63" width="519" height="14" font="3">p to 600MHz [4]. Figure 5 shows the data flow diagram for the FPGA chip, mai</text>
+<text top="291" left="63" width="519" height="14" font="3">nly consisting of FPGA reset part, IO port buffer, 1:2 multiplexers, correlation, st</text>
+<text top="309" left="63" width="275" height="14" font="3">ate machine and reset module of the ADC.<b> </b></text>
+<text top="493" left="515" width="4" height="14" font="3"> </text>
+<text top="527" left="214" width="221" height="12" font="6"><b>Fig. 5.</b> Data flow diagram for the FPGA </text>
+<text top="569" left="80" width="505" height="14" font="3">Reset of the FPGA chip is asserted by MAX811 from the external drive and manual </text>
+<text top="587" left="63" width="522" height="14" font="3">button with low signal to reset the FPGA. The data access to IO port are first translated </text>
+<text top="605" left="63" width="522" height="14" font="3">to BUFFER with LVDS signal changed to single-ended signal buffer, which is directly </text>
+<text top="623" left="63" width="523" height="14" font="3">completed by the hard-core inside FPGA. The 400MHz master clock can not be used </text>
+<text top="641" left="63" width="523" height="14" font="3">directly for data control. It is needed to down- frequency by 1:2 multiplexer in FPGA. </text>
+<text top="659" left="63" width="523" height="14" font="3">Through such transmission, input data are changed to into eight groups for four sets. </text>
+<text top="677" left="63" width="523" height="14" font="3">Then the data are translated to correlation part controlled by 200MHz. Divide work is </text>
+<text top="695" left="63" width="522" height="14" font="3">completed by the the DCM clock driver module in Virtex6. DCM module can not only </text>
+<text top="713" left="63" width="524" height="14" font="3">synchronize the clock, phase, frequency and frequency transform, but also can reach </text>
+<text top="731" left="63" width="522" height="14" font="3">the global clock output with jitter-free delay. FPGA computing process is shown as the </text>
+<text top="749" left="63" width="528" height="14" font="3">following formula for each band. 1_DI indicates the I channel signal of one </text>
+<text top="767" left="63" width="523" height="14" font="3">polarization; 1_DQ indicates the Q channel signal of one polarization. 2_DI indicates </text>
+<text top="785" left="63" width="523" height="14" font="3">the I channel signal of the other polarization; 2_DQ indicates the Q channel signal of </text>
+<text top="803" left="63" width="142" height="14" font="3">the other polarization.   </text>
+<text top="845" left="428" width="20" height="12" font="9"><i>DQ</i></text>
+<text top="845" left="365" width="20" height="12" font="9"><i>DQ</i></text>
+<text top="845" left="305" width="14" height="12" font="9"><i>DI</i></text>
+<text top="845" left="247" width="14" height="12" font="9"><i>DI</i></text>
+<text top="842" left="174" width="12" height="18" font="10"><i>E</i></text>
+<text top="845" left="415" width="7" height="12" font="5">_</text>
+<text top="845" left="404" width="7" height="12" font="5">1</text>
+<text top="845" left="352" width="7" height="12" font="5">_</text>
+<text top="845" left="341" width="7" height="12" font="5">1</text>
+<text top="845" left="292" width="7" height="12" font="5">_</text>
+<text top="845" left="282" width="7" height="12" font="5">1</text>
+<text top="845" left="234" width="7" height="12" font="5">_</text>
+<text top="845" left="224" width="7" height="12" font="5">1</text>
+<text top="852" left="189" width="7" height="12" font="5">1</text>
+<text top="837" left="201" width="4" height="7" font="11">2</text>
+<text top="841" left="393" width="7" height="18" font="12">×</text>
+<text top="841" left="330" width="7" height="18" font="12">+</text>
+<text top="841" left="271" width="7" height="18" font="12">×</text>
+<text top="841" left="211" width="7" height="18" font="12">=</text>
+<text top="841" left="456" width="130" height="14" font="3">                                    (1) </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="989" width="644">
+	<fontspec id="13" size="6" family="Times" color="#000000"/>
+	<fontspec id="14" size="14" family="Times" color="#000000"/>
+	<fontspec id="15" size="14" family="Times" color="#000000"/>
+	<fontspec id="16" size="14" family="Symbol" color="#000000"/>
+	<fontspec id="17" size="7" family="Symbol" color="#000000"/>
+	<fontspec id="18" size="13" family="Times" color="#000000"/>
+	<fontspec id="19" size="13" family="Times" color="#000000"/>
+	<fontspec id="20" size="13" family="Symbol" color="#000000"/>
+<text top="43" left="63" width="3" height="12" font="5"> </text>
+<text top="43" left="94" width="441" height="12" font="5">Design of 1.6GHz Bandwidth Four-Channels Digital-Correlator Based on FPGA </text>
+<text top="43" left="569" width="17" height="12" font="5">33 </text>
+<text top="102" left="415" width="20" height="13" font="9"><i>DQ</i></text>
+<text top="102" left="348" width="20" height="13" font="9"><i>DQ</i></text>
+<text top="102" left="285" width="15" height="13" font="9"><i>DI</i></text>
+<text top="102" left="224" width="15" height="13" font="9"><i>DI</i></text>
+<text top="99" left="144" width="13" height="19" font="10"><i>E</i></text>
+<text top="102" left="402" width="7" height="13" font="5">_</text>
+<text top="102" left="390" width="7" height="13" font="5">2</text>
+<text top="102" left="335" width="7" height="13" font="5">_</text>
+<text top="102" left="324" width="7" height="13" font="5">2</text>
+<text top="102" left="272" width="7" height="13" font="5">_</text>
+<text top="102" left="261" width="7" height="13" font="5">2</text>
+<text top="102" left="211" width="7" height="13" font="5">_</text>
+<text top="102" left="200" width="7" height="13" font="5">2</text>
+<text top="109" left="161" width="7" height="13" font="5">2</text>
+<text top="93" left="175" width="4" height="7" font="13">2</text>
+<text top="98" left="377" width="8" height="18" font="12">×</text>
+<text top="98" left="310" width="8" height="18" font="12">+</text>
+<text top="98" left="248" width="8" height="18" font="12">×</text>
+<text top="98" left="185" width="8" height="18" font="12">=</text>
+<text top="98" left="444" width="141" height="14" font="3">                                        (2) </text>
+<text top="148" left="439" width="23" height="14" font="14"><i>DQ</i></text>
+<text top="148" left="373" width="23" height="14" font="14"><i>DQ</i></text>
+<text top="148" left="313" width="17" height="14" font="14"><i>DI</i></text>
+<text top="148" left="252" width="17" height="14" font="14"><i>DI</i></text>
+<text top="148" left="186" width="10" height="14" font="14"><i>E</i></text>
+<text top="148" left="169" width="10" height="14" font="14"><i>E</i></text>
+<text top="148" left="426" width="8" height="15" font="15">_</text>
+<text top="148" left="414" width="8" height="15" font="15">2</text>
+<text top="148" left="360" width="8" height="15" font="15">_</text>
+<text top="148" left="349" width="8" height="15" font="15">1</text>
+<text top="148" left="300" width="8" height="15" font="15">_</text>
+<text top="148" left="288" width="8" height="15" font="15">2</text>
+<text top="148" left="239" width="8" height="15" font="15">_</text>
+<text top="148" left="229" width="8" height="15" font="15">1</text>
+<text top="148" left="146" width="18" height="15" font="15">Re</text>
+<text top="157" left="198" width="5" height="9" font="4">2</text>
+<text top="157" left="179" width="5" height="9" font="4">1</text>
+<text top="143" left="401" width="9" height="21" font="16">×</text>
+<text top="143" left="337" width="9" height="21" font="16">+</text>
+<text top="143" left="275" width="9" height="21" font="16">×</text>
+<text top="143" left="216" width="9" height="21" font="16">=</text>
+<text top="142" left="204" width="5" height="12" font="17">∗</text>
+<text top="156" left="468" width="76" height="14" font="3">                         </text>
+<text top="148" left="547" width="39" height="14" font="3">      (3) </text>
+<text top="195" left="438" width="23" height="14" font="18"><i>DQ</i></text>
+<text top="195" left="377" width="17" height="14" font="18"><i>DI</i></text>
+<text top="195" left="318" width="17" height="14" font="18"><i>DI</i></text>
+<text top="195" left="252" width="23" height="14" font="18"><i>DQ</i></text>
+<text top="195" left="186" width="10" height="14" font="18"><i>E</i></text>
+<text top="195" left="169" width="10" height="14" font="18"><i>E</i></text>
+<text top="195" left="425" width="8" height="14" font="19">_</text>
+<text top="195" left="414" width="8" height="14" font="19">2</text>
+<text top="195" left="364" width="8" height="14" font="19">_</text>
+<text top="195" left="354" width="8" height="14" font="19">1</text>
+<text top="195" left="305" width="8" height="14" font="19">_</text>
+<text top="195" left="293" width="8" height="14" font="19">2</text>
+<text top="195" left="239" width="8" height="14" font="19">_</text>
+<text top="195" left="228" width="8" height="14" font="19">1</text>
+<text top="195" left="146" width="17" height="14" font="19">Im</text>
+<text top="204" left="197" width="5" height="8" font="4">2</text>
+<text top="204" left="179" width="5" height="8" font="4">1</text>
+<text top="190" left="401" width="9" height="20" font="20">×</text>
+<text top="190" left="342" width="9" height="20" font="20">−</text>
+<text top="190" left="280" width="9" height="20" font="20">×</text>
+<text top="190" left="216" width="9" height="20" font="20">=</text>
+<text top="189" left="204" width="5" height="12" font="17">∗</text>
+<text top="195" left="468" width="117" height="14" font="3">                                (4) </text>
+<text top="228" left="80" width="505" height="14" font="3">The IP core in FPGA can be used to design 12-bit width multiplier and 8-bit × 1024 </text>
+<text top="246" left="63" width="522" height="14" font="3">synchronization FIFO. The 48-bit width accumulator is programmed by the VHDL[5]. </text>
+<text top="264" left="63" width="522" height="14" font="3">Figure6 is the IP core correlation flow for real-correlation, which needs two multipliers, </text>
+<text top="282" left="63" width="528" height="14" font="3">one adder and one accumulator. After accumulating 10 ms (controllable), the </text>
+<text top="300" left="63" width="523" height="14" font="3">correlation results are translated to PC via the serial output in a sequence of V-channel </text>
+<text top="318" left="63" width="522" height="14" font="3">self-correlation, H-channel self-correlation, real part of cross-correlation and imaginary </text>
+<text top="336" left="63" width="523" height="14" font="3">part of cross-correlation. The ADC has a capability to precisely reset its DCLK output </text>
+<text top="354" left="63" width="523" height="14" font="3">as determined by the DCLK_RESET pulse, which is controlled by FPGA. This allows </text>
+<text top="372" left="63" width="524" height="14" font="3">multiple ADCs in the system to have their output clocks at the same time. The reset </text>
+<text top="390" left="63" width="526" height="14" font="3">control is completed by FPGA. Serial port is designed in the system. The serial </text>
+<text top="408" left="63" width="526" height="14" font="3">connection is completed in accordance with requirements. RS232 chip selects the </text>
+<text top="426" left="63" width="524" height="14" font="3">MAX3232 with two pairs of signal driver. RS485 driver chip is SP3491. It has two </text>
+<text top="444" left="63" width="528" height="14" font="3">pairs of differential drivers and the corresponding enable pin. Enable pins are </text>
+<text top="462" left="63" width="431" height="14" font="3">controlled by the FPGA. Input and output pins are connected to FPGA. </text>
+<text top="596" left="554" width="4" height="14" font="3"> </text>
+<text top="633" left="239" width="39" height="12" font="6"><b>Fig. 6. </b></text>
+<text top="633" left="278" width="132" height="12" font="5">IP core correlation flow<b> </b></text>
+<text top="682" left="63" width="132" height="16" font="7"><b>5   PCB Design </b></text>
+<text top="721" left="63" width="525" height="14" font="3">The main PCB characteristics of the device are high-density and high-speed. The </text>
+<text top="739" left="63" width="444" height="14" font="3">analog and digital hybrid circuit design theory must be strictly followed.   </text>
+<text top="766" left="78" width="509" height="14" font="3">1. The PCB should be divided into analog and digital circuit[7]. The AD contains </text>
+<text top="784" left="63" width="522" height="14" font="3">analog and digital circuits. There are should no digital circuit above analog part, also no </text>
+<text top="802" left="63" width="198" height="14" font="3">analog circuit above digital part. </text>
+<text top="820" left="78" width="507" height="14" font="3">2. All the clock and data outputs are differential. The termination resistors should be </text>
+<text top="838" left="63" width="522" height="14" font="3">placed across the ports to insure 100 ohm impedance matching with the error less than </text>
+<text top="856" left="63" width="53" height="14" font="3">10 ohm. </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="989" width="644">
+<text top="43" left="63" width="17" height="12" font="5">34 </text>
+<text top="43" left="114" width="65" height="12" font="5">H. Lu et al. </text>
+<text top="87" left="78" width="507" height="14" font="3">3. For best result signal lines should not cross the gap between the ground margin and </text>
+<text top="105" left="63" width="387" height="14" font="3">the power margin unless the signal is close to a large area layer. </text>
+<text top="123" left="78" width="507" height="14" font="3">4. The adjacent two lines should be perpendicular to each other as much as possible, </text>
+<text top="141" left="63" width="523" height="14" font="3">or take a slash. The large area of the power layer and large area of ground should be </text>
+<text top="159" left="63" width="218" height="14" font="3">close to play the role of filtering[8]. </text>
+<text top="206" left="63" width="126" height="16" font="7"><b>6   Conclusion </b></text>
+<text top="246" left="63" width="523" height="14" font="3">Fully polarimetric microwave radiometer is a new kind of passive microwave remote </text>
+<text top="264" left="63" width="523" height="14" font="3">sensor. The new technology feature of fully polarimetric radiometer is using multiple </text>
+<text top="282" left="63" width="530" height="14" font="3">correlation technology to process correlation between horizontal and vertical </text>
+<text top="300" left="63" width="522" height="14" font="3">polarization signals in order to get the Stokes vectors. In the paper, one FPGA-Virtex6 </text>
+<text top="318" left="63" width="527" height="14" font="3">and four high-speed ADCs are used to complete 1.6GHz sampling and digital </text>
+<text top="336" left="63" width="525" height="14" font="3">correlation. The system can satisfy dual bandwidth correlation up to 1.6GHz. The </text>
+<text top="354" left="63" width="525" height="14" font="3">digital correlator has the characteristics of low power and small size. The power is </text>
+<text top="372" left="63" width="334" height="14" font="3">below 25W. The Effective number of bits is above 9bit.</text>
+<text top="368" left="398" width="8" height="19" font="3"> </text>
+<text top="408" left="63" width="524" height="14" font="8"><b>Acknowledgment.</b> Thanks to the Chinese Academy of Sciences &#34;Hundred Talents&#34; </text>
+<text top="426" left="63" width="53" height="14" font="3">support. </text>
+<text top="472" left="63" width="88" height="16" font="7"><b>References </b></text>
+<text top="512" left="62" width="523" height="12" font="5">[1]  Wang, Z., Jiang, J., Liu, J., Yin, X.: Critical technique and scientific topic on fully polarized </text>
+<text top="528" left="87" width="501" height="12" font="5">microwave radiometer remote sensing sea surface wind vector. Engineering Sciences 10, </text>
+<text top="545" left="87" width="146" height="12" font="5">76–86 (2008) (in Chinese) </text>
+<text top="561" left="62" width="523" height="12" font="5">[2]  National Semiconductor. ADC12D1800 12-Bit 3.6 GSPS Ultra High-Speed ADC (EB/OL) </text>
+<text top="578" left="87" width="395" height="12" font="5">(2010), http://www.national.com/ds/DC/ADC083000.pdf </text>
+<text top="594" left="62" width="309" height="12" font="5">[3]  Xilinx.Virtex-6 FPGA User Guide (EB/OL) (2010), </text>
+<text top="612" left="87" width="494" height="11" font="5">http://www.xilinx.com/support/documentation/user_guides/DS150</text>
+<text top="611" left="581" width="3" height="12" font="5"> </text>
+<text top="627" left="62" width="525" height="12" font="5">[4]  Xilinx. Virtex-6 FPGA Data Sheet: DC and Switching Characteristics (EB/OL) (2010), </text>
+<text top="645" left="87" width="494" height="11" font="5">http://www.xilinx.com/support/documentation/user_guides/DS152</text>
+<text top="644" left="581" width="3" height="12" font="5"> </text>
+<text top="660" left="62" width="529" height="12" font="5">[5]  Xilinx. Virtex-6 FPGA Data Sheet: DSP48E1 Slice User Guide (EB/OL) (2010), </text>
+<text top="678" left="87" width="494" height="11" font="5">http://www.xilinx.com/support/documentation/user_guides/UG369</text>
+<text top="677" left="581" width="3" height="12" font="5"> </text>
+<text top="693" left="62" width="526" height="12" font="5">[6]  He, B.: Detailed Design of Programmable Logic Devices. Tsinghua University Press, </text>
+<text top="710" left="87" width="152" height="12" font="5">Beijing (2010) (in Chinese) </text>
+<text top="726" left="62" width="526" height="12" font="5">[7]  Jiang, S.-M., Jiang, P.-G., Zheng, W.: Protel 99 SE Schematic, PCB and Simulation. </text>
+<text top="743" left="87" width="298" height="12" font="5">Machinery Industry Press, Beijing (2007) (in Chinese) </text>
+<text top="760" left="64" width="17" height="11" font="0">[8] </text>
+<text top="759" left="87" width="500" height="12" font="5">Liu, K., Gao, Z.-H.: Protel99 SE Circuit Design Examples Tutorial. Tsinghua University </text>
+<text top="776" left="87" width="184" height="12" font="5">Press, Beijing (2008) (in Chinese)</text>
+<text top="777" left="271" width="3" height="11" font="0"> </text>
+</page>
+</pdf2xml>

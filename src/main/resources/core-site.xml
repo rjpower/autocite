@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/scratch/hadoop/${user.name}</value>
+</property>
+
+<property>
+  <name>fs.default.name</name>
+  <value>hdfs://beaker-2/</value>
+</property>
+
+<property>
+  <name>fs.inmemory.size.mb</name>
+  <value>1000</value>
+</property>
+
+</configuration>

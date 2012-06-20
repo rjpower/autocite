@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="15" family="Times" color="#000000"/>
+	<fontspec id="1" size="12" family="Times" color="#000000"/>
+	<fontspec id="2" size="16" family="Helvetica" color="#585a60"/>
+	<fontspec id="3" size="11" family="Helvetica" color="#585a60"/>
+<text top="146" left="214" width="492" height="16" font="0">DFG IMPLEMENTATION ON MULTI GPU CLUSTER WITH</text>
+<text top="167" left="262" width="396" height="16" font="0">COMPUTATION-COMMUNICATION OVERLAP</text>
+<text top="214" left="103" width="324" height="15" font="0">Sylvain Huet, Vincent Boulos, Vincent Fristot</text>
+<text top="256" left="225" width="80" height="16" font="0">GIPSA-lab</text>
+<text top="277" left="117" width="295" height="16" font="0">UMR5216 CNRS/INPG/UJF/U.Stendhal</text>
+<text top="298" left="123" width="283" height="16" font="0">F-38402 GRENOBLE CEDEX, France</text>
+<text top="319" left="100" width="329" height="16" font="0">ﬁrstname.lastname@gipsa-lab.grenoble-inp.fr</text>
+<text top="214" left="643" width="71" height="15" font="0">Luc Salvo</text>
+<text top="256" left="651" width="55" height="16" font="0">SIMAP</text>
+<text top="277" left="574" width="210" height="16" font="0">UMR5266 CNRS/INPG/UJF</text>
+<text top="298" left="537" width="283" height="16" font="0">F-38402 GRENOBLE CEDEX, France</text>
+<text top="319" left="556" width="245" height="16" font="0">Luc.Salvo@simap.grenoble-inp.fr</text>
+<text top="379" left="224" width="81" height="13" font="1">ABSTRACT</text>
+<text top="405" left="82" width="366" height="13" font="1">Nowadays, it is possible to build a multi-GPU supercomputer,</text>
+<text top="423" left="82" width="366" height="13" font="1">well suited for implementation of digital signal processing al-</text>
+<text top="441" left="82" width="366" height="13" font="1">gorithms, for a few thousand dollars. However, to achieve</text>
+<text top="458" left="82" width="366" height="13" font="1">the highest performance with this kind of architecture, the</text>
+<text top="476" left="82" width="366" height="13" font="1">programmer has to focus on inter-processor communications,</text>
+<text top="494" left="82" width="149" height="13" font="1">tasks synchronization . . .</text>
+<text top="512" left="82" width="366" height="13" font="1">In this paper, we propose a design ﬂow allowing an efﬁcient</text>
+<text top="530" left="82" width="366" height="13" font="1">implementation of a Digital Signal Processing (DSP) appli-</text>
+<text top="548" left="82" width="366" height="13" font="1">cation speciﬁed as a Data Flow Graph (DFG) on a multi</text>
+<text top="566" left="82" width="144" height="13" font="1">GPU computer cluster.</text>
+<text top="566" left="240" width="207" height="13" font="1">We focus particularly on the ef-</text>
+<text top="584" left="82" width="366" height="13" font="1">fective implementation of communications by automating</text>
+<text top="602" left="82" width="366" height="13" font="1">the computation-communication overlap, which can lead to</text>
+<text top="620" left="82" width="366" height="13" font="1">signiﬁcant speedups as shown in the presented benchmark.</text>
+<text top="638" left="82" width="366" height="13" font="1">The approach is validated on a 3D granulometry application</text>
+<text top="656" left="82" width="216" height="13" font="1">developed for research on materials.</text>
+<text top="697" left="195" width="139" height="13" font="1">1. INTRODUCTION</text>
+<text top="731" left="82" width="366" height="13" font="1">Nowadays, computers embed many CPUs and a powerful</text>
+<text top="749" left="82" width="366" height="13" font="1">graphics card based on Graphical Processing Unit (GPU).</text>
+<text top="767" left="82" width="366" height="13" font="1">Workstations can host several GPU boards, which are well</text>
+<text top="785" left="82" width="320" height="13" font="1">suited for scientiﬁc and engineering computations.</text>
+<text top="785" left="417" width="30" height="13" font="1">Such</text>
+<text top="803" left="82" width="366" height="13" font="1">computers are linked through high bandwidth networks to</text>
+<text top="821" left="82" width="366" height="13" font="1">compose clusters for High Performance Computing (HPC).</text>
+<text top="838" left="82" width="366" height="13" font="1">These machines provide highly parallel multicore architec-</text>
+<text top="856" left="82" width="366" height="13" font="1">tures while being cost-effective. Moreover, they signiﬁcantly</text>
+<text top="874" left="82" width="366" height="13" font="1">reduce dissipated power, and space needs compared to clas-</text>
+<text top="892" left="82" width="366" height="13" font="1">sical HPC clusters. However, the real challenge is to achieve</text>
+<text top="910" left="82" width="366" height="13" font="1">the highest performances on muti-GPU architectures. The</text>
+<text top="928" left="82" width="366" height="13" font="1">programmer has to design architecture-speciﬁc code includ-</text>
+<text top="946" left="82" width="366" height="13" font="1">ing GPU communications and memory management, task</text>
+<text top="964" left="82" width="366" height="13" font="1">scheduling and synchronization. So, a high level program-</text>
+<text top="982" left="82" width="366" height="13" font="1">ming abstract model is required to express all these important</text>
+<text top="1000" left="82" width="366" height="13" font="1">operations. In this paper, we propose a design ﬂow allowing</text>
+<text top="1018" left="82" width="366" height="13" font="1">an efﬁcient implementation of a DSP application speciﬁed as</text>
+<text top="1036" left="82" width="366" height="13" font="1">a DFG on a multi GPU computer cluster. We focus particu-</text>
+<text top="1054" left="82" width="366" height="13" font="1">larly on the effective implementation of communications by</text>
+<text top="1072" left="82" width="317" height="13" font="1">automating the computation-communication overlap.</text>
+<text top="379" left="473" width="366" height="13" font="1">After presenting the related work in section 2, we show in sec-</text>
+<text top="397" left="473" width="366" height="13" font="1">tion 3 the interest of the implementation of communication-</text>
+<text top="415" left="473" width="366" height="13" font="1">computation overlap on multi-GPU architectures. In section</text>
+<text top="433" left="473" width="366" height="13" font="1">4 we present our design ﬂow that allows an efﬁcient imple-</text>
+<text top="451" left="473" width="366" height="13" font="1">mentation of an algorithm expressed as DFG on a multi-GPU</text>
+<text top="469" left="473" width="366" height="13" font="1">architecture. It is applied in section 5 on a real world applica-</text>
+<text top="487" left="473" width="366" height="13" font="1">tion of 3D granulometry developed for research on materials.</text>
+<text top="534" left="584" width="144" height="13" font="1">2. RELATED WORK</text>
+<text top="569" left="473" width="366" height="13" font="1">Although multi-GPU architectures are recent, many studies</text>
+<text top="587" left="473" width="366" height="13" font="1">have been conducted to raise the level of abstraction in GPU</text>
+<text top="605" left="473" width="85" height="13" font="1">programming.</text>
+<text top="623" left="473" width="366" height="13" font="1">Some authors proposed directive-based programming, to en-</text>
+<text top="641" left="473" width="366" height="13" font="1">hance a C source code. HiCUDA, developed by University</text>
+<text top="659" left="473" width="366" height="13" font="1">of Toronto [1] is a high-level directive-based language for</text>
+<text top="677" left="473" width="366" height="13" font="1">NVIDIA-CUDA programming. A source-to-source compiler</text>
+<text top="695" left="473" width="366" height="13" font="1">translates a sequential C program with hiCUDA pragmas to</text>
+<text top="713" left="473" width="366" height="13" font="1">CUDA and CPU programs. The proposed directives allow</text>
+<text top="731" left="473" width="366" height="13" font="1">the programmer to specify code regions which are executed</text>
+<text top="749" left="473" width="366" height="13" font="1">on the GPU or on the host, to specify the memory location</text>
+<text top="767" left="473" width="366" height="13" font="1">of the data (host, GPU global memory, GPU shared memory,</text>
+<text top="785" left="473" width="366" height="13" font="1">GPU constant memory),. . . This tool simpliﬁes GPU porting</text>
+<text top="803" left="473" width="366" height="13" font="1">of C sequential program. Nevertheless, at our knowledge,</text>
+<text top="821" left="473" width="366" height="13" font="1">it is does not support asynchronous transfers between CPU</text>
+<text top="838" left="473" width="366" height="13" font="1">and GPU and thus does not allow to do communication-</text>
+<text top="856" left="473" width="363" height="13" font="1">computation overlap and does not target multi-GPU clusters.</text>
+<text top="874" left="473" width="366" height="13" font="1">A Hybrid Multi-core Parallel Programming Environment</text>
+<text top="892" left="473" width="366" height="13" font="1">HMPP [2] is proposed by the CAPS French company that</text>
+<text top="910" left="473" width="366" height="13" font="1">provides a set of compiler directives with tools and a software</text>
+<text top="928" left="473" width="366" height="13" font="1">runtime support multi-core processor parallel programming</text>
+<text top="946" left="473" width="366" height="13" font="1">in C and Fortran. HMPP subroutines can be remotely exe-</text>
+<text top="964" left="473" width="289" height="13" font="1">cuted on a hardware accelerator as GPU, FPGA.</text>
+<text top="982" left="473" width="366" height="13" font="1">StarPU [3] developed by INRIA and Bordeaux University,</text>
+<text top="1000" left="473" width="366" height="13" font="1">provides a high level, uniﬁed execution model for heteroge-</text>
+<text top="1018" left="473" width="366" height="13" font="1">neous systems (CPU, GPU or CELL), including high level</text>
+<text top="1036" left="473" width="366" height="13" font="1">abstraction of tasks (codelets for multiple hardware imple-</text>
+<text top="1054" left="473" width="366" height="13" font="1">mentations), with dynamic scheduling policy and transparent</text>
+<text top="1072" left="473" width="311" height="13" font="1">support for GPU pipeline (Virtual Shared Memory).</text>
+<text top="730" left="29" width="0" height="17" font="2"><a href="http://hal.archives-ouvertes.fr/hal-00657536/fr/">hal-00657536, version 1 - 6 Jan 2012</a></text>
+<text top="32" left="165" width="708" height="12" font="3">Author manuscript, published in &#34;Design and Architectures for Signal and Image Processing, Tampere : Finland (2011)&#34;</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="4" size="7" family="Times" color="#000000"/>
+	<fontspec id="5" size="10" family="Times" color="#000000"/>
+	<fontspec id="6" size="8" family="Times" color="#000000"/>
+	<fontspec id="7" size="3" family="Times" color="#000000"/>
+	<fontspec id="8" size="5" family="Times" color="#000000"/>
+<text top="113" left="82" width="366" height="13" font="1">Our goal is to provide a design ﬂow that has a suitable entry</text>
+<text top="131" left="82" width="366" height="13" font="1">point to the application developer of signal processing appli-</text>
+<text top="149" left="82" width="366" height="13" font="1">cation that allows him to do not focus on the expression of</text>
+<text top="167" left="82" width="366" height="13" font="1">inter-processor communications, the synchronization of tasks</text>
+<text top="185" left="82" width="366" height="13" font="1">and memory allocation and optimization on both the CPU</text>
+<text top="202" left="82" width="366" height="13" font="1">and GPU. We choose to focus on DFG since it is a formalism</text>
+<text top="220" left="82" width="334" height="13" font="1">that have been widely used to specify DSP applications.</text>
+<text top="238" left="82" width="366" height="13" font="1">Before presenting the design ﬂow that we propose, the fol-</text>
+<text top="256" left="82" width="366" height="13" font="1">lowing section shows a benchmark that allows quantifying</text>
+<text top="274" left="82" width="366" height="13" font="1">the performance gain that can be expected when computation</text>
+<text top="292" left="82" width="276" height="13" font="1">and communication overlap on a GPU cluster.</text>
+<text top="334" left="89" width="350" height="13" font="1">3. COMMUNICATION-COMPUTATION OVERLAP</text>
+<text top="352" left="210" width="109" height="13" font="1">BENCHMARKS</text>
+<text top="386" left="82" width="366" height="13" font="1">In this section, we detail communication/computation over-</text>
+<text top="404" left="82" width="366" height="13" font="1">lap, in a real world application. We suppose data transfer time</text>
+<text top="422" left="82" width="366" height="13" font="1">is around the kernel execution duration. First, the principle of</text>
+<text top="440" left="82" width="366" height="13" font="1">communication/computation overlap for multi-GPUs systems</text>
+<text top="458" left="82" width="366" height="13" font="1">is given. Then this overlap is shown and measured. An assess-</text>
+<text top="476" left="82" width="366" height="13" font="1">ment of data transfer rate can be derived for several hardware</text>
+<text top="494" left="82" width="366" height="13" font="1">conﬁgurations. This study is done using a single multi CPUs</text>
+<text top="512" left="82" width="366" height="13" font="1">host workstation of the GPU cluster. The programming inter-</text>
+<text top="530" left="82" width="366" height="13" font="1">face used is the CUDA Nvidia API, a popular environment for</text>
+<text top="548" left="82" width="366" height="13" font="1">GPGPU, dedicated to Nvidia’s GPU devices. CUDA is gen-</text>
+<text top="566" left="82" width="366" height="13" font="1">erally more efﬁcient than OpenCL programming standard [4],</text>
+<text top="584" left="82" width="366" height="13" font="1">as the later is affected by its compatibility to program CPUs</text>
+<text top="601" left="82" width="203" height="13" font="1">and GPUs from different vendors.</text>
+<text top="642" left="82" width="108" height="13" font="1">3.1. The method</text>
+<text top="671" left="82" width="366" height="13" font="1">A basic test model is proposed for one host PC with two GPU</text>
+<text top="689" left="82" width="366" height="13" font="1">boards for the data ﬂow algorithm presented on ﬁgure 1. The</text>
+<text top="707" left="82" width="366" height="13" font="1">architectural target is a node equipped with 2 GPU accelera-</text>
+<text top="724" left="82" width="366" height="13" font="1">tors (Kernel A running on GPU-0, Kernel B running on GPU-</text>
+<text top="742" left="82" width="366" height="13" font="1">1). The host program is designed as follows. After initializing</text>
+<text top="760" left="82" width="366" height="13" font="1">memory blocks on the host and devices, an inﬁnite loop han-</text>
+<text top="778" left="82" width="366" height="13" font="1">dles communications, computations and synchronization for</text>
+<text top="796" left="82" width="366" height="13" font="1">each GPU device in four steps: (1) host to device data trans-</text>
+<text top="814" left="82" width="366" height="13" font="1">fer, (2) kernel execution on GPU device, (3) device to host</text>
+<text top="832" left="82" width="317" height="13" font="1">data transfer, (4) wait for the synchronization barrier.</text>
+<text top="850" left="82" width="366" height="13" font="1">The code is written in multi-threaded C, based on the Posix</text>
+<text top="868" left="82" width="366" height="13" font="1">pthread library. We create one CPU thread for each GPU</text>
+<text top="886" left="82" width="366" height="13" font="1">board plus one CPU thread for the synchronization barrier.</text>
+<text top="904" left="82" width="366" height="13" font="1">Allocation of the host memory blocks in page-locked (pinned)</text>
+<text top="922" left="82" width="366" height="13" font="1">memory (with the cudaHostAlloc() function) allows a 70%</text>
+<text top="940" left="82" width="366" height="13" font="1">increase of transfer rate compared with pageable host mem-</text>
+<text top="958" left="82" width="230" height="13" font="1">ory allocated by the malloc() function.</text>
+<text top="1014" left="210" width="36" height="11" font="4">Kernel A</text>
+<text top="1024" left="214" width="27" height="11" font="4">(gpu0)</text>
+<text top="1014" left="136" width="38" height="11" font="4">Producer</text>
+<text top="1024" left="144" width="21" height="11" font="4">(cpu)</text>
+<text top="1014" left="283" width="36" height="11" font="4">Kernel B</text>
+<text top="1024" left="287" width="27" height="11" font="4">(gpu1)</text>
+<text top="1014" left="354" width="41" height="11" font="4">consumer</text>
+<text top="1024" left="364" width="21" height="11" font="4">(cpu)</text>
+<text top="1066" left="122" width="284" height="14" font="1">Fig. 1: data ﬂow graph (DFG) of the test model</text>
+<text top="137" left="499" width="38" height="14" font="5">GPU-1</text>
+<text top="118" left="552" width="25" height="10" font="4">inKA0</text>
+<text top="118" left="605" width="18" height="10" font="4">KA0</text>
+<text top="118" left="648" width="31" height="10" font="4">outKA0</text>
+<text top="140" left="604" width="21" height="10" font="4">KB-1</text>
+<text top="118" left="684" width="25" height="10" font="4">inKA1</text>
+<text top="118" left="737" width="18" height="10" font="4">KA1</text>
+<text top="118" left="780" width="31" height="10" font="4">outKA1</text>
+<text top="140" left="684" width="25" height="10" font="4">inKB0</text>
+<text top="140" left="737" width="18" height="10" font="4">KB0</text>
+<text top="140" left="780" width="31" height="10" font="4">outKB0</text>
+<text top="169" left="707" width="78" height="12" font="6">synchro barriers</text>
+<text top="117" left="499" width="38" height="14" font="5">GPU-0</text>
+<text top="202" left="486" width="339" height="14" font="1">Fig. 2: serialized communication/computation execution</text>
+<text top="252" left="511" width="35" height="6" font="7">Host to Device</text>
+<text top="271" left="511" width="35" height="6" font="7">Device to Host</text>
+<text top="290" left="506" width="39" height="6" font="7">Kernel execution</text>
+<text top="260" left="474" width="23" height="12" font="6">GPU</text>
+<text top="272" left="482" width="6" height="12" font="6">0</text>
+<text top="289" left="627" width="15" height="9" font="8">KA0</text>
+<text top="289" left="683" width="15" height="9" font="8">KA1</text>
+<text top="251" left="610" width="21" height="9" font="8">inKA1</text>
+<text top="289" left="683" width="15" height="9" font="8">KA1</text>
+<text top="251" left="666" width="21" height="9" font="8">inKA2</text>
+<text top="270" left="664" width="26" height="9" font="8">outKA0</text>
+<text top="289" left="740" width="15" height="9" font="8">KA2</text>
+<text top="251" left="723" width="21" height="9" font="8">inKA3</text>
+<text top="270" left="720" width="26" height="9" font="8">outKA1</text>
+<text top="289" left="796" width="15" height="9" font="8">KA3</text>
+<text top="251" left="779" width="21" height="9" font="8">inKA4</text>
+<text top="270" left="776" width="26" height="9" font="8">outKA2</text>
+<text top="308" left="511" width="35" height="6" font="7">Host to Device</text>
+<text top="327" left="511" width="35" height="6" font="7">Device to Host</text>
+<text top="346" left="506" width="39" height="6" font="7">Kernel execution</text>
+<text top="314" left="475" width="23" height="12" font="6">GPU</text>
+<text top="326" left="484" width="6" height="12" font="6">1</text>
+<text top="345" left="626" width="18" height="9" font="8">KB-3</text>
+<text top="345" left="682" width="18" height="9" font="8">KB-2</text>
+<text top="345" left="738" width="18" height="9" font="8">KB-1</text>
+<text top="308" left="723" width="21" height="9" font="8">inKB0</text>
+<text top="345" left="796" width="15" height="9" font="8">KB0</text>
+<text top="308" left="779" width="21" height="9" font="8">inKB1</text>
+<text top="289" left="570" width="18" height="9" font="8">KA-1</text>
+<text top="251" left="554" width="21" height="9" font="8">inKA0</text>
+<text top="345" left="570" width="18" height="9" font="8">KB-4</text>
+<text top="375" left="473" width="366" height="14" font="1">Fig. 3: concurrent execution of communications and compu-</text>
+<text top="393" left="473" width="40" height="13" font="1">tations</text>
+<text top="444" left="495" width="343" height="13" font="1">A ﬁrst implementation concerns the synchronous mode</text>
+<text top="462" left="473" width="366" height="13" font="1">with regular sequential data transfers and computations. Data</text>
+<text top="480" left="473" width="366" height="13" font="1">transfers are launched by cudaMemcpy() functions, commu-</text>
+<text top="498" left="473" width="366" height="13" font="1">nications and kernel execute sequentially as shown in Figure</text>
+<text top="516" left="473" width="366" height="13" font="1">2. Both GPU devices run kernels concurrently. The latency</text>
+<text top="534" left="473" width="366" height="13" font="1">stands to one cycle of synchronization, related to concurrent</text>
+<text top="552" left="473" width="172" height="13" font="1">execution of the two kernels.</text>
+<text top="570" left="473" width="366" height="13" font="1">A second implementation is more efﬁcient, running with</text>
+<text top="588" left="473" width="227" height="13" font="1">communication/computation overlap.</text>
+<text top="588" left="713" width="125" height="13" font="1">CPU threads launch</text>
+<text top="606" left="473" width="366" height="13" font="1">kernels and transfers simultaneously, in asynchronous mode,</text>
+<text top="624" left="473" width="366" height="13" font="1">which means that all data is stored in double buffers, each one</text>
+<text top="642" left="473" width="366" height="13" font="1">allocated on the CPU and the GPU devices. Data transfers</text>
+<text top="660" left="473" width="366" height="13" font="1">are launched by cudaMemcpyAsync() functions and concur-</text>
+<text top="678" left="473" width="366" height="13" font="1">rent execution of kernels and transfers is managed by CUDA</text>
+<text top="696" left="473" width="366" height="13" font="1">streams. In the Figure 3 example, the latency stands to a total</text>
+<text top="713" left="473" width="366" height="13" font="1">of seven cycles (two cycles are inserted by each kernel and</text>
+<text top="731" left="473" width="366" height="13" font="1">retrieval of data plus one cycle to upload data to kernel B, and</text>
+<text top="749" left="473" width="366" height="13" font="1">also two cycles are needed by host memory double-buffers</text>
+<text top="767" left="473" width="219" height="13" font="1">for a producer out and consumer in).</text>
+<text top="809" left="473" width="271" height="13" font="1">3.2. Communication/computation overlap</text>
+<text top="838" left="473" width="366" height="13" font="1">We monitor CPU-GPU communication and GPU computa-</text>
+<text top="856" left="473" width="366" height="13" font="1">tion time. The overlap of data transfers and kernel execution</text>
+<text top="874" left="473" width="366" height="13" font="1">is underscored by varying the time length of GPU kernels. We</text>
+<text top="892" left="473" width="366" height="13" font="1">set kernel duration from 0 to twice the data transfer length.</text>
+<text top="910" left="473" width="366" height="13" font="1">The test program saves loop’s duration, with or without data</text>
+<text top="928" left="473" width="366" height="13" font="1">transfers, in synchronous or asynchronous mode. Experimen-</text>
+<text top="946" left="473" width="366" height="13" font="1">tal conditions are transfers of 64 MiB blocks to achieve maxi-</text>
+<text top="964" left="473" width="366" height="13" font="1">mum bandwidth on the PCI express bus. We checked three</text>
+<text top="982" left="473" width="366" height="13" font="1">motherboard conﬁgurations, recommended for GPU super-</text>
+<text top="1000" left="473" width="366" height="13" font="1">computers (1) an AsusTek G53JW notebook featuring an In-</text>
+<text top="1018" left="473" width="366" height="13" font="1">tel I7 Q740 CPU and including a GTX460M board (mono</text>
+<text top="1036" left="473" width="366" height="13" font="1">GPU) (2) a workstation based on AsRock X58 SuperCom-</text>
+<text top="1054" left="473" width="366" height="13" font="1">puter motherboard with an Intel I7 920 CPU and 3 GTX285</text>
+<text top="1072" left="473" width="366" height="13" font="1">boards (3) a workstation based on Asus P6T7 WS Super-</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="9" size="3" family="Times" color="#000000"/>
+<text top="296" left="109" width="5" height="6" font="7"> 0</text>
+<text top="266" left="104" width="10" height="6" font="7"> 0.5</text>
+<text top="235" left="109" width="5" height="6" font="7"> 1</text>
+<text top="204" left="104" width="10" height="6" font="7"> 1.5</text>
+<text top="174" left="109" width="5" height="6" font="7"> 2</text>
+<text top="143" left="104" width="10" height="6" font="7"> 2.5</text>
+<text top="113" left="109" width="5" height="6" font="7"> 3</text>
+<text top="302" left="115" width="5" height="6" font="7"> 0</text>
+<text top="302" left="193" width="10" height="6" font="7"> 0.5</text>
+<text top="302" left="275" width="5" height="6" font="7"> 1</text>
+<text top="302" left="353" width="10" height="6" font="7"> 1.5</text>
+<text top="302" left="436" width="5" height="6" font="7"> 2</text>
+<text top="242" left="95" width="0" height="6" font="9">Data transfer + kernel duration</text>
+<text top="311" left="258" width="39" height="6" font="7">Kernel duration</text>
+<text top="120" left="186" width="29" height="6" font="7">Kernel only</text>
+<text top="126" left="141" width="73" height="6" font="7">2 data transfers async mode</text>
+<text top="132" left="145" width="70" height="6" font="7">2 data transfers sync mode</text>
+<text top="138" left="192" width="22" height="6" font="7">speedup</text>
+<text top="334" left="92" width="345" height="14" font="1">Fig. 4: Communication/kernel overlap on Asus Notebook</text>
+<text top="387" left="82" width="366" height="13" font="1">computer motherboard with an Intel I7 920 CPU equipped</text>
+<text top="405" left="82" width="366" height="13" font="1">and 3 GTX285 boards. The results were measured using</text>
+<text top="422" left="82" width="366" height="13" font="1">Nvidia’s GPU CUDA SDK 3.2 (NVIDIA 260.19.26 driver)</text>
+<text top="440" left="82" width="366" height="13" font="1">under linux Ubuntu 10.04. In asynchronous mode, there is</text>
+<text top="458" left="82" width="366" height="13" font="1">a complete overlap if the kernel’s duration exceeds transfer</text>
+<text top="476" left="82" width="366" height="13" font="1">time. Otherwise, only the duration of the transfer remains. In</text>
+<text top="494" left="82" width="366" height="13" font="1">synchronous mode, we ﬁnd that transfer duration adds to the</text>
+<text top="512" left="82" width="184" height="13" font="1">length of the kernel (Figure 4).</text>
+<text top="531" left="104" width="343" height="13" font="1">The speedup factor is deﬁned as improvement of over-</text>
+<text top="549" left="82" width="366" height="13" font="1">lapped mode versus no overlap that reaches a factor of two if</text>
+<text top="567" left="82" width="323" height="13" font="1">data transfer time is around kernel execution duration.</text>
+<text top="612" left="82" width="245" height="13" font="1">3.3. Data transfer bandwidth on PCIe</text>
+<text top="642" left="82" width="366" height="13" font="1">On the PC motherboards, data transfers between host mem-</text>
+<text top="660" left="82" width="366" height="13" font="1">ory and GPU devices go through the PCI express bus. PCIe is</text>
+<text top="678" left="82" width="366" height="13" font="1">a high-speed point-to-point serial link connecting expansion</text>
+<text top="696" left="82" width="366" height="13" font="1">boards to the chipset. For PCIe Gen2.0, the serial bus uses</text>
+<text top="714" left="82" width="366" height="13" font="1">two low-voltage differential LVDS pairs, providing a 5 GT/s</text>
+<text top="732" left="82" width="366" height="13" font="1">(giga transfers per second) in each direction. The AsusTek</text>
+<text top="750" left="82" width="366" height="13" font="1">G53JW notebook has the 3400 Intel chipset, implementing</text>
+<text top="768" left="82" width="366" height="13" font="1">PCIe 2.0 x8 lanes. Actual data transfer bandwidth performs</text>
+<text top="786" left="82" width="366" height="13" font="1">3.0 GB/s for host to device (h→d) transfer and 3.2GB/s d→h</text>
+<text top="804" left="82" width="366" height="13" font="1">transfer. So in this case, there is no overlap between the</text>
+<text top="822" left="82" width="366" height="13" font="1">h→d and the d→h data transfers, on the same GPU board.</text>
+<text top="840" left="82" width="366" height="13" font="1">On Geforce boards, the PCIe interface does not support full-</text>
+<text top="858" left="82" width="366" height="13" font="1">duplex transfers (h→d and d→h simultaneously). Half du-</text>
+<text top="876" left="82" width="366" height="13" font="1">plex transfers of Geforce boards is the bottleneck for high</text>
+<text top="894" left="82" width="366" height="13" font="1">speed data transfers. It seems that Quadro and Tesla boards</text>
+<text top="911" left="82" width="366" height="13" font="1">support full duplex transfers on PCIe, doubling the data trans-</text>
+<text top="929" left="82" width="366" height="13" font="1">fer bandwidth. Both workstation motherboards have the X58</text>
+<text top="947" left="82" width="366" height="13" font="1">Intel chipset, with 2 PCIe 2.0 x16 links. The AsRock X58</text>
+<text top="996" left="108" width="76" height="13" font="1">motherboard</text>
+<text top="996" left="203" width="57" height="13" font="1">1 transfer</text>
+<text top="996" left="278" width="63" height="13" font="1">2 transfers</text>
+<text top="996" left="359" width="63" height="13" font="1">6 transfers</text>
+<text top="1014" left="108" width="78" height="13" font="1">AsRock X58</text>
+<text top="1014" left="222" width="19" height="13" font="1">3.0</text>
+<text top="1014" left="300" width="19" height="13" font="1">6.0</text>
+<text top="1014" left="381" width="19" height="13" font="1">7.0</text>
+<text top="1033" left="108" width="66" height="13" font="1">Asus P6T7</text>
+<text top="1033" left="222" width="19" height="13" font="1">5.5</text>
+<text top="1033" left="300" width="19" height="13" font="1">7.1</text>
+<text top="1033" left="381" width="19" height="13" font="1">7.1</text>
+<text top="1066" left="96" width="336" height="14" font="1">Table 1: PCIe 2.0 bandwidth of motherboards (in GB/s)</text>
+<text top="113" left="473" width="366" height="13" font="1">motherboard (three GPU boards PCIe x16), seems to be less</text>
+<text top="131" left="473" width="366" height="13" font="1">efﬁcient for a single data transfer but both motherboards cap</text>
+<text top="149" left="473" width="366" height="13" font="1">around 7.0 GB/s for six simultaneous data transfers, ie si-</text>
+<text top="167" left="473" width="366" height="13" font="1">multaneous h→d and d→h transfers for each GPU board.</text>
+<text top="185" left="473" width="366" height="13" font="1">However, we demonstrated that communication and computa-</text>
+<text top="202" left="473" width="366" height="13" font="1">tion can overlap when asynchronous transfers in multi GPUs</text>
+<text top="220" left="473" width="366" height="13" font="1">nodes are used. Thus, we improved the efﬁciency of multi-</text>
+<text top="238" left="473" width="266" height="13" font="1">GPU parallelism by hiding the transfer time.</text>
+<text top="280" left="593" width="126" height="13" font="1">4. DESIGN FLOW</text>
+<text top="314" left="473" width="366" height="13" font="1">Our goal is to provide a design ﬂow that allows implement-</text>
+<text top="332" left="473" width="366" height="13" font="1">ing a DSP application on a computer cluster without taking</text>
+<text top="350" left="473" width="366" height="13" font="1">care of implementation considerations. Particularly, we fo-</text>
+<text top="368" left="473" width="366" height="13" font="1">cus on automation of an efﬁcient implementation of commu-</text>
+<text top="386" left="473" width="366" height="13" font="1">nications, i.e. with computation communication overlap, on</text>
+<text top="404" left="473" width="366" height="13" font="1">computer cluster with multi GPU. In the ﬁrst subsection, we</text>
+<text top="422" left="473" width="366" height="13" font="1">present the steps of our design ﬂow. In the second subsec-</text>
+<text top="440" left="473" width="366" height="13" font="1">tion, we detail the graph analysis and transformations we do</text>
+<text top="458" left="473" width="214" height="13" font="1">to obtain the implementation graph.</text>
+<text top="498" left="473" width="65" height="13" font="1">4.1. Steps</text>
+<text top="526" left="473" width="366" height="13" font="1">The application is speciﬁed with a textual representation of a</text>
+<text top="544" left="473" width="366" height="13" font="1">DFG. It is composed of nodes representing the computations</text>
+<text top="562" left="473" width="366" height="13" font="1">and edges showing the data dependencies between them. The</text>
+<text top="580" left="473" width="366" height="13" font="1">semantic of a DFG is as following: a node can be ﬁred if and</text>
+<text top="598" left="473" width="366" height="13" font="1">only if all its inputs are available. When ﬁred, it consumes</text>
+<text top="616" left="473" width="366" height="13" font="1">all its inputs and executes the function it is associated to and</text>
+<text top="634" left="473" width="366" height="13" font="1">produces all its outputs. The designer associates in its DFG</text>
+<text top="652" left="473" width="366" height="13" font="1">speciﬁcation a data type to each edge and an object type to</text>
+<text top="670" left="473" width="366" height="13" font="1">each node. Initially, we impose that each node has one in-</text>
+<text top="688" left="473" width="366" height="13" font="1">put. This restriction is discussed at the end of subsection 4.2</text>
+<text top="706" left="473" width="366" height="13" font="1">and will be removed in a near future. Figure 5 presents an</text>
+<text top="724" left="473" width="366" height="13" font="1">example of a DFG: node p produces data consumed by node</text>
+<text top="742" left="473" width="9" height="12" font="1">a</text>
+<text top="742" left="486" width="353" height="13" font="1">which produces data for node b that broadcasts it to nodes</text>
+<text top="760" left="473" width="18" height="12" font="1">c1</text>
+<text top="759" left="491" width="348" height="13" font="1">, c2, d, and so on. An iteration is the ﬁring of all nodes</text>
+<text top="777" left="473" width="366" height="13" font="1">of the DFG. The meaning of the couple between parentheses</text>
+<text top="795" left="473" width="366" height="13" font="1">is given in subsection 4.2. The architecture is described with</text>
+<text top="813" left="473" width="366" height="13" font="1">a textual representation of an Architecture Graph (AG). The</text>
+<text top="831" left="473" width="366" height="13" font="1">nodes represent the processing elements, and the edges the</text>
+<text top="849" left="473" width="366" height="13" font="1">communication channels between them. Figure 6 presents an</text>
+<text top="867" left="473" width="366" height="13" font="1">AG of a cluster of two computers where each has a moth-</text>
+<text top="885" left="473" width="366" height="13" font="1">erboard with one CPU and three GPUs. Here, the designer</text>
+<text top="903" left="473" width="366" height="13" font="1">also speciﬁes the nature of each communication link. On our</text>
+<text top="921" left="473" width="366" height="13" font="1">cluster, CPU and GPUs on the same computer communicate</text>
+<text top="1066" left="555" width="202" height="14" font="1">Fig. 5: Data Flow Graph example</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="10" size="6" family="Times" color="#000000"/>
+<text top="113" left="82" width="366" height="13" font="1">through PCIe links whereas the computers through Inﬁniband</text>
+<text top="131" left="82" width="56" height="13" font="1">Network.</text>
+<text top="149" left="104" width="343" height="13" font="1">The mapping of an application on the architecture is spec-</text>
+<text top="167" left="82" width="366" height="13" font="1">iﬁed in the textual representation of a DFG. Figure 7 presents</text>
+<text top="185" left="82" width="310" height="13" font="1">the mapping we choose to illustrate the design ﬂow.</text>
+<text top="202" left="82" width="366" height="13" font="1">Finally, the designer has to provide a c++ class description</text>
+<text top="220" left="82" width="366" height="13" font="1">for each kind of object associated to the DFG nodes and to</text>
+<text top="238" left="82" width="366" height="13" font="1">complete resolution functions that are called at runtime to do</text>
+<text top="256" left="82" width="366" height="13" font="1">the memory allocations, the instantiation of the c++ class as-</text>
+<text top="274" left="82" width="153" height="13" font="1">sociated to each nodes . . .</text>
+<text top="292" left="104" width="343" height="13" font="1">At this time, the designer’s code is compiled and linked</text>
+<text top="310" left="82" width="366" height="13" font="1">with a library we developed, called Parallel Computations</text>
+<text top="328" left="82" width="366" height="13" font="1">with Communications Overlap (PACCO). This library al-</text>
+<text top="346" left="82" width="366" height="13" font="1">lows to obtain a binary which can execute the application</text>
+<text top="364" left="82" width="366" height="13" font="1">with computation communication overlap. Since we rely on</text>
+<text top="382" left="82" width="366" height="13" font="1">MPI [5] for inter-computer communications, we use mpirun</text>
+<text top="400" left="82" width="366" height="13" font="1">to launch and distribute the application on the cluster. At</text>
+<text top="418" left="82" width="366" height="13" font="1">runtime, the DFG with its mapping annotations and the AG</text>
+<text top="436" left="82" width="366" height="13" font="1">are analyzed. We do some graph transformations to allow</text>
+<text top="454" left="82" width="366" height="13" font="1">communication-computation overlap and to obtain an opti-</text>
+<text top="471" left="82" width="366" height="13" font="1">mized Implementation Graph (IG). We then create the threads</text>
+<text top="489" left="82" width="366" height="13" font="1">that will manage the CPU and GPU computations, i.e. DFG</text>
+<text top="507" left="82" width="366" height="13" font="1">nodes ﬁring, the communications among them and the syn-</text>
+<text top="525" left="82" width="366" height="13" font="1">chronizations. This code needs to be recompiled only when</text>
+<text top="543" left="82" width="366" height="13" font="1">the designer introduces a new data type in the DFG or asso-</text>
+<text top="561" left="82" width="209" height="13" font="1">ciates a new object to a DFG node.</text>
+<text top="579" left="82" width="366" height="13" font="1">Figure 8 summarizes all the steps of the design ﬂow. Here,</text>
+<text top="597" left="82" width="366" height="13" font="1">the designer only provides the information within the dark</text>
+<text top="615" left="82" width="117" height="13" font="1">rounded rectangles.</text>
+<text top="654" left="82" width="268" height="13" font="1">4.2. Graphs analysis and transformations</text>
+<text top="683" left="82" width="366" height="13" font="1">The objective of the analysis and transformations is to obtain</text>
+<text top="701" left="82" width="366" height="13" font="1">an IG which will be used by each CPU and GPU thread to</text>
+<text top="718" left="82" width="366" height="13" font="1">determine what it has to do. The IG speciﬁes the scheduling</text>
+<text top="736" left="82" width="366" height="13" font="1">of the DFG nodes and the buffers that allow them to commu-</text>
+<text top="754" left="82" width="186" height="13" font="1">nicate through the architecture.</text>
+<text top="772" left="82" width="83" height="13" font="1">- Scheduling.</text>
+<text top="790" left="82" width="366" height="13" font="1">A ﬁrst step consists in ﬁnding a schedule, i.e. a ﬁring order</text>
+<text top="808" left="82" width="366" height="13" font="1">of the nodes for an iteration of the DFG. For this purpose we</text>
+<text top="826" left="82" width="366" height="13" font="1">used a recursive algorithm called on sink nodes. The schedule</text>
+<text top="844" left="82" width="366" height="13" font="1">of our application example is speciﬁed in the ﬁrst element of</text>
+<text top="862" left="82" width="302" height="13" font="1">the couple between parentheses in the DFG nodes.</text>
+<text top="880" left="82" width="149" height="13" font="1">- Buffer node insertion.</text>
+<text top="1066" left="157" width="214" height="14" font="1">Fig. 6: Architecture Graph example</text>
+<text top="422" left="571" width="169" height="14" font="1">Fig. 7: DFG mapped on AG</text>
+<text top="472" left="473" width="366" height="13" font="1">The DFG of an application speciﬁes the data dependencies</text>
+<text top="490" left="473" width="366" height="13" font="1">(edges) between computations (nodes). From the implemen-</text>
+<text top="508" left="473" width="366" height="13" font="1">tation point of view, we need buffers to store the data that is</text>
+<text top="526" left="473" width="366" height="13" font="1">produced and consumed by the nodes. This means that buffers</text>
+<text top="544" left="473" width="366" height="13" font="1">are required all along an architecture’s path connecting the</text>
+<text top="562" left="473" width="366" height="13" font="1">nodes which with producer/consumer relationship. Figure 9</text>
+<text top="580" left="473" width="366" height="13" font="1">illustrates the result of buffer node insertion of the applica-</text>
+<text top="598" left="473" width="366" height="13" font="1">tion presented in Figure 5 on the architecture Figure 6 with</text>
+<text top="616" left="473" width="208" height="13" font="1">the mapping presented in Figure 7.</text>
+<text top="634" left="495" width="343" height="13" font="1">For example we consider the case of nodes b And c2 that</text>
+<text top="701" left="636" width="38" height="8" font="10">PACCO Lib</text>
+<text top="695" left="546" width="73" height="8" font="10">Resolutions functions</text>
+<text top="695" left="690" width="75" height="8" font="10">C++ classes to be fired</text>
+<text top="738" left="627" width="56" height="8" font="10">Compile and link</text>
+<text top="781" left="644" width="22" height="8" font="10">Binary</text>
+<text top="820" left="624" width="63" height="8" font="10">Application launch</text>
+<text top="830" left="640" width="29" height="8" font="10">(mpirun)</text>
+<text top="861" left="578" width="153" height="8" font="10">Application running on each computer cluster</text>
+<text top="921" left="622" width="68" height="8" font="10">Graphs analysis and </text>
+<text top="931" left="629" width="52" height="8" font="10">transormations</text>
+<text top="873" left="569" width="55" height="8" font="10">Application DFG</text>
+<text top="883" left="574" width="48" height="8" font="10">with mapping </text>
+<text top="893" left="577" width="41" height="8" font="10">annotations</text>
+<text top="878" left="692" width="44" height="8" font="10">Architecture </text>
+<text top="888" left="703" width="20" height="8" font="10">graph</text>
+<text top="1008" left="620" width="71" height="8" font="10">Threads creation and</text>
+<text top="1018" left="644" width="22" height="8" font="10">launch</text>
+<text top="970" left="617" width="76" height="8" font="10">Implementation graph</text>
+<text top="1066" left="597" width="117" height="14" font="1">Fig. 8: Design ﬂow</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
+<text top="539" left="176" width="178" height="14" font="1">Fig. 9: Buffer nodes insertion</text>
+<text top="595" left="82" width="366" height="13" font="1">have a producer-consumer relationship. Node b is mapped on</text>
+<text top="613" left="82" width="366" height="13" font="1">GPU1 of CPU0, whereas c2 is mapped on GPU0 of CPU1.</text>
+<text top="631" left="82" width="366" height="13" font="1">To go from GPU1 of CPU0 to GPU0 of CPU1, you have</text>
+<text top="649" left="82" width="366" height="13" font="1">to pass by CPU0 and then by GPU1. Thus, four buffers</text>
+<text top="667" left="82" width="366" height="13" font="1">are required: bn_2 allocated on the memory of GPU1 of</text>
+<text top="685" left="82" width="366" height="13" font="1">CPU0 computer, bn_9 allocated on the CPU0 computer</text>
+<text top="703" left="82" width="366" height="13" font="1">main memory, bn_10 allocated on the CPU1 computer main</text>
+<text top="720" left="82" width="366" height="13" font="1">memory and bn_11 allocated on the memory of GPU0 of</text>
+<text top="738" left="82" width="366" height="13" font="1">CPU1 computer. We notice that the data produced by b is</text>
+<text top="756" left="82" width="366" height="13" font="1">also consumed by c1. As the architectural path going from</text>
+<text top="775" left="82" width="9" height="12" font="1">b</text>
+<text top="774" left="95" width="353" height="13" font="1">to c1 is included in the path from b tp c2, no other buffer</text>
+<text top="792" left="82" width="100" height="13" font="1">node is required.</text>
+<text top="810" left="82" width="241" height="13" font="1">- Buffer node depth and optimization.</text>
+<text top="828" left="82" width="366" height="13" font="1">This step consists in determining the depth of each buffer</text>
+<text top="846" left="82" width="366" height="13" font="1">node, simple or double, and to optimize their allocation</text>
+<text top="864" left="82" width="366" height="13" font="1">through sharing. The choice of the depth of a buffer node de-</text>
+<text top="1066" left="160" width="208" height="14" font="1">Fig. 10: Buffer nodes optimization</text>
+<text top="113" left="473" width="366" height="13" font="1">pends on location of the processing elements of the nodes it</text>
+<text top="131" left="473" width="366" height="13" font="1">connects and the communication strategy, i.e. with or without</text>
+<text top="149" left="473" width="366" height="13" font="1">computation overlapping. The communication strategy also</text>
+<text top="167" left="473" width="207" height="13" font="1">impacts the IG model of execution</text>
+<text top="184" left="473" width="366" height="13" font="1">Inter processing elements communication with computa-</text>
+<text top="202" left="473" width="366" height="14" font="1">tion communication overlap In this case, each buffer node</text>
+<text top="220" left="473" width="366" height="13" font="1">that receives or send data to a processing element other than</text>
+<text top="238" left="473" width="366" height="13" font="1">the one it is mapped to must be a double buffer. Indeed,</text>
+<text top="256" left="473" width="366" height="13" font="1">in this case the two following situations have to be consid-</text>
+<text top="274" left="473" width="366" height="13" font="1">ered. (1) The case of a buffer node which receives a data</text>
+<text top="292" left="473" width="366" height="13" font="1">from another processing element. To implement computation</text>
+<text top="310" left="473" width="366" height="13" font="1">communication overlap, the buffer node can be written by</text>
+<text top="328" left="473" width="366" height="13" font="1">an asynchronous data transfer, whereas it can be read by an</text>
+<text top="346" left="473" width="366" height="13" font="1">internal DFG node. It is the case of bn_7, in Figure 9, which</text>
+<text top="364" left="473" width="366" height="13" font="1">is read by an asynchronous data transfer between bn_7 and</text>
+<text top="383" left="473" width="36" height="12" font="1">bn_8</text>
+<text top="382" left="512" width="327" height="13" font="1">whereas it can be written by another asynchronous data</text>
+<text top="400" left="473" width="366" height="13" font="1">transfer between bn_1 and bn_8. (2) The case of a buffer</text>
+<text top="418" left="473" width="366" height="13" font="1">node that sends data to another processing element. With</text>
+<text top="436" left="473" width="366" height="13" font="1">computation communication overlapping, the buffer node</text>
+<text top="454" left="473" width="366" height="13" font="1">with the data sends asynchronously to the other processing</text>
+<text top="471" left="473" width="366" height="13" font="1">element is written by an internal node. It is the case of bn_1</text>
+<text top="489" left="473" width="366" height="13" font="1">in ﬁgure 9 which can be asynchronously sent to bn_7 while</text>
+<text top="507" left="473" width="136" height="13" font="1">it is written by node a.</text>
+<text top="525" left="473" width="366" height="13" font="1">Inter processing elements communication without com-</text>
+<text top="543" left="473" width="366" height="14" font="1">putation communication overlap In this case, the transfers</text>
+<text top="561" left="473" width="366" height="13" font="1">between processing elements are done when all the kernels of</text>
+<text top="579" left="473" width="366" height="13" font="1">each processing elements have been ﬁred. Thus only single</text>
+<text top="597" left="473" width="121" height="13" font="1">buffers are required.</text>
+<text top="615" left="473" width="366" height="14" font="1">Intra processing elements communication As the DFG</text>
+<text top="633" left="473" width="366" height="13" font="1">nodes are ﬁred with respect to the scheduling, only single</text>
+<text top="651" left="473" width="366" height="13" font="1">buffer nodes are required as internal storage. We develop an</text>
+<text top="669" left="473" width="366" height="13" font="1">optimization pass, which allows sharing the internal buffer</text>
+<text top="687" left="473" width="366" height="13" font="1">nodes that transport the same data type. Even the double</text>
+<text top="705" left="473" width="366" height="13" font="1">buffer node’s part which is not used by an asynchronous</text>
+<text top="723" left="473" width="366" height="13" font="1">transfer between two processing elements can be shared. Fig-</text>
+<text top="740" left="473" width="366" height="13" font="1">ure 10 shows the results of this optimization applied to our</text>
+<text top="758" left="473" width="366" height="13" font="1">example application. In the context of computation commu-</text>
+<text top="776" left="473" width="366" height="13" font="1">nication overlap, the part of bn_1 double buffer which is not</text>
+<text top="794" left="473" width="366" height="13" font="1">used by the asynchronous transfer between CPU1 and GPU0</text>
+<text top="812" left="473" width="366" height="13" font="1">of CPU1 is read by c2,d,f and written by e and buffer</text>
+<text top="830" left="473" width="366" height="13" font="1">node bn_3 is read by e,c3 and written by d,f. To ensure</text>
+<text top="848" left="473" width="366" height="13" font="1">data consistency, all these transfers are of course done in the</text>
+<text top="866" left="473" width="366" height="13" font="1">scheduling order. This optimization avoids the instantiation</text>
+<text top="884" left="473" width="366" height="13" font="1">of two buffer nodes. Currently, we are working to determine</text>
+<text top="902" left="473" width="366" height="13" font="1">a scheduling speciﬁc to each processing element that mini-</text>
+<text top="920" left="473" width="187" height="13" font="1">mizes the buffer nodes number.</text>
+<text top="938" left="473" width="276" height="13" font="1">- Implementation graph model of execution</text>
+<text top="956" left="473" width="366" height="13" font="1">At runtime, a CPU thread is associated to each processing el-</text>
+<text top="974" left="473" width="366" height="13" font="1">ement (GPU computations and transfers are managed through</text>
+<text top="992" left="473" width="366" height="13" font="1">a CPU thread which launches the GPU kernels and transfers).</text>
+<text top="1009" left="473" width="366" height="13" font="1">These threads manage the nodes mapped on the processing</text>
+<text top="1027" left="473" width="170" height="13" font="1">elements that are associated.</text>
+<text top="1045" left="473" width="366" height="13" font="1">In the case with computation communication overlap they</text>
+<text top="1063" left="473" width="366" height="13" font="1">iteratively execute the following sequence: (1) launch the</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="11" size="3" family="Helvetica" color="#000000"/>
+	<fontspec id="12" size="3" family="Helvetica" color="#000000"/>
+<text top="113" left="82" width="366" height="13" font="1">asynchronous transfers (2) ﬁre each node with respect to the</text>
+<text top="131" left="82" width="366" height="13" font="1">scheduling (3) wait until all the nodes all processing elements</text>
+<text top="149" left="82" width="366" height="13" font="1">have ﬁnished for their execution and asynchronous transfers</text>
+<text top="167" left="82" width="97" height="13" font="1">have completed.</text>
+<text top="185" left="82" width="366" height="13" font="1">In the case without computation communication overlap they</text>
+<text top="202" left="82" width="366" height="13" font="1">iteratively execute the following sequence: (1) ﬁre each node</text>
+<text top="220" left="82" width="366" height="13" font="1">with respect to the scheduling (2) wait until all the nodes all</text>
+<text top="238" left="82" width="366" height="13" font="1">processing elements have ﬁnished their execution (3) lauch</text>
+<text top="256" left="82" width="306" height="13" font="1">the transfers (4) wait until all the transfers ﬁnished.</text>
+<text top="274" left="82" width="144" height="13" font="1">- Latency computation</text>
+<text top="292" left="82" width="366" height="13" font="1">Transfers between processing elements introduce delay cy-</text>
+<text top="310" left="82" width="366" height="13" font="1">cles in either case with computation communication overlap</text>
+<text top="328" left="82" width="66" height="13" font="1">or without.</text>
+<text top="346" left="82" width="273" height="13" font="1">With computation communication overlap:</text>
+<text top="346" left="370" width="77" height="13" font="1">each double</text>
+<text top="364" left="82" width="366" height="13" font="1">buffer introduces a delay of one cycle. The latencies speciﬁed</text>
+<text top="382" left="82" width="366" height="13" font="1">in the second element of the couple between parentheses in</text>
+<text top="400" left="82" width="215" height="13" font="1">ﬁgure 9 were computed in this case.</text>
+<text top="418" left="82" width="366" height="13" font="1">Without computation communication overlap, each pair of</text>
+<text top="436" left="82" width="366" height="13" font="1">connected buffer nodes located on different processing ele-</text>
+<text top="454" left="82" width="228" height="13" font="1">ments introduces a delay of one cycle.</text>
+<text top="471" left="82" width="366" height="13" font="1">So, whatever the case, at a given time, DFG nodes can be</text>
+<text top="489" left="82" width="366" height="13" font="1">working on different iterations of the application DFG. More-</text>
+<text top="507" left="82" width="366" height="13" font="1">over, to avoid ﬁring DFG nodes before valid data is present,</text>
+<text top="525" left="82" width="366" height="13" font="1">and thus to avoid transients, we compute the latency of the</text>
+<text top="543" left="82" width="366" height="13" font="1">input of each DFG node. The threads only ﬁre a DFG node</text>
+<text top="561" left="82" width="276" height="13" font="1">after a number of cycles equals to this latency.</text>
+<text top="579" left="82" width="159" height="13" font="1">- Multiple input problem</text>
+<text top="597" left="82" width="366" height="13" font="1">Initially, we impose that a DFG node only has one input.</text>
+<text top="615" left="82" width="366" height="13" font="1">Indeed when a DFG node has more than one input, it can be</text>
+<text top="633" left="82" width="366" height="13" font="1">necessary, depending on its predecessors mapping, to resyn-</text>
+<text top="651" left="82" width="366" height="13" font="1">chronize its inputs since their latency can be different. We are</text>
+<text top="669" left="82" width="366" height="13" font="1">working on this problem through two means: (1) delaying the</text>
+<text top="687" left="82" width="297" height="13" font="1">execution of shortest paths (2) adding delay lines.</text>
+<text top="731" left="138" width="253" height="13" font="1">5. CASE STUDY: GRANULOMETRY</text>
+<text top="766" left="82" width="366" height="13" font="1">The goal of our work is to provide a design ﬂow that simpli-</text>
+<text top="784" left="82" width="366" height="13" font="1">ﬁes CPU/GPU and GPU/GPU inter-communication and al-</text>
+<text top="802" left="82" width="366" height="13" font="1">lows computation/transfer overlapping. In order to apply this</text>
+<text top="820" left="82" width="366" height="13" font="1">design ﬂow concretely, we intend to use the granulometry ap-</text>
+<text top="838" left="82" width="366" height="13" font="1">plication. Firstly, we will present the algorithm. Secondly, we</text>
+<text top="856" left="82" width="366" height="13" font="1">will discuss its practical interest and the reason why this al-</text>
+<text top="874" left="82" width="366" height="13" font="1">gorithm is adapted to parallel programming and more specif-</text>
+<text top="892" left="82" width="366" height="13" font="1">ically GPUs. Thirdly, we will talk about the optimizations</text>
+<text top="910" left="82" width="366" height="13" font="1">brought to it. Lastly, we will present the speedup we get</text>
+<text top="927" left="82" width="352" height="13" font="1">thanks to our design ﬂow implementation of the algorithm.</text>
+<text top="970" left="82" width="173" height="13" font="1">5.1. Algorithm description</text>
+<text top="1000" left="82" width="366" height="13" font="1">Granulometry is the study of the statistical distribution of the</text>
+<text top="1018" left="82" width="366" height="13" font="1">sizes of a population of ﬁnite elements. In other words, it is</text>
+<text top="1036" left="82" width="366" height="13" font="1">the study of an image’s object sizes. In physics, that would</text>
+<text top="1054" left="82" width="366" height="13" font="1">resemble sieving (grain sorting): the image would be ﬁltered</text>
+<text top="1072" left="82" width="282" height="13" font="1">with a series of ’sieves’ of different mesh sizes.</text>
+<text top="113" left="495" width="343" height="13" font="1">The algorithm is based on the opening mathematical mor-</text>
+<text top="131" left="473" width="366" height="13" font="1">phology operator which consists in an erosion followed by a</text>
+<text top="149" left="473" width="366" height="13" font="1">dilation with the same structuring element. It takes an image</text>
+<text top="167" left="473" width="366" height="13" font="1">to process as an entry then computes openings with an in-</text>
+<text top="185" left="473" width="366" height="13" font="1">creasing structuring element size, until all objects in the vol-</text>
+<text top="202" left="473" width="366" height="13" font="1">ume disappear ; meaning the volume is empty. After each</text>
+<text top="220" left="473" width="366" height="13" font="1">opening, we collect the number of positive pixels still present</text>
+<text top="238" left="473" width="366" height="13" font="1">in the image. We then plot the results on a curve: the granulo-</text>
+<text top="256" left="473" width="366" height="13" font="1">metric curve. The abscissa of this curve represents the num-</text>
+<text top="274" left="473" width="366" height="13" font="1">ber of openings, and ordinate represents the corresponding</text>
+<text top="292" left="473" width="366" height="13" font="1">number of positive pixels remaining in the image. The dis-</text>
+<text top="310" left="473" width="366" height="13" font="1">crete derivative of the granulometric curve is called the pat-</text>
+<text top="328" left="473" width="366" height="13" font="1">tern spectrum and the abscissa of its peak is the predominant</text>
+<text top="346" left="473" width="246" height="13" font="1">size of objects in the image (see Fig. 11).</text>
+<text top="389" left="473" width="140" height="13" font="1">5.2. Practical interest</text>
+<text top="419" left="473" width="366" height="13" font="1">In order to study a material’s characteristics, tomographic re-</text>
+<text top="437" left="473" width="366" height="13" font="1">construction is widely used as an efﬁcient method. Many im-</text>
+<text top="455" left="473" width="366" height="13" font="1">plementations of these algorithms have been ported to GPUs</text>
+<text top="472" left="473" width="366" height="13" font="1">considerably accelerating computations [6, 7, 8]. However,</text>
+<text top="490" left="473" width="366" height="13" font="1">less attention has been paid to post-tomographic computa-</text>
+<text top="508" left="473" width="366" height="13" font="1">tions such as granulometry. Yet, their execution time is not</text>
+<text top="526" left="473" width="366" height="13" font="1">negligible, can be easily reduced, and hence discredits the ef-</text>
+<text top="544" left="473" width="284" height="13" font="1">forts made on tomographic reconstruction only.</text>
+<text top="562" left="473" width="358" height="13" font="1">Ganulometry can be efﬁciently implemented on GPU since:</text>
+<text top="580" left="473" width="322" height="13" font="1">(1) there aren’t many ﬂow control instructions needed</text>
+<text top="598" left="473" width="360" height="13" font="1">(2) it is the same operations done on each pixel of the image</text>
+<text top="616" left="473" width="366" height="13" font="1">(3) one pixel’s result is independent from other pixels’ results</text>
+<text top="634" left="473" width="366" height="13" font="1">(4) as we work on binary images, it uses basic operations such</text>
+<text top="652" left="473" width="366" height="13" font="1">as logic AND and logic OR (maximal instruction throughput</text>
+<text top="670" left="473" width="366" height="13" font="1">according to the CUDA programming guide [9]) and few in-</text>
+<text top="688" left="473" width="366" height="13" font="1">termediate variables meaning the occupancy should be maxi-</text>
+<text top="706" left="473" width="51" height="13" font="1">mal [10]</text>
+<text top="724" left="473" width="366" height="13" font="1">(5) processing doesn’t need to follow a special data order, so</text>
+<text top="741" left="473" width="366" height="13" font="1">we can do it in the simplest way, sequentially, to have coa-</text>
+<text top="759" left="473" width="145" height="13" font="1">lesced memory accesses</text>
+<text top="993" left="501" width="5" height="5" font="11"> 0</text>
+<text top="967" left="488" width="18" height="5" font="11"> 10000</text>
+<text top="941" left="488" width="18" height="5" font="11"> 20000</text>
+<text top="914" left="488" width="18" height="5" font="11"> 30000</text>
+<text top="888" left="488" width="18" height="5" font="11"> 40000</text>
+<text top="861" left="488" width="18" height="5" font="11"> 50000</text>
+<text top="835" left="488" width="18" height="5" font="11"> 60000</text>
+<text top="809" left="488" width="18" height="5" font="11"> 70000</text>
+<text top="999" left="507" width="5" height="5" font="11"> 0</text>
+<text top="999" left="571" width="5" height="5" font="11"> 2</text>
+<text top="999" left="635" width="5" height="5" font="11"> 4</text>
+<text top="999" left="699" width="5" height="5" font="11"> 6</text>
+<text top="999" left="762" width="5" height="5" font="11"> 8</text>
+<text top="999" left="825" width="8" height="5" font="11"> 10</text>
+<text top="962" left="481" width="0" height="5" font="12">Number of pixels of value remaining in the image</text>
+<text top="1008" left="638" width="62" height="5" font="11">Structuring element size</text>
+<text top="816" left="747" width="52" height="5" font="11">Granulometric curve</text>
+<text top="822" left="755" width="44" height="5" font="11">Pattern spectrum</text>
+<text top="1030" left="473" width="366" height="14" font="1">Fig. 11: Example of appearance of a granulometric curve.</text>
+<text top="1048" left="473" width="366" height="13" font="1">We can see on the pattern spectrum an extrema indicating the</text>
+<text top="1066" left="473" width="268" height="13" font="1">predominant size of the objects in the image.</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="13" size="4" family="Times" color="#3a3835"/>
+	<fontspec id="14" size="1" family="Times" color="#3a3835"/>
+	<fontspec id="15" size="4" family="Times" color="#3a3835"/>
+	<fontspec id="16" size="2" family="Times" color="#000000"/>
+<text top="175" left="126" width="23" height="8" font="13">Erosion</text>
+<text top="175" left="320" width="23" height="8" font="13">Dilation</text>
+<text top="171" left="360" width="17" height="8" font="13">Pixel </text>
+<text top="178" left="357" width="23" height="8" font="13">counter</text>
+<text top="196" left="320" width="23" height="8" font="13">Dilation</text>
+<text top="192" left="360" width="17" height="8" font="13">Pixel </text>
+<text top="200" left="357" width="23" height="8" font="13">counter</text>
+<text top="196" left="167" width="23" height="8" font="13">Erosion</text>
+<text top="196" left="272" width="23" height="8" font="13">Dilation</text>
+<text top="211" left="270" width="77" height="8" font="13">for i in [1 .. nbr_iterations]</text>
+<text top="230" left="320" width="23" height="8" font="13">Dilation</text>
+<text top="226" left="360" width="17" height="8" font="13">Pixel </text>
+<text top="233" left="357" width="23" height="8" font="13">counter</text>
+<text top="229" left="213" width="23" height="8" font="13">Erosion</text>
+<text top="230" left="274" width="23" height="8" font="13">Dilation</text>
+<text top="172" left="93" width="4" height="8" font="13">1</text>
+<text top="172" left="97" width="3" height="4" font="14">st</text>
+<text top="172" left="100" width="2" height="8" font="13"> </text>
+<text top="180" left="93" width="24" height="8" font="13">iteration</text>
+<text top="191" left="94" width="4" height="8" font="13">2</text>
+<text top="191" left="98" width="4" height="4" font="14">nd</text>
+<text top="191" left="102" width="2" height="8" font="13"> </text>
+<text top="199" left="94" width="24" height="8" font="13">iteration</text>
+<text top="226" left="95" width="14" height="8" font="13">N th </text>
+<text top="233" left="95" width="24" height="8" font="13">iteration</text>
+<text top="128" left="123" width="25" height="8" font="13">Original </text>
+<text top="136" left="126" width="19" height="8" font="13">image</text>
+<text top="129" left="402" width="37" height="8" font="13">read volume</text>
+<text top="202" left="402" width="40" height="8" font="13">granulometry</text>
+<text top="130" left="391" width="4" height="8" font="15"><b>0</b></text>
+<text top="204" left="391" width="4" height="8" font="15"><b>1</b></text>
+<text top="276" left="130" width="269" height="14" font="1">Fig. 12: The Data-Flow Graph modelization.</text>
+<text top="326" left="82" width="366" height="13" font="1">5.3. The DFG implementation of the granulometry appli-</text>
+<text top="344" left="82" width="39" height="13" font="1">cation</text>
+<text top="372" left="82" width="366" height="13" font="1">The granulometry GPU implementation comes in handy</text>
+<text top="390" left="82" width="366" height="13" font="1">when processing huge volumes of data. However, the bigger</text>
+<text top="408" left="82" width="366" height="13" font="1">the volume to process is, the more time it takes to be read from</text>
+<text top="426" left="82" width="366" height="13" font="1">the hard disk: our SATA disk evaluated bit rate is 120 MB/s.</text>
+<text top="444" left="82" width="366" height="13" font="1">Commonly used 3D volumes’ sizes for post-tomographic</text>
+<text top="462" left="82" width="191" height="13" font="1">processing are of at least 1024</text>
+<text top="459" left="273" width="6" height="9" font="6">3</text>
+<text top="462" left="285" width="162" height="13" font="1">voxels. Therefore, an im-</text>
+<text top="480" left="82" width="366" height="13" font="1">provement could be to overlap the CPU “read and binarize“</text>
+<text top="498" left="82" width="366" height="13" font="1">task with the GPU “granulometry“ task. However, this im-</text>
+<text top="516" left="82" width="366" height="13" font="1">plies the use of double buffers and introduces a latency. Thus,</text>
+<text top="534" left="82" width="366" height="13" font="1">this solution is mostly useful when processing the granulom-</text>
+<text top="552" left="82" width="366" height="13" font="1">etry application on a set of volumes. In this subsection, we</text>
+<text top="569" left="82" width="366" height="13" font="1">will illustrate the steps to follow in order to implement this</text>
+<text top="587" left="82" width="366" height="13" font="1">solution by using our design ﬂow. First, we decompose our</text>
+<text top="605" left="82" width="366" height="13" font="1">application in computing entities (nodes). Then, we do the</text>
+<text top="623" left="82" width="366" height="13" font="1">mapping between these nodes and the architecture. Finally,</text>
+<text top="641" left="82" width="366" height="13" font="1">we conclude with the results obtained, the beneﬁts and the</text>
+<text top="659" left="82" width="226" height="13" font="1">limitations to deal with in near future.</text>
+<text top="677" left="82" width="201" height="13" font="1">- DFG application modelization</text>
+<text top="695" left="82" width="366" height="13" font="1">Our computing entities (nodes) are easily identiﬁed. We can</text>
+<text top="713" left="82" width="366" height="13" font="1">divide the process into two tasks (see Fig. 12): (1) read vol-</text>
+<text top="731" left="82" width="366" height="13" font="1">ume from hard drive and binarize it (on CPU) (2) process the</text>
+<text top="749" left="82" width="349" height="13" font="1">granulometry application on the loaded volume (on GPU).</text>
+<text top="767" left="82" width="203" height="13" font="1">- Mapping DFG on architecture</text>
+<text top="785" left="82" width="366" height="13" font="1">The mapping is then processed, automatically adding buffers,</text>
+<text top="803" left="82" width="366" height="13" font="1">according to the architecture we wish to port the algorithm</text>
+<text top="820" left="82" width="260" height="13" font="1">onto. In our case, it would look like Fig. 13</text>
+<text top="838" left="82" width="327" height="13" font="1">- GPU versus CPU implemented application results</text>
+<text top="856" left="82" width="366" height="13" font="1">Firstly, let’s observe the acceleration brought just by port-</text>
+<text top="874" left="82" width="366" height="13" font="1">ing this speciﬁc application to the GPU (without task and</text>
+<text top="892" left="82" width="366" height="13" font="1">transfer overlapping). Fig. 14 shows the speedup of the GPU</text>
+<text top="910" left="82" width="366" height="13" font="1">implemented granulometry application compared to the CPU</text>
+<text top="928" left="82" width="192" height="13" font="1">single threaded implementation.</text>
+<text top="946" left="104" width="343" height="13" font="1">Sizes of the processed images on Fermi GTX 480 and</text>
+<text top="964" left="82" width="366" height="13" font="1">GTX 285 differ because of the difference in available device</text>
+<text top="982" left="82" width="366" height="13" font="1">memory: 1.5 GB for GTX 480 and 2 GB for GTX 285. Also,</text>
+<text top="1000" left="82" width="366" height="13" font="1">three buffers (four buffers in asynchronous mode) are needed</text>
+<text top="1018" left="82" width="366" height="13" font="1">on the GPU. Moreover, pitched memory is used which sig-</text>
+<text top="1036" left="82" width="366" height="13" font="1">niﬁcantly increases (up to 8 times) the amount of allocated</text>
+<text top="1054" left="82" width="366" height="13" font="1">memory for 2D memory alignment reasons. That limits the</text>
+<text top="1072" left="82" width="366" height="13" font="1">size of the images that can be processed on the GPUs. Let us</text>
+<text top="247" left="473" width="366" height="14" font="1">Fig. 13: The mapping of the dataﬂow graph on the architec-</text>
+<text top="265" left="473" width="27" height="13" font="1">ture.</text>
+<text top="469" left="511" width="7" height="5" font="7"> 20</text>
+<text top="444" left="511" width="7" height="5" font="7"> 40</text>
+<text top="419" left="511" width="7" height="5" font="7"> 60</text>
+<text top="393" left="511" width="7" height="5" font="7"> 80</text>
+<text top="368" left="508" width="10" height="5" font="7"> 100</text>
+<text top="343" left="508" width="10" height="5" font="7"> 120</text>
+<text top="317" left="508" width="10" height="5" font="7"> 140</text>
+<text top="475" left="516" width="10" height="5" font="7"> 200</text>
+<text top="475" left="565" width="10" height="5" font="7"> 400</text>
+<text top="475" left="614" width="10" height="5" font="7"> 600</text>
+<text top="475" left="663" width="10" height="5" font="7"> 800</text>
+<text top="475" left="710" width="13" height="5" font="7"> 1000</text>
+<text top="475" left="759" width="13" height="5" font="7"> 1200</text>
+<text top="475" left="808" width="13" height="5" font="7"> 1400</text>
+<text top="416" left="502" width="0" height="5" font="9">Ratio CPU/GPU time</text>
+<text top="483" left="644" width="45" height="5" font="7">Volume dimension </text>
+<text top="481" left="689" width="2" height="4" font="16">3</text>
+<text top="309" left="647" width="42" height="5" font="7">Performance gain</text>
+<text top="457" left="767" width="21" height="5" font="7">GTX 285</text>
+<text top="463" left="767" width="21" height="5" font="7">GTX 480</text>
+<text top="511" left="473" width="366" height="14" font="1">Fig. 14: Performance gain after porting the granulometry al-</text>
+<text top="529" left="473" width="100" height="13" font="1">gorithm to GPU.</text>
+<text top="585" left="473" width="366" height="13" font="1">note that for a ﬁxed image size, the performance gain is con-</text>
+<text top="603" left="473" width="366" height="13" font="1">stant whatever number of openings are performed. Thus, per-</text>
+<text top="621" left="473" width="366" height="13" font="1">formance gain is independant from the maximal object size in</text>
+<text top="638" left="473" width="366" height="13" font="1">an image but depends only on the number of pixels simulta-</text>
+<text top="656" left="473" width="320" height="13" font="1">neously processed by the GPU compared to the CPU.</text>
+<text top="674" left="473" width="273" height="13" font="1">- Synchronous versus asynchronous results</text>
+<text top="692" left="473" width="366" height="13" font="1">Asynchronous mode differs from synchronous in the fact that,</text>
+<text top="710" left="473" width="366" height="13" font="1">the CPU task (hard drive read and binarize) and the GPU task</text>
+<text top="728" left="473" width="366" height="13" font="1">(granulometry) are processed simultaneously. Also, the CPU</text>
+<text top="745" left="473" width="366" height="14" font="1">→ GPU PCI-e transfer is overlapped with the GPU kernels</text>
+<text top="764" left="473" width="366" height="13" font="1">execution. The results obtained for our CPU/GPU task over-</text>
+<text top="782" left="473" width="339" height="13" font="1">lapping granulometry implementation appear on Fig. 15.</text>
+<text top="803" left="495" width="343" height="13" font="1">For a small number of openings, meaning when objects’</text>
+<text top="821" left="473" width="366" height="13" font="1">sizes in the processed volume are small, the GPU granulome-</text>
+<text top="838" left="473" width="366" height="13" font="1">try computations are faster than the CPU ”read and binarize”</text>
+<text top="856" left="473" width="366" height="13" font="1">task. This is clearly demonstrated on Fig. 15: as long as the</text>
+<text top="874" left="473" width="366" height="13" font="1">“CPU read and binarize” task is slower than the “GPU com-</text>
+<text top="892" left="473" width="366" height="13" font="1">putations“, you can observe that the processing time remains</text>
+<text top="910" left="473" width="366" height="13" font="1">constant on the asynchronous curve while increasing by the</text>
+<text top="928" left="473" width="366" height="13" font="1">amount of time spent by the granulometry application on the</text>
+<text top="946" left="473" width="366" height="13" font="1">synchronous one. On the asynchronous curve, when the num-</text>
+<text top="964" left="473" width="366" height="13" font="1">ber of openings becomes big enough, the granulometry ap-</text>
+<text top="982" left="473" width="366" height="13" font="1">plication time exceeds this constant value and the processing</text>
+<text top="1000" left="473" width="366" height="13" font="1">time increases equally to the time spent by the GPU computa-</text>
+<text top="1018" left="473" width="366" height="13" font="1">tions. In other words, when GPU time reaches CPU time the</text>
+<text top="1036" left="473" width="366" height="13" font="1">speedup is at its peak value: x2 since the both tasks are per-</text>
+<text top="1054" left="473" width="366" height="13" font="1">fectly overlapped. The speedup then decreases asymptotically</text>
+<text top="1072" left="473" width="366" height="13" font="1">to 1. In conclusion, our design ﬂow automatically overlapped</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="17" size="7" family="Times" color="#000000"/>
+	<fontspec id="18" size="1" family="Times" color="#000000"/>
+	<fontspec id="19" size="9" family="Times" color="#000000"/>
+<text top="306" left="151" width="5" height="9" font="4">0</text>
+<text top="306" left="194" width="10" height="9" font="4">10</text>
+<text top="306" left="240" width="10" height="9" font="4">20</text>
+<text top="306" left="286" width="10" height="9" font="4">30</text>
+<text top="306" left="333" width="10" height="9" font="4">40</text>
+<text top="306" left="379" width="10" height="9" font="4">50</text>
+<text top="300" left="147" width="5" height="9" font="4">0</text>
+<text top="268" left="137" width="16" height="9" font="4">200</text>
+<text top="237" left="137" width="16" height="9" font="4">400</text>
+<text top="205" left="137" width="16" height="9" font="4">600</text>
+<text top="174" left="137" width="16" height="9" font="4">800</text>
+<text top="143" left="132" width="21" height="9" font="4">1000</text>
+<text top="111" left="132" width="21" height="9" font="4">1200</text>
+<text top="314" left="243" width="51" height="9" font="4">nb openings</text>
+<text top="221" left="128" width="0" height="9" font="17">time (ms)</text>
+<text top="301" left="153" width="1" height="4" font="18"> </text>
+<text top="113" left="383" width="1" height="4" font="18"> </text>
+<text top="306" left="151" width="5" height="9" font="4">0</text>
+<text top="306" left="194" width="10" height="9" font="4">10</text>
+<text top="306" left="240" width="10" height="9" font="4">20</text>
+<text top="306" left="286" width="10" height="9" font="4">30</text>
+<text top="306" left="333" width="10" height="9" font="4">40</text>
+<text top="306" left="379" width="10" height="9" font="4">50</text>
+<text top="300" left="385" width="13" height="9" font="4">0.8</text>
+<text top="268" left="385" width="5" height="9" font="4">1</text>
+<text top="237" left="385" width="13" height="9" font="4">1.2</text>
+<text top="205" left="385" width="13" height="9" font="4">1.4</text>
+<text top="174" left="385" width="13" height="9" font="4">1.6</text>
+<text top="143" left="385" width="13" height="9" font="4">1.8</text>
+<text top="111" left="385" width="5" height="9" font="4">2</text>
+<text top="220" left="406" width="0" height="9" font="17">speedup</text>
+<text top="269" left="345" width="19" height="9" font="4">sync</text>
+<text top="280" left="345" width="24" height="9" font="4">async</text>
+<text top="291" left="345" width="36" height="9" font="4">speedup</text>
+<text top="332" left="226" width="35" height="11" font="19">(a) 256</text>
+<text top="330" left="261" width="5" height="8" font="10">3</text>
+<text top="332" left="267" width="36" height="11" font="19">voxels</text>
+<text top="565" left="154" width="5" height="9" font="4">0</text>
+<text top="565" left="197" width="10" height="9" font="4">10</text>
+<text top="565" left="242" width="10" height="9" font="4">20</text>
+<text top="565" left="288" width="10" height="9" font="4">30</text>
+<text top="565" left="333" width="10" height="9" font="4">40</text>
+<text top="565" left="379" width="10" height="9" font="4">50</text>
+<text top="558" left="135" width="20" height="9" font="4">4000</text>
+<text top="532" left="135" width="20" height="9" font="4">6000</text>
+<text top="505" left="135" width="20" height="9" font="4">8000</text>
+<text top="479" left="130" width="26" height="9" font="4">10000</text>
+<text top="452" left="130" width="26" height="9" font="4">12000</text>
+<text top="425" left="130" width="26" height="9" font="4">14000</text>
+<text top="399" left="130" width="26" height="9" font="4">16000</text>
+<text top="372" left="130" width="26" height="9" font="4">18000</text>
+<text top="573" left="245" width="50" height="9" font="4">nb openings</text>
+<text top="481" left="126" width="0" height="9" font="17">time (ms)</text>
+<text top="560" left="156" width="1" height="4" font="18"> </text>
+<text top="374" left="384" width="1" height="4" font="18"> </text>
+<text top="565" left="154" width="5" height="9" font="4">0</text>
+<text top="565" left="197" width="10" height="9" font="4">10</text>
+<text top="565" left="242" width="10" height="9" font="4">20</text>
+<text top="565" left="288" width="10" height="9" font="4">30</text>
+<text top="565" left="333" width="10" height="9" font="4">40</text>
+<text top="565" left="379" width="10" height="9" font="4">50</text>
+<text top="558" left="385" width="5" height="9" font="4">1</text>
+<text top="465" left="385" width="13" height="9" font="4">1.5</text>
+<text top="372" left="385" width="5" height="9" font="4">2</text>
+<text top="480" left="406" width="0" height="9" font="17">speedup</text>
+<text top="529" left="346" width="19" height="9" font="4">sync</text>
+<text top="540" left="346" width="24" height="9" font="4">async</text>
+<text top="550" left="346" width="35" height="9" font="4">speedup</text>
+<text top="591" left="222" width="42" height="11" font="19">(b) 1024</text>
+<text top="589" left="265" width="5" height="8" font="10">3</text>
+<text top="591" left="271" width="36" height="11" font="19">voxels</text>
+<text top="621" left="82" width="366" height="14" font="1">Fig. 15: Synchronous and asynchronous timings for different</text>
+<text top="639" left="82" width="81" height="13" font="1">volume sizes.</text>
+<text top="689" left="82" width="366" height="13" font="1">CPU and GPU tasks successfully with a gain which can at-</text>
+<text top="707" left="82" width="366" height="13" font="1">tain a x2 speedup. In a less impacting manner, GPU kernels</text>
+<text top="725" left="82" width="366" height="13" font="1">and the PCI-e CPU → GPU memory transfer were also over-</text>
+<text top="743" left="82" width="366" height="13" font="1">lapped automatically. Since the granulometry application is</text>
+<text top="761" left="82" width="366" height="13" font="1">not suited for multi-GPU pipeline implementation, we didn’t</text>
+<text top="779" left="82" width="366" height="13" font="1">have the opportunity to develop a multi-host multi-GPU ap-</text>
+<text top="797" left="82" width="366" height="13" font="1">plication thanks to our design ﬂow but that would certainly be</text>
+<text top="815" left="82" width="366" height="13" font="1">of higher interest for people aiming at automatically dispatch-</text>
+<text top="833" left="82" width="328" height="13" font="1">ing their workload onto parallel processing plateforms.</text>
+<text top="876" left="204" width="121" height="13" font="1">6. CONCLUSION</text>
+<text top="910" left="82" width="366" height="13" font="1">This paper presents our analysis of task parallelism imple-</text>
+<text top="928" left="82" width="366" height="13" font="1">mentation on a GPU cluster’s node, dealing with communica-</text>
+<text top="946" left="82" width="210" height="13" font="1">tion and computation optimization.</text>
+<text top="964" left="104" width="343" height="13" font="1">We made the following contributions: We detailed com-</text>
+<text top="982" left="82" width="366" height="13" font="1">munication and computation overlap measurement method.</text>
+<text top="1000" left="82" width="366" height="13" font="1">Our microbenchmarks revealed a speedup factor of two when</text>
+<text top="1018" left="82" width="366" height="13" font="1">data transfer time is around the kernel execution duration. Us-</text>
+<text top="1036" left="82" width="366" height="13" font="1">ing our design ﬂow, the programmer doesn’t have to deal with</text>
+<text top="1054" left="82" width="366" height="13" font="1">inter-component communication and allocation of buffers.</text>
+<text top="1072" left="82" width="366" height="13" font="1">He doesn’t waste time on basic, rudimentary and sometimes</text>
+<text top="113" left="473" width="366" height="13" font="1">complex coding (MPI, POSIX threads, etc.) but rather focus</text>
+<text top="131" left="473" width="366" height="13" font="1">on the computation code development. Thus, an application</text>
+<text top="149" left="473" width="366" height="13" font="1">developed for a certain conﬁguration might be easily portable</text>
+<text top="167" left="473" width="366" height="13" font="1">on another platform. Also, with the efforts undertaken by the</text>
+<text top="185" left="473" width="366" height="13" font="1">GPU manufacturers to make the hardware even more adapted</text>
+<text top="202" left="473" width="366" height="13" font="1">to scientiﬁc computations, components’ inter-communication</text>
+<text top="220" left="473" width="366" height="13" font="1">will be the most important programming bottleneck after</text>
+<text top="238" left="473" width="366" height="13" font="1">kernel coding. The proposed design ﬂow automates tasks</text>
+<text top="256" left="473" width="366" height="13" font="1">overlap. It allows to hide the CPU-GPU transfer time and</text>
+<text top="274" left="473" width="214" height="13" font="1">lead to optimal use of the hardware.</text>
+<text top="315" left="595" width="121" height="13" font="1">7. REFERENCES</text>
+<text top="349" left="480" width="358" height="13" font="1">[1] Tianyi David Han and Tarek S. Abdelrahman, “hicuda:</text>
+<text top="367" left="505" width="333" height="13" font="1">a high-level directive-based language for gpu program-</text>
+<text top="385" left="505" width="333" height="13" font="1">ming,” in Proceedings of 2nd Workshop on General Pur-</text>
+<text top="403" left="505" width="280" height="13" font="1">pose Processing on Graphics Processing Units</text>
+<text top="403" left="785" width="41" height="13" font="1">, 2009.</text>
+<text top="433" left="480" width="358" height="13" font="1">[2] R. Dolbeau, S. Bihan, and F. Bodin, “Hmpp: A hy-</text>
+<text top="451" left="505" width="333" height="13" font="1">brid multi-core parallel programming environment,” in</text>
+<text top="469" left="505" width="333" height="13" font="1">Workshop on General Purpose Processing on Graphics</text>
+<text top="487" left="505" width="102" height="13" font="1">Processing Units</text>
+<text top="487" left="607" width="41" height="13" font="1">, 2007.</text>
+<text top="516" left="480" width="358" height="13" font="1">[3] C´edric Augonnet, Samuel Thibault, and Raymond</text>
+<text top="534" left="505" width="50" height="13" font="1">Namyst,</text>
+<text top="534" left="574" width="264" height="13" font="1">“StarPU: a Runtime System for Schedul-</text>
+<text top="552" left="505" width="333" height="13" font="1">ing Tasks over Accelerator-Based Multicore Machines,”</text>
+<text top="570" left="505" width="248" height="13" font="1">Research Report RR-7240, INRIA, 2010.</text>
+<text top="600" left="480" width="358" height="13" font="1">[4] Kamran Karimi, Neil G. Dickson, and Firas Hamze, “A</text>
+<text top="618" left="505" width="333" height="13" font="1">performance comparison of cuda and opencl,” CoRR,</text>
+<text top="636" left="505" width="155" height="13" font="1">vol. abs/1005.2581, 2010.</text>
+<text top="666" left="480" width="358" height="13" font="1">[5] William Gropp, Ewing Lusk, and Anthony Skjellum,</text>
+<text top="684" left="505" width="333" height="13" font="1">Using MPI (2nd ed.): portable parallel programming</text>
+<text top="702" left="505" width="209" height="13" font="1">with the message-passing interface</text>
+<text top="702" left="715" width="113" height="13" font="1">, MIT Press, 1999.</text>
+<text top="732" left="480" width="358" height="13" font="1">[6] Damien Vintache, Bernard Humbert, and David Brasse,</text>
+<text top="750" left="505" width="333" height="13" font="1">“Iterative reconstruction for transmission tomography</text>
+<text top="768" left="505" width="333" height="13" font="1">on gpu using nvidia cuda,” Tsinghua Science &amp; Tech-</text>
+<text top="786" left="505" width="41" height="13" font="1">nology</text>
+<text top="785" left="546" width="165" height="13" font="1">, vol. 15, pp. 11 – 16, 2010.</text>
+<text top="815" left="480" width="358" height="13" font="1">[7] J.L. Herraiz, S. Espaa, S. Garcia, R. Cabido, A.S. Mon-</text>
+<text top="833" left="505" width="333" height="13" font="1">temayor, M. Desco, J.J. Vaquero, and J.M. Udias, “Gpu</text>
+<text top="851" left="505" width="333" height="13" font="1">acceleration of a fully 3d iterative reconstruction soft-</text>
+<text top="869" left="505" width="333" height="13" font="1">ware for pet using cuda,” in Nuclear Science Symposium</text>
+<text top="887" left="505" width="258" height="13" font="1">Conference Record (NSS/MIC), 2009 IEEE</text>
+<text top="887" left="763" width="41" height="13" font="1">, 2009.</text>
+<text top="917" left="480" width="358" height="13" font="1">[8] Byunghyun Jang, D. Kaeli, Synho Do, and H. Pien,</text>
+<text top="935" left="505" width="333" height="13" font="1">“Multi gpu implementation of iterative tomographic re-</text>
+<text top="953" left="505" width="333" height="13" font="1">construction algorithms,” in Biomedical Imaging: From</text>
+<text top="971" left="505" width="333" height="13" font="1">Nano to Macro, 2009. IEEE International Symposium</text>
+<text top="989" left="505" width="15" height="13" font="1">on</text>
+<text top="989" left="520" width="41" height="13" font="1">, 2009.</text>
+<text top="1019" left="480" width="328" height="13" font="1">[9] NVidia, “Nvidia cuda c programming guide 3.2,” .</text>
+<text top="1048" left="473" width="269" height="13" font="1">[10] NVidia, “Cuda occupancy calculator,” .</text>
+<text top="730" left="29" width="0" height="17" font="2">hal-00657536, version 1 - 6 Jan 2012</text>
+</page>
+</pdf2xml>

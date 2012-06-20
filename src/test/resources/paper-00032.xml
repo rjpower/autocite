@@ -1,0 +1,1633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1020" width="681">
+	<fontspec id="0" size="11" family="Times" color="#000000"/>
+	<fontspec id="1" size="14" family="Times" color="#000000"/>
+	<fontspec id="2" size="9" family="Times" color="#000000"/>
+<text top="82" left="97" width="429" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 29–51, 2012</text>
+<text top="193" left="97" width="500" height="17" font="1">GRAPHICS PROCESSOR UNIT (GPU) ACCELERA-</text>
+<text top="211" left="97" width="500" height="17" font="1">TION OF FINITE-DIFFERENCE FREQUENCY-DOMAIN</text>
+<text top="229" left="97" width="160" height="17" font="1">(FDFD) METHOD</text>
+<text top="276" left="97" width="77" height="17" font="1">V. Demir</text>
+<text top="274" left="174" width="7" height="13" font="2">*</text>
+<text top="308" left="97" width="500" height="17" font="1">Northern Illinois University, Department of Electrical Engineering,</text>
+<text top="326" left="97" width="223" height="17" font="1">EB352 DeKalb, IL 60115, USA</text>
+<text top="368" left="97" width="500" height="17" font="1">Abstract—Recently, many numerical methods that are developed</text>
+<text top="386" left="97" width="500" height="17" font="1">for the solution of electromagnetic problems have greatly beneﬁted</text>
+<text top="403" left="97" width="500" height="17" font="1">from the hardware accelerated scientiﬁc computing capability provided</text>
+<text top="421" left="97" width="500" height="17" font="1">by graphics processing units (GPUs) and orders of magnitude</text>
+<text top="439" left="97" width="278" height="17" font="1">speed-up factors have been reported.</text>
+<text top="439" left="393" width="204" height="17" font="1">Among these methods, the</text>
+<text top="457" left="97" width="500" height="17" font="1">ﬁnite-diﬀerence frequency-domain (FDFD) method as well can be</text>
+<text top="475" left="97" width="500" height="17" font="1">accelerated substantially by utilizing an eﬃcient algorithm customized</text>
+<text top="493" left="97" width="500" height="17" font="1">for GPU computing. In this contribution, an algorithm is presented</text>
+<text top="511" left="97" width="500" height="17" font="1">that treats iterative solution of the FDFD linear equation system</text>
+<text top="529" left="97" width="500" height="17" font="1">similar to solution of three-dimensional Finite-Diﬀerence Time-</text>
+<text top="547" left="97" width="500" height="17" font="1">Domain (FDTD) method, which inherently yields itself to high level</text>
+<text top="565" left="97" width="500" height="17" font="1">parallelization. The presented algorithm uses BICGSTAB iterative</text>
+<text top="583" left="97" width="500" height="17" font="1">solver. Integrated with BICGSTAB, an eﬃcient method of performing</text>
+<text top="601" left="97" width="500" height="17" font="1">matrix-vector products for the linear system of FDFD equations is</text>
+<text top="619" left="97" width="500" height="17" font="1">adapted and implemented in Compute Uniﬁed Device Architecture</text>
+<text top="637" left="97" width="500" height="17" font="1">(CUDA). It is shown that FDFD can be solved with a speed-up factor</text>
+<text top="655" left="97" width="500" height="17" font="1">of more than 20 on a GPU compared with the solution on a central</text>
+<text top="672" left="97" width="500" height="17" font="1">processing unit (CPU), while memory usage as well can be reduced</text>
+<text top="690" left="97" width="309" height="17" font="1">substantially with the presented algorithm.</text>
+<text top="733" left="97" width="177" height="17" font="1">1. INTRODUCTION</text>
+<text top="767" left="97" width="500" height="17" font="1">Recently, it has been realized that graphics processing units (GPUs)</text>
+<text top="785" left="97" width="500" height="17" font="1">can be used not only for acceleration of graphics computations, but</text>
+<text top="803" left="97" width="500" height="17" font="1">acceleration of scientiﬁc computations as well. Though GPU processors</text>
+<text top="821" left="97" width="500" height="17" font="1">are built to perform simpler tasks compared with central processing</text>
+<text top="839" left="97" width="500" height="17" font="1">unit (CPU) processors, having a large number of GPU processors on</text>
+<text top="870" left="110" width="467" height="13" font="2">Received 9 September 2011, Accepted 16 December 2011, Scheduled 8 January 2012</text>
+<text top="884" left="97" width="324" height="13" font="2">* Corresponding author: Veysel Demir (vdemir@niu.edu).</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">30</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="97" width="500" height="17" font="1">a graphics card gives it a huge computation power. If an algorithm</text>
+<text top="139" left="97" width="500" height="17" font="1">involves data parallel computations, i.e., the same instructions are</text>
+<text top="157" left="97" width="500" height="17" font="1">applied to a large set of data, the algorithm can be implemented to</text>
+<text top="175" left="97" width="500" height="17" font="1">run faster on a GPU card. Graphics card vendors have been improving</text>
+<text top="193" left="97" width="500" height="17" font="1">their hardware architectures to further address the needs of scientiﬁc</text>
+<text top="211" left="97" width="500" height="17" font="1">computations, thus promoting GPU based computation cards as the</text>
+<text top="229" left="97" width="282" height="17" font="1">new-generation computation platforms.</text>
+<text top="247" left="130" width="467" height="17" font="1">Developments in GPU hardware have been accompanied by</text>
+<text top="265" left="97" width="500" height="17" font="1">introduction of software platforms to facilitate programming for GPU</text>
+<text top="283" left="97" width="500" height="17" font="1">cards. OpenGL, Brook, and High Level Shader Language (HLSL)</text>
+<text top="301" left="97" width="500" height="17" font="1">were the programming languages available previously to develop codes</text>
+<text top="319" left="97" width="500" height="17" font="1">to run on GPUs; however, they are outdated by the introduction</text>
+<text top="337" left="97" width="500" height="17" font="1">of new software development environments such as Compute Uniﬁed</text>
+<text top="355" left="97" width="500" height="17" font="1">Device Architecture (CUDA), Open Computing Language (OpenCL),</text>
+<text top="373" left="97" width="500" height="17" font="1">and DirectCompute. These new languages are developed to facilitate</text>
+<text top="390" left="97" width="500" height="17" font="1">the use of new-generation graphics cards and let the programmers focus</text>
+<text top="408" left="97" width="500" height="17" font="1">on the task of parallelization of their algorithms rather than spending</text>
+<text top="426" left="97" width="464" height="17" font="1">time on dealing with the intrinsics of underlying GPU hardware.</text>
+<text top="444" left="130" width="467" height="17" font="1">Recently, introduction of CUDA by Nvidia caused a major shift</text>
+<text top="462" left="97" width="500" height="17" font="1">toward use of GPU cards in scientiﬁc computing. CUDA can be run</text>
+<text top="480" left="97" width="500" height="17" font="1">only on CUDA enabled Nvidia cards, which is a major disadvantage,</text>
+<text top="498" left="97" width="500" height="17" font="1">however, extensive support from Nvidia and accumulated knowledge</text>
+<text top="516" left="97" width="500" height="17" font="1">within the programming community is expected to keep CUDA as one</text>
+<text top="534" left="97" width="500" height="17" font="1">of the main programming platforms in the near future besides the</text>
+<text top="552" left="97" width="500" height="17" font="1">other more general application programming interfaces (APIs) such as</text>
+<text top="570" left="97" width="65" height="17" font="1">OpenCL.</text>
+<text top="588" left="130" width="467" height="17" font="1">CUDA has been extensively used to develop GPU accelerated</text>
+<text top="606" left="97" width="254" height="17" font="1">electromagnetic simulation codes.</text>
+<text top="606" left="379" width="218" height="17" font="1">Finite-diﬀerence time-domain</text>
+<text top="624" left="97" width="500" height="17" font="1">(FDTD) method is one of the methods that has beneﬁted from GPU</text>
+<text top="642" left="97" width="439" height="17" font="1">computing the most since it is a data parallel algorithm.</text>
+<text top="642" left="554" width="42" height="17" font="1">While</text>
+<text top="659" left="97" width="500" height="17" font="1">implementations of FDTD using CUDA have been reported in several</text>
+<text top="677" left="97" width="500" height="17" font="1">publications, [1–4] are among those that discuss details on development</text>
+<text top="695" left="97" width="500" height="17" font="1">of eﬃcient FDTD codes and can be used as guidelines by developers.</text>
+<text top="713" left="97" width="500" height="17" font="1">Similarly, MoM and FEM also have been implemented to run on GPU</text>
+<text top="731" left="97" width="500" height="17" font="1">and several reports have been published to demonstrate eﬀectiveness</text>
+<text top="749" left="97" width="500" height="17" font="1">of GPU computations of these methods. All these publications report</text>
+<text top="767" left="97" width="500" height="17" font="1">signiﬁcant speed-up factors. For instance, [5] reports a speed-up factor</text>
+<text top="785" left="97" width="500" height="17" font="1">of about 20 in FEM, [6] reports a speed-up factor of 17 in MoM,</text>
+<text top="803" left="97" width="500" height="17" font="1">while [3] reports a factor of about 30 in FDTD, when GPU codes</text>
+<text top="821" left="97" width="500" height="17" font="1">are compared with CPU codes. It should also be noted that these</text>
+<text top="839" left="97" width="500" height="17" font="1">numbers of speed-up factors may not be directly comparable with each</text>
+<text top="857" left="97" width="500" height="17" font="1">other since several factors, such as types of problems involved, types of</text>
+<text top="875" left="97" width="500" height="17" font="1">GPU and CPU architectures, single or double precision computations,</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">31</text>
+<text top="121" left="97" width="500" height="17" font="1">etc., will aﬀect the speed-up factors. However, it can be claimed</text>
+<text top="139" left="97" width="500" height="17" font="1">that the FDTD method has been the method beneﬁting from GPU</text>
+<text top="157" left="97" width="500" height="17" font="1">computations the most since it inherently yields itself to parallelization,</text>
+<text top="175" left="97" width="500" height="17" font="1">unlike other frequency-domain methods which require solution of large-</text>
+<text top="193" left="97" width="500" height="17" font="1">scale matrix equations that require more elaborate work to solve using</text>
+<text top="211" left="97" width="136" height="17" font="1">parallel processing.</text>
+<text top="229" left="130" width="467" height="17" font="1">If transient results or wideband results are sought in the solution</text>
+<text top="247" left="97" width="500" height="17" font="1">of an electromagnetic problem, a time-domain method, such as</text>
+<text top="265" left="97" width="500" height="17" font="1">FDTD, can be used. Time domain methods may not be preferable</text>
+<text top="283" left="97" width="213" height="17" font="1">for some types of problems.</text>
+<text top="283" left="330" width="267" height="17" font="1">For example, time-domain methods</text>
+<text top="301" left="97" width="500" height="17" font="1">are computationally expensive for modeling dispersive materials, or</text>
+<text top="319" left="97" width="500" height="17" font="1">computations take very long time for highly resonant structures. If</text>
+<text top="337" left="97" width="500" height="17" font="1">results at a single frequency or a small number of frequencies is sought,</text>
+<text top="355" left="97" width="500" height="17" font="1">a frequency domain method may be preferred depending on the type of</text>
+<text top="373" left="97" width="500" height="17" font="1">the problem geometry. For instance, ﬁnite-diﬀerence frequency-domain</text>
+<text top="390" left="97" width="500" height="17" font="1">(FDFD) might be preferred for a highly inhomogeneous, dispersive, or</text>
+<text top="408" left="97" width="185" height="17" font="1">highly resonant geometry.</text>
+<text top="426" left="130" width="467" height="17" font="1">FDFD has been receiving attention as an alternative electromag-</text>
+<text top="444" left="97" width="500" height="17" font="1">netic solution method for various types of problems. Besides being</text>
+<text top="462" left="97" width="500" height="17" font="1">used for solution of regular problems, for instance, FDFD has been</text>
+<text top="480" left="97" width="500" height="17" font="1">used as the solver in iterative multi region (IMR) for the solution of</text>
+<text top="498" left="97" width="500" height="17" font="1">large-scale problems in [7–9], while it has been used to model chiral</text>
+<text top="516" left="97" width="500" height="17" font="1">materials in [10, 11]. FDFD requires iterative solution of a very large</text>
+<text top="534" left="97" width="500" height="17" font="1">sparse linear equation system, which is usually very ineﬃcient. Solu-</text>
+<text top="552" left="97" width="500" height="17" font="1">tion of FDFD as well can signiﬁcantly beneﬁt from GPU acceleration.</text>
+<text top="570" left="130" width="467" height="17" font="1">So far, the only contribution published in the literature on GPU</text>
+<text top="588" left="97" width="500" height="17" font="1">acceleration of FDFD equations is the one by Zainud-Deen et al. [12],</text>
+<text top="606" left="97" width="500" height="17" font="1">where Brook is used to implement the FDFD code. While solving large</text>
+<text top="624" left="97" width="500" height="17" font="1">sparse matrix equations, customarily only the non-zero coeﬃcients of</text>
+<text top="642" left="97" width="500" height="17" font="1">a matrix would be stored along with the coordinates of the coeﬃcients</text>
+<text top="659" left="97" width="500" height="17" font="1">in the matrix. In [12], a similar coordinate format storage scheme is</text>
+<text top="677" left="97" width="500" height="17" font="1">used, and the respective calculations are based on this storage scheme.</text>
+<text top="695" left="130" width="467" height="17" font="1">It should be noted that a good choice of the storage scheme</text>
+<text top="713" left="97" width="451" height="17" font="1">is an important factor for achieving an eﬃcient solution.</text>
+<text top="713" left="573" width="24" height="17" font="1">For</text>
+<text top="731" left="97" width="500" height="17" font="1">instance, [13] presents the eﬀective use of two matrix storage schemes,</text>
+<text top="749" left="97" width="500" height="17" font="1">Compressed Sparse Row (CSR) and Hybrid (HYB) Ellpack Coordinate</text>
+<text top="767" left="97" width="475" height="17" font="1">formats, for the solution of MoM equations on GPU using CUDA.</text>
+<text top="785" left="130" width="467" height="17" font="1">It has been shown in [14] that the coeﬃcients that describe FDFD</text>
+<text top="803" left="97" width="500" height="17" font="1">equations can be stored in three-dimensional arrays, similar to the</text>
+<text top="821" left="97" width="500" height="17" font="1">updating coeﬃcients of the FDTD method, and an algorithm based</text>
+<text top="839" left="97" width="500" height="17" font="1">on this scheme can improve the eﬃciency of FDFD solution both in</text>
+<text top="857" left="97" width="500" height="17" font="1">terms of computation time and memory usage. Moreover, this scheme</text>
+<text top="875" left="97" width="500" height="17" font="1">presented in [14] inherently lends itself to high level of parallelism,</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">32</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="97" width="500" height="17" font="1">similar to FDTD method, on a GPU architecture. In the current</text>
+<text top="139" left="97" width="500" height="17" font="1">contribution, we show that the speed of FDFD calculations can further</text>
+<text top="157" left="97" width="463" height="17" font="1">be improved on a GPU by using the algorithm presented in [14].</text>
+<text top="175" left="130" width="467" height="17" font="1">Section 2 presents the FDFD formulation considered in this</text>
+<text top="193" left="97" width="500" height="17" font="1">contribution. Section 3 summarizes the algorithm that is presented</text>
+<text top="211" left="97" width="500" height="17" font="1">in [14] and adopted here for CUDA implementation. Section 4 presents</text>
+<text top="229" left="97" width="500" height="17" font="1">the CUDA implementation of iterative FDFD solution. Section 5</text>
+<text top="247" left="97" width="490" height="17" font="1">illustrates the speed-up factors achieved by the presented algorithm.</text>
+<text top="289" left="97" width="227" height="17" font="1">2. FDFD FORMULATION</text>
+<text top="323" left="97" width="500" height="17" font="1">FDFD formulation is based on Maxwell’s curl equations expressed in</text>
+<text top="341" left="97" width="127" height="17" font="1">frequency domain</text>
+<text top="365" left="271" width="28" height="17" font="1">× ¯</text>
+<text top="365" left="287" width="12" height="17" font="1">E</text>
+<text top="372" left="299" width="26" height="13" font="2">total</text>
+<text top="365" left="333" width="73" height="17" font="1">= −jωµ ¯</text>
+<text top="365" left="394" width="14" height="17" font="1">H</text>
+<text top="372" left="407" width="26" height="13" font="2">total</text>
+<text top="365" left="434" width="5" height="17" font="1">,</text>
+<text top="365" left="576" width="21" height="17" font="1">(1)</text>
+<text top="388" left="269" width="29" height="17" font="1">× ¯</text>
+<text top="388" left="286" width="14" height="17" font="1">H</text>
+<text top="394" left="299" width="26" height="13" font="2">total</text>
+<text top="388" left="333" width="57" height="17" font="1">= jω ¯</text>
+<text top="388" left="378" width="12" height="17" font="1">E</text>
+<text top="394" left="390" width="26" height="13" font="2">total</text>
+<text top="388" left="417" width="5" height="17" font="1">,</text>
+<text top="388" left="576" width="21" height="17" font="1">(2)</text>
+<text top="412" left="97" width="59" height="17" font="1">where ¯</text>
+<text top="412" left="144" width="12" height="17" font="1">E</text>
+<text top="419" left="156" width="26" height="13" font="2">total</text>
+<text top="412" left="189" width="44" height="17" font="1">and ¯</text>
+<text top="412" left="220" width="14" height="17" font="1">H</text>
+<text top="419" left="234" width="26" height="13" font="2">total</text>
+<text top="412" left="266" width="286" height="17" font="1">are the electric and magnetic ﬁelds, and</text>
+<text top="412" left="570" width="26" height="17" font="1">and</text>
+<text top="430" left="97" width="500" height="17" font="1">µ are permittivity and permeability parameters. The time harmonic</text>
+<text top="448" left="97" width="246" height="17" font="1">convention used in (1) and (2) is e</text>
+<text top="446" left="343" width="19" height="13" font="2">jωt</text>
+<text top="448" left="363" width="234" height="17" font="1">. Scattered ﬁeld formulation [15]</text>
+<text top="466" left="97" width="441" height="17" font="1">can be used for scattering problems, where the total ﬁelds ( ¯</text>
+<text top="466" left="526" width="12" height="17" font="1">E</text>
+<text top="472" left="538" width="26" height="13" font="2">total</text>
+<text top="466" left="570" width="26" height="17" font="1">and</text>
+<text top="480" left="101" width="8" height="17" font="1">¯</text>
+<text top="484" left="97" width="14" height="17" font="1">H</text>
+<text top="490" left="111" width="26" height="13" font="2">total</text>
+<text top="484" left="137" width="220" height="17" font="1">) are sum of incident ﬁelds ( ¯</text>
+<text top="484" left="345" width="12" height="17" font="1">E</text>
+<text top="490" left="357" width="16" height="13" font="2">inc</text>
+<text top="484" left="381" width="45" height="17" font="1">and ¯</text>
+<text top="484" left="413" width="14" height="17" font="1">H</text>
+<text top="490" left="427" width="16" height="13" font="2">inc</text>
+<text top="484" left="444" width="153" height="17" font="1">) and scattered ﬁelds</text>
+<text top="502" left="97" width="18" height="17" font="1">( ¯</text>
+<text top="502" left="103" width="12" height="17" font="1">E</text>
+<text top="508" left="115" width="22" height="13" font="2">scat</text>
+<text top="502" left="144" width="45" height="17" font="1">and ¯</text>
+<text top="502" left="176" width="14" height="17" font="1">H</text>
+<text top="508" left="190" width="22" height="13" font="2">scat</text>
+<text top="502" left="213" width="384" height="17" font="1">). Incident ﬁelds are the ﬁelds that propagate in free</text>
+<text top="520" left="97" width="500" height="17" font="1">space in which no scatterers exist, thus they satisfy Maxwell’s equations</text>
+<text top="538" left="97" width="500" height="17" font="1">in free space, and they excite the problem space in consideration. After</text>
+<text top="556" left="97" width="500" height="17" font="1">some manipulations (1) and (2) can be written in terms of incident and</text>
+<text top="574" left="97" width="127" height="17" font="1">scattered ﬁelds as</text>
+<text top="599" left="209" width="8" height="17" font="1">¯</text>
+<text top="603" left="205" width="14" height="17" font="1">H</text>
+<text top="609" left="218" width="22" height="13" font="2">scat</text>
+<text top="603" left="248" width="32" height="17" font="1">= −</text>
+<text top="592" left="292" width="8" height="17" font="1">1</text>
+<text top="614" left="282" width="28" height="17" font="1">jωµ</text>
+<text top="603" left="329" width="28" height="17" font="1">× ¯</text>
+<text top="603" left="346" width="12" height="17" font="1">E</text>
+<text top="609" left="358" width="22" height="13" font="2">scat</text>
+<text top="603" left="384" width="13" height="17" font="1">+</text>
+<text top="592" left="402" width="10" height="17" font="1">µ</text>
+<text top="598" left="412" width="6" height="13" font="2">0</text>
+<text top="592" left="423" width="26" height="17" font="1">− µ</text>
+<text top="614" left="421" width="10" height="17" font="1">µ</text>
+<text top="599" left="455" width="8" height="17" font="1">¯</text>
+<text top="603" left="451" width="14" height="17" font="1">H</text>
+<text top="609" left="464" width="16" height="13" font="2">inc</text>
+<text top="603" left="481" width="5" height="17" font="1">,</text>
+<text top="603" left="576" width="21" height="17" font="1">(3)</text>
+<text top="641" left="210" width="8" height="17" font="1">¯</text>
+<text top="645" left="206" width="12" height="17" font="1">E</text>
+<text top="651" left="218" width="22" height="13" font="2">scat</text>
+<text top="645" left="248" width="13" height="17" font="1">=</text>
+<text top="634" left="278" width="8" height="17" font="1">1</text>
+<text top="656" left="269" width="18" height="17" font="1">jω</text>
+<text top="645" left="313" width="29" height="17" font="1">× ¯</text>
+<text top="645" left="330" width="14" height="17" font="1">H</text>
+<text top="651" left="343" width="22" height="13" font="2">scat</text>
+<text top="645" left="370" width="13" height="17" font="1">−</text>
+<text top="640" left="394" width="6" height="13" font="2">0</text>
+<text top="634" left="405" width="37" height="28" font="1">− ¯E</text>
+<text top="651" left="442" width="16" height="13" font="2">inc</text>
+<text top="645" left="459" width="5" height="17" font="1">,</text>
+<text top="645" left="576" width="21" height="17" font="1">(4)</text>
+<text top="679" left="97" width="42" height="17" font="1">where</text>
+<text top="685" left="158" width="6" height="13" font="2">0</text>
+<text top="679" left="178" width="49" height="17" font="1">and µ</text>
+<text top="685" left="226" width="6" height="13" font="2">0</text>
+<text top="679" left="246" width="351" height="17" font="1">are free space permittivity and permeability</text>
+<text top="697" left="97" width="500" height="17" font="1">parameters. Equations (3) and (4) are vector equations, and they</text>
+<text top="715" left="97" width="500" height="17" font="1">can be expressed in terms of six scalar equations imposed on Cartesian</text>
+<text top="733" left="97" width="414" height="17" font="1">coordinate system. For instance, one of these equations is</text>
+<text top="766" left="142" width="14" height="17" font="1">H</text>
+<text top="772" left="156" width="33" height="13" font="2">scat,x</text>
+<text top="766" left="194" width="13" height="17" font="1">=</text>
+<text top="755" left="227" width="8" height="17" font="1">1</text>
+<text top="777" left="213" width="28" height="17" font="1">jωµ</text>
+<text top="784" left="241" width="7" height="13" font="2">x</text>
+<text top="755" left="253" width="22" height="17" font="1">∂E</text>
+<text top="761" left="275" width="32" height="13" font="2">scat,y</text>
+<text top="777" left="271" width="17" height="17" font="1">∂z</text>
+<text top="766" left="313" width="13" height="17" font="1">−</text>
+<text top="755" left="345" width="8" height="17" font="1">1</text>
+<text top="777" left="331" width="28" height="17" font="1">jωµ</text>
+<text top="784" left="359" width="7" height="13" font="2">x</text>
+<text top="755" left="371" width="22" height="17" font="1">∂E</text>
+<text top="761" left="392" width="31" height="13" font="2">scat,z</text>
+<text top="777" left="389" width="18" height="17" font="1">∂y</text>
+<text top="766" left="431" width="13" height="17" font="1">+</text>
+<text top="755" left="449" width="10" height="17" font="1">µ</text>
+<text top="761" left="459" width="6" height="13" font="2">0</text>
+<text top="755" left="469" width="26" height="17" font="1">− µ</text>
+<text top="761" left="496" width="7" height="13" font="2">x</text>
+<text top="777" left="467" width="10" height="17" font="1">µ</text>
+<text top="784" left="477" width="7" height="13" font="2">x</text>
+<text top="766" left="505" width="14" height="17" font="1">H</text>
+<text top="772" left="519" width="27" height="13" font="2">inc,x</text>
+<text top="766" left="546" width="5" height="17" font="1">,</text>
+<text top="766" left="576" width="21" height="17" font="1">(5)</text>
+<text top="800" left="97" width="500" height="17" font="1">At this point, these equations can be slightly modiﬁed to account for</text>
+<text top="818" left="97" width="500" height="17" font="1">perfectly matched layer (PML) [16] absorbing boundary conditions as</text>
+<text top="836" left="97" width="409" height="17" font="1">shown in [7] or [12]. Since only the material parameters</text>
+<text top="836" left="526" width="71" height="17" font="1">and µ are</text>
+<text top="854" left="97" width="500" height="17" font="1">slightly modiﬁed, the form of equations will stay the same. Therefore,</text>
+<text top="872" left="97" width="500" height="17" font="1">to keep the following discussions simple, the PML-related modiﬁcations</text>
+<text top="890" left="97" width="303" height="17" font="1">will be omitted in the following equations.</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">33</text>
+<text top="121" left="130" width="467" height="17" font="1">The partial diﬀerential equations (PDEs) as (5) can be imposed</text>
+<text top="139" left="97" width="500" height="17" font="1">on a grid composed of Yee cells [17] on which electric and magnetic</text>
+<text top="157" left="97" width="500" height="17" font="1">ﬁeld components are speciﬁed at discrete spatial positions. Yee cells</text>
+<text top="175" left="97" width="500" height="17" font="1">are used as the basis of FDTD method as well, therefore, the same</text>
+<text top="193" left="97" width="500" height="17" font="1">type of geometrical modeling can be done in FDFD as in FDTD. As</text>
+<text top="211" left="97" width="500" height="17" font="1">will be discussed later, the same type of spatial dependence of ﬁelds</text>
+<text top="229" left="97" width="500" height="17" font="1">between FDTD and FDFD will allow us to develop a very similar type</text>
+<text top="247" left="97" width="356" height="17" font="1">of GPU acceleration code for FDFD as in FDTD.</text>
+<text top="265" left="130" width="467" height="17" font="1">Expressing equations as (5) on a discrete Yee grid using central</text>
+<text top="283" left="97" width="377" height="17" font="1">diﬀerence approximation to partial derivatives yields</text>
+<text top="318" left="110" width="14" height="17" font="1">H</text>
+<text top="324" left="124" width="33" height="13" font="2">scat,x</text>
+<text top="318" left="157" width="65" height="17" font="1">(i, j, k) −</text>
+<text top="307" left="277" width="8" height="17" font="1">1</text>
+<text top="329" left="228" width="28" height="17" font="1">jωµ</text>
+<text top="336" left="256" width="7" height="13" font="2">x</text>
+<text top="329" left="264" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="318" left="336" width="12" height="17" font="1">E</text>
+<text top="324" left="348" width="32" height="13" font="2">scat,y</text>
+<text top="318" left="381" width="77" height="17" font="1">(i, j, k + 1)</text>
+<text top="361" left="110" width="13" height="17" font="1">+</text>
+<text top="350" left="174" width="8" height="17" font="1">1</text>
+<text top="372" left="125" width="28" height="17" font="1">jωµ</text>
+<text top="378" left="153" width="7" height="13" font="2">x</text>
+<text top="372" left="161" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="361" left="233" width="12" height="17" font="1">E</text>
+<text top="367" left="245" width="32" height="13" font="2">scat,y</text>
+<text top="361" left="278" width="65" height="17" font="1">(i, j, k) +</text>
+<text top="350" left="398" width="8" height="17" font="1">1</text>
+<text top="372" left="349" width="28" height="17" font="1">jωµ</text>
+<text top="378" left="377" width="7" height="13" font="2">x</text>
+<text top="372" left="385" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="361" left="458" width="12" height="17" font="1">E</text>
+<text top="367" left="470" width="31" height="13" font="2">scat,z</text>
+<text top="361" left="502" width="78" height="17" font="1">(i, j + 1, k)</text>
+<text top="406" left="110" width="13" height="17" font="1">−</text>
+<text top="395" left="174" width="8" height="17" font="1">1</text>
+<text top="417" left="125" width="28" height="17" font="1">jωµ</text>
+<text top="423" left="153" width="7" height="13" font="2">x</text>
+<text top="417" left="161" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="406" left="234" width="12" height="17" font="1">E</text>
+<text top="412" left="246" width="31" height="13" font="2">scat,z</text>
+<text top="406" left="278" width="66" height="17" font="1">(i, j, k) =</text>
+<text top="395" left="351" width="10" height="17" font="1">µ</text>
+<text top="401" left="360" width="6" height="13" font="2">0</text>
+<text top="395" left="371" width="26" height="17" font="1">− µ</text>
+<text top="401" left="397" width="7" height="13" font="2">x</text>
+<text top="395" left="405" width="49" height="17" font="1">(i, j, k)</text>
+<text top="417" left="369" width="10" height="17" font="1">µ</text>
+<text top="423" left="379" width="7" height="13" font="2">x</text>
+<text top="417" left="387" width="49" height="17" font="1">(i, j, k)</text>
+<text top="406" left="456" width="14" height="17" font="1">H</text>
+<text top="412" left="469" width="27" height="13" font="2">inc,x</text>
+<text top="406" left="497" width="53" height="17" font="1">(i, j, k),</text>
+<text top="406" left="576" width="21" height="17" font="1">(6)</text>
+<text top="474" left="110" width="14" height="17" font="1">H</text>
+<text top="480" left="124" width="32" height="13" font="2">scat,y</text>
+<text top="474" left="157" width="65" height="17" font="1">(i, j, k) −</text>
+<text top="463" left="277" width="8" height="17" font="1">1</text>
+<text top="485" left="227" width="28" height="17" font="1">jωµ</text>
+<text top="492" left="255" width="6" height="13" font="2">y</text>
+<text top="485" left="263" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="474" left="336" width="12" height="17" font="1">E</text>
+<text top="480" left="348" width="31" height="13" font="2">scat,z</text>
+<text top="474" left="381" width="77" height="17" font="1">(i + 1, j, k)</text>
+<text top="518" left="110" width="13" height="17" font="1">+</text>
+<text top="507" left="174" width="8" height="17" font="1">1</text>
+<text top="529" left="125" width="28" height="17" font="1">jωµ</text>
+<text top="535" left="153" width="6" height="13" font="2">y</text>
+<text top="529" left="160" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="518" left="234" width="12" height="17" font="1">E</text>
+<text top="524" left="246" width="31" height="13" font="2">scat,z</text>
+<text top="518" left="279" width="65" height="17" font="1">(i, j, k) +</text>
+<text top="507" left="398" width="8" height="17" font="1">1</text>
+<text top="529" left="349" width="28" height="17" font="1">jωµ</text>
+<text top="535" left="377" width="6" height="13" font="2">y</text>
+<text top="529" left="385" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="518" left="457" width="12" height="17" font="1">E</text>
+<text top="524" left="469" width="33" height="13" font="2">scat,x</text>
+<text top="518" left="503" width="77" height="17" font="1">(i, j, k + 1)</text>
+<text top="563" left="110" width="13" height="17" font="1">−</text>
+<text top="552" left="174" width="8" height="17" font="1">1</text>
+<text top="574" left="125" width="28" height="17" font="1">jωµ</text>
+<text top="581" left="153" width="6" height="13" font="2">y</text>
+<text top="574" left="160" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="563" left="233" width="12" height="17" font="1">E</text>
+<text top="569" left="245" width="33" height="13" font="2">scat,x</text>
+<text top="563" left="278" width="66" height="17" font="1">(i, j, k) =</text>
+<text top="552" left="351" width="10" height="17" font="1">µ</text>
+<text top="558" left="360" width="6" height="13" font="2">0</text>
+<text top="552" left="371" width="26" height="17" font="1">− µ</text>
+<text top="558" left="397" width="6" height="13" font="2">y</text>
+<text top="552" left="405" width="49" height="17" font="1">(i, j, k)</text>
+<text top="574" left="369" width="10" height="17" font="1">µ</text>
+<text top="581" left="379" width="6" height="13" font="2">y</text>
+<text top="574" left="386" width="49" height="17" font="1">(i, j, k)</text>
+<text top="563" left="455" width="14" height="17" font="1">H</text>
+<text top="569" left="469" width="26" height="13" font="2">inc,y</text>
+<text top="563" left="496" width="53" height="17" font="1">(i, j, k),</text>
+<text top="563" left="576" width="21" height="17" font="1">(7)</text>
+<text top="632" left="110" width="14" height="17" font="1">H</text>
+<text top="638" left="124" width="31" height="13" font="2">scat,z</text>
+<text top="632" left="156" width="65" height="17" font="1">(i, j, k) −</text>
+<text top="621" left="276" width="8" height="17" font="1">1</text>
+<text top="643" left="227" width="28" height="17" font="1">jωµ</text>
+<text top="650" left="255" width="6" height="13" font="2">z</text>
+<text top="643" left="262" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="632" left="335" width="12" height="17" font="1">E</text>
+<text top="638" left="347" width="33" height="13" font="2">scat,x</text>
+<text top="632" left="380" width="78" height="17" font="1">(i, j + 1, k)</text>
+<text top="675" left="110" width="13" height="17" font="1">+</text>
+<text top="664" left="174" width="8" height="17" font="1">1</text>
+<text top="686" left="125" width="28" height="17" font="1">jωµ</text>
+<text top="693" left="153" width="6" height="13" font="2">z</text>
+<text top="686" left="160" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="675" left="233" width="12" height="17" font="1">E</text>
+<text top="681" left="245" width="33" height="13" font="2">scat,x</text>
+<text top="675" left="278" width="65" height="17" font="1">(i, j, k) +</text>
+<text top="664" left="398" width="8" height="17" font="1">1</text>
+<text top="686" left="349" width="28" height="17" font="1">jωµ</text>
+<text top="693" left="377" width="6" height="13" font="2">z</text>
+<text top="686" left="384" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="675" left="458" width="12" height="17" font="1">E</text>
+<text top="681" left="470" width="32" height="13" font="2">scat,y</text>
+<text top="675" left="503" width="77" height="17" font="1">(i + 1, j, k)</text>
+<text top="720" left="110" width="13" height="17" font="1">−</text>
+<text top="709" left="174" width="8" height="17" font="1">1</text>
+<text top="731" left="125" width="28" height="17" font="1">jωµ</text>
+<text top="737" left="153" width="6" height="13" font="2">z</text>
+<text top="731" left="160" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="720" left="234" width="12" height="17" font="1">E</text>
+<text top="726" left="246" width="32" height="13" font="2">scat,y</text>
+<text top="720" left="279" width="66" height="17" font="1">(i, j, k) =</text>
+<text top="709" left="351" width="10" height="17" font="1">µ</text>
+<text top="715" left="361" width="6" height="13" font="2">0</text>
+<text top="709" left="371" width="26" height="17" font="1">− µ</text>
+<text top="715" left="398" width="6" height="13" font="2">z</text>
+<text top="709" left="405" width="49" height="17" font="1">(i, j, k)</text>
+<text top="731" left="369" width="10" height="17" font="1">µ</text>
+<text top="737" left="379" width="6" height="13" font="2">z</text>
+<text top="731" left="386" width="49" height="17" font="1">(i, j, k)</text>
+<text top="720" left="455" width="14" height="17" font="1">H</text>
+<text top="726" left="469" width="26" height="13" font="2">inc,z</text>
+<text top="720" left="496" width="53" height="17" font="1">(i, j, k),</text>
+<text top="720" left="576" width="21" height="17" font="1">(8)</text>
+<text top="788" left="110" width="12" height="17" font="1">E</text>
+<text top="794" left="122" width="33" height="13" font="2">scat,x</text>
+<text top="788" left="155" width="65" height="17" font="1">(i, j, k) +</text>
+<text top="777" left="274" width="8" height="17" font="1">1</text>
+<text top="799" left="226" width="18" height="17" font="1">jω</text>
+<text top="806" left="251" width="7" height="13" font="2">x</text>
+<text top="799" left="259" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="788" left="331" width="14" height="17" font="1">H</text>
+<text top="794" left="345" width="32" height="13" font="2">scat,y</text>
+<text top="788" left="378" width="49" height="17" font="1">(i, j, k)</text>
+<text top="831" left="110" width="13" height="17" font="1">−</text>
+<text top="820" left="172" width="8" height="17" font="1">1</text>
+<text top="842" left="125" width="18" height="17" font="1">jω</text>
+<text top="849" left="150" width="7" height="13" font="2">x</text>
+<text top="842" left="158" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="831" left="230" width="14" height="17" font="1">H</text>
+<text top="837" left="244" width="32" height="13" font="2">scat,y</text>
+<text top="831" left="277" width="93" height="17" font="1">(i, j, k − 1) −</text>
+<text top="820" left="423" width="8" height="17" font="1">1</text>
+<text top="842" left="375" width="18" height="17" font="1">jω</text>
+<text top="849" left="400" width="7" height="13" font="2">x</text>
+<text top="842" left="408" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="831" left="481" width="14" height="17" font="1">H</text>
+<text top="837" left="495" width="31" height="13" font="2">scat,z</text>
+<text top="831" left="527" width="49" height="17" font="1">(i, j, k)</text>
+<text top="876" left="110" width="13" height="17" font="1">+</text>
+<text top="865" left="172" width="8" height="17" font="1">1</text>
+<text top="887" left="125" width="18" height="17" font="1">jω</text>
+<text top="893" left="150" width="7" height="13" font="2">x</text>
+<text top="887" left="158" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="876" left="230" width="14" height="17" font="1">H</text>
+<text top="882" left="244" width="31" height="13" font="2">scat,z</text>
+<text top="876" left="277" width="95" height="17" font="1">(i, j − 1, k) =</text>
+<text top="871" left="385" width="6" height="13" font="2">0</text>
+<text top="865" left="395" width="13" height="17" font="1">−</text>
+<text top="871" left="418" width="7" height="13" font="2">x</text>
+<text top="865" left="426" width="49" height="17" font="1">(i, j, k)</text>
+<text top="893" left="401" width="7" height="13" font="2">x</text>
+<text top="887" left="409" width="49" height="17" font="1">(i, j, k)</text>
+<text top="876" left="477" width="12" height="17" font="1">E</text>
+<text top="882" left="489" width="27" height="13" font="2">inc,x</text>
+<text top="876" left="516" width="80" height="17" font="1">(i, j, k), (9)</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">34</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="128" left="106" width="12" height="17" font="1">E</text>
+<text top="134" left="118" width="32" height="13" font="2">scat,y</text>
+<text top="128" left="151" width="65" height="17" font="1">(i, j, k) +</text>
+<text top="117" left="270" width="8" height="17" font="1">1</text>
+<text top="139" left="222" width="18" height="17" font="1">jω</text>
+<text top="146" left="247" width="6" height="13" font="2">y</text>
+<text top="139" left="254" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="128" left="328" width="14" height="17" font="1">H</text>
+<text top="134" left="341" width="31" height="13" font="2">scat,z</text>
+<text top="128" left="374" width="49" height="17" font="1">(i, j, k)</text>
+<text top="172" left="106" width="13" height="17" font="1">−</text>
+<text top="161" left="169" width="8" height="17" font="1">1</text>
+<text top="183" left="121" width="18" height="17" font="1">jω</text>
+<text top="189" left="146" width="6" height="13" font="2">y</text>
+<text top="183" left="153" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="172" left="227" width="14" height="17" font="1">H</text>
+<text top="178" left="240" width="31" height="13" font="2">scat,z</text>
+<text top="172" left="273" width="93" height="17" font="1">(i − 1, j, k) −</text>
+<text top="161" left="419" width="8" height="17" font="1">1</text>
+<text top="183" left="372" width="18" height="17" font="1">jω</text>
+<text top="189" left="397" width="6" height="13" font="2">y</text>
+<text top="183" left="404" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="172" left="477" width="14" height="17" font="1">H</text>
+<text top="178" left="490" width="33" height="13" font="2">scat,x</text>
+<text top="172" left="524" width="49" height="17" font="1">(i, j, k)</text>
+<text top="217" left="106" width="13" height="17" font="1">+</text>
+<text top="206" left="168" width="8" height="17" font="1">1</text>
+<text top="228" left="121" width="18" height="17" font="1">jω</text>
+<text top="235" left="146" width="6" height="13" font="2">y</text>
+<text top="228" left="153" width="70" height="17" font="1">(i, j, k)∆z</text>
+<text top="217" left="226" width="14" height="17" font="1">H</text>
+<text top="223" left="239" width="33" height="13" font="2">scat,x</text>
+<text top="217" left="273" width="94" height="17" font="1">(i, j, k − 1) =</text>
+<text top="212" left="380" width="6" height="13" font="2">0</text>
+<text top="206" left="391" width="13" height="17" font="1">−</text>
+<text top="212" left="414" width="6" height="13" font="2">y</text>
+<text top="206" left="421" width="49" height="17" font="1">(i, j, k)</text>
+<text top="235" left="397" width="6" height="13" font="2">y</text>
+<text top="228" left="404" width="49" height="17" font="1">(i, j, k)</text>
+<text top="217" left="472" width="12" height="17" font="1">E</text>
+<text top="223" left="484" width="26" height="13" font="2">inc,y</text>
+<text top="217" left="511" width="86" height="17" font="1">(i, j, k), (10)</text>
+<text top="286" left="106" width="12" height="17" font="1">E</text>
+<text top="292" left="118" width="31" height="13" font="2">scat,z</text>
+<text top="286" left="151" width="65" height="17" font="1">(i, j, k) +</text>
+<text top="275" left="269" width="8" height="17" font="1">1</text>
+<text top="297" left="222" width="18" height="17" font="1">jω</text>
+<text top="304" left="247" width="6" height="13" font="2">z</text>
+<text top="297" left="254" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="286" left="327" width="14" height="17" font="1">H</text>
+<text top="292" left="340" width="33" height="13" font="2">scat,x</text>
+<text top="286" left="374" width="49" height="17" font="1">(i, j, k)</text>
+<text top="329" left="106" width="13" height="17" font="1">−</text>
+<text top="318" left="168" width="8" height="17" font="1">1</text>
+<text top="340" left="121" width="18" height="17" font="1">jω</text>
+<text top="347" left="146" width="6" height="13" font="2">z</text>
+<text top="340" left="153" width="70" height="17" font="1">(i, j, k)∆y</text>
+<text top="329" left="226" width="14" height="17" font="1">H</text>
+<text top="335" left="239" width="33" height="13" font="2">scat,x</text>
+<text top="329" left="273" width="94" height="17" font="1">(i, j − 1, k) −</text>
+<text top="318" left="420" width="8" height="17" font="1">1</text>
+<text top="340" left="372" width="18" height="17" font="1">jω</text>
+<text top="347" left="398" width="6" height="13" font="2">z</text>
+<text top="340" left="405" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="329" left="478" width="14" height="17" font="1">H</text>
+<text top="335" left="492" width="32" height="13" font="2">scat,y</text>
+<text top="329" left="525" width="49" height="17" font="1">(i, j, k)</text>
+<text top="374" left="106" width="13" height="17" font="1">+</text>
+<text top="363" left="169" width="8" height="17" font="1">1</text>
+<text top="385" left="121" width="18" height="17" font="1">jω</text>
+<text top="391" left="146" width="6" height="13" font="2">z</text>
+<text top="385" left="153" width="72" height="17" font="1">(i, j, k)∆x</text>
+<text top="374" left="227" width="14" height="17" font="1">H</text>
+<text top="380" left="240" width="32" height="13" font="2">scat,y</text>
+<text top="374" left="273" width="94" height="17" font="1">(i − 1, j, k) =</text>
+<text top="369" left="380" width="6" height="13" font="2">0</text>
+<text top="363" left="391" width="13" height="17" font="1">−</text>
+<text top="369" left="414" width="6" height="13" font="2">z</text>
+<text top="363" left="421" width="49" height="17" font="1">(i, j, k)</text>
+<text top="391" left="397" width="6" height="13" font="2">z</text>
+<text top="385" left="404" width="49" height="17" font="1">(i, j, k)</text>
+<text top="374" left="472" width="12" height="17" font="1">E</text>
+<text top="380" left="484" width="26" height="13" font="2">inc,z</text>
+<text top="374" left="511" width="86" height="17" font="1">(i, j, k). (11)</text>
+<text top="412" left="97" width="500" height="17" font="1">In (6)–(11) scattered ﬁeld components on the left-hand sides are the</text>
+<text top="430" left="97" width="500" height="17" font="1">unknowns to be computed, while the right-hand sides include the</text>
+<text top="448" left="97" width="500" height="17" font="1">excitations. At this point, (6)–(11) can be used to construct a linear</text>
+<text top="466" left="97" width="174" height="17" font="1">set of equations, such as</text>
+<text top="502" left="318" width="57" height="17" font="1">Ax = y,</text>
+<text top="502" left="567" width="29" height="17" font="1">(12)</text>
+<text top="528" left="97" width="500" height="17" font="1">where A is a coeﬃcient matrix, x is a vector including all scattered</text>
+<text top="546" left="97" width="500" height="17" font="1">electric and magnetic ﬁeld components, while y is the excitation</text>
+<text top="564" left="97" width="500" height="17" font="1">vector. If a three-dimensional computational domain is composed of,</text>
+<text top="582" left="97" width="499" height="17" font="1">for instance, N cells, the vectors x and y will be of size 6N , while</text>
+<text top="600" left="97" width="500" height="17" font="1">matrix A will be of size 6N × 6N , since both the electric and magnetic</text>
+<text top="618" left="97" width="257" height="17" font="1">ﬁeld components are the unknowns.</text>
+<text top="636" left="130" width="172" height="17" font="1">It is possible to obtain H</text>
+<text top="642" left="302" width="33" height="13" font="2">scat,x</text>
+<text top="636" left="335" width="22" height="17" font="1">, H</text>
+<text top="642" left="357" width="32" height="13" font="2">scat,y</text>
+<text top="636" left="390" width="52" height="17" font="1">, and H</text>
+<text top="642" left="443" width="31" height="13" font="2">scat,z</text>
+<text top="636" left="479" width="117" height="17" font="1">from (6)–(8) and</text>
+<text top="654" left="97" width="407" height="17" font="1">use them in (9)–(11) to obtain three equations in which E</text>
+<text top="660" left="504" width="33" height="13" font="2">scat,x</text>
+<text top="654" left="538" width="21" height="17" font="1">, E</text>
+<text top="660" left="559" width="32" height="13" font="2">scat,y</text>
+<text top="654" left="592" width="5" height="17" font="1">,</text>
+<text top="672" left="97" width="45" height="17" font="1">and E</text>
+<text top="678" left="142" width="31" height="13" font="2">scat,z</text>
+<text top="672" left="182" width="415" height="17" font="1">are the only unknowns. Such equations are shown in [7]</text>
+<text top="690" left="97" width="500" height="17" font="1">(Equations (2.27), (2.28), and (2.29)). Using these reduced equations,</text>
+<text top="708" left="97" width="500" height="17" font="1">a matrix equation as (12) can be obtained, where the vectors x and</text>
+<text top="726" left="97" width="499" height="17" font="1">y will be of size 3N , while matrix A will be of size 3N × 3N for a</text>
+<text top="744" left="97" width="240" height="17" font="1">computational domain of N cells.</text>
+<text top="762" left="130" width="467" height="17" font="1">Here it should be noted that the coeﬃcient matrix A is highly</text>
+<text top="779" left="97" width="500" height="17" font="1">sparse and it includes only 13 nonzero coeﬃcients per row as shown</text>
+<text top="797" left="97" width="500" height="17" font="1">in [7]. Since A is highly sparse, it is suﬃcient to store only its nonzero</text>
+<text top="815" left="97" width="500" height="17" font="1">components on computer memory while processing it in a program.</text>
+<text top="833" left="97" width="500" height="17" font="1">Special storage schemes are used to store such sparse matrices, details</text>
+<text top="851" left="97" width="500" height="17" font="1">of which are discussed in [18]. For instance, [7] uses a scheme referred</text>
+<text top="869" left="97" width="500" height="17" font="1">to as coordinate format, in which the data structure consists of three</text>
+<text top="887" left="97" width="500" height="17" font="1">arrays: (1) an array containing all the complex values of the nonzero</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">35</text>
+<text top="121" left="97" width="500" height="17" font="1">elements of A; (2) an integer array containing their row indices;</text>
+<text top="139" left="97" width="500" height="17" font="1">and (3) a second integer array containing their column indices. All</text>
+<text top="157" left="97" width="500" height="17" font="1">three arrays are of length 39N . It should be noted that [12] uses</text>
+<text top="175" left="97" width="500" height="17" font="1">the coordinate format storage scheme with two arrays: (1) an array</text>
+<text top="193" left="97" width="500" height="17" font="1">containing the values of the nonzero elements; and (2) an integer array</text>
+<text top="211" left="97" width="499" height="17" font="1">containing their column indices. Each of these arrays are of size 39N .</text>
+<text top="229" left="97" width="500" height="17" font="1">Since it is already known that each row contains 13 elements, there</text>
+<text top="247" left="97" width="500" height="17" font="1">is no need to store row indices. Although two other sparse storage</text>
+<text top="265" left="97" width="500" height="17" font="1">schemes, named as compressed sparse row (CSR) format and modiﬁed</text>
+<text top="283" left="97" width="500" height="17" font="1">sparse row (MSR) format, are available and slightly more eﬃcient, the</text>
+<text top="301" left="97" width="500" height="17" font="1">memory requirement is still very high for the storage of A. We discuss</text>
+<text top="319" left="97" width="500" height="17" font="1">a storage scheme presented in [14] that stores the coeﬃcients in three-</text>
+<text top="337" left="97" width="500" height="17" font="1">dimensional arrays, which leads to improved eﬃciency in computation</text>
+<text top="355" left="97" width="315" height="17" font="1">time and memory usage in the next section.</text>
+<text top="397" left="97" width="474" height="17" font="1">3. AN ALGORITHM FOR EFFICIENT SOLUTION OF</text>
+<text top="415" left="97" width="53" height="17" font="1">FDFD</text>
+<text top="449" left="97" width="500" height="17" font="1">The solution of large sparse systems is very costly, if not impossible,</text>
+<text top="467" left="97" width="500" height="17" font="1">in terms of computer time and memory if direct linear system</text>
+<text top="485" left="97" width="500" height="17" font="1">solution methods (i.e., Gaussian elimination, LU decomposition, etc.)</text>
+<text top="503" left="97" width="500" height="17" font="1">are used. These large systems can often be solved only by using</text>
+<text top="521" left="97" width="500" height="17" font="1">iterative methods. There are several iterative techniques proposed for</text>
+<text top="539" left="97" width="500" height="17" font="1">solving linear systems [18, 19]. Among these techniques, Generalized</text>
+<text top="557" left="97" width="500" height="17" font="1">Minimal Residual (GMRES) method [20] and Biconjugate Gradients</text>
+<text top="575" left="97" width="500" height="17" font="1">Stabilized (BICGSTAB) [21, 22] method are the most commonly used</text>
+<text top="593" left="97" width="360" height="17" font="1">for numerical solution of Maxwell’s equations [14].</text>
+<text top="611" left="130" width="467" height="17" font="1">It is widely recognized that preconditioning is the most critical</text>
+<text top="629" left="97" width="500" height="17" font="1">ingredient in the development of eﬃcient solvers for challenging</text>
+<text top="647" left="97" width="500" height="17" font="1">problems in scientiﬁc computation, and that the importance of</text>
+<text top="664" left="97" width="500" height="17" font="1">preconditioning is destined to increase even further [30]. A well-chosen</text>
+<text top="682" left="97" width="500" height="17" font="1">preconditioner can signiﬁcantly improve the eﬃciency of an iterative</text>
+<text top="700" left="97" width="500" height="17" font="1">solver. The current contribution addresses the GPU acceleration of</text>
+<text top="718" left="97" width="395" height="17" font="1">FDFD, where the BICGSTAB algorithm is utilized.</text>
+<text top="718" left="512" width="85" height="17" font="1">One should</text>
+<text top="736" left="97" width="500" height="17" font="1">consider ﬁnding and using an eﬃcient preconditioner as well to further</text>
+<text top="754" left="97" width="482" height="17" font="1">accelerate the computations both on the CPU and GPU platforms.</text>
+<text top="772" left="130" width="350" height="17" font="1">An iterative solver starts with an initial guess x</text>
+<text top="778" left="479" width="6" height="13" font="2">0</text>
+<text top="772" left="493" width="104" height="17" font="1">and minimizes</text>
+<text top="790" left="97" width="170" height="17" font="1">the residual r = y − Ax</text>
+<text top="796" left="267" width="7" height="13" font="2">k</text>
+<text top="790" left="280" width="309" height="17" font="1">= y − y as the iterations proceed, where x</text>
+<text top="796" left="589" width="7" height="13" font="2">k</text>
+<text top="808" left="97" width="492" height="17" font="1">is the solution at the kth iteration. As the residual minimizes the x</text>
+<text top="814" left="589" width="7" height="13" font="2">k</text>
+<text top="826" left="97" width="500" height="17" font="1">converges to the solution x. This process requires a multiplication of</text>
+<text top="844" left="97" width="50" height="17" font="1">A by x</text>
+<text top="850" left="147" width="7" height="13" font="2">k</text>
+<text top="844" left="160" width="437" height="17" font="1">to produce the next residual [14]. The matrix-vector product</text>
+<text top="862" left="97" width="22" height="17" font="1">Ax</text>
+<text top="868" left="119" width="7" height="13" font="2">k</text>
+<text top="862" left="132" width="464" height="17" font="1">is the most time consuming stage in the iterative procedure. As</text>
+<text top="880" left="97" width="500" height="17" font="1">discussed in Section 2, generally one of the sparse matrix storage</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">36</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="97" width="360" height="17" font="1">schemes is used to store A and the operation Ax</text>
+<text top="128" left="457" width="7" height="13" font="2">k</text>
+<text top="121" left="471" width="126" height="17" font="1">is performed in a</text>
+<text top="139" left="97" width="500" height="17" font="1">function, usually referred to as matvec, that is based on the employed</text>
+<text top="157" left="97" width="500" height="17" font="1">scheme. However, it is not necessary to employ one of these storage</text>
+<text top="175" left="97" width="500" height="17" font="1">schemes mentioned above; one can develop an alternative storage</text>
+<text top="193" left="97" width="500" height="17" font="1">scheme and develop an algorithm based on this new scheme. Then a</text>
+<text top="211" left="97" width="284" height="17" font="1">matvec function that computes y = Ax</text>
+<text top="218" left="381" width="7" height="13" font="2">k</text>
+<text top="211" left="394" width="202" height="17" font="1">based on this new algorithm</text>
+<text top="229" left="97" width="500" height="17" font="1">and returns the result to the iterative solver can be implemented. Such</text>
+<text top="247" left="97" width="313" height="17" font="1">an algorithm to improve the eﬃciency of Ax</text>
+<text top="253" left="410" width="7" height="13" font="2">k</text>
+<text top="247" left="422" width="174" height="17" font="1">stage is proposed in [14].</text>
+<text top="265" left="97" width="334" height="17" font="1">A summary of this algorithm is provided next.</text>
+<text top="306" left="97" width="469" height="17" font="1">3.1. Storage of Coeﬃcients in Three-Dimensional Arrays</text>
+<text top="334" left="97" width="376" height="17" font="1">One can notice that (6)–(8) can be cast in a form as</text>
+<text top="370" left="290" width="9" height="17" font="1">x</text>
+<text top="376" left="299" width="6" height="13" font="2">e</text>
+<text top="370" left="310" width="29" height="17" font="1">+ A</text>
+<text top="376" left="338" width="6" height="13" font="2">e</text>
+<text top="370" left="345" width="9" height="17" font="1">x</text>
+<text top="377" left="354" width="7" height="13" font="2">h</text>
+<text top="370" left="367" width="25" height="17" font="1">= y</text>
+<text top="376" left="392" width="6" height="13" font="2">e</text>
+<text top="370" left="399" width="5" height="17" font="1">,</text>
+<text top="370" left="567" width="29" height="17" font="1">(13)</text>
+<text top="397" left="97" width="235" height="17" font="1">whereas (9)–(11) can be given as</text>
+<text top="433" left="289" width="9" height="17" font="1">x</text>
+<text top="439" left="298" width="7" height="13" font="2">h</text>
+<text top="433" left="310" width="29" height="17" font="1">+ A</text>
+<text top="439" left="338" width="7" height="13" font="2">h</text>
+<text top="433" left="346" width="9" height="17" font="1">x</text>
+<text top="439" left="356" width="6" height="13" font="2">e</text>
+<text top="433" left="367" width="25" height="17" font="1">= y</text>
+<text top="439" left="392" width="7" height="13" font="2">h</text>
+<text top="433" left="400" width="5" height="17" font="1">,</text>
+<text top="433" left="567" width="29" height="17" font="1">(14)</text>
+<text top="460" left="97" width="62" height="17" font="1">where A</text>
+<text top="466" left="159" width="6" height="13" font="2">e</text>
+<text top="460" left="173" width="46" height="17" font="1">and A</text>
+<text top="466" left="219" width="7" height="13" font="2">h</text>
+<text top="460" left="234" width="190" height="17" font="1">are coeﬃcient matrices, x</text>
+<text top="466" left="424" width="6" height="13" font="2">e</text>
+<text top="460" left="438" width="43" height="17" font="1">and x</text>
+<text top="466" left="481" width="7" height="13" font="2">h</text>
+<text top="460" left="496" width="100" height="17" font="1">are vectors of</text>
+<text top="478" left="97" width="415" height="17" font="1">electric and magnetic ﬁeld components, respectively, and y</text>
+<text top="484" left="512" width="6" height="13" font="2">e</text>
+<text top="478" left="523" width="39" height="17" font="1">and y</text>
+<text top="484" left="562" width="7" height="13" font="2">h</text>
+<text top="478" left="575" width="22" height="17" font="1">are</text>
+<text top="496" left="97" width="240" height="17" font="1">excitation vectors. One can use x</text>
+<text top="502" left="337" width="7" height="13" font="2">h</text>
+<text top="496" left="351" width="204" height="17" font="1">from (14) in (13) and obtain</text>
+<text top="532" left="253" width="9" height="17" font="1">x</text>
+<text top="538" left="262" width="6" height="13" font="2">e</text>
+<text top="532" left="273" width="29" height="17" font="1">− A</text>
+<text top="538" left="301" width="6" height="13" font="2">e</text>
+<text top="532" left="308" width="12" height="17" font="1">A</text>
+<text top="538" left="320" width="7" height="13" font="2">h</text>
+<text top="532" left="328" width="9" height="17" font="1">x</text>
+<text top="538" left="338" width="6" height="13" font="2">e</text>
+<text top="532" left="349" width="25" height="17" font="1">= y</text>
+<text top="538" left="374" width="6" height="13" font="2">e</text>
+<text top="532" left="384" width="29" height="17" font="1">− A</text>
+<text top="538" left="413" width="6" height="13" font="2">e</text>
+<text top="532" left="420" width="8" height="17" font="1">y</text>
+<text top="538" left="428" width="7" height="13" font="2">h</text>
+<text top="532" left="436" width="5" height="17" font="1">,</text>
+<text top="532" left="567" width="29" height="17" font="1">(15)</text>
+<text top="558" left="97" width="291" height="17" font="1">which is equivalent to (12). For a given x</text>
+<text top="565" left="388" width="7" height="13" font="2">k</text>
+<text top="558" left="395" width="66" height="17" font="1">, y = Ax</text>
+<text top="565" left="461" width="7" height="13" font="2">k</text>
+<text top="558" left="473" width="123" height="17" font="1">can be performed</text>
+<text top="576" left="97" width="269" height="17" font="1">in multiple steps using (15) such that</text>
+<text top="621" left="191" width="9" height="17" font="1">x</text>
+<text top="627" left="200" width="5" height="13" font="2">t</text>
+<text top="621" left="210" width="30" height="17" font="1">= A</text>
+<text top="628" left="240" width="7" height="13" font="2">h</text>
+<text top="621" left="248" width="9" height="17" font="1">x</text>
+<text top="628" left="257" width="7" height="13" font="2">k</text>
+<text top="621" left="265" width="5" height="17" font="1">,</text>
+<text top="621" left="288" width="9" height="17" font="1">x</text>
+<text top="627" left="298" width="5" height="13" font="2">t</text>
+<text top="621" left="307" width="30" height="17" font="1">= A</text>
+<text top="627" left="337" width="6" height="13" font="2">e</text>
+<text top="621" left="344" width="9" height="17" font="1">x</text>
+<text top="627" left="353" width="5" height="13" font="2">t</text>
+<text top="621" left="358" width="5" height="17" font="1">,</text>
+<text top="621" left="382" width="44" height="17" font="1">y = x</text>
+<text top="628" left="426" width="7" height="13" font="2">k</text>
+<text top="621" left="437" width="26" height="17" font="1">− x</text>
+<text top="627" left="463" width="5" height="13" font="2">t</text>
+<text top="621" left="468" width="5" height="17" font="1">,</text>
+<text top="621" left="567" width="29" height="17" font="1">(16)</text>
+<text top="648" left="97" width="56" height="17" font="1">where x</text>
+<text top="654" left="153" width="5" height="13" font="2">t</text>
+<text top="648" left="164" width="433" height="17" font="1">is a vector used to store intermediate results. The advantage</text>
+<text top="666" left="97" width="500" height="17" font="1">of this scheme is that instead of using a matrix A with 39N nonzero</text>
+<text top="684" left="97" width="275" height="17" font="1">coeﬃcients, we use two matrices, A</text>
+<text top="690" left="372" width="6" height="13" font="2">e</text>
+<text top="684" left="388" width="48" height="17" font="1">and A</text>
+<text top="690" left="436" width="7" height="13" font="2">h</text>
+<text top="684" left="444" width="152" height="17" font="1">, each with 12N (3</text>
+<text top="702" left="97" width="500" height="17" font="1">ﬁelds × 4 nonzero coeﬃcients per row ×N cells) nonzero coeﬃcients.</text>
+<text top="720" left="97" width="499" height="17" font="1">This implies a reduction in storage of coeﬃcients from 39N to 24N .</text>
+<text top="738" left="97" width="500" height="17" font="1">Examining (6)–(11) one can notice that we have coeﬃcient pairs in</text>
+<text top="756" left="97" width="500" height="17" font="1">which the pairs are diﬀerent only by their signs. For instance, (6) can</text>
+<text top="774" left="97" width="110" height="17" font="1">be expressed as</text>
+<text top="801" left="122" width="14" height="17" font="1">H</text>
+<text top="807" left="136" width="33" height="13" font="2">scat,x</text>
+<text top="801" left="169" width="80" height="17" font="1">(i, j, k) − C</text>
+<text top="807" left="249" width="27" height="13" font="2">hxey</text>
+<text top="801" left="277" width="67" height="17" font="1">(i, j, k)(E</text>
+<text top="807" left="344" width="32" height="13" font="2">scat,y</text>
+<text top="801" left="377" width="109" height="17" font="1">(i, j, k + 1) − E</text>
+<text top="807" left="486" width="32" height="13" font="2">scat,y</text>
+<text top="801" left="519" width="55" height="17" font="1">(i, j, k))</text>
+<text top="827" left="122" width="24" height="17" font="1">+C</text>
+<text top="834" left="146" width="26" height="13" font="2">hxez</text>
+<text top="827" left="174" width="67" height="17" font="1">(i, j, k)(E</text>
+<text top="833" left="241" width="31" height="13" font="2">scat,z</text>
+<text top="827" left="274" width="110" height="17" font="1">(i, j + 1, k) − E</text>
+<text top="833" left="384" width="31" height="13" font="2">scat,z</text>
+<text top="827" left="416" width="55" height="17" font="1">(i, j, k))</text>
+<text top="866" left="122" width="13" height="17" font="1">=</text>
+<text top="854" left="141" width="10" height="17" font="1">µ</text>
+<text top="861" left="151" width="6" height="13" font="2">0</text>
+<text top="854" left="162" width="26" height="17" font="1">− µ</text>
+<text top="861" left="188" width="7" height="13" font="2">x</text>
+<text top="854" left="196" width="49" height="17" font="1">(i, j, k)</text>
+<text top="877" left="159" width="10" height="17" font="1">µ</text>
+<text top="883" left="169" width="7" height="13" font="2">x</text>
+<text top="877" left="177" width="49" height="17" font="1">(i, j, k)</text>
+<text top="866" left="246" width="14" height="17" font="1">H</text>
+<text top="872" left="260" width="27" height="13" font="2">inc,x</text>
+<text top="866" left="287" width="53" height="17" font="1">(i, j, k),</text>
+<text top="866" left="567" width="29" height="17" font="1">(17)</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1020" width="681">
+	<fontspec id="3" size="10" family="Times" color="#231f20"/>
+	<fontspec id="4" size="8" family="Times" color="#231f20"/>
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">37</text>
+<text top="121" left="97" width="500" height="17" font="1">which implies that the coeﬃcient storage requirements can further be</text>
+<text top="139" left="97" width="500" height="17" font="1">reduced by half, and we need to store only 12N coeﬃcients. This is</text>
+<text top="157" left="97" width="295" height="17" font="1">done by storing the coeﬃcients, such as C</text>
+<text top="164" left="392" width="27" height="13" font="2">hxey</text>
+<text top="157" left="420" width="96" height="17" font="1">(i, j, k) and C</text>
+<text top="164" left="516" width="26" height="13" font="2">hxez</text>
+<text top="157" left="543" width="53" height="17" font="1">(i, j, k),</text>
+<text top="175" left="97" width="311" height="17" font="1">as three-dimensional arrays each with size N</text>
+<text top="181" left="408" width="7" height="13" font="2">x</text>
+<text top="175" left="417" width="27" height="17" font="1">×N</text>
+<text top="181" left="444" width="6" height="13" font="2">y</text>
+<text top="175" left="453" width="27" height="17" font="1">×N</text>
+<text top="181" left="479" width="6" height="13" font="2">z</text>
+<text top="175" left="486" width="68" height="17" font="1">, where N</text>
+<text top="181" left="555" width="7" height="13" font="2">x</text>
+<text top="175" left="562" width="22" height="17" font="1">, N</text>
+<text top="181" left="585" width="6" height="13" font="2">y</text>
+<text top="175" left="592" width="5" height="17" font="1">,</text>
+<text top="193" left="97" width="45" height="17" font="1">and N</text>
+<text top="199" left="142" width="6" height="13" font="2">z</text>
+<text top="193" left="154" width="442" height="17" font="1">are the numbers of cells in x, y, and z directions, respectively.</text>
+<text top="211" left="97" width="339" height="17" font="1">Thus, the total number of cells becomes N = N</text>
+<text top="217" left="436" width="7" height="13" font="2">x</text>
+<text top="211" left="446" width="29" height="17" font="1">× N</text>
+<text top="217" left="475" width="6" height="13" font="2">y</text>
+<text top="211" left="485" width="28" height="17" font="1">× N</text>
+<text top="217" left="513" width="6" height="13" font="2">z</text>
+<text top="211" left="520" width="76" height="17" font="1">. This way</text>
+<text top="229" left="97" width="500" height="17" font="1">of coeﬃcient storage also eliminates the need for integer arrays that</text>
+<text top="247" left="97" width="500" height="17" font="1">contain row and column indices discussed in Section 2. It has been</text>
+<text top="265" left="97" width="500" height="17" font="1">shown in [14] that the required amount of computer memory to store</text>
+<text top="283" left="97" width="500" height="17" font="1">coeﬃcients can be reduced by 80%. To comply with the presented</text>
+<text top="301" left="97" width="500" height="17" font="1">scheme, the unknown vector x is stored as well as a three-dimensional</text>
+<text top="319" left="97" width="125" height="17" font="1">array with size N</text>
+<text top="325" left="222" width="7" height="13" font="2">x</text>
+<text top="319" left="233" width="30" height="17" font="1">× N</text>
+<text top="325" left="263" width="6" height="13" font="2">y</text>
+<text top="319" left="274" width="38" height="17" font="1">× 3N</text>
+<text top="325" left="312" width="6" height="13" font="2">z</text>
+<text top="319" left="319" width="278" height="17" font="1">. The dimension in the z direction is 3</text>
+<text top="337" left="97" width="56" height="17" font="1">times N</text>
+<text top="343" left="153" width="6" height="13" font="2">z</text>
+<text top="337" left="160" width="193" height="17" font="1">, since ﬁrst section stores E</text>
+<text top="343" left="353" width="33" height="13" font="2">scat,x</text>
+<text top="337" left="386" width="173" height="17" font="1">, second section stores E</text>
+<text top="343" left="559" width="32" height="13" font="2">scat,y</text>
+<text top="337" left="592" width="5" height="17" font="1">,</text>
+<text top="355" left="97" width="217" height="17" font="1">and the third section stores E</text>
+<text top="361" left="314" width="31" height="13" font="2">scat,z</text>
+<text top="355" left="347" width="250" height="17" font="1">. Fig. 1 shows this storage scheme</text>
+<text top="373" left="97" width="500" height="17" font="1">and how ﬁeld indices in three-dimensional space relate to ﬁeld indices</text>
+<text top="390" left="97" width="110" height="17" font="1">in the x vector.</text>
+<text top="408" left="130" width="467" height="17" font="1">Another advantage with this scheme is that, when storing the</text>
+<text top="426" left="97" width="500" height="17" font="1">parameters in arrays we can directly do array operations, i.e., element-</text>
+<text top="444" left="97" width="500" height="17" font="1">wise addition, multiplication, etc., which can be easily optimized for</text>
+<text top="462" left="97" width="500" height="17" font="1">speed by compilers. It is shown in [14] that FDFD solution can be</text>
+<text top="480" left="97" width="500" height="17" font="1">achieved 30% faster with the presented algorithm. The presented</text>
+<text top="498" left="97" width="500" height="17" font="1">storage scheme will be referred to as coeﬃcient arrays storage in the</text>
+<text top="516" left="97" width="144" height="17" font="1">subsequent sections.</text>
+<text top="754" left="297" width="8" height="12" font="3">E</text>
+<text top="759" left="306" width="5" height="10" font="4">x</text>
+<text top="754" left="311" width="38" height="12" font="3">(i,j,k) =</text>
+<text top="770" left="223" width="142" height="12" font="3">x[(i 1)+(j 1)*nx+(k 1)*nxy]</text>
+<text top="682" left="297" width="8" height="12" font="3">E</text>
+<text top="687" left="306" width="5" height="10" font="4">y</text>
+<text top="682" left="311" width="38" height="12" font="3">(i,j,k) =</text>
+<text top="698" left="197" width="175" height="12" font="3">x[(i 1)+(j 1)*nx+(k 1)*nxy+nxyz]</text>
+<text top="605" left="300" width="8" height="12" font="3">E</text>
+<text top="611" left="310" width="5" height="10" font="4">z</text>
+<text top="605" left="315" width="38" height="12" font="3">(i,j,k) =</text>
+<text top="622" left="221" width="138" height="12" font="3">x[(i 1)+(j 1)*nx+(k 1)*nxy</text>
+<text top="637" left="307" width="52" height="12" font="3">+ 2*nxyz]</text>
+<text top="798" left="265" width="8" height="12" font="3">E</text>
+<text top="803" left="273" width="5" height="10" font="4">x</text>
+<text top="798" left="279" width="71" height="12" font="3">(1,1,1) = x[0]</text>
+<text top="727" left="247" width="8" height="12" font="3">E</text>
+<text top="733" left="258" width="5" height="10" font="4">y</text>
+<text top="727" left="263" width="90" height="12" font="3">(1,1,1) = x[nxyz]</text>
+<text top="655" left="235" width="8" height="12" font="3">E</text>
+<text top="661" left="244" width="5" height="10" font="4">z</text>
+<text top="655" left="250" width="102" height="12" font="3">(1,1,1) = x[2*nxyz]</text>
+<text top="585" left="294" width="6" height="12" font="3">x</text>
+<text top="574" left="288" width="6" height="12" font="3">y</text>
+<text top="567" left="281" width="6" height="12" font="3">z</text>
+<text top="624" left="237" width="6" height="11" font="4">−</text>
+<text top="624" left="268" width="6" height="11" font="4">−</text>
+<text top="624" left="319" width="6" height="11" font="4">−</text>
+<text top="773" left="240" width="6" height="11" font="4">−</text>
+<text top="773" left="270" width="6" height="11" font="4">−</text>
+<text top="772" left="321" width="6" height="11" font="4">−</text>
+<text top="700" left="214" width="6" height="11" font="4">−</text>
+<text top="700" left="244" width="6" height="11" font="4">−</text>
+<text top="700" left="295" width="6" height="11" font="4">−</text>
+<text top="840" left="97" width="500" height="17" font="1">Figure 1. Field indices mapping from three-dimensional space to</text>
+<text top="858" left="97" width="499" height="17" font="1">x vector. All ﬁelds are scattered electric ﬁelds. Domain size is N =</text>
+<text top="876" left="97" width="499" height="17" font="1">N x×N y ×N z cells. Here nxy = N x×N y and nxyz = N x×N y ×N z.</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">38</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="130" width="467" height="17" font="1">Presented algorithm can particularly beneﬁt for eﬃciency of</text>
+<text top="139" left="97" width="500" height="17" font="1">computations on GPU for two main reasons. (1) Storing the data</text>
+<text top="157" left="97" width="500" height="17" font="1">as three-dimensional arrays naturally represents a three-dimensional</text>
+<text top="175" left="97" width="500" height="17" font="1">space and converts FDFD to a data-parallel algorithm. (2) As will be</text>
+<text top="193" left="97" width="500" height="17" font="1">discussed later, one major bottleneck in eﬃciency of computations on</text>
+<text top="211" left="97" width="500" height="17" font="1">a GPU is data transfers from and to GPU global memory. Using less</text>
+<text top="229" left="97" width="500" height="17" font="1">number of coeﬃcients means less data transfer from the GPU global</text>
+<text top="247" left="97" width="217" height="17" font="1">memory, and higher eﬃciency.</text>
+<text top="287" left="97" width="325" height="17" font="1">3.2. Coeﬃcient Indices Storage Scheme</text>
+<text top="316" left="97" width="500" height="17" font="1">In this section, we present another improvement on the coeﬃcient</text>
+<text top="334" left="97" width="500" height="17" font="1">arrays storage scheme that utilizes the additional cached memory</text>
+<text top="352" left="97" width="500" height="17" font="1">spaces available on CUDA enabled GPU and further reduces the data</text>
+<text top="369" left="97" width="500" height="17" font="1">storage on GPU global memory and data transfers from the GPU</text>
+<text top="387" left="97" width="500" height="17" font="1">memory. This scheme further reduces the memory requirements and</text>
+<text top="405" left="97" width="192" height="17" font="1">speeds up the calculations.</text>
+<text top="423" left="130" width="467" height="17" font="1">The coeﬃcient arrays storage scheme can handle solution of</text>
+<text top="441" left="97" width="500" height="17" font="1">highly inhomogeneous problems even in which every single coeﬃcient</text>
+<text top="459" left="97" width="500" height="17" font="1">associated with the ﬁeld components in the Yee grid is diﬀerent from</text>
+<text top="477" left="97" width="500" height="17" font="1">the others in value. If there are a small number of unique values</text>
+<text top="495" left="97" width="500" height="17" font="1">of coeﬃcients, it is better to store these unique values in a separate</text>
+<text top="513" left="97" width="500" height="17" font="1">small size coeﬃcient array, and store the indices of these coeﬃcients in</text>
+<text top="531" left="97" width="500" height="17" font="1">indices arrays associated with ﬁeld components (or in other terms the</text>
+<text top="549" left="97" width="245" height="17" font="1">edge components) in the Yee grid.</text>
+<text top="567" left="130" width="467" height="17" font="1">Since two coeﬃcient values are needed per ﬁeld component, as</text>
+<text top="585" left="97" width="500" height="17" font="1">in (17), unique combination of coeﬃcient pairs needs to be stored</text>
+<text top="603" left="97" width="500" height="17" font="1">instead of single coeﬃcient values. Then the indices to these coeﬃcient</text>
+<text top="621" left="97" width="500" height="17" font="1">pairs need to be stored in 6 arrays, each with size N , where each index</text>
+<text top="638" left="97" width="500" height="17" font="1">is type ‘unsigned short’ of size 2 bytes. The total storage requirement</text>
+<text top="656" left="97" width="500" height="17" font="1">for indices becomes 12N bytes. This storage scheme is refereed to as</text>
+<text top="674" left="97" width="331" height="17" font="1">coeﬃcient indices storage in this contribution.</text>
+<text top="692" left="130" width="465" height="17" font="1">In the coeﬃcient arrays storage scheme, we need to store 12N</text>
+<text top="710" left="97" width="500" height="17" font="1">coeﬃcients, where each coeﬃcient is type ‘cuDoubleComplex’ of size 16</text>
+<text top="728" left="97" width="500" height="17" font="1">bytes. These numbers indicate that coeﬃcient indices storage scheme</text>
+<text top="746" left="97" width="500" height="17" font="1">requires 1/16 the memory space compared with the coeﬃcient arrays</text>
+<text top="764" left="97" width="115" height="17" font="1">storage scheme.</text>
+<text top="764" left="229" width="367" height="17" font="1">The smaller size indices arrays lead to less data</text>
+<text top="782" left="97" width="500" height="17" font="1">transfer from the GPU global memory during the computations on</text>
+<text top="800" left="97" width="500" height="17" font="1">GPU, thus lead to higher eﬃciency. This kind of coeﬃcient indices</text>
+<text top="818" left="97" width="500" height="17" font="1">storage scheme is often employed in CUDA implementations of FDTD</text>
+<text top="836" left="97" width="52" height="17" font="1">as well.</text>
+<text top="854" left="130" width="467" height="17" font="1">The next section presents the CUDA implementation of the</text>
+<text top="872" left="97" width="500" height="17" font="1">FDFD solution based on, ﬁrst, the coeﬃcient arrays and, second, the</text>
+<text top="890" left="97" width="248" height="17" font="1">coeﬃcient indices storage schemes.</text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">39</text>
+<text top="121" left="97" width="424" height="17" font="1">4. IMPLEMENTATION OF FDFD USING CUDA</text>
+<text top="156" left="97" width="176" height="17" font="1">4.1. CUDA Concepts</text>
+<text top="184" left="97" width="500" height="17" font="1">In this section, a brief description of some concepts in CUDA is</text>
+<text top="202" left="97" width="500" height="17" font="1">summarized from [23] in order to prepare the reader for the discussions</text>
+<text top="220" left="97" width="82" height="17" font="1">that follow.</text>
+<text top="238" left="130" width="467" height="17" font="1">To program using CUDA the programmer deﬁnes C functions,</text>
+<text top="256" left="97" width="500" height="17" font="1">called kernels, that, when called, are executed N times in parallel by</text>
+<text top="274" left="97" width="500" height="17" font="1">N diﬀerent CUDA threads. Each of the threads that executes a kernel</text>
+<text top="292" left="97" width="500" height="17" font="1">is given a unique thread ID that is accessible within the kernel through</text>
+<text top="310" left="97" width="500" height="17" font="1">the built-in threadIdx variable. In CUDA, a number of threads form</text>
+<text top="328" left="97" width="500" height="17" font="1">a thread block. A kernel function can be executed by multiple equally-</text>
+<text top="345" left="97" width="500" height="17" font="1">shaped thread blocks, so that the total number of threads is equal to</text>
+<text top="363" left="97" width="500" height="17" font="1">the number of threads per block times the number of blocks. Then</text>
+<text top="381" left="97" width="500" height="17" font="1">a number of thread blocks are organized to form a grid of thread</text>
+<text top="399" left="97" width="500" height="17" font="1">blocks. Each block within the grid can be identiﬁed by an index</text>
+<text top="417" left="97" width="500" height="17" font="1">accessible within the kernel through the built-in blockIdx variable. The</text>
+<text top="435" left="97" width="500" height="17" font="1">dimension of the thread block is accessible within the kernel through</text>
+<text top="453" left="97" width="221" height="17" font="1">the built-in blockDim variable.</text>
+<text top="471" left="130" width="467" height="17" font="1">CUDA threads may access data from multiple memory spaces</text>
+<text top="489" left="97" width="500" height="17" font="1">during their execution. Each thread has a private local memory and</text>
+<text top="507" left="97" width="500" height="17" font="1">a shared memory visible to all threads of the block and with the same</text>
+<text top="525" left="97" width="500" height="17" font="1">lifetime as the block. Finally, all threads have access to the same global</text>
+<text top="543" left="97" width="500" height="17" font="1">memory. Global memory is the main memory space on the device to</text>
+<text top="561" left="97" width="500" height="17" font="1">store the application data. However, data access to global memory</text>
+<text top="579" left="97" width="500" height="17" font="1">is very slow and that ineﬃciency becomes the main bottleneck in the</text>
+<text top="597" left="97" width="500" height="17" font="1">execution of a kernel. On the other hand, the shared memory is much</text>
+<text top="614" left="97" width="500" height="17" font="1">faster to access but the size of the shared memory is very limited.</text>
+<text top="632" left="97" width="500" height="17" font="1">However, though very limited in size, the shared memory can provide</text>
+<text top="650" left="97" width="455" height="17" font="1">the means for data reuse and improve the eﬃciency of a kernel.</text>
+<text top="691" left="97" width="238" height="17" font="1">4.2. Thread to Cell Mapping</text>
+<text top="720" left="97" width="500" height="17" font="1">The presented FDFD algorithm in Section 3 uses three-dimensional</text>
+<text top="738" left="97" width="500" height="17" font="1">arrays that provide direct mapping between the coeﬃcients that are</text>
+<text top="756" left="97" width="500" height="17" font="1">used to calculate ﬁeld components and the cells in which these ﬁeld</text>
+<text top="773" left="97" width="500" height="17" font="1">components exist. This scheme maximizes data parallelization and</text>
+<text top="791" left="97" width="500" height="17" font="1">lets one-to-one mapping between cells and the CUDA threads that</text>
+<text top="809" left="97" width="500" height="17" font="1">process the data in these cells. One can construct a grid of thread</text>
+<text top="827" left="97" width="500" height="17" font="1">blocks in which each block consists of a number of threads such that</text>
+<text top="845" left="97" width="500" height="17" font="1">the total number of cells is equal to the total number of threads in the</text>
+<text top="863" left="97" width="500" height="17" font="1">grid. However, a diﬀerent approach is followed in this contribution:</text>
+<text top="881" left="97" width="500" height="17" font="1">instead of mapping threads in a grid to cells in a three-dimensional</text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">40</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="97" width="499" height="17" font="1">computational domain, threads in a grid are mapped to cells in an xy</text>
+<text top="139" left="97" width="500" height="17" font="1">plane cut of the computational domain. Then, each thread is used</text>
+<text top="157" left="97" width="500" height="17" font="1">to process all other cells in the same column by iterating the cells in</text>
+<text top="175" left="97" width="500" height="17" font="1">the z direction, thus the entire FDFD domain is covered. As will be</text>
+<text top="193" left="97" width="500" height="17" font="1">illustrated later, this algorithm helps for global memory reuse, which</text>
+<text top="211" left="97" width="500" height="17" font="1">improves eﬃciency. This scheme of thread-to-cell mapping is used and</text>
+<text top="229" left="97" width="500" height="17" font="1">illustrated in [2] for a CUDA implementation of FDTD method, and</text>
+<text top="247" left="97" width="223" height="17" font="1">it is referred to as xy-mapping.</text>
+<text top="288" left="97" width="315" height="17" font="1">4.3. Coalesced Global Memory Access</text>
+<text top="316" left="97" width="500" height="17" font="1">In CUDA, when accessing global memory, there are 400 to 600</text>
+<text top="334" left="97" width="277" height="17" font="1">clock cycles of memory latency [23].</text>
+<text top="334" left="394" width="203" height="17" font="1">If a code is dominated by</text>
+<text top="352" left="97" width="500" height="17" font="1">memory accesses rather than arithmetic instructions the memory</text>
+<text top="370" left="97" width="500" height="17" font="1">access ineﬃciency becomes the bottle-neck for the eﬃciency of a</text>
+<text top="388" left="97" width="500" height="17" font="1">program on GPU. Global memory bandwidth is used most eﬃciently</text>
+<text top="406" left="97" width="500" height="17" font="1">when the simultaneous memory accesses by threads in a half-warp</text>
+<text top="424" left="97" width="500" height="17" font="1">(during the execution of a single read or write instruction) can be</text>
+<text top="442" left="97" width="500" height="17" font="1">coalesced into a single memory transaction of 32, 64, or 128 bytes [23].</text>
+<text top="460" left="130" width="467" height="17" font="1">The three-dimensional ﬁeld and coeﬃcient arrays are actually</text>
+<text top="478" left="97" width="500" height="17" font="1">stored as one-dimensional arrays on computer memory, and they are</text>
+<text top="496" left="97" width="500" height="17" font="1">accessed as one-dimensional arrays in kernel functions. It should be</text>
+<text top="514" left="97" width="500" height="17" font="1">noted that the base code of FDFD considered in this contribution is</text>
+<text top="532" left="97" width="500" height="17" font="1">implemented in FORTRAN. In FORTRAN, the ﬁrst array index varies</text>
+<text top="549" left="97" width="499" height="17" font="1">most rapidly in multi-dimensional arrays, i.e., for an array of A (i, j, k),</text>
+<text top="567" left="97" width="500" height="17" font="1">i index varies most rapidly, then j, and then k, as illustrated in Fig. 1.</text>
+<text top="585" left="97" width="500" height="17" font="1">This ordering is retained after the arrays are transferred to GPU. The</text>
+<text top="603" left="97" width="500" height="17" font="1">size of the three-dimensional arrays is the same as the size of the FDFD</text>
+<text top="621" left="97" width="499" height="17" font="1">domain in number of cells. If the size of the FDFD domain in the x</text>
+<text top="639" left="97" width="500" height="17" font="1">and y directions is multiple of 16, then the coalesced memory access is</text>
+<text top="657" left="97" width="336" height="17" font="1">ensured [2]. If a problem space is composed of N</text>
+<text top="663" left="433" width="7" height="13" font="2">x</text>
+<text top="657" left="441" width="26" height="17" font="1">×N</text>
+<text top="663" left="467" width="6" height="13" font="2">y</text>
+<text top="657" left="475" width="26" height="17" font="1">×N</text>
+<text top="663" left="501" width="6" height="13" font="2">z</text>
+<text top="657" left="512" width="77" height="17" font="1">cells and N</text>
+<text top="663" left="589" width="7" height="13" font="2">x</text>
+<text top="675" left="97" width="31" height="17" font="1">or N</text>
+<text top="681" left="128" width="6" height="13" font="2">y</text>
+<text top="675" left="139" width="457" height="17" font="1">is not a multiple of 16, then the computational domain is enlarged</text>
+<text top="693" left="97" width="500" height="17" font="1">in the respective direction to have the number of cells as a multiple</text>
+<text top="711" left="97" width="500" height="17" font="1">of 16. Since the problem space is terminated by PML, expansion in</text>
+<text top="729" left="97" width="500" height="17" font="1">domain size will only move the PML away from the scattering objects</text>
+<text top="747" left="97" width="399" height="17" font="1">in the problem space, which will not aﬀect the solution.</text>
+<text top="765" left="130" width="178" height="17" font="1">Once it is ensured that N</text>
+<text top="771" left="307" width="7" height="13" font="2">x</text>
+<text top="765" left="320" width="44" height="17" font="1">and N</text>
+<text top="771" left="364" width="6" height="13" font="2">y</text>
+<text top="765" left="375" width="221" height="17" font="1">are multiples of 16, then thread</text>
+<text top="783" left="97" width="500" height="17" font="1">blocks of size 256 can be used to map threads in a grid to cells in an</text>
+<text top="801" left="97" width="312" height="17" font="1">xy plane cut using the xy mapping scheme.</text>
+<text top="841" left="97" width="252" height="17" font="1">4.4. BICGSTAB Using CUDA</text>
+<text top="870" left="97" width="500" height="17" font="1">The iterative solver used to solve the presented FDFD equations is the</text>
+<text top="888" left="97" width="500" height="17" font="1">“vanilla” version of BICGSTAB [22]. A FORTRAN implementation</text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">41</text>
+<text top="121" left="97" width="500" height="17" font="1">of BICGSTAB, developed by Botchev and Fokkema, is obtained from</text>
+<text top="139" left="97" width="500" height="17" font="1">the authors’ website [24]. This FORTRAN code is ﬁrst converted</text>
+<text top="157" left="97" width="500" height="17" font="1">to a C code so that it can be modiﬁed and transformed into a</text>
+<text top="175" left="97" width="500" height="17" font="1">CUDA implementation. The BICGSTAB code includes several array</text>
+<text top="193" left="97" width="500" height="17" font="1">instructions, i.e., element-wise multiplication and addition of arrays.</text>
+<text top="211" left="97" width="500" height="17" font="1">These operations are the time-consuming parts of the BICGSTAB, so</text>
+<text top="229" left="97" width="500" height="17" font="1">they are ported to run on GPU using CUDA. To facilitate this all</text>
+<text top="247" left="97" width="500" height="17" font="1">arrays, including coeﬃcient, ﬁeld, and temporary arrays, are copied to</text>
+<text top="265" left="97" width="500" height="17" font="1">GPU global memory. Many of these array instructions are available</text>
+<text top="283" left="97" width="500" height="17" font="1">in Basic Linear Algebra Subprograms (BLAS) [25] libraries. At this</text>
+<text top="301" left="97" width="500" height="17" font="1">point, cuBlas, a BLAS library ported to CUDA, is utilized and cuBlas</text>
+<text top="319" left="97" width="500" height="17" font="1">functions are called in the developed C version of the BICGSTAB</text>
+<text top="337" left="97" width="124" height="17" font="1">where applicable.</text>
+<text top="377" left="97" width="440" height="17" font="1">4.5. Matrix-vector Product Using CUDA: Coeﬃcient</text>
+<text top="395" left="97" width="192" height="17" font="1">Arrays Storage Scheme</text>
+<text top="423" left="97" width="316" height="17" font="1">As mentioned earlier, calculation of y = Ax</text>
+<text top="430" left="413" width="7" height="13" font="2">k</text>
+<text top="423" left="427" width="170" height="17" font="1">is the stage which takes</text>
+<text top="441" left="97" width="500" height="17" font="1">the most signiﬁcant computation time during the iterative solution.</text>
+<text top="459" left="97" width="500" height="17" font="1">Kernel functions based on the algorithm presented in Section 3 are</text>
+<text top="477" left="97" width="500" height="17" font="1">developed to speed-up the calculations on GPU. Listing 1 shows a C</text>
+<text top="495" left="97" width="500" height="17" font="1">function that initializes and launches these kernel functions. Here the</text>
+<text top="513" left="97" width="500" height="17" font="1">arrays that reside on GPU global memory are indicated with a dv</text>
+<text top="531" left="97" width="499" height="17" font="1">preﬁx. The function cuda matvec basically calculates y for a given x.</text>
+<text top="549" left="97" width="500" height="17" font="1">Here, the pointers to the arrays that reside on GPU global memory</text>
+<text top="567" left="97" width="500" height="17" font="1">are indicated with a dv preﬁx. The pointers to coeﬃcient arrays are</text>
+<text top="585" left="97" width="500" height="17" font="1">indicated with a dvC preﬁx. The ﬁrst three kernels perform the ﬁrst</text>
+<text top="603" left="97" width="500" height="17" font="1">line of (16), whereas the following three kernels perform the second</text>
+<text top="621" left="97" width="500" height="17" font="1">and third lines of (16). In other terms, the ﬁrst three kernels perform</text>
+<text top="639" left="97" width="500" height="17" font="1">operations associated with (6)–(8), respectively, while the following</text>
+<text top="657" left="97" width="416" height="17" font="1">three kernels perform operations associated with (9)–(11).</text>
+<text top="674" left="130" width="467" height="17" font="1">Listing 2 shows the details of the second kernel, which is associated</text>
+<text top="692" left="97" width="500" height="17" font="1">with the operation in (7) based on the coeﬃcient arrays storage scheme,</text>
+<text top="710" left="97" width="500" height="17" font="1">where all three-dimensional coeﬃcient arrays are copied to the global</text>
+<text top="728" left="97" width="500" height="17" font="1">memory before the iterative solution is performed. Due to (16), the</text>
+<text top="746" left="97" width="272" height="17" font="1">required operation of (7) translates to</text>
+<text top="771" left="106" width="122" height="17" font="1">tmpy(i, j, k) = C</text>
+<text top="777" left="228" width="24" height="13" font="2">hyez</text>
+<text top="771" left="254" width="80" height="17" font="1">(i, j, k)(−E</text>
+<text top="777" left="333" width="31" height="13" font="2">scat,z</text>
+<text top="771" left="366" width="109" height="17" font="1">(i + 1, j, k) + E</text>
+<text top="777" left="475" width="31" height="13" font="2">scat,z</text>
+<text top="771" left="508" width="55" height="17" font="1">(i, j, k))</text>
+<text top="793" left="217" width="24" height="17" font="1">+C</text>
+<text top="800" left="241" width="25" height="13" font="2">hyex</text>
+<text top="793" left="267" width="67" height="17" font="1">(i, j, k)(E</text>
+<text top="799" left="335" width="33" height="13" font="2">scat,x</text>
+<text top="793" left="368" width="98" height="17" font="1">(i, j, k+1)−E</text>
+<text top="799" left="466" width="33" height="13" font="2">scat,x</text>
+<text top="793" left="499" width="97" height="17" font="1">(i, j, k)). (18)</text>
+<text top="818" left="130" width="467" height="17" font="1">In Listing 2, ﬁrst the index of the cell in an xy plane cut that maps</text>
+<text top="836" left="97" width="499" height="17" font="1">to the active thread is calculated and stored as ci. Then an index k</text>
+<text top="854" left="97" width="500" height="17" font="1">is used to iterate in a for loop. While k iterates in the z direction, an</text>
+<text top="872" left="97" width="500" height="17" font="1">index i traverses all the cells in the column of cell ci. As i proceeds,</text>
+<text top="890" left="97" width="500" height="17" font="1">the respective value of array tmpy[i] is calculated as required by (18).</text>
+</page>
+<page number="14" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">42</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="120" left="106" width="300" height="17" font="1">Listing 1. Launching kernels for y = Ax</text>
+<text top="127" left="406" width="7" height="13" font="2">k</text>
+<text top="120" left="414" width="5" height="17" font="1">.</text>
+<text top="163" left="106" width="298" height="14" font="0">void cuda matvec (double2 ∗ dvx, double2 ∗ dvy)</text>
+<text top="183" left="106" width="7" height="14" font="0">{</text>
+<text top="202" left="106" width="179" height="14" font="0">int number of threads = 256;</text>
+<text top="222" left="106" width="313" height="14" font="0">int number of blocks = nx ∗ ny/number of threads;</text>
+<text top="242" left="106" width="288" height="14" font="0">dim3 threads = dim3 (number of threads, 1, 1);</text>
+<text top="261" left="106" width="260" height="14" font="0">dim3 grid = dim3 (number of blocks, 1, 1);</text>
+<text top="281" left="106" width="305" height="14" font="0">cuda matvec tmpx kernel &lt;&lt;&lt; grid, threads &gt;&gt;&gt;</text>
+<text top="301" left="106" width="318" height="14" font="0">(dvx, dvy, dvtmpx, dvChxey, dvChxez, nx, ny, nz);</text>
+<text top="321" left="106" width="307" height="14" font="0">cuda matvec tmpy kernel &lt;&lt;&lt; grid, threads &gt;&gt;&gt;</text>
+<text top="340" left="106" width="316" height="14" font="0">(dvx, dvy, dvtmpy, dvChyex, dvChyez, nx, ny, nz);</text>
+<text top="360" left="106" width="306" height="14" font="0">cuda matvec tmpz kernel &lt;&lt;&lt; grid, threads &gt;&gt;&gt;</text>
+<text top="380" left="106" width="315" height="14" font="0">(dvx, dvy, dvtmpz, dvChzey, dvChzex, nx, ny, nz);</text>
+<text top="400" left="106" width="296" height="14" font="0">cuda matvec yex kernel &lt;&lt;&lt; grid, threads &gt;&gt;&gt;</text>
+<text top="419" left="106" width="427" height="14" font="0">(dvx, dvy, dvtmpx, dvtmpy, dvtmpz, dvCexhy, dvCexhz, nx, ny, nz);</text>
+<text top="439" left="106" width="294" height="14" font="0">cuda matvec yey kernel &lt;&lt;&lt; grid, threads &gt;&gt;&gt;</text>
+<text top="459" left="106" width="424" height="14" font="0">(dvx, dvy, dvtmpx, dvtmpy, dvtmpz, dvCeyhx, dvCeyhz, nx, ny, nz);</text>
+<text top="478" left="106" width="297" height="14" font="0">cuda matvec yez kernel &lt;&lt;&lt; grid, threads &gt;&gt;&gt;</text>
+<text top="498" left="106" width="422" height="14" font="0">(dvx, dvy, dvtmpx, dvtmpy, dvtmpz, dvCezhy, dvCezhx, nx, ny, nz);</text>
+<text top="518" left="108" width="7" height="14" font="0">}</text>
+<text top="554" left="130" width="220" height="17" font="1">In (18) one can notice that E</text>
+<text top="560" left="350" width="33" height="13" font="2">scat,x</text>
+<text top="554" left="383" width="101" height="17" font="1">(i, j, k) and E</text>
+<text top="560" left="484" width="33" height="13" font="2">scat,x</text>
+<text top="554" left="518" width="79" height="17" font="1">(i, j, k + 1)</text>
+<text top="572" left="97" width="500" height="17" font="1">are used together. Therefore, both values will be fetched from the</text>
+<text top="590" left="97" width="499" height="17" font="1">global memory during an iteration of k. At the next iteration of k,</text>
+<text top="608" left="97" width="177" height="17" font="1">the previous value of E</text>
+<text top="614" left="274" width="33" height="13" font="2">scat,x</text>
+<text top="608" left="310" width="287" height="17" font="1">(i, j, k + 1) becomes the new value of</text>
+<text top="626" left="97" width="12" height="17" font="1">E</text>
+<text top="632" left="109" width="33" height="13" font="2">scat,x</text>
+<text top="626" left="145" width="451" height="17" font="1">(i, j, k), and it is already available in the local memory, so there</text>
+<text top="644" left="97" width="500" height="17" font="1">is no need to fetch it again from the global memory. Thus, this iterative</text>
+<text top="661" left="97" width="500" height="17" font="1">procedure saves a global memory fetch and slightly improves the speed</text>
+<text top="679" left="97" width="135" height="17" font="1">of the calculations.</text>
+<text top="697" left="130" width="66" height="17" font="1">In (18) E</text>
+<text top="704" left="196" width="31" height="13" font="2">scat,z</text>
+<text top="697" left="233" width="363" height="17" font="1">is ﬁrst copied into shared memory that is indicated</text>
+<text top="715" left="97" width="202" height="17" font="1">with a pointer S. Here E</text>
+<text top="721" left="299" width="31" height="13" font="2">scat,z</text>
+<text top="715" left="335" width="110" height="17" font="1">(i, j, k) and E</text>
+<text top="721" left="444" width="31" height="13" font="2">scat,z</text>
+<text top="715" left="480" width="117" height="17" font="1">(i + 1, j, k) are</text>
+<text top="733" left="97" width="500" height="17" font="1">needed together. When the threads in a thread block fetch respective</text>
+<text top="751" left="97" width="106" height="17" font="1">elements of E</text>
+<text top="757" left="203" width="31" height="13" font="2">scat,z</text>
+<text top="751" left="238" width="358" height="17" font="1">(i, j, k) from global memory, the next element</text>
+<text top="769" left="97" width="12" height="17" font="1">E</text>
+<text top="775" left="109" width="31" height="13" font="2">scat,z</text>
+<text top="769" left="144" width="452" height="17" font="1">(i + 1, j, k) on the boundary of the thread block will not be</text>
+<text top="787" left="97" width="500" height="17" font="1">available to use yet. Therefore, another fetch, controlled by if (ti &lt; 16)</text>
+<text top="805" left="97" width="500" height="17" font="1">statement, from global memory is made and the data is copied into the</text>
+<text top="823" left="97" width="500" height="17" font="1">shared memory. Once all data are available on the shared memory, the</text>
+<text top="841" left="97" width="500" height="17" font="1">respective instructions afterwards are performed. Other kernels are</text>
+<text top="859" left="97" width="500" height="17" font="1">implemented similarly. This type of implementation is very similar to</text>
+<text top="877" left="97" width="219" height="17" font="1">that of FDTD discussed in [2].</text>
+</page>
+<page number="15" position="absolute" top="0" left="0" height="1020" width="681">
+	<fontspec id="5" size="6" family="Times" color="#000000"/>
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">43</text>
+<text top="120" left="106" width="275" height="17" font="1">Listing 2. Second kernel in Listing 1.</text>
+<text top="168" left="106" width="17" height="9" font="5">−−</text>
+<text top="163" left="124" width="36" height="14" font="0">global</text>
+<text top="168" left="160" width="17" height="9" font="5">−−</text>
+<text top="163" left="180" width="186" height="14" font="0">void cuda matvec tmpy kernel</text>
+<text top="183" left="106" width="438" height="14" font="0">(cuDoubleComplex ∗ x, cuDoubleComplex ∗ y, cuDoubleComplex ∗ tmpy,</text>
+<text top="202" left="106" width="462" height="14" font="0">cuDoubleComplex ∗ chyex, cuDoubleComplex ∗ chyez, int nx, int ny, int nz)</text>
+<text top="222" left="106" width="7" height="14" font="0">{</text>
+<text top="247" left="106" width="17" height="9" font="5">−−</text>
+<text top="242" left="124" width="39" height="14" font="0">shared</text>
+<text top="247" left="163" width="17" height="9" font="5">−−</text>
+<text top="242" left="184" width="187" height="14" font="0">cuDoubleComplex S[256 + 16];</text>
+<text top="261" left="106" width="426" height="14" font="0">int ti = threadIdx.x; int ci = blockIdx.x ∗ blockDim.x + threadIdx.x;</text>
+<text top="281" left="106" width="309" height="14" font="0">int i, k; int nxy = nx ∗ ny; int nxyz = nxy ∗ nz;</text>
+<text top="301" left="106" width="393" height="14" font="0">cuDoubleComplex ∗ ex = x; cuDoubleComplex ∗ ey = &amp;x[nxyz];</text>
+<text top="321" left="106" width="232" height="14" font="0">cuDoubleComplex ∗ ez = &amp;x[2 ∗ nxyz];</text>
+<text top="340" left="106" width="301" height="14" font="0">double2 a, b, c, exi, exi p; i = ci; exi = ex[i];</text>
+<text top="360" left="106" width="183" height="14" font="0">for (k = 0; k &lt; nz − 1; k + +)</text>
+<text top="380" left="106" width="7" height="14" font="0">{</text>
+<text top="400" left="106" width="209" height="14" font="0">exi p = ex[i + nxy]; S[ti] = ez[i];</text>
+<text top="419" left="106" width="70" height="14" font="0">if (ti &lt; 16)</text>
+<text top="439" left="106" width="7" height="14" font="0">{</text>
+<text top="459" left="106" width="247" height="14" font="0">S[ti + blockDim.x] = ez[i + blockDim.x];</text>
+<text top="478" left="108" width="7" height="14" font="0">}</text>
+<text top="503" left="106" width="17" height="9" font="5">−−</text>
+<text top="498" left="124" width="86" height="14" font="0">syncthreads();</text>
+<text top="518" left="106" width="56" height="14" font="0">a.x = exi</text>
+<text top="523" left="162" width="6" height="9" font="5">p</text>
+<text top="518" left="169" width="63" height="14" font="0">.x − exi.x;</text>
+<text top="518" left="273" width="56" height="14" font="0">a.y = exi</text>
+<text top="523" left="329" width="6" height="9" font="5">p</text>
+<text top="518" left="336" width="62" height="14" font="0">.y − exi.y;</text>
+<text top="538" left="106" width="326" height="14" font="0">b.x = S[ti].x − S[ti + 1].x; b.y = S[ti].y − S[ti + 1].y;</text>
+<text top="563" left="106" width="17" height="9" font="5">−−</text>
+<text top="557" left="124" width="86" height="14" font="0">syncthreads();</text>
+<text top="577" left="106" width="440" height="14" font="0">c.x = chyex[i].x ∗ a.x − chyex[i].y ∗ a.y +chyez[i].x ∗ b.x − chyez[i].y ∗ b.y;</text>
+<text top="597" left="106" width="439" height="14" font="0">c.y = chyex[i].x ∗ a.y + chyex[i].y ∗ a.x +chyez[i].x ∗ b.y + chyez[i].y ∗ b.x;</text>
+<text top="617" left="106" width="226" height="14" font="0">tmpy[i] = c; exi = exi p; i = i + nxy;</text>
+<text top="636" left="122" width="7" height="14" font="0">}</text>
+<text top="656" left="108" width="7" height="14" font="0">}</text>
+<text top="705" left="97" width="440" height="17" font="1">4.6. Matrix-vector Product Using CUDA: Coeﬃcient</text>
+<text top="723" left="97" width="194" height="17" font="1">Indices Storage Scheme</text>
+<text top="751" left="97" width="500" height="17" font="1">As discussed before, employing the coeﬃcient indices scheme reduces</text>
+<text top="769" left="97" width="500" height="17" font="1">the required memory on the global memory space of GPU; Instead of</text>
+<text top="787" left="97" width="500" height="17" font="1">storing the coeﬃcients, one can store the indices to coeﬃcient pairs on</text>
+<text top="805" left="97" width="500" height="17" font="1">the global memory. Moreover, unique coeﬃcient pairs as well need to</text>
+<text top="823" left="97" width="500" height="17" font="1">be copied to the GPU memory. The arrays that store each of the unique</text>
+<text top="841" left="97" width="500" height="17" font="1">coeﬃcient pairs are not suitable for coalesced memory access, thus it is</text>
+<text top="859" left="97" width="500" height="17" font="1">ineﬃcient to store them on the global memory. Instead, CUDA enabled</text>
+<text top="877" left="97" width="500" height="17" font="1">GPU devices provide two additional memory spaces, the texture and</text>
+</page>
+<page number="16" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">44</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="97" width="500" height="17" font="1">constant memory, which are cached to enable fast access to unordered</text>
+<text top="139" left="97" width="500" height="17" font="1">data. However, the sizes of these memory spaces are small. As long</text>
+<text top="157" left="97" width="500" height="17" font="1">as the unique coeﬃcient pair arrays can ﬁt in the limited size of these</text>
+<text top="175" left="97" width="478" height="17" font="1">memory spaces, the coeﬃcient indices storage scheme can be used.</text>
+<text top="193" left="130" width="467" height="17" font="1">The coeﬃcients used in this contribution are with double precision.</text>
+<text top="211" left="97" width="500" height="17" font="1">CUDA does not support double precision on the texture memory,</text>
+<text top="229" left="97" width="500" height="17" font="1">while it supports double precision on the constant memory. Therefore,</text>
+<text top="247" left="97" width="500" height="17" font="1">constant memory is used to store the coeﬃcient arrays. The presented</text>
+<text top="265" left="97" width="500" height="17" font="1">algorithm is implemented and executed on a Nvidia Tesla C1060 card</text>
+<text top="283" left="97" width="500" height="17" font="1">which holds 64 KB constant memory. Since each coeﬃcient pair needs</text>
+<text top="301" left="97" width="500" height="17" font="1">32 bytes, 2048 coeﬃcient pairs in total can be stored on the constant</text>
+<text top="319" left="97" width="61" height="17" font="1">memory.</text>
+<text top="354" left="106" width="469" height="17" font="1">Listing 3. Second kernel in Listing 1 based on coeﬃcient indices</text>
+<text top="375" left="106" width="112" height="17" font="1">storage scheme.</text>
+<text top="422" left="106" width="17" height="9" font="5">−−</text>
+<text top="417" left="124" width="36" height="14" font="0">global</text>
+<text top="422" left="160" width="17" height="9" font="5">−−</text>
+<text top="417" left="178" width="29" height="14" font="0">void</text>
+<text top="436" left="106" width="242" height="14" font="0">cuda matvec tmpy kernel with indexing</text>
+<text top="456" left="106" width="279" height="14" font="0">(cuDoubleComplex ∗ x, cuDoubleComplex ∗ y,</text>
+<text top="476" left="106" width="476" height="14" font="0">cuDoubleComplex ∗ tmpy, unsigned short ∗ chy ind, int nx, int ny, int nz)</text>
+<text top="496" left="106" width="7" height="14" font="0">{</text>
+<text top="501" left="119" width="17" height="9" font="5">−−</text>
+<text top="496" left="137" width="39" height="14" font="0">shared</text>
+<text top="501" left="177" width="17" height="9" font="5">−−</text>
+<text top="496" left="195" width="330" height="14" font="0">cuDoubleComplex S[TILE SIZE ∗ TILE SIZE + TILE</text>
+<text top="501" left="525" width="6" height="9" font="5">S</text>
+<text top="496" left="531" width="31" height="14" font="0">IZE];</text>
+<text top="515" left="106" width="440" height="14" font="0">int ti = threadIdx.x; int ci = blockIdx.x ∗ blockDim.x + threadIdx.x;</text>
+<text top="535" left="106" width="46" height="14" font="0">int i, k;</text>
+<text top="535" left="249" width="256" height="14" font="0">int nxy = nx ∗ ny; int nxyz = nxy ∗ nz;</text>
+<text top="555" left="106" width="190" height="14" font="0">cuDoubleComplex chyez, chyex;</text>
+<text top="555" left="363" width="175" height="14" font="0">unsigned short edge index;</text>
+<text top="575" left="106" width="167" height="14" font="0">cuDoubleComplex ∗ ex = x;</text>
+<text top="575" left="354" width="216" height="14" font="0">cuDoubleComplex ∗ ey = &amp;x[nxyz];</text>
+<text top="594" left="106" width="463" height="14" font="0">cuDoubleComplex ∗ ez = &amp;x[2 ∗ nxyz]; cuDoubleComplex a, b, c, tx, txp;</text>
+<text top="614" left="106" width="113" height="14" font="0">i = ci; tx = ex[i];</text>
+<text top="634" left="106" width="180" height="14" font="0">for (k = 0; k &lt; nz − 1; k + +)</text>
+<text top="653" left="106" width="211" height="14" font="0">{ txp = ex[i + nxy]; S[ti] = ez[i];</text>
+<text top="673" left="106" width="123" height="14" font="0">if (ti &lt; TILE SIZE)</text>
+<text top="693" left="106" width="274" height="14" font="0">{ S[ti + blockDim.x] = ez[i + blockDim.x]; }</text>
+<text top="718" left="106" width="17" height="9" font="5">−−</text>
+<text top="713" left="124" width="86" height="14" font="0">syncthreads();</text>
+<text top="732" left="106" width="99" height="14" font="0">edge index = chy</text>
+<text top="738" left="205" width="3" height="9" font="5">i</text>
+<text top="732" left="209" width="374" height="14" font="0">nd[i]; chyez = dvCh1[edge index]; chyex = dvCh2[edge index];</text>
+<text top="752" left="106" width="114" height="14" font="0">a.x = txp.x − tx.x;</text>
+<text top="752" left="282" width="112" height="14" font="0">a.y = txp.y − tx.y;</text>
+<text top="772" left="106" width="157" height="14" font="0">b.x = S[ti].x − S[ti + 1].x;</text>
+<text top="772" left="284" width="156" height="14" font="0">b.y = S[ti].y − S[ti + 1].y;</text>
+<text top="797" left="106" width="17" height="9" font="5">−−</text>
+<text top="791" left="124" width="86" height="14" font="0">syncthreads();</text>
+<text top="811" left="106" width="393" height="14" font="0">c.x = chyex.x ∗ a.x − chyex.y ∗ a.y +chyez.x ∗ b.x − chyez.y ∗ b.y;</text>
+<text top="831" left="106" width="390" height="14" font="0">c.y = chyex.x ∗ a.y + chyex.y ∗ a.x +chyez.x ∗ b.y + chyez.y ∗ b.x;</text>
+<text top="851" left="106" width="227" height="14" font="0">tmpy[i] = c; tx = txp; i = i + nxy;</text>
+<text top="870" left="108" width="20" height="14" font="0">} }</text>
+</page>
+<page number="17" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">45</text>
+<text top="121" left="130" width="467" height="17" font="1">Listing 3 shows the details of the second kernel in Listing 1, based</text>
+<text top="139" left="97" width="500" height="17" font="1">on the coeﬃcient indices storage scheme. Here chy ind is a coeﬃcient</text>
+<text top="157" left="97" width="500" height="17" font="1">indices array that reside on the global memory, while dvCh1 and dvCh2</text>
+<text top="175" left="97" width="500" height="17" font="1">are two coeﬃcient arrays, each holding one of the pairs, that reside on</text>
+<text top="193" left="97" width="155" height="17" font="1">the constant memory.</text>
+<text top="236" left="97" width="108" height="17" font="1">5. RESULTS</text>
+<text top="270" left="97" width="500" height="17" font="1">The performance of the presented algorithm is analyzed through two</text>
+<text top="288" left="97" width="500" height="17" font="1">examples in this section. The solution times on GPU and CPU are</text>
+<text top="306" left="97" width="446" height="17" font="1">compared. The following codes are considered in the analyses:</text>
+<text top="324" left="130" width="467" height="17" font="1">CPU: A BLAS version of BICGSTAB developed by Fokkema is</text>
+<text top="342" left="97" width="500" height="17" font="1">obtained from [24]. This code is in FORTRAN. Single-threaded version</text>
+<text top="360" left="97" width="500" height="17" font="1">of Intel Math Kernel Library (Intel MKL) is used to execute the</text>
+<text top="378" left="97" width="500" height="17" font="1">BLAS routines. The function that performs the matrix-vector product</text>
+<text top="395" left="97" width="500" height="17" font="1">(matvec) is implemented in FORTRAN as presented in [14]. The code</text>
+<text top="413" left="97" width="330" height="17" font="1">is run on an Intel Xeon E5405 CPU at 2 GHz.</text>
+<text top="431" left="130" width="467" height="17" font="1">GPU: The codes of the presented algorithm based on the</text>
+<text top="449" left="97" width="500" height="17" font="1">coeﬃcient arrays and coeﬃcient indices storage schemes are run on an</text>
+<text top="467" left="97" width="500" height="17" font="1">Nvidia Tesla C1060 computation card at 1.3 GHz. The abbreviations</text>
+<text top="485" left="97" width="500" height="17" font="1">CAS and CIS denote the coeﬃcient arrays and coeﬃcient indices</text>
+<text top="503" left="97" width="415" height="17" font="1">storage schemes, respectively, in the following discussions.</text>
+<text top="544" left="97" width="330" height="17" font="1">5.1. Scattering from a Dielectric Sphere</text>
+<text top="572" left="97" width="500" height="17" font="1">First, scattering from a dielectric sphere is calculated. The sphere</text>
+<text top="590" left="97" width="500" height="17" font="1">has 7.2 cm radius and dielectric constant of 4. The incident ﬁeld is</text>
+<text top="608" left="97" width="500" height="17" font="1">an x polarized plane wave at 1 GHz traveling in +z direction. The</text>
+<text top="626" left="97" width="500" height="17" font="1">cubic computational domain is 32 cm on a side. FDFD calculations are</text>
+<text top="644" left="97" width="500" height="17" font="1">performed, both on CPU and GPU, each time with a diﬀerent cell size,</text>
+<text top="662" left="97" width="500" height="17" font="1">thus with a diﬀerent number of cells. The results are shown in Table 1.</text>
+<text top="680" left="97" width="500" height="17" font="1">It can be seen that as problem size gets bigger, the eﬃciency of the</text>
+<text top="698" left="97" width="500" height="17" font="1">CUDA program increases. It is possible to solve FDFD on a GPU 20</text>
+<text top="716" left="97" width="500" height="17" font="1">times faster than on a CPU. Moreover, the coeﬃcient indices storage</text>
+<text top="734" left="97" width="500" height="17" font="1">scheme is slightly faster than the coeﬃcient arrays storage scheme.</text>
+<text top="752" left="97" width="500" height="17" font="1">Fig. 2 shows bistatic radar cross-section (RCS) of the sphere calculated</text>
+<text top="770" left="97" width="500" height="17" font="1">by CUDA FDFD and compared with an analytical solution obtained</text>
+<text top="788" left="97" width="297" height="17" font="1">from a Matlab program presented in [26].</text>
+<text top="828" left="97" width="298" height="17" font="1">5.2. Scattering from a Human Head</text>
+<text top="857" left="97" width="500" height="17" font="1">As a second example, calculation of scattered ﬁelds from a human head</text>
+<text top="875" left="97" width="500" height="17" font="1">is presented here. First, an updated, dedicated MRI head phantom</text>
+</page>
+<page number="18" position="absolute" top="0" left="0" height="1020" width="681">
+	<fontspec id="6" size="6" family="Times" color="#231f20"/>
+	<fontspec id="7" size="7" family="Times" color="#231f20"/>
+	<fontspec id="8" size="7" family="Times" color="#231f20"/>
+	<fontspec id="9" size="5" family="Times" color="#231f20"/>
+	<fontspec id="10" size="5" family="Times" color="#231f20"/>
+<text top="82" left="97" width="16" height="14" font="0">46</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="122" left="97" width="220" height="17" font="1">Table 1. Results for a sphere.</text>
+<text top="164" left="122" width="46" height="14" font="0">cell size</text>
+<text top="184" left="128" width="34" height="14" font="0">(mm)</text>
+<text top="154" left="218" width="28" height="14" font="0">total</text>
+<text top="174" left="209" width="46" height="14" font="0">number</text>
+<text top="194" left="212" width="41" height="14" font="0">of cells</text>
+<text top="154" left="302" width="46" height="14" font="0">time on</text>
+<text top="174" left="310" width="30" height="14" font="0">CPU</text>
+<text top="194" left="297" width="56" height="14" font="0">(seconds)</text>
+<text top="154" left="403" width="46" height="14" font="0">time on</text>
+<text top="174" left="389" width="74" height="14" font="0">GPU (CAS)</text>
+<text top="194" left="398" width="56" height="14" font="0">(seconds)</text>
+<text top="154" left="510" width="46" height="14" font="0">time on</text>
+<text top="174" left="499" width="69" height="14" font="0">GPU (CIS)</text>
+<text top="194" left="505" width="56" height="14" font="0">(seconds)</text>
+<text top="214" left="141" width="7" height="14" font="0">5</text>
+<text top="214" left="195" width="75" height="14" font="0">64 × 64 × 64</text>
+<text top="214" left="315" width="21" height="14" font="0">337</text>
+<text top="214" left="419" width="14" height="14" font="0">22</text>
+<text top="214" left="526" width="14" height="14" font="0">21</text>
+<text top="234" left="141" width="7" height="14" font="0">4</text>
+<text top="234" left="195" width="75" height="14" font="0">80 × 80 × 80</text>
+<text top="234" left="315" width="21" height="14" font="0">851</text>
+<text top="234" left="419" width="14" height="14" font="0">49</text>
+<text top="234" left="526" width="14" height="14" font="0">42</text>
+<text top="255" left="129" width="31" height="14" font="0">3.333</text>
+<text top="255" left="195" width="75" height="14" font="0">96 × 96 × 96</text>
+<text top="255" left="311" width="28" height="14" font="0">1901</text>
+<text top="255" left="415" width="21" height="14" font="0">115</text>
+<text top="255" left="526" width="14" height="14" font="0">99</text>
+<text top="499" left="244" width="5" height="8" font="6">0</text>
+<text top="499" left="267" width="9" height="8" font="6">20</text>
+<text top="499" left="293" width="9" height="8" font="6">40</text>
+<text top="499" left="318" width="9" height="8" font="6">60</text>
+<text top="499" left="344" width="9" height="8" font="6">80</text>
+<text top="499" left="367" width="14" height="8" font="6">100</text>
+<text top="499" left="393" width="14" height="8" font="6">120</text>
+<text top="499" left="418" width="14" height="8" font="6">140</text>
+<text top="499" left="444" width="14" height="8" font="6">160</text>
+<text top="499" left="469" width="14" height="8" font="6">180</text>
+<text top="492" left="230" width="12" height="8" font="6"> 25</text>
+<text top="447" left="230" width="12" height="8" font="6"> 20</text>
+<text top="401" left="230" width="12" height="8" font="6"> 15</text>
+<text top="356" left="230" width="12" height="8" font="6"> 10</text>
+<text top="310" left="234" width="7" height="8" font="6"> 5</text>
+<text top="509" left="337" width="5" height="7" font="7">θ</text>
+<text top="508" left="342" width="44" height="10" font="7"> [degrees]</text>
+<text top="415" left="219" width="0" height="7" font="8">σ</text>
+<text top="410" left="224" width="0" height="6" font="9">θθ</text>
+<text top="400" left="219" width="0" height="10" font="8"> [dB]</text>
+<text top="493" left="245" width="2" height="7" font="10"> </text>
+<text top="311" left="476" width="2" height="7" font="10"> </text>
+<text top="320" left="404" width="67" height="8" font="6">analytical solution</text>
+<text top="330" left="404" width="55" height="8" font="6">FDFD on GPU</text>
+<text top="356" left="227" width="5" height="6" font="6">−</text>
+<text top="310" left="231" width="5" height="6" font="6">−</text>
+<text top="401" left="228" width="5" height="6" font="6">−</text>
+<text top="446" left="227" width="5" height="6" font="6">−</text>
+<text top="492" left="226" width="5" height="6" font="6">−</text>
+<text top="538" left="97" width="500" height="17" font="1">Figure 2. Bistatic radar cross-section of a sphere with 7.2 cm radius</text>
+<text top="555" left="97" width="500" height="17" font="1">and dielectric constant of 4 at 1 GHz. Cell size is 4 mm on a side.</text>
+<text top="573" left="97" width="275" height="17" font="1">Domain size is N = 80 × 80 × 80 cells.</text>
+<text top="620" left="97" width="500" height="17" font="1">made available by techniques described in [27] is downloaded from [28],</text>
+<text top="638" left="97" width="500" height="17" font="1">which is 256 × 256 × 128 cells in size. This anatomical model data</text>
+<text top="655" left="97" width="499" height="17" font="1">is decimated by half in each direction and a 128 × 128 × 64 cells</text>
+<text top="673" left="97" width="139" height="17" font="1">model is obtained.</text>
+<text top="673" left="256" width="341" height="17" font="1">A cross-section view of the head that shows</text>
+<text top="691" left="97" width="500" height="17" font="1">tissue distribution is shown in Fig. 3. In this model the cell size</text>
+<text top="709" left="97" width="500" height="17" font="1">is 2.2 mm × 2.2 mm × 2.8 mm, where each cell is ﬁlled with a tissue</text>
+<text top="727" left="97" width="500" height="17" font="1">material. Then, permittivity and conductivity values of these tissues</text>
+<text top="745" left="97" width="500" height="17" font="1">are obtained from [29]. This head model is placed in an FDFD problem</text>
+<text top="763" left="97" width="500" height="17" font="1">space with size 160 × 160 × 93, and FDFD calculations are performed</text>
+<text top="781" left="97" width="500" height="17" font="1">to calculate scattered electric ﬁelds due to an incident plane wave with</text>
+<text top="799" left="97" width="500" height="17" font="1">z polarization at 900 MHz that hits the head on its side. Fig. 4 shows</text>
+<text top="817" left="97" width="469" height="17" font="1">the z component of scattered electric ﬁeld on an xy cross-section.</text>
+<text top="835" left="130" width="467" height="17" font="1">Table 2 shows solution times for this case. Solution of FDFD is</text>
+<text top="853" left="97" width="500" height="17" font="1">achieved about 28 times faster on a GPU compared with that on a</text>
+<text top="871" left="97" width="500" height="17" font="1">CPU. One can notice that, as problem size gets larger, solution speed-</text>
+<text top="889" left="97" width="218" height="17" font="1">up factor gets higher on GPU.</text>
+</page>
+<page number="19" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">47</text>
+<text top="295" left="97" width="240" height="17" font="1">Figure 3. An xy cross-section</text>
+<text top="313" left="97" width="240" height="17" font="1">view of an anatomical head model</text>
+<text top="331" left="97" width="187" height="17" font="1">used in FDFD simulation.</text>
+<text top="295" left="357" width="82" height="17" font="1">Figure 4.</text>
+<text top="295" left="467" width="130" height="17" font="1">Scattered electric</text>
+<text top="313" left="357" width="60" height="17" font="1">ﬁeld (E</text>
+<text top="319" left="418" width="31" height="13" font="2">scat,z</text>
+<text top="313" left="450" width="147" height="17" font="1">) distribution from</text>
+<text top="331" left="357" width="240" height="17" font="1">a human head on an xy cross-</text>
+<text top="349" left="357" width="54" height="17" font="1">section.</text>
+<text top="382" left="97" width="262" height="17" font="1">Table 2. Results for a human head.</text>
+<text top="421" left="125" width="93" height="17" font="1">total number</text>
+<text top="443" left="148" width="49" height="17" font="1">of cells</text>
+<text top="410" left="262" width="55" height="17" font="1">time on</text>
+<text top="432" left="271" width="36" height="17" font="1">GPU</text>
+<text top="453" left="254" width="69" height="17" font="1">(minutes)</text>
+<text top="410" left="376" width="55" height="17" font="1">time on</text>
+<text top="432" left="359" width="88" height="17" font="1">GPU (CAS)</text>
+<text top="453" left="368" width="69" height="17" font="1">(minutes)</text>
+<text top="410" left="495" width="55" height="17" font="1">time on</text>
+<text top="432" left="482" width="80" height="17" font="1">CPU (CIS)</text>
+<text top="453" left="488" width="69" height="17" font="1">(minutes)</text>
+<text top="476" left="119" width="105" height="17" font="1">160 × 160 × 93</text>
+<text top="476" left="277" width="25" height="17" font="1">130</text>
+<text top="476" left="392" width="21" height="17" font="1">5.4</text>
+<text top="476" left="512" width="21" height="17" font="1">4.6</text>
+<text top="527" left="97" width="225" height="17" font="1">5.3. Use of Preconditioners</text>
+<text top="556" left="97" width="500" height="17" font="1">It is widely recognized that preconditioning is the most critical</text>
+<text top="574" left="97" width="500" height="17" font="1">ingredient in the development of eﬃcient solvers for challenging</text>
+<text top="592" left="97" width="500" height="17" font="1">problems in scientiﬁc computation, and that the importance of</text>
+<text top="610" left="97" width="500" height="17" font="1">preconditioning is destined to increase even further [23]. A well-chosen</text>
+<text top="628" left="97" width="500" height="17" font="1">preconditioner can signiﬁcantly improve the eﬃciency of an iterative</text>
+<text top="646" left="97" width="500" height="17" font="1">solver. The current contribution addresses the GPU acceleration of</text>
+<text top="664" left="97" width="395" height="17" font="1">FDFD, where the BICGSTAB algorithm is utilized.</text>
+<text top="664" left="512" width="85" height="17" font="1">One should</text>
+<text top="682" left="97" width="500" height="17" font="1">consider ﬁnding and using an eﬃcient preconditioner as well to further</text>
+<text top="699" left="97" width="482" height="17" font="1">accelerate the computations both on the CPU and GPU platforms.</text>
+<text top="717" left="130" width="467" height="17" font="1">Analyses of simple preconditioners, such as Jacobi, ILU(0), and</text>
+<text top="735" left="97" width="500" height="17" font="1">SSOR [18], are performed to evaluate their eﬀectiveness to improve</text>
+<text top="753" left="97" width="142" height="17" font="1">the solution speed.</text>
+<text top="753" left="258" width="339" height="17" font="1">First, Jacobi and ILU(0) preconditioners are</text>
+<text top="771" left="97" width="79" height="17" font="1">considered.</text>
+<text top="771" left="195" width="401" height="17" font="1">It has been found that these preconditioners do not</text>
+<text top="789" left="97" width="161" height="17" font="1">improve the solution.</text>
+<text top="789" left="279" width="318" height="17" font="1">Moreover, sometimes they yield divergent</text>
+<text top="807" left="97" width="500" height="17" font="1">solutions. The SSOR preconditioner is found to improve convergence</text>
+<text top="825" left="97" width="500" height="17" font="1">rate signiﬁcantly, i.e., convergence is achieved with a much less number</text>
+<text top="843" left="97" width="500" height="17" font="1">of iterations, however, the overhead introduced by the application of</text>
+<text top="861" left="97" width="500" height="17" font="1">the preconditioner adversely aﬀects the solution speed, and the overall</text>
+<text top="879" left="97" width="378" height="17" font="1">solution time becomes more with the preconditioner.</text>
+</page>
+<page number="20" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">48</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="130" width="467" height="17" font="1">These preconditioner analyses are performed on a CPU platform.</text>
+<text top="139" left="97" width="500" height="17" font="1">It should be noted that an eﬀective implementation of a preconditioner</text>
+<text top="157" left="97" width="500" height="17" font="1">is more diﬃcult on a GPU platform. Most preconditioners are based</text>
+<text top="175" left="97" width="500" height="17" font="1">on LU decomposition and forward and backward solutions of resulting</text>
+<text top="193" left="97" width="500" height="17" font="1">triangular matrix equations. In the standard forward and backward</text>
+<text top="211" left="97" width="500" height="17" font="1">substitution algorithms for solving triangular systems, the outer</text>
+<text top="229" left="97" width="500" height="17" font="1">loop of the substitution for each unknown is sequential. Therefore,</text>
+<text top="247" left="97" width="438" height="17" font="1">these algorithms are not suitable for parallel processing.</text>
+<text top="247" left="558" width="38" height="17" font="1">Some</text>
+<text top="265" left="97" width="500" height="17" font="1">other methods, such as level scheduling, which exploits topological</text>
+<text top="283" left="97" width="430" height="17" font="1">sorting [18], need to be employed for better parallelism [31].</text>
+<text top="325" left="97" width="151" height="17" font="1">6. CONCLUSION</text>
+<text top="360" left="97" width="500" height="17" font="1">A CUDA implementation of FDFD method is presented in this</text>
+<text top="378" left="97" width="500" height="17" font="1">contribution to speed-up the solution of electromagnetics problems.</text>
+<text top="395" left="97" width="449" height="17" font="1">The presented algorithm uses BICGSTAB iterative solver.</text>
+<text top="395" left="568" width="28" height="17" font="1">The</text>
+<text top="413" left="97" width="500" height="17" font="1">BICGSTAB solver is ported to run on a GPU using CUDA. Then,</text>
+<text top="431" left="97" width="500" height="17" font="1">integrated with BICGSTAB, an eﬃcient method of performing matrix-</text>
+<text top="449" left="97" width="500" height="17" font="1">vector products for the linear system of FDFD equations is adapted</text>
+<text top="467" left="97" width="500" height="17" font="1">from [14] and implemented in CUDA based on two coeﬃcient schemes</text>
+<text top="485" left="97" width="500" height="17" font="1">to further improve the speed of calculations. It has been shown that,</text>
+<text top="503" left="97" width="500" height="17" font="1">with the presented algorithm, FDFD can be solved more than 20 times</text>
+<text top="521" left="97" width="238" height="17" font="1">faster on a GPU than on a CPU.</text>
+<text top="564" left="97" width="128" height="17" font="1">REFERENCES</text>
+<text top="598" left="104" width="492" height="17" font="1">1. Sypek, P., A. Dziekonski, and M. Mrozowski, “How to render</text>
+<text top="616" left="130" width="467" height="17" font="1">FDTD computations more eﬀective using a graphics accelerator,”</text>
+<text top="634" left="130" width="467" height="17" font="1">IEEE Transactions on Magnetics, Vol. 45, No. 3, 1324–1327, 2009.</text>
+<text top="655" left="104" width="492" height="17" font="1">2. Demir, V. and A. Z. Elsherbeni, “Compute uniﬁed device archi-</text>
+<text top="672" left="130" width="467" height="17" font="1">tecture (CUDA) based ﬁnite-diﬀerence time-domain (FDTD) im-</text>
+<text top="690" left="130" width="467" height="17" font="1">plementation,” Journal of the Applied Computational Electromag-</text>
+<text top="708" left="130" width="426" height="17" font="1">netics Society (ACES), Vol. 25, No. 4, 303–314, April 2010.</text>
+<text top="729" left="104" width="492" height="17" font="1">3. Ong, C. Y., M. Weldon, S. Quiring, L. Maxwell, M. C. Hughes,</text>
+<text top="747" left="130" width="467" height="17" font="1">C. Whelan, and M. Okoniewski, “Speed it up,” IEEE Microwave</text>
+<text top="765" left="130" width="317" height="17" font="1">Magazine, Vol. 11, No. 2, 70–78, April 2010.</text>
+<text top="786" left="104" width="492" height="17" font="1">4. De Donno, D., A. Esposito, L. Tarricone, and L. Catarinucci,</text>
+<text top="804" left="130" width="467" height="17" font="1">“Introduction to GPU computing and CUDA programming:</text>
+<text top="822" left="130" width="467" height="17" font="1">A case study on FDTD,” IEEE Antennas and Propagation</text>
+<text top="840" left="130" width="467" height="17" font="1">Magazine, EM Programmer’s Notebook, Vol. 52, No. 3, 116–122,</text>
+<text top="858" left="130" width="77" height="17" font="1">June 2010.</text>
+</page>
+<page number="21" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">49</text>
+<text top="121" left="104" width="492" height="17" font="1">5. G¨odel, N., N. Nunn, T. Warburton, and T. Clemens, “Scalability</text>
+<text top="139" left="130" width="467" height="17" font="1">of higher-order discontinuous galerkin FEM computations for</text>
+<text top="157" left="130" width="467" height="17" font="1">solving electromagnetic wave propagation problems on GPU</text>
+<text top="175" left="130" width="467" height="17" font="1">clusters,” IEEE Transactions on Magnetics, Vol. 46, No. 8,</text>
+<text top="193" left="130" width="94" height="17" font="1">August 2010.</text>
+<text top="214" left="104" width="492" height="17" font="1">6. De Donno, D., A. Esposito, G. Monti, and L. Tarricone, “GPU-</text>
+<text top="232" left="130" width="467" height="17" font="1">based acceleration of the MPIE/MoM matrix calculation for</text>
+<text top="250" left="130" width="467" height="17" font="1">the analysis of microstrip circuits,” Proceedings of the European</text>
+<text top="268" left="130" width="467" height="17" font="1">Conference on Antennas and Propagation (EuCAP 2011), Rome,</text>
+<text top="286" left="130" width="122" height="17" font="1">Italy, April 2011.</text>
+<text top="307" left="104" width="492" height="17" font="1">7. Al Sharkawy, M. H., V. Demir, and A. Z. Elsherbeni, Electro-</text>
+<text top="325" left="130" width="467" height="17" font="1">magnetic Scattering Using the Iterative Multi-Region Technique</text>
+<text top="343" left="130" width="467" height="17" font="1">(Synthesis Lectures on Computational Electromagnetics), Morgan</text>
+<text top="361" left="130" width="300" height="17" font="1">and Claypool Publishers, November 2007.</text>
+<text top="381" left="104" width="492" height="17" font="1">8. Al Sharkawy, M. H., V. Demir, and A. Z. Elsherbeni, “The</text>
+<text top="399" left="130" width="467" height="17" font="1">iterative multi-region algorithm using a hybrid ﬁnite diﬀerence</text>
+<text top="417" left="130" width="467" height="17" font="1">frequency domain and method of moments techniques,” Progress</text>
+<text top="435" left="130" width="368" height="17" font="1">In Electromagnetics Research, Vol. 57, 19–32, 2006.</text>
+<text top="456" left="104" width="492" height="17" font="1">9. Al Sharkawy, M. H., V. Demir, and A. Z. Elsherbeni, “Plane</text>
+<text top="474" left="130" width="467" height="17" font="1">wave scattering from three dimensional multiple objects using the</text>
+<text top="492" left="130" width="467" height="17" font="1">Iterative Multi-Region technique based on the FDFD method,”</text>
+<text top="510" left="130" width="467" height="17" font="1">IEEE Transactions on Antennas and Propagation, Vol. 54, No. 2,</text>
+<text top="528" left="130" width="174" height="17" font="1">666–673, February 2006.</text>
+<text top="549" left="97" width="500" height="17" font="1">10. Kuzu, L., V. Demir, A. Z. Elsherbeni, and E. Arvas,</text>
+<text top="567" left="130" width="467" height="17" font="1">“Electromagnetic scattering from arbitrarily shaped chiral objects</text>
+<text top="585" left="130" width="467" height="17" font="1">using the ﬁnite diﬀerence frequency domain method,” Progress In</text>
+<text top="603" left="130" width="338" height="17" font="1">Electromagnetics Research, Vol. 67, 1–24, 2007.</text>
+<text top="624" left="97" width="500" height="17" font="1">11. Alkan, E., V. Demir, A. Z. Elsherbeni, and E. Arvas, “Double-</text>
+<text top="642" left="130" width="467" height="17" font="1">grid ﬁnite-diﬀerence frequency-domain method for modeling chiral</text>
+<text top="659" left="130" width="467" height="17" font="1">medium,” IEEE Transactions on Antennas and Propagation,</text>
+<text top="677" left="130" width="264" height="17" font="1">Vol. 58, No. 3, 817–823, March 2010.</text>
+<text top="698" left="97" width="500" height="17" font="1">12. Zainud-Deen, S. H., E. El-Deen, M. S. Ibrahim, K. H. Awadalla,</text>
+<text top="716" left="130" width="467" height="17" font="1">and A. Z. Botros, “Electromagnetic scattering using GPU-</text>
+<text top="734" left="130" width="467" height="17" font="1">based ﬁnite diﬀerence frequency domain method,” Progress In</text>
+<text top="752" left="130" width="380" height="17" font="1">Electromagnetics Research B, Vol. 16, 351–369, 2009.</text>
+<text top="773" left="97" width="500" height="17" font="1">13. De Donno, D., A. Esposito, G. Monti, and L. Tarricone,</text>
+<text top="791" left="130" width="467" height="17" font="1">“Iterative solution of linear systems in electromagnetics (and</text>
+<text top="809" left="130" width="76" height="17" font="1">not only):</text>
+<text top="809" left="225" width="371" height="17" font="1">Experiences with CUDA,” UnConventional High</text>
+<text top="827" left="130" width="467" height="17" font="1">Performance Computing, Lecture Notes in Computer Science</text>
+<text top="845" left="130" width="251" height="17" font="1">(LNCS), Vol. 6586, Springer, 2011.</text>
+<text top="866" left="97" width="500" height="17" font="1">14. Demir, V., E. Alkan, A. Z. Elsherbeni, and E. Arvas, “An</text>
+<text top="884" left="130" width="467" height="17" font="1">algorithm for eﬃcient solution of ﬁnite-diﬀerence frequency-</text>
+</page>
+<page number="22" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="16" height="14" font="0">50</text>
+<text top="82" left="553" width="44" height="14" font="0">Demir</text>
+<text top="121" left="130" width="467" height="17" font="1">domain (FDFD) methods,” IEEE Antennas and Propagation</text>
+<text top="139" left="130" width="367" height="17" font="1">Magazine, Vol. 61, No. 6, 143–150, December 2009.</text>
+<text top="160" left="97" width="500" height="17" font="1">15. Kunz, K. S. and R. J. Luebbers, The Finite Diﬀerence Time</text>
+<text top="178" left="130" width="398" height="17" font="1">Domain Method for Electromagnetics, CRC Press, 1993</text>
+<text top="199" left="97" width="500" height="17" font="1">16. Berenger, J. P., “A perfectly matched layer for the absorption</text>
+<text top="217" left="130" width="467" height="17" font="1">of electromagnetic waves,” Journal of Computational Physics,</text>
+<text top="235" left="130" width="285" height="17" font="1">Vol. 114, No. 2, 185–200, October 1994.</text>
+<text top="256" left="97" width="500" height="17" font="1">17. Yee, K. S., “Numerical solution of initial boundary value</text>
+<text top="274" left="130" width="467" height="17" font="1">problems involving Maxwell’s equations in isotropic media,” IEEE</text>
+<text top="292" left="130" width="467" height="17" font="1">Transactions on Antennas and Propagation, Vol. 14, 302–307,</text>
+<text top="310" left="130" width="74" height="17" font="1">May 1966.</text>
+<text top="331" left="97" width="500" height="17" font="1">18. Saad, Y., Iterative Methods for Sparse Linear Systems, Society for</text>
+<text top="349" left="130" width="467" height="17" font="1">Industrial and Applied Mathematics (SIAM), Philadelphia, PA,</text>
+<text top="367" left="130" width="81" height="17" font="1">USA, 2003.</text>
+<text top="387" left="97" width="500" height="17" font="1">19. Barrett, R., M. Berry, T. F. Chan, J. Demmel, J. Donato,</text>
+<text top="405" left="130" width="467" height="17" font="1">J. Dongarra, V. Eijkhout, R. Pozo, C. Romine, and H. Van der</text>
+<text top="423" left="130" width="467" height="17" font="1">Vorst, Templates for the Solution of Linear Systems: Building</text>
+<text top="441" left="130" width="467" height="17" font="1">Blocks for Iterative Methods, 2nd Edition, Society for Industrial</text>
+<text top="459" left="130" width="467" height="17" font="1">and Applied Mathematics (SIAM), Philadelphia, PA, USA, 1994.</text>
+<text top="480" left="97" width="500" height="17" font="1">20. Saad, Y. and M. H. Schultz, “GMRES: A generalized minimal</text>
+<text top="498" left="130" width="467" height="17" font="1">residual algorithm for solving nonsymmetric linear systems,”</text>
+<text top="516" left="130" width="467" height="17" font="1">SIAM Journal on Scientiﬁc and Statistical Computing, Vol. 7,</text>
+<text top="534" left="130" width="189" height="17" font="1">No. 3, 856–869, July 1986.</text>
+<text top="555" left="97" width="500" height="17" font="1">21. Van der Vorst, H. A., “BI-CGSTAB: A fast and smoothly</text>
+<text top="573" left="130" width="467" height="17" font="1">converging variant of BI-CG for the solution of nonsymmetric</text>
+<text top="591" left="130" width="467" height="17" font="1">linear systems,” SIAM Journal on Scientiﬁc and Statistical</text>
+<text top="609" left="130" width="352" height="17" font="1">Computing, Vol. 13, No. 2, 631–644, March 1992.</text>
+<text top="630" left="97" width="500" height="17" font="1">22. Sleijpen, G. L. G. and D. R. Fokkema, “BICGSTAB(l) for</text>
+<text top="647" left="130" width="467" height="17" font="1">linear equations involving unsymmetric matrices with complex</text>
+<text top="665" left="130" width="467" height="17" font="1">spectrum,” Electronic Transactions on Numerical Analysis, Vol. 1,</text>
+<text top="683" left="130" width="88" height="17" font="1">11–32, 1993.</text>
+<text top="704" left="97" width="500" height="17" font="1">23. CUDA 2.1 Programming Guide, http://www.nvidia.com/object/-</text>
+<text top="722" left="130" width="135" height="17" font="1">cuda develop.html.</text>
+<text top="743" left="97" width="441" height="17" font="1">24. http://www.staﬀ.science.uu.nl/∼vorst102/software.html.</text>
+<text top="764" left="97" width="500" height="17" font="1">25. Blackford, L. S., J. Demmel, J. Dongarra, I. Duﬀ, S. Hammarling,</text>
+<text top="782" left="130" width="467" height="17" font="1">G. Henry, M. Heroux, L. Kaufman, A. Lumsdaine, A. Petitet,</text>
+<text top="800" left="130" width="467" height="17" font="1">R. Pozo, K. Remington, and R. C. Whaley, “An updated set of</text>
+<text top="818" left="130" width="467" height="17" font="1">basic linear algebra subprograms (BLAS),” ACM Trans. Math.</text>
+<text top="836" left="130" width="256" height="17" font="1">Soft., Vol. 28, No. 2, 135–151, 2002.</text>
+<text top="857" left="97" width="500" height="17" font="1">26. Demir, V., A. Z. Elsherbeni, D. Worasawate, and E. Arvas, “A</text>
+<text top="875" left="130" width="467" height="17" font="1">graphical user interface (GUI) for plane wave scattering from a</text>
+</page>
+<page number="23" position="absolute" top="0" left="0" height="1020" width="681">
+<text top="82" left="97" width="392" height="14" font="0">Progress In Electromagnetics Research M, Vol. 23, 2012</text>
+<text top="82" left="580" width="16" height="14" font="0">51</text>
+<text top="121" left="130" width="467" height="17" font="1">conducting, dielectric or a chiral sphere,” IEEE Antennas and</text>
+<text top="139" left="130" width="429" height="17" font="1">Propagation Magazine, Vol. 46, No. 5, 94–99, October 2004.</text>
+<text top="160" left="97" width="500" height="17" font="1">27. Zubal, I. G., C. R. Harrell, E. O. Smith, Z. Rattner, G. R. Gindi,</text>
+<text top="178" left="130" width="467" height="17" font="1">and P. B. Hoﬀer, “Computerized three-dimensional segmented</text>
+<text top="196" left="130" width="467" height="17" font="1">human anatomy,” Medical Physics, Vol. 21, No. 2, 299–302,</text>
+<text top="214" left="130" width="107" height="17" font="1">February 1994.</text>
+<text top="235" left="97" width="497" height="17" font="1">28. The Zubal Phantom, http://noodle.med.yale.edu/zubal/index.h-</text>
+<text top="253" left="130" width="25" height="17" font="1">tm.</text>
+<text top="274" left="97" width="500" height="17" font="1">29. “An internet resource for the calculation of the dielectric</text>
+<text top="292" left="130" width="467" height="17" font="1">properties of body tissues in the frequency range 10 Hz–100 GHz,”</text>
+<text top="310" left="130" width="290" height="17" font="1">2011, http://niremf.ifac.cnr.it/tissprop/.</text>
+<text top="331" left="97" width="500" height="17" font="1">30. Benzi, M., “Preconditioning techniques for large linear systems:</text>
+<text top="349" left="130" width="467" height="17" font="1">A survey,” Journal of Computational Physics, Vol. 182, No. 2,</text>
+<text top="367" left="130" width="182" height="17" font="1">418–477, November 2002.</text>
+<text top="387" left="97" width="500" height="17" font="1">31. Li, R. and Y. Saad, “GPU-accelerated preconditioned iterative</text>
+<text top="405" left="130" width="467" height="17" font="1">linear solvers,” CUDA ITSOL Technical Report, available at</text>
+<text top="423" left="130" width="304" height="17" font="1">http://www-users.cs.umn.edu/∼rli/, 2011.</text>
+</page>
+</pdf2xml>

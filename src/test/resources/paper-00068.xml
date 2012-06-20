@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="15" family="Times" color="#000000"/>
+	<fontspec id="1" size="33" family="Times" color="#000000"/>
+	<fontspec id="2" size="9" family="Times" color="#000000"/>
+	<fontspec id="3" size="12" family="Times" color="#000000"/>
+	<fontspec id="4" size="12" family="Times" color="#000000"/>
+	<fontspec id="5" size="15" family="Times" color="#000000"/>
+	<fontspec id="6" size="15" family="Times" color="#000000"/>
+<text top="1124" left="105" width="186" height="16" font="0">www.picocomputing.com </text>
+<text top="1124" left="443" width="18" height="16" font="0">1  </text>
+<text top="1124" left="789" width="4" height="16" font="0"> </text>
+<text top="167" left="148" width="606" height="32" font="1">Accelerating Short Read Mapping Using a </text>
+<text top="208" left="283" width="336" height="32" font="1">Scalable FPGA Cluster </text>
+<text top="261" left="294" width="305" height="16" font="0">Corey Olson, Greg Edvenson, Boris Kogon</text>
+<text top="257" left="600" width="3" height="11" font="2"> </text>
+<text top="289" left="317" width="264" height="13" font="3">{corey, greg, bkogon}@picocomputing.com </text>
+<text top="315" left="386" width="125" height="13" font="4"><i>Pico Computing Inc. </i></text>
+<text top="331" left="356" width="185" height="13" font="4"><i>150 Nickerson Street Suite 311 </i></text>
+<text top="348" left="377" width="142" height="13" font="4"><i>Seattle, WA 98109 USA </i></text>
+<text top="410" left="79" width="100" height="16" font="5"><b>Introduction </b></text>
+<text top="438" left="79" width="346" height="16" font="0">Short  read  alignment  software,  such  as  <i>BFAST</i> </text>
+<text top="458" left="79" width="346" height="16" font="0">(Blat-like Fast Accurate Search Tool) [1], is one </text>
+<text top="479" left="79" width="350" height="16" font="0">of  the  key  tools  in  bioinformatics  research.  </text>
+<text top="499" left="79" width="346" height="16" font="0">However,  typical  runtimes  are  measured  in </text>
+<text top="519" left="79" width="346" height="16" font="0">hours  or  even  days.    Our  implementation </text>
+<text top="539" left="79" width="346" height="16" font="0">replaces  a  cluster  of  260  quad-core  Intel  Xeon </text>
+<text top="559" left="79" width="271" height="16" font="0">processors with 8 commodity FPGAs. </text>
+<text top="597" left="79" width="97" height="16" font="5"><b>Background </b></text>
+<text top="626" left="79" width="346" height="16" font="0">To  sequence  a  genome,  a  DNA  sample  is </text>
+<text top="646" left="79" width="346" height="16" font="0">randomly  chopped  into  billions  of  fragments, </text>
+<text top="666" left="79" width="350" height="16" font="0">each  approximately  100  nucleotides  in  length.  </text>
+<text top="686" left="79" width="346" height="16" font="0">Sequencing  machines  determine  the  nucleotide </text>
+<text top="706" left="79" width="346" height="16" font="0">sequence  of  the  fragment  and  produce  a  digital </text>
+<text top="727" left="79" width="248" height="16" font="0">representation, called a <i>short read</i>. </text>
+<text top="966" left="356" width="4" height="16" font="0"> </text>
+<text top="981" left="105" width="293" height="13" font="3">Figure  1:  Reverse  termination  sequencing. </text>
+<text top="998" left="105" width="293" height="13" font="3">Fragments  are  bridge-amplified,  and  a  single </text>
+<text top="1015" left="105" width="293" height="13" font="3">base (alternating between the 4 possible bases) is </text>
+<text top="1032" left="105" width="293" height="13" font="3">attached to the fragment along with a fluorescent </text>
+<text top="1048" left="105" width="293" height="13" font="3">terminator.  The  terminator  is  then  read  and </text>
+<text top="1065" left="105" width="252" height="13" font="3">removed in order to read the next base. [2] </text>
+<text top="409" left="473" width="346" height="16" font="0">In recent years there has been a revolution in the </text>
+<text top="430" left="473" width="351" height="16" font="0">technology  of  genome  sequencing  machines.  </text>
+<text top="450" left="473" width="346" height="16" font="0">The  massive  parallelism  of  next-generation </text>
+<text top="470" left="473" width="83" height="16" font="0">sequencing </text>
+<text top="470" left="572" width="87" height="16" font="0">technology, </text>
+<text top="470" left="676" width="30" height="16" font="0">like </text>
+<text top="470" left="722" width="26" height="16" font="0">the </text>
+<text top="470" left="764" width="55" height="16" font="0">reverse </text>
+<text top="490" left="473" width="346" height="16" font="0">termination  sequencing  in  Figure  1,  has  greatly </text>
+<text top="510" left="473" width="346" height="16" font="0">improved  the  throughput  and  lowered  the  cost </text>
+<text top="530" left="473" width="350" height="16" font="0">of sequencing  a  genome, as shown in  Figure 2.  </text>
+<text top="550" left="473" width="346" height="16" font="0">Sequencing machines, such as Illumina’s HiSeq </text>
+<text top="571" left="473" width="346" height="16" font="0">2000  or  Applied  Biosystems’  5500  Genetic </text>
+<text top="591" left="473" width="346" height="16" font="0">Analyzer, produce massive amounts of data, and </text>
+<text top="611" left="473" width="346" height="16" font="0">their  throughput  is  improving  faster  than  the </text>
+<text top="631" left="473" width="346" height="16" font="0">processing  performance  of  compute  clusters. </text>
+<text top="651" left="473" width="346" height="16" font="0">This  is  now  becoming  a  classic  <i>big  data</i> </text>
+<text top="671" left="473" width="67" height="16" font="0">problem. </text>
+<text top="931" left="803" width="4" height="16" font="0"> </text>
+<text top="947" left="499" width="293" height="13" font="3">Figure  2:  Cost  per  genome  improvement  since </text>
+<text top="964" left="499" width="57" height="13" font="3">2001. [3] </text>
+<text top="995" left="473" width="346" height="16" font="0">By determining where each of these short reads </text>
+<text top="1016" left="473" width="346" height="16" font="0">came  from  in  the  sample  DNA,  we  can </text>
+<text top="1036" left="473" width="346" height="16" font="0">reconstruct  the  sample  genome,  which  is  called </text>
+<text top="1056" left="473" width="346" height="16" font="6"><i>short  read  mapping</i>.    This  mapping  must </text>
+<text top="1076" left="473" width="346" height="16" font="0">tolerate  genetic variations and errors during the </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="7" size="14" family="Times" color="#000000"/>
+<text top="1124" left="79" width="186" height="16" font="0">www.picocomputing.com </text>
+<text top="1124" left="443" width="18" height="16" font="0">2  </text>
+<text top="1124" left="815" width="4" height="16" font="0"> </text>
+<text top="163" left="79" width="346" height="16" font="0">sequencing phase.  This is analogous to piecing </text>
+<text top="183" left="79" width="346" height="16" font="0">together  a  billion-piece  puzzle  from  a  blurry </text>
+<text top="203" left="79" width="136" height="16" font="0">picture on the box. </text>
+<text top="241" left="79" width="346" height="16" font="0">An  improvement  in  the  short  read  mapping </text>
+<text top="261" left="79" width="346" height="16" font="0">runtime would reduce the development time for </text>
+<text top="281" left="79" width="346" height="16" font="0">many  bioinformatics  breakthroughs  including: </text>
+<text top="301" left="79" width="346" height="16" font="0">drug discovery, improved crop yields, and DNA </text>
+<text top="321" left="79" width="346" height="16" font="0">forensics.    Comparison  of  DNA  sequences </text>
+<text top="341" left="79" width="346" height="16" font="0">enables  researchers  to  identify  the  cause  of </text>
+<text top="362" left="79" width="346" height="16" font="0">genetic  defects,  disease,  or  even  possibly </text>
+<text top="382" left="79" width="346" height="16" font="0">cancer.    By  identifying  the  differences, </text>
+<text top="402" left="79" width="346" height="16" font="0">researchers could have a tool to identify genetic </text>
+<text top="422" left="79" width="346" height="16" font="0">warning  signs  on  the  individual  level,  even </text>
+<text top="442" left="79" width="249" height="16" font="0">leading to personalized medicine.   </text>
+<text top="480" left="79" width="82" height="16" font="5"><b>Algorithm </b></text>
+<text top="509" left="79" width="346" height="16" font="0">The algorithm used in BFAST finds locations in </text>
+<text top="529" left="79" width="346" height="16" font="0">the  reference  genome  where  the  short  read  is </text>
+<text top="549" left="79" width="346" height="16" font="0">likely to align.  It then performs a more detailed </text>
+<text top="569" left="79" width="346" height="16" font="0">scoring at each of those  locations;  the one with </text>
+<text top="589" left="79" width="346" height="16" font="0">the best score is considered the final location for </text>
+<text top="609" left="79" width="65" height="16" font="0">the read. </text>
+<text top="647" left="79" width="346" height="16" font="0">The mapping process would be trivial if all short </text>
+<text top="667" left="79" width="346" height="16" font="0">reads  matched  perfectly  to  one  location  in  the </text>
+<text top="688" left="79" width="346" height="16" font="0">reference  genome.    However,  the  short  reads </text>
+<text top="708" left="79" width="346" height="16" font="0">differ from the reference genome due to genetic </text>
+<text top="728" left="79" width="346" height="16" font="0">variations between the reference and the sample </text>
+<text top="748" left="79" width="346" height="16" font="0">DNA sequence.  Additionally, short reads differ </text>
+<text top="768" left="79" width="346" height="16" font="0">from  the  sample  DNA  sequence  due  to  errors </text>
+<text top="788" left="79" width="217" height="16" font="0">during the sequencing phase.   </text>
+<text top="826" left="79" width="24" height="16" font="0">To </text>
+<text top="826" left="119" width="73" height="16" font="0">overcome </text>
+<text top="826" left="208" width="55" height="16" font="0">genetic </text>
+<text top="826" left="278" width="78" height="16" font="0">variations, </text>
+<text top="826" left="372" width="53" height="16" font="0">shorter </text>
+<text top="846" left="79" width="346" height="16" font="0">subsequences of the short read, called <i>seeds</i>, are </text>
+<text top="866" left="79" width="346" height="16" font="0">matched perfectly to the reference genome.  All </text>
+<text top="886" left="79" width="346" height="16" font="0">possible  seeds  within  a  short  read  are  matched </text>
+<text top="906" left="79" width="346" height="16" font="0">against the reference genome, and the collection </text>
+<text top="927" left="79" width="346" height="16" font="0">of  matching  locations  is  called  the  Candidate </text>
+<text top="947" left="79" width="350" height="16" font="0">Alignment  Locations  (CALs)  of  the  short  read.  </text>
+<text top="967" left="79" width="346" height="16" font="0">The  key  to  finding  the  correct  location  for  the </text>
+<text top="987" left="79" width="346" height="16" font="0">short read in the reference  genome is to extract </text>
+<text top="1007" left="79" width="346" height="16" font="0">at  least  one  seed  from  the  short  read  with  no </text>
+<text top="1027" left="79" width="346" height="16" font="0">genetic  variations  or  sequencing  errors,  as </text>
+<text top="1048" left="79" width="136" height="16" font="0">shown in Figure 3. </text>
+<text top="296" left="809" width="4" height="16" font="0"> </text>
+<text top="311" left="499" width="293" height="13" font="3">Figure  3:  Short  read  with  a  genetic  variation </text>
+<text top="328" left="499" width="293" height="13" font="3">(shown  in  red)  does  not  match  perfectly  to  the </text>
+<text top="344" left="499" width="293" height="13" font="3">reference.  Seeds  of  length  4  match  perfectly  to </text>
+<text top="361" left="499" width="285" height="13" font="3">the reference if they do not contain the variation.</text>
+<text top="360" left="785" width="4" height="15" font="7"> </text>
+<text top="393" left="473" width="346" height="16" font="0">To  determine  which  CAL  is  the  best  alignment </text>
+<text top="414" left="473" width="346" height="16" font="0">location  for  the  short  read,  BFAST  computes  a </text>
+<text top="434" left="473" width="351" height="16" font="0">score  for  the  entire  short  read  at  each  CAL.  </text>
+<text top="454" left="473" width="346" height="16" font="0">Because  the  seed  matched  perfectly  at  a  CAL, </text>
+<text top="474" left="473" width="346" height="16" font="0">that  portion  of  the  short  read  is  guaranteed  to </text>
+<text top="494" left="473" width="346" height="16" font="0">match  perfectly  to  the  reference.    Further </text>
+<text top="514" left="473" width="346" height="16" font="0">scoring  is  necessary  to  compare  the  rest  of  the </text>
+<text top="535" left="473" width="346" height="16" font="0">short  read  to  the  reference  sequence.    The </text>
+<text top="555" left="473" width="346" height="16" font="0">scoring is a variation of a commonly used string </text>
+<text top="575" left="473" width="346" height="16" font="0">matching  algorithm  called  Smith-Waterman,  as </text>
+<text top="595" left="473" width="346" height="16" font="0">demonstrated  in  Figure  4.    The  highest  scoring </text>
+<text top="615" left="473" width="346" height="16" font="0">location  for  a  short  read  is  declared  to  be  the </text>
+<text top="635" left="473" width="346" height="16" font="0">alignment for that short  read, which is the final </text>
+<text top="655" left="473" width="237" height="16" font="0">output of the mapping algorithm. </text>
+<text top="933" left="796" width="4" height="16" font="0"> </text>
+<text top="948" left="499" width="42" height="13" font="3">Figure </text>
+<text top="948" left="558" width="15" height="13" font="3">4: </text>
+<text top="948" left="589" width="55" height="13" font="3">Example </text>
+<text top="948" left="661" width="131" height="13" font="3">Smith-Waterman-like </text>
+<text top="965" left="499" width="293" height="13" font="3">alignment  of  a  short  read  (ACACGT)  to </text>
+<text top="982" left="499" width="293" height="13" font="3">Candidate  Alignment  Location  of  the  reference </text>
+<text top="999" left="499" width="293" height="13" font="3">(ACCACG).    Actual  alignment  is  found  by </text>
+<text top="1015" left="499" width="293" height="13" font="3">tracing  backwards  through  the  cells  with  the </text>
+<text top="1032" left="499" width="293" height="13" font="3">highest score from the end of the read to the start </text>
+<text top="1049" left="499" width="293" height="13" font="3">of  the  read.    Cells  associated  with  the  actual </text>
+<text top="1066" left="499" width="252" height="13" font="3">alignment for this example are highlighted.</text>
+<text top="1064" left="752" width="4" height="15" font="7"> </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="1124" left="79" width="186" height="16" font="0">www.picocomputing.com </text>
+<text top="1124" left="443" width="18" height="16" font="0">3  </text>
+<text top="1124" left="815" width="4" height="16" font="0"> </text>
+<text top="163" left="79" width="346" height="16" font="0">Mapping  software  can  be  accelerated  by </text>
+<text top="183" left="79" width="346" height="16" font="0">exploiting  the  parallelism  inherent  in  the </text>
+<text top="203" left="79" width="346" height="16" font="0">application.  Many short reads can be aligned at </text>
+<text top="223" left="79" width="346" height="16" font="0">the  same  time  if  multiple  processors  are </text>
+<text top="243" left="79" width="346" height="16" font="0">available.    Likewise,  each  read  may  need  to  be </text>
+<text top="263" left="79" width="350" height="16" font="0">aligned at several CALs to find the correct one.  </text>
+<text top="284" left="79" width="346" height="16" font="0">Running  the  mapping  software  on  a  server </text>
+<text top="304" left="79" width="346" height="16" font="0">cluster  to  exploit  this  parallelism  can  reduce </text>
+<text top="324" left="79" width="346" height="16" font="0">runtime  but  at  the  cost  of  increased  power </text>
+<text top="344" left="79" width="207" height="16" font="0">consumption and rack space. </text>
+<text top="382" left="79" width="176" height="16" font="5"><b>FPGA Implementation </b></text>
+<text top="411" left="79" width="346" height="16" font="0">Our  hardware  accelerated  solution  to  the  short </text>
+<text top="431" left="79" width="346" height="16" font="0">read  mapping  problem  leverages  the  massive </text>
+<text top="451" left="79" width="351" height="16" font="0">parallelism  and  energy  efficiency  of  FPGAs.  </text>
+<text top="471" left="79" width="346" height="16" font="0">Pico Computing’s SC5 is a cluster of FGPAs in </text>
+<text top="491" left="79" width="342" height="16" font="0">a  single  4U  server,  connected  by  a  fully-</text>
+<text top="511" left="79" width="293" height="16" font="0">switched Gen2 PCI-Express architecture. </text>
+<text top="549" left="79" width="346" height="16" font="0">Portions  of  the  BFAST  software,  such  as  the </text>
+<text top="569" left="79" width="346" height="16" font="0">data pre-processing and post-processing, are not </text>
+<text top="589" left="79" width="346" height="16" font="0">well-suited for FPGA acceleration and therefore </text>
+<text top="609" left="79" width="346" height="16" font="0">are  left  running  in  software.    However,  the </text>
+<text top="630" left="79" width="346" height="16" font="0">parallelism  of  finding  <i>Candidate  Alignment </i></text>
+<text top="650" left="79" width="346" height="16" font="6"><i>Locations</i>  (CALs)  for  multiple  short  reads  and </text>
+<text top="670" left="79" width="346" height="16" font="0">aligning a short read against many CALs can be </text>
+<text top="690" left="79" width="224" height="16" font="0">exploited on the FPGA system. </text>
+<text top="728" left="79" width="346" height="16" font="0">Short  reads  are  streamed  to  a  single  FPGA  via </text>
+<text top="748" left="79" width="346" height="16" font="0">PCIe.  Short reads are then split into seeds using </text>
+<text top="768" left="79" width="346" height="16" font="0">a  shift  register.    Each  seed  is  looked  up  in  an </text>
+<text top="788" left="79" width="346" height="16" font="0">index table, which is a data structure that returns </text>
+<text top="808" left="79" width="321" height="16" font="0">CALs for a given seed, as shown in Figure 5. </text>
+<text top="964" left="404" width="4" height="16" font="0"> </text>
+<text top="979" left="105" width="293" height="13" font="3">Figure  5:  The  index  table  returns  a set  of  CALs </text>
+<text top="996" left="105" width="84" height="13" font="3">for each seed. </text>
+<text top="1028" left="79" width="346" height="16" font="0">The  index  table  is  a  large  table  (~20  GB  for </text>
+<text top="1048" left="79" width="346" height="16" font="0">human genome) that must be compiled from the </text>
+<text top="1068" left="79" width="346" height="16" font="0">reference genome.  Different reference genomes </text>
+<text top="1088" left="79" width="346" height="16" font="0">will  have  different  index  tables.    This  table  is </text>
+<text top="163" left="473" width="346" height="16" font="0">used as a fast way to determine all the CALs for </text>
+<text top="183" left="473" width="346" height="16" font="0">an  input  seed.    The  index  table  is  implemented </text>
+<text top="203" left="473" width="346" height="16" font="0">as  a  hash  table,  with  one  level  of  indirection </text>
+<text top="223" left="473" width="346" height="16" font="0">used  to  compress  the  table  size.    This  table  is </text>
+<text top="243" left="473" width="346" height="16" font="0">too  large for block  RAM  on the  FPGA, so it is </text>
+<text top="263" left="473" width="346" height="16" font="0">instead stored in DRAM.  Consecutive accesses </text>
+<text top="284" left="473" width="346" height="16" font="0">to the index table are independent, and therefore </text>
+<text top="304" left="473" width="346" height="16" font="0">accesses  for  multiple  seeds  are  pipelined  to </text>
+<text top="324" left="473" width="234" height="16" font="0">yield higher memory bandwidth. </text>
+<text top="362" left="473" width="346" height="16" font="0">The CALs for each seed are filtered to produce </text>
+<text top="382" left="473" width="346" height="16" font="0">a  unique  set  of  CALs.    Then  the  short  read  is </text>
+<text top="402" left="473" width="346" height="16" font="0">aligned against the reference genome at each of </text>
+<text top="422" left="473" width="346" height="16" font="0">its  CALs.    To  align  a  short  read  for  a  given </text>
+<text top="442" left="473" width="346" height="16" font="0">CAL,  the  reference  sequence  associated  with </text>
+<text top="462" left="473" width="346" height="16" font="0">that  CAL  is  looked  up  in  memory.    Like  the </text>
+<text top="482" left="473" width="346" height="16" font="0">index table, the reference is too large to fit in the </text>
+<text top="503" left="473" width="346" height="16" font="0">block RAM on the FPGA, so it is also stored in </text>
+<text top="523" left="473" width="346" height="16" font="0">DRAM.  The short read is parallel-loaded into a </text>
+<text top="543" left="473" width="346" height="16" font="0">Smith-Waterman  compute  engine,  which  is </text>
+<text top="563" left="473" width="346" height="16" font="0">implemented  as  a  systolic  array,  like  the </text>
+<text top="583" left="473" width="346" height="16" font="0">example shown in Figure 6.  The reference data </text>
+<text top="603" left="473" width="346" height="16" font="0">is then streamed through the systolic array, and </text>
+<text top="623" left="473" width="346" height="16" font="0">the  short  read  is  scored  against  the  reference </text>
+<text top="644" left="473" width="346" height="16" font="0">using  an  affine-gap  model.    The  systolic  array </text>
+<text top="664" left="473" width="346" height="16" font="0">approximately aligns <i>all bases of the short read</i> </text>
+<text top="684" left="473" width="346" height="16" font="0">to bases of the reference sequence <i>every FPGA </i></text>
+<text top="704" left="473" width="346" height="16" font="6"><i>clock cycle</i>, resulting in a linear runtime for the </text>
+<text top="724" left="473" width="180" height="16" font="0">Smith-Waterman engine. </text>
+<text top="1017" left="730" width="4" height="16" font="0"> </text>
+<text top="1032" left="499" width="293" height="13" font="3">Figure  6:  Smith-Waterman  systolic  array  scores </text>
+<text top="1048" left="499" width="293" height="13" font="3">bases of  the short  read to  bases  of  the  reference </text>
+<text top="1065" left="499" width="66" height="13" font="3">in parallel. </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="8" size="10" family="Times" color="#000000"/>
+<text top="1124" left="79" width="186" height="16" font="0">www.picocomputing.com </text>
+<text top="1124" left="443" width="18" height="16" font="0">4  </text>
+<text top="1124" left="815" width="4" height="16" font="0"> </text>
+<text top="163" left="79" width="346" height="16" font="0">After  filtering,  CALs  for  a  short  read  are </text>
+<text top="183" left="79" width="346" height="16" font="0">independent,  and  therefore  a  short  read  can  be </text>
+<text top="203" left="79" width="346" height="16" font="0">aligned  to  multiple  CALs  simultaneously.    In </text>
+<text top="223" left="79" width="346" height="16" font="0">other  words,  DRAM  accesses  for  multiple </text>
+<text top="243" left="79" width="346" height="16" font="0">CALs  are  pipelined,  and  the  alignment  of  the </text>
+<text top="263" left="79" width="346" height="16" font="0">short read to the reference sequences of multiple </text>
+<text top="284" left="79" width="346" height="16" font="0">CALs are performed in parallel.  To accomplish </text>
+<text top="304" left="79" width="346" height="16" font="0">this, multiple Smith-Waterman compute engines </text>
+<text top="324" left="79" width="346" height="16" font="0">are  instantiated  in  an  FPGA.    CALs  for  a  short </text>
+<text top="344" left="79" width="342" height="16" font="0">read  are  distributed  to  the  set  of  Smith-</text>
+<text top="364" left="79" width="315" height="16" font="0">Waterman engines in a round-robin manner. </text>
+<text top="402" left="79" width="346" height="16" font="0">A single module tracks the best score for a short </text>
+<text top="422" left="79" width="346" height="16" font="0">read  along  with  the  final  alignment  associated </text>
+<text top="442" left="79" width="346" height="16" font="0">with  that  score.    Once  a  short  read  has  been </text>
+<text top="462" left="79" width="346" height="16" font="0">aligned  to  its  set  of  CALs,  the  best  score  and </text>
+<text top="482" left="79" width="346" height="16" font="0">final  alignment  is  reported  back  to  the  host </text>
+<text top="503" left="79" width="346" height="16" font="0">processor via PCIe.  Figure 7 shows a high-level </text>
+<text top="523" left="79" width="313" height="16" font="0">overview of the described hardware system. </text>
+<text top="695" left="415" width="4" height="16" font="0"> </text>
+<text top="710" left="105" width="293" height="13" font="3">Figure  7:  FPGA  design  of  the  short  read </text>
+<text top="727" left="105" width="103" height="13" font="3">mapping system. </text>
+<text top="759" left="79" width="346" height="16" font="0">Since  the  index  table  is  too  large  to  fit  onto  a </text>
+<text top="779" left="79" width="346" height="16" font="0">single DRAM, the index table and the reference </text>
+<text top="799" left="79" width="346" height="16" font="0">are  partitioned  amongst  the  DRAM  of  multiple </text>
+<text top="820" left="79" width="346" height="16" font="0">FPGA  modules.    In  a  system  containing  N </text>
+<text top="840" left="79" width="346" height="16" font="0">DRAMs,  partitioning  the  index  table  by  seed </text>
+<text top="167" left="473" width="271" height="16" font="0">makes  each  FPGA  responsible  for </text>
+<text top="161" left="750" width="7" height="13" font="8">ଵ</text>
+<text top="180" left="749" width="9" height="13" font="8">ே</text>
+<text top="167" left="763" width="56" height="16" font="0"> of  the </text>
+<text top="192" left="473" width="346" height="16" font="0">number  of  seeds  for  each  short  read.    In  other </text>
+<text top="212" left="473" width="346" height="16" font="0">words, seeds that do not fall within the range of </text>
+<text top="232" left="473" width="346" height="16" font="0">valid  seeds  for  an  FPGA  will  not  be  looked  up </text>
+<text top="253" left="473" width="346" height="16" font="0">in  the  index  table.    This  results  in  a  system </text>
+<text top="273" left="473" width="346" height="16" font="0">memory  bandwidth  improvement  of  a  factor  of </text>
+<text top="293" left="473" width="235" height="16" font="0">N for accesses to the index table. </text>
+<text top="331" left="473" width="346" height="16" font="0">Partitioning  the  index  table  in  this  way  means </text>
+<text top="351" left="473" width="346" height="16" font="0">the  entire  reference  must  be  replicated  in  each </text>
+<text top="371" left="473" width="346" height="16" font="0">partition,  which  is  about  750  MB  per  partition </text>
+<text top="391" left="473" width="346" height="16" font="0">for  the  human  genome.    Our  implementation </text>
+<text top="411" left="473" width="346" height="16" font="0">uses  4  GB  of  DDR3  DRAM  per  partition,  or </text>
+<text top="431" left="473" width="346" height="16" font="0">3.25  GB  of  index  table  per  partition.    An  8 </text>
+<text top="452" left="473" width="346" height="16" font="0">FPGA  system  holds  the  entire  index  table  and </text>
+<text top="472" left="473" width="107" height="16" font="0">reference data. </text>
+<text top="509" left="473" width="346" height="16" font="0">Short  reads  are  then  aligned  to  the  entire </text>
+<text top="529" left="473" width="346" height="16" font="0">reference  by  streaming  the  short  reads  through </text>
+<text top="550" left="473" width="346" height="16" font="0">all partitions, which are connected together in a </text>
+<text top="570" left="473" width="346" height="16" font="0">daisy-chain.    Short  reads  must  carry  their  best </text>
+<text top="590" left="473" width="346" height="16" font="0">alignment  information  and  a  unique  read  ID </text>
+<text top="610" left="473" width="346" height="16" font="0">through  the  daisy-chain.    This  daisy-chain </text>
+<text top="630" left="473" width="270" height="16" font="0">configuration can be seen in Figure 8. </text>
+<text top="668" left="473" width="187" height="16" font="5"><b>Comparison to Software </b></text>
+<text top="706" left="473" width="346" height="16" font="0">We ran an experiment to compare our system to </text>
+<text top="726" left="473" width="350" height="16" font="0">the performance of BFAST running in software.  </text>
+<text top="746" left="473" width="346" height="16" font="0">BFAST  was  run  on  two  quad-core  Intel  Xeon </text>
+<text top="766" left="473" width="346" height="16" font="0">processors, with Hyper-Threading, for a total of </text>
+<text top="786" left="473" width="346" height="16" font="0">16 threads.  Each processor was paired with 24 </text>
+<text top="806" left="473" width="346" height="16" font="0">GB  of  RAM.    This  system  aligned  50  million </text>
+<text top="826" left="473" width="173" height="16" font="0">short reads in 2.2 hours. </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="1124" left="79" width="186" height="16" font="0">www.picocomputing.com </text>
+<text top="1124" left="443" width="18" height="16" font="0">5  </text>
+<text top="1124" left="815" width="4" height="16" font="0"> </text>
+<text top="545" left="79" width="346" height="16" font="0">The  tested  Pico  Computing  system  consists  of </text>
+<text top="565" left="79" width="346" height="16" font="0">eight  M-503  modules  with  4  GB  of  DDR3 </text>
+<text top="585" left="79" width="346" height="16" font="0">DRAM  each.    Loading  the  index  and  reference </text>
+<text top="605" left="79" width="346" height="16" font="0">onto the M-503s took several minutes, but only </text>
+<text top="625" left="79" width="350" height="16" font="0">needed  to  be  done  once  per  reference  genome.  </text>
+<text top="646" left="79" width="346" height="16" font="0">This system then aligned 50 million short reads </text>
+<text top="666" left="79" width="346" height="16" font="0">in 61 seconds, resulting in a runtime about 129x </text>
+<text top="686" left="79" width="346" height="16" font="0">faster  than  the  described  software  system.    In </text>
+<text top="706" left="79" width="346" height="16" font="0">other  words,  this  speedup  equates  to  the  8 </text>
+<text top="726" left="79" width="346" height="16" font="0">commodity  FPGAs  replacing  a  cluster  of  260 </text>
+<text top="746" left="79" width="346" height="16" font="0">quad-core  Intel  Xeon  processors.    Furthermore, </text>
+<text top="767" left="79" width="346" height="16" font="0">greater  speedup is possible with the addition of </text>
+<text top="787" left="79" width="346" height="16" font="0">more M-503 modules and further partitioning of </text>
+<text top="807" left="79" width="73" height="16" font="0">the index. </text>
+<text top="845" left="79" width="177" height="16" font="5"><b>About Pico Computing </b></text>
+<text top="873" left="79" width="346" height="16" font="0">Pico Computing specializes in highly integrated </text>
+<text top="893" left="79" width="346" height="16" font="0">high performance computing platforms based on </text>
+<text top="914" left="79" width="346" height="16" font="0">Field  Programmable  Gate  Array  (FPGA) </text>
+<text top="934" left="79" width="346" height="16" font="0">technologies.  The  company  also  provides </text>
+<text top="954" left="79" width="346" height="16" font="0">consulting  and  engineering  services.    For  more </text>
+<text top="974" left="79" width="346" height="16" font="0">information  on  this  FPGA  short  read  mapping </text>
+<text top="994" left="79" width="282" height="16" font="0">system:  contact@picocomputing.com.  </text>
+<text top="545" left="473" width="86" height="16" font="5"><b>References </b></text>
+<text top="577" left="473" width="346" height="16" font="0">[1] N.  Homer,  B.  Merriman,  and  S.  F.  Nelson, </text>
+<text top="597" left="498" width="321" height="16" font="0">&#34;BFAST:  An  Alignment  Tool  for  Large </text>
+<text top="617" left="498" width="321" height="16" font="0">Scale  Genome  Resequencing,&#34;  <i>PLoS  ONE</i>, </text>
+<text top="637" left="498" width="292" height="16" font="0">vol. 4, no. 11, p. e7767, November 2009. </text>
+<text top="680" left="473" width="346" height="16" font="0">[2] Erik  Pettersson,  Joakim  Lundeberg,  and </text>
+<text top="700" left="498" width="52" height="16" font="0">Afshin </text>
+<text top="700" left="574" width="82" height="16" font="0">Ahmadian, </text>
+<text top="700" left="680" width="96" height="16" font="0">&#34;Generations </text>
+<text top="700" left="800" width="19" height="16" font="0">of </text>
+<text top="720" left="498" width="321" height="16" font="0">sequencing  technologies,&#34;  <i>Genomics</i>,  vol. </text>
+<text top="740" left="498" width="275" height="16" font="0">93, no. 2, pp. 105-111, February 2009. </text>
+<text top="782" left="473" width="346" height="16" font="0">[3] United  States  Department  of  Health  and </text>
+<text top="802" left="498" width="321" height="16" font="0">Human Services. (2011, April) Genome.gov </text>
+<text top="822" left="498" width="8" height="16" font="0">| </text>
+<text top="822" left="523" width="42" height="16" font="0">DNA </text>
+<text top="822" left="583" width="86" height="16" font="0">Sequencing </text>
+<text top="822" left="686" width="48" height="16" font="0">Costs. </text>
+<text top="822" left="751" width="68" height="16" font="0">[Online]. </text>
+<text top="842" left="498" width="250" height="16" font="0">http://www.genome.gov/27541954 </text>
+<text top="883" left="473" width="4" height="16" font="0"> </text>
+<text top="495" left="168" width="561" height="13" font="3">Figure 8: Multiple FPGAs are connected in a daisy-chain, and short reads are streamed through </text>
+<text top="512" left="168" width="66" height="13" font="3">the system.</text>
+<text top="510" left="234" width="4" height="16" font="0"> </text>
+</page>
+</pdf2xml>

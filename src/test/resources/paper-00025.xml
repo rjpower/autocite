@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="0" size="12" family="Times" color="#000000"/>
+	<fontspec id="1" size="12" family="Times" color="#000000"/>
+	<fontspec id="2" size="15" family="Times" color="#000000"/>
+	<fontspec id="3" size="12" family="Times" color="#0000ff"/>
+	<fontspec id="4" size="13" family="Times" color="#000000"/>
+	<fontspec id="5" size="11" family="Times" color="#000000"/>
+	<fontspec id="6" size="16" family="Times" color="#000000"/>
+	<fontspec id="7" size="11" family="Times" color="#000000"/>
+	<fontspec id="8" size="8" family="Times" color="#000000"/>
+	<fontspec id="9" size="15" family="Times" color="#000000"/>
+	<fontspec id="10" size="6" family="Times" color="#000000"/>
+	<fontspec id="11" size="16" family="Times" color="#000000"/>
+	<fontspec id="12" size="15" family="Times" color="#000000"/>
+	<fontspec id="13" size="17" family="Times" color="#000000"/>
+<text top="1120" left="454" width="410" height="14" font="0">1                                                            Copyright © #### by ASME </text>
+<text top="57" left="861" width="4" height="14" font="1"><b> </b></text>
+<text top="75" left="131" width="735" height="14" font="1"><b>Proceedings of 2011 International Conference on Instrumentation, Measurement, Circuits and Systems </b></text>
+<text top="93" left="768" width="97" height="14" font="1"><b>ICIMCS  2011 </b></text>
+<text top="111" left="602" width="263" height="14" font="1"><b>December  13-14,  2011,  Hong  Kong </b></text>
+<text top="186" left="59" width="801" height="17" font="2"><b>CHARACTERISTICS MEASUREMENT AND FPGA CONTROLLER DESIGN FOR AN AIR MOTOR </b></text>
+<text top="208" left="242" width="436" height="17" font="2"><b>AND ELECTRIC MOTOR HYBRID POWER SYSTEM </b></text>
+<text top="229" left="53" width="4" height="14" font="0"> </text>
+<text top="246" left="53" width="4" height="14" font="0"> </text>
+<text top="263" left="224" width="119" height="14" font="1"><b>Shih-Yao Huang </b></text>
+<text top="281" left="152" width="262" height="14" font="0">Department of Mechanical Engineering </text>
+<text top="298" left="193" width="180" height="14" font="0">National Central University </text>
+<text top="315" left="199" width="170" height="14" font="0">Jhongli, Taoyuan, Taiwan </text>
+<text top="332" left="210" width="142" height="14" font="3">kejsu@yahoo.com.tw</text>
+<text top="332" left="353" width="12" height="14" font="0">   </text>
+<text top="263" left="572" width="126" height="14" font="1"><b>Yean-Ren Hwang </b></text>
+<text top="281" left="503" width="262" height="14" font="0">Department of Mechanical Engineering </text>
+<text top="298" left="544" width="180" height="14" font="0">National Central University </text>
+<text top="315" left="550" width="170" height="14" font="0">Jhongli, Taoyuan, Taiwan </text>
+<text top="332" left="554" width="157" height="14" font="3">yhwang@cc.ncu.edu.tw</text>
+<text top="332" left="711" width="12" height="14" font="0">   </text>
+<text top="350" left="53" width="4" height="14" font="0"> </text>
+<text top="368" left="53" width="4" height="14" font="0"> </text>
+<text top="385" left="53" width="86" height="14" font="1"><b>ABSTRACT </b></text>
+<text top="403" left="80" width="362" height="14" font="0">This  paper  proposed  an  air-electric  power  hybrid  system </text>
+<text top="421" left="53" width="389" height="14" font="0">which  utilizes  a  Field  Programmable  Gate  Array  (FPGA) </text>
+<text top="438" left="53" width="389" height="14" font="0">controller  to  integrate  two  power  systems  together,  one  being </text>
+<text top="456" left="53" width="389" height="14" font="0">the  auxiliary  power  of  an  air  motor  and  the  other  an  electric </text>
+<text top="474" left="53" width="389" height="14" font="0">power  motor.  The  major  task  of  air-electric  power  hybrid </text>
+<text top="491" left="53" width="389" height="14" font="0">system is to extend the service life and reduce the change times </text>
+<text top="509" left="53" width="389" height="14" font="0">of  the  batteries.  Because  the  service  life  of  the  batteries  is  the </text>
+<text top="527" left="53" width="389" height="14" font="0">crucial problem in electric vehicle development and it is related </text>
+<text top="544" left="53" width="389" height="14" font="0">to  the  transportation  distance,  standing  start  or  accelerating </text>
+<text top="562" left="53" width="389" height="14" font="0">condition.  With  the  auxiliary  power,  the  batteries  can  avoid </text>
+<text top="580" left="53" width="389" height="14" font="0">operating  in  the  large  discharge  range  and  then  promoting  the </text>
+<text top="597" left="53" width="389" height="14" font="0">safety.  An  air-electric  power  hybrid  prototype  platform  is  built </text>
+<text top="615" left="53" width="389" height="14" font="0">with a FPGA controller and tested under the load condition. The </text>
+<text top="633" left="53" width="389" height="14" font="0">testing results obtained by using the proposed two-power hybrid </text>
+<text top="650" left="53" width="389" height="14" font="0">system indicate that the output current is 126A when the electric </text>
+<text top="668" left="53" width="389" height="14" font="0">motor  operating  in  standing  start  condition  and  the  output </text>
+<text top="685" left="53" width="389" height="14" font="0">current is 64A when the switching velocity is 1400 rpm. Hence, </text>
+<text top="703" left="53" width="389" height="14" font="0">the  reduction  of  the  output  current  is  about  49%  and  then  the </text>
+<text top="721" left="53" width="315" height="14" font="0">service life of the batteries can be greatly improved. </text>
+<text top="738" left="53" width="4" height="14" font="0"> </text>
+<text top="756" left="53" width="361" height="14" font="1"><b>Keywords</b>: air motor; electric motor; FPGA; hybrid system </text>
+<text top="774" left="53" width="4" height="14" font="0"> </text>
+<text top="791" left="53" width="119" height="14" font="1"><b>INTRODUCTION </b></text>
+<text top="809" left="80" width="362" height="14" font="0">According  to  the  MOTC’s  statistical  data,  there  are  more </text>
+<text top="827" left="53" width="310" height="14" font="0">than 14 million motorcycles in Taiwan of 2011 [1].</text>
+<text top="826" left="363" width="4" height="14" font="4"> </text>
+<text top="827" left="368" width="74" height="14" font="0">In addition, </text>
+<text top="845" left="53" width="389" height="14" font="0">the  international  forecasting  institution  of  Frost  Sullivan  and </text>
+<text top="862" left="53" width="389" height="14" font="0">Argonne  National  Laboratory  [2]  that  estimated  in  2030,  the </text>
+<text top="880" left="53" width="389" height="14" font="0">global  automotive  sales  will  reach  130  million,  pure  electric </text>
+<text top="897" left="53" width="389" height="14" font="0">vehicles  will  reach  21  million.  This  estimation  shows  the </text>
+<text top="915" left="53" width="272" height="14" font="0">importance of electric vehicles development. </text>
+<text top="933" left="80" width="362" height="14" font="0">There are several advantages to driving an electric vehicle </text>
+<text top="950" left="53" width="389" height="14" font="0">that  uses  electric  motors  instead  of  an  internal  combustion </text>
+<text top="968" left="53" width="389" height="14" font="0">engine  [3-4].  Also,  in  general,  electric  motors  perform  more </text>
+<text top="986" left="53" width="389" height="14" font="0">efficiently  than  internal  engines  [5].  Besides,  electric  vehicles </text>
+<text top="1003" left="53" width="389" height="14" font="0">are  compact,  quiet  to  drive,  convenient  and  durable.  On  the </text>
+<text top="1021" left="53" width="389" height="14" font="0">other  hand,  there  are  several  disadvantages  existing  in  electric </text>
+<text top="1039" left="53" width="389" height="14" font="0">vehicles.  The  vehicle  battery’s  service  life,  which  limited  the </text>
+<text top="1056" left="53" width="389" height="14" font="0">travel  distance,  is  the  most  crucial  disadvantage  [6].  Due  to  a </text>
+<text top="385" left="478" width="389" height="14" font="0">new  idea  of  using  compressed  air  as  the  power  source  for </text>
+<text top="403" left="478" width="389" height="14" font="0">motorcycle is proposed and tested [7]. In this research, we use </text>
+<text top="421" left="478" width="389" height="14" font="0">an air motor as the  auxiliary  power.  Because  the  power  source </text>
+<text top="438" left="478" width="389" height="14" font="0">of air motor is the compressed air, there will be no pollutant of </text>
+<text top="456" left="478" width="389" height="14" font="0">emission to the environment and this is why we use air motor as </text>
+<text top="474" left="478" width="122" height="14" font="0">the auxiliary power. </text>
+<text top="491" left="505" width="362" height="14" font="0">Compared to electric motors, air motors are cleaner, higher </text>
+<text top="509" left="478" width="389" height="14" font="0">power-to-weight  ratio,  better  compliance  and  resistance  to </text>
+<text top="526" left="478" width="389" height="14" font="0">environmental dangers [8-10]. Hence, it reduces the probability </text>
+<text top="544" left="478" width="389" height="14" font="0">of  electricity  shock  and  fire  in  high  temperature,  flammable  or </text>
+<text top="562" left="478" width="144" height="14" font="0">explosive environment. </text>
+<text top="579" left="505" width="362" height="14" font="0">In  recent  years,  the  field  programmable  gate  arrays </text>
+<text top="597" left="478" width="389" height="14" font="0">(FPGAs)  combined  with  low  cost,  convenient  software  tools </text>
+<text top="615" left="478" width="389" height="14" font="0">and  significant  integration  density.  As  for  the  digital  signal </text>
+<text top="632" left="478" width="389" height="14" font="0">processors  (DSPs),  it  is  to  be  good  at  heterogeneous  functions </text>
+<text top="650" left="478" width="389" height="14" font="0">and the high level of parallelism of the algorithm is suitable for </text>
+<text top="668" left="478" width="389" height="14" font="0">FPGAs  [12].  Based  on  these  above  mentioned  reasons,  we </text>
+<text top="685" left="478" width="389" height="14" font="0">develop  a  FPGA  control  system  for  air-electric  power  hybrid </text>
+<text top="703" left="478" width="389" height="14" font="0">system.  In  addition,  modular  conception  is  used  to  divide  a </text>
+<text top="721" left="478" width="389" height="14" font="0">complex  system  into  many  parts.  This  top-down  methodology </text>
+<text top="738" left="478" width="389" height="14" font="0">shortens  the  development  time  and  easy  to  modify  for  each </text>
+<text top="756" left="478" width="52" height="14" font="0">module. </text>
+<text top="773" left="505" width="4" height="14" font="0"> </text>
+<text top="791" left="478" width="130" height="14" font="1"><b>NOMENCLATURE </b></text>
+<text top="816" left="488" width="69" height="12" font="5"><b>Parameters </b></text>
+<text top="816" left="680" width="70" height="12" font="5"><b>Description </b></text>
+<text top="836" left="517" width="8" height="16" font="6"><i>e</i></text>
+<text top="839" left="528" width="3" height="12" font="7"> </text>
+<text top="840" left="572" width="122" height="12" font="7">Speed error of motors </text>
+<text top="872" left="526" width="3" height="9" font="8"><i>i</i></text>
+<text top="862" left="513" width="12" height="16" font="9"><i>K</i></text>
+<text top="868" left="532" width="2" height="8" font="10"> </text>
+<text top="863" left="572" width="181" height="12" font="7">Integral  gain  of  PID  algorithm </text>
+<text top="899" left="525" width="5" height="9" font="8"><i>p</i></text>
+<text top="889" left="511" width="12" height="16" font="9"><i>K</i></text>
+<text top="895" left="534" width="2" height="8" font="10"> </text>
+<text top="891" left="572" width="208" height="12" font="7">Proportional  gain  of  PID  algorithm </text>
+<text top="909" left="514" width="11" height="17" font="11">η</text>
+<text top="912" left="528" width="3" height="12" font="7"> </text>
+<text top="915" left="572" width="157" height="12" font="7">Efficiency  of  an  air  motor </text>
+<text top="933" left="522" width="9" height="16" font="9"><i>p</i></text>
+<text top="933" left="511" width="11" height="16" font="12">∆</text>
+<text top="936" left="534" width="3" height="12" font="7"> </text>
+<text top="936" left="572" width="208" height="12" font="7">Pressure  difference  of  an  air  motor </text>
+<text top="957" left="514" width="13" height="16" font="9"><i>Q</i></text>
+<text top="960" left="530" width="3" height="12" font="7"> </text>
+<text top="960" left="572" width="182" height="12" font="7">Airflow  rate  of  compressed  air </text>
+<text top="981" left="514" width="10" height="16" font="9"><i>T</i></text>
+<text top="984" left="529" width="3" height="12" font="7"> </text>
+<text top="982" left="572" width="139" height="12" font="7">Torque  of  an  air  motor </text>
+<text top="998" left="516" width="9" height="16" font="9"><i>u</i></text>
+<text top="1001" left="528" width="3" height="12" font="7"> </text>
+<text top="1002" left="572" width="205" height="12" font="7">Control  output  of  FPGA  controller </text>
+<text top="1031" left="523" width="3" height="9" font="8"><i>i</i></text>
+<text top="1022" left="514" width="9" height="16" font="9"><i>u</i></text>
+<text top="1025" left="530" width="3" height="12" font="7"> </text>
+<text top="1025" left="572" width="212" height="12" font="7">Control  output  of  integral  controller </text>
+<text top="1043" left="514" width="12" height="17" font="13">ω</text>
+<text top="1047" left="530" width="3" height="12" font="7"> </text>
+<text top="1048" left="572" width="160" height="12" font="7">Angular  velocity  of  motors </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="14" size="10" family="Times" color="#000000"/>
+<text top="1120" left="454" width="410" height="14" font="0">2                                                            Copyright © #### by ASME </text>
+<text top="112" left="80" width="362" height="14" font="0">As to the entire  control  procedure  of  an  air-electric  power </text>
+<text top="129" left="53" width="389" height="14" font="0">hybrid system was shown in Fig. 1. The solid-line represents an </text>
+<text top="147" left="53" width="389" height="14" font="0">air motor control section and the dash-line represents an electric </text>
+<text top="165" left="53" width="385" height="14" font="0">motor  control  section.  By  the  feedback  signals  from  the  air-</text>
+<text top="182" left="53" width="389" height="14" font="0">electric  power  hybrid  system,  the  on/off  valve  can  adjust  the </text>
+<text top="200" left="53" width="389" height="14" font="0">switching  frequency  and  then  output  the  different  flow  rate  of </text>
+<text top="218" left="53" width="389" height="14" font="0">compressed  air.  Similarly,  the  drive  circuit  can  adjust  the </text>
+<text top="235" left="53" width="389" height="14" font="0">current and then cause the different speed of an electric motor. </text>
+<text top="253" left="53" width="389" height="14" font="0">During  this  experimental  platform,  the  pressure,  flow  rate  and </text>
+<text top="271" left="53" width="389" height="14" font="0">temperature  (measured  by  RTD)  of  compressed  air  and  the </text>
+<text top="288" left="53" width="389" height="14" font="0">current, voltage of the battery would be record and collected in </text>
+<text top="306" left="53" width="389" height="14" font="0">data-acquisition  system  (DAQ).  And  then  we  can  calculate  the </text>
+<text top="323" left="53" width="389" height="14" font="0">service  life  of  the  battery  and  efficiency  of  these  two  motors </text>
+<text top="341" left="53" width="206" height="14" font="0">according to these measured data. </text>
+<text top="575" left="437" width="4" height="14" font="0"> </text>
+<text top="597" left="102" width="290" height="11" font="14">Fig.1 Control procedure of air-electric power hybrid system </text>
+<text top="620" left="53" width="3" height="11" font="14"> </text>
+<text top="635" left="80" width="362" height="14" font="0">  The air motor control section, with its schematic diagram </text>
+<text top="653" left="53" width="389" height="14" font="0">shown  in  Fig.  1,  consists  of  an  air  tank,  a  filter/regulator  with </text>
+<text top="671" left="53" width="389" height="14" font="0">lubricant, an on/off valve, a pressure sensor, an airflow meter, a </text>
+<text top="688" left="53" width="389" height="14" font="0">temperature  sensor,  an  air  motor,  a  torque  transducer  and  a </text>
+<text top="706" left="53" width="389" height="14" font="0">FPGA  chip.  Generally,  the  airflow  path  starts  from  an  air  tank </text>
+<text top="724" left="53" width="389" height="14" font="0">through  the  on/off  valve,  other  instruments,  and  finally  enters </text>
+<text top="741" left="53" width="389" height="14" font="0">the air motor. The speed of an air motor will be determined by </text>
+<text top="759" left="53" width="389" height="14" font="0">the on/off valves, which is controlled by  duty  cycle  (%)  of  the </text>
+<text top="777" left="53" width="389" height="14" font="0">linear  pulse-width  modulation  (PWM)  scheme.  Hence,  the </text>
+<text top="794" left="53" width="389" height="14" font="0">different  duty  cycle  values  will  influence  the  switching </text>
+<text top="812" left="53" width="389" height="14" font="0">frequency between “On” and “Off” state of the solenoid valves. </text>
+<text top="829" left="53" width="389" height="14" font="0">Through  the  PWM  algorithm,  it  allows  on/off  solenoid  valves </text>
+<text top="847" left="53" width="331" height="14" font="0">to be used in place of costly proportional servo valves. </text>
+<text top="865" left="80" width="362" height="14" font="0">The  electric  motor  control  section,  with  its  schematic </text>
+<text top="882" left="53" width="389" height="14" font="0">diagram  shown  in  Fig.  1,  consists  of  the  lead-acid  batteries, </text>
+<text top="900" left="53" width="389" height="14" font="0">drive and measurement  circuits,  a  DC  brushed  motor,  a  torque </text>
+<text top="918" left="53" width="389" height="14" font="0">transducer, an optical encoder and a FPGA chip. The lead-acid </text>
+<text top="935" left="53" width="389" height="14" font="0">batteries  are  rated  at  12V-60Ah  and  utilized  as  the  power </text>
+<text top="953" left="53" width="389" height="14" font="0">source  for  the  electric  motor.  The  function  of  drive  circuit  is </text>
+<text top="971" left="53" width="389" height="14" font="0">adjusting the input current of the electric motor by the feedback </text>
+<text top="988" left="53" width="389" height="14" font="0">speed signal from an optical encoder. The major element of the </text>
+<text top="1006" left="53" width="389" height="14" font="0">drive circuit is the operational amplifier (OP741) and MOSFET </text>
+<text top="1023" left="53" width="389" height="14" font="0">(IRL1004).  Among  this  drive  circuit,  the  OP741  receives  the </text>
+<text top="1041" left="53" width="389" height="14" font="0">PWM  signal  that  generated  by  the  FPGA  speed  controller  and </text>
+<text top="1059" left="53" width="389" height="14" font="0">then promotes the voltage. Hence, the  promoted  voltage  signal </text>
+<text top="112" left="478" width="389" height="14" font="0">can control the MOSFET in “On” or “Off” state. By this PWM </text>
+<text top="129" left="478" width="389" height="14" font="0">algorithm,  the  input  current  of  the  electric  motor  can  be </text>
+<text top="147" left="478" width="389" height="14" font="0">adjusted by the drive circuit and result in different speed of the </text>
+<text top="165" left="478" width="389" height="14" font="0">electric  motor.  Besides,  the  input  current  and  voltage  of  the </text>
+<text top="182" left="478" width="389" height="14" font="0">electric motor will be measured by the measurement circuit and </text>
+<text top="200" left="478" width="389" height="14" font="0">recorded in the oscilloscope. Then the degree of electric power </text>
+<text top="218" left="478" width="389" height="14" font="0">saving  can  be  obtained  according  to  the  current  and  voltage </text>
+<text top="235" left="478" width="389" height="14" font="0">variation during the experiment. In addition, the efficiency of an </text>
+<text top="253" left="478" width="389" height="14" font="0">electric  motor  can  be  calculated  by  the  ratio  of  the  output </text>
+<text top="271" left="478" width="389" height="14" font="0">energy  (product  of  speed  and  torque)  to  the  input  energy </text>
+<text top="288" left="478" width="389" height="14" font="0">(product  of  current  and  voltage).  As  for  the  electric  motor,  a </text>
+<text top="306" left="478" width="389" height="14" font="0">TECO  24V  DC  brushed  motor  was  adopted  in  this  research </text>
+<text top="323" left="478" width="389" height="14" font="0">which is rated at power of 2.1 kW, a largest torque of 0.69 kg-m </text>
+<text top="341" left="478" width="280" height="14" font="0">and a maximum rotational speed of 3600 rpm. </text>
+<text top="359" left="505" width="362" height="14" font="0">Fig. 2 shows the test  platform  of  air-electric  power  hybrid </text>
+<text top="376" left="478" width="389" height="14" font="0">system  that  consist  of  an  optical  encoder,  an  electric  motor,  a </text>
+<text top="394" left="478" width="389" height="14" font="0">powder brake, couplings, a torque transducer and an air motor. </text>
+<text top="412" left="478" width="389" height="14" font="0">The  test  procedure  of  the  velocity  switch  experiment  is  as </text>
+<text top="429" left="478" width="389" height="14" font="0">follows:  Before  the  experiment,  the  switch  velocity  will  be </text>
+<text top="447" left="478" width="389" height="14" font="0">determined by user in  the  FPGA  design  software.  Thus,  below </text>
+<text top="465" left="478" width="389" height="14" font="0">the switch velocity, the  air  motor  is  the  driving  source  and  the </text>
+<text top="482" left="478" width="389" height="14" font="0">electric motor is rotated together with the air motor through the </text>
+<text top="500" left="478" width="389" height="14" font="0">powder brake. On the contrary, the electric motor is the driving </text>
+<text top="517" left="478" width="389" height="14" font="0">source  above  the  switch  velocity.  During  the  velocity  switch </text>
+<text top="535" left="478" width="389" height="14" font="0">experiment, the torque transducers will measure the torque of an </text>
+<text top="553" left="478" width="389" height="14" font="0">air motor and an electric motor respectively and then the torque </text>
+<text top="570" left="478" width="389" height="14" font="0">signals  will  be  recorded  in  the  data  acquisition  system.  The </text>
+<text top="588" left="478" width="389" height="14" font="0">main  purpose  of  the  velocity  switch  experiment  is  to  observe </text>
+<text top="606" left="478" width="389" height="14" font="0">the  torque  variation  of  these  two  motors  and  let  the  batteries </text>
+<text top="623" left="478" width="389" height="14" font="0">avoid operating in the large discharge region in order to saving </text>
+<text top="641" left="478" width="162" height="14" font="0">the energy of the batteries. </text>
+<text top="932" left="862" width="4" height="14" font="0"> </text>
+<text top="946" left="521" width="28" height="11" font="14">Fig.2 </text>
+<text top="945" left="549" width="276" height="12" font="7">The experimental air-electric power hybrid system </text>
+<text top="962" left="478" width="4" height="14" font="0"> </text>
+<text top="979" left="505" width="362" height="14" font="0">In the air motor control section, the on/off solenoid valves </text>
+<text top="997" left="478" width="389" height="14" font="0">to  be  used  in  place  of  the  costly  proportional  servo  valves. </text>
+<text top="1015" left="478" width="389" height="14" font="0">Therefore,  the  pulse  width  modulation  (PWM)  algorithm  must </text>
+<text top="1032" left="478" width="389" height="14" font="0">be used to accomplish the on/off control. Fig. 3 shows the block </text>
+<text top="1050" left="478" width="235" height="14" font="0">diagram of the FPGA on/off controller.</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="15" size="12" family="Times" color="#000000"/>
+<text top="1120" left="454" width="410" height="14" font="0">2                                                            Copyright © #### by ASME </text>
+<text top="311" left="861" width="4" height="14" font="0"> </text>
+<text top="324" left="316" width="286" height="11" font="14">Fig.3 Control block diagram of the FPGA on/off controller </text>
+<text top="339" left="457" width="4" height="14" font="0"> </text>
+<text top="357" left="80" width="362" height="14" font="0">The  entire  block  diagram  consists  of  frequency  divider </text>
+<text top="374" left="53" width="389" height="14" font="0">module,  speed  measurement  module,  valve  control  module, </text>
+<text top="392" left="53" width="389" height="14" font="0">PWM  algorithm  module  and  bypass  module.  In  the  frequency </text>
+<text top="410" left="53" width="389" height="14" font="0">divider module, the original frequency is 50 MHz of ALTERA </text>
+<text top="427" left="53" width="389" height="14" font="0">DE0 board that transformed into the 100 kHz. The function  of </text>
+<text top="445" left="53" width="389" height="14" font="0">the speed measurement module is to calculate  the  speed  of  the </text>
+<text top="463" left="53" width="389" height="14" font="0">air  motor  by  the  optical  encoder  and  increase  the  measure </text>
+<text top="480" left="53" width="389" height="14" font="0">resolution by the quadrature decoder. Then, the operation of the </text>
+<text top="498" left="53" width="389" height="14" font="0">valve control module is fully open of the on/off solenoid valve </text>
+<text top="516" left="53" width="389" height="14" font="0">when  the  speed  of  air  motor  below  the  determined  switch </text>
+<text top="533" left="53" width="389" height="14" font="0">velocity.  Oppositely,  the  on/off  solenoid  valve  is  fully  close </text>
+<text top="551" left="53" width="389" height="14" font="0">when  the  speed  of  air  motor  above  the  determined  switch </text>
+<text top="568" left="53" width="389" height="14" font="0">velocity.  Next,  this  output  signal  <i>u</i>  will  be  transformed  into </text>
+<text top="586" left="53" width="389" height="14" font="0">PWM  signal  by  using  a  triangle  waveform  and  a  comparator. </text>
+<text top="604" left="53" width="389" height="14" font="0">When the value of the <i>u</i> is more than the triangle waveform, the </text>
+<text top="621" left="53" width="389" height="14" font="0">PWM signal is in the high state, otherwise it is in the low state. </text>
+<text top="639" left="53" width="389" height="14" font="0">In  addition,  in  order  to  prevent  the  inner  damages  of  an  air </text>
+<text top="657" left="53" width="389" height="14" font="0">motor  and  saving  more  compressed  air,  we  use  a  tube  as  a </text>
+<text top="674" left="53" width="389" height="14" font="0">bypass pipe that placed between the atmosphere and the inlet of </text>
+<text top="692" left="53" width="88" height="14" font="0">an air motor.   </text>
+<text top="710" left="80" width="362" height="14" font="0">Fig.  4  shows  the  schematic  diagram  of  the  bypass  device. </text>
+<text top="727" left="53" width="389" height="14" font="0">There are two air sources of an air motor, one is the compressed </text>
+<text top="745" left="53" width="389" height="14" font="0">air  and  the  other  is  the  atmosphere.  Hence,  when  the  electric </text>
+<text top="762" left="53" width="389" height="14" font="0">motor  is  the  driving  source,  the  bypass  module  will  send  high </text>
+<text top="780" left="53" width="389" height="14" font="0">state signal to the on/off solenoid valve and then the atmosphere </text>
+<text top="798" left="53" width="186" height="14" font="0">will supply air to an air motor. </text>
+<text top="1020" left="409" width="4" height="14" font="0"> </text>
+<text top="1033" left="58" width="379" height="11" font="14">Fig.4 Schematic diagram of bypass pipe used to separate compressed air from </text>
+<text top="1047" left="216" width="59" height="11" font="14">an air motor</text>
+<text top="1045" left="275" width="4" height="14" font="0"> </text>
+<text top="357" left="505" width="362" height="14" font="0">As  for  the  characteristics  of  an  air  motor,  the  testing </text>
+<text top="374" left="478" width="389" height="14" font="0">procedure  as  follows:  (1)  Set  the  load  value  of  powder  brake; </text>
+<text top="392" left="478" width="389" height="14" font="0">(2)  Set  the  compressed  air  pressure  by  the  pressure  regulator; </text>
+<text top="410" left="478" width="389" height="14" font="0">(3) Adjust the input voltage of proportional servo valve to cause </text>
+<text top="427" left="478" width="389" height="14" font="0">the  different  speed  of  an  air  motor;  (4)  During  the  testing </text>
+<text top="445" left="478" width="389" height="14" font="0">period, the air pressure, airflow rate, rotational speed and torque </text>
+<text top="463" left="478" width="281" height="14" font="0">will be recorded in the data acquisition system.</text>
+<text top="462" left="760" width="4" height="14" font="4"> </text>
+<text top="463" left="764" width="103" height="14" font="0">And then we use </text>
+<text top="480" left="478" width="385" height="14" font="0">the  statistic  software  that  called  “R”  to  construct  the  multiple-</text>
+<text top="498" left="478" width="389" height="14" font="0">regression  model  of  the  air  pressure,  speed  and  torque.  Fig.  5 </text>
+<text top="516" left="478" width="389" height="14" font="0">shows  the  prediction  of  air  pressure  by  the  multiple-regression </text>
+<text top="533" left="478" width="326" height="14" font="0">model of Eq. (1) and the prediction error is about 8%. </text>
+<text top="552" left="813" width="7" height="13" font="0">0</text>
+<text top="552" left="670" width="15" height="13" font="0">03</text>
+<text top="552" left="667" width="4" height="13" font="0">.</text>
+<text top="552" left="660" width="7" height="13" font="0">0</text>
+<text top="552" left="582" width="15" height="13" font="0">89</text>
+<text top="552" left="579" width="4" height="13" font="0">.</text>
+<text top="552" left="564" width="15" height="13" font="0">10</text>
+<text top="552" left="538" width="15" height="13" font="0">25</text>
+<text top="552" left="534" width="4" height="13" font="0">.</text>
+<text top="552" left="527" width="7" height="13" font="0">6</text>
+<text top="552" left="801" width="8" height="14" font="0">=</text>
+<text top="552" left="734" width="8" height="14" font="0">+</text>
+<text top="552" left="686" width="8" height="14" font="0">×</text>
+<text top="552" left="649" width="8" height="14" font="0">+</text>
+<text top="552" left="598" width="8" height="14" font="0">×</text>
+<text top="552" left="555" width="8" height="14" font="0">+</text>
+<text top="552" left="516" width="8" height="14" font="0">−</text>
+<text top="552" left="747" width="51" height="13" font="15"><i>pressure</i></text>
+<text top="552" left="697" width="34" height="13" font="15"><i>speed</i></text>
+<text top="552" left="608" width="39" height="13" font="15"><i>torque</i></text>
+<text top="551" left="823" width="44" height="14" font="0">      (1) </text>
+<text top="572" left="505" width="362" height="14" font="0">The  speed  and  torque  output  response  of  an  air-electric </text>
+<text top="590" left="478" width="389" height="14" font="0">power  hybrid  system  when  the  switching  velocity  is  400  rpm </text>
+<text top="608" left="478" width="389" height="14" font="0">was  shown  in  Fig.  6.  When  the  air  motor  accelerate  to  the </text>
+<text top="625" left="478" width="389" height="14" font="0">switching  velocity  and  then  the  on/off  solenoid  valve  do  not </text>
+<text top="643" left="478" width="389" height="14" font="0">supply the compressed air. At this moment, electric motor starts </text>
+<text top="661" left="478" width="389" height="14" font="0">to rotate and accelerate to higher velocity. The dash-line is the </text>
+<text top="678" left="478" width="389" height="14" font="0">entire speed of the hybrid system, the dash-dot line is the torque </text>
+<text top="696" left="478" width="389" height="14" font="0">of  an  air  motor  and  the  solid-line  is  the  torque  of  an  electric </text>
+<text top="714" left="478" width="389" height="14" font="0">motor.  There  are  several  phenomena  can  be  observed:  (1)  In </text>
+<text top="731" left="478" width="389" height="14" font="0">order  to  start  rotating,  air  motor  needed  to  overcome  the </text>
+<text top="749" left="478" width="389" height="14" font="0">maximum  static  friction  torque;  (2)  the  electric  motor  starts  to </text>
+<text top="766" left="478" width="389" height="14" font="0">rotate and accelerate to higher velocity when the electric motor </text>
+<text top="784" left="478" width="389" height="14" font="0">overcome  the  resistance  force  produced  by  the  air  motor  and </text>
+<text top="802" left="478" width="389" height="14" font="0">powder  brake;  (3)  Above  the  switching  velocity,  air  motor  is </text>
+<text top="819" left="478" width="389" height="14" font="0">driven by the electric motor, so the torque value of air motor is </text>
+<text top="837" left="478" width="389" height="14" font="0">negative.  Therefore,  the  proposed  air-electric  power  hybrid </text>
+<text top="855" left="478" width="171" height="14" font="0">system is a feasible scheme. </text>
+<text top="872" left="505" width="362" height="14" font="0">As for the improvement design, case 1 is the length of the </text>
+<text top="890" left="478" width="389" height="14" font="0">bypass pipe is 2.5 m and case 2 is no bypass pipe. Fig. 7 and 8 </text>
+<text top="908" left="478" width="389" height="14" font="0">shows the speed and torque response of electric motor under the </text>
+<text top="925" left="478" width="389" height="14" font="0">case 1 and 2 respectively. Among these two figures, the torque </text>
+<text top="943" left="478" width="389" height="14" font="0">value  of  electric  motor  is  2  Nm  under  case  1  and  the  torque </text>
+<text top="960" left="478" width="389" height="14" font="0">value is 1 Nm under case 2. According to this phenomenon, we </text>
+<text top="978" left="478" width="389" height="14" font="0">clearly  know  that  when  the  less  length  of  the  bypass  pipe,  the </text>
+<text top="996" left="478" width="389" height="14" font="0">smaller  resistance  force  that  produced  by  air  motor  to  the </text>
+<text top="1013" left="478" width="389" height="14" font="0">electric  motor.  And  then  we  can  save  more  energy  of  the </text>
+<text top="1031" left="478" width="58" height="14" font="0">batteries. </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
+	<fontspec id="16" size="10" family="Times" color="#0000ff"/>
+	<fontspec id="17" size="10" family="Times" color="#000000"/>
+<text top="1120" left="454" width="410" height="14" font="0">2                                                            Copyright © #### by ASME </text>
+<text top="328" left="437" width="4" height="14" font="0"> </text>
+<text top="341" left="73" width="348" height="11" font="14">Fig.5 Prediction for the air pressure by using multiple-regression model </text>
+<text top="355" left="246" width="3" height="11" font="14"> </text>
+<text top="590" left="422" width="3" height="11" font="14"> </text>
+<text top="601" left="89" width="315" height="11" font="14">Fig.6 The speed and torque curves of velocity switch experiment </text>
+<text top="823" left="430" width="4" height="14" font="4"> </text>
+<text top="836" left="100" width="291" height="11" font="14">Fig.7 Influence of bypass pipe for the electric motor (case 1)</text>
+<text top="834" left="391" width="4" height="14" font="0"> </text>
+<text top="1042" left="422" width="4" height="14" font="4"> </text>
+<text top="1056" left="113" width="294" height="11" font="14">Fig.8 Influence of bypass pipe for the electric motor (case 2) </text>
+<text top="112" left="505" width="362" height="14" font="0">Fig.  9  shows  the  current  response  of  the  battery  by  the </text>
+<text top="129" left="478" width="389" height="14" font="0">different pre-set switching points and different loads. From this </text>
+<text top="147" left="478" width="389" height="14" font="0">figure, we can observe the output current is 126A of the battery </text>
+<text top="165" left="478" width="389" height="14" font="0">when the pre-set switching point is 0 rpm. That is, the maximum </text>
+<text top="182" left="478" width="389" height="14" font="0">output  current  of  the  battery  occurs  the  electric  motor  is </text>
+<text top="200" left="478" width="389" height="14" font="0">operating  in  a  standing  start  condition  without  the  auxiliary </text>
+<text top="218" left="478" width="389" height="14" font="0">power. Thus, the best method to saving the energy of the battery </text>
+<text top="235" left="478" width="389" height="14" font="0">is to increase the pre-set switching point. The experimental data </text>
+<text top="253" left="478" width="389" height="14" font="0">shows that the output current is 64A when the pre-set switching </text>
+<text top="271" left="478" width="389" height="14" font="0">point is 1400 rpm. The current reduction of the battery is about </text>
+<text top="288" left="478" width="389" height="14" font="0">49%  and  then  the  service  life  of  the  battery  can  be  greatly </text>
+<text top="306" left="478" width="389" height="14" font="0">improved.  The  results  also  shows  the  efficiency  trend  clearly </text>
+<text top="323" left="478" width="389" height="14" font="0">represents  the  higher  efficiency  can  be  obtained  by  the  higher </text>
+<text top="341" left="478" width="144" height="14" font="0">pre-set switching point. </text>
+<text top="559" left="863" width="4" height="14" font="0"> </text>
+<text top="572" left="503" width="336" height="11" font="14">Fig.9 Current response of an electric motor at various switching point</text>
+<text top="570" left="839" width="4" height="14" font="0"> </text>
+<text top="587" left="505" width="4" height="14" font="0"> </text>
+<text top="604" left="478" width="167" height="14" font="1"><b>ACKNOWLEDGMENTS </b></text>
+<text top="622" left="505" width="362" height="14" font="0">This  work  was  supported  by  the  Industrial  Technology </text>
+<text top="640" left="478" width="334" height="14" font="0">Research Institute (ITRI) under Contract No. 991643.   </text>
+<text top="658" left="478" width="4" height="14" font="0"> </text>
+<text top="675" left="478" width="106" height="14" font="1"><b>REFERENCES </b></text>
+<text top="692" left="478" width="388" height="11" font="14">[1]  Ministry  of  Transportation  and  Communications,  Taiwan,  Republic  of </text>
+<text top="706" left="505" width="139" height="11" font="14">China, 2011, available from </text>
+<text top="706" left="644" width="121" height="11" font="16">http://www.motc.gov.tw/</text>
+<text top="706" left="765" width="9" height="11" font="14">   </text>
+<text top="721" left="478" width="280" height="11" font="14">[2] Executive Yuan, Republic of China (R.O.C, Taiwan), </text>
+<text top="721" left="759" width="105" height="11" font="16">http://www.ey.gov.tw</text>
+<text top="721" left="863" width="6" height="11" font="14">, </text>
+<text top="735" left="505" width="31" height="11" font="14">2011. </text>
+<text top="749" left="478" width="388" height="11" font="14">[3]  K.  T.  Chau,  C.  C.  Chan,  C.  H.  Liu,  Overview  of  permanent-magnet </text>
+<text top="763" left="505" width="361" height="11" font="14">brushless  drivers  for  electric  and  hybrid  electric  vehicles,  Industrial </text>
+<text top="778" left="505" width="347" height="11" font="14">Electronics, IEEE Transactions on 2008, vol. 55, no. 6, pp. 2246-2257. </text>
+<text top="792" left="478" width="388" height="11" font="14">[4] James Larminie, John Lowry, Electric vehicle technology explained, 2003, </text>
+<text top="806" left="505" width="122" height="11" font="14">John Wiley &amp; Sons, Ltd. </text>
+<text top="820" left="478" width="166" height="11" font="14">[5]  Electric  motor,  Wikipedia, </text>
+<text top="820" left="650" width="211" height="11" font="16">http://en.wikipedia.org/wiki/Electric_motor</text>
+<text top="820" left="860" width="6" height="11" font="14">, </text>
+<text top="834" left="505" width="31" height="11" font="14">2011. </text>
+<text top="849" left="478" width="388" height="11" font="14">[6]  Yuan-Yong  Hsu,  Shao-Yuan  Lu,  Design  and  implementation  of  a  hybrid </text>
+<text top="863" left="505" width="361" height="11" font="14">electric  motorcycle  management  system,  Applied  Energy  2010,  vol.  87, </text>
+<text top="877" left="505" width="77" height="11" font="14">pp. 3546-3551. </text>
+<text top="891" left="478" width="385" height="11" font="14">[7]  Yu-Ta  Shen,  Yean-Ren  Hwang,  Design  and  implementation  of  an  air-</text>
+<text top="906" left="505" width="335" height="11" font="14">powered motorcycles, Applied Energy 2009, vol. 86, pp. 1105-1110. </text>
+<text top="920" left="478" width="388" height="11" font="14">[8]  S.R.  Pandian,  F.  Takemura,  Y.  Hayakawa,  and  S.  Kawamura,  Control </text>
+<text top="934" left="505" width="361" height="11" font="14">performance  of  an  air  motor  –  can  air  motors  replace  electric  motors, </text>
+<text top="948" left="505" width="358" height="11" font="14">Robotics and Automation, IEEE Int. Conference on 1999, vol. 1, pp. 518-</text>
+<text top="962" left="505" width="24" height="11" font="14">524. </text>
+<text top="977" left="478" width="354" height="11" font="14">[9] S.J. Majumdar, Pneumatic systems, Mc-Graw Hill, New York, 1996. </text>
+<text top="991" left="478" width="388" height="11" font="14">[10]  J.L.  Shearer,  Study  of  pneumatic  processes  in  the  continuous  control  of </text>
+<text top="1005" left="505" width="349" height="11" font="14">motion with compressed air, Trans. ASME, 1956, vol. 78, pp. 233-249. </text>
+<text top="1019" left="478" width="388" height="11" font="14">[11]  Eric  Monmasson,  Marcian  N.  Cirstea,  FPGA  design  methodology  for </text>
+<text top="1034" left="505" width="361" height="11" font="14">industrial  control  systems  –  a  review,  Industrial  Electronics,  IEEE </text>
+<text top="1048" left="505" width="227" height="11" font="14">Transactions on 2007, vol. 54, pp. 1824-1842.<b> </b></text>
+</page>
+</pdf2xml>

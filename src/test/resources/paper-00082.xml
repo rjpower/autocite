@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="2" size="13" family="Helvetica" color="#3b8cc3"/>
+<text top="176" left="75" width="748" height="17" font="0"> An FPGA based demonstrator for a topological processor in the future ATLAS L1-Calo trigger</text>
+<text top="212" left="75" width="64" height="17" font="0">&#34;GOLD&#34;</text>
+<text top="292" left="75" width="642" height="14" font="1">This article has been downloaded from IOPscience. Please scroll down to see the full text article.</text>
+<text top="322" left="75" width="148" height="14" font="1">2012 JINST 7 C01067</text>
+<text top="352" left="75" width="334" height="14" font="1">(http://iopscience.iop.org/1748-0221/7/01/C01067)</text>
+<text top="510" left="75" width="118" height="14" font="1">Download details:</text>
+<text top="532" left="75" width="186" height="14" font="1">IP Address: 216.165.108.65</text>
+<text top="555" left="75" width="344" height="14" font="1">The article was downloaded on 25/01/2012 at 05:00</text>
+<text top="615" left="75" width="295" height="14" font="1">Please note that <a href="http://iopscience.iop.org/page/terms">terms and conditions apply.</a></text>
+<text top="390" left="75" width="529" height="14" font="1">View <a href="http://iopscience.iop.org/1748-0221/7/01">the table of contents for this issue</a>, or go to the <a href="http://iopscience.iop.org/1748-0221">journal homepage for more</a></text>
+<text top="85" left="15" width="40" height="14" font="2"><a href="http://iopscience.iop.org/">Home</a></text>
+<text top="85" left="75" width="48" height="14" font="2"><a href="http://iopscience.iop.org/search">Search</a></text>
+<text top="85" left="143" width="73" height="14" font="2"><a href="http://iopscience.iop.org/collections">Collections</a></text>
+<text top="85" left="233" width="57" height="14" font="2"><a href="http://iopscience.iop.org/journals">Journals</a></text>
+<text top="85" left="306" width="39" height="14" font="2"><a href="http://iopscience.iop.org/page/aboutioppublishing">About</a></text>
+<text top="85" left="360" width="72" height="14" font="2"><a href="http://iopscience.iop.org/contact">Contact us</a></text>
+<text top="85" left="448" width="101" height="14" font="2"><a href="http://iopscience.iop.org/myiopscience">My IOPscience</a></text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="3" size="42" family="Courier" color="#bfbfbf"/>
+	<fontspec id="4" size="12" family="Times" color="#000000"/>
+	<fontspec id="5" size="9" family="Times" color="#000000"/>
+	<fontspec id="6" size="11" family="Times" color="#000000"/>
+	<fontspec id="7" size="8" family="Times" color="#000000"/>
+	<fontspec id="8" size="14" family="Times" color="#000000"/>
+	<fontspec id="9" size="23" family="Times" color="#000000"/>
+	<fontspec id="10" size="14" family="Times" color="#000000"/>
+	<fontspec id="11" size="14" family="Times" color="#0000ff"/>
+	<fontspec id="12" size="12" family="Times" color="#0000ff"/>
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="132" left="481" width="8" height="13" font="4">P</text>
+<text top="134" left="490" width="86" height="11" font="5">UBLISHED BY</text>
+<text top="132" left="581" width="38" height="13" font="4">IOP P</text>
+<text top="134" left="620" width="100" height="11" font="5">UBLISHING FOR</text>
+<text top="132" left="724" width="44" height="13" font="4">SISSA</text>
+<text top="161" left="594" width="9" height="12" font="6">R</text>
+<text top="163" left="604" width="50" height="10" font="7">ECEIVED</text>
+<text top="161" left="654" width="113" height="12" font="6">: November 11, 2011</text>
+<text top="179" left="599" width="10" height="12" font="6">A</text>
+<text top="181" left="609" width="52" height="10" font="7">CCEPTED</text>
+<text top="179" left="661" width="107" height="12" font="6">: December 6, 2011</text>
+<text top="197" left="600" width="7" height="12" font="6">P</text>
+<text top="199" left="608" width="58" height="10" font="7">UBLISHED</text>
+<text top="197" left="666" width="102" height="12" font="6">: January 18, 2012</text>
+<text top="227" left="125" width="10" height="15" font="8">T</text>
+<text top="229" left="136" width="52" height="12" font="6">OPICAL</text>
+<text top="227" left="193" width="16" height="15" font="8">W</text>
+<text top="229" left="209" width="97" height="12" font="6">ORKSHOP ON</text>
+<text top="227" left="311" width="11" height="15" font="8">E</text>
+<text top="229" left="323" width="127" height="12" font="6">LECTRONICS FOR</text>
+<text top="227" left="455" width="11" height="15" font="8">P</text>
+<text top="229" left="465" width="60" height="12" font="6">ARTICLE</text>
+<text top="227" left="531" width="11" height="15" font="8">P</text>
+<text top="229" left="542" width="53" height="12" font="6">HYSICS</text>
+<text top="227" left="601" width="44" height="15" font="8">2011,</text>
+<text top="249" left="125" width="65" height="15" font="8">26–30 S</text>
+<text top="252" left="192" width="78" height="12" font="6">EPTEMBER</text>
+<text top="249" left="275" width="44" height="15" font="8">2011,</text>
+<text top="272" left="125" width="11" height="15" font="8">V</text>
+<text top="274" left="137" width="43" height="12" font="6">IENNA</text>
+<text top="272" left="181" width="21" height="15" font="8">, A</text>
+<text top="274" left="202" width="52" height="12" font="6">USTRIA</text>
+<text top="354" left="125" width="567" height="24" font="9"><b>An FPGA based demonstrator for a topological</b></text>
+<text top="391" left="125" width="553" height="24" font="9"><b>processor in the future ATLAS L1-Calo trigger</b></text>
+<text top="427" left="125" width="99" height="24" font="9"><b>“GOLD”</b></text>
+<text top="524" left="125" width="189" height="15" font="10"><b>A. Ebling, B. Bauß, V. B ¨</b></text>
+<text top="524" left="306" width="430" height="15" font="10"><b>uscher, R. Degele, W. Ji, C. Meyer, S. Moritz, U. Sch ¨afer,</b></text>
+<text top="548" left="125" width="84" height="15" font="10"><b>E. Simioni,</b></text>
+<text top="546" left="209" width="6" height="11" font="5">1</text>
+<text top="548" left="220" width="216" height="15" font="10"><b>S. Tapprogge and V. Wenzel</b></text>
+<text top="577" left="137" width="122" height="13" font="4">University of Mainz,</text>
+<text top="597" left="137" width="208" height="13" font="4">Staudingerweg 7, Mainz, Germany</text>
+<text top="629" left="137" width="50" height="14" font="8">E-mail:</text>
+<text top="629" left="192" width="189" height="14" font="11"><a href="mailto:eduard.simioni@cern.ch">eduard.simioni@cern.ch</a></text>
+<text top="673" left="125" width="12" height="15" font="8">A</text>
+<text top="675" left="138" width="63" height="12" font="6">BSTRACT</text>
+<text top="673" left="201" width="567" height="15" font="8">: The existing ATLAS trigger consists of three levels. The level 1 (L1) is an FPGAs</text>
+<text top="696" left="125" width="643" height="15" font="8">based custom designed trigger, while the second and third levels are software based. The LHC ma-</text>
+<text top="718" left="125" width="643" height="15" font="8">chine plans to bring the beam energy to the maximum value of 7 TeV and to increase the luminosity</text>
+<text top="740" left="125" width="643" height="15" font="8">in the coming years. The current L1 trigger system is therefore seriously challenged. To cope with</text>
+<text top="763" left="125" width="643" height="15" font="8">the resulting higher event rate, as part of the ATLAS trigger upgrade, a new electronics module is</text>
+<text top="785" left="125" width="643" height="15" font="8">foreseen to be added into the ATLAS Level-1 Calorimeter Trigger electronics chain: the topolog-</text>
+<text top="807" left="125" width="643" height="15" font="8">ical Processor (TP). Such a processor needs fast optical I/O and large aggregate bandwidth to use</text>
+<text top="830" left="125" width="643" height="15" font="8">the information on trigger object position in space (e.g. jets in the calorimeters or muons measured</text>
+<text top="852" left="125" width="643" height="15" font="8">in the muon detectors) to improve the purity of the L1 triggers streams by applying topological cuts</text>
+<text top="874" left="125" width="643" height="15" font="8">within the L1 latency budget. In this paper, an overview of the adopted technological solutions and</text>
+<text top="897" left="125" width="498" height="15" font="8">the R&amp;D activities on the demonstrator for the TP (“GOLD”) are presented.</text>
+<text top="943" left="125" width="12" height="15" font="8">K</text>
+<text top="945" left="138" width="69" height="12" font="6">EYWORDS</text>
+<text top="943" left="208" width="560" height="15" font="8">: Trigger concepts and systems (hardware and software); Trigger algorithms; Digital</text>
+<text top="965" left="125" width="257" height="15" font="8">electronic circuits; Modular electronics</text>
+<text top="1070" left="143" width="5" height="9" font="7">1</text>
+<text top="1073" left="149" width="120" height="12" font="6">Corresponding author.</text>
+<text top="1162" left="128" width="187" height="11" font="5">c 2012 IOP Publishing Ltd and SISSA</text>
+<text top="1160" left="545" width="23" height="13" font="4"><a href="http://dx.doi.org/10.1088/1748-0221/7/01/C01067">doi:</a></text>
+<text top="1160" left="568" width="200" height="13" font="12"><a href="http://dx.doi.org/10.1088/1748-0221/7/01/C01067">10.1088/1748-0221/7/01/C01067</a></text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="13" size="15" family="Times" color="#000000"/>
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="168" left="125" width="69" height="16" font="13">Contents</text>
+<text top="209" left="125" width="8" height="15" font="8">1</text>
+<text top="209" left="150" width="140" height="15" font="8">The L1Calo Trigger</text>
+<text top="209" left="760" width="8" height="15" font="11"><a href="pdfxml.html#3">1</a></text>
+<text top="248" left="125" width="8" height="15" font="8">2</text>
+<text top="248" left="150" width="296" height="15" font="8">Phase I upgrade and topological processor</text>
+<text top="248" left="760" width="8" height="15" font="11"><a href="pdfxml.html#4">2</a></text>
+<text top="286" left="125" width="8" height="15" font="8">3</text>
+<text top="286" left="150" width="290" height="15" font="8">GOLD requirements and implementation</text>
+<text top="286" left="760" width="8" height="15" font="11"><a href="pdfxml.html#4">2</a></text>
+<text top="309" left="150" width="20" height="15" font="8">3.1</text>
+<text top="309" left="187" width="124" height="15" font="8">Main requirements</text>
+<text top="309" left="760" width="8" height="15" font="11"><a href="pdfxml.html#5">3</a></text>
+<text top="331" left="150" width="20" height="15" font="8">3.2</text>
+<text top="331" left="187" width="190" height="15" font="8">Features and implementation</text>
+<text top="331" left="760" width="8" height="15" font="11"><a href="pdfxml.html#5">3</a></text>
+<text top="354" left="187" width="33" height="15" font="8">3.2.1</text>
+<text top="354" left="240" width="115" height="15" font="8">Processing power</text>
+<text top="354" left="760" width="8" height="15" font="11"><a href="pdfxml.html#5">3</a></text>
+<text top="376" left="187" width="33" height="15" font="8">3.2.2</text>
+<text top="376" left="240" width="127" height="15" font="8">Real time data path</text>
+<text top="376" left="760" width="8" height="15" font="11"><a href="pdfxml.html#5">3</a></text>
+<text top="398" left="187" width="33" height="15" font="8">3.2.3</text>
+<text top="398" left="240" width="118" height="15" font="8">Clock distribution</text>
+<text top="398" left="760" width="8" height="15" font="11"><a href="pdfxml.html#6">4</a></text>
+<text top="421" left="187" width="33" height="15" font="8">3.2.4</text>
+<text top="421" left="240" width="169" height="15" font="8">Conﬁguration and control</text>
+<text top="421" left="760" width="8" height="15" font="11"><a href="pdfxml.html#6">4</a></text>
+<text top="459" left="125" width="8" height="15" font="8">4</text>
+<text top="459" left="150" width="174" height="15" font="8">GOLD production status</text>
+<text top="459" left="760" width="8" height="15" font="11"><a href="pdfxml.html#7">5</a></text>
+<text top="498" left="125" width="8" height="15" font="8">5</text>
+<text top="498" left="150" width="166" height="15" font="8">Plans for GOLD testing</text>
+<text top="498" left="760" width="8" height="15" font="11"><a href="pdfxml.html#7">5</a></text>
+<text top="537" left="125" width="8" height="15" font="8">6</text>
+<text top="537" left="150" width="69" height="15" font="8">Summary</text>
+<text top="537" left="760" width="8" height="15" font="11"><a href="pdfxml.html#9">7</a></text>
+<text top="640" left="125" width="9" height="16" font="13">1</text>
+<text top="640" left="152" width="153" height="16" font="13">The L1Calo Trigger</text>
+<text top="681" left="125" width="643" height="15" font="8">The ATLAS Level-1 Calorimeter Trigger (L1Calo) is a ﬁxed latency, 40 MHz hardware-based</text>
+<text top="703" left="125" width="549" height="15" font="8">pipelined system built to operate at the LHC design instantaneous luminosity of 10</text>
+<text top="700" left="674" width="12" height="11" font="5">34</text>
+<text top="703" left="687" width="20" height="15" font="8">cm</text>
+<text top="699" left="707" width="15" height="12" font="5">−2</text>
+<text top="703" left="723" width="6" height="15" font="8">s</text>
+<text top="699" left="729" width="15" height="12" font="5">−1</text>
+<text top="703" left="750" width="5" height="15" font="8"><a href="pdfxml.html#9">[</a></text>
+<text top="703" left="756" width="8" height="15" font="11"><a href="pdfxml.html#9">1</a></text>
+<text top="703" left="764" width="4" height="15" font="8"><a href="pdfxml.html#9">,</a></text>
+<text top="726" left="125" width="8" height="15" font="11"><a href="pdfxml.html#9">2</a></text>
+<text top="726" left="133" width="635" height="15" font="8"><a href="pdfxml.html#9">]. </a>The input data comes from 7200 analogue “trigger towers” built with a granularity of 0.1 × 0.1</text>
+<text top="748" left="125" width="553" height="15" font="8">in the η/φ range covered by the ATLAS electromagnetic and hadronic calorimeters.</text>
+<text top="770" left="155" width="612" height="15" font="8">After digitization of the input signals, and digital ﬁltering on a mixed-signal Pre-Processor, the</text>
+<text top="793" left="125" width="643" height="15" font="8">trigger tower signals are processed on a Cluster Processor (CP), aimed at identiﬁcation of electron,</text>
+<text top="815" left="125" width="643" height="15" font="8">photon, tau and hadron candidates with a Transverse Energy (ET) above a set of programmable</text>
+<text top="837" left="125" width="77" height="15" font="8">thresholds <a href="pdfxml.html#9">[</a></text>
+<text top="837" left="202" width="8" height="15" font="11"><a href="pdfxml.html#9">3</a></text>
+<text top="837" left="210" width="558" height="15" font="8"><a href="pdfxml.html#9">], </a>and a Jet/Energy-sum Processor (JEP) which identiﬁes jet candidates and produces</text>
+<text top="860" left="125" width="301" height="15" font="8">global sums of total, missing, and jet-sum ET.</text>
+<text top="882" left="155" width="612" height="15" font="8">Inside the CP and the JEP are the Common Merger Modules (CMMs) which count the multi-</text>
+<text top="904" left="125" width="643" height="15" font="8">plicities of triggered objects over the entire crate and send the result to the Central Trigger Processor</text>
+<text top="927" left="125" width="643" height="15" font="8">(CTP) where the actual trigger decision is taken. The total latency of the Level-1 electronics chain</text>
+<text top="949" left="125" width="643" height="15" font="8">is 2.1 µs, including cabling. Upon receiving the L1Accept signal from the CTP, the coordinates in</text>
+<text top="972" left="125" width="643" height="15" font="8">the η/φ plane for each object identiﬁed at L1 (Region of Interest, RoI) are sent through ReadOut</text>
+<text top="994" left="125" width="269" height="15" font="8">Drivers (RODs) on to the Level 2 trigger.</text>
+<text top="1159" left="430" width="33" height="15" font="8">– 1 –</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="356" left="134" width="625" height="14" font="4">Figure 1. Simpliﬁed outline of the L1-Calo trigger chain with the inclusion of the topological processor.</text>
+<text top="403" left="125" width="9" height="16" font="13">2</text>
+<text top="403" left="152" width="324" height="16" font="13">Phase I upgrade and topological processor</text>
+<text top="444" left="125" width="404" height="15" font="8">Due to the gradual increase in the LHC luminosity up to 10</text>
+<text top="441" left="529" width="12" height="11" font="5">34</text>
+<text top="444" left="542" width="20" height="15" font="8">cm</text>
+<text top="440" left="562" width="15" height="12" font="5">−2</text>
+<text top="444" left="578" width="6" height="15" font="8">s</text>
+<text top="440" left="584" width="15" height="12" font="5">−1</text>
+<text top="444" left="606" width="162" height="15" font="8">as it is foreseen in 2014</text>
+<text top="466" left="125" width="149" height="15" font="8">(Phase 0) and 2.5 × 10</text>
+<text top="463" left="274" width="12" height="11" font="5">34</text>
+<text top="466" left="287" width="20" height="15" font="8">cm</text>
+<text top="462" left="307" width="15" height="12" font="5">−2</text>
+<text top="466" left="323" width="6" height="15" font="8">s</text>
+<text top="462" left="330" width="15" height="12" font="5">−1</text>
+<text top="466" left="350" width="418" height="15" font="8">for 2018 (Phase I), the L1-Calo trigger needs to be upgraded to</text>
+<text top="488" left="125" width="643" height="15" font="8">cope with the higher background rate in order to keep L1 trigger rates at current levels without</text>
+<text top="511" left="125" width="302" height="15" font="8">pre-scaling trigger streams of physics interest.</text>
+<text top="533" left="155" width="612" height="15" font="8">As mentioned before, the current L1-Calo trigger allows making selections on counts of ob-</text>
+<text top="556" left="125" width="643" height="15" font="8">jects (numbers of jets at various thresholds and clusters) and Missing Transverse Energy. To achieve</text>
+<text top="578" left="125" width="643" height="15" font="8">additional background rate reduction at Level-1, the information on jet or muon direction in space</text>
+<text top="600" left="125" width="643" height="15" font="8">can be used. The current L1-Calo scheme is not designed to handle such amount of information in</text>
+<text top="623" left="125" width="643" height="15" font="8">the Real Time Data Path (RTDP). To explore this feature, a new element in the L1-chain is needed:</text>
+<text top="645" left="125" width="643" height="15" font="8">the Topological Processor (TP). The TP will make it possible to use the RoI information in the L1</text>
+<text top="667" left="125" width="643" height="15" font="8">trigger. Technically the TP works as a data concentrator (from the calorimeters and muon detec-</text>
+<text top="690" left="125" width="643" height="15" font="8">tors) and feeds such data into speciﬁc topological algorithms which provide an output to the CTP.</text>
+<text top="712" left="125" width="643" height="15" font="8">As a consequence, the TP requires optical connectivity (data concentrator), high bandwidth, and</text>
+<text top="734" left="125" width="643" height="15" font="8">high processing power (algorithms coded into FPGAs). Some modules in the existing L1 trigger</text>
+<text top="757" left="125" width="643" height="15" font="8">signal chain will have to be upgraded or replaced to make topological information available to the</text>
+<text top="779" left="125" width="458" height="15" font="8">TP. An outline of the trigger chain including the TP is shown in ﬁgure</text>
+<text top="779" left="587" width="8" height="15" font="11"><a href="pdfxml.html#4">1</a></text>
+<text top="779" left="595" width="4" height="15" font="8"><a href="pdfxml.html#4">.</a></text>
+<text top="801" left="155" width="612" height="15" font="8">The applications can perform many tasks. As an example, extensive studies in calculating cor-</text>
+<text top="824" left="125" width="643" height="15" font="8">relations among jet angles by cutting on their relative azimuthal angle, have shown large potential</text>
+<text top="846" left="125" width="643" height="15" font="8">in reducing QCD background in the dijet plus Missing Transverse Energy stream. Optimization</text>
+<text top="869" left="125" width="643" height="15" font="8">of speciﬁc topological algorithms is of central interest and is currently pursued on high luminosity</text>
+<text top="891" left="125" width="139" height="15" font="8">monte carlo samples.</text>
+<text top="938" left="125" width="9" height="16" font="13">3</text>
+<text top="938" left="152" width="318" height="16" font="13">GOLD requirements and implementation</text>
+<text top="979" left="125" width="643" height="15" font="8">The GOLD “Generic Opto Link Demonstrator” is a demonstrator module for the technologies to</text>
+<text top="1001" left="125" width="220" height="15" font="8">be implemented in the TP design.</text>
+<text top="1159" left="430" width="33" height="15" font="8">– 2 –</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="131" left="125" width="20" height="15" font="8">3.1</text>
+<text top="131" left="162" width="134" height="15" font="8">Main requirements</text>
+<text top="163" left="125" width="643" height="15" font="8">The GOLD main board is based on the AdvancedTCA form factor. The board needs to carry pro-</text>
+<text top="185" left="125" width="643" height="15" font="8">grammable logic devices (FPGAs and CPLDs), external interfaces, general module infrastructure</text>
+<text top="208" left="125" width="643" height="15" font="8">and power regulators. Electro-optical converters for incoming data, as well as electrical fan-out</text>
+<text top="230" left="125" width="643" height="15" font="8">are located on an mezzanine module. Clock circuitry is located on a separate mezzanine board.</text>
+<text top="252" left="125" width="524" height="15" font="8">Another small mezzanine is dedicated to pre-conﬁguration access to the GOLD.</text>
+<text top="275" left="155" width="612" height="15" font="8">For the intended use as future modules in the L1Calo trigger chain, low processing latency</text>
+<text top="297" left="125" width="643" height="15" font="8">on the Real-Time Data Path (RTDP) is crucial. The GOLD is designed for minimum latency data</text>
+<text top="319" left="125" width="342" height="15" font="8">transmission and processing throughout the module.</text>
+<text top="342" left="155" width="612" height="15" font="8">The GOLD is envisaged to be used as a test bench for topological algorithms running on</text>
+<text top="364" left="125" width="643" height="15" font="8">Xilinx Virtex-6 family FPGAs, moreover it can be used as optical data sink (and source) for L1Calo</text>
+<text top="386" left="125" width="224" height="15" font="8">modules, or stand-alone link tests.</text>
+<text top="425" left="125" width="20" height="15" font="8">3.2</text>
+<text top="425" left="162" width="205" height="15" font="8">Features and implementation</text>
+<text top="457" left="125" width="372" height="15" font="8">A full review of the GOLD speciﬁcation is available on <a href="pdfxml.html#9">[</a></text>
+<text top="457" left="497" width="8" height="15" font="11"><a href="pdfxml.html#9">4</a></text>
+<text top="457" left="505" width="262" height="15" font="8"><a href="pdfxml.html#9">]. </a>Here a summary of some key features</text>
+<text top="479" left="125" width="129" height="15" font="8">is brieﬂy discussed.</text>
+<text top="518" left="125" width="33" height="15" font="8">3.2.1</text>
+<text top="518" left="174" width="122" height="15" font="8">Processing power</text>
+<text top="548" left="125" width="643" height="15" font="8">The processing power is provided by FPGAs of the Xilinx Virtex-6 product families. The GOLD</text>
+<text top="571" left="125" width="643" height="15" font="8">PCB has been designed to be used as a common test bench for two Virtex-6 product lines</text>
+<text top="593" left="125" width="643" height="15" font="8">(LXT/HXT). HXT has become available on the market only recently, and therefore all current</text>
+<text top="615" left="125" width="643" height="15" font="8">documentation is focused on the XC6VLXT. The Multi-Gigabit Transceivers (MGTs) of the LXT</text>
+<text top="638" left="125" width="202" height="15" font="8">devices support up to 6.6 Gbs</text>
+<text top="634" left="327" width="15" height="12" font="5">−1</text>
+<text top="638" left="349" width="419" height="15" font="8">data rate, higher data rates can be handled on the GOLD only</text>
+<text top="660" left="125" width="643" height="15" font="8">if HXT devices are mounted. Both the LXT and the HXT subsystems are connected to the input</text>
+<text top="682" left="125" width="473" height="15" font="8">mezzanine with two 400-pin FMC mezzanine connectors each. In ﬁgure</text>
+<text top="682" left="602" width="8" height="15" font="11"><a href="pdfxml.html#6">2</a></text>
+<text top="682" left="615" width="153" height="15" font="8">the outline of the board</text>
+<text top="705" left="125" width="643" height="15" font="8">shows the physical locations of the FPGAs, indicated with the letters from A to J. Initially only the</text>
+<text top="727" left="125" width="416" height="15" font="8">upper half of the board will be gradually mounted with FPGAs.</text>
+<text top="749" left="155" width="596" height="15" font="8">The input processor FPGAs (A, B, C, D) are each fed electrically at up to 36 × 6.6 Gbs</text>
+<text top="746" left="752" width="15" height="12" font="5">−1</text>
+<text top="772" left="125" width="643" height="15" font="8">from the centrally located input mezzanines. Their processing power is available to regional pre-</text>
+<text top="794" left="125" width="643" height="15" font="8">processing at quadrant level. The input processors are connected to the main processor using</text>
+<text top="817" left="125" width="155" height="15" font="8">parallel differential I/O.</text>
+<text top="839" left="155" width="612" height="15" font="8">The main processor FPGA (E) has access to the results from the input processors via a total of</text>
+<text top="861" left="125" width="643" height="15" font="8">320 differential lanes. A small fraction of lanes are required for control purposes on this demon-</text>
+<text top="884" left="125" width="643" height="15" font="8">strator. The main processor has access to the detector information from the full solid angle and will</text>
+<text top="906" left="125" width="643" height="15" font="8">therefore house global algorithms. The output of the topological algorithms is sent from the main</text>
+<text top="928" left="125" width="504" height="15" font="8">processor via a single ﬁbre-optical ribbon through the front panel to the CTP.</text>
+<text top="967" left="125" width="33" height="15" font="8">3.2.2</text>
+<text top="967" left="174" width="138" height="15" font="8">Real time data path</text>
+<text top="997" left="125" width="445" height="15" font="8">ATCA backplane zones 2 and 3 of the GOLD (Z2 and Z3 in ﬁgure</text>
+<text top="997" left="575" width="8" height="15" font="11"><a href="pdfxml.html#6">2</a></text>
+<text top="997" left="583" width="185" height="15" font="8"><a href="pdfxml.html#6">) </a>are used for real-time data</text>
+<text top="1020" left="125" width="643" height="15" font="8">transmission. Optical data enter the GOLD through the backplane. The ﬁbres are fed in via ﬁve</text>
+<text top="1042" left="125" width="643" height="15" font="8">blind-mate MTP/MPO type backplane connectors that can carry up to 72 ﬁbres each. This lim-</text>
+<text top="1064" left="125" width="550" height="15" font="8">its the maximum aggregate bandwidth on the optical inputs to 3.6Tb/s, if 10 Gbs</text>
+<text top="1061" left="675" width="15" height="12" font="5">−1</text>
+<text top="1064" left="696" width="72" height="15" font="8">line rate is</text>
+<text top="1159" left="430" width="33" height="15" font="8">– 3 –</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="356" left="125" width="643" height="14" font="4">Figure 2. The location of the FPGAs on the GOLD module. The letters from A to J indicate FPGAs. The</text>
+<text top="376" left="125" width="643" height="13" font="4">letters V,W,X,Y indicate the FMC connector to the opto mezzanine. The letters Z1,Z2 and Z3 correspond to</text>
+<text top="396" left="125" width="167" height="13" font="4">the ATCA backplane zones.</text>
+<text top="445" left="125" width="643" height="15" font="8">used throughout. The opto-electrical conversion is performed by 12-ﬁbre industry standard re-</text>
+<text top="467" left="125" width="643" height="15" font="8">ceivers mounted on mezzanine modules feeding electrical signals through four FMC connectors</text>
+<text top="489" left="125" width="643" height="15" font="8">with differential signal layout. CML fan out circuits can be implemented on the mezzanines to</text>
+<text top="512" left="125" width="643" height="15" font="8">explore electrical duplication schemes required by topological algorithms. Data from the two</text>
+<text top="534" left="125" width="509" height="15" font="8">top FMC connectors are routed to the four input FPGAs (A, B, C, D in ﬁgure</text>
+<text top="534" left="639" width="8" height="15" font="11"><a href="pdfxml.html#6">2</a></text>
+<text top="534" left="647" width="121" height="15" font="8"><a href="pdfxml.html#6">) </a>and de-serialised</text>
+<text top="556" left="125" width="120" height="15" font="8">in MGT receivers.</text>
+<text top="596" left="125" width="33" height="15" font="8">3.2.3</text>
+<text top="596" left="174" width="127" height="15" font="8">Clock distribution</text>
+<text top="625" left="125" width="643" height="15" font="8">FPGA fabric and MGT clocks need appropriate signal levels and signal quality. The MGT clocks</text>
+<text top="648" left="125" width="643" height="15" font="8">are CML level signals, AC-coupled into the MGT clock pads of the FPGAs. Clock generation</text>
+<text top="670" left="125" width="643" height="15" font="8">and jitter clean-up are performed on a clock and control mezzanine module, located towards the</text>
+<text top="693" left="125" width="643" height="15" font="8">bottom of the GOLD. There are two independent clock trees for the fabric clocks into all FPGAs.</text>
+<text top="715" left="125" width="643" height="15" font="8">There is one common MGT clock tree into all FPGAs. Another MGT clock tree supplies the main</text>
+<text top="737" left="125" width="643" height="15" font="8">processor MGTs. There is yet another clock tree available to supply the high speed quads of the</text>
+<text top="760" left="125" width="133" height="15" font="8">XC6VHXT devices.</text>
+<text top="799" left="125" width="33" height="15" font="8">3.2.4</text>
+<text top="799" left="174" width="182" height="15" font="8">Conﬁguration and control</text>
+<text top="829" left="125" width="643" height="15" font="8">With the GOLD, an attempt of prototyping various module controls for future ATCA based mod-</text>
+<text top="851" left="125" width="643" height="15" font="8">ules is performed. The GOLD is equipped with a USB microcontroller which supports 480Mb/s</text>
+<text top="873" left="125" width="643" height="15" font="8">USB high-speed mode. The microcontroller is interfaced to the FPGAs via JTAG protocol. The</text>
+<text top="896" left="125" width="643" height="15" font="8">microcontroller design is fully compatible to the Xilinx platform USB solution. Either production</text>
+<text top="918" left="125" width="434" height="15" font="8">ﬁrmware or service code can be loaded to the FPGAs, as required.</text>
+<text top="940" left="155" width="612" height="15" font="8">GOLD module control is initially done via a serially extended VME bus. The module is seen</text>
+<text top="963" left="125" width="643" height="15" font="8">from a VME crate CPU as if it were a local VME module. As soon as the required software</text>
+<text top="985" left="125" width="643" height="15" font="8">environment is available, this access mode will be converted to standard Ethernet access. The</text>
+<text top="1007" left="125" width="387" height="15" font="8">required hardware components are available on the GOLD.</text>
+<text top="1159" left="430" width="33" height="15" font="8">– 4 –</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="498" left="285" width="323" height="14" font="4">Figure 3. Picture of the GOLD PCB before assembly.</text>
+<text top="546" left="125" width="9" height="16" font="13">4</text>
+<text top="546" left="152" width="191" height="16" font="13">GOLD production status</text>
+<text top="586" left="125" width="643" height="15" font="8">The GOLD PCB has been produced in September 2011 and at the time of this conference is in</text>
+<text top="608" left="125" width="643" height="15" font="8">assembly phase. Initially the GOLD will mount three XC6VLX240 devices: the two input FPGAs</text>
+<text top="631" left="125" width="276" height="15" font="8">indicated with the letters A and B in ﬁgure</text>
+<text top="631" left="405" width="8" height="15" font="11"><a href="pdfxml.html#6">2</a></text>
+<text top="631" left="417" width="351" height="15" font="8">and the main processor. This will allow initial tests on</text>
+<text top="653" left="125" width="627" height="15" font="8">the hardware as explained in the next section. A picture of the bare GOLD PCB is show in ﬁgure</text>
+<text top="653" left="756" width="8" height="15" font="11"><a href="pdfxml.html#7">3</a></text>
+<text top="653" left="764" width="4" height="15" font="8"><a href="pdfxml.html#7">.</a></text>
+<text top="701" left="125" width="9" height="16" font="13">5</text>
+<text top="701" left="152" width="181" height="16" font="13">Plans for GOLD testing</text>
+<text top="741" left="125" width="643" height="15" font="8">After the PCB production, an electrical test was performed in order to guarantee that all inter-</text>
+<text top="764" left="125" width="643" height="15" font="8">connections were functioning. Moreover, after assembly, extended tests aimed at verifying the</text>
+<text top="786" left="125" width="643" height="15" font="8">operation of the external hardware interface, board level connectivity and the basic operation of the</text>
+<text top="808" left="125" width="198" height="15" font="8">hardware devices are planned.</text>
+<text top="831" left="155" width="440" height="15" font="8">A schematic overview of the GOLD test setup is shown in ﬁgure</text>
+<text top="831" left="601" width="8" height="15" font="11"><a href="pdfxml.html#8">4</a></text>
+<text top="831" left="609" width="159" height="15" font="8"><a href="pdfxml.html#8">. </a>The GOLD control is</text>
+<text top="853" left="125" width="643" height="15" font="8">obtained via an opto ﬁbre connection to a 6U VME-busmodule carrying SerDes devices and optical</text>
+<text top="875" left="125" width="621" height="15" font="8">transceivers. The opto-electrical interface will be a SFP module with LC-type opto connectors.</text>
+<text top="898" left="155" width="612" height="15" font="8">At ﬁrst the interconnection between the FPGAs is tested by means of a JTAG boundary scan</text>
+<text top="920" left="125" width="643" height="15" font="8">performed using the GOEPEL electronics boundary Scan software SYSTEMCASCON, interfaced</text>
+<text top="942" left="125" width="643" height="15" font="8">via USB. Moreover, speciﬁcs test aimed at verifying functioning and performance of the GOLD</text>
+<text top="965" left="125" width="96" height="15" font="8">are here listed:</text>
+<text top="1000" left="125" width="92" height="15" font="8">Latency test:</text>
+<text top="1000" left="234" width="534" height="15" font="8">the latency is measured on high-speed SerDes and SerDes for differential con-</text>
+<text top="1022" left="125" width="643" height="15" font="8">nection between input and main FPGA. The latency and functioning for algorithms was already</text>
+<text top="1045" left="125" width="302" height="15" font="8">simulated and will be validated on the GOLD.</text>
+<text top="1159" left="430" width="33" height="15" font="8">– 5 –</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="408" left="197" width="498" height="14" font="4">Figure 4. Schematic drawing of the set up for tests (blue: control; red: RTDP-test).</text>
+<text top="797" left="189" width="280" height="14" font="4">Figure 5. Picture of an eye diagram at 6.4 Gbs</text>
+<text top="793" left="468" width="14" height="11" font="5">−1</text>
+<text top="797" left="487" width="217" height="13" font="4">measured on another module (BLT).</text>
+<text top="845" left="125" width="169" height="15" font="8">Transceiver ﬁne tuning:</text>
+<text top="845" left="317" width="56" height="15" font="8">in ﬁgure</text>
+<text top="845" left="378" width="8" height="15" font="11"><a href="pdfxml.html#8">5</a></text>
+<text top="845" left="391" width="377" height="15" font="8">and eye diagrams is illustrated. The empty regions mea-</text>
+<text top="868" left="125" width="643" height="15" font="8">sure the interval in which the transceiver is functioning free from bit errors. The eye diagrams</text>
+<text top="890" left="125" width="643" height="15" font="8">are dependent on the transceivers parameters settings. A combined test of the opto-electro con-</text>
+<text top="913" left="125" width="643" height="15" font="8">verter (AVAGO) connected to a MGT (inside the FPGA) is done to maximize the eye opening by</text>
+<text top="935" left="125" width="643" height="15" font="8">ﬁne tuning the transceiver setting. The Xilinx IBERT core has the logic to control, monitor, and</text>
+<text top="957" left="125" width="643" height="15" font="8">change the transceiver parameters runtime, accessible through JTAG. The parameters of the opto-</text>
+<text top="980" left="125" width="239" height="15" font="8">electro converter are controlled via I</text>
+<text top="977" left="364" width="6" height="11" font="5">2</text>
+<text top="980" left="371" width="397" height="15" font="8">C. The eye diagrams are then measured and the eye opening</text>
+<text top="1002" left="125" width="364" height="15" font="8">is maximized by ﬁne tuning such parameters at 6.4 Gbs</text>
+<text top="998" left="489" width="15" height="12" font="5">−1</text>
+<text top="1002" left="505" width="4" height="15" font="8">.</text>
+<text top="1037" left="125" width="171" height="15" font="8">Bit Error Test (IBERT):</text>
+<text top="1037" left="313" width="455" height="15" font="8">the ChipScope Pro Serial I/O toolkit integrate the debug of the high-</text>
+<text top="1060" left="125" width="643" height="15" font="8">speed serial transceiver of Xilinx FPGAs. Eye diagrams are measured for each MGT with Chip-</text>
+<text top="1159" left="430" width="33" height="15" font="8">– 6 –</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="305" left="825" width="0" height="35" font="3">2012 JINST 7 C01067</text>
+<text top="132" left="125" width="643" height="15" font="8">Scope by swapping the sampling point and also directly with the oscilloscope (32GHz; 80 GSa/s).</text>
+<text top="154" left="125" width="310" height="15" font="8">By running up to 8 MGT in parallel at 6.4 Gbs</text>
+<text top="150" left="435" width="15" height="12" font="5">−1</text>
+<text top="154" left="455" width="312" height="15" font="8">(after ﬁne tuning of their setting) for one week,</text>
+<text top="176" left="125" width="317" height="15" font="8">no errors should be measured (error bit rate &lt;10</text>
+<text top="173" left="442" width="21" height="12" font="5">−16</text>
+<text top="176" left="464" width="10" height="15" font="8">).</text>
+<text top="211" left="125" width="239" height="15" font="8">Test of the full chain of the RTDP:</text>
+<text top="212" left="381" width="387" height="15" font="8">12 Channel data source can either be the main FPGA send-</text>
+<text top="234" left="125" width="643" height="15" font="8">ing via one AVAGO on the mainboard, the input FPGA “B” (which is connected to one AVAGO</text>
+<text top="256" left="125" width="371" height="15" font="8">transmitter on the input mezzanine) or the BLT module <a href="pdfxml.html#9">[</a></text>
+<text top="256" left="496" width="8" height="15" font="11"><a href="pdfxml.html#9">5</a></text>
+<text top="256" left="504" width="263" height="15" font="8"><a href="pdfxml.html#9">]. </a>The received data is then processed in</text>
+<text top="279" left="125" width="404" height="15" font="8">the two input FPGAs and the result is sent to the main FPGA.</text>
+<text top="326" left="125" width="9" height="16" font="13">6</text>
+<text top="326" left="152" width="76" height="16" font="13">Summary</text>
+<text top="367" left="125" width="643" height="15" font="8">This document gives an overview of the Generic Opto Link Demonstrator (GOLD) built to explore</text>
+<text top="389" left="125" width="643" height="15" font="8">technological solutions that can be adopted in the future L1Calo TP design. The GOLD will be used</text>
+<text top="411" left="125" width="643" height="15" font="8">to test topological algorithms in their ﬁrmware incarnation and test latency and perfomances on a</text>
+<text top="434" left="125" width="643" height="15" font="8">simulated input. At the time of this conference the GOLD PCB has been produced and assembled.</text>
+<text top="456" left="125" width="431" height="15" font="8">The plan for testing of the board functionality has been presented.</text>
+<text top="504" left="125" width="83" height="16" font="13">References</text>
+<text top="543" left="127" width="389" height="13" font="4">[1] R. Achenbach et al., The ATLAS Level-1 calorimeter trigger,</text>
+<text top="543" left="519" width="133" height="13" font="12"><a href="http://dx.doi.org/10.1088/1748-0221/3/03/P03001">2008 JINST 3 P03001</a></text>
+<text top="543" left="652" width="4" height="13" font="4"><a href="http://dx.doi.org/10.1088/1748-0221/3/03/P03001">.</a></text>
+<text top="570" left="127" width="437" height="13" font="4">[2] J. Garvey et al., The ATLAS Level-1 calorimeter trigger architecture,</text>
+<text top="570" left="567" width="131" height="13" font="12"><a href="http://dx.doi.org/10.1109/TNS.2004.828800">IEEE Trans. Nucl Sci.</a></text>
+<text top="570" left="702" width="59" height="14" font="12"><a href="http://dx.doi.org/10.1109/TNS.2004.828800">51 (2004)</a></text>
+<text top="589" left="152" width="22" height="13" font="12"><a href="http://dx.doi.org/10.1109/TNS.2004.828800">356</a></text>
+<text top="589" left="175" width="4" height="13" font="4"><a href="http://dx.doi.org/10.1109/TNS.2004.828800">.</a></text>
+<text top="617" left="127" width="602" height="13" font="4">[3] J. Garvey et al., Use of an FPGA to identify electromagnetic clusters and isolated hadrons in the</text>
+<text top="637" left="152" width="83" height="13" font="4">ATLAS Level-</text>
+<text top="636" left="235" width="130" height="13" font="4">1 calorimeter trigger,</text>
+<text top="637" left="368" width="124" height="13" font="12"><a href="http://dx.doi.org/10.1016/S0168-9002(03)02015-1">Nucl. Instrum. Meth.</a></text>
+<text top="636" left="496" width="107" height="14" font="12"><a href="http://dx.doi.org/10.1016/S0168-9002(03)02015-1">A 512 (2003) 506</a></text>
+<text top="636" left="603" width="4" height="13" font="4"><a href="http://dx.doi.org/10.1016/S0168-9002(03)02015-1">.</a></text>
+<text top="664" left="127" width="586" height="13" font="4">[4] U. Schaefer et al., ATLAS Level-1 calorimeter trigger GOLD module, private communication,</text>
+<text top="683" left="152" width="492" height="13" font="12"><a href="http://www.staff.uni-mainz.de/uschaefe/browsable/L1Calo/GOLD/GoldURD2.pdf">http://www.staff.uni-mainz.de/uschaefe/browsable/L1Calo/GOLD/GoldURD2.pdf</a></text>
+<text top="683" left="644" width="4" height="13" font="4"><a href="http://www.staff.uni-mainz.de/uschaefe/browsable/L1Calo/GOLD/GoldURD2.pdf">.</a></text>
+<text top="711" left="127" width="596" height="13" font="4">[5] U. Schaefer et al., ATLAS Level-1 calorimeter trigger upgrade backplane tester module, private</text>
+<text top="730" left="152" width="97" height="13" font="4">communication,</text>
+<text top="730" left="253" width="497" height="13" font="12"><a href="http://www.staff.uni-mainz.de/uschaefe/browsable/L1Calo/BackplaneTester/Specs/BackplaneTesterSpecs-03.pdf">http://www.staff.uni-mainz.de/uschaefe/browsable/L1Calo/BackplaneTester/Specs/</a></text>
+<text top="750" left="152" width="178" height="13" font="12"><a href="http://www.staff.uni-mainz.de/uschaefe/browsable/L1Calo/BackplaneTester/Specs/BackplaneTesterSpecs-03.pdf">BackplaneTesterSpecs-03.pdf</a></text>
+<text top="1159" left="430" width="33" height="15" font="8">– 7 –</text>
+</page>
+</pdf2xml>

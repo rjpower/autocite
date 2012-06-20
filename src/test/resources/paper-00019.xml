@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="4968" width="3522">
+	<fontspec id="0" size="25" family="Times" color="#000000"/>
+	<fontspec id="1" size="40" family="Times" color="#000000"/>
+	<fontspec id="2" size="106" family="Times" color="#ffffff"/>
+	<fontspec id="3" size="64" family="Times" color="#000000"/>
+	<fontspec id="4" size="41" family="Times" color="#000000"/>
+	<fontspec id="5" size="34" family="Times" color="#000000"/>
+	<fontspec id="6" size="88" family="Times" color="#000000"/>
+	<fontspec id="7" size="70" family="Times" color="#000000"/>
+	<fontspec id="8" size="28" family="Times" color="#000000"/>
+	<fontspec id="9" size="28" family="Times" color="#ffffff"/>
+	<fontspec id="10" size="31" family="Times" color="#000000"/>
+	<fontspec id="11" size="24" family="Times" color="#000000"/>
+	<fontspec id="12" size="16" family="Times" color="#000000"/>
+	<fontspec id="13" size="40" family="Times" color="#ffffff"/>
+	<fontspec id="14" size="22" family="Times" color="#ffffff"/>
+	<fontspec id="15" size="19" family="Times" color="#ffffff"/>
+	<fontspec id="16" size="34" family="Times" color="#000000"/>
+	<fontspec id="17" size="13" family="Times" color="#000000"/>
+	<fontspec id="18" size="14" family="Times" color="#000000"/>
+	<fontspec id="19" size="79" family="Times" color="#000000"/>
+	<fontspec id="20" size="23" family="Times" color="#000000"/>
+	<fontspec id="21" size="12" family="Times" color="#000000"/>
+	<fontspec id="22" size="31" family="Times" color="#365f91"/>
+	<fontspec id="23" size="29" family="Times" color="#4f81bd"/>
+	<fontspec id="24" size="14" family="Times" color="#4f81bd"/>
+	<fontspec id="25" size="19" family="Times" color="#000000"/>
+	<fontspec id="26" size="23" family="Times" color="#ffffff"/>
+<text top="4899" left="61" width="333" height="30" font="0">© 2011 Tech-X Corporation </text>
+<text top="4750" left="1406" width="1355" height="47" font="1">Work partially supported by Tech-X Corpoation and by the Office of High-</text>
+<text top="4799" left="1406" width="1289" height="47" font="1">Energy Physics, Office of Science, U.S. Department of Energy under </text>
+<text top="4850" left="1406" width="1051" height="47" font="1">Contracts #DE-FG02-08ER85043 and #DE-SC0000842 </text>
+<text top="4787" left="61" width="131" height="47" font="1">The 13</text>
+<text top="4787" left="192" width="23" height="31" font="0">th</text>
+<text top="4787" left="215" width="964" height="47" font="1"> International Conference on Accelerator and Large </text>
+<text top="4837" left="61" width="1022" height="47" font="1">Experimental Physics Control Systems, October, 2011 </text>
+<text top="72" left="1017" width="2029" height="121" font="2">Experiences in Messaging Middleware for  </text>
+<text top="201" left="1278" width="1507" height="121" font="2">High-Level Control Applications </text>
+<text top="342" left="764" width="405" height="74" font="3">Nanbor Wang</text>
+<text top="342" left="1169" width="17" height="49" font="4">*</text>
+<text top="342" left="1186" width="2088" height="74" font="3">, Svetlana Shasharina, James Matykiewicz, and Rooparani Pundaleeka</text>
+<text top="342" left="3261" width="12" height="49" font="4"> </text>
+<text top="420" left="1734" width="569" height="74" font="3">Tech-X Corporation </text>
+<text top="500" left="1712" width="17" height="49" font="4">*</text>
+<text top="499" left="1730" width="595" height="74" font="3">nanbor@txcorp.com </text>
+<text top="875" left="111" width="1018" height="40" font="5">  Existing  high-level  applications  in  accelerator  control  and </text>
+<text top="917" left="67" width="1062" height="40" font="5">modeling  systems  leverage  many  different  languages,  tools  and </text>
+<text top="960" left="67" width="1062" height="40" font="5">frameworks that do not interoperate with one another. As a result, </text>
+<text top="1004" left="67" width="1062" height="40" font="5">the  accelerator  control  community  is  moving  toward  the  proven </text>
+<text top="1047" left="67" width="1062" height="40" font="5">Service-Oriented  Architecture  (SOA)  approach  to  address  the </text>
+<text top="1091" left="67" width="1062" height="40" font="5">interoperability  challenges  among  heterogeneous  high-level </text>
+<text top="1133" left="67" width="1062" height="40" font="5">application  modules.  Such  SOA  approach  enables  developers  to </text>
+<text top="1176" left="67" width="1062" height="40" font="5">package  various  control  subsystems  and  activities  into  “services” </text>
+<text top="1220" left="67" width="1062" height="40" font="5">with well-defined “interfaces” and make leveraging heterogeneous </text>
+<text top="1263" left="67" width="1062" height="40" font="5">high-level applications via flexible composition possible. Examples </text>
+<text top="1307" left="67" width="1062" height="40" font="5">of  such  applications  include  presentation  panel  clients  based  on </text>
+<text top="1349" left="67" width="1062" height="40" font="5">Control  System  Studio  (CSS)  and  middle-layer  applications  such </text>
+<text top="1392" left="67" width="384" height="40" font="5">as model/data servers.  </text>
+<text top="1434" left="113" width="1016" height="44" font="5">	  This	  poster	  presents	  our	  experiences	  in	  developing	  a	  demonstra5ve	  </text>
+<text top="1477" left="67" width="1062" height="44" font="5">high-­‐level	   applica5on	   environment	   using	   emerging	   messaging	  </text>
+<text top="1519" left="67" width="1062" height="44" font="5">middleware	  standards.	  	  In	  par5cular,	  we	  u5lize	  new	  features	  such	  as	  in	  </text>
+<text top="1563" left="67" width="1062" height="44" font="5">EPICS	  v4	  and	  other	  emerging	  standards	  such	  as	  Data	  Distribu5on	  Service	  </text>
+<text top="1606" left="67" width="1062" height="44" font="5">(DDS)	  and	  Extensible	  Type	  Interface	  by	  the	  Object	  Management	  Group.	  </text>
+<text top="1650" left="67" width="1062" height="44" font="5">We	  brieﬂy	  review	  examples	  we	  developed	  previously.	  We	  then	  present	  </text>
+<text top="1693" left="67" width="1062" height="44" font="5">our	  current	  eﬀort	  in	  integra5ng	  DDS	  into	  such	  a	  SOA	  environment	  for	  </text>
+<text top="1735" left="67" width="1062" height="44" font="5">control	   system.	   Speciﬁcally,	   we	   illustrate	   how	   we	   are	   integra5ng	   DDS	  </text>
+<text top="1779" left="67" width="670" height="44" font="5">into	  CSS	  and	  showcase	  our	  other	  DDS	  eﬀorts.	  </text>
+<text top="660" left="435" width="330" height="101" font="6">Abstract </text>
+<text top="1863" left="373" width="455" height="101" font="6">Motivations </text>
+<text top="2109" left="1272" width="984" height="80" font="7">Middle-Layer Server Examples </text>
+<text top="3462" left="1230" width="1062" height="41" font="5">•  We  extended  the  open  source  TouchStone  performance  test </text>
+<text top="3504" left="1270" width="732" height="40" font="5">suite to work with most DDS implementations </text>
+<text top="3548" left="1230" width="1062" height="41" font="5">•  The  test  suite  helps  developers  to  explore  different  ways  to </text>
+<text top="3591" left="1270" width="1022" height="40" font="5">configure  the  overall  system  QoS  policies  using  different </text>
+<text top="3635" left="1270" width="1022" height="40" font="5">operational  scenarios  before  actually  developing  the </text>
+<text top="3678" left="1270" width="200" height="40" font="5">applications </text>
+<text top="3200" left="1395" width="755" height="101" font="6">DDS Performance  </text>
+<text top="3308" left="1575" width="395" height="101" font="6">Test Suite </text>
+<text top="2262" left="1233" width="1062" height="40" font="5">We  developed  an  example  middle-layer  server  on  top  of  two </text>
+<text top="2304" left="1233" width="518" height="40" font="5">different DDS implementations:  </text>
+<text top="2347" left="1233" width="392" height="41" font="5">•  Web Browser runs UI </text>
+<text top="2391" left="1233" width="1062" height="41" font="5">•  Web Server connect to the actual Optim Server using pub/sub </text>
+<text top="2434" left="1274" width="542" height="40" font="5">protocols (DDS and EPICS-DDS) </text>
+<text top="2478" left="1233" width="601" height="41" font="5">•  Optim Server runs MAD-X or UAL  </text>
+<text top="876" left="1230" width="1062" height="40" font="5">Data-centric  publish-subscribe  middleware  provides  more  flexible </text>
+<text top="918" left="1230" width="1062" height="40" font="5">coupling  between  data  information  producers  and  consumers. </text>
+<text top="961" left="1230" width="1062" height="40" font="5">Furthermore, DDS has built-in Quality-of-Service policies that are </text>
+<text top="1005" left="1230" width="424" height="40" font="5">crucial to control systems. </text>
+<text top="666" left="1264" width="996" height="80" font="7">Why Data Distribution Service? </text>
+<text top="1551" left="1230" width="1055" height="41" font="5">•  Deadline: Establishes contract regarding rate at which periodic </text>
+<text top="1593" left="1270" width="278" height="40" font="5">data is refreshed </text>
+<text top="1637" left="1230" width="1055" height="41" font="5">•  Latency:  Establishes  guidelines  for  acceptable  end-to-end </text>
+<text top="1680" left="1270" width="96" height="40" font="5">delay </text>
+<text top="1724" left="1230" width="1055" height="41" font="5">•  Time-based  Filter:  Mediates  exchanges  between  slow </text>
+<text top="1767" left="1270" width="494" height="40" font="5">consumers and fast producers </text>
+<text top="1809" left="1230" width="1013" height="41" font="5">•  Resource Limit: Controls resource utilization by DDS entities </text>
+<text top="1853" left="1230" width="1055" height="41" font="5">•  Reliability: Controls message delivery QoS (Best-effort/reliable) </text>
+<text top="1896" left="1230" width="1056" height="41" font="5">•  History:  Control  how  many  messages  are  kept  by  the </text>
+<text top="1940" left="1270" width="536" height="40" font="5">middleware (keep last n/keep all) </text>
+<text top="1983" left="1230" width="1055" height="41" font="5">•  Durability:  Control  the  lifecycle  of  data  (volatile,  transient, </text>
+<text top="2025" left="1270" width="178" height="40" font="5">persistent) </text>
+<text top="658" left="2421" width="1021" height="101" font="6">Integrating DDS into CSS </text>
+<text top="877" left="2399" width="876" height="40" font="5">Motivation: The  Intensity  Frontier  experiment  employs </text>
+<text top="919" left="2399" width="876" height="40" font="5">both EPICS and DDS in the instrument. It is necessary </text>
+<text top="962" left="2399" width="876" height="40" font="5">to  monitor  information  and  send  control  signals  over </text>
+<text top="1006" left="2399" width="246" height="40" font="5">both protocols. </text>
+<text top="2051" left="2398" width="1062" height="41" font="5">•  The  easiest  way  for  Python  code  to  interact  with  DDS  data </text>
+<text top="2093" left="2439" width="1022" height="40" font="5">space  is  to  wrap  up  C/C++  generated  code  with  SWIG/</text>
+<text top="2137" left="2439" width="220" height="40" font="5">Boost.python </text>
+<text top="2180" left="2451" width="419" height="41" font="5">•  Type-specific wrappers </text>
+<text top="2224" left="2451" width="757" height="41" font="5">•  Extra-steps necessary to generate wrappers </text>
+<text top="2267" left="2451" width="997" height="41" font="5">•  Need to regenerate wrappers when topic structures change </text>
+<text top="2309" left="2451" width="1010" height="41" font="5">•  Not  compatible  to  Python’s  dynamic/interpretive  language </text>
+<text top="2353" left="2491" width="112" height="40" font="5">nature </text>
+<text top="4019" left="2497" width="864" height="80" font="7">Summary and Future Work </text>
+<text top="3050" left="2399" width="845" height="41" font="5">•  With the new pyDDS library, a Python application: </text>
+<text top="3092" left="2451" width="1010" height="41" font="5">•  Dynamically  generate  type-specific  objects  right  inside </text>
+<text top="3135" left="2492" width="862" height="40" font="5">Python application using services provided by pyDDS </text>
+<text top="3179" left="2451" width="777" height="41" font="5">•  Interact with DDS services directly via pyDDS </text>
+<text top="3222" left="2451" width="1010" height="41" font="5">•  Does  not  require  extra  tools  or  separate  steps  to  generate </text>
+<text top="3266" left="2492" width="560" height="40" font="5">wrappings for every topic structure </text>
+<text top="3308" left="2451" width="1010" height="41" font="5">•  Take advantabe of Python’s dynamic language features and </text>
+<text top="3351" left="2492" width="442" height="40" font="5">fit into its development flow </text>
+<text top="4133" left="2399" width="1062" height="40" font="5">A SOA with dual messaging buses have shown to be an effective </text>
+<text top="4175" left="2399" width="1062" height="40" font="5">approach to address the scalability and interoperability challenges </text>
+<text top="4219" left="2399" width="1062" height="40" font="5">of  modern  large-scale  accelerator  control  systems.  We  are </text>
+<text top="4262" left="2399" width="1062" height="40" font="5">developing tools and libraries to simplify the adoption of DDS. We </text>
+<text top="4306" left="2399" width="1062" height="40" font="5">plan  to  continue  to  harden  these  tools  and  enhance  them  to </text>
+<text top="4349" left="2399" width="1062" height="40" font="5">support  more  dynamic  features  such  as  run-time  type  resolution </text>
+<text top="4391" left="2399" width="1062" height="40" font="5">and  the  emerging  extensible  type  standard  to  make  them  more </text>
+<text top="4435" left="2399" width="765" height="40" font="5">robust and adaptable to new application needs. </text>
+<text top="1938" left="2585" width="692" height="80" font="7">Python DDS (pyDDS) </text>
+<text top="3455" left="69" width="18" height="41" font="5">• </text>
+<text top="3454" left="109" width="953" height="44" font="5">Client-­‐Server/RPC-­‐styled/remote	  object	  messaging	  protocols	  are	  </text>
+<text top="3488" left="109" width="839" height="44" font="5">suitable	  for	  command/control	  and	  deployment	  purposes	  </text>
+<text top="3524" left="121" width="18" height="41" font="5">• </text>
+<text top="3523" left="162" width="623" height="44" font="5">They	  are	  not	  suitable	  for	  dynamic	  services	  </text>
+<text top="3559" left="69" width="18" height="41" font="5">• </text>
+<text top="3557" left="109" width="328" height="44" font="5">Dual	  messaging	  buses	  </text>
+<text top="3593" left="69" width="18" height="41" font="5">• </text>
+<text top="3592" left="109" width="849" height="44" font="5">Solu5ons:	  Adding	  a	  publish/subscribe	  messaging	  protocol	  </text>
+<text top="3628" left="121" width="18" height="41" font="5">• </text>
+<text top="3626" left="162" width="154" height="44" font="5">OMG	  DDS	  </text>
+<text top="3662" left="121" width="18" height="41" font="5">• </text>
+<text top="3661" left="162" width="346" height="44" font="5">Java	  Messaging	  Service	  </text>
+<text top="3697" left="121" width="18" height="41" font="5">• </text>
+<text top="3695" left="162" width="406" height="44" font="5">EPICSv4	  pvData,	  EPICS-­‐DDS	  </text>
+<text top="3079" left="262" width="700" height="101" font="6">Service-Oriented </text>
+<text top="3187" left="157" width="910" height="101" font="6">Architecture (SOA) for </text>
+<text top="3295" left="282" width="660" height="101" font="6">Control Systems </text>
+<text top="2694" left="264" width="104" height="34" font="8">Off-line </text>
+<text top="2730" left="275" width="82" height="34" font="8">Model </text>
+<text top="2704" left="825" width="87" height="34" font="8">Online </text>
+<text top="2740" left="827" width="82" height="34" font="8">Model </text>
+<text top="2774" left="520" width="113" height="34" font="8">Machine </text>
+<text top="2810" left="491" width="172" height="34" font="8">Middle Layer </text>
+<text top="2495" left="347" width="80" height="34" font="8">Thick </text>
+<text top="2531" left="314" width="147" height="34" font="8">Application </text>
+<text top="2898" left="184" width="81" height="37" font="9">EPICS	  	  </text>
+<text top="2495" left="745" width="67" height="34" font="8">Thin </text>
+<text top="2531" left="705" width="147" height="34" font="8">Application </text>
+<text top="2988" left="242" width="207" height="37" font="9">Real	  Accelerator	  	  </text>
+<text top="2988" left="745" width="236" height="37" font="9">Virtual	  Accelerator	  	  </text>
+<text top="2032" left="67" width="18" height="41" font="5">• </text>
+<text top="2030" left="107" width="944" height="44" font="5">Modern	  accelerators	  have	  greatly	  increase	  complexity	  and	  scale	  </text>
+<text top="2066" left="119" width="18" height="41" font="5">• </text>
+<text top="2065" left="160" width="891" height="44" font="5">More	  devices	  and	  sub-­‐devices	  to	  control,	  conﬁgure,	  monitor	  </text>
+<text top="2099" left="160" width="229" height="44" font="5">simultaneously	  </text>
+<text top="2135" left="67" width="18" height="41" font="5">• </text>
+<text top="2134" left="107" width="710" height="44" font="5">With	  more	  and	  more	  features	  and	  automa5ons	  	  </text>
+<text top="2170" left="122" width="18" height="41" font="5">• </text>
+<text top="2168" left="163" width="604" height="44" font="5">High-­‐level	  client	  and	  physics	  applica5ons	  </text>
+<text top="2204" left="122" width="18" height="41" font="5">• </text>
+<text top="2203" left="163" width="780" height="44" font="5">Centralized	  control	  panels	  for	  users	  of	  diﬀerent	  roles	  </text>
+<text top="2239" left="122" width="18" height="41" font="5">• </text>
+<text top="2237" left="163" width="530" height="44" font="5">Distributed	  display	  for	  oﬀ-­‐site	  users	  </text>
+<text top="2273" left="67" width="18" height="41" font="5">• </text>
+<text top="2272" left="107" width="723" height="44" font="5">There	  exist	  many	  standard	  environments	  for	  ACS	  </text>
+<text top="2308" left="122" width="18" height="41" font="5">• </text>
+<text top="2306" left="163" width="463" height="44" font="5">EPICS,	  Tango,	  Tine,	  ACNET,	  etc.	  </text>
+<text top="2342" left="67" width="18" height="41" font="5">• </text>
+<text top="2341" left="107" width="419" height="44" font="5">Limited	  interfacing	  supports	  </text>
+<text top="2377" left="122" width="18" height="41" font="5">• </text>
+<text top="2375" left="163" width="877" height="44" font="5">Hard	  to	  expand	  system	  by	  dynamically	  adding	  components	  	  </text>
+<text top="2566" left="1354" width="164" height="37" font="10">Web Client</text>
+<text top="2673" left="1348" width="177" height="37" font="10">Web Server</text>
+<text top="2767" left="1344" width="184" height="37" font="10">Optim Client</text>
+<text top="2881" left="1284" width="206" height="37" font="10">Optim Server </text>
+<text top="2921" left="1293" width="178" height="37" font="10">Request PV</text>
+<text top="3101" left="1345" width="275" height="37" font="10">Optim Server CAS</text>
+<text top="2974" left="1476" width="206" height="37" font="10">Optim Server </text>
+<text top="3014" left="1500" width="149" height="37" font="10">Result PV</text>
+<text top="3048" left="1743" width="202" height="37" font="10">Optim Engine</text>
+<text top="2874" left="1990" width="212" height="37" font="10">Optim Engine </text>
+<text top="2914" left="2038" width="106" height="37" font="10">Thread</text>
+<text top="3001" left="2006" width="117" height="37" font="10">MAD-X/</text>
+<text top="3041" left="2032" width="65" height="37" font="10">UAL</text>
+<text top="3105" left="2037" width="149" height="37" font="10">Twiss File</text>
+<text top="2594" left="1671" width="156" height="29" font="11">Web Browser</text>
+<text top="2785" left="1683" width="137" height="29" font="11">Web Server</text>
+<text top="2864" left="1679" width="152" height="29" font="11">Optimization </text>
+<text top="2896" left="1713" width="77" height="29" font="11">Server</text>
+<text top="3185" left="1288" width="931" height="28" font="0">Figure 4: Architecture of the general purpose web-based optimization service.</text>
+<text top="3291" left="1207" width="1094" height="28" font="0">ﬁles to the service and returns the visual results of twiss calculations. Physicists can use it</text>
+<text top="3325" left="1207" width="1094" height="28" font="0">to submit a series of incremental optimizations and see the optimization results remotely.</text>
+<text top="3359" left="1207" width="1093" height="28" font="0">Although this software as a service (SaaS) prototype provides somewhat limited usefulness</text>
+<text top="3392" left="1207" width="1094" height="28" font="0">for real applications, it nonetheless demonstrates the core idea on SOA using DDS and lays</text>
+<text top="3426" left="1207" width="708" height="28" font="0">down the foundation for further more complicated services.</text>
+<text top="3460" left="1248" width="1053" height="28" font="0">We began implementing the prototype service using the UAL. Composition UAL is an</text>
+<text top="3493" left="1207" width="1093" height="28" font="0">Epics-DDS v1.5 example application, and like Tech-X performance apps, it is self-contained</text>
+<text top="3527" left="1207" width="1093" height="28" font="0">in that there is no need to start an additional process (server). Composition UAL relies</text>
+<text top="3561" left="1207" width="1093" height="28" font="0">heavily on UAL for deﬁning/reading/writing accelerator lattices (.adxf) and UAL’s Twiss</text>
+<text top="3595" left="1207" width="134" height="28" font="0">algorithms.</text>
+<text top="3629" left="1248" width="1053" height="28" font="0">In general, this set of applications initializes an Epics caServer with pre-deﬁned PV</text>
+<text top="3662" left="1207" width="1094" height="28" font="0">information and provides a couple of diﬀerent tools to read data from the server and use the</text>
+<text top="3696" left="1207" width="1093" height="28" font="0">UAL libs to calculate Twiss parameters and tracking results. There is a publisher to ’tickle’</text>
+<text top="3730" left="1207" width="688" height="28" font="0">the beam provide some small variance to the BPM data.</text>
+<text top="3764" left="1248" width="1053" height="28" font="0">Since multiple Epics caServers can be conﬁgured to communicate with one another,</text>
+<text top="3798" left="1207" width="1094" height="28" font="0">several of these applications can be run at the same to time read and write PV record</text>
+<text top="3831" left="1207" width="1094" height="28" font="0">data. For example, MachineServer, TwissServer and VAServer are ’pure’ caServer apps</text>
+<text top="3865" left="1207" width="1094" height="28" font="0">used to initialize PV data and read PV data for calculating results. Figure 5 show how</text>
+<text top="3899" left="1207" width="1094" height="28" font="0">the MachinePublisherClient and MIAClient use the Epics-DDS API to update the PV data</text>
+<text top="3932" left="1207" width="1093" height="28" font="0">and read the updates for calculating results. This application has several key components,</text>
+<text top="3966" left="1207" width="117" height="28" font="0">including:</text>
+<text top="4025" left="1247" width="1053" height="22" font="0">• MIAClient - this process is an Epics-DDS application used to read PV data from</text>
+<text top="4050" left="1275" width="1025" height="28" font="0">the pre-deﬁned topics and calculate both Twiss parameters and Turn-by-turn (TBT)</text>
+<text top="4120" left="1740" width="27" height="28" font="0">12</text>
+<text top="1525" left="2114" width="4" height="22" font="12">!</text>
+<text top="3958" left="1528" width="399" height="51" font="13">DDS	  Global	  Data	  Space	  </text>
+<text top="4007" left="1648" width="159" height="51" font="13">(Domain)	  </text>
+<text top="3843" left="1272" width="114" height="37" font="9">Publisher	  </text>
+<text top="3919" left="1272" width="114" height="37" font="9">Publisher	  </text>
+<text top="3996" left="1272" width="114" height="37" font="9">Publisher	  </text>
+<text top="3825" left="2128" width="128" height="37" font="9">Subscriber	  </text>
+<text top="3901" left="2128" width="128" height="37" font="9">Subscriber	  </text>
+<text top="3978" left="2128" width="128" height="37" font="9">Subscriber	  </text>
+<text top="4061" left="1842" width="53" height="29" font="14">Topic	  </text>
+<text top="4090" left="1862" width="14" height="29" font="14">A	  </text>
+<text top="4212" left="1281" width="114" height="37" font="9">Publisher	  </text>
+<text top="4288" left="1281" width="114" height="37" font="9">Publisher	  </text>
+<text top="4365" left="1281" width="114" height="37" font="9">Publisher	  </text>
+<text top="4203" left="2110" width="128" height="37" font="9">Subscriber	  </text>
+<text top="4279" left="2110" width="128" height="37" font="9">Subscriber	  </text>
+<text top="4356" left="2110" width="128" height="37" font="9">Subscriber	  </text>
+<text top="4142" left="1653" width="53" height="29" font="14">Topic</text>
+<text top="4171" left="1673" width="13" height="29" font="14">B	  </text>
+<text top="3876" left="1472" width="101" height="26" font="15">Throughput	  </text>
+<text top="3900" left="1484" width="75" height="26" font="15">MB/sec?	  </text>
+<text top="3876" left="1940" width="101" height="26" font="15">Throughput	  </text>
+<text top="3900" left="1952" width="75" height="26" font="15">MB/sec?	  </text>
+<text top="4326" left="1562" width="101" height="26" font="15">Throughput	  </text>
+<text top="4350" left="1568" width="88" height="26" font="15">msgs/sec?	  </text>
+<text top="4137" left="1292" width="101" height="26" font="15">Throughput	  </text>
+<text top="4161" left="1298" width="88" height="26" font="15">msgs/sec?	  </text>
+<text top="3786" left="1705" width="66" height="26" font="15">Latency	  </text>
+<text top="3810" left="1711" width="54" height="26" font="15">msec?	  </text>
+<text top="4065" left="2134" width="71" height="26" font="15">Priority/	  </text>
+<text top="4089" left="2141" width="57" height="26" font="15">Rates?	  </text>
+<text top="1049" left="2398" width="1062" height="41" font="5">•  We  modeled  after  org.csstudio.platform.libs.epics  and </text>
+<text top="1091" left="2439" width="982" height="40" font="5">implemented a set of plug-ins to present DDS topics as PV’s: </text>
+<text top="1134" left="2451" width="669" height="41" font="5">•  com.txcorp.soaac.css.platform.libs.dds </text>
+<text top="1178" left="2451" width="707" height="41" font="5">•  com.txcorp.soaac.css.platform.libs.dds.ui </text>
+<text top="1221" left="2451" width="513" height="41" font="5">•  com.txcorp.soaac.css.pv.dds </text>
+<text top="1265" left="2398" width="1062" height="41" font="5">•  The  added  plug-ins  enable  CSS  applications  to  subscribe/</text>
+<text top="1307" left="2439" width="814" height="40" font="5">publish (get/set) a DDS topic (structured like a PV) </text>
+<text top="1350" left="2451" width="1010" height="41" font="5">•  For  example,  an  OPI  widget  can  be  associated  to  a  PV </text>
+<text top="1396" left="2491" width="399" height="41" font="5">dds://temperature3 </text>
+<text top="1437" left="2398" width="272" height="40" font="16"><b>Current Status: </b></text>
+<text top="1481" left="2398" width="1062" height="41" font="5">•  Topics  (with  their  associated  QoS  policies)  need  to  be </text>
+<text top="1523" left="2439" width="1022" height="40" font="5">p r e c o m p i l e d  i n t o  j a r  f i l e s  a n d  l o a d e d  t h r u </text>
+<text top="1566" left="2439" width="472" height="40" font="5">com.txcorp.soaac.css.pv.dds </text>
+<text top="1610" left="2398" width="1062" height="41" font="5">•  We currently support only DDS topics with structures similar to </text>
+<text top="1653" left="2439" width="444" height="40" font="5">PVs (with some meta-data) </text>
+<text top="1695" left="2398" width="272" height="40" font="16"><b>Ongoing effort:</b> </text>
+<text top="1739" left="2398" width="891" height="41" font="5">•  Add support for general DDS topic structures such as</text>
+<text top="1737" left="3289" width="25" height="44" font="5">,	  	  </text>
+<text top="1785" left="2439" width="756" height="41" font="5">dds://Booster/Quad/Magnet2#current </text>
+<text top="1826" left="2398" width="1062" height="41" font="5">•  Add  support  for  dynamic  topic/QoS  definitions  via  XML </text>
+<text top="1869" left="2439" width="840" height="40" font="5">(eliminate the need to implement a separate .jar file) </text>
+<text top="2903" left="2803" width="241" height="37" font="9">Domain	  Par5cipant	  </text>
+<text top="2967" left="2872" width="112" height="37" font="9">Netwotk	  </text>
+<text top="2804" left="3077" width="135" height="37" font="9">Subscriber	  </text>
+<text top="2804" left="2643" width="120" height="37" font="9">Publisher	  </text>
+<text top="2728" left="2606" width="86" height="37" font="9">Writer	  </text>
+<text top="2728" left="3152" width="94" height="37" font="9">Reader	  </text>
+<text top="2584" left="2546" width="152" height="37" font="8">TopicWriter	  </text>
+<text top="2584" left="3146" width="159" height="37" font="8">TopicReader	  </text>
+<text top="2656" left="2828" width="193" height="37" font="8">pyDDS	  Services	  </text>
+<text top="2462" left="2805" width="238" height="37" font="9">Python	  Applica5on	  </text>
+<text top="3423" left="2454" width="279" height="37" font="8">Joining	  a	  Data	  Domain	  </text>
+<text top="3464" left="2454" width="425" height="18" font="17"># A one-stop interface into the pydds global </text>
+<text top="3483" left="2454" width="170" height="18" font="17"># factory methods </text>
+<text top="3504" left="2454" width="142" height="18" font="17">import pydds;  </text>
+<text top="3527" left="2454" width="19" height="18" font="17">  </text>
+<text top="3549" left="2454" width="406" height="18" font="17"># Uers defines their dataspace/runtime and </text>
+<text top="3573" left="2454" width="425" height="18" font="17"># pass it in as an argument to various other </text>
+<text top="3592" left="2454" width="378" height="18" font="17"># operations that need it.  (See later) </text>
+<text top="3614" left="2454" width="142" height="18" font="17">myDataspace =  </text>
+<text top="3633" left="2454" width="255" height="18" font="17">   pydds.connect_dataspace </text>
+<text top="3652" left="2454" width="369" height="18" font="17">     (“Domain name”, “Partition name”) </text>
+<text top="3675" left="2454" width="19" height="18" font="17">  </text>
+<text top="3698" left="2454" width="406" height="18" font="17"># A Dataspace object should contains some  </text>
+<text top="3717" left="2454" width="425" height="18" font="17"># default subscriber/publisher objects with  </text>
+<text top="3735" left="2454" width="274" height="18" font="17"># some default QoS policies. </text>
+<text top="3760" left="2454" width="302" height="37" font="8">Manipulate	  QoS	  Policies	  </text>
+<text top="3801" left="2454" width="255" height="18" font="17">myQoS = pydds.create_qos() </text>
+<text top="3824" left="2454" width="274" height="18" font="17">myQoS.set_reliable (3000000) </text>
+<text top="3846" left="2454" width="208" height="18" font="17">myQoS.set_transient() </text>
+<text top="3869" left="2454" width="227" height="18" font="17">myQoS.set_keep_last (3) </text>
+<text top="3891" left="2454" width="9" height="18" font="17"> </text>
+<text top="3928" left="2454" width="16" height="88" font="7">	  </text>
+<text top="3394" left="2973" width="354" height="37" font="8">Create	  Topic	  Reders/Writers	  </text>
+<text top="3435" left="2973" width="416" height="19" font="18"># Creating/Finding a topic in global data </text>
+<text top="3454" left="2973" width="406" height="19" font="18"># space. Last argument specifies the URI </text>
+<text top="3475" left="2973" width="327" height="19" font="18"># of topic structure definitions </text>
+<text top="3498" left="2973" width="307" height="19" font="18">helloTopic = pydds.createTopic </text>
+<text top="3518" left="2973" width="158" height="19" font="18">  (“TopicName”, </text>
+<text top="3538" left="2973" width="168" height="19" font="18">    myDataspace, </text>
+<text top="3557" left="2973" width="109" height="19" font="18">    myQoS, </text>
+<text top="3577" left="2973" width="396" height="19" font="18">    file:///HelloWorld.idl#HelloTopic); </text>
+<text top="3596" left="2973" width="347" height="19" font="18"># Now create reader/writer objects </text>
+<text top="3617" left="2973" width="386" height="19" font="18">helloReader = helloTopic.create_reader </text>
+<text top="3637" left="2973" width="149" height="19" font="18">  (readerQoS); </text>
+<text top="3660" left="2973" width="386" height="19" font="18">helloWriter = helloTopic.create_writer </text>
+<text top="3684" left="2973" width="149" height="19" font="18">  (writerQoS); </text>
+<text top="3710" left="2973" width="363" height="37" font="8">Wri5ng	  and	  Reading	  Samples	  </text>
+<text top="3750" left="2973" width="198" height="19" font="18"># Creating a sample </text>
+<text top="3774" left="2973" width="386" height="19" font="18">helloSample = helloTopic.create_sample </text>
+<text top="3798" left="2973" width="396" height="19" font="18">  (message = “John Smith”, repeat = 3); </text>
+<text top="3822" left="2973" width="238" height="19" font="18"># Publishing the sample </text>
+<text top="3846" left="2973" width="416" height="19" font="18">status = helloWriter.write (helloSample); </text>
+<text top="3870" left="2973" width="198" height="19" font="18"># Simple read/take  </text>
+<text top="3894" left="2973" width="386" height="19" font="18">[samples, infos] = helloReader.read(); </text>
+<text top="3917" left="2973" width="376" height="19" font="18">sys.stdout write(samples[0].message); </text>
+<text top="3942" left="2973" width="486" height="37" font="8">Listen-­‐based	  Read	  Modeled	  a\er	  Twist/</text>
+<text top="3979" left="2973" width="79" height="37" font="8">Trellis	  </text>
+<text top="4020" left="2973" width="10" height="19" font="18"> </text>
+<text top="4061" left="2973" width="18" height="99" font="19">	  </text>
+<text top="3107" left="226" width="6" height="29" font="20"> </text>
+<text top="3107" left="601" width="6" height="29" font="20"> </text>
+<text top="3116" left="1163" width="3" height="18" font="21">!</text>
+<text top="4661" left="39" width="6" height="32" font="20">!</text>
+<text top="3197" left="39" width="1094" height="39" font="22"><b>SOAAC:&amp;Service,Oriented&amp;Architecture&amp;for&amp;Next,Generation&amp;Large,Scale&amp;</b></text>
+<text top="3242" left="39" width="444" height="39" font="22"><b>Accelerator&amp;Control&amp;Systems&amp;</b></text>
+<text top="3311" left="39" width="634" height="36" font="23"><b>Phase&amp;II&amp;SBIR&amp;Project&amp;,&amp;DE,FG02,08ER85043&amp;</b></text>
+<text top="3353" left="39" width="507" height="36" font="23"><b>Nanbor&amp;Wang&amp;–&amp;Tech,X&amp;Corporation</b></text>
+<text top="3367" left="546" width="4" height="20" font="24"><b>&amp;</b></text>
+<text top="3396" left="39" width="1067" height="32" font="20">In!collaboration!with!NSLS1II!control!system!researchers!at!BNL,!Tech1X!Corporation!is!developing!a!</text>
+<text top="3433" left="39" width="1038" height="32" font="20">reference!Service1Oriented!Architecture!(SOA)!environment!for!accelerator!control!systems!that!</text>
+<text top="3471" left="39" width="1120" height="32" font="20">promotes!multiple!levels!of!loose!coupling!to!increase!the!robustness!and!adaptability!of!overall!control!</text>
+<text top="3507" left="39" width="1100" height="32" font="20">applications.!Traditional!frameworks!for!accelerator!control!system!development!do!not!scale!well!for!</text>
+<text top="3544" left="39" width="1094" height="32" font="20">control!systems!of!next1generation!large1scale!accelerators!that!consist!of!many!sub1accelerators!and!</text>
+<text top="3582" left="39" width="1039" height="32" font="20">operation!teams.!By!focusing!on!strengthening!the!existing!EPICSv4!dynamic!data!interfaces!and!</text>
+<text top="3619" left="39" width="1138" height="32" font="20">communication!mechanisms,!this!project!contributes!to!the!development!of!High1Level!Application!(HLA)!</text>
+<text top="3655" left="39" width="1097" height="32" font="20">environment!in!NSLS1II!control!systems!being!developed!by!BNL.!!The!attached!diagram!illustrates!the!</text>
+<text top="3693" left="39" width="1115" height="32" font="20">architecture!of!a!HLA!environment!adopted!by!the!NSLS1II!control!system!group.!The!new!development!</text>
+<text top="3730" left="39" width="1099" height="32" font="20">paradigm!enabled!through!this!paradigm!will!encourage!robust!integrations!of!heterogeneous!control!</text>
+<text top="4418" left="39" width="1084" height="32" font="20">subsystems.!Various!control!subsystems!and!activities!can!be!implemented!separately!and!packaged!</text>
+<text top="4455" left="39" width="1052" height="32" font="20">into!“services”!with!well1defined!“interfaces”!for!to!enable!composition!of!applications.!!Tech1X!is!</text>
+<text top="4493" left="39" width="1061" height="32" font="20">currently!working!with!NSLS1II!control!system!group!to!enhance!the!design!of!dynamic!data!access!</text>
+<text top="4530" left="39" width="1111" height="32" font="20">interface!and!developing!an!example!HLA!scenario!that!include!a!model!server!and!CSS!presentation!to!</text>
+<text top="4566" left="39" width="783" height="32" font="20">demonstrate!how!new!HLA’s!can!be!incorporated!into!the!system!easily.!</text>
+<text top="3798" left="131" width="128" height="28" font="20">High-Level </text>
+<text top="3829" left="159" width="72" height="28" font="20">Client </text>
+<text top="3859" left="124" width="136" height="28" font="20">Applications</text>
+<text top="3798" left="316" width="194" height="24" font="25">Presentation Clients</text>
+<text top="3824" left="335" width="161" height="24" font="25">(Control System </text>
+<text top="3850" left="378" width="69" height="24" font="25">Studio)</text>
+<text top="3824" left="606" width="134" height="24" font="25">MMLT Clients</text>
+<text top="3824" left="855" width="157" height="24" font="25">Scripting Clients</text>
+<text top="4223" left="326" width="88" height="24" font="25">Machine </text>
+<text top="4249" left="335" width="64" height="24" font="25">Server</text>
+<text top="4223" left="688" width="53" height="24" font="25">BPM </text>
+<text top="4249" left="680" width="64" height="24" font="25">Server</text>
+<text top="4324" left="305" width="124" height="24" font="25">EPICS CAv3</text>
+<text top="4382" left="224" width="72" height="24" font="25">Dipoles</text>
+<text top="4382" left="333" width="69" height="24" font="25">Quad’s</text>
+<text top="4382" left="445" width="59" height="24" font="25">Sext’s</text>
+<text top="4324" left="650" width="124" height="24" font="25">EPICS CAv3</text>
+<text top="4382" left="581" width="47" height="24" font="25">BPM</text>
+<text top="4382" left="688" width="47" height="24" font="25">BPM</text>
+<text top="4382" left="796" width="47" height="24" font="25">BPM</text>
+<text top="4094" left="344" width="657" height="28" font="26">Service Bus EPICS CAv4 (pvData,pvAccess), EPICS-DDS</text>
+<text top="3957" left="469" width="129" height="24" font="25">Model Server</text>
+<text top="3983" left="459" width="148" height="24" font="25">(Tracy/Elegant)</text>
+<text top="4210" left="937" width="70" height="24" font="25">Lattice/</text>
+<text top="4236" left="901" width="148" height="24" font="25">ChannelFinder </text>
+<text top="4262" left="940" width="64" height="24" font="25">Server</text>
+<text top="4333" left="981" width="60" height="24" font="25">IRMIS</text>
+<text top="4359" left="978" width="65" height="24" font="25">Tables</text>
+<text top="3957" left="732" width="169" height="24" font="25">Orbit/Data Server</text>
+<text top="3983" left="755" width="122" height="24" font="25">(Conv/Resp)</text>
+<text top="3976" left="120" width="150" height="28" font="20">Middle-Level </text>
+<text top="4006" left="143" width="97" height="28" font="20">Services</text>
+<text top="4345" left="99" width="115" height="28" font="20">Real-time </text>
+<text top="4376" left="97" width="113" height="28" font="20">Front-End</text>
+<text top="4549" left="1412" width="1982" height="51" font="1">Acknowledgment:	  The	  authors	  wish	  to	  thank	  Nikokay	  Malitsky	  of	  Brookhaven	  Na5onal	  Lab	  for	  providing	  the	  middle-­‐</text>
+<text top="4599" left="1412" width="2051" height="51" font="1">layer	  server	  examples,	  and	  	  Jim	  Kowalkoski,	  Marc	  Paterno,	  	  Kurt	  Biery,	  and	  Erik	  Go^schalk	  of	  Fermilab	  for	  discussing	  the	  </text>
+<text top="4650" left="1412" width="1047" height="51" font="1">needs	  and	  requirements	  of	  the	  projects	  they	  are	  working	  on.	  </text>
+</page>
+</pdf2xml>

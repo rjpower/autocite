@@ -1,0 +1,1812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml>
+<page number="1" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="0" size="21" family="Times" color="#000000"/>
+	<fontspec id="1" size="16" family="Times" color="#000000"/>
+	<fontspec id="2" size="12" family="Times" color="#000000"/>
+	<fontspec id="3" size="14" family="Times" color="#000000"/>
+	<fontspec id="4" size="14" family="Times" color="#000000"/>
+	<fontspec id="5" size="14" family="Times" color="#000000"/>
+	<fontspec id="6" size="19" family="Times" color="#000000"/>
+	<fontspec id="7" size="25" family="Times" color="#000000"/>
+	<fontspec id="8" size="11" family="Times" color="#000000"/>
+	<fontspec id="9" size="6" family="Times" color="#000000"/>
+	<fontspec id="10" size="18" family="Times" color="#000000"/>
+	<fontspec id="11" size="11" family="Times" color="#000000"/>
+	<fontspec id="12" size="6" family="Times" color="#000000"/>
+	<fontspec id="13" size="11" family="Times" color="#000000"/>
+	<fontspec id="14" size="6" family="Times" color="#000000"/>
+	<fontspec id="15" size="21" family="Times" color="#000000"/>
+	<fontspec id="16" size="10" family="Times" color="#000000"/>
+	<fontspec id="17" size="10" family="Times" color="#000000"/>
+	<fontspec id="18" size="10" family="Times" color="#000000"/>
+	<fontspec id="19" size="8" family="Times" color="#000000"/>
+	<fontspec id="20" size="12" family="Times" color="#000000"/>
+	<fontspec id="21" size="12" family="Times" color="#000000"/>
+	<fontspec id="22" size="7" family="Times" color="#000000"/>
+	<fontspec id="23" size="15" family="Times" color="#000000"/>
+	<fontspec id="24" size="13" family="Times" color="#000000"/>
+	<fontspec id="25" size="13" family="Times" color="#000000"/>
+	<fontspec id="26" size="13" family="Times" color="#000000"/>
+	<fontspec id="27" size="10" family="Helvetica" color="#000000"/>
+<text top="113" left="125" width="648" height="21" font="0"><b>Explicit Implementation of Predictive Control Based on FPGA </b></text>
+<text top="140" left="449" width="6" height="21" font="0"><b> </b></text>
+<text top="165" left="156" width="584" height="16" font="1">A. AGUILERA*, M. RODRÍGUEZ*, T. VILLEGAS**, W. COLMENARES** </text>
+<text top="186" left="315" width="267" height="16" font="1">* Industrial Technology Department </text>
+<text top="207" left="308" width="282" height="16" font="1">** Processes and Systems Department </text>
+<text top="227" left="345" width="212" height="16" font="1"> Universidad Simón Bolívar  </text>
+<text top="248" left="265" width="367" height="16" font="1">Sartenejas Valley Caracas 1081A Apartado 89000 </text>
+<text top="269" left="393" width="111" height="16" font="1">VENEZUELA </text>
+<text top="289" left="141" width="616" height="16" font="1">*aaguilera@usb.ve, *mirodriguez@usb.ve, **tvillegas@usb.ve, **williamc@usb.ve </text>
+<text top="310" left="446" width="4" height="14" font="2"> </text>
+<text top="327" left="446" width="4" height="14" font="2"> </text>
+<text top="344" left="76" width="738" height="15" font="3"><i>Abstract: - </i>This paper presents an explicit predictive control strategy based on FPGA, to monitor the status of </text>
+<text top="363" left="76" width="738" height="15" font="4">the  slogans during an  industrial  process by using  a  table of  positions,  in  order to  optimize  the  time it  takes </text>
+<text top="382" left="76" width="738" height="15" font="4">to control actions. The system has been specified using graphical programming, conversion modules analog - </text>
+<text top="401" left="76" width="738" height="15" font="4">digital (A/ D) and digital - analog (D/A). The modified functions are found from the prediction error obtained </text>
+<text top="420" left="76" width="738" height="15" font="4">from model identification. MATLAB ® was used as a work platform to carry out the process of designing and </text>
+<text top="439" left="76" width="733" height="15" font="4">testing the system controller and its development. The results show that the controller designed is quite useful. </text>
+<text top="459" left="21" width="4" height="15" font="5"><b> </b></text>
+<text top="477" left="76" width="749" height="15" font="3"><i>Key-Words: -</i> Explicit Predictive Control, controller, identification, FPGA, Table of positions, D/A Conversion, </text>
+<text top="496" left="76" width="121" height="15" font="4">A/D Conversion.  </text>
+<text top="515" left="21" width="4" height="15" font="4"> </text>
+<text top="536" left="77" width="151" height="19" font="6"><b>1   Introduction. </b></text>
+<text top="558" left="77" width="355" height="15" font="4">The purpose of this paper is to design and implement </text>
+<text top="577" left="77" width="355" height="15" font="4">a  predictive  control  strategy  that  controls  explicit </text>
+<text top="596" left="77" width="355" height="15" font="4">setpoints  of  conventional  PID  controllers to  operate </text>
+<text top="615" left="77" width="355" height="15" font="4">on  any  variable  (temperature,  pressure,  speed,  etc.) </text>
+<text top="634" left="77" width="355" height="15" font="4">of  an  industrial  process,  using  this  FPGA </text>
+<text top="653" left="76" width="100" height="15" font="4">programmable </text>
+<text top="653" left="193" width="68" height="15" font="4">controller </text>
+<text top="653" left="277" width="24" height="15" font="4">via </text>
+<text top="653" left="317" width="12" height="15" font="4">a </text>
+<text top="653" left="344" width="32" height="15" font="4">data </text>
+<text top="653" left="391" width="40" height="15" font="4">table. </text>
+<text top="672" left="77" width="355" height="15" font="4">The explicit  predictive control  strategy can  be  seen </text>
+<text top="691" left="77" width="333" height="15" font="4">as a methodology for the extraction of non-linear  </text>
+<text top="710" left="77" width="109" height="15" font="4">mapping from a </text>
+<text top="710" left="206" width="23" height="15" font="4">set </text>
+<text top="710" left="249" width="182" height="15" font="4">of rules and programmable </text>
+<text top="729" left="77" width="355" height="15" font="4">logic control provides the  appropriate  resources for </text>
+<text top="748" left="77" width="355" height="15" font="4">the implementation of Boolean mappings. The paper </text>
+<text top="767" left="77" width="355" height="15" font="4">is organized as follows: first described the technique </text>
+<text top="786" left="77" width="18" height="15" font="4">of </text>
+<text top="786" left="112" width="53" height="15" font="4">explicit </text>
+<text top="786" left="183" width="70" height="15" font="4">predictive </text>
+<text top="786" left="271" width="55" height="15" font="4">control, </text>
+<text top="786" left="344" width="24" height="15" font="4">the </text>
+<text top="786" left="386" width="46" height="15" font="4">FPGA </text>
+<text top="805" left="76" width="355" height="15" font="4">programmable controller, model identification, study </text>
+<text top="824" left="77" width="308" height="15" font="4">design, results and conclusions finish the job.  </text>
+<text top="843" left="77" width="4" height="15" font="4"> </text>
+<text top="864" left="77" width="322" height="19" font="6"><b>2 Model Predictive Control (MPC)  </b></text>
+<text top="888" left="77" width="81" height="19" font="6"><b>Explicit. </b></text>
+<text top="910" left="77" width="355" height="15" font="4">The explicit MPC is a control technique that allows </text>
+<text top="929" left="77" width="355" height="15" font="4">specific solutions to set parameters for a universe of </text>
+<text top="948" left="77" width="355" height="15" font="4">finite  characteristics,  thus  achieving  optimal </text>
+<text top="967" left="77" width="355" height="15" font="4">responses  to  the  system  [3].  The  MPC  problem  for </text>
+<text top="986" left="77" width="355" height="15" font="4">discrete  linear  system  in  time  is  represented  by  the </text>
+<text top="1005" left="77" width="66" height="15" font="4">equation: </text>
+<text top="1024" left="21" width="4" height="15" font="4"> </text>
+<text top="523" left="498" width="6" height="31" font="7">{</text>
+<text top="523" left="816" width="6" height="31" font="7">}</text>
+<text top="574" left="749" width="5" height="13" font="8">)</text>
+<text top="574" left="743" width="7" height="13" font="8">1</text>
+<text top="574" left="740" width="5" height="13" font="8">(</text>
+<text top="677" left="599" width="7" height="13" font="8">0</text>
+<text top="677" left="572" width="3" height="13" font="8">,</text>
+<text top="657" left="649" width="7" height="13" font="8">0</text>
+<text top="657" left="622" width="3" height="13" font="8">,</text>
+<text top="636" left="540" width="5" height="13" font="8">)</text>
+<text top="636" left="530" width="5" height="13" font="8">(</text>
+<text top="615" left="642" width="7" height="13" font="8">1</text>
+<text top="615" left="564" width="3" height="13" font="8">,</text>
+<text top="595" left="659" width="7" height="13" font="8">1</text>
+<text top="595" left="615" width="17" height="13" font="8">,...,</text>
+<text top="595" left="609" width="7" height="13" font="8">0</text>
+<text top="595" left="582" width="3" height="13" font="8">,</text>
+<text top="574" left="624" width="17" height="13" font="8">,...,</text>
+<text top="574" left="619" width="7" height="13" font="8">1</text>
+<text top="574" left="593" width="3" height="13" font="8">,</text>
+<text top="574" left="469" width="3" height="13" font="8">.</text>
+<text top="539" left="547" width="9" height="13" font="8">))</text>
+<text top="539" left="538" width="5" height="13" font="8">(</text>
+<text top="539" left="526" width="3" height="13" font="8">,</text>
+<text top="539" left="514" width="5" height="13" font="8">(</text>
+<text top="539" left="463" width="21" height="13" font="8">min</text>
+<text top="685" left="564" width="2" height="7" font="9">/</text>
+<text top="685" left="511" width="2" height="7" font="9">/</text>
+<text top="664" left="572" width="2" height="7" font="9">/</text>
+<text top="664" left="519" width="2" height="7" font="9">/</text>
+<text top="664" left="513" width="4" height="7" font="9">1</text>
+<text top="643" left="500" width="2" height="7" font="9">/</text>
+<text top="623" left="556" width="2" height="7" font="9">/</text>
+<text top="602" left="567" width="14" height="7" font="9">max</text>
+<text top="602" left="496" width="13" height="7" font="9">min</text>
+<text top="581" left="578" width="14" height="7" font="9">max</text>
+<text top="581" left="548" width="2" height="7" font="9">/</text>
+<text top="581" left="496" width="13" height="7" font="9">min</text>
+<text top="535" left="681" width="4" height="7" font="9">1</text>
+<text top="549" left="680" width="4" height="7" font="9">0</text>
+<text top="547" left="745" width="2" height="7" font="9">/</text>
+<text top="547" left="706" width="2" height="7" font="9">/</text>
+<text top="547" left="633" width="2" height="7" font="9">/</text>
+<text top="547" left="595" width="2" height="7" font="9">/</text>
+<text top="547" left="508" width="4" height="7" font="9">0</text>
+<text top="674" left="587" width="8" height="16" font="8">≥</text>
+<text top="674" left="523" width="8" height="16" font="8">=</text>
+<text top="653" left="637" width="8" height="16" font="8">≥</text>
+<text top="653" left="583" width="8" height="16" font="8">+</text>
+<text top="653" left="530" width="8" height="16" font="8">=</text>
+<text top="633" left="512" width="8" height="16" font="8">=</text>
+<text top="612" left="633" width="8" height="16" font="8">−</text>
+<text top="612" left="608" width="8" height="16" font="8">≤</text>
+<text top="612" left="586" width="8" height="16" font="8">≤</text>
+<text top="612" left="513" width="8" height="16" font="8">=</text>
+<text top="591" left="651" width="8" height="16" font="8">−</text>
+<text top="591" left="598" width="8" height="16" font="8">=</text>
+<text top="591" left="549" width="8" height="16" font="8">≤</text>
+<text top="591" left="513" width="8" height="16" font="8">≤</text>
+<text top="571" left="609" width="8" height="16" font="8">=</text>
+<text top="571" left="559" width="8" height="16" font="8">≤</text>
+<text top="571" left="514" width="8" height="16" font="8">≤</text>
+<text top="536" left="755" width="8" height="16" font="8">+</text>
+<text top="536" left="644" width="8" height="16" font="8">+</text>
+<text top="536" left="560" width="8" height="16" font="8">=</text>
+<text top="683" left="552" width="4" height="9" font="9">+</text>
+<text top="683" left="500" width="4" height="9" font="9">+</text>
+<text top="662" left="611" width="4" height="9" font="9">+</text>
+<text top="662" left="561" width="4" height="9" font="9">+</text>
+<text top="662" left="509" width="4" height="9" font="9">+</text>
+<text top="662" left="499" width="4" height="9" font="9">+</text>
+<text top="621" left="544" width="4" height="9" font="9">+</text>
+<text top="621" left="499" width="4" height="9" font="9">+</text>
+<text top="600" left="534" width="4" height="9" font="9">+</text>
+<text top="580" left="536" width="4" height="9" font="9">+</text>
+<text top="533" left="677" width="4" height="9" font="9">−</text>
+<text top="547" left="675" width="4" height="9" font="9">=</text>
+<text top="545" left="806" width="4" height="9" font="9">+</text>
+<text top="545" left="776" width="4" height="9" font="9">+</text>
+<text top="545" left="733" width="4" height="9" font="9">+</text>
+<text top="545" left="695" width="4" height="9" font="9">+</text>
+<text top="545" left="620" width="4" height="9" font="9">+</text>
+<text top="545" left="581" width="4" height="9" font="9">+</text>
+<text top="533" left="655" width="15" height="24" font="10">∑</text>
+<text top="677" left="577" width="6" height="13" font="11"><i>k</i></text>
+<text top="677" left="534" width="15" height="13" font="11"><i>Cx</i></text>
+<text top="677" left="490" width="6" height="13" font="11"><i>y</i></text>
+<text top="657" left="627" width="6" height="13" font="11"><i>k</i></text>
+<text top="657" left="594" width="15" height="13" font="11"><i>Bx</i></text>
+<text top="657" left="543" width="15" height="13" font="11"><i>Ax</i></text>
+<text top="657" left="490" width="6" height="13" font="11"><i>x</i></text>
+<text top="636" left="535" width="4" height="13" font="11"><i>t</i></text>
+<text top="636" left="524" width="6" height="13" font="11"><i>x</i></text>
+<text top="636" left="490" width="6" height="13" font="11"><i>x</i></text>
+<text top="615" left="620" width="9" height="13" font="11"><i>N</i></text>
+<text top="615" left="597" width="6" height="13" font="11"><i>k</i></text>
+<text top="615" left="569" width="11" height="13" font="11"><i>M</i></text>
+<text top="615" left="535" width="6" height="13" font="11"><i>x</i></text>
+<text top="615" left="489" width="7" height="13" font="11"><i>u</i></text>
+<text top="595" left="634" width="11" height="13" font="11"><i>M</i></text>
+<text top="595" left="587" width="6" height="13" font="11"><i>k</i></text>
+<text top="595" left="560" width="7" height="13" font="11"><i>u</i></text>
+<text top="595" left="524" width="7" height="13" font="11"><i>u</i></text>
+<text top="595" left="489" width="7" height="13" font="11"><i>u</i></text>
+<text top="574" left="644" width="9" height="13" font="11"><i>N</i></text>
+<text top="574" left="598" width="6" height="13" font="11"><i>k</i></text>
+<text top="574" left="572" width="6" height="13" font="11"><i>y</i></text>
+<text top="574" left="527" width="6" height="13" font="11"><i>y</i></text>
+<text top="574" left="490" width="6" height="13" font="11"><i>y</i></text>
+<text top="574" left="471" width="4" height="13" font="11"><i>t</i></text>
+<text top="574" left="464" width="5" height="13" font="11"><i>s</i></text>
+<text top="539" left="796" width="7" height="13" font="11"><i>u</i></text>
+<text top="539" left="766" width="7" height="13" font="11"><i>u</i></text>
+<text top="539" left="724" width="6" height="13" font="11"><i>x</i></text>
+<text top="539" left="686" width="6" height="13" font="11"><i>x</i></text>
+<text top="539" left="611" width="6" height="13" font="11"><i>x</i></text>
+<text top="539" left="572" width="6" height="13" font="11"><i>x</i></text>
+<text top="539" left="542" width="4" height="13" font="11"><i>t</i></text>
+<text top="539" left="531" width="6" height="13" font="11"><i>x</i></text>
+<text top="539" left="504" width="4" height="13" font="11"><i>f</i></text>
+<text top="685" left="568" width="2" height="7" font="12"><i>t</i></text>
+<text top="685" left="557" width="4" height="7" font="12"><i>k</i></text>
+<text top="685" left="549" width="2" height="7" font="12"><i>t</i></text>
+<text top="685" left="515" width="2" height="7" font="12"><i>t</i></text>
+<text top="685" left="505" width="4" height="7" font="12"><i>k</i></text>
+<text top="685" left="496" width="2" height="7" font="12"><i>t</i></text>
+<text top="664" left="616" width="4" height="7" font="12"><i>k</i></text>
+<text top="664" left="608" width="2" height="7" font="12"><i>t</i></text>
+<text top="664" left="576" width="2" height="7" font="12"><i>t</i></text>
+<text top="664" left="566" width="4" height="7" font="12"><i>k</i></text>
+<text top="664" left="557" width="2" height="7" font="12"><i>t</i></text>
+<text top="664" left="523" width="2" height="7" font="12"><i>t</i></text>
+<text top="664" left="504" width="4" height="7" font="12"><i>k</i></text>
+<text top="664" left="495" width="2" height="7" font="12"><i>t</i></text>
+<text top="643" left="504" width="2" height="7" font="12"><i>t</i></text>
+<text top="643" left="495" width="2" height="7" font="12"><i>t</i></text>
+<text top="623" left="560" width="2" height="7" font="12"><i>t</i></text>
+<text top="623" left="550" width="4" height="7" font="12"><i>k</i></text>
+<text top="623" left="541" width="2" height="7" font="12"><i>t</i></text>
+<text top="623" left="504" width="4" height="7" font="12"><i>k</i></text>
+<text top="623" left="495" width="2" height="7" font="12"><i>t</i></text>
+<text top="602" left="540" width="4" height="7" font="12"><i>k</i></text>
+<text top="602" left="531" width="2" height="7" font="12"><i>t</i></text>
+<text top="581" left="552" width="2" height="7" font="12"><i>t</i></text>
+<text top="581" left="541" width="4" height="7" font="12"><i>k</i></text>
+<text top="581" left="533" width="2" height="7" font="12"><i>t</i></text>
+<text top="535" left="670" width="5" height="7" font="12"><i>N</i></text>
+<text top="549" left="670" width="4" height="7" font="12"><i>k</i></text>
+<text top="547" left="811" width="4" height="7" font="12"><i>k</i></text>
+<text top="547" left="802" width="2" height="7" font="12"><i>t</i></text>
+<text top="537" left="773" width="4" height="7" font="12"><i>T</i></text>
+<text top="547" left="781" width="4" height="7" font="12"><i>k</i></text>
+<text top="547" left="772" width="2" height="7" font="12"><i>t</i></text>
+<text top="547" left="749" width="2" height="7" font="12"><i>t</i></text>
+<text top="547" left="739" width="4" height="7" font="12"><i>k</i></text>
+<text top="547" left="730" width="2" height="7" font="12"><i>t</i></text>
+<text top="537" left="692" width="4" height="7" font="12"><i>T</i></text>
+<text top="547" left="711" width="2" height="7" font="12"><i>t</i></text>
+<text top="547" left="700" width="4" height="7" font="12"><i>k</i></text>
+<text top="547" left="692" width="2" height="7" font="12"><i>t</i></text>
+<text top="547" left="638" width="2" height="7" font="12"><i>t</i></text>
+<text top="547" left="625" width="5" height="7" font="12"><i>N</i></text>
+<text top="547" left="616" width="2" height="7" font="12"><i>t</i></text>
+<text top="537" left="578" width="4" height="7" font="12"><i>T</i></text>
+<text top="547" left="599" width="2" height="7" font="12"><i>t</i></text>
+<text top="547" left="586" width="5" height="7" font="12"><i>N</i></text>
+<text top="547" left="577" width="2" height="7" font="12"><i>t</i></text>
+<text top="616" left="525" width="11" height="12" font="13"><b>K</b></text>
+<text top="540" left="786" width="10" height="12" font="13"><b>R</b></text>
+<text top="540" left="714" width="11" height="12" font="13"><b>Q</b></text>
+<text top="540" left="602" width="8" height="12" font="13"><b>P</b></text>
+<text top="540" left="518" width="8" height="12" font="13"><b>S</b></text>
+<text top="551" left="472" width="4" height="7" font="14"><b>S</b></text>
+<text top="580" left="822" width="4" height="15" font="4"> </text>
+<text top="697" left="468" width="315" height="15" font="4">And it can be rewritten in a matrix of the form: </text>
+<text top="707" left="531" width="6" height="27" font="15">{</text>
+<text top="707" left="739" width="6" height="27" font="15">}</text>
+<text top="755" left="780" width="4" height="12" font="16">)</text>
+<text top="755" left="774" width="6" height="12" font="16">2</text>
+<text top="755" left="769" width="4" height="12" font="16">(</text>
+<text top="755" left="503" width="3" height="12" font="16">.</text>
+<text top="720" left="578" width="9" height="12" font="16">))</text>
+<text top="720" left="569" width="4" height="12" font="16">(</text>
+<text top="720" left="558" width="3" height="12" font="16">,</text>
+<text top="720" left="546" width="4" height="12" font="16">(</text>
+<text top="720" left="498" width="20" height="12" font="16">min</text>
+<text top="728" left="700" width="4" height="8" font="9">2</text>
+<text top="718" left="700" width="4" height="8" font="9">1</text>
+<text top="728" left="603" width="4" height="8" font="9">2</text>
+<text top="718" left="602" width="4" height="8" font="9">1</text>
+<text top="726" left="541" width="4" height="8" font="9">0</text>
+<text top="761" left="593" width="2" height="8" font="12"><i>t</i></text>
+<text top="717" left="715" width="5" height="8" font="12"><i>T</i></text>
+<text top="726" left="682" width="2" height="8" font="12"><i>t</i></text>
+<text top="717" left="660" width="5" height="8" font="12"><i>T</i></text>
+<text top="726" left="636" width="2" height="8" font="12"><i>t</i></text>
+<text top="717" left="617" width="5" height="8" font="12"><i>T</i></text>
+<text top="726" left="616" width="2" height="8" font="12"><i>t</i></text>
+<text top="755" left="587" width="6" height="12" font="17"><i>x</i></text>
+<text top="755" left="506" width="4" height="12" font="17"><i>t</i></text>
+<text top="755" left="499" width="5" height="12" font="17"><i>s</i></text>
+<text top="720" left="677" width="6" height="12" font="17"><i>x</i></text>
+<text top="720" left="631" width="6" height="12" font="17"><i>x</i></text>
+<text top="720" left="611" width="6" height="12" font="17"><i>x</i></text>
+<text top="720" left="573" width="4" height="12" font="17"><i>t</i></text>
+<text top="720" left="563" width="6" height="12" font="17"><i>x</i></text>
+<text top="720" left="537" width="4" height="12" font="17"><i>f</i></text>
+<text top="755" left="579" width="9" height="11" font="18"><b>E</b></text>
+<text top="755" left="553" width="13" height="11" font="18"><b>W</b></text>
+<text top="755" left="522" width="16" height="11" font="18"><b>TS</b></text>
+<text top="720" left="721" width="17" height="11" font="18"><b>HS</b></text>
+<text top="720" left="707" width="7" height="11" font="18"><b>S</b></text>
+<text top="720" left="667" width="10" height="11" font="18"><b>G</b></text>
+<text top="720" left="653" width="7" height="11" font="18"><b>S</b></text>
+<text top="720" left="623" width="8" height="11" font="18"><b>F</b></text>
+<text top="720" left="551" width="7" height="11" font="18"><b>S</b></text>
+<text top="731" left="506" width="5" height="8" font="14"><b>S</b></text>
+<text top="752" left="569" width="7" height="15" font="16">+</text>
+<text top="752" left="542" width="7" height="15" font="16">≤</text>
+<text top="717" left="689" width="7" height="15" font="16">+</text>
+<text top="717" left="643" width="7" height="15" font="16">+</text>
+<text top="717" left="590" width="7" height="15" font="16">=</text>
+<text top="756" left="788" width="4" height="15" font="4"> </text>
+<text top="774" left="468" width="353" height="15" font="4">This equation is  dependent  on the control  sequence </text>
+<text top="793" left="468" width="140" height="15" font="4">vector S and vector <i>x</i></text>
+<text top="799" left="607" width="3" height="9" font="19"><i>t</i></text>
+<text top="793" left="610" width="210" height="15" font="4"> initial state space, it represents </text>
+<text top="812" left="468" width="353" height="15" font="4">a  constrained  optimization  problem.  The  Lagrange </text>
+<text top="831" left="468" width="177" height="15" font="4">function (2) is defined by: </text>
+<text top="860" left="786" width="5" height="13" font="2">)</text>
+<text top="860" left="780" width="7" height="13" font="2">3</text>
+<text top="860" left="777" width="5" height="13" font="2">(</text>
+<text top="860" left="740" width="5" height="13" font="2">)</text>
+<text top="860" left="669" width="5" height="13" font="2">(</text>
+<text top="860" left="519" width="5" height="13" font="2">)</text>
+<text top="860" left="505" width="4" height="13" font="2">,</text>
+<text top="860" left="494" width="4" height="13" font="2">,</text>
+<text top="860" left="483" width="5" height="13" font="2">(</text>
+<text top="868" left="624" width="4" height="7" font="9">2</text>
+<text top="859" left="624" width="4" height="7" font="9">1</text>
+<text top="868" left="537" width="4" height="7" font="9">2</text>
+<text top="859" left="537" width="4" height="7" font="9">1</text>
+<text top="860" left="750" width="7" height="13" font="20"><b>λ</b></text>
+<text top="860" left="723" width="9" height="13" font="20"><b>E</b></text>
+<text top="860" left="700" width="14" height="13" font="20"><b>W</b></text>
+<text top="860" left="673" width="17" height="13" font="20"><b>TS</b></text>
+<text top="860" left="642" width="19" height="13" font="20"><b>HS</b></text>
+<text top="860" left="629" width="8" height="13" font="20"><b>S</b></text>
+<text top="860" left="593" width="11" height="13" font="20"><b>G</b></text>
+<text top="860" left="582" width="8" height="13" font="20"><b>S</b></text>
+<text top="860" left="554" width="9" height="13" font="20"><b>F</b></text>
+<text top="860" left="487" width="8" height="13" font="20"><b>S</b></text>
+<text top="857" left="744" width="5" height="7" font="12"><i>T</i></text>
+<text top="867" left="736" width="2" height="7" font="12"><i>t</i></text>
+<text top="857" left="636" width="5" height="7" font="12"><i>T</i></text>
+<text top="867" left="608" width="2" height="7" font="12"><i>t</i></text>
+<text top="857" left="588" width="5" height="7" font="12"><i>T</i></text>
+<text top="867" left="567" width="2" height="7" font="12"><i>t</i></text>
+<text top="857" left="549" width="5" height="7" font="12"><i>T</i></text>
+<text top="867" left="549" width="2" height="7" font="12"><i>t</i></text>
+<text top="867" left="515" width="2" height="7" font="12"><i>t</i></text>
+<text top="860" left="731" width="6" height="13" font="21"><i>x</i></text>
+<text top="860" left="603" width="6" height="13" font="21"><i>x</i></text>
+<text top="860" left="562" width="6" height="13" font="21"><i>x</i></text>
+<text top="860" left="544" width="6" height="13" font="21"><i>x</i></text>
+<text top="860" left="510" width="6" height="13" font="21"><i>x</i></text>
+<text top="860" left="476" width="8" height="13" font="21"><i>L</i></text>
+<text top="856" left="714" width="8" height="16" font="2">−</text>
+<text top="856" left="690" width="8" height="16" font="2">−</text>
+<text top="856" left="660" width="8" height="16" font="2">+</text>
+<text top="856" left="614" width="8" height="16" font="2">+</text>
+<text top="856" left="573" width="8" height="16" font="2">+</text>
+<text top="856" left="526" width="8" height="16" font="2">=</text>
+<text top="856" left="498" width="8" height="17" font="2">λ</text>
+<text top="864" left="793" width="5" height="16" font="1"> </text>
+<text top="850" left="839" width="5" height="16" font="1"> </text>
+<text top="890" left="468" width="170" height="15" font="4">and the solution given is: </text>
+<text top="921" left="783" width="5" height="12" font="8">)</text>
+<text top="921" left="776" width="7" height="12" font="8">4</text>
+<text top="921" left="771" width="5" height="12" font="8">(</text>
+<text top="921" left="676" width="3" height="12" font="8">,</text>
+<text top="921" left="669" width="7" height="12" font="8">0</text>
+<text top="921" left="544" width="5" height="12" font="8">)</text>
+<text top="921" left="528" width="3" height="12" font="8">,</text>
+<text top="921" left="516" width="3" height="12" font="8">,</text>
+<text top="921" left="504" width="5" height="12" font="8">(</text>
+<text top="918" left="658" width="8" height="16" font="8">=</text>
+<text top="918" left="620" width="8" height="16" font="8">+</text>
+<text top="918" left="588" width="8" height="16" font="8">+</text>
+<text top="918" left="553" width="8" height="16" font="8">=</text>
+<text top="918" left="478" width="10" height="16" font="8">∇</text>
+<text top="921" left="647" width="7" height="12" font="13"><b>λ</b></text>
+<text top="921" left="631" width="9" height="12" font="13"><b>T</b></text>
+<text top="921" left="599" width="18" height="12" font="13"><b>HS</b></text>
+<text top="921" left="564" width="11" height="12" font="13"><b>G</b></text>
+<text top="921" left="521" width="7" height="12" font="13"><b>λ</b></text>
+<text top="921" left="508" width="8" height="12" font="13"><b>S</b></text>
+<text top="918" left="640" width="5" height="9" font="22"><i>T</i></text>
+<text top="927" left="581" width="3" height="9" font="22"><i>t</i></text>
+<text top="927" left="540" width="3" height="9" font="22"><i>t</i></text>
+<text top="927" left="489" width="5" height="9" font="22"><i>S</i></text>
+<text top="921" left="575" width="6" height="12" font="11"><i>x</i></text>
+<text top="921" left="534" width="6" height="12" font="11"><i>x</i></text>
+<text top="921" left="496" width="8" height="12" font="11"><i>L</i></text>
+<text top="926" left="791" width="18" height="16" font="23">    </text>
+<text top="915" left="813" width="5" height="16" font="23"> </text>
+<text top="965" left="787" width="5" height="14" font="24">)</text>
+<text top="965" left="780" width="8" height="14" font="24">5</text>
+<text top="965" left="775" width="5" height="14" font="24">(</text>
+<text top="965" left="690" width="4" height="14" font="24">,</text>
+<text top="965" left="666" width="15" height="14" font="24">,...</text>
+<text top="965" left="660" width="8" height="14" font="24">1</text>
+<text top="965" left="624" width="4" height="14" font="24">,</text>
+<text top="965" left="616" width="8" height="14" font="24">0</text>
+<text top="965" left="596" width="5" height="14" font="24">)</text>
+<text top="965" left="489" width="5" height="14" font="24">(</text>
+<text top="965" left="680" width="8" height="14" font="25"><i>q</i></text>
+<text top="965" left="641" width="4" height="14" font="25"><i>i</i></text>
+<text top="965" left="583" width="7" height="14" font="25"><i>x</i></text>
+<text top="972" left="590" width="3" height="10" font="19"><i>t</i></text>
+<text top="961" left="577" width="3" height="10" font="19"><i>i</i></text>
+<text top="961" left="548" width="3" height="10" font="19"><i>i</i></text>
+<text top="961" left="505" width="3" height="10" font="19"><i>i</i></text>
+<text top="972" left="483" width="3" height="10" font="19"><i>i</i></text>
+<text top="961" left="649" width="8" height="17" font="24">=</text>
+<text top="961" left="605" width="8" height="17" font="24">=</text>
+<text top="961" left="556" width="8" height="17" font="24">−</text>
+<text top="961" left="520" width="8" height="17" font="24">−</text>
+<text top="965" left="566" width="10" height="14" font="26"><b>E</b></text>
+<text top="965" left="531" width="15" height="14" font="26"><b>W</b></text>
+<text top="965" left="509" width="8" height="14" font="26"><b>S</b></text>
+<text top="965" left="494" width="10" height="14" font="26"><b>T</b></text>
+<text top="960" left="474" width="8" height="18" font="4">λ</text>
+<text top="963" left="795" width="5" height="16" font="1"> </text>
+<text top="959" left="813" width="5" height="16" font="23"> </text>
+<text top="1009" left="788" width="5" height="13" font="2">)</text>
+<text top="1009" left="781" width="7" height="13" font="2">6</text>
+<text top="1009" left="776" width="5" height="13" font="2">(</text>
+<text top="1009" left="497" width="7" height="13" font="2">0</text>
+<text top="1006" left="485" width="8" height="17" font="2">≥</text>
+<text top="1009" left="474" width="7" height="13" font="20"><b>λ</b></text>
+<text top="1007" left="796" width="21" height="16" font="23">   </text>
+<text top="1054" left="788" width="5" height="14" font="24">)</text>
+<text top="1054" left="780" width="8" height="14" font="24">7</text>
+<text top="1054" left="775" width="5" height="14" font="24">(</text>
+<text top="1054" left="572" width="8" height="14" font="24">0</text>
+<text top="1050" left="560" width="8" height="17" font="24">≤</text>
+<text top="1050" left="524" width="8" height="17" font="24">−</text>
+<text top="1050" left="495" width="8" height="17" font="24">−</text>
+<text top="1061" left="552" width="3" height="10" font="19"><i>t</i></text>
+<text top="1054" left="545" width="7" height="14" font="25"><i>x</i></text>
+<text top="1054" left="535" width="10" height="14" font="26"><b>E</b></text>
+<text top="1054" left="506" width="15" height="14" font="26"><b>W</b></text>
+<text top="1054" left="473" width="19" height="14" font="26"><b>TS</b></text>
+<text top="1052" left="796" width="21" height="16" font="23">   </text>
+<text top="1094" left="468" width="40" height="15" font="4">where</text>
+<text top="1095" left="508" width="16" height="14" font="2"> λ </text>
+<text top="1089" left="524" width="8" height="21" font="2">∈</text>
+<text top="1088" left="532" width="6" height="21" font="1">ι</text>
+<text top="1086" left="538" width="12" height="25" font="1">ℝ</text>
+<text top="1088" left="550" width="6" height="11" font="17"><i>q</i></text>
+<text top="1094" left="556" width="4" height="15" font="4">,</text>
+<text top="1095" left="560" width="4" height="14" font="2"> </text>
+<text top="1094" left="564" width="235" height="15" font="4">and the matrix H is full rank. From </text>
+<text top="39" left="293" width="307" height="16" font="27">Recent Researches in Engineering and Automatic Control</text>
+<text top="1207" left="108" width="137" height="16" font="27">ISBN: 978-1-61804-057-2</text>
+<text top="1207" left="436" width="20" height="16" font="27">101</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="28" size="14" family="Times" color="#323232"/>
+	<fontspec id="29" size="7" family="Times" color="#000000"/>
+	<fontspec id="30" size="14" family="Times" color="#000000"/>
+	<fontspec id="31" size="15" family="Times" color="#000000"/>
+	<fontspec id="32" size="16" family="Times" color="#000000"/>
+	<fontspec id="33" size="8" family="Times" color="#000000"/>
+	<fontspec id="34" size="15" family="Times" color="#000000"/>
+	<fontspec id="35" size="5" family="Times" color="#000000"/>
+	<fontspec id="36" size="5" family="Times" color="#000000"/>
+	<fontspec id="37" size="16" family="Times" color="#000000"/>
+	<fontspec id="38" size="4" family="Times" color="#000000"/>
+	<fontspec id="39" size="6" family="Times" color="#000000"/>
+	<fontspec id="40" size="4" family="Times" color="#000000"/>
+<text top="110" left="77" width="29" height="15" font="4"> the </text>
+<text top="110" left="121" width="84" height="15" font="4">condition of </text>
+<text top="110" left="221" width="121" height="15" font="4">optimization, you </text>
+<text top="110" left="358" width="27" height="15" font="4">can </text>
+<text top="110" left="401" width="31" height="15" font="4">find </text>
+<text top="129" left="77" width="241" height="15" font="4">the optimal value of <i>S</i> depending on</text>
+<text top="129" left="317" width="4" height="15" font="28"> </text>
+<text top="129" left="321" width="7" height="15" font="3"><i>x</i></text>
+<text top="135" left="329" width="3" height="9" font="19"><i>t</i></text>
+<text top="129" left="332" width="4" height="15" font="28"> </text>
+<text top="129" left="336" width="95" height="15" font="4">and Lagrange </text>
+<text top="149" left="77" width="101" height="15" font="4">multipliers  λ.  </text>
+<text top="179" left="355" width="4" height="12" font="8">)</text>
+<text top="179" left="349" width="7" height="12" font="8">8</text>
+<text top="179" left="345" width="4" height="12" font="8">(</text>
+<text top="176" left="243" width="5" height="8" font="29">1</text>
+<text top="176" left="190" width="5" height="8" font="29">1</text>
+<text top="179" left="263" width="6" height="12" font="13"><b>λ</b></text>
+<text top="179" left="248" width="9" height="12" font="13"><b>T</b></text>
+<text top="179" left="227" width="10" height="12" font="13"><b>H</b></text>
+<text top="179" left="194" width="10" height="12" font="13"><b>G</b></text>
+<text top="179" left="174" width="10" height="12" font="13"><b>H</b></text>
+<text top="179" left="143" width="7" height="12" font="13"><b>S</b></text>
+<text top="176" left="256" width="5" height="8" font="22"><i>T</i></text>
+<text top="185" left="210" width="3" height="8" font="22"><i>t</i></text>
+<text top="179" left="204" width="6" height="12" font="11"><i>x</i></text>
+<text top="174" left="238" width="5" height="11" font="29">−</text>
+<text top="174" left="185" width="5" height="11" font="29">−</text>
+<text top="176" left="217" width="7" height="15" font="8">−</text>
+<text top="176" left="166" width="7" height="15" font="8">−</text>
+<text top="176" left="155" width="7" height="15" font="8">=</text>
+<text top="185" left="363" width="8" height="15" font="4">  </text>
+<text top="199" left="77" width="108" height="15" font="5"><b>Definition 1.1.  </b></text>
+<text top="217" left="77" width="355" height="15" font="4">Let  <i><b>S</b>*(x)</i> the  optimal  solution of  (2) for  a  given </text>
+<text top="236" left="77" width="82" height="15" font="3"><i>x</i>. It defines </text>
+<text top="236" left="177" width="68" height="15" font="4">the active </text>
+<text top="236" left="263" width="80" height="15" font="4">constraints, </text>
+<text top="236" left="361" width="35" height="15" font="4">such </text>
+<text top="236" left="414" width="18" height="15" font="4">as </text>
+<text top="255" left="77" width="88" height="15" font="4">restrictions <i><b>T</b></i></text>
+<text top="252" left="164" width="3" height="9" font="19"><i>i</i></text>
+<text top="256" left="167" width="9" height="11" font="30"><i><b>S</b></i></text>
+<text top="255" left="176" width="47" height="15" font="3"><i>*(x)-<b>W</b></i></text>
+<text top="252" left="223" width="3" height="9" font="19"><i>i</i></text>
+<text top="255" left="226" width="17" height="15" font="3"><i>-<b>E</b></i></text>
+<text top="252" left="242" width="3" height="9" font="19"><i>i</i></text>
+<text top="255" left="245" width="35" height="15" font="3"><i>x=0</i>, </text>
+<text top="255" left="314" width="28" height="15" font="4">and </text>
+<text top="255" left="375" width="56" height="15" font="4">inactive </text>
+<text top="274" left="77" width="241" height="15" font="4">constraints,  such  as  restrictions <i><b>T</b></i></text>
+<text top="271" left="318" width="3" height="9" font="19"><i>i</i></text>
+<text top="275" left="321" width="9" height="11" font="30"><i><b>S</b></i></text>
+<text top="274" left="330" width="47" height="15" font="3"><i>*(x)-<b>W</b></i></text>
+<text top="271" left="377" width="3" height="9" font="19"><i>i</i></text>
+<text top="274" left="380" width="17" height="15" font="3"><i>-<b>E</b></i></text>
+<text top="271" left="396" width="3" height="9" font="19"><i>i</i></text>
+<text top="274" left="399" width="7" height="15" font="3"><i>x</i></text>
+<text top="281" left="406" width="3" height="9" font="19"><i> </i></text>
+<text top="274" left="416" width="15" height="15" font="3"><i>&lt; </i></text>
+<text top="293" left="77" width="355" height="15" font="3"><i>0</i>. The  optimal  time active <i>A*(x)</i>  is  the  time of  the </text>
+<text top="312" left="77" width="355" height="15" font="4">indices  of active  constraints at the  optimal  level </text>
+<text top="331" left="77" width="92" height="15" font="4">of <i>A*(x)={i|<b>T</b></i></text>
+<text top="328" left="168" width="3" height="9" font="19"><i>i</i></text>
+<text top="331" left="171" width="9" height="11" font="30"><i><b>S</b></i></text>
+<text top="331" left="180" width="52" height="15" font="3"><i>*(x)=<b>W</b></i></text>
+<text top="328" left="233" width="3" height="9" font="19"><i>i</i></text>
+<text top="331" left="235" width="22" height="15" font="3"><i>+<b>E</b></i></text>
+<text top="328" left="258" width="3" height="9" font="19"><i>i</i></text>
+<text top="331" left="260" width="171" height="15" font="3"><i>x}</i>.  It  is  also  defined  as </text>
+<text top="350" left="77" width="355" height="15" font="4">weakly  active  constraint  active  in  a  restriction </text>
+<text top="369" left="77" width="355" height="15" font="4">associated  with  a  zero  Lagrange  multiplier </text>
+<text top="387" left="77" width="7" height="15" font="8">λ</text>
+<text top="387" left="84" width="3" height="8" font="22"><i>i</i></text>
+<text top="388" left="87" width="143" height="15" font="4">, strong and active as </text>
+<text top="388" left="251" width="24" height="15" font="4">the </text>
+<text top="388" left="296" width="135" height="15" font="4">restriction on active </text>
+<text top="408" left="77" width="310" height="15" font="4">constraints with positive Lagrange multiplier λ</text>
+<text top="405" left="387" width="3" height="9" font="19"><i>i</i></text>
+<text top="408" left="390" width="30" height="15" font="4">. Let</text>
+<text top="432" left="79" width="9" height="16" font="23">λ</text>
+<text top="416" left="80" width="7" height="14" font="23">⌣</text>
+<text top="432" left="92" width="33" height="15" font="4">, the </text>
+<text top="432" left="147" width="66" height="15" font="4">Lagrange </text>
+<text top="432" left="236" width="94" height="15" font="4">multipliers of </text>
+<text top="432" left="351" width="81" height="15" font="4">the inactive </text>
+<text top="457" left="77" width="72" height="15" font="4">constraints</text>
+<text top="456" left="178" width="9" height="17" font="1">0</text>
+<text top="456" left="151" width="23" height="17" font="1">λ =</text>
+<text top="440" left="151" width="8" height="14" font="1">⌣</text>
+<text top="462" left="190" width="32" height="15" font="3"><i>,</i> and</text>
+<text top="457" left="225" width="9" height="16" font="23">λ</text>
+<text top="446" left="224" width="10" height="16" font="23">~</text>
+<text top="457" left="237" width="194" height="15" font="4"> Lagrange multipliers of  the </text>
+<text top="487" left="77" width="304" height="15" font="4">constraints active. Matrices  can  be  formed</text>
+<text top="487" left="383" width="12" height="16" font="31"><b>T</b></text>
+<text top="476" left="384" width="10" height="16" font="23">~</text>
+<text top="487" left="400" width="4" height="15" font="4">,</text>
+<text top="486" left="407" width="18" height="16" font="32"><b>W</b></text>
+<text top="475" left="411" width="10" height="17" font="1">~</text>
+<text top="487" left="427" width="4" height="15" font="4"> </text>
+<text top="512" left="77" width="28" height="15" font="4">and </text>
+<text top="512" left="107" width="12" height="16" font="31"><b>E</b></text>
+<text top="501" left="108" width="10" height="16" font="23">~</text>
+<text top="512" left="123" width="25" height="15" font="4">the </text>
+<text top="512" left="183" width="113" height="15" font="4">row containing <i><b>T</b></i></text>
+<text top="509" left="296" width="3" height="9" font="19"><i>i</i></text>
+<text top="512" left="299" width="8" height="15" font="3"><i>, </i></text>
+<text top="512" left="342" width="15" height="11" font="30"><i><b>W</b></i></text>
+<text top="509" left="357" width="3" height="9" font="19"><i>i</i></text>
+<text top="512" left="360" width="8" height="15" font="3"><i>, </i></text>
+<text top="512" left="403" width="28" height="15" font="4">and<i> </i></text>
+<text top="531" left="77" width="11" height="11" font="30"><i><b>E</b></i></text>
+<text top="528" left="87" width="3" height="9" font="19"><i>i</i></text>
+<text top="531" left="90" width="267" height="15" font="4"> corresponding to the active constraints. </text>
+<text top="551" left="77" width="108" height="15" font="5"><b>Definition 1.2.  </b></text>
+<text top="569" left="77" width="355" height="15" font="4">For  an active  time,  the  definition  of linear </text>
+<text top="588" left="77" width="218" height="15" font="4">independence constraint (LICQ) </text>
+<text top="588" left="328" width="41" height="15" font="4">states </text>
+<text top="588" left="403" width="29" height="15" font="4">that </text>
+<text top="607" left="77" width="201" height="15" font="4">the time constraint gradient is </text>
+<text top="607" left="305" width="55" height="15" font="4">directly </text>
+<text top="607" left="388" width="43" height="15" font="4">active </text>
+<text top="631" left="77" width="188" height="15" font="4">independent  [2],  p.  ie, </text>
+<text top="631" left="280" width="12" height="16" font="31"><b>T</b></text>
+<text top="620" left="281" width="10" height="16" font="23">~</text>
+<text top="634" left="296" width="135" height="15" font="4">  has  the  entire </text>
+<text top="655" left="77" width="181" height="15" font="4">row. Assuming LICQ sets, </text>
+<text top="655" left="273" width="35" height="15" font="4">such </text>
+<text top="655" left="323" width="29" height="15" font="4">that </text>
+<text top="655" left="368" width="24" height="15" font="4">the </text>
+<text top="655" left="411" width="12" height="16" font="31"><b>T</b></text>
+<text top="644" left="412" width="10" height="16" font="23">~</text>
+<text top="674" left="77" width="355" height="15" font="4">rows are independent  directors.  For  the  active </text>
+<text top="693" left="77" width="355" height="15" font="4">constraints  with  equations  (4)  and  (5)  we  obtain </text>
+<text top="712" left="77" width="301" height="15" font="4">Lagrange multiplier of the active constraints. </text>
+<text top="744" left="77" width="4" height="15" font="4"> </text>
+<text top="743" left="399" width="6" height="16" font="23">)</text>
+<text top="743" left="391" width="9" height="16" font="23">9</text>
+<text top="743" left="385" width="6" height="16" font="23">(</text>
+<text top="743" left="349" width="6" height="16" font="23">)</text>
+<text top="743" left="334" width="6" height="16" font="23">)</text>
+<text top="733" left="283" width="9" height="16" font="23">~</text>
+<text top="733" left="255" width="9" height="16" font="23">~</text>
+<text top="743" left="247" width="6" height="16" font="23">(</text>
+<text top="733" left="217" width="9" height="16" font="23">~</text>
+<text top="743" left="207" width="6" height="16" font="23">(</text>
+<text top="743" left="187" width="6" height="16" font="23">)</text>
+<text top="733" left="166" width="9" height="16" font="23">~</text>
+<text top="733" left="129" width="9" height="16" font="23">~</text>
+<text top="743" left="122" width="6" height="16" font="23">(</text>
+<text top="732" left="83" width="9" height="16" font="23">~</text>
+<text top="740" left="314" width="5" height="9" font="33">1</text>
+<text top="740" left="200" width="5" height="9" font="33">1</text>
+<text top="740" left="160" width="5" height="9" font="33">1</text>
+<text top="743" left="341" width="8" height="16" font="34"><i>x</i></text>
+<text top="740" left="178" width="6" height="9" font="19"><i>T</i></text>
+<text top="744" left="319" width="14" height="16" font="31"><b>G</b></text>
+<text top="744" left="294" width="14" height="16" font="31"><b>H</b></text>
+<text top="744" left="282" width="12" height="16" font="31"><b>T</b></text>
+<text top="744" left="254" width="12" height="16" font="31"><b>E</b></text>
+<text top="744" left="213" width="17" height="16" font="31"><b>W</b></text>
+<text top="744" left="166" width="12" height="16" font="31"><b>T</b></text>
+<text top="744" left="140" width="14" height="16" font="31"><b>H</b></text>
+<text top="744" left="128" width="12" height="16" font="31"><b>T</b></text>
+<text top="744" left="84" width="9" height="16" font="31"><b>λ</b></text>
+<text top="738" left="309" width="6" height="12" font="33">−</text>
+<text top="738" left="195" width="6" height="12" font="33">−</text>
+<text top="738" left="155" width="6" height="12" font="33">−</text>
+<text top="739" left="269" width="10" height="20" font="23">+</text>
+<text top="739" left="235" width="10" height="20" font="23">+</text>
+<text top="739" left="112" width="10" height="20" font="23">−</text>
+<text top="739" left="98" width="10" height="20" font="23">=</text>
+<text top="744" left="409" width="4" height="15" font="4"> </text>
+<text top="766" left="77" width="323" height="15" font="4">Now, equation (9) is substituted in (8) to obtain: </text>
+<text top="794" left="408" width="4" height="11" font="16">)</text>
+<text top="794" left="398" width="12" height="11" font="16">10</text>
+<text top="794" left="395" width="4" height="11" font="16">(</text>
+<text top="786" left="367" width="7" height="11" font="16">~</text>
+<text top="794" left="353" width="4" height="11" font="16">)</text>
+<text top="786" left="341" width="7" height="11" font="16">~</text>
+<text top="786" left="318" width="7" height="11" font="16">~</text>
+<text top="794" left="314" width="4" height="11" font="16">(</text>
+<text top="786" left="302" width="7" height="11" font="16">~</text>
+<text top="794" left="267" width="4" height="11" font="16">)</text>
+<text top="794" left="229" width="4" height="11" font="16">)</text>
+<text top="786" left="199" width="7" height="11" font="16">~</text>
+<text top="786" left="183" width="7" height="11" font="16">~</text>
+<text top="794" left="179" width="4" height="11" font="16">(</text>
+<text top="794" left="167" width="4" height="11" font="16">)</text>
+<text top="786" left="155" width="7" height="11" font="16">~</text>
+<text top="786" left="132" width="7" height="11" font="16">~</text>
+<text top="794" left="128" width="4" height="11" font="16">(</text>
+<text top="786" left="116" width="7" height="11" font="16">~</text>
+<text top="794" left="96" width="4" height="11" font="16">(</text>
+<text top="792" left="361" width="4" height="7" font="35">1</text>
+<text top="792" left="337" width="4" height="7" font="35">1</text>
+<text top="792" left="298" width="4" height="7" font="35">1</text>
+<text top="792" left="255" width="4" height="7" font="35">1</text>
+<text top="792" left="218" width="4" height="7" font="35">1</text>
+<text top="792" left="175" width="4" height="7" font="35">1</text>
+<text top="792" left="151" width="4" height="7" font="35">1</text>
+<text top="792" left="112" width="4" height="7" font="35">1</text>
+<text top="794" left="365" width="12" height="11" font="18"><b>W</b></text>
+<text top="794" left="340" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="324" width="10" height="11" font="18"><b>H</b></text>
+<text top="794" left="318" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="301" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="286" width="10" height="11" font="18"><b>H</b></text>
+<text top="794" left="258" width="10" height="11" font="18"><b>G</b></text>
+<text top="794" left="243" width="10" height="11" font="18"><b>H</b></text>
+<text top="794" left="221" width="10" height="11" font="18"><b>G</b></text>
+<text top="794" left="206" width="10" height="11" font="18"><b>H</b></text>
+<text top="794" left="199" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="182" width="8" height="11" font="18"><b>E</b></text>
+<text top="794" left="154" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="138" width="10" height="11" font="18"><b>H</b></text>
+<text top="794" left="131" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="115" width="8" height="11" font="18"><b>T</b></text>
+<text top="794" left="99" width="10" height="11" font="18"><b>H</b></text>
+<text top="794" left="78" width="7" height="11" font="18"><b>S</b></text>
+<text top="790" left="357" width="4" height="8" font="35">−</text>
+<text top="790" left="333" width="4" height="8" font="35">−</text>
+<text top="790" left="294" width="4" height="8" font="35">−</text>
+<text top="790" left="252" width="4" height="8" font="35">−</text>
+<text top="790" left="215" width="4" height="8" font="35">−</text>
+<text top="790" left="171" width="4" height="8" font="35">−</text>
+<text top="790" left="147" width="4" height="8" font="35">−</text>
+<text top="790" left="108" width="4" height="8" font="35">−</text>
+<text top="791" left="278" width="7" height="14" font="16">+</text>
+<text top="791" left="235" width="7" height="14" font="16">−</text>
+<text top="791" left="191" width="7" height="14" font="16">+</text>
+<text top="791" left="87" width="7" height="14" font="16">=</text>
+<text top="792" left="347" width="4" height="7" font="36"><i>T</i></text>
+<text top="792" left="309" width="4" height="7" font="36"><i>T</i></text>
+<text top="792" left="161" width="4" height="7" font="36"><i>T</i></text>
+<text top="792" left="122" width="4" height="7" font="36"><i>T</i></text>
+<text top="794" left="271" width="6" height="11" font="17"><i>x</i></text>
+<text top="788" left="413" width="4" height="15" font="4"> </text>
+<text top="832" left="32" width="62" height="15" font="4">               </text>
+<text top="830" left="211" width="5" height="13" font="2">)</text>
+<text top="830" left="197" width="15" height="13" font="2">11</text>
+<text top="830" left="193" width="5" height="13" font="2">(</text>
+<text top="830" left="156" width="11" height="13" font="20"><b>N</b></text>
+<text top="830" left="120" width="14" height="13" font="20"><b>M</b></text>
+<text top="830" left="95" width="8" height="13" font="20"><b>S</b></text>
+<text top="826" left="144" width="8" height="17" font="2">+</text>
+<text top="826" left="108" width="8" height="17" font="2">=</text>
+<text top="830" left="134" width="7" height="13" font="21"><i>x</i></text>
+<text top="832" left="218" width="4" height="15" font="4"> </text>
+<text top="859" left="77" width="355" height="15" font="4">The  equation (11)  is the  explicit  solution of  (2) for </text>
+<text top="879" left="77" width="334" height="15" font="4">a given optimal active constraint: A* ⊆ {1,…,q},  </text>
+<text top="898" left="77" width="28" height="15" font="4">and </text>
+<text top="898" left="127" width="119" height="15" font="3"><i>x</i> fixed. Note that </text>
+<text top="898" left="268" width="28" height="15" font="4">this </text>
+<text top="898" left="318" width="114" height="15" font="4">solution remains </text>
+<text top="919" left="77" width="90" height="15" font="4">optimal if  <i>x</i></text>
+<text top="923" left="166" width="3" height="12" font="33">ι</text>
+<text top="919" left="170" width="262" height="15" font="4">A*.  This  optimal  active  time is </text>
+<text top="938" left="77" width="355" height="15" font="4">determined  by imposition  of <i>S</i> as  it  should be </text>
+<text top="956" left="77" width="83" height="15" font="4">feasible (7). </text>
+<text top="987" left="363" width="6" height="15" font="4">)</text>
+<text top="987" left="346" width="17" height="15" font="4">12</text>
+<text top="987" left="342" width="6" height="15" font="4">(</text>
+<text top="987" left="304" width="8" height="15" font="4">0</text>
+<text top="987" left="196" width="6" height="15" font="4">)</text>
+<text top="987" left="134" width="6" height="15" font="4">(</text>
+<text top="983" left="290" width="9" height="19" font="4">≤</text>
+<text top="983" left="255" width="9" height="19" font="4">−</text>
+<text top="983" left="215" width="9" height="19" font="4">+</text>
+<text top="983" left="172" width="9" height="19" font="4">−</text>
+<text top="987" left="268" width="17" height="15" font="5"><b>W</b></text>
+<text top="987" left="227" width="24" height="15" font="5"><b>TN</b></text>
+<text top="987" left="185" width="11" height="15" font="5"><b>E</b></text>
+<text top="987" left="140" width="27" height="15" font="5"><b>TM</b></text>
+<text top="987" left="203" width="8" height="15" font="3"><i>x</i></text>
+<text top="994" left="372" width="4" height="15" font="4"> </text>
+<text top="1009" left="77" width="225" height="15" font="4">and Lagrange Multiplier (9) must </text>
+<text top="1009" left="347" width="80" height="15" font="4">remain non-</text>
+<text top="1028" left="77" width="60" height="15" font="4">negative </text>
+<text top="1063" left="359" width="5" height="13" font="2">)</text>
+<text top="1063" left="345" width="14" height="13" font="2">13</text>
+<text top="1063" left="341" width="5" height="13" font="2">(</text>
+<text top="1063" left="308" width="7" height="13" font="2">0</text>
+<text top="1063" left="288" width="5" height="13" font="2">)</text>
+<text top="1063" left="269" width="5" height="13" font="2">)</text>
+<text top="1054" left="225" width="8" height="13" font="2">~</text>
+<text top="1054" left="203" width="8" height="13" font="2">~</text>
+<text top="1063" left="197" width="5" height="13" font="2">(</text>
+<text top="1054" left="172" width="8" height="13" font="2">~</text>
+<text top="1063" left="164" width="5" height="13" font="2">(</text>
+<text top="1063" left="146" width="5" height="13" font="2">)</text>
+<text top="1054" left="127" width="8" height="13" font="2">~</text>
+<text top="1054" left="93" width="8" height="13" font="2">~</text>
+<text top="1063" left="87" width="5" height="13" font="2">(</text>
+<text top="1060" left="252" width="5" height="9" font="29">1</text>
+<text top="1060" left="157" width="5" height="9" font="29">1</text>
+<text top="1060" left="120" width="5" height="9" font="29">1</text>
+<text top="1060" left="296" width="8" height="16" font="2">≥</text>
+<text top="1060" left="214" width="8" height="16" font="2">+</text>
+<text top="1060" left="186" width="8" height="16" font="2">+</text>
+<text top="1060" left="77" width="8" height="16" font="2">−</text>
+<text top="1057" left="247" width="5" height="11" font="29">−</text>
+<text top="1057" left="152" width="5" height="11" font="29">−</text>
+<text top="1057" left="115" width="5" height="11" font="29">−</text>
+<text top="1070" left="282" width="3" height="9" font="22"><i>t</i></text>
+<text top="1060" left="136" width="6" height="9" font="22"><i>T</i></text>
+<text top="1063" left="275" width="6" height="13" font="21"><i>x</i></text>
+<text top="1063" left="257" width="11" height="13" font="20"><b>G</b></text>
+<text top="1063" left="234" width="11" height="13" font="20"><b>H</b></text>
+<text top="1063" left="224" width="9" height="13" font="20"><b>T</b></text>
+<text top="1063" left="202" width="9" height="13" font="20"><b>E</b></text>
+<text top="1063" left="169" width="14" height="13" font="20"><b>W</b></text>
+<text top="1063" left="126" width="9" height="13" font="20"><b>T</b></text>
+<text top="1063" left="102" width="11" height="13" font="20"><b>H</b></text>
+<text top="1063" left="93" width="9" height="13" font="20"><b>T</b></text>
+<text top="1061" left="367" width="4" height="15" font="4"> </text>
+<text top="1058" left="521" width="44" height="15" font="4">(1.24) </text>
+<text top="1087" left="221" width="4" height="15" font="4"> </text>
+<text top="1087" left="521" width="4" height="15" font="4"> </text>
+<text top="1106" left="77" width="355" height="15" font="4">The  equations  (12) and  (13) represent  a  polyhedron </text>
+<text top="1125" left="77" width="355" height="15" font="4">in the space of states. We can write this polyhedron </text>
+<text top="110" left="468" width="355" height="15" font="4">by: <i>Ax&lt;b</i>. the  following  definitions  will  help  us </text>
+<text top="129" left="468" width="355" height="15" font="4">manage the polyhedron to find explicit on MPC the </text>
+<text top="148" left="468" width="195" height="15" font="4">solutions all the state spaces. </text>
+<text top="167" left="468" width="104" height="15" font="5"><b>Definition 1.3. </b></text>
+<text top="187" left="468" width="68" height="15" font="4">Leaving <i>X</i></text>
+<text top="194" left="536" width="5" height="9" font="33">0</text>
+<text top="187" left="541" width="29" height="15" font="4"> _ R</text>
+<text top="184" left="570" width="5" height="9" font="19"><i>n</i></text>
+<text top="187" left="575" width="247" height="15" font="4"> polyhedron be represented by linear </text>
+<text top="206" left="468" width="91" height="15" font="4">inequalities <i>A</i></text>
+<text top="213" left="558" width="5" height="9" font="33">0</text>
+<text top="206" left="563" width="91" height="15" font="3"><i>x≤b</i>. Leaving </text>
+<text top="206" left="679" width="5" height="15" font="3"><i>i</i></text>
+<text top="203" left="684" width="8" height="9" font="19"><i>th</i></text>
+<text top="206" left="692" width="29" height="15" font="4"> the </text>
+<text top="206" left="745" width="77" height="15" font="4">hyperplane </text>
+<text top="225" left="468" width="14" height="15" font="4"> <i>A</i></text>
+<text top="232" left="482" width="5" height="9" font="19"><i>0</i></text>
+<text top="222" left="487" width="3" height="9" font="19"><i>i</i></text>
+<text top="225" left="490" width="27" height="15" font="3"><i>x=b</i></text>
+<text top="222" left="517" width="3" height="9" font="19"><i>i</i></text>
+<text top="225" left="520" width="24" height="15" font="4"> be </text>
+<text top="225" left="567" width="57" height="15" font="4">denoted </text>
+<text top="225" left="648" width="66" height="15" font="4">by <i>H</i>. If <i>X</i></text>
+<text top="232" left="713" width="5" height="9" font="19"><i>0</i></text>
+<text top="225" left="719" width="43" height="15" font="3"><i>∩H</i> is </text>
+<text top="225" left="786" width="37" height="15" font="3"><i>(n-1)</i> </text>
+<text top="244" left="468" width="144" height="15" font="4">dimensional,  then  <i>X</i></text>
+<text top="251" left="611" width="5" height="9" font="19"><i>0</i></text>
+<text top="244" left="617" width="206" height="15" font="3"><i>∩H</i>  is  called a  phase of  the </text>
+<text top="263" left="468" width="83" height="15" font="4">polyhedron. </text>
+<text top="282" left="468" width="104" height="15" font="5"><b>Definition 1.4. </b></text>
+<text top="301" left="468" width="355" height="15" font="4">Two polyhedral are called neighboring polyhedral, if </text>
+<text top="320" left="468" width="187" height="15" font="4">they have a common phase. </text>
+<text top="340" left="468" width="104" height="15" font="5"><b>Definition 1.5. </b></text>
+<text top="358" left="468" width="263" height="15" font="4">Given a polyhedron <i>X</i> represented by <i>A</i></text>
+<text top="364" left="730" width="5" height="9" font="33">0</text>
+<text top="358" left="735" width="87" height="15" font="3"><i>x≤b</i>. We say </text>
+<text top="378" left="468" width="39" height="15" font="4">that <i>A</i></text>
+<text top="375" left="507" width="3" height="9" font="19"><i>i</i></text>
+<text top="385" left="510" width="5" height="9" font="19"><i>0</i></text>
+<text top="378" left="515" width="144" height="15" font="3"><i>x≤bi</i>  is  redundant: <i>A</i></text>
+<text top="375" left="659" width="3" height="9" font="19"><i>j</i></text>
+<text top="385" left="662" width="5" height="9" font="19"><i>0</i></text>
+<text top="378" left="667" width="29" height="15" font="3"><i>x≤bi</i></text>
+<text top="373" left="696" width="12" height="20" font="23">∀</text>
+<text top="378" left="708" width="9" height="15" font="3"><i>j </i></text>
+<text top="373" left="722" width="9" height="20" font="23">≅</text>
+<text top="378" left="731" width="14" height="15" font="3"><i>  i</i></text>
+<text top="373" left="745" width="16" height="20" font="23">⇒</text>
+<text top="378" left="762" width="20" height="15" font="3"><i>  A</i></text>
+<text top="375" left="781" width="3" height="9" font="19"><i>i</i></text>
+<text top="385" left="784" width="5" height="9" font="19"><i>0</i></text>
+<text top="378" left="789" width="33" height="15" font="3"><i>x≤bi</i> </text>
+<text top="397" left="468" width="355" height="15" font="4">(ie. Can  be  removed  from the  description of  the </text>
+<text top="416" left="468" width="119" height="15" font="4">polyhedron). The </text>
+<text top="416" left="623" width="94" height="15" font="4">inequality <i>i</i> is </text>
+<text top="416" left="753" width="70" height="15" font="4">redundant </text>
+<text top="435" left="468" width="351" height="15" font="4">with degree <i>h</i>,  if there is  redundant and  there <i>h-</i></text>
+<text top="455" left="468" width="273" height="15" font="3"><i>dimensional</i> subset <i>Y</i>  of  <i>X</i> such  that </text>
+<text top="454" left="741" width="11" height="16" font="37"><i>A</i></text>
+<text top="450" left="752" width="3" height="11" font="17"><i>i</i></text>
+<text top="461" left="755" width="6" height="11" font="17"><i>0</i></text>
+<text top="454" left="761" width="34" height="16" font="37"><i>x=bi</i></text>
+<text top="455" left="795" width="27" height="15" font="4"> for </text>
+<text top="477" left="468" width="21" height="15" font="4">all </text>
+<text top="476" left="489" width="8" height="16" font="37"><i>x</i></text>
+<text top="479" left="496" width="4" height="15" font="16">ι</text>
+<text top="476" left="500" width="10" height="16" font="37"><i>Y</i></text>
+<text top="477" left="510" width="8" height="15" font="4">. </text>
+<text top="497" left="468" width="100" height="15" font="5"><b>Definition 1.6.</b></text>
+<text top="496" left="567" width="5" height="16" font="1"> </text>
+<text top="516" left="468" width="355" height="15" font="4">A representation of a polyhedron is <i>l-minimum</i> of l if </text>
+<text top="535" left="468" width="355" height="15" font="4">all redundant  constraints have  the  degree <i>h&gt; l</i>. </text>
+<text top="554" left="468" width="355" height="15" font="4">These  definitions can  help  to  represent the  regions </text>
+<text top="573" left="468" width="355" height="15" font="4">where <i>S</i> remains  optimal. First  find  the  critical </text>
+<text top="593" left="468" width="60" height="15" font="4">partition </text>
+<text top="592" left="534" width="11" height="16" font="37"><i>R</i></text>
+<text top="598" left="545" width="6" height="11" font="16">0</text>
+<text top="593" left="551" width="271" height="15" font="4">. This  region  is  found  to  define  the </text>
+<text top="612" left="468" width="355" height="15" font="4">optimal  time  constraints  active  as  empty.  The </text>
+<text top="631" left="468" width="330" height="15" font="4">Lagrange multipliers are zero. From (8) we have: </text>
+<text top="663" left="717" width="5" height="14" font="24">)</text>
+<text top="663" left="702" width="15" height="14" font="24">14</text>
+<text top="663" left="698" width="5" height="14" font="24">(</text>
+<text top="663" left="542" width="8" height="14" font="24">*</text>
+<text top="670" left="672" width="5" height="10" font="33">0</text>
+<text top="660" left="592" width="5" height="10" font="33">1</text>
+<text top="663" left="663" width="9" height="14" font="25"><i>R</i></text>
+<text top="663" left="640" width="7" height="14" font="25"><i>x</i></text>
+<text top="663" left="609" width="7" height="14" font="25"><i>x</i></text>
+<text top="660" left="649" width="11" height="17" font="24">∈</text>
+<text top="660" left="630" width="11" height="17" font="24">∀</text>
+<text top="660" left="564" width="8" height="17" font="24">−</text>
+<text top="660" left="552" width="8" height="17" font="24">=</text>
+<text top="657" left="587" width="6" height="12" font="33">−</text>
+<text top="664" left="597" width="12" height="14" font="26"><b>G</b></text>
+<text top="664" left="573" width="12" height="14" font="26"><b>H</b></text>
+<text top="664" left="534" width="8" height="14" font="26"><b>S</b></text>
+<text top="663" left="725" width="4" height="15" font="4"> </text>
+<text top="685" left="519" width="4" height="15" font="4"> </text>
+<text top="668" left="752" width="4" height="15" font="4"> </text>
+<text top="705" left="468" width="172" height="15" font="4">Since <i>S*</i> critical partition </text>
+<text top="704" left="639" width="11" height="16" font="37"><i>R</i></text>
+<text top="711" left="650" width="6" height="11" font="16">0</text>
+<text top="705" left="656" width="78" height="15" font="4"> defined by </text>
+<text top="705" left="771" width="52" height="15" font="4">(7), the </text>
+<text top="726" left="468" width="60" height="15" font="4">partition </text>
+<text top="725" left="528" width="11" height="16" font="37"><i>R</i></text>
+<text top="731" left="539" width="6" height="11" font="16">0</text>
+<text top="726" left="545" width="202" height="15" font="4"> is described by the inequality </text>
+<text top="725" left="746" width="11" height="16" font="37"><i>A</i></text>
+<text top="731" left="757" width="6" height="11" font="16">0</text>
+<text top="725" left="764" width="27" height="16" font="37"><i>x</i>≤<i>b</i></text>
+<text top="731" left="790" width="9" height="11" font="16">0,</text>
+<text top="726" left="799" width="4" height="15" font="4"> </text>
+<text top="745" left="468" width="81" height="15" font="4">(See Figure </text>
+<text top="745" left="569" width="98" height="15" font="4">1). Redundant </text>
+<text top="745" left="686" width="80" height="15" font="4">inequalities </text>
+<text top="745" left="787" width="36" height="15" font="4">were </text>
+<text top="766" left="468" width="85" height="15" font="4">removed, so </text>
+<text top="765" left="552" width="11" height="16" font="37"><i>R</i></text>
+<text top="771" left="563" width="6" height="11" font="16">0</text>
+<text top="766" left="570" width="191" height="15" font="4"> is an <i>l-minimal</i> polyhedron. </text>
+<text top="790" left="694" width="23" height="23" font="10">( )</text>
+<text top="798" left="696" width="15" height="14" font="24">15</text>
+<text top="798" left="631" width="5" height="14" font="24">)</text>
+<text top="798" left="556" width="5" height="14" font="24">(</text>
+<text top="795" left="590" width="5" height="10" font="33">1</text>
+<text top="799" left="660" width="15" height="14" font="26"><b>W</b></text>
+<text top="799" left="621" width="10" height="14" font="26"><b>E</b></text>
+<text top="799" left="595" width="12" height="14" font="26"><b>G</b></text>
+<text top="799" left="561" width="22" height="14" font="26"><b>TH</b></text>
+<text top="795" left="648" width="8" height="17" font="24">≤</text>
+<text top="795" left="610" width="8" height="17" font="24">+</text>
+<text top="795" left="545" width="8" height="17" font="24">−</text>
+<text top="792" left="585" width="6" height="12" font="33">−</text>
+<text top="798" left="637" width="7" height="14" font="25"><i>x</i></text>
+<text top="798" left="718" width="4" height="15" font="4"> </text>
+<text top="793" left="756" width="4" height="15" font="4"> </text>
+<text top="1053" left="794" width="4" height="15" font="4"> </text>
+<text top="1068" left="468" width="355" height="15" font="4">Figure  1:  Representation  of all  the  inequality that </text>
+<text top="1086" left="468" width="146" height="15" font="4">defines the partition <i>R</i></text>
+<text top="1093" left="614" width="5" height="9" font="33">0</text>
+<text top="1086" left="619" width="8" height="15" font="4">. </text>
+<text top="1105" left="468" width="4" height="15" font="4"> </text>
+<text top="1124" left="468" width="4" height="15" font="4"> </text>
+<text top="1040" left="516" width="11" height="7" font="9">-10</text>
+<text top="1040" left="581" width="7" height="7" font="9">-5</text>
+<text top="1040" left="648" width="4" height="7" font="9">0</text>
+<text top="1040" left="773" width="10" height="7" font="9">10 </text>
+<text top="1040" left="712" width="4" height="7" font="9">5</text>
+<text top="1034" left="509" width="11" height="7" font="9">-10</text>
+<text top="933" left="511" width="9" height="7" font="9">0  </text>
+<text top="983" left="513" width="7" height="7" font="9">-5</text>
+<text top="833" left="510" width="10" height="7" font="9">10 </text>
+<text top="883" left="516" width="4" height="7" font="9">5</text>
+<text top="1051" left="645" width="4" height="7" font="9">x</text>
+<text top="1055" left="650" width="3" height="6" font="38">1</text>
+<text top="935" left="499" width="0" height="7" font="39">x</text>
+<text top="932" left="503" width="0" height="6" font="40">2</text>
+<text top="39" left="293" width="307" height="16" font="27">Recent Researches in Engineering and Automatic Control</text>
+<text top="1207" left="108" width="137" height="16" font="27">ISBN: 978-1-61804-057-2</text>
+<text top="1207" left="436" width="20" height="16" font="27">102</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="41" size="19" family="Times" color="#000000"/>
+<text top="111" left="77" width="306" height="16" font="32"><b>2.1 Complexity of the Explicit Solution. </b></text>
+<text top="131" left="77" width="355" height="15" font="4">As mentioned above, it has changed the optimization </text>
+<text top="150" left="76" width="355" height="15" font="4">problem by  a  table  of data,  ie,  a  structure  of state </text>
+<text top="169" left="76" width="355" height="15" font="4">feedback control and  continuous  piecewise  linear </text>
+<text top="187" left="76" width="355" height="15" font="4">(PWL)  [6],  with  the  purpose  of  using  the  MPC </text>
+<text top="206" left="76" width="355" height="15" font="4">approach in simple systems, but with fast dynamics, </text>
+<text top="225" left="76" width="355" height="15" font="4">where the  optimization  time  is the primary  obstacle </text>
+<text top="244" left="76" width="287" height="15" font="4">to its use. This controller is represented as: </text>
+<text top="324" left="169" width="7" height="16" font="2"></text>
+<text top="310" left="169" width="7" height="16" font="2"></text>
+<text top="330" left="169" width="7" height="16" font="2"></text>
+<text top="286" left="169" width="7" height="16" font="2"></text>
+<text top="277" left="169" width="7" height="16" font="2"></text>
+<text top="296" left="169" width="7" height="16" font="2"></text>
+<text top="263" left="169" width="7" height="16" font="2"></text>
+<text top="326" left="282" width="10" height="16" font="2">∈</text>
+<text top="326" left="205" width="8" height="16" font="2">+</text>
+<text top="284" left="283" width="10" height="16" font="2">∈</text>
+<text top="284" left="205" width="8" height="16" font="2">+</text>
+<text top="262" left="283" width="10" height="16" font="2">∈</text>
+<text top="262" left="205" width="8" height="16" font="2">+</text>
+<text top="294" left="158" width="8" height="16" font="2">=</text>
+<text top="337" left="306" width="4" height="8" font="12"><i>n</i></text>
+<text top="337" left="227" width="4" height="8" font="12"><i>n</i></text>
+<text top="337" left="190" width="4" height="8" font="12"><i>n</i></text>
+<text top="329" left="296" width="9" height="13" font="21"><i>X</i></text>
+<text top="329" left="274" width="6" height="13" font="21"><i>x</i></text>
+<text top="329" left="249" width="8" height="13" font="21"><i>if</i></text>
+<text top="329" left="196" width="6" height="13" font="21"><i>x</i></text>
+<text top="287" left="296" width="9" height="13" font="21"><i>X</i></text>
+<text top="287" left="274" width="6" height="13" font="21"><i>x</i></text>
+<text top="287" left="249" width="8" height="13" font="21"><i>if</i></text>
+<text top="287" left="196" width="6" height="13" font="21"><i>x</i></text>
+<text top="265" left="296" width="9" height="13" font="21"><i>X</i></text>
+<text top="265" left="275" width="6" height="13" font="21"><i>x</i></text>
+<text top="265" left="250" width="8" height="13" font="21"><i>if</i></text>
+<text top="265" left="196" width="6" height="13" font="21"><i>x</i></text>
+<text top="297" left="143" width="6" height="13" font="21"><i>x</i></text>
+<text top="297" left="130" width="6" height="13" font="21"><i>k</i></text>
+<text top="329" left="233" width="4" height="13" font="2">,</text>
+<text top="287" left="233" width="4" height="13" font="2">,</text>
+<text top="265" left="231" width="4" height="13" font="2">,</text>
+<text top="297" left="150" width="5" height="13" font="2">)</text>
+<text top="297" left="138" width="5" height="13" font="2">(</text>
+<text top="294" left="306" width="4" height="8" font="9">2</text>
+<text top="294" left="227" width="4" height="8" font="9">2</text>
+<text top="294" left="190" width="4" height="8" font="9">2</text>
+<text top="273" left="306" width="4" height="8" font="9">1</text>
+<text top="273" left="226" width="4" height="8" font="9">1</text>
+<text top="273" left="191" width="4" height="8" font="9">1</text>
+<text top="330" left="216" width="10" height="13" font="20"><b>N</b></text>
+<text top="330" left="176" width="13" height="13" font="20"><b>M</b></text>
+<text top="287" left="216" width="10" height="13" font="20"><b>N</b></text>
+<text top="287" left="176" width="13" height="13" font="20"><b>M</b></text>
+<text top="266" left="216" width="10" height="13" font="20"><b>N</b></text>
+<text top="266" left="178" width="13" height="13" font="20"><b>M</b></text>
+<text top="307" left="204" width="5" height="11" font="2">⋮</text>
+<text top="284" left="315" width="32" height="16" font="1">       </text>
+<text top="285" left="346" width="32" height="15" font="4">(18) </text>
+<text top="361" left="77" width="355" height="15" font="4">Where <i>x</i> are the states (with <i>x</i> is the control action to </text>
+<text top="380" left="77" width="355" height="15" font="4">be  applied). A  search can  be  intelligent,  an </text>
+<text top="399" left="77" width="355" height="15" font="4">algorithm that  reduces the  time  to  find an  item  in </text>
+<text top="418" left="77" width="82" height="15" font="4">the table. In </text>
+<text top="418" left="176" width="28" height="15" font="4">this </text>
+<text top="418" left="221" width="104" height="15" font="4">case, found the </text>
+<text top="418" left="342" width="55" height="15" font="4">number </text>
+<text top="418" left="414" width="18" height="15" font="4">of </text>
+<text top="437" left="77" width="135" height="15" font="4">partitions generated </text>
+<text top="437" left="246" width="45" height="15" font="4">by the </text>
+<text top="437" left="325" width="55" height="15" font="4">number </text>
+<text top="437" left="414" width="18" height="15" font="4">of </text>
+<text top="456" left="77" width="355" height="15" font="4">nodes contained  in  the  table,  each  node contains </text>
+<text top="475" left="77" width="355" height="15" font="4">the control action and this node is defined by a set of </text>
+<text top="493" left="77" width="355" height="15" font="4">inequalities. The  simplest method for such problems </text>
+<text top="512" left="77" width="355" height="15" font="4">is the binary search. To apply this method, the table </text>
+<text top="531" left="77" width="355" height="15" font="4">must be  sorted.  And just  check if  the  item is </text>
+<text top="550" left="77" width="355" height="15" font="4">contained in  the  middle  of the  table,  if the  item  is </text>
+<text top="569" left="77" width="355" height="15" font="4">greater,  the  lower  half is  removed  and viceversa </text>
+<text top="588" left="77" width="355" height="15" font="4">if the  item  is  less. This  operation  is  repeated on </text>
+<text top="607" left="77" width="355" height="15" font="4">the remaining table to  find  the node  where the  item </text>
+<text top="626" left="77" width="355" height="15" font="4">belongs. This  method is  recursive and  the worst </text>
+<text top="645" left="77" width="85" height="15" font="4">solution can </text>
+<text top="645" left="181" width="20" height="15" font="4">be </text>
+<text top="645" left="221" width="85" height="15" font="4">found in <i>log </i></text>
+<text top="645" left="326" width="105" height="15" font="3"><i>n</i> iterations [8], </text>
+<text top="664" left="77" width="355" height="15" font="4">where <i>n</i> is  the  total  number of  nodes. In  our </text>
+<text top="683" left="77" width="355" height="15" font="4">case, each  control is  limited  within a  convex </text>
+<text top="702" left="77" width="355" height="15" font="4">polyhedron [1], and  uses  a  tree  search  algorithm </text>
+<text top="721" left="77" width="355" height="15" font="4">binary.  The  search  should  have  access to  the  root </text>
+<text top="740" left="77" width="355" height="15" font="4">node. If  the  tree  is null, requested  does  not  exist. </text>
+<text top="759" left="77" width="355" height="15" font="4">Otherwise, if  the  value is  equal to  the  root,  the </text>
+<text top="778" left="77" width="355" height="15" font="4">search is successful. If the value is less than the root, </text>
+<text top="797" left="77" width="355" height="15" font="4">the search is the left subtree. Also if it is greater than </text>
+<text top="816" left="77" width="355" height="15" font="4">the root, the search is the right subtree. This process </text>
+<text top="835" left="77" width="75" height="15" font="4">is repeated </text>
+<text top="835" left="168" width="35" height="15" font="4">until </text>
+<text top="835" left="219" width="64" height="15" font="4">the value </text>
+<text top="835" left="299" width="58" height="15" font="4">is found </text>
+<text top="835" left="373" width="18" height="15" font="4">or </text>
+<text top="835" left="408" width="24" height="15" font="4">the </text>
+<text top="854" left="77" width="355" height="15" font="4">specified subtree is  null. If the  desired  value is  not </text>
+<text top="873" left="77" width="355" height="15" font="4">found before  a subtree is  null,  then  the  value must </text>
+<text top="892" left="77" width="355" height="15" font="4">not  be  present in  the  tree. Thus, we  can  separate in </text>
+<text top="911" left="77" width="257" height="15" font="4">binary form different sets of partitions </text>
+<text top="930" left="77" width="4" height="15" font="4"> </text>
+<text top="950" left="77" width="116" height="16" font="32"><b>2.2 Table Size. </b></text>
+<text top="970" left="77" width="355" height="15" font="4">The table  size is  directly the  number  of  partitions </text>
+<text top="988" left="77" width="355" height="15" font="4">found  to  solve  the  problem  explicit  MPC. </text>
+<text top="1008" left="77" width="91" height="15" font="4">Although the </text>
+<text top="1008" left="191" width="46" height="15" font="4">search </text>
+<text top="1008" left="260" width="108" height="15" font="4">algorithm is the </text>
+<text top="1008" left="391" width="40" height="15" font="4">ideal, </text>
+<text top="1026" left="77" width="355" height="15" font="4">the number  of  partitions should  be  as small  as </text>
+<text top="1045" left="76" width="118" height="15" font="4">possible, thus the </text>
+<text top="1045" left="212" width="46" height="15" font="4">search </text>
+<text top="1045" left="274" width="34" height="15" font="4">time </text>
+<text top="1045" left="324" width="30" height="15" font="4">will </text>
+<text top="1045" left="371" width="61" height="15" font="4">decrease </text>
+<text top="1064" left="77" width="355" height="15" font="4">considerably.  Consider  what  should  be  the  number </text>
+<text top="1083" left="77" width="355" height="15" font="4">of  partitions  generated  to  solve  the  optimization </text>
+<text top="1102" left="76" width="126" height="15" font="4">problem explicitly </text>
+<text top="1102" left="220" width="68" height="15" font="4">in section </text>
+<text top="1102" left="306" width="41" height="15" font="4">2, the </text>
+<text top="1102" left="365" width="66" height="15" font="4">partitions </text>
+<text top="1121" left="77" width="355" height="15" font="4">are generated  from  the set  of  constraints of problem </text>
+<text top="1140" left="77" width="355" height="15" font="4">(2). It  is  known  that these  constraints  are  generated </text>
+<text top="110" left="468" width="355" height="15" font="4">from  the  restrictions in  the  states  and system </text>
+<text top="129" left="468" width="355" height="15" font="4">inputs. These  restrictions must  be  met through  the </text>
+<text top="148" left="468" width="355" height="15" font="4">forecast. Therefore, the  total  number  of  partitions </text>
+<text top="167" left="468" width="355" height="15" font="4">equals  the  number  of  constraints multiplied  by the </text>
+<text top="186" left="468" width="355" height="15" font="4">forecast  horizon, in  addition  to  the critical partition </text>
+<text top="206" left="468" width="6" height="15" font="4">(</text>
+<text top="205" left="473" width="11" height="16" font="37"><i>R</i></text>
+<text top="211" left="484" width="6" height="11" font="17"><i>0</i></text>
+<text top="205" left="490" width="6" height="16" font="37"><i>)</i></text>
+<text top="206" left="496" width="327" height="15" font="4">,  which  is generated when  the  restrictions are </text>
+<text top="225" left="468" width="73" height="15" font="4">not active. </text>
+<text top="244" left="468" width="4" height="15" font="4"> </text>
+<text top="264" left="468" width="142" height="16" font="32"><b>2.3  Disturbances. </b></text>
+<text top="284" left="468" width="355" height="15" font="4">With the above steps, we can find an explicit control </text>
+<text top="303" left="468" width="355" height="15" font="4">rules  based  only  on  feedback  control  law  of  the </text>
+<text top="322" left="468" width="355" height="15" font="4">state.  But  this  system  should  be  linear  and  simple. </text>
+<text top="341" left="468" width="355" height="15" font="4">The  difference  between  a simple  model  and the </text>
+<text top="360" left="468" width="355" height="15" font="4">original system are the disturbances, which make the </text>
+<text top="379" left="468" width="355" height="15" font="4">predictive control does not work. A commonly used </text>
+<text top="398" left="468" width="355" height="15" font="4">technique  is  to  model  these  disturbances  constants </text>
+<text top="417" left="468" width="355" height="15" font="4">for  the  prediction  model,  which  corresponds  to </text>
+<text top="436" left="468" width="352" height="15" font="4">model the disturbances as an integrated white noise.  </text>
+<text top="455" left="468" width="346" height="15" font="4">That is, including a new state variable in the model, </text>
+<text top="514" left="592" width="5" height="24" font="41">[</text>
+<text top="514" left="677" width="5" height="24" font="41">]</text>
+<text top="530" left="670" width="5" height="10" font="33">1</text>
+<text top="530" left="622" width="5" height="10" font="33">1</text>
+<text top="506" left="559" width="5" height="10" font="33">1</text>
+<text top="483" left="559" width="5" height="10" font="33">1</text>
+<text top="487" left="726" width="25" height="14" font="24">(19)</text>
+<text top="499" left="679" width="8" height="14" font="24">0</text>
+<text top="477" left="679" width="8" height="14" font="24">1</text>
+<text top="499" left="618" width="8" height="14" font="24">1</text>
+<text top="499" left="595" width="8" height="14" font="24">0</text>
+<text top="477" left="618" width="8" height="14" font="24">0</text>
+<text top="528" left="665" width="6" height="12" font="33">−</text>
+<text top="528" left="617" width="6" height="12" font="33">−</text>
+<text top="503" left="554" width="6" height="12" font="33">+</text>
+<text top="481" left="554" width="6" height="12" font="33">+</text>
+<text top="520" left="632" width="8" height="17" font="24">+</text>
+<text top="520" left="581" width="8" height="17" font="24">−</text>
+<text top="520" left="553" width="8" height="17" font="24">=</text>
+<text top="488" left="687" width="6" height="17" font="24"></text>
+<text top="499" left="687" width="6" height="17" font="24"></text>
+<text top="474" left="687" width="6" height="17" font="24"></text>
+<text top="488" left="673" width="6" height="17" font="24"></text>
+<text top="499" left="673" width="6" height="17" font="24"></text>
+<text top="474" left="673" width="6" height="17" font="24"></text>
+<text top="484" left="662" width="8" height="17" font="24">+</text>
+<text top="488" left="653" width="6" height="17" font="24"></text>
+<text top="500" left="653" width="6" height="17" font="24"></text>
+<text top="474" left="653" width="6" height="17" font="24"></text>
+<text top="488" left="633" width="6" height="17" font="24"></text>
+<text top="500" left="633" width="6" height="17" font="24"></text>
+<text top="474" left="633" width="6" height="17" font="24"></text>
+<text top="488" left="626" width="6" height="17" font="24"></text>
+<text top="499" left="626" width="6" height="17" font="24"></text>
+<text top="474" left="626" width="6" height="17" font="24"></text>
+<text top="488" left="588" width="6" height="17" font="24"></text>
+<text top="499" left="588" width="6" height="17" font="24"></text>
+<text top="474" left="588" width="6" height="17" font="24"></text>
+<text top="484" left="576" width="8" height="17" font="24">=</text>
+<text top="488" left="566" width="6" height="17" font="24"></text>
+<text top="500" left="566" width="6" height="17" font="24"></text>
+<text top="474" left="566" width="6" height="17" font="24"></text>
+<text top="488" left="535" width="6" height="17" font="24"></text>
+<text top="500" left="535" width="6" height="17" font="24"></text>
+<text top="474" left="535" width="6" height="17" font="24"></text>
+<text top="530" left="661" width="3" height="10" font="19"><i>t</i></text>
+<text top="530" left="613" width="3" height="10" font="19"><i>t</i></text>
+<text top="530" left="573" width="3" height="10" font="19"><i>t</i></text>
+<text top="530" left="543" width="3" height="10" font="19"><i>t</i></text>
+<text top="494" left="701" width="3" height="10" font="19"><i>t</i></text>
+<text top="506" left="647" width="3" height="10" font="19"><i>t</i></text>
+<text top="483" left="647" width="3" height="10" font="19"><i>t</i></text>
+<text top="506" left="550" width="3" height="10" font="19"><i>t</i></text>
+<text top="483" left="550" width="3" height="10" font="19"><i>t</i></text>
+<text top="523" left="643" width="17" height="14" font="25"><i>Bu</i></text>
+<text top="523" left="597" width="16" height="14" font="25"><i>Ax</i></text>
+<text top="523" left="566" width="7" height="14" font="25"><i>x</i></text>
+<text top="487" left="693" width="8" height="14" font="25"><i>u</i></text>
+<text top="476" left="640" width="7" height="14" font="25"><i>x</i></text>
+<text top="477" left="595" width="9" height="14" font="25"><i>A</i></text>
+<text top="476" left="542" width="7" height="14" font="25"><i>x</i></text>
+<text top="519" left="534" width="7" height="18" font="24">δ</text>
+<text top="495" left="638" width="7" height="18" font="24">δ</text>
+<text top="495" left="540" width="7" height="18" font="24">δ</text>
+<text top="498" left="754" width="41" height="15" font="4">          </text>
+<text top="545" left="468" width="45" height="15" font="4">where </text>
+<text top="542" left="512" width="7" height="17" font="2">δ</text>
+<text top="552" left="520" width="3" height="9" font="22"><i>t</i></text>
+<text top="545" left="522" width="300" height="15" font="4"> is  a  vector  of disturbances state and  <i>x</i> </text>
+<text top="564" left="468" width="156" height="15" font="4">is measurable [4]. This </text>
+<text top="564" left="642" width="93" height="15" font="4">configuration </text>
+<text top="564" left="754" width="26" height="15" font="4">has </text>
+<text top="564" left="799" width="24" height="15" font="4">the </text>
+<text top="583" left="468" width="355" height="15" font="4">advantage  of  eliminating  the  steady-state  error  and </text>
+<text top="602" left="468" width="355" height="15" font="4">re-design  have  a  parameter  between  control </text>
+<text top="621" left="468" width="355" height="15" font="4">performance and  the  number  of partitions. But  the </text>
+<text top="639" left="468" width="355" height="15" font="4">functioning  of control is  the  priority;  therefore we </text>
+<text top="659" left="468" width="355" height="15" font="4">must  use some  techniques to  reduce  the  size of  the </text>
+<text top="677" left="468" width="50" height="15" font="4">model. </text>
+<text top="697" left="468" width="4" height="15" font="4"> </text>
+<text top="717" left="468" width="354" height="19" font="6"><b>3 FPGA Module (Field Programmable </b></text>
+<text top="741" left="468" width="121" height="19" font="6"><b>Gate Array). </b></text>
+<text top="764" left="468" width="355" height="15" font="4">The  programmable  controller FPGA is  a  tool  that </text>
+<text top="783" left="468" width="355" height="15" font="4">contains  logic  blocks whose  interconnection and </text>
+<text top="802" left="468" width="355" height="15" font="4">functionality  can  be programmed  (Reconfigurable </text>
+<text top="821" left="468" width="355" height="15" font="4">Computing)  [7].  Programmable  logic  can  play  from </text>
+<text top="840" left="468" width="355" height="15" font="4">as simple as functions performed by a logic gate or a </text>
+<text top="859" left="468" width="355" height="15" font="4">combinational  system,  to  complex  systems on  a </text>
+<text top="878" left="468" width="355" height="15" font="4">chip technology  also allows  for custom  designs, </text>
+<text top="897" left="468" width="355" height="15" font="4">low cost  of  development, including  the  production </text>
+<text top="916" left="468" width="47" height="15" font="4">of few </text>
+<text top="916" left="532" width="84" height="15" font="4">units. These </text>
+<text top="916" left="634" width="57" height="15" font="4">features </text>
+<text top="916" left="708" width="40" height="15" font="4">make </text>
+<text top="916" left="765" width="58" height="15" font="4">the very </text>
+<text top="934" left="468" width="355" height="15" font="4">interesting FPGA for  rapid  prototyping.  It  has  a </text>
+<text top="953" left="468" width="355" height="15" font="4">great advantage  compared  to other programmable </text>
+<text top="972" left="468" width="355" height="15" font="4">devices such  as  microcontrollers,  it  is  based mainly </text>
+<text top="991" left="468" width="355" height="15" font="4">on  its parallel  processing  capability,  providing </text>
+<text top="1010" left="468" width="355" height="15" font="4">faster at  a  lower  cost of  capacity  and programming </text>
+<text top="1029" left="468" width="355" height="15" font="4">time, deliver  performance and  reliability  of custom </text>
+<text top="1048" left="468" width="106" height="15" font="4">hardware while </text>
+<text top="1048" left="592" width="83" height="15" font="4">maintaining </text>
+<text top="1048" left="693" width="93" height="15" font="4">the flexibility </text>
+<text top="1048" left="805" width="18" height="15" font="4">of </text>
+<text top="1067" left="468" width="205" height="15" font="4">a software-defined system [9]. </text>
+<text top="1086" left="468" width="4" height="15" font="4"> </text>
+<text top="1105" left="468" width="4" height="15" font="4"> </text>
+<text top="1126" left="468" width="5" height="19" font="6"><b> </b></text>
+<text top="39" left="293" width="307" height="16" font="27">Recent Researches in Engineering and Automatic Control</text>
+<text top="1207" left="108" width="137" height="16" font="27">ISBN: 978-1-61804-057-2</text>
+<text top="1207" left="436" width="20" height="16" font="27">103</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="112" left="77" width="215" height="19" font="6"><b>4 Model Identification.  </b></text>
+<text top="134" left="77" width="257" height="15" font="4">For this  study,  we used as  a  model </text>
+<text top="153" left="76" width="263" height="15" font="4">plastic extruder,  made  with  electronic</text>
+<text top="172" left="76" width="355" height="15" font="4">for  educational  purposes  why  the  operation  is  not </text>
+<text top="191" left="76" width="359" height="15" font="4">permanent and identification schemes are possible in  </text>
+<text top="210" left="76" width="355" height="15" font="4">open  loop.  The  system  identification  was  carried </text>
+<text top="229" left="77" width="258" height="15" font="4">through, an electronic circuit designed</text>
+<text top="248" left="77" width="331" height="15" font="4">control circuit (to  emulate the  extruder)  and</text>
+<text top="267" left="77" width="298" height="15" font="4">oscilloscope  with data acquisition (DAQ)  to</text>
+<text top="286" left="77" width="265" height="15" font="4">and  store  the  data.  There  were  10 data</text>
+<text top="305" left="77" width="322" height="15" font="4">ranging from  0  to 10  volts. It  is  noteworthy</text>
+<text top="324" left="77" width="255" height="15" font="4">a reading  of  0 volts is  the  maximum</text>
+<text top="343" left="77" width="297" height="15" font="4">and  a  reading  of 10  volts corresponds</text>
+<text top="362" left="77" width="333" height="15" font="4">minimum power  output,  with a  sampling  time</text>
+<text top="381" left="77" width="281" height="15" font="3"><i>480 msec</i>. After determining identification</text>
+<text top="400" left="76" width="249" height="15" font="4">parameters,  we  used  the MATLAB </text>
+<text top="419" left="77" width="28" height="15" font="4">[5], </text>
+<text top="419" left="120" width="123" height="15" font="4">which determined </text>
+<text top="419" left="258" width="61" height="15" font="4">the plant </text>
+<text top="419" left="335" width="41" height="15" font="4">model</text>
+<text top="438" left="76" width="355" height="15" font="4">variable  of  order  2,  which  represents  the  simplest </text>
+<text top="457" left="76" width="297" height="15" font="4">model  that  can  be  found  with  the  best </text>
+<text top="475" left="77" width="276" height="15" font="4">experimental  data.  The  order  of  this</text>
+<text top="495" left="77" width="327" height="15" font="4">ensure  we have  a small  number  of  partitions  in</text>
+<text top="513" left="77" width="355" height="15" font="4">explicit solution to the problem MPC. The resulting </text>
+<text top="533" left="77" width="151" height="15" font="4">model was as follows: </text>
+<text top="615" left="77" width="57" height="16" font="1">Where: </text>
+<text top="678" left="77" width="4" height="14" font="2"> </text>
+<text top="727" left="77" width="4" height="14" font="2"> </text>
+<text top="751" left="236" width="30" height="14" font="2">        </text>
+<text top="775" left="77" width="4" height="14" font="2"> </text>
+<text top="792" left="77" width="266" height="15" font="4">Substituting the values in the model are:</text>
+<text top="918" left="77" width="4" height="15" font="4"> </text>
+<text top="938" left="77" width="236" height="19" font="6"><b>5  Methodological Design. </b></text>
+<text top="961" left="77" width="262" height="15" font="4">It proposes  the  use  of a  model  plant,</text>
+<text top="980" left="77" width="334" height="15" font="4">above, we use the principle of an extrusion system</text>
+<text top="999" left="77" width="270" height="15" font="4">describe  the  dynamics of  the  variables,</text>
+<text top="1018" left="77" width="25" height="15" font="4">the </text>
+<text top="1018" left="137" width="111" height="15" font="4">temperature and </text>
+<text top="1018" left="283" width="83" height="15" font="4">disturbances</text>
+<text top="1037" left="76" width="355" height="15" font="4">product of  the  thermoplastic  material),  present </text>
+<text top="1056" left="77" width="279" height="15" font="4">in the system which must  be  regulated</text>
+<text top="1075" left="77" width="295" height="15" font="4">temperature  profile is  invariably this  is</text>
+<text top="1094" left="77" width="257" height="15" font="4">a high peak temperature can distort the</text>
+<text top="1113" left="77" width="277" height="15" font="4">of  the  melt. The  problem of  the  plant</text>
+<text top="1131" left="77" width="274" height="15" font="4">the temperature  control  in such  systems</text>
+<text top="134" left="246" width="185" height="15" font="4">as  a  model  plant system, </text>
+<text top="153" left="274" width="158" height="15" font="4">electronic  components </text>
+<text top="172" left="77" width="355" height="15" font="4">for  educational  purposes  why  the  operation  is  not </text>
+<text top="191" left="77" width="359" height="15" font="4">permanent and identification schemes are possible in  </text>
+<text top="210" left="77" width="355" height="15" font="4">open  loop.  The  system  identification  was  carried </text>
+<text top="229" left="276" width="155" height="15" font="4">designed with a power </text>
+<text top="248" left="267" width="165" height="15" font="4">the  extruder)  and an </text>
+<text top="267" left="198" width="234" height="15" font="4">data acquisition (DAQ)  to  display </text>
+<text top="286" left="314" width="118" height="15" font="4">data jacks inputs, </text>
+<text top="305" left="280" width="152" height="15" font="4">It  is  noteworthy that </text>
+<text top="324" left="217" width="215" height="15" font="4">is  the  maximum power  output </text>
+<text top="343" left="294" width="137" height="15" font="4">corresponds to  the </text>
+<text top="362" left="289" width="142" height="15" font="4">a  sampling  time of </text>
+<text top="381" left="269" width="92" height="15" font="4">identification </text>
+<text top="400" left="321" width="110" height="15" font="4"> toolbox <i>IDENT </i></text>
+<text top="419" left="283" width="37" height="15" font="4">plant </text>
+<text top="419" left="335" width="97" height="15" font="4">model in state </text>
+<text top="438" left="77" width="355" height="15" font="4">variable  of  order  2,  which  represents  the  simplest </text>
+<text top="457" left="77" width="355" height="15" font="4">model  that  can  be  found  with  the  best  fidelity </text>
+<text top="475" left="218" width="213" height="15" font="4">The  order  of  this model will </text>
+<text top="495" left="321" width="111" height="15" font="4">partitions  in the </text>
+<text top="513" left="233" width="198" height="15" font="4">problem MPC. The resulting </text>
+<text top="552" left="357" width="5" height="16" font="1"> </text>
+<text top="586" left="341" width="4" height="14" font="2"> </text>
+<text top="653" left="338" width="4" height="14" font="2"> </text>
+<text top="703" left="339" width="4" height="14" font="2"> </text>
+<text top="751" left="339" width="4" height="14" font="2"> </text>
+<text top="792" left="318" width="29" height="15" font="4">are: </text>
+<text top="874" left="389" width="3" height="16" font="24"> </text>
+<text top="894" left="338" width="4" height="14" font="2"> </text>
+<text top="961" left="235" width="196" height="15" font="4">a  model  plant, as  described </text>
+<text top="980" left="299" width="132" height="15" font="4">extrusion system to </text>
+<text top="999" left="234" width="197" height="15" font="4">of  the  variables, in this  case </text>
+<text top="1018" left="220" width="28" height="15" font="4">and </text>
+<text top="1018" left="283" width="149" height="15" font="4">disturbances (revenue </text>
+<text top="1037" left="131" width="300" height="15" font="4">of  the  thermoplastic  material),  present </text>
+<text top="1056" left="212" width="219" height="15" font="4">must  be  regulated so that the </text>
+<text top="1075" left="319" width="112" height="15" font="4">this  is because </text>
+<text top="1094" left="313" width="116" height="15" font="4">the characteristic </text>
+<text top="1113" left="265" width="167" height="15" font="4">of  the  plant resides  in </text>
+<text top="1131" left="260" width="172" height="15" font="4">such  systems (extrusion) </text>
+<text top="110" left="468" width="242" height="15" font="4">because  it leads  to problems  of  loss</text>
+<text top="129" left="468" width="255" height="15" font="4">and production errors, by disturbances</text>
+<text top="148" left="468" width="226" height="15" font="4">For  this particular  output will  be</text>
+<text top="167" left="468" width="355" height="15" font="4">the  control  tools  that  can  establish  control  and  that </text>
+<text top="186" left="468" width="343" height="15" font="4">even  with  the  entry  of  disturbances,  the  system  ca</text>
+<text top="205" left="468" width="355" height="15" font="4">compensate  and  maintain  stability.  The  strategy </text>
+<text top="224" left="468" width="351" height="15" font="4">allows  for  a  combination  of  the  parameters  found,</text>
+<text top="243" left="468" width="215" height="15" font="4">assign  them  to a  table  and</text>
+<text top="262" left="468" width="187" height="15" font="4">tool MATLAB  <i>(mpt_studio</i></text>
+<text top="281" left="468" width="199" height="15" font="4">for  controlling  the  system. </text>
+<text top="300" left="468" width="179" height="15" font="4">consists  of two  stages: </text>
+<text top="319" left="468" width="212" height="15" font="4">a power  control  and the  other</text>
+<text top="338" left="468" width="181" height="15" font="4">control module of National</text>
+<text top="357" left="468" width="260" height="15" font="4">consisting  of  data  acquisition  modules</text>
+<text top="376" left="468" width="196" height="15" font="4">and the programmable device</text>
+<text top="416" left="625" width="36" height="16" font="23">varia</text>
+<text top="468" left="643" width="5" height="16" font="23"> </text>
+<text top="520" left="643" width="5" height="16" font="23"> </text>
+<text top="572" left="496" width="165" height="15" font="4">Figure 2. Block Diagram</text>
+<text top="591" left="468" width="4" height="15" font="4"> </text>
+<text top="611" left="468" width="141" height="16" font="32"><b>5.2  Power Stage.  </b></text>
+<text top="630" left="468" width="226" height="15" font="4">To  emulate the  extrusion  process</text>
+<text top="649" left="468" width="209" height="15" font="4">electronic  circuit that  allows</text>
+<text top="668" left="468" width="53" height="15" font="4">voltage </text>
+<text top="668" left="536" width="60" height="15" font="4">readings </text>
+<text top="668" left="611" width="94" height="15" font="4">(temperature) </text>
+<text top="668" left="720" width="103" height="15" font="4">between  two </text>
+<text top="687" left="468" width="355" height="15" font="4">alternative  entry  and  exit  to  obtain  a  reading </text>
+<text top="706" left="468" width="312" height="15" font="4">consistent  with  the  expected  response. </text>
+<text top="725" left="468" width="245" height="15" font="4">objective of  this  stage is,  control</text>
+<text top="744" left="468" width="240" height="15" font="4">of the  bulbs used  in the  circuit</text>
+<text top="763" left="468" width="247" height="15" font="4">electricity  grid and  generating  a</text>
+<text top="782" left="468" width="355" height="15" font="4">depending on the presence and non presence of light </text>
+<text top="801" left="468" width="355" height="15" font="4">will provide  a  control bulbs  (temperature).  For  this, </text>
+<text top="820" left="468" width="289" height="15" font="4">it has set a power control card triac devices.</text>
+<text top="839" left="468" width="4" height="15" font="4"> </text>
+<text top="999" left="568" width="157" height="15" font="4">Figure 3. Power control</text>
+<text top="1018" left="468" width="5" height="16" font="32"><b> </b></text>
+<text top="1039" left="468" width="175" height="16" font="32"><b>5.3  Implementation of</b></text>
+<text top="1039" left="642" width="5" height="16" font="31"><b> </b></text>
+<text top="1059" left="468" width="248" height="15" font="4">Once  the runs and  taken the  values</text>
+<text top="1078" left="468" width="349" height="15" font="3"><i>mpt_studio  ()</i>  in  MATLAB  and  is  the  explicit </text>
+<text top="1097" left="468" width="271" height="15" font="4">control  of  the  system.  With  the  model</text>
+<text top="1116" left="468" width="197" height="15" font="4">found in plant  identification</text>
+<text top="1135" left="468" width="205" height="15" font="4">the  restrictions at  the  entranc</text>
+<text top="513" left="572" width="3" height="11" font="16"> </text>
+<text top="527" left="551" width="45" height="11" font="16">POWER </text>
+<text top="541" left="544" width="60" height="11" font="16">CONTROL </text>
+<text top="417" left="640" width="3" height="12" font="8"> </text>
+<text top="433" left="618" width="44" height="12" font="8">PLANT</text>
+<text top="110" left="597" width="226" height="15" font="4">problems  of  loss of  raw  material </text>
+<text top="129" left="619" width="204" height="15" font="4">by disturbances in the system. </text>
+<text top="148" left="644" width="179" height="15" font="4">will  be  established  using </text>
+<text top="167" left="468" width="355" height="15" font="4">the  control  tools  that  can  establish  control  and  that </text>
+<text top="186" left="468" width="355" height="15" font="4">even  with  the  entry  of  disturbances,  the  system  can </text>
+<text top="205" left="468" width="355" height="15" font="4">compensate  and  maintain  stability.  The  strategy </text>
+<text top="224" left="468" width="355" height="15" font="4">allows  for  a  combination  of  the  parameters  found, </text>
+<text top="243" left="589" width="234" height="15" font="4">a  table  and using  the software </text>
+<text top="262" left="576" width="247" height="15" font="3"><i>(mpt_studio ())</i>, set  new  parameters </text>
+<text top="281" left="468" width="355" height="15" font="4">for  controlling  the  system.  The  control  process </text>
+<text top="300" left="643" width="180" height="15" font="4"> the  first  stage it forms </text>
+<text top="319" left="615" width="207" height="15" font="4">the  other phase  consists  of a </text>
+<text top="338" left="591" width="231" height="15" font="4">National Instrument CompactRIO </text>
+<text top="357" left="468" width="355" height="15" font="4">consisting  of  data  acquisition  modules,  input/output </text>
+<text top="376" left="520" width="284" height="15" font="4">programmable device (FPGA). (Figure 2). </text>
+<text top="416" left="625" width="36" height="16" font="23">varia</text>
+<text top="416" left="661" width="5" height="16" font="1"> </text>
+<text top="468" left="643" width="5" height="16" font="23"> </text>
+<text top="520" left="643" width="5" height="16" font="23"> </text>
+<text top="572" left="560" width="235" height="15" font="4">Block Diagram of Control System. </text>
+<text top="630" left="549" width="274" height="15" font="4">the  extrusion  process as  a  model use an </text>
+<text top="649" left="594" width="229" height="15" font="4">that  allows  combining  power </text>
+<text top="668" left="468" width="53" height="15" font="4">voltage </text>
+<text top="668" left="536" width="60" height="15" font="4">readings </text>
+<text top="668" left="611" width="94" height="15" font="4">(temperature) </text>
+<text top="668" left="720" width="103" height="15" font="4">between  two </text>
+<text top="687" left="468" width="355" height="15" font="4">alternative  entry  and  exit  to  obtain  a  reading </text>
+<text top="706" left="468" width="355" height="15" font="4">consistent  with  the  expected  response.  The </text>
+<text top="725" left="636" width="186" height="15" font="4">is,  control the  brightness </text>
+<text top="744" left="628" width="195" height="15" font="4">the  circuit coupled  to the </text>
+<text top="763" left="581" width="242" height="15" font="4">and  generating  a signal,  which </text>
+<text top="782" left="468" width="355" height="15" font="4">depending on the presence and non presence of light </text>
+<text top="801" left="468" width="355" height="15" font="4">will provide  a  control bulbs  (temperature).  For  this, </text>
+<text top="820" left="468" width="293" height="15" font="4">it has set a power control card triac devices. </text>
+<text top="985" left="837" width="4" height="14" font="2"> </text>
+<text top="999" left="632" width="143" height="15" font="4">Power control circuit </text>
+<text top="1039" left="642" width="5" height="16" font="31"><b> </b></text>
+<text top="1039" left="647" width="119" height="16" font="32"><b>Explicit MPC.  </b></text>
+<text top="1059" left="643" width="169" height="15" font="4">the  values use  the  tool </text>
+<text top="1078" left="573" width="243" height="15" font="4">in  MATLAB  and  is  the  explicit </text>
+<text top="1097" left="629" width="188" height="15" font="4">With  the  model previously </text>
+<text top="1116" left="527" width="289" height="15" font="4">plant  identification and  complying with </text>
+<text top="1135" left="574" width="242" height="15" font="4">at  the  entrances and  exits,  with  a </text>
+<text top="516" left="700" width="37" height="11" font="16"> FPGA </text>
+<text top="529" left="717" width="3" height="11" font="16"> </text>
+<text top="543" left="685" width="64" height="11" font="16">CompactRIO</text>
+<text top="544" left="749" width="3" height="9" font="33"> </text>
+<text top="433" left="618" width="47" height="12" font="8">PLANT </text>
+<text top="952" left="802" width="25" height="8" font="29">110 V </text>
+<text top="39" left="293" width="307" height="16" font="27">Recent Researches in Engineering and Automatic Control</text>
+<text top="1207" left="108" width="137" height="16" font="27">ISBN: 978-1-61804-057-2</text>
+<text top="1207" left="436" width="20" height="16" font="27">104</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="42" size="5" family="Times" color="#000000"/>
+<text top="110" left="76" width="126" height="15" font="4">prediction horizon </text>
+<text top="110" left="234" width="30" height="15" font="4">of 2 </text>
+<text top="110" left="295" width="130" height="15" font="4">and output weights </text>
+<text top="129" left="76" width="349" height="15" font="4">in 1000, to  avoid overshoot, predictive  control was </text>
+<text top="148" left="76" width="349" height="15" font="4">tuned for  better performance  with  the smallest </text>
+<text top="167" left="76" width="349" height="15" font="4">possible horizon. In this way we can ensure that the </text>
+<text top="186" left="77" width="349" height="15" font="4">number of  partitions  generated  in  the  explicit </text>
+<text top="205" left="77" width="349" height="15" font="4">solution  of  MPC  is  a  small  as  possible.  Following </text>
+<text top="224" left="77" width="229" height="15" font="4">is the MPC optimization problem. </text>
+<text top="298" left="198" width="23" height="14" font="24">120</text>
+<text top="298" left="147" width="8" height="14" font="24">0</text>
+<text top="275" left="190" width="15" height="14" font="24">10</text>
+<text top="275" left="147" width="8" height="14" font="24">0</text>
+<text top="286" left="130" width="4" height="14" font="24">.</text>
+<text top="286" left="122" width="4" height="14" font="24">.</text>
+<text top="245" left="369" width="5" height="14" font="24">)</text>
+<text top="245" left="309" width="5" height="14" font="24">(</text>
+<text top="245" left="279" width="30" height="14" font="24">1000</text>
+<text top="245" left="253" width="5" height="14" font="24">)</text>
+<text top="245" left="197" width="5" height="14" font="24">(</text>
+<text top="245" left="166" width="30" height="14" font="24">1000</text>
+<text top="245" left="116" width="23" height="14" font="24">min</text>
+<text top="242" left="376" width="4" height="8" font="9">2</text>
+<text top="253" left="363" width="4" height="8" font="9">2</text>
+<text top="253" left="324" width="4" height="8" font="9">2</text>
+<text top="242" left="260" width="4" height="8" font="9">2</text>
+<text top="253" left="248" width="4" height="8" font="9">1</text>
+<text top="253" left="210" width="4" height="8" font="9">1</text>
+<text top="258" left="127" width="2" height="8" font="9">,</text>
+<text top="262" left="134" width="3" height="6" font="38">2</text>
+<text top="262" left="123" width="3" height="6" font="38">1</text>
+<text top="294" left="187" width="8" height="17" font="24">≤</text>
+<text top="294" left="158" width="8" height="17" font="24">≤</text>
+<text top="271" left="179" width="8" height="17" font="24">≤</text>
+<text top="271" left="158" width="8" height="17" font="24">≤</text>
+<text top="241" left="333" width="8" height="17" font="24">−</text>
+<text top="241" left="269" width="8" height="17" font="24">+</text>
+<text top="241" left="219" width="8" height="17" font="24">−</text>
+<text top="241" left="156" width="8" height="17" font="24">=</text>
+<text top="306" left="179" width="2" height="8" font="12"><i>i</i></text>
+<text top="283" left="175" width="2" height="8" font="12"><i>i</i></text>
+<text top="258" left="129" width="4" height="8" font="12"><i>u</i></text>
+<text top="258" left="118" width="4" height="8" font="12"><i>u</i></text>
+<text top="298" left="172" width="7" height="14" font="25"><i>y</i></text>
+<text top="275" left="166" width="8" height="14" font="25"><i>u</i></text>
+<text top="286" left="125" width="4" height="14" font="25"><i>t</i></text>
+<text top="286" left="117" width="6" height="14" font="25"><i>s</i></text>
+<text top="245" left="345" width="17" height="14" font="25"><i>ref</i></text>
+<text top="245" left="316" width="7" height="14" font="25"><i>y</i></text>
+<text top="245" left="230" width="17" height="14" font="25"><i>ref</i></text>
+<text top="245" left="204" width="7" height="14" font="25"><i>y</i></text>
+<text top="245" left="143" width="7" height="14" font="25"><i>J</i></text>
+<text top="262" left="383" width="4" height="15" font="4"> </text>
+<text top="319" left="77" width="349" height="15" font="4">With  this optimization  function was  found explicit </text>
+<text top="338" left="77" width="176" height="15" font="4">control polytopes consists </text>
+<text top="338" left="273" width="18" height="15" font="4">of </text>
+<text top="338" left="312" width="21" height="15" font="4">25 </text>
+<text top="338" left="353" width="72" height="15" font="4">dependent </text>
+<text top="357" left="77" width="349" height="15" font="4">variables  6,  two outputs, two  inputs  and two </text>
+<text top="376" left="77" width="349" height="15" font="4">references. In  figure  4,  one  can  observe  three </text>
+<text top="395" left="77" width="349" height="15" font="4">regions  that  are  projections  of  states  polytopes </text>
+<text top="414" left="77" width="349" height="15" font="4">model  found  above.  Note  that the  state  space is </text>
+<text top="433" left="77" width="342" height="15" font="4">restricted between 0 and 120 degrees Celsius (° C). </text>
+<text top="613" left="389" width="4" height="14" font="2"> </text>
+<text top="626" left="79" width="351" height="15" font="4">Figure 4. Explicit control of partitions of 25 regions. </text>
+<text top="646" left="41" width="5" height="16" font="32"><b> </b></text>
+<text top="667" left="77" width="353" height="16" font="32"><b>5.4  Structure  and Configuring  the FPGA </b></text>
+<text top="688" left="76" width="133" height="16" font="32"><b>with LabVIEW.  </b></text>
+<text top="708" left="76" width="355" height="15" font="4">As a first phase for the structure and configuration of </text>
+<text top="726" left="77" width="355" height="15" font="4">the FPGA, was  established  execution  algorithm, </text>
+<text top="745" left="77" width="44" height="15" font="4">coded </text>
+<text top="745" left="139" width="90" height="15" font="4">in LabVIEW </text>
+<text top="745" left="248" width="71" height="15" font="4">(graphical </text>
+<text top="745" left="338" width="94" height="15" font="4">programming </text>
+<text top="764" left="77" width="355" height="15" font="4">language),  which consists  of PID's. Once  the coding </text>
+<text top="783" left="77" width="355" height="15" font="4">and tuned to the setpoints, we proceeded to program </text>
+<text top="802" left="77" width="355" height="15" font="4">the FPGA. Notably,  the LabVIEW program in  its </text>
+<text top="821" left="77" width="355" height="15" font="4">internal  configuration  simulator  has  a  different </text>
+<text top="840" left="77" width="129" height="15" font="4">FPGA models. For </text>
+<text top="840" left="222" width="28" height="15" font="4">this </text>
+<text top="840" left="266" width="119" height="15" font="4">simulation model </text>
+<text top="840" left="402" width="30" height="15" font="4">was </text>
+<text top="859" left="77" width="355" height="15" font="4">used cRIO 9002/9004. Given the  input  parameters </text>
+<text top="878" left="77" width="355" height="15" font="4">and  introduced  the  program,  the second  step  was </text>
+<text top="897" left="77" width="355" height="15" font="4">to tune the  controller FPGA to the  data  obtained </text>
+<text top="916" left="77" width="355" height="15" font="4">with advanced  control  technique  explicit  MPC. </text>
+<text top="935" left="77" width="355" height="15" font="4">Procurement  functions  and  data  transmission, </text>
+<text top="954" left="77" width="355" height="15" font="4">analog-digital  conversion,  parallel  communication, </text>
+<text top="973" left="77" width="355" height="15" font="4">reference voltage settings and pulse generation were </text>
+<text top="992" left="76" width="355" height="15" font="4">performed  by simulation  with  the  LabVIEW </text>
+<text top="1011" left="76" width="355" height="15" font="4">program.  Once  you  know  the  model  proceeded  to </text>
+<text top="1030" left="77" width="355" height="15" font="4">load  the different  data  required for  execution. With </text>
+<text top="1049" left="77" width="355" height="15" font="4">this,  associated data  found  in the  previous  steps </text>
+<text top="1068" left="77" width="355" height="15" font="4">and the  run was  conducted to  observe the  behavior </text>
+<text top="1087" left="77" width="355" height="15" font="4">of  the FPGA and advanced  control  technology. </text>
+<text top="1106" left="77" width="355" height="15" font="4">Performing  the  simulation,  it  was  proven  the </text>
+<text top="1125" left="77" width="355" height="15" font="4">efficiency  of  the  system.  To  make  a  control  that </text>
+<text top="110" left="468" width="355" height="15" font="4">decreases  the  overshoot were tuning the  weights  in </text>
+<text top="129" left="468" width="343" height="15" font="4">the output of which were 10 and 1000 respectively. </text>
+<text top="254" left="832" width="4" height="15" font="4"> </text>
+<text top="269" left="468" width="355" height="15" font="4">Figure 5. Simulation for a weight of 10 in the output. </text>
+<text top="395" left="832" width="4" height="14" font="2"> </text>
+<text top="409" left="468" width="330" height="15" font="4">Figure 6. Simulation for a weight of 1000 output. </text>
+<text top="428" left="468" width="4" height="15" font="4"> </text>
+<text top="447" left="468" width="349" height="15" font="4">You may notice that with a weight of 1000 (Figure </text>
+<text top="466" left="468" width="349" height="15" font="4">6),  the  system not  present  overshoot  and  still </text>
+<text top="484" left="468" width="247" height="15" font="4">reference 45° and 55°C respectively. </text>
+<text top="504" left="468" width="4" height="15" font="4"> </text>
+<text top="524" left="468" width="219" height="19" font="6"><b>6 Experimental Results. </b></text>
+<text top="547" left="468" width="189" height="15" font="4">The explicit MPC control is </text>
+<text top="547" left="686" width="80" height="15" font="4">represented </text>
+<text top="547" left="796" width="20" height="15" font="4">by </text>
+<text top="566" left="468" width="349" height="15" font="4">a table polyhedral  and for  each  polyhedron have a </text>
+<text top="585" left="468" width="348" height="15" font="4">control  action dependent  on  the 6  states  (<i>y1,  y2, </i></text>
+<text top="604" left="468" width="349" height="15" font="3"><i>u1, u2, ref1,  ref2</i>). The  problem  with  this control is </text>
+<text top="623" left="468" width="348" height="15" font="4">to find the polyhedron that contains the states <i>x</i>, for </text>
+<text top="641" left="468" width="349" height="15" font="4">this we use the method of binary tree search. Using </text>
+<text top="661" left="468" width="349" height="15" font="4">programming  language  C++  to  represent  this </text>
+<text top="679" left="468" width="349" height="15" font="4">control  arranged  in a  binary  tree. Each  level is </text>
+<text top="699" left="468" width="349" height="15" font="4">represented  by a  hyperplane and  the  condition of </text>
+<text top="717" left="468" width="349" height="15" font="4">more  or  less  indicates because branch  is  going  to </text>
+<text top="736" left="468" width="348" height="15" font="4">find  the  region  containing the  states  <i>x</i>,  the </text>
+<text top="755" left="468" width="349" height="15" font="4">following equation  we  can see  the  condition of </text>
+<text top="774" left="468" width="106" height="15" font="4">the hyperplane: </text>
+<text top="795" left="674" width="9" height="16" font="1">0</text>
+<text top="791" left="660" width="10" height="21" font="1">&lt;</text>
+<text top="791" left="624" width="10" height="21" font="1">−</text>
+<text top="805" left="649" width="3" height="10" font="19"><i>i</i></text>
+<text top="805" left="607" width="3" height="10" font="19"><i>i</i></text>
+<text top="795" left="612" width="8" height="16" font="37"><i>x</i></text>
+<text top="796" left="637" width="10" height="16" font="32"><b>k</b></text>
+<text top="796" left="595" width="10" height="16" font="32"><b>h</b></text>
+<text top="805" left="687" width="4" height="15" font="3"><i> </i></text>
+<text top="820" left="468" width="349" height="15" font="4">The  values  of <i>H</i>  and  <i>k</i> form  a table  with each  of </text>
+<text top="839" left="468" width="349" height="15" font="4">the hyperplanes that  form  the levels  of  the  tree and </text>
+<text top="858" left="468" width="25" height="15" font="4">the </text>
+<text top="858" left="511" width="68" height="15" font="4">following </text>
+<text top="858" left="598" width="67" height="15" font="4">two-level </text>
+<text top="858" left="683" width="47" height="15" font="4">nodes, </text>
+<text top="858" left="749" width="68" height="15" font="4">which we </text>
+<text top="877" left="468" width="349" height="15" font="4">call <i>ST</i>. After searching the region will only use the </text>
+<text top="896" left="468" width="321" height="15" font="4">resulting node to implement the control actions: </text>
+<text top="927" left="678" width="3" height="10" font="19"><i>i</i></text>
+<text top="927" left="636" width="3" height="10" font="19"><i>i</i></text>
+<text top="917" left="642" width="8" height="16" font="37"><i>x</i></text>
+<text top="918" left="668" width="9" height="16" font="32"><b>g</b></text>
+<text top="918" left="626" width="11" height="16" font="32"><b>F</b></text>
+<text top="918" left="596" width="10" height="16" font="32"><b>u</b></text>
+<text top="913" left="654" width="10" height="21" font="1">+</text>
+<text top="913" left="611" width="10" height="21" font="1">=</text>
+<text top="927" left="685" width="4" height="15" font="3"><i> </i></text>
+<text top="943" left="432" width="5" height="16" font="32"><b> </b></text>
+<text top="964" left="468" width="342" height="16" font="32"><b>6.1    Explicit   MPC   implementation   with </b></text>
+<text top="985" left="468" width="58" height="16" font="32"><b>FPGA. </b></text>
+<text top="1004" left="468" width="349" height="15" font="4">The explicit solution of MPC generates  a  table that </text>
+<text top="1023" left="468" width="349" height="15" font="4">can  be  easily programmed  into  an  FPGA  as  it </text>
+<text top="1042" left="468" width="46" height="15" font="4">would </text>
+<text top="1042" left="528" width="40" height="15" font="4">when </text>
+<text top="1042" left="584" width="123" height="15" font="4">a PID program on </text>
+<text top="1042" left="721" width="28" height="15" font="4">this </text>
+<text top="1042" left="765" width="51" height="15" font="4">device, </text>
+<text top="1061" left="468" width="349" height="15" font="4">improving the  performance  of  the FPGA as  a </text>
+<text top="1080" left="468" width="349" height="15" font="4">control. The function found in C + + in the previous </text>
+<text top="1099" left="468" width="349" height="15" font="4">section  works with  numbers of  32-bit floating </text>
+<text top="1118" left="468" width="349" height="15" font="4">point,  but  if you  want  to  implement on  a </text>
+<text top="1137" left="468" width="188" height="15" font="4">microcontroller or FPGA to </text>
+<text top="1137" left="674" width="20" height="15" font="4">be </text>
+<text top="1137" left="712" width="104" height="15" font="4">considered that </text>
+<text top="606" left="197" width="4" height="7" font="35">0</text>
+<text top="606" left="225" width="8" height="7" font="35">20</text>
+<text top="606" left="255" width="8" height="7" font="35">40</text>
+<text top="606" left="285" width="8" height="7" font="35">60</text>
+<text top="606" left="316" width="8" height="7" font="35">80</text>
+<text top="606" left="344" width="12" height="7" font="35">100</text>
+<text top="606" left="374" width="12" height="7" font="35">120</text>
+<text top="601" left="193" width="4" height="7" font="35">0</text>
+<text top="577" left="190" width="8" height="7" font="35">20</text>
+<text top="554" left="190" width="8" height="7" font="35">40</text>
+<text top="530" left="190" width="8" height="7" font="35">60</text>
+<text top="506" left="190" width="8" height="7" font="35">80</text>
+<text top="483" left="186" width="12" height="7" font="35">100</text>
+<text top="460" left="186" width="12" height="7" font="35">120</text>
+<text top="451" left="218" width="142" height="7" font="35">Controller partition with 25 regions. (tracking)</text>
+<text top="615" left="278" width="23" height="7" font="35">T1(°C)</text>
+<text top="539" left="181" width="0" height="7" font="42">T</text>
+<text top="534" left="181" width="0" height="7" font="42">2</text>
+<text top="529" left="181" width="0" height="7" font="42">(°</text>
+<text top="524" left="181" width="0" height="7" font="42">C</text>
+<text top="518" left="181" width="0" height="7" font="42">)</text>
+<text top="39" left="293" width="307" height="16" font="27">Recent Researches in Engineering and Automatic Control</text>
+<text top="1207" left="108" width="137" height="16" font="27">ISBN: 978-1-61804-057-2</text>
+<text top="1207" left="436" width="20" height="16" font="27">105</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="43" size="18" family="Times" color="#000000"/>
+	<fontspec id="44" size="18" family="Times" color="#000000"/>
+	<fontspec id="45" size="3" family="Times" color="#000000"/>
+<text top="110" left="77" width="349" height="15" font="4">these devices  work with integer  or  fixed  point </text>
+<text top="129" left="77" width="349" height="15" font="4">operations.  To  transform  this  function  and  ensure </text>
+<text top="148" left="77" width="342" height="15" font="4">optimal management of resources of the controller. </text>
+<text top="167" left="77" width="349" height="15" font="4">The  outputs of  the  plant going  to an  analog / </text>
+<text top="186" left="77" width="349" height="15" font="4">digital (A  / D) will  adjust the  conversion with  the </text>
+<text top="205" left="77" width="349" height="15" font="4">following  range, when  you get 150°  Celsius (° C), </text>
+<text top="224" left="77" width="349" height="15" font="4">the converter will give a value of 1024 bit (this will </text>
+<text top="243" left="76" width="349" height="15" font="4">be  the  maximum  conversion  rate). For  this, use </text>
+<text top="262" left="77" width="349" height="15" font="4">a 10-bit converter. On  the  other hand, the  output  of </text>
+<text top="281" left="77" width="107" height="15" font="4">the FPGA must </text>
+<text top="281" left="201" width="125" height="15" font="4">be converted from </text>
+<text top="281" left="344" width="47" height="15" font="4">digital </text>
+<text top="281" left="408" width="17" height="15" font="4">to </text>
+<text top="300" left="77" width="349" height="15" font="4">analog (D / A), for this output is represented with 8 </text>
+<text top="319" left="76" width="345" height="15" font="4">bits,  so to  have  10 volts will  require  a 256-</text>
+<text top="338" left="77" width="104" height="15" font="4">word bit value. </text>
+<text top="338" left="208" width="111" height="15" font="4">Therefore, there </text>
+<text top="338" left="348" width="30" height="15" font="4">will </text>
+<text top="338" left="406" width="19" height="15" font="4">be </text>
+<text top="357" left="77" width="349" height="15" font="4">a scaled model  to  consider is changes  in digital </text>
+<text top="376" left="77" width="211" height="15" font="4">/ analog (D/ A). (See Figure 7). </text>
+<text top="513" left="430" width="4" height="15" font="4"> </text>
+<text top="528" left="144" width="272" height="15" font="4">Figure. 7. Scaling model transformation. </text>
+<text top="547" left="76" width="142" height="15" font="4">The scale model will </text>
+<text top="547" left="239" width="20" height="15" font="4">be </text>
+<text top="547" left="279" width="81" height="15" font="4">represented </text>
+<text top="547" left="380" width="45" height="15" font="4">by the </text>
+<text top="566" left="76" width="134" height="15" font="4">following equation: </text>
+<text top="586" left="380" width="6" height="11" font="16">1</text>
+<text top="586" left="258" width="6" height="11" font="16">1</text>
+<text top="589" left="309" width="7" height="19" font="10">)</text>
+<text top="589" left="295" width="7" height="19" font="10">(</text>
+<text top="589" left="182" width="7" height="19" font="10">)</text>
+<text top="589" left="173" width="10" height="19" font="10">1</text>
+<text top="589" left="142" width="7" height="19" font="10">(</text>
+<text top="583" left="373" width="7" height="14" font="16">−</text>
+<text top="583" left="251" width="7" height="14" font="16">−</text>
+<text top="584" left="319" width="12" height="24" font="10">+</text>
+<text top="584" left="194" width="12" height="24" font="10">=</text>
+<text top="584" left="159" width="12" height="24" font="10">+</text>
+<text top="590" left="334" width="37" height="19" font="43"><b>αBβ</b></text>
+<text top="590" left="210" width="39" height="19" font="43"><b>αAα</b></text>
+<text top="589" left="301" width="6" height="19" font="44"><i>t</i></text>
+<text top="589" left="266" width="9" height="19" font="44"><i>y</i></text>
+<text top="589" left="149" width="6" height="19" font="44"><i>t</i></text>
+<text top="589" left="114" width="9" height="19" font="44"><i>y</i></text>
+<text top="600" left="277" width="14" height="11" font="17"><i>Int</i></text>
+<text top="600" left="124" width="14" height="11" font="17"><i>Int</i></text>
+<text top="601" left="388" width="4" height="15" font="4"> </text>
+<text top="616" left="77" width="338" height="15" font="4">Where α is the scaling matrix A/D converter and β </text>
+<text top="635" left="77" width="349" height="15" font="4">Is the scaling matrix D/A converter as the scaling is </text>
+<text top="654" left="77" width="349" height="15" font="4">the  same  for  the  two  outputs,  α can  be </text>
+<text top="673" left="77" width="349" height="15" font="4">represented by  a  scalar  and is150/1024. The  same </text>
+<text top="691" left="77" width="349" height="15" font="4">goes for β and the scaling value is 10/256. Note that </text>
+<text top="711" left="77" width="349" height="15" font="4">now the  model  input ranges  from  0  to 255  and the </text>
+<text top="729" left="77" width="349" height="15" font="4">output  of  the model  goes from  0  to 1023.With  this </text>
+<text top="748" left="77" width="349" height="15" font="4">new  model we  find  the explicit MPC control again, </text>
+<text top="767" left="77" width="284" height="15" font="4">using the following optimization problem: </text>
+<text top="847" left="275" width="4" height="11" font="16">)</text>
+<text top="847" left="244" width="18" height="11" font="16">120</text>
+<text top="847" left="241" width="4" height="11" font="16">(</text>
+<text top="847" left="210" width="18" height="11" font="16">819</text>
+<text top="847" left="169" width="6" height="11" font="16">0</text>
+<text top="820" left="285" width="4" height="11" font="16">)</text>
+<text top="820" left="245" width="12" height="11" font="16">10</text>
+<text top="820" left="242" width="4" height="11" font="16">(</text>
+<text top="820" left="204" width="18" height="11" font="16">255</text>
+<text top="820" left="169" width="6" height="11" font="16">0</text>
+<text top="829" left="156" width="3" height="11" font="16">.</text>
+<text top="829" left="150" width="3" height="11" font="16">.</text>
+<text top="788" left="343" width="4" height="11" font="16">)</text>
+<text top="788" left="296" width="4" height="11" font="16">(</text>
+<text top="788" left="272" width="25" height="11" font="16">1000</text>
+<text top="788" left="252" width="4" height="11" font="16">)</text>
+<text top="788" left="208" width="4" height="11" font="16">(</text>
+<text top="788" left="184" width="25" height="11" font="16">1000</text>
+<text top="788" left="145" width="19" height="11" font="16">min</text>
+<text top="786" left="348" width="4" height="6" font="35">2</text>
+<text top="794" left="338" width="4" height="6" font="35">2</text>
+<text top="794" left="308" width="4" height="6" font="35">2</text>
+<text top="786" left="257" width="4" height="6" font="35">2</text>
+<text top="794" left="248" width="4" height="6" font="35">1</text>
+<text top="794" left="219" width="4" height="6" font="35">1</text>
+<text top="798" left="153" width="2" height="6" font="35">,</text>
+<text top="802" left="159" width="3" height="5" font="45">2</text>
+<text top="802" left="150" width="3" height="5" font="45">1</text>
+<text top="847" left="267" width="8" height="11" font="17"><i>C</i></text>
+<text top="847" left="188" width="5" height="11" font="17"><i>y</i></text>
+<text top="820" left="264" width="20" height="11" font="17"><i>Volt</i></text>
+<text top="820" left="184" width="6" height="11" font="17"><i>u</i></text>
+<text top="829" left="152" width="3" height="11" font="17"><i>t</i></text>
+<text top="829" left="145" width="5" height="11" font="17"><i>s</i></text>
+<text top="788" left="324" width="14" height="11" font="17"><i>ref</i></text>
+<text top="788" left="302" width="5" height="11" font="17"><i>y</i></text>
+<text top="788" left="234" width="14" height="11" font="17"><i>ref</i></text>
+<text top="788" left="214" width="5" height="11" font="17"><i>y</i></text>
+<text top="788" left="166" width="5" height="11" font="17"><i>J</i></text>
+<text top="853" left="194" width="2" height="6" font="36"><i>i</i></text>
+<text top="827" left="192" width="2" height="6" font="36"><i>i</i></text>
+<text top="798" left="155" width="4" height="6" font="36"><i>u</i></text>
+<text top="798" left="147" width="4" height="6" font="36"><i>u</i></text>
+<text top="844" left="262" width="5" height="14" font="16">°</text>
+<text top="844" left="201" width="7" height="14" font="16">≤</text>
+<text top="844" left="178" width="7" height="14" font="16">≤</text>
+<text top="817" left="195" width="7" height="14" font="16">≤</text>
+<text top="817" left="178" width="7" height="14" font="16">≤</text>
+<text top="785" left="315" width="7" height="14" font="16">−</text>
+<text top="785" left="265" width="7" height="14" font="16">+</text>
+<text top="785" left="226" width="7" height="14" font="16">−</text>
+<text top="785" left="176" width="7" height="14" font="16">=</text>
+<text top="849" left="354" width="4" height="15" font="4"> </text>
+<text top="864" left="77" width="349" height="15" font="4">In  Figure  8,  one  can  observe the  response  of </text>
+<text top="883" left="77" width="83" height="15" font="4">this control. </text>
+<text top="1011" left="427" width="4" height="15" font="4"> </text>
+<text top="1026" left="132" width="238" height="15" font="4">Figure. 8. Scaling control response. </text>
+<text top="1045" left="77" width="53" height="15" font="4">It notes </text>
+<text top="1045" left="147" width="29" height="15" font="4">that </text>
+<text top="1045" left="194" width="25" height="15" font="4">the </text>
+<text top="1045" left="235" width="77" height="15" font="4">response is </text>
+<text top="1045" left="330" width="61" height="15" font="4">identical </text>
+<text top="1045" left="408" width="17" height="15" font="4">to </text>
+<text top="1064" left="77" width="349" height="15" font="4">the control found above; the  control  signal  and </text>
+<text top="1083" left="77" width="349" height="15" font="4">outputs are  scaled in  this  case. Perform  this </text>
+<text top="1102" left="77" width="349" height="15" font="4">function for converting representation of the control </text>
+<text top="1121" left="77" width="349" height="15" font="4">with only integers. The quantification of inputs and </text>
+<text top="1140" left="77" width="349" height="15" font="4">outputs  provide  10/256  and  150/1024  errors, </text>
+<text top="110" left="468" width="349" height="15" font="4">respectively,  which when  applied to  the  original </text>
+<text top="129" left="468" width="208" height="15" font="4">system generates a small error. </text>
+<text top="148" left="468" width="4" height="15" font="4"> </text>
+<text top="167" left="468" width="4" height="15" font="4"> </text>
+<text top="187" left="468" width="137" height="19" font="6"><b>7   Conclusion. </b></text>
+<text top="210" left="468" width="349" height="15" font="4">The  use  of advanced  control in  conjunction  with </text>
+<text top="229" left="468" width="171" height="15" font="4">the FPGA programmable </text>
+<text top="229" left="677" width="139" height="15" font="4">controller, computer </text>
+<text top="248" left="468" width="349" height="15" font="4">tools and  other duties  as  may  be able to  join, were </text>
+<text top="267" left="468" width="349" height="15" font="4">positive  for  optimum  results and  to  establish the </text>
+<text top="286" left="468" width="349" height="15" font="4">features  of  construction of  these  devices. The  most </text>
+<text top="305" left="468" width="349" height="15" font="4">important  function in  this type  of  research was  to </text>
+<text top="324" left="468" width="92" height="15" font="4">implement in </text>
+<text top="324" left="579" width="78" height="15" font="4">the explicit </text>
+<text top="324" left="676" width="140" height="15" font="4">MPC control FPGA, </text>
+<text top="343" left="468" width="349" height="15" font="4">obtaining  a  better  control  performance  than </text>
+<text top="362" left="468" width="349" height="15" font="4">conventional  PID.  A  remarkable  feature  in  this </text>
+<text top="381" left="468" width="349" height="15" font="4">investigation  was  to  establish  the  explicit  MPC </text>
+<text top="400" left="468" width="349" height="15" font="4">control  in  combination  with other  processes; </text>
+<text top="419" left="468" width="349" height="15" font="4">another reason is that recent developments indicate </text>
+<text top="438" left="468" width="29" height="15" font="4">that </text>
+<text top="438" left="514" width="162" height="15" font="4">the MPC formalism can </text>
+<text top="438" left="693" width="20" height="15" font="4">be </text>
+<text top="438" left="730" width="53" height="15" font="4">applied </text>
+<text top="438" left="799" width="17" height="15" font="4">to </text>
+<text top="457" left="468" width="348" height="15" font="4">denominated hybrid systems, ie systems containing  </text>
+<text top="475" left="468" width="142" height="15" font="4">switches, continuous </text>
+<text top="475" left="624" width="28" height="15" font="4">and </text>
+<text top="475" left="668" width="101" height="15" font="4">discrete states, </text>
+<text top="475" left="783" width="33" height="15" font="4">with </text>
+<text top="495" left="468" width="349" height="15" font="4">design  specifications.  This  opens a  very  wide and </text>
+<text top="513" left="468" width="169" height="15" font="4">important applications in </text>
+<text top="513" left="669" width="87" height="15" font="4">all industrial </text>
+<text top="513" left="789" width="28" height="15" font="4">and </text>
+<text top="533" left="468" width="349" height="15" font="4">commercial  sectors (manufacturing, chemical  and </text>
+<text top="551" left="468" width="318" height="15" font="4">processing, automotive, marine, aviation, etc.).. </text>
+<text top="570" left="468" width="4" height="15" font="4"> </text>
+<text top="589" left="468" width="4" height="15" font="4"> </text>
+<text top="608" left="468" width="82" height="15" font="3"><i>References: </i></text>
+<text top="627" left="468" width="355" height="15" font="4">[1]  Baotic,  M.:  An  Efficient  Algorithm  for  Multi-</text>
+<text top="646" left="468" width="359" height="15" font="4">Parametric  Quadratic  Programming.  ETH  Zurich, </text>
+<text top="665" left="468" width="157" height="15" font="4">Switzerland, Feb 2002. </text>
+<text top="684" left="468" width="359" height="15" font="4">[2] Baotic, M., F.J. Christophersen and M. Morari: A </text>
+<text top="703" left="468" width="359" height="15" font="4">new Algorithm for Constrained Finite Time Optimal </text>
+<text top="722" left="468" width="359" height="15" font="4">Control  of  Hybrid  Systems  with  a  Linear </text>
+<text top="741" left="468" width="341" height="15" font="4">Performance Index. In ECC Cambridge,Sept 2003. </text>
+<text top="760" left="468" width="359" height="15" font="4">[3]  Bemporad,  A.,  F.  Borrelli  and  M.  Morari: </text>
+<text top="779" left="468" width="359" height="15" font="4">Explicit  Solution  of  LP-Based  Model  Predictive </text>
+<text top="798" left="468" width="329" height="15" font="4">Control. In Proc. 39th IEEE Australia, Dec 2000. </text>
+<text top="817" left="468" width="359" height="15" font="4">[4] E. F. Camacho and C. Bordons, Model predictive </text>
+<text top="836" left="468" width="348" height="15" font="4">control, 2nd edition, springer-verlag, London, 2004. </text>
+<text top="855" left="468" width="349" height="15" font="4">[5]  L¨ofberg,  J.:  YALMIP  :  A  Toolbox  for </text>
+<text top="874" left="468" width="349" height="15" font="4">Modeling  and  Optimization  in  MATLAB.  In </text>
+<text top="893" left="468" width="340" height="15" font="4">Proceedings of the CACSD Taipei, Taiwan, 2004.  </text>
+<text top="912" left="468" width="349" height="15" font="4">[6]  Mayne,  D.  Q.  and  S.  Rakovi  ´c:  Model </text>
+<text top="931" left="468" width="349" height="15" font="4">predicitive  control  of  constrained  piecewise  affine </text>
+<text top="950" left="468" width="349" height="15" font="4">discrete-time  systems.  Int.  J.  of  Robust  and </text>
+<text top="969" left="468" width="316" height="15" font="4">Nonlinear Control, 13(3):261–279, April 2003. </text>
+<text top="988" left="468" width="349" height="15" font="4"> [7]  Oldfield  J.  and  Dorf  R.,  &#34;Field-Programmable </text>
+<text top="1007" left="468" width="261" height="15" font="4">Gate Arrays. John Wiley &amp; Son. 1995. </text>
+<text top="1026" left="468" width="349" height="15" font="4"> [8]  Tøndel,  P.,  T.A.  Johansen  and  A.  Bemporad: </text>
+<text top="1045" left="468" width="349" height="15" font="4">An  Algorithm  for  Multi-Parametric  Quadratic </text>
+<text top="1064" left="468" width="349" height="15" font="4">Programming  and  Explicit  MPC  Solutions.  40th </text>
+<text top="1083" left="468" width="347" height="15" font="4">IEEE Conf Decision and Control, Florida,dec 2001. </text>
+<text top="1102" left="468" width="349" height="15" font="4">[9]  Trimberger  S.,  &#34;Field-Programmable  Gate </text>
+<text top="1121" left="468" width="349" height="15" font="4">Arrays  Technology&#34;,  &#34;,  Boston:  Kluwer  Academic </text>
+<text top="1140" left="468" width="118" height="15" font="4">Publishers, 1995. </text>
+<text top="39" left="293" width="307" height="16" font="27">Recent Researches in Engineering and Automatic Control</text>
+<text top="1207" left="108" width="137" height="16" font="27">ISBN: 978-1-61804-057-2</text>
+<text top="1207" left="436" width="20" height="16" font="27">106</text>
+</page>
+</pdf2xml>

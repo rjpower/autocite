@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+<property>
+  <name>mapred.job.tracker</name>
+  <value>beaker-2:29999</value>
+</property>
+
+<property>
+  <name>mapred.local.dir</name>
+  <value>${hadoop.tmp.dir}/mapred/local</value>
+</property>
+
+<property>
+  <name>mapred.system.dir</name>
+  <value>${hadoop.tmp.dir}/mapred/system</value>
+</property>
+
+<property>
+  <name>mapred.temp.dir</name>
+  <value>${hadoop.tmp.dir}/mapred/temp</value>
+</property>
+
+<property>
+  <name>mapred.map.child.java.opts</name>
+  <value>-Xmx1024M</value>
+</property>
+
+<property>
+  <name>mapred.reduce.child.java.opts</name>
+  <value>-Xmx1024M</value>
+</property>
+
+<property>
+  <name>mapred.tasktracker.map.tasks.maximum</name>
+  <value>4</value>
+</property>
+
+<property>
+  <name>mapred.tasktracker.reduce.tasks.maximum</name>
+  <value>4</value>
+</property>
+
+</configuration>
