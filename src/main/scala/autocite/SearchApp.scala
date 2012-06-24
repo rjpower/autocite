@@ -1,30 +1,28 @@
 package autocite.web
 
-
 import java.net.InetSocketAddress
-
-import org.apache.log4j.Level
 import org.mortbay.jetty.nio.SelectChannelConnector
 import org.mortbay.jetty.webapp.WebAppContext
 import org.mortbay.jetty.Server
 import org.scalatra.scalate.ScalateSupport
 import org.scalatra.ScalatraServlet
-
-import com.codahale.logula.Logging
+import com.twitter.logging._
 import com.twitter.conversions.time.intToTimeableNumber
 import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.thrift.ThriftClientFramedCodec
-
 import autocite.Thrift.Implicits.thrift2json
 import autocite.Search
+import autocite.AutociteApp
 
-class AutociteServlet extends ScalatraServlet with ScalateSupport with Logging {
+class AutociteServlet extends ScalatraServlet with ScalateSupport {
   val service = ClientBuilder()
     .hosts(new InetSocketAddress("localhost", 9999))
     .codec(ThriftClientFramedCodec())
     .hostConnectionLimit(1)
     .tcpConnectTimeout(3.seconds)
     .build()
+
+  val log = Logger.get(classOf[AutociteServlet])
 
   val master = new Search.FinagledClient(service)
 
@@ -72,17 +70,10 @@ class AutociteServlet extends ScalatraServlet with ScalateSupport with Logging {
   }
 }
 
-object SearchApp extends App with Logging {
-  Logging.configure { log =>
-    log.registerWithJMX = true
-    log.level = Level.INFO
-    log.console.enabled = true
-    log.console.threshold = Level.INFO
-    log.file.enabled = false
-  }
+object SearchApp extends AutociteApp {
 
-//  System.setProperty("DEBUG", "true")
-//  System.setProperty("VERBOSE", "true")
+  //  System.setProperty("DEBUG", "true")
+  //  System.setProperty("VERBOSE", "true")
 
   val server = new Server
   val scc = new SelectChannelConnector

@@ -1,22 +1,21 @@
 package autocite
 
-import java.io.{ObjectOutputStream, ObjectInputStream}
+import java.io.{ ObjectOutputStream, ObjectInputStream }
 import java.net.URLClassLoader
 import scala.Array.canBuildFrom
 import scala.collection.JavaConversions._
 import scala.collection.Iterator
-import scala.math.{pow, log1p, log}
+import scala.math.{ pow, log1p, log }
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.compress.GzipCodec
 import org.apache.hadoop.io._
 import org.apache.hadoop.mapred.lib.MultipleInputs
 import org.apache.hadoop.mapred._
-import com.codahale.logula.Logging
-import com.twitter.scrooge.{ThriftStructCodec, ThriftStruct}
+import com.twitter.logging._
+import com.twitter.scrooge.{ ThriftStructCodec, ThriftStruct }
 import java.io.ByteArrayInputStream
 import org.apache.commons.io.output.ByteArrayOutputStream
-
 
 object HadoopImplicits {
   implicit def writable2boolean(value: BooleanWritable) = value.get
@@ -35,7 +34,14 @@ object HadoopImplicits {
   implicit def writable2bytes(value: BytesWritable): Array[Byte] = value.getBytes
 }
 
-abstract class ScalaBase[KO, VO] extends MapReduceBase with Logging {
+abstract class ScalaBase[KO, VO] extends MapReduceBase {
+  LoggerFactory(
+    node = "",
+    level = Some(Level.INFO),
+    handlers = List(ConsoleHandler()))()
+
+  val log = Logger.get(getClass)
+
   var reporter: Reporter = null
   var context: OutputCollector[KO, VO] = null
 
@@ -135,6 +141,7 @@ object HadoopUtil {
       val vIn = new BytesWritable
 
       var hasNext = reader.next(kIn, vIn)
+
       def next = {
         kOut = kIn.get
         vOut = vIn.getBytes
@@ -169,9 +176,9 @@ class ContextHelper {
     val obj = new ObjectOutputStream(bytes)
     obj.writeObject(mapper)
     obj.close
-    
+
     job.set("serializedMapper", new String(bytes.toByteArray))
-    
+
     val m = new GenericMapper[MKeyIn, MValueIn, MKeyOut, MValueOut]
     MultipleInputs.addInputPath(
       job, new Path(in), m.inputFormat, m.getClass())

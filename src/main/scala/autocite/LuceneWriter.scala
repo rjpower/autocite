@@ -1,6 +1,5 @@
 package autocite
 import java.io.File
-
 import org.apache.hadoop.fs.{Path, FileSystem}
 import org.apache.hadoop.io.LongWritable
 import org.apache.hadoop.mapred.{Reporter, RecordWriter, OutputFormat, JobConf, FileOutputFormat}
@@ -9,12 +8,11 @@ import org.apache.lucene.analysis.shingle.ShingleAnalyzerWrapper
 import org.apache.lucene.document.{Document => LuceneDoc}
 import org.apache.lucene.index.{IndexWriterConfig, IndexWriter}
 import org.apache.lucene.store.FSDirectory
+import com.twitter.logging.Logger
 
-import com.codahale.logula.Logging
-
-class LuceneRecordWriter(val fs: FileSystem, val job: JobConf, val name: String) extends RecordWriter[LongWritable, LuceneDoc]
-  with Logging {
-
+class LuceneRecordWriter(val fs: FileSystem, val job: JobConf, val name: String) extends RecordWriter[LongWritable, LuceneDoc] {
+  val log = Logger.get(classOf[LuceneRecordWriter])
+  
   val version = org.apache.lucene.util.Version.LUCENE_35
   val indexDirectory = FSDirectory.open(new java.io.File("./tmp/"))
   val indexConf = new IndexWriterConfig(version, new ShingleAnalyzerWrapper(version, 2, 4))

@@ -16,7 +16,8 @@ struct Document {
  2: string xml,
  3: list<Citation> incoming,
  4: list<Citation> outgoing,
- 5: string text
+ 5: string text,
+ 6: string url,
 }
 
 struct SearchResult {

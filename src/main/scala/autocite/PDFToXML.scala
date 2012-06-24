@@ -21,9 +21,13 @@ object PDFToXML {
       return None
     }
 
-    val binaryIn = new ByteArrayInputStream(pdfBlob, 4 + endOfHeader, pdfBlob.length - 4 - endOfHeader);
     val url = v.data.getHeader().getUrl().toLowerCase()
     val processor = if (url.contains(".pdf")) { "pdftoxml" } else { "pstoxml" }
+    val binaryIn = new ByteArrayInputStream(pdfBlob, 4 + endOfHeader, pdfBlob.length - 4 - endOfHeader);
+    apply(binaryIn, processor)
+  }
+  
+  def apply(binaryIn : InputStream, processor : String) : Option[Array[Byte]] = {
     val xmlOut = new ByteArrayOutputStream()
 
     val pbThread = new Thread(

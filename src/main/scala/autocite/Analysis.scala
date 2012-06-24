@@ -2,15 +2,15 @@ package autocite
 
 import java.nio.ByteBuffer
 import java.security.MessageDigest
-
 import scala.Array.canBuildFrom
 import scala.util.parsing.combinator.{ RegexParsers, PackratParsers }
 import scala.util.parsing.input.CharSequenceReader
 import scala.xml.Node
-
 import com.twitter.logging.Logger
-
 import autocite.XMLImplicits.nodeToHelper
+import scala.collection.mutable.LinkedList
+import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.ArrayBuffer
 
 class Analysis(val xml: String) {
   lazy val dom = Analysis.parseXML(xml)
@@ -168,8 +168,8 @@ object Analysis {
   // to the delimiters within and between these sections.  This parser
   // relies on a number of heuristics to find a successful parse.
 
-  object CitationParser extends RegexParsers with PackratParsers {
-    val keyWords = Set("and", "or", "the", "if")
+  class CitationParser extends RegexParsers with PackratParsers {
+    val keyWords = Set("and", "or", "the", "if", "our")
     val conferenceWords = Set(
       "proc\\.", "inc\\.", "pp\\.",
       "proceedings", "conference",
@@ -180,8 +180,9 @@ object Analysis {
       def lower() = chars.toLowerCase
       def words() = chars.toLowerCase.split(" ")
 
-      def isKeyWord() = !(words.toSet & keyWords).isEmpty
-      def isConferenceWord() = !(words.toSet & conferenceWords).isEmpty
+      def isKeyWord() = containsWords(keyWords)
+      def isConferenceWord() = containsWords(conferenceWords)
+      def containsWords(s: Set[String]) = !(words.toSet & s).isEmpty
       def hasDate() = !words.flatMap("\\d\\d\\d\\d".r.findFirstIn).isEmpty
       def isNumeric() = "\\d".r.findFirstIn(chars).isDefined
     }
@@ -190,97 +191,113 @@ object Analysis {
     case class EOT(chars: String) extends N
     case class Separator(chars: String) extends N
 
-    case class Name(chars: String) extends N
     case class Title(chars: String) extends N
     case class Conference(chars: String) extends N
 
     case class Authors(vals: List[Author])
 
-    implicit def node2string(t: N): String = t.chars
+    def token(p: Parser[String]): Parser[Token] = p ^^ { w => Token(w.trim) }
 
-    // Strip out quotation marks.
-    override val whiteSpace = "[\\s\"]+".r
+    implicit def stringToTokenParser(p: Parser[String]): Parser[Token] = token(p)
+    implicit def tokenToString(t: Token) = t.chars
 
-    val phd: PackratParser[Token] = "ph\\.? ? d\\.?".r ^^^ { Token("PhD") }
-    val etal: PackratParser[Token] = "(?i)et\\.? al\\.?".r ^^^ { Token("et al") }
+    val phd: Parser[Token] = "ph\\.? ? d\\.?".r ^^^ { Token("PhD") }
+    val etal: Parser[Token] = "(?i)et\\.? al\\.?".r ^^^ { Token("et al") }
 
+    def peek[T](p: Parser[T]) = Parser {
+      in =>
+        p(in) match {
+          case s @ Success(v, _) => Success(v, in)
+          case f @ Failure(v, _) => Failure(v, in)
+          case e @ Error(v, _)   => Error(v, in)
+        }
+    }
 
-    lazy val special: PackratParser[Token] =
+    class CappedBuffer extends ArrayBuffer[String] {
+      override def +=(s: String) = {
+        if (length < 500) {
+          super.+=(s)
+        }
+        this
+      }
+    }
+
+    val parserLog = new ArrayBuffer[String]
+
+    def plog[T](p: Parser[T])(msg: String) = Parser { in =>
+      parserLog += "Parsing " + msg
+      parserLog += in.pos.longString
+      var result = p(in)
+      parserLog += result.toString
+      result
+    }
+
+    lazy val special: Parser[Token] =
       conferenceWords
-        .map(w => regex(w.r))
+        .map(w => regex(("(?i)" + w).r))
         .reduce((a, b) => (a | b)) ^^ { Token(_) }
 
-    lazy val word: PackratParser[Token] =
-      (special | "[^\\s.,]+".r ^^ { Token(_) })
+    lazy val endOfAuthors: Parser[EOT] = ("." | "," | "\"" | ";") ^^ { EOT(_) }
 
-    lazy val endOfTitle: PackratParser[EOT] = ("." | "," | " ") ^^ { EOT(_) }
-    lazy val endOfAuthors = endOfTitle
+    lazy val initial: Parser[Token] = (
+      "[\\p{Lu}][ ]".r ^^ { init => Token(init.trim) }
+      | "[\\p{Lu}]".r <~ peek("[^\\p{L}]".r) ^^ { Token })
 
-    lazy val separator: PackratParser[Separator] = (":" | "-") ^^ { Separator(_) }
-
-    lazy val initial: PackratParser[Token] = "[A-Z]\\.?".r ^^ { Token(_) }
-    lazy val nameLike: PackratParser[Name] = (
-      etal ^^ { n => Name(n.chars) } |
-      "[A-Z][^0-9., ]+".r ^^ { Name(_) } |
-      "[a-z]{2,4}".r ^^ { Name(_) })
+    lazy val initialDot: Parser[Token] = ("[\\p{Lu}]".r <~ "." ^^ { Token } | initial)
+    lazy val nameLike: Parser[Token] =
+      (etal
+        | token("[\\p{Lu}][^0-9., ]+".r)
+        | token("[\\p{Ll}]{2,4}".r))
 
     class Validator[T](val msg: String, f: Function[T, Boolean]) extends PartialFunction[T, T] {
       def isDefinedAt(t: T) = f(t)
       def apply(t: T) = t
     }
 
-    val nameValidators = List(
-      new Validator[Name]("Name.TooShort", _.chars.length > 2),
-      new Validator[Name]("Name.TooLong", _.chars.length < 50),
-      new Validator[Name]("Name.IsKeyWord", !_.isKeyWord),
-      new Validator[Name]("Name.IsConferenceWord", !_.isConferenceWord),
-      new Validator[Name]("Name.HasNumbers", !_.isNumeric))
+    def validator[T](msg: String, f: Function[T, Boolean])(implicit m: Manifest[T]) =
+      new Validator[T](m.erasure.getName + "." + msg, f)
 
-    val authorValidators = List(
-      new Validator[Authors]("Authors.Empty", _.vals.length > 0),
-      new Validator[Authors]("Authors.TooMany", _.vals.length < 8))
-
-    val titleValidators = List(
-      new Validator[Title]("Title.TooShort", _.chars.length > 5),
-      new Validator[Title]("Title.HasAnd", !_.lower.startsWith("and")),
-      new Validator[Title]("Title.HasConference", !_.isConferenceWord()),
-      new Validator[Title]("Title.HasNumbers", !_.hasDate()))
-
-    val conferenceValidators = List(
-      new Validator[Conference]("Conference.TooShort", c => c.chars.length > 5))
-
-    def validate[T](p: PackratParser[T], v: Seq[Validator[T]]) =
+    def validate[T](p: Parser[T])(v: Seq[Validator[T]]) =
       v.foldLeft(p)((a, b) => memo(a ^? (b, t => b.msg + " :: " + t.toString)))
 
-    lazy val name: PackratParser[Name] = validate(nameLike, nameValidators)
+    val nameValidators = List(
+      validator[Token]("TooLong", _.chars.length < 50),
+      validator[Token]("IsKeyWord", !_.isKeyWord),
+      validator[Token]("IsConferenceWord", !_.isConferenceWord),
+      validator[Token]("HasNumbers", !_.isNumeric))
+    lazy val name: Parser[Token] = validate(nameLike ^^ { t => Token(t.chars) })(nameValidators)
 
     // Different citation formats are:
-    lazy val authorACM: PackratParser[Author] =
+    lazy val authorACM: Parser[Author] =
       (name ~ name ^^ { case a ~ b => Author(List(a, b)) }
-        | name ~ initial ~ name ^^ { case a ~ b ~ c => Author(List(a, b, c)) }
-        | initial ~ name ~ name ~ name ^^ { case a ~ b ~ c ~ d => Author(List(a, b, c, d)) }
-        | initial ~ name ~ name ^^ { case a ~ b ~ c => Author(List(a, b, c)) }
-        | initial ~ name ^^ { case a ~ b => Author(List(a, b)) }
-        | initial ~ initial ~ name ^^ { case a ~ b ~ c => Author(List(a, b, c)) })
+        | name ~ initialDot ~ name ^^ { case a ~ b ~ c => Author(List(a, b, c)) }
+        | initialDot ~ name ~ name ~ name ^^ { case a ~ b ~ c ~ d => Author(List(a, b, c, d)) }
+        | initialDot ~ name ~ name ^^ { case a ~ b ~ c => Author(List(a, b, c)) }
+        | initialDot ~ name ^^ { case a ~ b => Author(List(a, b)) }
+        | initialDot ~ initialDot ~ name ^^ { case a ~ b ~ c => Author(List(a, b, c)) })
 
-    lazy val authorIEEE: PackratParser[Author] = authorACM
-    lazy val authorSpringer: PackratParser[Author] =
-      (name ~ "," ~ initial ~ initial ^^ { case a ~ _ ~ b ~ c => Author(List(a, b, c)) }
-        | name ~ "," ~ initial ^^ { case a ~ _ ~ b => Author(List(a, b)) })
+    lazy val authorIEEE: Parser[Author] = authorACM
+    lazy val authorSpringer: Parser[Author] =
+      (name ~ "," ~ initialDot ~ initialDot ^^ { case a ~ _ ~ b ~ c => Author(List(a, b, c)) }
+        | name ~ "," ~ initialDot ^^ { case a ~ _ ~ b => Author(List(a, b)) })
 
     lazy val authorOpenAccess: PackratParser[Author] =
       name ~ "," ~ initial ^^ { case a ~ _ ~ b => Author(List(b, a)) }
 
     lazy val authorIOP: PackratParser[Author] =
-      (name ~ initial ~ initial ^^ { case a ~ b ~ c => Author(List(a, b, c)) }
+      (name ~ initialDot ~ initial ^^ { case a ~ b ~ c => Author(List(a, b, c)) }
         | name ~ initial ^^ { case a ~ b => Author(List(a, b)) })
 
-    lazy val defaultSeparator = "," ||| "and" ||| ("," ~ "and")
+    lazy val defaultSeparator = ("," ~ "(?i)and".r) | "," | "(?)and".r
 
-    def authorList[A, B](author: Parser[Author], sep: Parser[A], Node: Parser[B]): Parser[Authors] =
-      (author ~ sep ~ authorList(author, sep, Node) ^^ { case a ~ _ ~ b => Authors(a :: b.vals) }
-        | author ~ opt(sep) ~ etal <~ opt(Node) ^^ { case a ~ _ ~ b => Authors(List(a, Author(List("et al")))) }
-        | author <~ Node ^^ { case a => Authors(List(a)) })
+    def _authorList[A, B](author: Parser[Author], sep: Parser[A], eol: Parser[B]): PackratParser[Authors] =
+      (author ~ sep ~ authorList(author, sep, eol) ^^ { case a ~ _ ~ b => Authors(a :: b.vals) }
+        | author ~ opt(sep) ~ etal <~ opt(eol) ^^ { case a ~ _ ~ b => Authors(List(a, Author(List("et al")))) }
+        | author <~ eol ^^ { case a => Authors(List(a)) })
+
+    val authorValidators = List()
+    def authorList[A, B](author: Parser[Author], sep: Parser[A], eol: Parser[B]): PackratParser[Authors] =
+      _authorList(validate(plog(author)("author"))(authorValidators), sep, eol)
 
     lazy val authorsSpringer = authorList(authorSpringer, ",", ":")
     lazy val authorsIEEE = authorList(authorIEEE, defaultSeparator, regex("\\.|,".r))
@@ -289,33 +306,105 @@ object Analysis {
     lazy val authorsIOP = authorList(authorIOP, ",", ".")
     lazy val authorsOpenAccess = authorList(authorIEEE, ";", " ")
 
-    lazy val authors: PackratParser[Authors] = validate(
-      authorsACM |||
-        authorsSpringer |||
-        authorsIEEE |||
-        authorsIOP |||
-        authorsOpenAccess, authorValidators)
+    val authorListValidators = List(
+      validator[Authors]("Empty", _.vals.length > 0),
+      validator[Authors]("TooMany", _.vals.length < 8))
+
+    lazy val authors: PackratParser[Authors] =
+      validate(
+        authorsSpringer |
+          authorsACM |
+          authorsIEEE |
+          authorsIOP |
+          authorsOpenAccess |
+          authorsSpringer)(authorListValidators)
+
+    //    val badTitles = Set("our", "its", "is", "the", "http://www")
+
+    // Title parsing
+    val titleValidators = List(
+      validator[Title]("TooShort", _.chars.length > 5),
+      validator[Title]("HasConference", !_.containsWords(conferenceWords)),
+      validator[Title]("HasNumbers", !_.hasDate()))
+
+    lazy val titleCaseWord: Parser[Token] = regex("[A-Z][^\\s.,]+".r)
+    lazy val word: Parser[Token] = (special | token(regex("[^\\s.,]+".r)))
+    lazy val endOfTitle: Parser[EOT] = ("." | "," | "\"" | ";") ^^ { EOT(_) }
+    lazy val titleSeparator: Parser[Separator] = (":" | "-") ^^ { Separator(_) }
 
     lazy val titleLike: PackratParser[Title] =
-      (endOfTitle ||| word ~ titleLike) ^^ {
-          case EOT(sep)                      => Title("")
-          case Token(a) ~ Title(chars)       => Title(a + " " + chars)
+      plog(word ~ titleLike ^^ { case Token(a) ~ Title(chars) => Title(a + " " + chars) }
+        | endOfTitle ^^^ { Title("") })("titleLike")
+
+    lazy val title: PackratParser[Title] = validate(
+      "[\\p{Pi}]".r ~> "[^\\p{Pf}]+".r <~ "[\\p{Pf}]".r ^^ { Title }
+        | titleCaseWord ~ titleLike ^^ { case Token(a) ~ Title(b) => Title(a + " " + b) })(titleValidators)
+
+    // Conference parsing
+    val conferenceValidators = List(
+      validator[Conference]("TooShort", c => c.chars.length > 5),
+      validator[Conference]("TooLong", c => c.chars.length < 200))
+
+    lazy val inPrefix: Parser[String] = regex("(?i)In([: ])".r) <~ opt("the")
+
+    lazy val confSeparator: Parser[Separator] = (":" | "-" | ",") ^^ { Separator(_) }
+
+    // Stack overflow issues tend to occur when dealing with the conference
+    // parsing via combinators, so do it by hand.
+    val conferenceRest = new Parser[Conference] {
+      def apply(in: Input): ParseResult[Conference] = {
+        var conf = new StringBuffer()
+        var rest = in
+
+        while (conf.length < 500) {
+          (initialDot | token("[0-9]+\\.?".r) | word)(rest) match {
+            case Success(init, r) => {
+              conf.append(init.chars)
+              rest = r
+            }
+            case _ => {
+              return Success(Conference(conf.toString.trim), rest)
+            }
+          }
+
+          confSeparator(rest) match {
+            case Success(v, r) => {
+              conf.append(v.chars)
+              rest = r
+            }
+            case _ => {}
+          }
+
+          conf.append(" ")
         }
 
-    lazy val title: PackratParser[Title] = validate(titleLike, titleValidators)
+        Failure("TooLong:: " + conf.toString, rest)
+      }
+    }
+    plog(((initialDot | word) ~ confSeparator ~ conferenceRest
+      | (initialDot | word) ~ conferenceRest
+      | endOfTitle) ^^ {
+        case EOT(sep)                                      => Conference("")
+        case Conference(c)                                 => Conference(c)
+        case Token(a) ~ Separator(sep) ~ Conference(chars) => Conference(a + sep + chars)
+        case Token(a) ~ Conference(chars)                  => Conference(a + " " + chars)
+      })("conf")
 
-    lazy val conferenceLike: PackratParser[Conference] =
-      (word ~ separator ~ conferenceLike
-        | word ~ conferenceLike
-        | endOfTitle) ^^ {
-          case EOT(sep)                                      => Conference("")
-          case Token(a) ~ Separator(sep) ~ Conference(chars) => Conference(a + sep + chars)
-          case Token(a) ~ Conference(chars)                  => Conference(a + " " + chars)
-        }
+    lazy val conferenceStart: Parser[Token] =
+      (special
+        | titleCaseWord
+        | token(regex("[0-9]+".r))
+        | failure("StartOfConference"))
 
-    lazy val conference: PackratParser[Conference] = validate(conferenceLike, conferenceValidators)
+    lazy val conferenceLike: Parser[Conference] =
+      (opt(inPrefix) ~>
+        conferenceStart ~ confSeparator ~ conferenceRest ^^ { case Token(a) ~ Separator(b) ~ Conference(c) => Conference(a + b + c) }
+        | conferenceStart ~ conferenceRest ^^ { case Token(a) ~ Conference(b) => Conference(a + " " + b) })
 
-    lazy val citation: PackratParser[Citation] =
+    lazy val conference: Parser[Conference] =
+      validate(conferenceLike)(conferenceValidators)
+
+    lazy val citation: Parser[Citation] =
       authors ~ title ~ conference ^^ {
         case Authors(authors) ~ Title(title) ~ Conference(conference) => {
           Citation(title.trim, authors, conference.trim)
@@ -324,10 +413,15 @@ object Analysis {
 
     lazy val citeSeparator = "[^.\\n]+[.|\\n]".r
 
+    val stripListIdentifiers = "\\[\\d+\\]".r
+
     def parseAll(str: String): Seq[Citation] = {
+      parserLog.clear
+
+      var cleanedStr = stripListIdentifiers.replaceAllIn(str, "")
       var results = new collection.mutable.LinkedList[Citation]
 
-      var reader: Input = new PackratReader(new CharSequenceReader(str))
+      var reader: Input = new PackratReader(new CharSequenceReader(cleanedStr))
       while (!reader.atEnd) {
         val cite = citation(reader)
         if (cite.successful) {
@@ -335,11 +429,10 @@ object Analysis {
           reader = cite.next
           results +:= cite.get
         } else {
-          //println("Failure... ")
-          //println(cite)
+          parserLog += "------------------------- Failed Parse:"
+          parserLog += cite.toString
           reader = citeSeparator(reader).next
           reader = reader.drop(1)
-          //println("seeking to:", reader.pos)
         }
       }
 
@@ -347,7 +440,17 @@ object Analysis {
     }
   }
 
+  val theParser = new CitationParser()
+
   def extractCitations(a: Analysis): Seq[Citation] = {
-    CitationParser.parseAll(extractText(a.pages.last))
+    val txt = a.pages.takeRight(2).map(extractText)
+    try {
+      txt.flatMap(theParser.parseAll)
+    } catch {
+      case e: StackOverflowError => {
+        log.error(theParser.parserLog.mkString("\n"))
+        List()
+      }
+    }
   }
 }

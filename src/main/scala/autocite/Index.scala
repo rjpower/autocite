@@ -1,47 +1,52 @@
 package autocite
 
-import org.apache.hadoop.io.{LongWritable, BytesWritable}
-import org.apache.lucene.document.Field.{Store, Index}
-import org.apache.lucene.document.{Field, Document => LuceneDoc}
+import org.apache.hadoop.io.{ LongWritable, BytesWritable }
+import org.apache.lucene.document.Field.{ Store, Index }
+import org.apache.lucene.document.{ Field, Document => LuceneDoc }
 
-import autocite.HadoopImplicits.{writable2bytes, long2writable, bytes2writable}
+import autocite.HadoopImplicits.{ writable2bytes, long2writable, bytes2writable }
 import autocite.Thrift.Implicits.thrift2json
 import edu.cmu.lemurproject.WarcFileInputFormat
 import edu.cmu.lemurproject.WritableArchiveRecord
 
 class PDFToDocumentMapper extends ScalaMapper[LongWritable, WritableArchiveRecord, LongWritable, BytesWritable] {
   override def inputFormat = classOf[WarcFileInputFormat]
-  def _map(key: LongWritable, value: WritableArchiveRecord) : Unit = {
+  def _map(key: LongWritable, value: WritableArchiveRecord): Unit = {
     val header = value.data.getHeader()
 
     if (header.getUrl() == null || header.getUrl() == "") {
       increment("MissingUrl")
       return
-    } 
-    
+    }
+
     val url = header.getUrl().toLowerCase()
+    log.info("Working on %s", url)
     if (header.getLength() < 5000) {
-      log.info("Too small: %s", url) 
+      log.info("Too small: %s", url)
       increment("TooSmall")
       return
     }
 
     var filetype = ""
     if (url.contains(".pdf")) {
-      println("PDF: %s", url) 
+      log.info("PDF: %s", url)
       filetype = "PDF"
     } else if (url.contains(".ps")) {
-      log.info("Postcript: %s", url) 
+      log.info("Postcript: %s", url)
       filetype = "PostScript"
     } else {
-      log.info("Unknown: %s", url) 
+      log.info("Unknown: %s", url)
       filetype = "Unknown-PS"
     }
 
     val xml = PDFToXML(value)
     if (xml.isDefined) {
       increment(filetype + ".success")
-      emit(xml.get.hashCode, Document(xml = new String(xml.get), title = "", incoming = List(), outgoing = List(), text ="").binary)
+      emit(xml.get.hashCode, Document(
+        xml = new String(xml.get),
+        url = url,
+        title = "",
+        incoming = List(), outgoing = List(), text = "").binary)
     } else {
       increment(filetype + ".failure")
     }
@@ -49,14 +54,14 @@ class PDFToDocumentMapper extends ScalaMapper[LongWritable, WritableArchiveRecor
 }
 
 class ExtractInfoMapper extends ScalaMapper[LongWritable, BytesWritable, LongWritable, BytesWritable] {
-  def _map(key: LongWritable, value: BytesWritable) : Unit = {
-    log.info("Reading document of length %d", value.getLength)
+  def _map(key: LongWritable, value: BytesWritable): Unit = {
     if (value.getLength > 10000000) {
       increment("TooLong")
       return
     }
 
     val doc = Thrift.parseBinary(Document, value.getBytes)
+    log.info("Processing... %s", doc.url)
     val analyzer = new Analysis(doc.xml)
     val title = analyzer.title
     if (title.isEmpty) {
@@ -66,6 +71,7 @@ class ExtractInfoMapper extends ScalaMapper[LongWritable, BytesWritable, LongWri
     } else {
       increment("GoodTitle")
       val md = Document(
+        url = doc.url,
         title = title,
         incoming = List(),
         outgoing = analyzer.citations,
@@ -80,14 +86,14 @@ class SelectTestSetMapper extends ScalaMapper[LongWritable, BytesWritable, LongW
   def _map(key: LongWritable, value: BytesWritable) {
     val doc = Thrift.parseBinary(Document, value.getBytes)
     val analyzer = new Analysis(doc.xml)
-    doc.incoming.map(c => 
+    doc.incoming.map(c =>
       emit(Analysis.titleToId(c.title), CiteOrDoc(cite = Some(c), doc = None).binary))
     emit(analyzer.id, CiteOrDoc(cite = None, doc = Some(doc)).binary)
   }
 }
 
 class SelectTestSetReducer extends ScalaReducer[LongWritable, BytesWritable, LongWritable, BytesWritable] {
-  def _reduce(key: LongWritable, values: Iterator[BytesWritable]) : Unit = {
+  def _reduce(key: LongWritable, values: Iterator[BytesWritable]): Unit = {
     val entries = values.take(200).map(bw => Thrift.parseBinary(CiteOrDoc, bw)).toList
     val cites = entries.filter(_.cite.isDefined).map(_.cite.get)
     val docs = entries.filter(_.doc.isDefined).map(_.doc.get)
@@ -119,7 +125,7 @@ class InvertCitationsMapper extends ScalaMapper[LongWritable, BytesWritable, Lon
     val doc = Thrift.parseBinary(Document, value.getBytes)
     val analyzer = new Analysis(doc.xml)
     histogram("map-citations", doc.outgoing.length)
-    doc.outgoing.map(c => 
+    doc.outgoing.map(c =>
       emit(Analysis.titleToId(c.title), CiteOrDoc(cite = Some(c), doc = None).binary))
     emit(
       analyzer.id, CiteOrDoc(cite = None, doc = Some(doc)).binary)
@@ -144,6 +150,7 @@ class InvertCitationsReducer extends ScalaReducer[LongWritable, BytesWritable, L
     def lenSort(d: Document): Long = d.xml.length
     val best = documents.sortBy(lenSort).last
     val combined = new Document(
+      url = best.url,
       title = best.title,
       xml = best.xml,
       incoming = cites,
@@ -204,14 +211,14 @@ class IdentityReducer[KIn, VIn] extends ScalaReducer[KIn, VIn, KIn, VIn] {
 object Indexer {
   def pdfToDocument() = {
     new ContextHelper()
-      .mapper(classOf[PDFToDocumentMapper], "/autocite/warcs/*.gz")
+      .mapper(classOf[PDFToDocumentMapper], "/autocite-epoch-*/warcs/*.gz")
       .reducer(classOf[IdentityReducer[LongWritable, BytesWritable]], "/autocite/xml")
       .run()
   }
-  
+
   def extractDocumentInfo() = {
     new ContextHelper()
-      .mapper(classOf[ExtractInfoMapper], "/autocite-epoch-*/xml/part*")
+      .mapper(classOf[ExtractInfoMapper], "/autocite/xml/part*")
       .reducer(classOf[IdentityReducer[LongWritable, BytesWritable]], "/autocite/document")
       .run()
   }
@@ -238,8 +245,8 @@ object Indexer {
   }
 
   def main(args: Array[String]): Unit = {
-    // pdfToDocument()
-    // extractDocumentInfo()
+    //pdfToDocument()
+        extractDocumentInfo()
     // invertCitations()
     // buildIndex()
 
