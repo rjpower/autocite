@@ -22,9 +22,6 @@ retrieveManaged := true
 
 compileOrder := CompileOrder.JavaThenScala
 
-EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
-
-EclipseKeys.withSource := true
 
 resolvers ++= Seq(
   "apache" at "http://maven.apache.org",

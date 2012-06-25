@@ -29,11 +29,10 @@ class ExtractionSpec extends FunSuite with ShouldMatchers {
   }
 
   def testcite(str: String, shouldAssert: Boolean = true) {
-    val parser = new Analysis.CitationParser()
+    val parser = new CitationParser()
     val cites = parser.parseAll(str)
     if (shouldAssert && cites.isEmpty) {
       log.info("Bad cite: %s", str);
-      log.info("Parser log: " + parser.parserLog.mkString("\n"))
       assert(!cites.isEmpty, cites)
     } else {
       printCites(cites)
@@ -56,21 +55,21 @@ HARRIS, T., HO, A., NEUGEBAUER, R., PRATT, I., AND
 Proceedings of the nineteenth ACM symposium on Operating systems principles(New York, NY, USA, 2003), ACM, pp. 164�177.
         """)
   }
-//
-//  test("osdi") {
-//    val files = new File("./osdi")
-//      .listFiles
-//      .filter(_.getName.endsWith(".pdf"))
-//      .sortBy(_.getName)
-//
-//    for (f <- files) {
-//      val xml = new String(PDFToXML(new FileInputStream(f), "pdftoxml").get)
-//      new File(f.getPath + ".xml").dump(xml)
-//      log.info("Processing %s", f)
-//      val txt = new Analysis(xml).pages.takeRight(2).flatMap(Analysis.extractText)
-//      testcite(txt.mkString(""))
-//    }
-//  }
+
+  test("osdi") {
+    val files = new File("./osdi")
+      .listFiles
+      .filter(_.getName.endsWith(".pdf"))
+      .sortBy(_.getName)
+
+    for (f <- files) {
+      val xml = f.read
+      new File(f.getPath + ".xml").dump(xml)
+      log.info("Processing %s", f)
+      val txt = new Analysis(xml).pages.takeRight(2).flatMap(Analysis.extractText)
+      testcite(txt.mkString(""))
+    }
+  }
 
   //  test("sequence file") {
   //    println("Here...")
