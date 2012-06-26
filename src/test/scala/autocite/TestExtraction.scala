@@ -8,7 +8,7 @@ import com.twitter.logging.{ LoggerFactory, Level, ConsoleHandler }
 import com.twitter.logging.Logger
 import scala.io.Source
 import java.io._
-import autocite.FileImplicits._
+import autocite.util.FileImplicits._
 
 @RunWith(classOf[JUnitRunner])
 class ExtractionSpec extends FunSuite with ShouldMatchers {
@@ -29,7 +29,7 @@ class ExtractionSpec extends FunSuite with ShouldMatchers {
   }
 
   def testcite(str: String, shouldAssert: Boolean = true) {
-    val parser = new CitationParser()
+    val parser = new CitationParser.Parser()
     val cites = parser.parseAll(str)
     if (shouldAssert && cites.isEmpty) {
       log.info("Bad cite: %s", str);
@@ -39,14 +39,6 @@ class ExtractionSpec extends FunSuite with ShouldMatchers {
     }
   }
 
-  test("sinfonia") {
-    testcite("""M. K. Aguilera, A. Merchant, M. Shah, A. Veitch, and C. Kara-
-manolis. Sinfonia: a new paradigm for building scalable dis-
-tributed systems. In SOSP ¦~@~Y07: Proceedings of twenty-¦~Arst ACM 
-SIGOPS symposium on Operating systems principles
-, pages 159¦~@~S174, New York, NY, USA, 2007. ACM.""")
-  }
-  
   test("timing") {
     testcite("""
         [2] BARHAM, P., DRAGOVIC, B., FRASER, K., HAND, S.,
@@ -55,41 +47,47 @@ HARRIS, T., HO, A., NEUGEBAUER, R., PRATT, I., AND
 Proceedings of the nineteenth ACM symposium on Operating systems principles(New York, NY, USA, 2003), ACM, pp. 164�177.
         """)
   }
+  
+  test("dht") {
+    testcite("""
+        [17] D. Karger, E. Lehman, T. Leighton, R. Panigrahy,
+M. Levine, and D. Lewin. Consistent hashing and random
+trees: distributed caching protocols for relieving hot spots
+on the World Wide Web. In Proc. STOC '97, El Paso, TX,
+May 1997.
+        """)
+  }
+  
+  test("kemme") {
+    testcite("""
+        [19] B. Kemme and G. Alonso. A new approach to developing
+and implementing eager database replication protocols.
+Transactions on Database Systems
+, 25(3):333­379, 2000.""")
+  }
+  
+  test("lamport") {
+    testcite("""
+        [20] L. Lamport. Time, clocks, and ordering of events in a dis-tributed system. 
+        Communications of the ACM, 21(7):558­ 565, July 1978.
+        """)
+  }
 
   test("osdi") {
     val files = new File("./osdi")
       .listFiles
-      .filter(_.getName.endsWith(".pdf"))
+      .filter(_.getName.endsWith(".xml"))
       .sortBy(_.getName)
 
     for (f <- files) {
-      val xml = f.read
-      new File(f.getPath + ".xml").dump(xml)
+      log.info(f.toString)
+      val xml = f.readAll
       log.info("Processing %s", f)
       val txt = new Analysis(xml).pages.takeRight(2).flatMap(Analysis.extractText)
-      testcite(txt.mkString(""))
+      testcite(txt.mkString(""), false)
     }
   }
 
-  //  test("sequence file") {
-  //    println("Here...")
-  //    val docs = HadoopUtil
-  //      .sequenceFileToStream("file:///home/power/w/autocite/part-00002")
-  //      .map({ case (k, v) => Thrift.parseBinary(Document, v).xml })
-  //
-  //    docs
-  //      .filter(_.length > 5000)
-  //      .zipWithIndex
-  //      .map(v => {
-  //        FileUtil.dump(v, "./test-xml." + v._2)
-  //        (v._2, new Analysis(v._1).citations)
-  //      })
-  //      .map(_._2.length < 5)
-  //      .map(println)
-  //      .length
-  //  }
-
-  //
   //  test("MIT Quarterly") {
   //    val a = new Analysis(Source.fromFile("./test-doc.00076.xml").mkString(""))
   //    printCites(a.citations)

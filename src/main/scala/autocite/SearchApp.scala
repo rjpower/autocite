@@ -1,18 +1,20 @@
 package autocite.web
 
 import java.net.InetSocketAddress
+
 import org.mortbay.jetty.nio.SelectChannelConnector
 import org.mortbay.jetty.webapp.WebAppContext
 import org.mortbay.jetty.Server
 import org.scalatra.scalate.ScalateSupport
 import org.scalatra.ScalatraServlet
-import com.twitter.logging._
+
 import com.twitter.conversions.time.intToTimeableNumber
 import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.thrift.ThriftClientFramedCodec
-import autocite.Thrift.Implicits.thrift2json
-import autocite.Search
-import autocite.AutociteApp
+import com.twitter.logging.Logger
+
+import autocite.util.Thrift.Implicits.thrift2json
+import autocite.{Search, AutociteApp}
 
 class AutociteServlet extends ScalatraServlet with ScalateSupport {
   val service = ClientBuilder()

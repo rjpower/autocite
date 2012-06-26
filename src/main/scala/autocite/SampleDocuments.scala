@@ -1,6 +1,6 @@
 package autocite
 
-import autocite._
+import autocite.util._
 import com.twitter.util._
 
 object SampleDocuments extends App {

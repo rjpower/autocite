@@ -1,4 +1,4 @@
-package autocite
+package autocite.util
 
 import java.io.{ StringReader, ByteArrayInputStream }
 import java.net.{ InetSocketAddress, InetAddress }
@@ -81,7 +81,7 @@ object Finagle {
 }
 
 
-class FinagleApp[T <: Service](val rpcServer: T) extends AutociteApp {
+class FinagleApp[T <: Service](val rpcServer: T) extends autocite.AutociteApp {
   val runtime = RuntimeEnvironment(this, args)
   val adminFactory = AdminServiceFactory(
     httpPort = 9900,

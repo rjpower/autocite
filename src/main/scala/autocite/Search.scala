@@ -16,6 +16,8 @@ import org.apache.lucene.search.IndexSearcher
 import org.apache.lucene.store.FSDirectory
 import org.apache.lucene.util.Version
 
+import autocite.util._
+
 import com.twitter.util.{FuturePool, Future, Eval}
 
 case class ScoringInfo(val textScore: Double, val refs: Double, val title: String)

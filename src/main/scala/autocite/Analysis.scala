@@ -2,15 +2,12 @@ package autocite
 
 import java.nio.ByteBuffer
 import java.security.MessageDigest
-import scala.Array.canBuildFrom
-import scala.util.parsing.combinator.{ RegexParsers, PackratParsers }
-import scala.util.parsing.input.CharSequenceReader
+
 import scala.xml.Node
+
 import com.twitter.logging.Logger
-import autocite.XMLImplicits.nodeToHelper
-import scala.collection.mutable.LinkedList
-import scala.collection.mutable.ListBuffer
-import scala.collection.mutable.ArrayBuffer
+
+import autocite.util.XMLImplicits.nodeToHelper
 
 class Analysis(val xml: String) {
   lazy val dom = Analysis.parseXML(xml)
@@ -158,7 +155,7 @@ object Analysis {
     ByteBuffer.wrap(md5.digest(simplify(title).getBytes)).getLong()
   }
 
-  val theParser = new CitationParser()
+  val theParser = new CitationParser.Parser()
 
   def extractCitations(a: Analysis): Seq[Citation] = {
     val txt = a.pages.takeRight(2).map(extractText)

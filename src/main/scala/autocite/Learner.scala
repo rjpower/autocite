@@ -1,17 +1,19 @@
 package autocite
 
-import java.net.{ InetSocketAddress, InetAddress }
+import java.net.InetAddress
+
 import scala.Array.canBuildFrom
 import scala.collection.mutable.HashMap
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
-import org.apache.hadoop.io.{ Text, SequenceFile, LongWritable }
-import com.twitter.conversions.time.intToTimeableNumber
-import com.twitter.finagle.builder.ClientBuilder
-import com.twitter.finagle.thrift.ThriftClientFramedCodec
-import com.twitter.util.Future
-import autocite.Thrift.Implicits.thrift2json
+import org.apache.hadoop.io.{Text, SequenceFile}
+
 import com.twitter.logging.Logger
+import com.twitter.util.Future
+
+import autocite.util.{Thrift, TextUtil, Finagle, FinagleApp}
+import autocite.util.Thrift.Implicits._
 
 abstract class Learner {
   val _rand = new java.util.Random

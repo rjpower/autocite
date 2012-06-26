@@ -1,4 +1,4 @@
-package autocite
+package autocite.util
 
 import java.io.StringReader
 

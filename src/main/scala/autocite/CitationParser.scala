@@ -4,6 +4,7 @@ import scala.util.parsing.combinator._
 import scala.util.parsing.combinator.lexical._
 import scala.util.parsing.input.CharSequenceReader
 import com.twitter.logging.Logger
+import scala.collection.mutable.ArrayBuffer
 
 // A citation is a hairy beast.
 //
@@ -15,10 +16,8 @@ import com.twitter.logging.Logger
 // to the delimiters within and between these sections.  This parser
 // relies on a number of heuristics to find a successful parse.
 
-object CitationLexer extends Scanners with RegexParsers {
-  override type Elem = Char
-
-  def whitespace: Parser[Any] = "\\s+".r
+object CitationParser {
+  val log = Logger.get()
 
   val keyTokens = Set("and", "or", "the", "if", "our")
   val conferenceTokens = Set("proc\\.", "inc\\.", "pp\\.", "proceedings", "conference", "acm", "ieee", "usenix")
@@ -34,69 +33,82 @@ object CitationLexer extends Scanners with RegexParsers {
     def isConferenceToken() = containsTokens(conferenceTokens)
     def isNumeric() = "\\d".r.findFirstIn(chars).isDefined
     def isInitial() = isUpper && chars.length == 1
-    def isPunct() = "[\\p{P}]]".r.findFirstIn(chars).isDefined
 
     def hasDate() = !words.flatMap("\\d\\d\\d\\d".r.findFirstIn).isEmpty
+
+    override def toString = chars
   }
 
-  def keyToken: Parser[Token] = keyTokens
-    .map(w => literal(w) ^^ Token)
-    .reduce((a, b) => a | b)
+  implicit def tokenToString(t: Token) = t.chars
 
-  def conferenceToken: Parser[Token] = conferenceTokens
-    .map(w => literal(w) ^^ Token)
-    .reduce((a, b) => a | b)
+  class Parser extends Parsers with RegexParsers {
+    type Token = CitationParser.Token
 
-  val phd = "ph\\.? ? d\\.?".r ^^^ { Token("PhD") }
-  val etal = "(?i)et\\.? al\\.?".r ^^^ { Token("et al") }
-  val initial = "[\\p{Lu}].?".r ^^ Token
-  val name = "[\\p{Lu}][\\p{Lu}]+]".r ^^ Token
-  val comma = literal(",") ^^ Token
-  val other = "[^\\s]+".r ^^ Token
+    def keyToken: Parser[Token] = keyTokens
+      .map(w => literal(w) ^^ Token)
+      .reduce((a, b) => a | b)
 
-  def token(): Parser[Token] = {
-    keyToken |
-      conferenceToken |
-      phd |
-      etal |
-      initial |
-      name |
-      comma |
-      other
-  }
+    def conferenceToken: Parser[Token] = conferenceTokens
+      .map(w => literal(w) ^^ Token)
+      .reduce((a, b) => a | b)
 
-  def errorToken(msg: String) = Token("err.")
-}
+    val phd = "ph\\.? ? d\\.?".r ^^^ { Token("PhD") }
+    val etal = "(?i)et\\.? al\\.?".r ^^^ { Token("et al") }
+    val initial = "[\\p{Lu}][.]".r ^^ Token
+    val nameUpper = "[\\p{Lu}][\\p{Lu}]+".r ^^ Token
+    val nameRegular = "[\\p{Lu}][\\p{Ll}]+".r ^^ Token
+    val word = "[^.\\s]+".r ^^ Token
+    val comma = literal(",") ^^ Token
+    val punct = "[\\p{P}]+" ^^ Token
+    val other = ".".r ^^ Token
 
-class CitationParser extends Parsers {
-  type Elem = CitationLexer.Token
-  type Token = CitationLexer.Token
+    def token(): Parser[Token] =
+      (keyToken |
+        conferenceToken |
+        phd |
+        etal |
+        initial |
+        nameUpper |
+        word |
+        punct |
+        other)
 
-  val log = Logger.get(classOf[CitationParser]);
+    def t(msg: String, f: Token => Boolean): Parser[Token] =
+      token ^? { case tok if f(tok) => tok }
 
-  def token(s: String) = elem(s, _ => true)
+    val author: Parser[Author] =
+      nameUpper ~ comma ~ rep1(initial) ^^ { case n ~ c ~ r => { Author(n :: r.map(_.chars)) } } |
+      rep1(initial) ~ nameRegular ^^ { case r ~ n  => { Author(n :: r.map(_.chars)) } }
 
-  val name = elem("name", w => w.isUpper && !w.isInitial)
-  val initial = elem("initial", _.isInitial)
-  val comma = token(",")
-  val word = elem("word", w => !w.isPunct())
+    val authors: Parser[Seq[Author]] = 
+      author ~ "and" ~ author ~ "." ^^ { case a ~ _ ~ b ~ _ => List(a, b) } |
+      rep1sep(author, comma) ~ "(?i), and".r ~ author ~ opt(".") ^^ { case l ~ a ~ r ~ _ => r :: l } |
+      author ~ "." ^^ { case a ~ _ => List(a) }
 
-  val author = name ~ rep1sep(initial, comma)
-  val authors = rep1sep(author, comma) ^^ { _.map(Author) }
-  val title = rep1(word) ^^ { _.mkString }
+    val title = rep1(word) ^^ { _.mkString(" ") }
+    val cite = authors ~ title ^^ { case a ~ t => Citation(t, a, "") }
 
-  val cite = authors ~ title ^^ {
-    m => Citation(m._1, m._2, "")
-  }
+    def parseAll(str: String): Seq[Citation] = {
+      val out = new ArrayBuffer[Citation]
+      var reader: Input = new CharSequenceReader(str)
+      while (!reader.atEnd) {
+        val result = cite(reader)
+        //println(result)
 
-  def parseAll(str: String): Seq[Citation] = {
-    val reader = new CitationLexer.Scanner(str)
-    cite(reader) match {
-      case Success(v, rest) => {}
-      case Failure(v, rest) => {}
-      case Error(v, rest) => {}
+        result match {
+          case Success(v, rest) => {
+            out += v
+            reader = rest
+          }
+          case Failure(v, rest) => {
+            reader = token()(reader).next
+          }
+          case Error(v, rest) => {
+            reader = token()(reader).next
+          }
+        }
+      }
+      out
     }
-
-    List()
   }
 }
