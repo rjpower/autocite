@@ -41,10 +41,10 @@ class PDFToDocumentMapper extends ScalaMapper[LongWritable, WritableArchiveRecor
     }
 
     val xml = PDFToXML(value)
-    if (xml.isDefined) {
+    if (xml != null) {
       increment(filetype + ".success")
-      emit(xml.get.hashCode, Document(
-        xml = new String(xml.get),
+      emit(xml.hashCode, Document(
+        xml = new String(xml),
         url = url,
         title = "",
         incoming = List(), outgoing = List(), text = "").binary)
