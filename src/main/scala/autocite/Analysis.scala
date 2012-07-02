@@ -7,7 +7,7 @@ import scala.xml.Node
 
 import com.twitter.logging.Logger
 
-import autocite.util.XMLImplicits.nodeToHelper
+import autocite.util.Implicits.enrichNode
 
 class Analysis(val xml: String) {
   lazy val dom = Analysis.parseXML(xml)
@@ -67,7 +67,7 @@ object Analysis {
           id += 1
           TextNode(fonts, node, page.iattr("number"), id)
         })
-      })
+      }).take(100)
     } catch {
       case e: Exception => {
         log.info("Error while extracting text nodes from document. %s", e.toString)
@@ -148,9 +148,11 @@ object Analysis {
   }
 
   def titleToId(title: String): Long = {
-    def stripPunctuation(v: String) = "[^\\w+]".r.replaceAllIn(v, "")
-    def simplify(t: String) = stripPunctuation(t).toLowerCase()
+    def stripPunctuation(v: String) = "[^a-zA-Z+]".r.replaceAllIn(v, "")
+    def stripProceedings(v: String) = "(proc\\..*|proceedings.*)".r.replaceAllIn(v, "")
+    def simplify(t: String) = stripPunctuation(stripProceedings(t)).toLowerCase()
 
+    //println(simplify(title))
     val md5 = MessageDigest.getInstance("MD5")
     ByteBuffer.wrap(md5.digest(simplify(title).getBytes)).getLong()
   }

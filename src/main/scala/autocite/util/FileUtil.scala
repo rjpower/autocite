@@ -16,8 +16,8 @@ object FileUtil {
   }
 
   def readAll(f: File): String = {
-    assert(f.exists, "Missing file!")
-    assert(f.length > 0)
+    assert(f.exists, "Missing file.")
+    // assert(f.length > 0, "Empty file.")
     
     val bytes = new Array[Byte](f.length.toInt)
     val in = new FileInputStream(f)
@@ -26,14 +26,4 @@ object FileUtil {
     
     new String(bytes)
   }
-}
-
-object FileImplicits {
-  class RichFile(f: File) {
-    def readAll(): String = FileUtil.readAll(f)
-    def open(): InputStream = new FileInputStream(f)
-    def dump(s: String) = FileUtil.dump(s, f.getAbsolutePath)
-  }
-
-  implicit def enrichFile(f: File): RichFile = new RichFile(f)
 }

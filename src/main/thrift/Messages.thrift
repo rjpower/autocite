@@ -48,6 +48,10 @@ struct CiteOrDoc {
   2: optional Document doc,
 } 
 
+struct DocMap {
+  1: map<string, Document> docs,
+}
+
 service Search {
   bool loadIndex(1: string dir)
   SearchResults search(1: string text, 2: string scorer)

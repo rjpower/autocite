@@ -6,7 +6,7 @@ import org.apache.lucene.document.{ Field, Document => LuceneDoc }
 
 import autocite.HadoopImplicits.{ writable2bytes, long2writable, bytes2writable }
 import autocite.util._
-import autocite.util.Thrift.Implicits.thrift2json
+import autocite.util.Implicits._
 import edu.cmu.lemurproject.WarcFileInputFormat
 import edu.cmu.lemurproject.WritableArchiveRecord
 

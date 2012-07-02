@@ -23,46 +23,6 @@ object Thrift {
       new TMemoryInputTransport(in.toArray))
     codec.decoder(prot)
   }
-
-  object Implicits {
-    class JsonView(in: ThriftStruct) {
-      def json(): String = {
-        val buffer = new TMemoryBuffer(100)
-        val protocol = new TSimpleJSONProtocol.Factory().getProtocol(buffer)
-        in.write(protocol)
-        val a = buffer.getArray()
-        new String(buffer.getArray, 0, buffer.length())
-      }
-
-      def binary(): Array[Byte] = {
-        val buffer = new TMemoryBuffer(100)
-        val protocol = new TBinaryProtocol.Factory().getProtocol(buffer)
-        in.write(protocol)
-        val a = buffer.getArray()
-        a.view(0, a.size).toArray
-      }
-    }
-
-    implicit def thrift2json(in: ThriftStruct) = new JsonView(in)
-  }
-}
-
-object Compress {
-  def compress(in: Array[Byte]): Array[Byte] = {
-    val bOut = new ByteArrayOutputStream()
-    val zOut = new GZIPOutputStream(bOut)
-    zOut.write(in)
-    zOut.close
-    bOut.toByteArray
-  }
-
-  def decompress(in: Array[Byte]): Array[Byte] = {
-    val bIn = new ByteArrayInputStream(in)
-    val zIn = new GZIPInputStream(bIn)
-    val bOut = new ByteArrayOutputStream()
-    bOut.write(zIn)
-    bOut.toByteArray
-  }
 }
 
 object Finagle {

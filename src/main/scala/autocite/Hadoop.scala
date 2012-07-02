@@ -17,6 +17,45 @@ import com.twitter.scrooge.{ ThriftStructCodec, ThriftStruct }
 import java.io.ByteArrayInputStream
 import org.apache.commons.io.output.ByteArrayOutputStream
 
+object HadoopUtil {
+  def sequenceFileReader[K, V](fileName: String) = {
+    new SequenceFileRecordReader[K, V](
+      new Configuration(),
+      new FileSplit(
+        new Path(fileName),
+        0, 1000 * 1000 * 1000, null.asInstanceOf[Array[String]]))
+  }
+
+  def sequenceFileWriter[K, V](outputFile: String)
+  (implicit kManifest: Manifest[K], vManifest : Manifest[V]) = {
+    val conf = new Configuration()
+    val outputPath = new Path(outputFile)
+    new SequenceFile.Writer(
+      outputPath.getFileSystem(conf),
+      conf, outputPath, kManifest.erasure, vManifest.erasure)
+  }
+
+  def sequenceFileToStream[K, V](fileName: String)
+  (implicit mK : Manifest[K], mV : Manifest[V]): Iterator[(K, V)] = {
+    new Iterator[(K, V)] {
+      val reader = sequenceFileReader[K, V](fileName)
+      var kIn = mK.erasure.newInstance().asInstanceOf[K]
+      var kOut = mK.erasure.newInstance().asInstanceOf[K]
+      var vIn = mV.erasure.newInstance().asInstanceOf[V]
+      var vOut = mV.erasure.newInstance().asInstanceOf[V]
+
+      var hasNext = reader.next(kIn, vIn)
+
+      def next = {
+        kOut = kIn
+        vOut = vIn
+        hasNext = reader.next(kIn, vIn)
+        (kOut, vOut)
+      }
+    }
+  }
+}
+
 object HadoopImplicits {
   implicit def writable2boolean(value: BooleanWritable) = value.get
   implicit def boolean2writable(value: Boolean) = new BooleanWritable(value)
@@ -105,52 +144,6 @@ class GenericMapper[K, V, KO <: Writable, VO <: Writable] extends ScalaMapper[K,
   }
 }
 
-object HadoopUtil {
-  def sequenceFileWriter[T](outputFile: String)(implicit m: Manifest[T]) = {
-    val conf = new Configuration()
-    val outputPath = new Path(outputFile)
-    new SequenceFile.Writer(
-      outputPath.getFileSystem(conf),
-      conf, outputPath, classOf[LongWritable], m.erasure)
-  }
-
-  def listToSequenceFile[T](l: Seq[T], outputFile: String)(implicit m: Manifest[T]) {
-    val writer = sequenceFileWriter[T](outputFile)
-    for (v <- l) {
-      writer.append(new LongWritable(0), v)
-    }
-
-    writer.close()
-  }
-
-  def sequenceFileReader[T](fileName: String) = {
-    new SequenceFileRecordReader[LongWritable, T](
-      new Configuration(),
-      new FileSplit(
-        new Path(fileName),
-        0, 1000 * 1000 * 1000, null.asInstanceOf[Array[String]]))
-  }
-
-  def sequenceFileToStream(fileName: String): Iterator[(Long, Array[Byte])] = {
-    new Iterator[(Long, Array[Byte])] {
-      val reader = sequenceFileReader[BytesWritable](fileName)
-      var kOut: Long = 0
-      var vOut: Array[Byte] = null
-
-      val kIn = new LongWritable
-      val vIn = new BytesWritable
-
-      var hasNext = reader.next(kIn, vIn)
-
-      def next = {
-        kOut = kIn.get
-        vOut = vIn.getBytes
-        hasNext = reader.next(kIn, vIn)
-        (kOut, vOut)
-      }
-    }
-  }
-}
 
 class ContextHelper {
   val job = new JobConf

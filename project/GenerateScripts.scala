@@ -12,9 +12,9 @@ object GenerateScripts extends Plugin {
     
 CLASSPATH="%s"
 MAINCLASS="%s"
-JVMARGS="-Xmx12000m"
+JVMARGS="-Xms1024m -Xmx3192m"
  
-java $JVMARGS -cp $CLASSPATH $MAINCLASS
+java $JVMARGS -cp $CLASSPATH $MAINCLASS $*
 
 """
 
@@ -27,12 +27,14 @@ java $JVMARGS -cp $CLASSPATH $MAINCLASS
     discoveredMainClasses in Compile) map {
       (stream, target, useJarFile, cp, jarFile, scripts) =>
         {
+          val separator = java.io.File.pathSeparator
           val log = stream.log
           for (f <- scripts) {
             val scriptName = f.split('.').last
             val targetFile = (target / scriptName).asFile
-            val jarClassPath = if (useJarFile) { jarFile.getAbsolutePath() + ":" } else { "" }
-            val classPath = jarClassPath + cp.map(_.data).mkString(":")
+            
+            val jarClassPath = if (useJarFile) { jarFile.getAbsolutePath() + separator } else { "" }
+            val classPath = jarClassPath + cp.map(_.data).mkString(separator)
             log.info("Generating script for %s".format(f))
             IO.write(targetFile, scriptTemplate.format(classPath, f))
             targetFile.setExecutable(true)
@@ -41,6 +43,6 @@ java $JVMARGS -cp $CLASSPATH $MAINCLASS
     }
 
   val newSettings: Seq[Setting[_]] = Seq(
-    scriptUsesJar := true,
+    scriptUsesJar := false,
     genScripts <<= genScriptsTask)
 }

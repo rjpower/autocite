@@ -13,7 +13,7 @@ import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.thrift.ThriftClientFramedCodec
 import com.twitter.logging.Logger
 
-import autocite.util.Thrift.Implicits.thrift2json
+import autocite.util.Implicits._
 import autocite.{Search, AutociteApp}
 
 class AutociteServlet extends ScalatraServlet with ScalateSupport {

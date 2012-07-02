@@ -1,19 +1,16 @@
 package autocite
 
 import java.net.InetAddress
-
 import scala.Array.canBuildFrom
 import scala.collection.mutable.HashMap
-
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.hadoop.io.{Text, SequenceFile}
-
 import com.twitter.logging.Logger
 import com.twitter.util.Future
-
 import autocite.util.{Thrift, TextUtil, Finagle, FinagleApp}
-import autocite.util.Thrift.Implicits._
+import autocite.util.Implicits._
+import org.apache.hadoop.io.LongWritable
 
 abstract class Learner {
   val _rand = new java.util.Random
@@ -51,7 +48,7 @@ class NaiveBayesLearner extends Learner {
 
   def train(label: String, text: String) {
     val cLabel = counts(label)
-    TextUtil.ngram(text).map(ng => update(cLabel, ng))
+    text.ngram.map(ng => update(cLabel, ng))
   }
 
   def model(docid: Long): NaiveBayesModel = {
@@ -138,7 +135,7 @@ class LearnWorker extends Learning.ThriftServer {
     log.info("Got %d peers from master.", peerNames.length)
     peers = peerNames.map(host => Finagle.connect(s => new Learning.FinagledClient(s), host, 19999))
     keys = documents.keysIterator.toArray
-    learnerResults = HadoopUtil.sequenceFileWriter[Text](
+    learnerResults = HadoopUtil.sequenceFileWriter[LongWritable, Text](
       "/autocite/learner-results/%s/%s".format(InetAddress.getLocalHost(), this.hashCode()))
 
     log.info("Setup finished.")
