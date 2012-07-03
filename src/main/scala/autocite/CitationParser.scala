@@ -56,7 +56,7 @@ object CitationParser {
     val etal = "(?i)et\\.? al\\.?".r ^^^ { Token("et al") }
     val initial = "[\\p{Lu}][.]".r ^^ Token
     val nameUpper = "[\\p{Lu}][\\p{Lu}]+".r ^^ Token
-    val nameRegular = "[\\p{Lu}][\\p{Ll}]+".r ^^ Token
+    val nameRegular = "[\\p{Lu}][\\p{Ll}][^,.\\s]+".r ^^ Token
     val word = "[^.\\s]+".r ^^ Token
     val comma = literal(",") ^^ Token
     val punct = "[\\p{P}]+" ^^ Token

@@ -1,15 +1,15 @@
 package autocite
 
 import java.io._
+import autocite.util.FileImplicits._
+
 import scala.collection.JavaConversions.asScalaIterator
 import scala.sys.process._
-import org.apache.commons.logging.LogFactory
-import org.apache.hadoop.io.{Text, LongWritable}
-import org.apache.hadoop.mapred._
+
 import edu.cmu.lemurproject.WritableArchiveRecord
 
 object PDFToXML {
-  def apply(v: WritableArchiveRecord): Option[Array[Byte]] = {
+  def apply(v: WritableArchiveRecord): Array[Byte] = {
     val blobWriter = new ByteArrayOutputStream()
     v.data.dump(blobWriter)
     blobWriter.close()
@@ -18,18 +18,19 @@ object PDFToXML {
     val endOfHeader = blobWriter.toString().indexOf("\r\n\r\n")
 
     if (endOfHeader == -1 || pdfBlob.length < 5000) {
-      return None
+      return null
     }
 
     val url = v.data.getHeader().getUrl().toLowerCase()
-    val processor = if (url.contains(".pdf")) { "pdftoxml" } else { "pstoxml" }
     val binaryIn = new ByteArrayInputStream(pdfBlob, 4 + endOfHeader, pdfBlob.length - 4 - endOfHeader);
-    apply(binaryIn, processor)
+    apply(binaryIn, url)
   }
   
-  def apply(binaryIn : InputStream, processor : String) : Option[Array[Byte]] = {
-    val xmlOut = new ByteArrayOutputStream()
-
+  def apply(filename : String) : Array[Byte] = apply(new File(filename).open(), filename)
+ 
+  def apply(binaryIn : InputStream, name : String) : Array[Byte] = {
+    val xmlOut = new ByteArrayOutputStream() 
+    val processor = if (name.contains(".pdf")) { "pdftoxml" } else { "pstoxml" }
     val pbThread = new Thread(
       new Runnable {
         def run() {
@@ -45,9 +46,9 @@ object PDFToXML {
 
     val bytes = xmlOut.toByteArray
     if (bytes.length > 100) {
-      return Some(bytes)
+      return bytes
     } else {
-      return None
+      return null
     }
   }
 }
