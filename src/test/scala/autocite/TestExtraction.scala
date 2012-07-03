@@ -8,7 +8,7 @@ import com.twitter.logging.{ LoggerFactory, Level, ConsoleHandler }
 import com.twitter.logging.Logger
 import scala.io.Source
 import java.io._
-import autocite.util.FileImplicits._
+import autocite.util.Implicits._
 
 @RunWith(classOf[JUnitRunner])
 class ExtractionSpec extends FunSuite with ShouldMatchers {

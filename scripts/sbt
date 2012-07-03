@@ -3,7 +3,7 @@
 java\
  -Xverify:none\
  -Xms512M\
- -Xmx512M\
+ -Xmx1500M\
  -Xss1M\
  -XX:+UnlockExperimentalVMOptions\
  -XX:+CMSClassUnloadingEnabled\
