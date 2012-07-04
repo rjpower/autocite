@@ -1,7 +1,7 @@
 package autocite
 
 import java.io._
-import autocite.util.FileImplicits._
+import autocite.util.Implicits._
 
 import scala.collection.JavaConversions.asScalaIterator
 import scala.sys.process._
