@@ -10,30 +10,45 @@ import autocite.util.Compress
 import scala.collection.immutable.HashMap
 
 object UnlabeledLearner {
-  class Helper(val doc: Document) {
-    val splitter = "[0-9\\s\\p{Punct}]".r
-    
-    lazy val bagOfWords = {
-      var m = new HashMap[String, Double]
-      splitter
-        .split(doc.text.toLowerCase)
-        .filter(_.length > 1)
-        .map(k => {
-            m = m + Pair(k, m.getOrElse(k, 0.0) + 1.0)
-        })
-      m
+  type BagOfWords = Map[String, Double]
+
+  val splitter = "[0-9\\s\\p{Punct}]".r
+
+  class RichCite(cite : Citation) {
+    lazy val id = Analysis.titleToId(cite.title)
+  }
+
+  implicit def enrichCite = RichCite
+
+  def docToBagOfWords(d: Document): BagOfWords = {
+    var out = new HashMap[String, Double]
+    for (w <- splitter.split(d.text.toLowerCase)) {
+      out = out + Pair(w, 1.0 + out.getOrElse(w, 0.0))
     }
+    out
+  }
 
-    lazy val id = Analysis.titleToId(doc.title)
-    var normalized : Map[String, Double] = null
-
-    def normalize(counts : Map[String, Double]) = {
-      if (normalized == null) {
-        normalized = bagOfWords.map({ case (k, v) => (k, v.toDouble / counts(k)) })
+  def normalize(bow: BagOfWords, idf: BagOfWords, numDocs: Int) = {
+    bow.map({
+      case (k, v) => {
+        (k, v * idf(k))
       }
+    })
+  }
 
-      normalized
+  def idf(bow: Map[Long, BagOfWords]): BagOfWords = {
+    var idf = new HashMap[String, Double]
+    for (m <- bow.values) {
+      for ((k, v) <- m) {
+        idf = idf + Pair(k, idf.getOrElse(k, 0.0) + 1)
+      }
     }
+
+    println(idf.take(10).mkString("\n"))
+    for ((k, v) <- idf) {
+      idf = idf.updated(k, scala.math.log(bow.size / idf(k)))
+    }
+    idf
   }
 
   def loadData(hadoopFile: String) = {
@@ -46,21 +61,10 @@ object UnlabeledLearner {
           (Analysis.titleToId(doc.title), doc)
         }
       })
-      .toList
       .toMap
   }
 
-  def idf(docs: Iterable[Helper]): Map[String, Double] = {
-    var counts = new HashMap[String, Double]
-    for (m <- docs.toArray) {
-      for ((k, v) <- m.bagOfWords) {
-        counts = counts + Pair(k, counts.getOrElse(k, 0.0) + v)
-      }
-    }
-    counts
-  }
-
-  def cosineSimilarity(a: Map[String, Double], b: Map[String, Double]) : Double = {
+  def cosineSimilarity(a: BagOfWords, b: BagOfWords): Double = {
     var total = 0.0
     val magnitude = b.values.sum
     for ((k, v) <- a) {
@@ -68,29 +72,21 @@ object UnlabeledLearner {
     }
     total / magnitude
   }
-  
-  def cosineSimilarity(a: Helper, b: Helper) : Double = cosineSimilarity(a.bagOfWords, b.bagOfWords)
 
-  def tfIdfSimiliarity(counts: Map[String, Double])(a: Helper, b: Helper) = {
-    cosineSimilarity(a.normalize(counts), b.normalize(counts))
-  }
-
-  def findMatches(docs: Map[Long, Helper]) = {
+  def findMatches(docs: Map[Long, Document]) : Map[Long, Seq[Long]] = {
     println("Matching references...")
-    docs.map({
-      case (k, v) => {
-        (v, v.doc.outgoing.count(
-          cite => docs contains Analysis.titleToId(cite.title)))
-      }
-    }).toList
+    docs.mapValues(
+        _.outgoing
+          .filter(cite => docs contains cite.id)
+          .map(_.id))
+          .toArray
   }
 
-  def mostSimilar(a: Helper, docs: Iterable[Helper], metric: (Helper, Helper) => Double) = {
+  def mostSimilar(a: BagOfWords, docs: Map[Long, BagOfWords])= {
     docs
       .toArray
-      .map(b => (metric(a, b), b))
-      .sortBy(_._1)
-      .takeRight(20)
+      .map(b => (b._1, cosineSimilarity(a, b._2)))
+      .sortBy(_._2)
   }
 }
 
@@ -116,49 +112,42 @@ class UnlabeledLearner(sourceDir: String, cacheFile: String) {
     }
   }
 
-//  def save() {
-//    val oo = new ObjectOutputStream(new GZipOutputStream(new FileOutputStream("data.out")))
-//    oo.writeObject(docs)
-//    oo.writeObject(matches)
-//    oo.writeObject(counts)
-//    oo.Close()
-//  }
-
-
   analyzeFiles
-  val docs = UnlabeledLearner.loadData(hadoop).mapValues(doc => new UnlabeledLearner.Helper(doc))
+  val docs = UnlabeledLearner.loadData(hadoop)
+  val numDocs = docs.size
+  println("Computing bag of words")
+  val bow = docs.mapValues(UnlabeledLearner.docToBagOfWords)
+  println("Computing idf")
+  val idf = UnlabeledLearner.idf(bow)
+  println("Matching")
   val matches = UnlabeledLearner.findMatches(docs)
-  val counts = UnlabeledLearner.idf(docs.values)
+  println("Normalizing")
+  val normalized = bow.mapValues(v => UnlabeledLearner.normalize(v, idf, numDocs))
 }
 
 object UnlabeledAnalysis extends App {
   val learner = new UnlabeledLearner(args(0), args(1))
 
-  learner.counts
-    .toArray
-    .sortBy(_._2)
-    .takeRight(20)
-    .map(println)
-
-
-  def printMatches(title : String, matches : Seq[(Double, UnlabeledLearner.Helper)]) {
+  def printMatches(title: String, matches: Seq[(Long, Double)]) {
     println(title)
-    for ((score, m) <- matches) {
-      println("%4.5f %s".format(score, m.doc.title))
+    for ((docid, score) <- matches.reverse) {
+      val doc = learner.docs(docid)
+      println("%4.5f %s".format(score, doc.title))
     }
   }
-  
+
   val best = learner.matches
-    .toArray
     .sortBy(_._2)
     .takeRight(20)
     .map(_._1)
 
-  for (a <- best) {
-    println("Working....")
+  for (doc <- best) {
+    println("Processing....", doc.title)
 
-    // printMatches(a.doc.title, UnlabeledLearner.mostSimilar(a, learner.docs.values, UnlabeledLearner.cosineSimilarity))
-    printMatches(a.doc.title, UnlabeledLearner.mostSimilar(a, learner.docs.values, UnlabeledLearner.tfIdfSimiliarity(learner.counts)))
+    printMatches(doc,
+      UnlabeledLearner.mostSimilar(
+        learner.bow(Analysis.titleToId(doc.title)),
+        learner.normalized))
   }
 
 }
