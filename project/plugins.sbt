@@ -21,7 +21,7 @@ externalResolvers <<= (resolvers) map identity
 
 // addSbtPlugin("com.twitter" %% "sbt-package-dist" % "1.0.4")
 
-addSbtPlugin("com.twitter" %% "sbt11-scrooge" % "1.0.0")
+addSbtPlugin("com.twitter" %% "sbt11-scrooge" % "3.0.0")
 
 addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.0.0")
 

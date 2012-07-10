@@ -13,11 +13,13 @@ struct Citation {
 
 struct Document {
  1: string title,
- 2: string xml,
- 3: list<Citation> incoming,
- 4: list<Citation> outgoing,
- 5: string text,
- 6: string url,
+ 2: optional i64 id = 0,
+ 3: string xml,
+ 4: list<Citation> incoming,
+ 5: list<Citation> outgoing,
+ 6: string text,
+ 7: string url,
+ 8: optional i32 year = 0,
 }
 
 struct SearchResult {
@@ -42,14 +44,19 @@ struct NaiveBayesModel {
   2: map<string, map<string, double> > classes
 }
 
+typedef map<string, double> BagOfWords 
+struct LearnerCache {  
+   1: map<i64, Document> docs,
+   2: map<i64, BagOfWords> bow,
+   3: map<i64, BagOfWords> normalized,
+   4: BagOfWords idf,
+   5: map<i64, list<i64>> matches
+}
+
 // Used during indexing to invert citations.
 struct CiteOrDoc {
   1: optional Citation cite,
   2: optional Document doc,
-} 
-
-struct DocMap {
-  1: map<string, Document> docs,
 }
 
 service Search {

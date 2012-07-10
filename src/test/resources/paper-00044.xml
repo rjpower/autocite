@@ -1,993 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
-
-<pdf2xml>
-<page number="1" position="absolute" top="0" left="0" height="1188" width="918">
-	<fontspec id="0" size="24" family="Times" color="#231f20"/>
-	<fontspec id="1" size="15" family="Times" color="#231f20"/>
-	<fontspec id="2" size="8" family="Times" color="#231f20"/>
-	<fontspec id="3" size="9" family="Times" color="#231f20"/>
-	<fontspec id="4" size="12" family="Times" color="#231f20"/>
-	<fontspec id="5" size="11" family="Times" color="#231f20"/>
-<text top="110" left="98" width="718" height="26" font="0"><b>An FPGA-based Scalable Simulation Accelerator for Tile</b></text>
-<text top="140" left="371" width="173" height="26" font="0"><b>Architectures</b></text>
-<text top="212" left="120" width="234" height="18" font="1">Shinya Takamaeda-Yamazaki</text>
-<text top="210" left="354" width="11" height="14" font="2">†‡</text>
-<text top="212" left="365" width="166" height="18" font="1">, Ryosuke Sasakawa</text>
-<text top="210" left="531" width="5" height="14" font="2">†</text>
-<text top="212" left="538" width="156" height="18" font="1">, Yoshito Sakaguchi</text>
-<text top="210" left="694" width="5" height="14" font="2">†</text>
-<text top="212" left="700" width="89" height="18" font="1">, Kenji Kise</text>
-<text top="210" left="789" width="5" height="14" font="2">†</text>
-<text top="227" left="135" width="6" height="16" font="3">†</text>
-<text top="232" left="141" width="638" height="16" font="1">Graduate School of Information Science and Engineering, Tokyo Institute of Technology</text>
-<text top="246" left="374" width="6" height="16" font="3">‡</text>
-<text top="251" left="380" width="161" height="16" font="1">JSPS Research Fellow</text>
-<text top="268" left="190" width="534" height="16" font="1">{takamaeda, sasakawa, yoshito}@arch.cs.titech.ac.jp, kise@cs.titech.ac.jp</text>
-<text top="312" left="81" width="97" height="16" font="1">ABSTRACT</text>
-<text top="335" left="88" width="352" height="14" font="4">FPGA-based simulation systems can simulate processor be-</text>
-<text top="350" left="81" width="359" height="14" font="4">havior in realistic time. In order to practically simulate tile</text>
-<text top="365" left="81" width="359" height="14" font="4">many-core architectures, we propose ScalableCore for pro-</text>
-<text top="380" left="81" width="359" height="14" font="4">totyping system development using multiple FPGAs. In this</text>
-<text top="395" left="81" width="375" height="14" font="4">paper, we present an FPGA-based platform called ScalableCore</text>
-<text top="410" left="81" width="359" height="14" font="4">system 1.1, which consists of several simulation tiles named</text>
-<text top="425" left="81" width="359" height="14" font="4">ScalableCore Units. Each tile is connected to four neighbor</text>
-<text top="440" left="81" width="359" height="14" font="4">tiles via interface boards called ScalableCore Boards, and so</text>
-<text top="455" left="81" width="359" height="14" font="4">increasing the target number of cores is easy. We also de-</text>
-<text top="470" left="81" width="359" height="14" font="4">scribe useful techniques by which to achieve high scalability</text>
-<text top="485" left="81" width="359" height="14" font="4">of simulation and to implement complicated hardware func-</text>
-<text top="501" left="81" width="359" height="14" font="4">tions on an FPGA. The developed system simulates the be-</text>
-<text top="516" left="81" width="359" height="14" font="4">havior of a tile architecture with DMA communications and</text>
-<text top="531" left="81" width="359" height="14" font="4">NoC 14.2 times faster than a corresponding software-based</text>
-<text top="546" left="81" width="359" height="14" font="4">functional simulator running on a standard computer with an</text>
-<text top="561" left="81" width="359" height="14" font="4">Intel Core2Duo processor. We veriﬁed that the ScalableCore</text>
-<text top="576" left="81" width="359" height="14" font="4">system is cycle-accurate by comparing the simulation behav-</text>
-<text top="591" left="81" width="203" height="14" font="4">ior on a software-based simulator.</text>
-<text top="626" left="81" width="77" height="16" font="1">Keywords</text>
-<text top="649" left="88" width="351" height="14" font="4">Multi-FPGA System; Processor Prototyping; Tile Archi-</text>
-<text top="664" left="81" width="41" height="14" font="4">tecture</text>
-<text top="699" left="81" width="13" height="16" font="1">1.</text>
-<text top="699" left="112" width="143" height="16" font="1">INTRODUCTION</text>
-<text top="719" left="88" width="353" height="14" font="4">Various processor simulators have been widely used to eval-</text>
-<text top="734" left="81" width="359" height="14" font="4">uate novel architectures and techniques in the computer ar-</text>
-<text top="749" left="81" width="359" height="14" font="4">chitecture research area. Popular software-based simulators,</text>
-<text top="764" left="81" width="359" height="14" font="4">such as SimpleScalar [1], GEMS [2], and M5 [3], are cus-</text>
-<text top="779" left="81" width="359" height="14" font="4">tomizable and operate on computers such as inexpensive per-</text>
-<text top="794" left="81" width="359" height="14" font="4">sonal computers and high-end workstations and so are used</text>
-<text top="809" left="81" width="359" height="14" font="4">in various studies. However, these software-based simula-</text>
-<text top="824" left="81" width="359" height="14" font="4">tors perform simulation far slower than simulated proces-</text>
-<text top="840" left="81" width="359" height="14" font="4">sors. In order to evaluate the proposed method under more</text>
-<text top="855" left="81" width="361" height="14" font="4">realistic conditions, today’s computer research requires faster</text>
-<text top="870" left="81" width="151" height="14" font="4">simulation environments.</text>
-<text top="885" left="88" width="352" height="14" font="4">The processor trend is moving toward many-core proces-</text>
-<text top="900" left="81" width="359" height="14" font="4">sors for power-efﬁcient, high-performance computing. In</text>
-<text top="915" left="81" width="359" height="14" font="4">order to efﬁciently realize an emerging many-core processor,</text>
-<text top="930" left="81" width="359" height="14" font="4">efﬁcient evaluation environments are needed. Moreover, in</text>
-<text top="945" left="81" width="359" height="14" font="4">order to handle an increasing number of cores, the simula-</text>
-<text top="960" left="81" width="359" height="14" font="4">tion speed and scalability of the simulation environment are</text>
-<text top="975" left="81" width="359" height="14" font="4">very important. FPGA-based simulation systems are used</text>
-<text top="990" left="81" width="359" height="14" font="4">to accelerate simulation. However, previous systems either</text>
-<text top="1005" left="81" width="359" height="14" font="4">cannot increase the target number of cores or have no scal-</text>
-<text top="1020" left="81" width="359" height="14" font="4">ability of the simulation speed, which would enable system</text>
-<text top="1035" left="81" width="203" height="14" font="4">to handle a large number of cores.</text>
-<text top="1050" left="88" width="351" height="14" font="4">A simple and honest solution that would enable a large</text>
-<text top="1065" left="81" width="359" height="14" font="4">number of cores to be handled is to use distributed envi-</text>
-<text top="314" left="475" width="359" height="14" font="4">ronments, such as multi-FPGA systems. However, in the</text>
-<text top="329" left="475" width="359" height="14" font="4">multi-FPGA system, maintaining the simulation speed for</text>
-<text top="344" left="475" width="359" height="14" font="4">an increasing number of cores is difﬁcult because (1) efﬁ-</text>
-<text top="359" left="475" width="359" height="14" font="4">cient and scalable synchronization of simulation informa-</text>
-<text top="374" left="475" width="359" height="14" font="4">tion among FPGAs is required for fast cycle-accurate simu-</text>
-<text top="389" left="475" width="359" height="14" font="4">lation, (2) FPGA systems have hardware limitations in terms</text>
-<text top="404" left="475" width="359" height="14" font="4">of memory ports, memory size, or CAM complexity, and (3)</text>
-<text top="419" left="475" width="359" height="14" font="4">many FPGAs require scalable power supplies. These prob-</text>
-<text top="434" left="475" width="359" height="14" font="4">lems must be overcome in order to create a scalable environ-</text>
-<text top="449" left="475" width="34" height="14" font="4">ment.</text>
-<text top="464" left="482" width="353" height="14" font="4">We present ScalableCore [4], which is a concept based upon</text>
-<text top="479" left="475" width="359" height="14" font="4">which to develop a many-core processor emulator using mul-</text>
-<text top="495" left="475" width="359" height="14" font="4">tiple FPGAs with scalability. We describe useful techniques</text>
-<text top="510" left="475" width="359" height="14" font="4">to solve the above described problems. This paper also intro-</text>
-<text top="525" left="475" width="359" height="14" font="4">duces a multi-FPGA-based simulator, called ScalableCore</text>
-<text top="540" left="475" width="359" height="14" font="4">system 1.1, for tile architectures. The system consists of</text>
-<text top="555" left="475" width="359" height="14" font="4">many simulation tiles called ScalableCore Units. Each tile</text>
-<text top="570" left="475" width="318" height="14" font="4">consists of low-end small FPGAs (Xilinx Spartan-3E</text>
-<text top="585" left="475" width="359" height="14" font="4">XC3S500E) and is connected to four adjacent tiles, so it is</text>
-<text top="600" left="475" width="359" height="14" font="4">easy to increase the core count in the simulated architecture</text>
-<text top="615" left="475" width="239" height="14" font="4">while maintaining the simulation speed.</text>
-<text top="630" left="482" width="351" height="14" font="4">The ScalableCore system 1.1 simulates the behavior of a</text>
-<text top="645" left="475" width="359" height="14" font="4">simple processor consisting of 64 nodes 14.2 times faster</text>
-<text top="660" left="475" width="367" height="14" font="4">than a corresponding software-based functional simulator run-</text>
-<text top="675" left="475" width="359" height="14" font="4">ning on a standard computer with an Intel Core2Duo Pro-</text>
-<text top="690" left="475" width="359" height="14" font="4">cessor. Note that the implementation of the processor core</text>
-<text top="705" left="475" width="359" height="14" font="4">on the software simulator is equivalent to a functional-level</text>
-<text top="720" left="475" width="359" height="14" font="4">processor core. Therefore, the simulation speed will be de-</text>
-<text top="736" left="475" width="359" height="14" font="4">graded in simulations of more detailed processor cores, and</text>
-<text top="751" left="475" width="347" height="14" font="4">the speedup of the ScalableCore system will be increased.</text>
-<text top="766" left="482" width="351" height="14" font="4">System validation is important for reliable simulation re-</text>
-<text top="781" left="475" width="359" height="14" font="4">sults. In order to conﬁrm that the ScalableCore system is</text>
-<text top="796" left="475" width="359" height="14" font="4">cycle-accurate, we veriﬁed that the behavior of the Scal-</text>
-<text top="811" left="475" width="359" height="14" font="4">ableCore system is equivalent to the behavior of the corre-</text>
-<text top="826" left="475" width="359" height="14" font="4">sponding software simulator by comparing their processor</text>
-<text top="841" left="475" width="359" height="14" font="4">core state and network state for each cycle in the target pro-</text>
-<text top="856" left="475" width="40" height="14" font="4">cessor.</text>
-<text top="871" left="482" width="249" height="14" font="4">The major contributions of this paper are:</text>
-<text top="896" left="495" width="339" height="19" font="4">• ScalableCore, which is a concept based upon which to</text>
-<text top="914" left="509" width="325" height="14" font="4">develop large-scale prototyping systems using a num-</text>
-<text top="929" left="509" width="325" height="14" font="4">ber of small FPGAs while maintaining the scalability</text>
-<text top="944" left="509" width="298" height="14" font="4">of the simulation speed in a multi-FPGAs system.</text>
-<text top="971" left="495" width="339" height="19" font="4">• We describe a technique by which to easily implement</text>
-<text top="990" left="509" width="271" height="14" font="4">complex and unsuitable hardware on FPGAs.</text>
-<text top="1017" left="495" width="339" height="19" font="4">• We demonstrate that the simulation speed of this sys-</text>
-<text top="1035" left="509" width="325" height="14" font="4">tem is scalable and is 14.2 times faster than the corre-</text>
-<text top="1050" left="509" width="325" height="14" font="4">sponding software simulator in the case of simulation</text>
-<text top="1065" left="509" width="90" height="14" font="4">using 64 cores.</text>
-<text top="1121" left="108" width="272" height="18" font="5">ACM SIGARCH Computer Architecture News</text>
-<text top="1121" left="451" width="15" height="18" font="5">38</text>
-<text top="1121" left="621" width="189" height="18" font="5">Vol. 39, No. 4, September 2011</text>
-</page>
-<page number="2" position="absolute" top="0" left="0" height="1188" width="918">
-	<fontspec id="6" size="4" family="Times" color="#100e0c"/>
-	<fontspec id="7" size="5" family="Times" color="#100e0c"/>
-	<fontspec id="8" size="8" family="Times" color="#ffffff"/>
-<text top="81" left="100" width="339" height="19" font="4">• We demonstrate that behavior of the developed system</text>
-<text top="100" left="114" width="325" height="14" font="4">is equivalent to that of software simulator at the cycle</text>
-<text top="115" left="114" width="32" height="14" font="4">level.</text>
-<text top="140" left="88" width="351" height="14" font="4">The remainder of this paper is organized as follows. Sec-</text>
-<text top="155" left="81" width="359" height="14" font="4">tion 2 presents related works. Section 3 describes the Scal-</text>
-<text top="170" left="81" width="359" height="14" font="4">ableCore, which is a concept based upon which to realize a</text>
-<text top="185" left="81" width="359" height="14" font="4">scalable emulator, as well as techniques by which to achieve</text>
-<text top="200" left="81" width="359" height="14" font="4">scalability and to easily implement target hardware func-</text>
-<text top="215" left="81" width="359" height="14" font="4">tions. In addition, this section describes the actual imple-</text>
-<text top="230" left="81" width="359" height="14" font="4">mentation issues of ScalableCore system 1.1, which is a sys-</text>
-<text top="245" left="81" width="359" height="14" font="4">tem with connected 64 FPGA tiles. In Section 4, we evalu-</text>
-<text top="260" left="81" width="359" height="14" font="4">ate the implemented system with respect to simulation speed</text>
-<text top="275" left="81" width="359" height="14" font="4">and system accuracy. Finally, Section 5 presents a summary</text>
-<text top="290" left="81" width="78" height="14" font="4">of this paper.</text>
-<text top="324" left="81" width="13" height="16" font="1">2.</text>
-<text top="324" left="112" width="148" height="16" font="1">RELATED WORK</text>
-<text top="344" left="88" width="351" height="14" font="4">There have been several studies on the simulation environ-</text>
-<text top="359" left="81" width="359" height="14" font="4">ment for multicore processors and many-core processors. In</text>
-<text top="374" left="81" width="359" height="14" font="4">order to efﬁciently execute a parallel program on multicore</text>
-<text top="389" left="81" width="359" height="14" font="4">or many-core processors, we must carefully consider not</text>
-<text top="404" left="81" width="359" height="14" font="4">only processor architectures but also middleware and run-</text>
-<text top="419" left="81" width="359" height="14" font="4">time software behavior. Therefore, a fast simulation envi-</text>
-<text top="434" left="81" width="359" height="14" font="4">ronment for multicore and many-core processors is very im-</text>
-<text top="449" left="81" width="46" height="14" font="4">portant.</text>
-<text top="464" left="88" width="351" height="14" font="4">RAMP Gold [5, 6], which uses a single moderately sized</text>
-<text top="479" left="81" width="359" height="14" font="4">FPGA, is an attempt to quickly simulate a many-core proces-</text>
-<text top="494" left="81" width="359" height="14" font="4">sor with 64 cores and shared caches with a crossbar network.</text>
-<text top="509" left="81" width="359" height="14" font="4">In RAMP Gold, the functional model and the timing model</text>
-<text top="525" left="81" width="359" height="14" font="4">of the target processor are implemented separately. In order</text>
-<text top="540" left="81" width="359" height="14" font="4">to efﬁciently simulate a large number of cores with respect</text>
-<text top="555" left="81" width="359" height="14" font="4">to time, RAMP Gold uses host-multithreading, i.e., running</text>
-<text top="570" left="81" width="359" height="14" font="4">multiple threads simulating different target cores on a single</text>
-<text top="585" left="81" width="359" height="14" font="4">simulating tile, which reduces the memory access overhead</text>
-<text top="600" left="81" width="262" height="14" font="4">and the circuit overhead of data forwarding.</text>
-<text top="615" left="88" width="351" height="14" font="4">Most other studies [7, 8, 9, 10, 11, 12] use a single FPGA</text>
-<text top="630" left="81" width="359" height="14" font="4">or a small number of large FPGAs to implement the entire</text>
-<text top="645" left="81" width="359" height="14" font="4">processor. This makes the system extremely fast. However,</text>
-<text top="660" left="81" width="359" height="14" font="4">it may limit the core count to be simulated and may reduce</text>
-<text top="675" left="81" width="359" height="14" font="4">the simulation speed as the core count increases. In addition,</text>
-<text top="690" left="81" width="359" height="14" font="4">systems with large FPGAs greatly increase the compiling</text>
-<text top="705" left="81" width="227" height="14" font="4">time required to generate a bit stream.</text>
-<text top="720" left="88" width="351" height="14" font="4">We adopt the other method of using a number of small FP-</text>
-<text top="735" left="81" width="359" height="14" font="4">GAs and develop a simulator with scalable simulation speed</text>
-<text top="750" left="81" width="163" height="14" font="4">as the core count increases.</text>
-<text top="784" left="81" width="13" height="16" font="1">3.</text>
-<text top="784" left="112" width="327" height="16" font="1">PROPOSAL OF THE SCALABLECORE</text>
-<text top="805" left="112" width="74" height="16" font="1">SYSTEM</text>
-<text top="835" left="81" width="22" height="16" font="1">3.1</text>
-<text top="835" left="121" width="64" height="16" font="1">Concept</text>
-<text top="855" left="88" width="351" height="14" font="4">We herein propose ScalableCore, which is a concept based</text>
-<text top="870" left="81" width="359" height="14" font="4">upon which to develop a scalable environment for tile archi-</text>
-<text top="885" left="81" width="359" height="14" font="4">tecture simulation. Using multiple distributed FPGAs, the</text>
-<text top="900" left="81" width="359" height="14" font="4">system forms an emulator. Figure.1 shows the concept of</text>
-<text top="915" left="81" width="359" height="14" font="4">the ScalableCore. In the following, we referred to a system</text>
-<text top="930" left="81" width="287" height="14" font="4">based on this concept as a ScalableCore system.</text>
-<text top="945" left="88" width="351" height="14" font="4">The ScalableCore system consists of both the simulation</text>
-<text top="960" left="81" width="359" height="14" font="4">tiles and connection interfaces of these nodes, referred to</text>
-<text top="975" left="81" width="359" height="14" font="4">herein as ScalableCore Units and ScalableCore Boards,</text>
-<text top="990" left="81" width="359" height="14" font="4">respectively. The ScalableCore Unit is a small custom de-</text>
-<text top="1005" left="81" width="359" height="14" font="4">signed FPGA board. Each ScalableCore Unit corresponds</text>
-<text top="1020" left="81" width="359" height="14" font="4">to a processor core in the target tile architecture and has</text>
-<text top="1035" left="81" width="359" height="14" font="4">emulated functions in the target processor core. Each Scal-</text>
-<text top="1050" left="81" width="359" height="14" font="4">ableCore Unit can communicate with adjacent ScalableCore</text>
-<text top="1065" left="81" width="373" height="14" font="4">Units by serial I/O via the signal wires on ScalableCore Boards.</text>
-<text top="115" left="605" width="19" height="6" font="6">%!</text>
-<text top="128" left="655" width="7" height="6" font="6"></text>
-<text top="174" left="655" width="7" height="6" font="6"></text>
-<text top="221" left="655" width="7" height="6" font="6"></text>
-<text top="268" left="655" width="7" height="6" font="6"></text>
-<text top="128" left="691" width="7" height="6" font="6"></text>
-<text top="174" left="691" width="7" height="6" font="6"></text>
-<text top="221" left="691" width="7" height="6" font="6"></text>
-<text top="268" left="690" width="7" height="6" font="6"></text>
-<text top="128" left="725" width="7" height="6" font="6"></text>
-<text top="174" left="725" width="7" height="6" font="6"></text>
-<text top="221" left="725" width="7" height="6" font="6"></text>
-<text top="268" left="725" width="7" height="6" font="6"></text>
-<text top="128" left="759" width="7" height="6" font="6"></text>
-<text top="174" left="759" width="7" height="6" font="6"></text>
-<text top="221" left="759" width="7" height="6" font="6"></text>
-<text top="268" left="759" width="7" height="6" font="6"></text>
-<text top="292" left="543" width="70" height="7" font="7">! 
-!</text>
-<text top="301" left="545" width="53" height="7" font="7">#! 
-!</text>
-<text top="267" left="543" width="63" height="7" font="7">! #</text>
-<text top="276" left="545" width="44" height="7" font="7"> 
-!</text>
-<text top="206" left="529" width="69" height="7" font="7">$# !%!</text>
-<text top="215" left="536" width="54" height="7" font="7">!&#34;&#34;! !</text>
-<text top="236" left="534" width="58" height="7" font="7">&amp;&#34;# $#</text>
-<text top="139" left="561" width="36" height="7" font="7">$#</text>
-<text top="149" left="566" width="26" height="7" font="7">&#34; &amp;</text>
-<text top="93" left="620" width="14" height="9" font="8"></text>
-<text top="334" left="475" width="332" height="13" font="4">Figure 1: ScalableCore concept. An example for a 4</text>
-<text top="330" left="811" width="23" height="19" font="4">× 4</text>
-<text top="349" left="475" width="185" height="13" font="4">FPGAs ScalableCore system.</text>
-<text top="413" left="482" width="351" height="14" font="4">We can change the number of ScalableCore Units that make</text>
-<text top="428" left="475" width="209" height="14" font="4">up the system. In the case of a 4</text>
-<text top="424" left="689" width="145" height="19" font="4">× 4, 16-core processor,</text>
-<text top="443" left="475" width="31" height="14" font="4">16 (4</text>
-<text top="439" left="510" width="324" height="19" font="4">× 4) ScalableCore Units and 25 (5 × 5) ScalableCore</text>
-<text top="458" left="475" width="359" height="14" font="4">Boards to connect the ScalableCore Units are required. Each</text>
-<text top="473" left="475" width="359" height="14" font="4">ScalableCore Unit is connected to only four adjacent Scal-</text>
-<text top="488" left="475" width="359" height="14" font="4">ableCore Units, and each unit can directly communicate with</text>
-<text top="503" left="475" width="359" height="14" font="4">only adjacent units. For hardware scalability, ScalableCore</text>
-<text top="518" left="475" width="222" height="14" font="4">Units do not have global signal lines.</text>
-<text top="533" left="482" width="351" height="14" font="4">In order to emulate complex functions which are not suit-</text>
-<text top="548" left="475" width="359" height="14" font="4">able for direct implementation onto FPGAs, such as a multi-</text>
-<text top="563" left="475" width="359" height="14" font="4">port RAM, the system emulates the target behavior in one</text>
-<text top="578" left="475" width="359" height="14" font="4">clock cycle using multiple FPGA clocks. We refer to this as</text>
-<text top="593" left="475" width="111" height="14" font="4">the Virtual Cycle.</text>
-<text top="609" left="482" width="351" height="14" font="4">In order to obtain cycle-accurate simulation results, each</text>
-<text top="624" left="475" width="359" height="14" font="4">ScalableCore Unit must know the newest simulation infor-</text>
-<text top="639" left="475" width="359" height="14" font="4">mation, such as the state of on-chip routers and the state of</text>
-<text top="654" left="475" width="359" height="14" font="4">processor cores, generated by the others must be used. This</text>
-<text top="669" left="475" width="359" height="14" font="4">can be achieved simply by using an all-to-all barrier, and</text>
-<text top="684" left="475" width="359" height="14" font="4">states are updated during each cycle on the target processor</text>
-<text top="699" left="475" width="359" height="14" font="4">for the entire system. However, all-to-all operations have a</text>
-<text top="714" left="475" width="329" height="14" font="4">very large overhead and make the system non-scalable.</text>
-<text top="729" left="482" width="351" height="14" font="4">Since the ScalableCore system focuses on tile architectures</text>
-<text top="744" left="475" width="359" height="14" font="4">consisting of a mesh network, sharing of simulation informa-</text>
-<text top="759" left="475" width="359" height="14" font="4">tion among all FPGAs is not necessary. In order to satisfy the</text>
-<text top="774" left="475" width="359" height="14" font="4">cycle accuracy, each ScalableCore Unit must share informa-</text>
-<text top="789" left="475" width="359" height="14" font="4">tion among only its four adjacent ScalableCore Units. We</text>
-<text top="804" left="475" width="359" height="14" font="4">refer to this bound-reduced simulation information sharing</text>
-<text top="819" left="475" width="359" height="14" font="4">as Local Barrier Synchronization. This technique enables</text>
-<text top="834" left="475" width="359" height="14" font="4">the number of ScalableCore Units used for simulation can be</text>
-<text top="850" left="475" width="359" height="14" font="4">increased without increasing the synchronization overhead,</text>
-<text top="865" left="475" width="249" height="14" font="4">which allows a scalable simulation speed.</text>
-<text top="880" left="482" width="351" height="14" font="4">The program image for each unit is stored in an SD card,</text>
-<text top="895" left="475" width="359" height="14" font="4">which is shown as a black rectangle. When the system ini-</text>
-<text top="910" left="475" width="359" height="14" font="4">tiates the simulation, the top-left unit ((1,1) in the ﬁgure)</text>
-<text top="925" left="475" width="359" height="14" font="4">distributes the program image to every unit. A custom com-</text>
-<text top="940" left="475" width="359" height="14" font="4">mand interpreter type display enables the simulating state to</text>
-<text top="955" left="475" width="82" height="14" font="4">be visualized.</text>
-<text top="985" left="475" width="22" height="16" font="1">3.2</text>
-<text top="985" left="516" width="156" height="16" font="1">System Architecture</text>
-<text top="1005" left="482" width="351" height="14" font="4">Each ScalableCore Unit has the functions of the target pro-</text>
-<text top="1020" left="475" width="363" height="14" font="4">cessor as well as some system level functions. Figure.2 shows</text>
-<text top="1035" left="475" width="365" height="14" font="4">the function hierarchy of a ScalableCore Unit. Figure.3 shows</text>
-<text top="1050" left="475" width="359" height="14" font="4">the function architecture of each ScalableCore Unit. All</text>
-<text top="1065" left="475" width="359" height="14" font="4">of the function units are described in Verilog HDL, which</text>
-<text top="1121" left="108" width="272" height="18" font="5">ACM SIGARCH Computer Architecture News</text>
-<text top="1121" left="451" width="15" height="18" font="5">39</text>
-<text top="1121" left="621" width="189" height="18" font="5">Vol. 39, No. 4, September 2011</text>
-</page>
-<page number="3" position="absolute" top="0" left="0" height="1188" width="918">
-	<fontspec id="9" size="3" family="Times" color="#100e0c"/>
-	<fontspec id="10" size="3" family="Times" color="#100e0c"/>
-	<fontspec id="11" size="16" family="Times" color="#100e0c"/>
-	<fontspec id="12" size="14" family="Times" color="#231f20"/>
-<text top="245" left="231" width="30" height="7" font="7">#*#</text>
-<text top="243" left="261" width="3" height="10" font="7"> </text>
-<text top="267" left="233" width="32" height="7" font="7">$#*#</text>
-<text top="265" left="265" width="3" height="10" font="7"> </text>
-<text top="262" left="307" width="4" height="7" font="7"></text>
-<text top="271" left="300" width="27" height="7" font="7">! %#!#</text>
-<text top="269" left="327" width="3" height="10" font="7"> </text>
-<text top="240" left="300" width="22" height="7" font="7"> </text>
-<text top="250" left="300" width="27" height="7" font="7">! %#!#</text>
-<text top="248" left="327" width="3" height="10" font="7"> </text>
-<text top="240" left="373" width="13" height="7" font="7">!</text>
-<text top="249" left="362" width="31" height="7" font="7">
- #%!#</text>
-<text top="262" left="369" width="17" height="7" font="7">$%</text>
-<text top="271" left="362" width="31" height="7" font="7">
- #%!#</text>
-<text top="190" left="259" width="41" height="7" font="7">) #! *#</text>
-<text top="188" left="300" width="3" height="10" font="7"> </text>
-<text top="190" left="325" width="27" height="7" font="7">!#)</text>
-<text top="190" left="359" width="17" height="7" font="7">#%#</text>
-<text top="188" left="376" width="3" height="10" font="7"> </text>
-<text top="163" left="285" width="59" height="7" font="7">!#)  %*#</text>
-<text top="161" left="344" width="3" height="10" font="7"> </text>
-<text top="130" left="316" width="45" height="7" font="7">! !#)</text>
-<text top="130" left="368" width="27" height="7" font="7">! %#!#</text>
-<text top="128" left="395" width="3" height="10" font="7"> </text>
-<text top="130" left="250" width="21" height="7" font="7">!&amp;%#</text>
-<text top="128" left="271" width="3" height="10" font="7"> </text>
-<text top="107" left="314" width="8" height="7" font="7"></text>
-<text top="107" left="337" width="57" height="7" font="7">%(!#  %#</text>
-<text top="105" left="397" width="3" height="10" font="7"> </text>
-<text top="107" left="259" width="10" height="7" font="7">!#</text>
-<text top="105" left="269" width="3" height="10" font="7"> </text>
-<text top="119" left="163" width="35" height="7" font="7">$# )#</text>
-<text top="89" left="222" width="54" height="7" font="7">!&#34;&amp;%%!  !</text>
-<text top="207" left="117" width="23" height="7" font="7">)$%</text>
-<text top="216" left="119" width="23" height="7" font="7">&amp; %! </text>
-<text top="220" left="237" width="18" height="7" font="7">#</text>
-<text top="229" left="225" width="48" height="7" font="7">!&amp; %! $</text>
-<text top="220" left="306" width="16" height="7" font="7">'</text>
-<text top="229" left="300" width="27" height="7" font="7">! %#!#</text>
-<text top="220" left="369" width="23" height="7" font="7">! </text>
-<text top="229" left="369" width="17" height="7" font="7">$%</text>
-<text top="190" left="163" width="35" height="7" font="7">  )#</text>
-<text top="246" left="163" width="46" height="7" font="7">)$ )#</text>
-<text top="163" left="169" width="55" height="7" font="7">$ )$% )#</text>
-<text top="111" left="118" width="25" height="7" font="7">&amp;%</text>
-<text top="121" left="113" width="31" height="7" font="7">#(#</text>
-<text top="307" left="101" width="319" height="13" font="4">Figure 2: Logic hierarchy on a ScalableCore Unit.</text>
-<text top="419" left="183" width="9" height="6" font="6">!</text>
-<text top="399" left="159" width="53" height="6" font="6">!' 
-#(!</text>
-<text top="486" left="175" width="19" height="6" font="6">$#!</text>
-<text top="451" left="148" width="7" height="6" font="6">
-</text>
-<text top="451" left="169" width="51" height="6" font="6">#%! 
-#!</text>
-<text top="505" left="265" width="37" height="6" font="6">'!(!</text>
-<text top="506" left="201" width="34" height="6" font="6">&#34;!(! &amp;</text>
-<text top="506" left="135" width="32" height="6" font="6">!(! &amp;</text>
-<text top="414" left="385" width="15" height="6" font="6"></text>
-<text top="423" left="381" width="24" height="6" font="6">!'</text>
-<text top="431" left="383" width="24" height="6" font="6">#!!</text>
-<text top="430" left="320" width="24" height="6" font="6">!'</text>
-<text top="439" left="327" width="15" height="6" font="6">!#!</text>
-<text top="531" left="134" width="37" height="6" font="6">! $# $#</text>
-<text top="531" left="200" width="33" height="6" font="6">! 
- $#</text>
-<text top="455" left="385" width="7" height="6" font="6">
-</text>
-<text top="463" left="383" width="21" height="6" font="6">!&#34;#!</text>
-<text top="534" left="378" width="33" height="5" font="9"># !  </text>
-<text top="393" left="262" width="33" height="5" font="9">
-# !'</text>
-<text top="393" left="301" width="6" height="5" font="9">#</text>
-<text top="413" left="259" width="12" height="5" font="9">#!</text>
-<text top="433" left="353" width="11" height="5" font="9"></text>
-<text top="458" left="292" width="12" height="5" font="9">!#</text>
-<text top="468" left="296" width="5" height="5" font="9"></text>
-<text top="475" left="292" width="26" height="5" font="9">!#</text>
-<text top="413" left="353" width="12" height="5" font="9">!#</text>
-<text top="472" left="144" width="23" height="5" font="9">$# $# #</text>
-<text top="472" left="200" width="19" height="5" font="9">
- $# #</text>
-<text top="489" left="108" width="12" height="5" font="9"># #</text>
-<text top="495" left="108" width="21" height="5" font="9">&amp;# </text>
-<text top="490" left="244" width="18" height="5" font="9"># !</text>
-<text top="496" left="244" width="21" height="5" font="9">&amp;# </text>
-<text top="378" left="166" width="4" height="6" font="6"></text>
-<text top="378" left="181" width="24" height="6" font="6">#!!</text>
-<text top="499" left="383" width="20" height="6" font="6"> </text>
-<text top="507" left="383" width="24" height="6" font="6">#!!</text>
-<text top="375" left="300" width="13" height="5" font="9">#!</text>
-<text top="424" left="259" width="11" height="5" font="9"></text>
-<text top="443" left="292" width="11" height="5" font="9"></text>
-<text top="389" left="362" width="12" height="6" font="6"></text>
-<text top="389" left="380" width="23" height="6" font="6">!#!</text>
-<text top="373" left="357" width="15" height="6" font="6">&#34;#</text>
-<text top="373" left="380" width="23" height="6" font="6">!#!</text>
-<text top="364" left="301" width="6" height="5" font="9">#</text>
-<text top="364" left="155" width="15" height="5" font="9">! </text>
-<text top="563" left="93" width="334" height="13" font="4">Figure 3: Logic architecture on a ScalableCore Unit.</text>
-<text top="629" left="81" width="359" height="14" font="4">comprises approximately 8,000 lines of code. There are</text>
-<text top="644" left="81" width="359" height="14" font="4">four main layers of the function implementation, namely, the</text>
-<text top="659" left="81" width="359" height="14" font="4">physical layer, link layer, base system layer, and user layer.</text>
-<text top="674" left="81" width="359" height="14" font="4">The physical layer, link layer, and base system layer pro-</text>
-<text top="689" left="81" width="359" height="14" font="4">vide the system functions to construct the target processor’s</text>
-<text top="704" left="81" width="359" height="14" font="4">functions and to control the simulation state by local barrier</text>
-<text top="719" left="81" width="99" height="14" font="4">synchronization.</text>
-<text top="734" left="88" width="351" height="14" font="4">The target architecture of ScalableCore System 1.1 is an M-</text>
-<text top="749" left="81" width="359" height="14" font="4">Core architecture [13], which consists of multiple computa-</text>
-<text top="764" left="81" width="359" height="14" font="4">tion units connected by a mesh NoC. The Computation Node</text>
-<text top="779" left="81" width="359" height="14" font="4">in Figure.2 corresponds to a tile in a processor. The Com-</text>
-<text top="794" left="81" width="359" height="14" font="4">putation Node has a core, which is an execution unit, a node</text>
-<text top="809" left="81" width="359" height="14" font="4">memory, which is a local memory with a independent mem-</text>
-<text top="824" left="81" width="359" height="14" font="4">ory address space, an on-chip router, and an INCC, which is</text>
-<text top="840" left="81" width="356" height="14" font="4">an network interface dealing network packets to/from NoC.</text>
-<text top="855" left="88" width="351" height="14" font="4">In this version, the ScalableCore system has no off-chip</text>
-<text top="870" left="81" width="345" height="14" font="4">memory functions. This will be investigated in the future.</text>
-<text top="885" left="88" width="351" height="14" font="4">Here, we introduce the Virtual Cycle. A Virtual Cycle cor-</text>
-<text top="900" left="81" width="359" height="14" font="4">responds to a clock cycle of the target processor and com-</text>
-<text top="915" left="81" width="359" height="14" font="4">prises several FPGA clock cycles. The goal is to emulate</text>
-<text top="930" left="81" width="359" height="14" font="4">rich hardware mechanisms, which are unsuitable for FPGAs,</text>
-<text top="945" left="81" width="359" height="14" font="4">such as multiple RAM port. Therefore, the target behavior is</text>
-<text top="960" left="81" width="359" height="14" font="4">emulated in a time interleaved fashion by operating a simple</text>
-<text top="975" left="81" width="359" height="14" font="4">hardware unit multiple times. This reduces the implementa-</text>
-<text top="990" left="81" width="97" height="14" font="4">tion complexity.</text>
-<text top="1005" left="88" width="351" height="14" font="4">Figure.4 shows a time chart of ScalableCore system 1.1.</text>
-<text top="1020" left="81" width="361" height="14" font="4">Each block indicates the period during which the correspond-</text>
-<text top="1035" left="81" width="359" height="14" font="4">ing function unit is working. The Computation Node in</text>
-<text top="1050" left="81" width="359" height="14" font="4">M-Core architecture requires 32-bits and four RAM ports</text>
-<text top="1065" left="81" width="359" height="14" font="4">(I-Fetch, Load/Store, Network Interface Read, and Network</text>
-<text top="104" left="559" width="55" height="5" font="9">&#34;%  
-&#34;   </text>
-<text top="102" left="616" width="2" height="7" font="9"> </text>
-<text top="104" left="640" width="35" height="5" font="9">  
- &#34; </text>
-<text top="102" left="677" width="2" height="7" font="9"> </text>
-<text top="104" left="697" width="58" height="5" font="9">&#34;%  
-&#34;   &#34;</text>
-<text top="102" left="756" width="2" height="7" font="9"> </text>
-<text top="124" left="558" width="15" height="5" font="9">#&#34; </text>
-<text top="122" left="574" width="2" height="7" font="9"> </text>
-<text top="142" left="597" width="118" height="5" font="9"> &#34; !&amp; ' &#34; $   
-   &#34;</text>
-<text top="140" left="717" width="2" height="7" font="9"> </text>
-<text top="195" left="602" width="123" height="5" font="9">$ &#34; !&amp; ' &#34; $   
-   &#34;</text>
-<text top="194" left="727" width="2" height="7" font="9"> </text>
-<text top="154" left="599" width="102" height="5" font="9"> &#34; !&amp; ' &#34; $   
- </text>
-<text top="154" left="707" width="6" height="5" font="9">!&#34;</text>
-<text top="153" left="715" width="2" height="7" font="9"> </text>
-<text top="166" left="598" width="117" height="5" font="9"> &#34; !&amp; ' &#34; $   
-  !&#34;</text>
-<text top="165" left="716" width="2" height="7" font="9"> </text>
-<text top="179" left="597" width="118" height="5" font="9"> &#34; !&amp; ' &#34; $   
-  #&#34;</text>
-<text top="177" left="717" width="2" height="7" font="9"> </text>
-<text top="208" left="623" width="106" height="5" font="9">$ &#34; !&amp; ' &#34; $   
- </text>
-<text top="208" left="736" width="6" height="5" font="9">!&#34;</text>
-<text top="206" left="744" width="2" height="7" font="9"> </text>
-<text top="220" left="603" width="121" height="5" font="9">$ &#34; !&amp; ' &#34; $   
-  !&#34;</text>
-<text top="219" left="726" width="2" height="7" font="9"> </text>
-<text top="232" left="630" width="123" height="5" font="9">$ &#34; !&amp; ' &#34; $   
-  #&#34;</text>
-<text top="231" left="754" width="2" height="7" font="9"> </text>
-<text top="130" left="582" width="30" height="7" font="10"><i>&#34; &#34; !</i></text>
-<text top="240" left="718" width="49" height="7" font="10"><i>! !&amp; '&#34;</i></text>
-<text top="85" left="604" width="106" height="7" font="10"><i> &#34; $ #&#34;    &amp;  &#34;!</i></text>
-<text top="96" left="502" width="43" height="7" font="10"><i>#&#34; 
- % </i></text>
-<text top="103" left="493" width="52" height="7" font="10"><i>%&#34;  &amp; !!!</i></text>
-<text top="115" left="502" width="43" height="7" font="10"><i>#&#34; 
- % </i></text>
-<text top="122" left="486" width="59" height="7" font="10"><i>%&#34;#&#34;  &amp; !!!</i></text>
-<text top="154" left="520" width="24" height="7" font="10"><i>&#34;  </i></text>
-<text top="161" left="512" width="33" height="7" font="10"><i>$    !</i></text>
-<text top="210" left="516" width="29" height="7" font="10"><i>&#34; $ </i></text>
-<text top="216" left="512" width="33" height="7" font="10"><i>$    !</i></text>
-<text top="251" left="644" width="17" height="6" font="6"> &#34;#</text>
-<text top="251" left="667" width="10" height="6" font="6">&amp;</text>
-<text top="87" left="544" width="12" height="5" font="9"></text>
-<text top="262" left="561" width="38" height="7" font="10"><i>&#34;  &#34;# &amp; </i></text>
-<text top="262" left="778" width="38" height="7" font="10"><i>&#34;  &#34;# &amp; </i></text>
-<text top="167" left="776" width="19" height="17" font="11">(</text>
-<text top="293" left="579" width="152" height="13" font="4">Figure 4: Virtual Cycle.</text>
-<text top="352" left="475" width="359" height="14" font="4">Interface Write) for node memory. However, an SRAM on</text>
-<text top="367" left="475" width="359" height="14" font="4">each ScalableCore Unit in this version has only one port for</text>
-<text top="382" left="475" width="359" height="14" font="4">8-bit read/write operation. Therefore, the memory access</text>
-<text top="397" left="475" width="359" height="14" font="4">behavior on INCC and Core is emulated by accessing the</text>
-<text top="412" left="475" width="359" height="14" font="4">SRAM 16 times. At the same time, the system drives the</text>
-<text top="427" left="475" width="359" height="14" font="4">functions of emulated hardware for combinational circuits</text>
-<text top="442" left="475" width="359" height="14" font="4">and ﬂip-ﬂops, and each unit shares simulation information</text>
-<text top="457" left="475" width="359" height="14" font="4">with its neighbors, which reduces emulation and synchro-</text>
-<text top="472" left="475" width="110" height="14" font="4">nization overhead.</text>
-<text top="487" left="482" width="244" height="14" font="4">Here, we describe the rolls of each layer.</text>
-<text top="519" left="475" width="103" height="15" font="12">Physical Layer.</text>
-<text top="535" left="482" width="351" height="14" font="4">The base system contains a serial I/O interface, a device</text>
-<text top="550" left="475" width="359" height="14" font="4">controller for SRAM and an SD card, and a clock and reset</text>
-<text top="566" left="475" width="359" height="14" font="4">signal generator. The SD card controller supports the SPI</text>
-<text top="581" left="475" width="183" height="14" font="4">mode for read/write operation.</text>
-<text top="613" left="475" width="76" height="15" font="12">Link Layer.</text>
-<text top="629" left="482" width="351" height="14" font="4">The link layer contains a simulation synchronizer and a</text>
-<text top="644" left="475" width="95" height="14" font="4">memory arbiter.</text>
-<text top="659" left="482" width="351" height="14" font="4">The synchronizer controls the working timing of every im-</text>
-<text top="674" left="475" width="359" height="14" font="4">plemented function, as shown in Figure.3. In addition, the</text>
-<text top="689" left="475" width="359" height="14" font="4">synchronizer arbitrates the simulation steps among adjacent</text>
-<text top="704" left="475" width="359" height="14" font="4">ScalableCore Units. In order to ensure a cycle-accurate sim-</text>
-<text top="719" left="475" width="359" height="14" font="4">ulation result, each ScalableCore Unit shares the newest data</text>
-<text top="734" left="475" width="359" height="14" font="4">related to its simulation, such as the output signals of on-chip</text>
-<text top="749" left="475" width="194" height="14" font="4">routers destined to other routers.</text>
-<text top="764" left="482" width="351" height="14" font="4">Since the ScalableCore system focuses on tile architectures</text>
-<text top="779" left="475" width="359" height="14" font="4">consisting of a mesh network, each ScalableCore Unit must</text>
-<text top="794" left="475" width="359" height="14" font="4">be synchronized with only the four adjacent ScalableCore</text>
-<text top="809" left="475" width="359" height="14" font="4">Units by sending and receiving the newest data. We refer</text>
-<text top="824" left="475" width="359" height="14" font="4">to this bound-reduced synchronization as Local Barrier Syn-</text>
-<text top="840" left="475" width="78" height="14" font="4">chronization.</text>
-<text top="855" left="482" width="351" height="14" font="4">As shown in Figure.4, in order to move to the next Virtual</text>
-<text top="870" left="475" width="359" height="14" font="4">Cycle, the synchronizer waits for sending and receiving of</text>
-<text top="885" left="475" width="359" height="14" font="4">data to be complete by the end of the Virtual Cycle. Since</text>
-<text top="900" left="475" width="359" height="14" font="4">each of the ScalableCore Units must be synchronized inde-</text>
-<text top="915" left="475" width="359" height="14" font="4">pendently of the core count of the target processor, the syn-</text>
-<text top="930" left="475" width="359" height="14" font="4">chronization overhead does not increase when simulating a</text>
-<text top="945" left="475" width="359" height="14" font="4">processor with a higher core count. It realizes scalable speed</text>
-<text top="960" left="475" width="67" height="14" font="4">simulation.</text>
-<text top="975" left="482" width="351" height="14" font="4">In order to obtain the same execution results as the soft-</text>
-<text top="990" left="475" width="359" height="14" font="4">ware simulator, a synchronizer has the ability to control the</text>
-<text top="1005" left="475" width="359" height="14" font="4">start time of program execution. Figure.5 shows an exam-</text>
-<text top="1020" left="475" width="359" height="14" font="4">ple of program delivery and synchronized start of execution.</text>
-<text top="1035" left="475" width="359" height="14" font="4">In the software simulator, each memory image initialized at</text>
-<text top="1050" left="475" width="359" height="14" font="4">simulation start and all processor cores start execution at the</text>
-<text top="1065" left="475" width="359" height="14" font="4">same time. As described in the following section, each ini-</text>
-<text top="1121" left="108" width="272" height="18" font="5">ACM SIGARCH Computer Architecture News</text>
-<text top="1121" left="451" width="15" height="18" font="5">40</text>
-<text top="1121" left="621" width="189" height="18" font="5">Vol. 39, No. 4, September 2011</text>
-</page>
-<page number="4" position="absolute" top="0" left="0" height="1188" width="918">
-	<fontspec id="13" size="5" family="Times" color="#a1a1a0"/>
-	<fontspec id="14" size="6" family="Times" color="#100e0c"/>
-	<fontspec id="15" size="6" family="Times" color="#ffffff"/>
-<text top="124" left="212" width="17" height="7" font="7">%</text>
-<text top="138" left="207" width="43" height="5" font="9">% !$!'  !#</text>
-<text top="146" left="222" width="30" height="7" font="7"> +&#34;</text>
-<text top="124" left="280" width="17" height="7" font="7">%</text>
-<text top="138" left="275" width="43" height="5" font="9">% !$!'  !#</text>
-<text top="146" left="286" width="34" height="7" font="7"> +&#34;</text>
-<text top="124" left="348" width="17" height="7" font="7">%</text>
-<text top="138" left="343" width="43" height="5" font="9">% !$!'  !#</text>
-<text top="146" left="349" width="40" height="7" font="7">  +&#34;</text>
-<text top="186" left="212" width="17" height="7" font="7">%</text>
-<text top="201" left="207" width="43" height="5" font="9">% !$!'  !#</text>
-<text top="208" left="214" width="38" height="7" font="7"> +&#34;</text>
-<text top="186" left="280" width="17" height="7" font="7">%</text>
-<text top="201" left="275" width="43" height="5" font="9">% !$!'  !#</text>
-<text top="208" left="274" width="4" height="7" font="7">
-</text>
-<text top="208" left="290" width="30" height="7" font="7"> +&#34;</text>
-<text top="186" left="348" width="17" height="7" font="7">%</text>
-<text top="201" left="343" width="43" height="5" font="9">% !$!'  !#</text>
-<text top="208" left="342" width="4" height="7" font="7"></text>
-<text top="208" left="358" width="30" height="7" font="7"> +&#34;</text>
-<text top="122" left="142" width="17" height="7" font="7">%</text>
-<text top="139" left="146" width="27" height="7" font="7">&amp;%&amp;#</text>
-<text top="148" left="148" width="22" height="7" font="7">%&amp;</text>
-<text top="189" left="142" width="17" height="7" font="13">%</text>
-<text top="206" left="138" width="42" height="7" font="13">% *)(!%$</text>
-<text top="266" left="111" width="224" height="11" font="14"><i>$' )) +)   )&amp; ')+0$1   -/)+%#+).&#34;#*.-</i></text>
-<text top="266" left="347" width="25" height="11" font="14"><i>+&#34;$(</i></text>
-<text top="276" left="186" width="6" height="11" font="14"><i></i></text>
-<text top="276" left="206" width="40" height="11" font="14"><i>  0&amp; </i></text>
-<text top="286" left="111" width="179" height="11" font="14"><i>)-&amp;$' ))  ) , $' )) +) </i></text>
-<text top="297" left="173" width="61" height="11" font="14"><i>    0&amp; </i></text>
-<text top="87" left="132" width="18" height="11" font="14"><i>) </i></text>
-<text top="87" left="171" width="96" height="11" font="14"><i>&amp;), -#  *+)&#34;+' $(+0 -)</i></text>
-<text top="97" left="132" width="18" height="11" font="14"><i>) </i></text>
-<text top="97" left="171" width="18" height="11" font="14"><i>) </i></text>
-<text top="97" left="209" width="57" height="11" font="14"><i>)  
- ) </i></text>
-<text top="97" left="287" width="18" height="11" font="14"><i>) </i></text>
-<text top="97" left="323" width="40" height="11" font="14"><i>( )  
-</i></text>
-<text top="127" left="112" width="12" height="8" font="15"></text>
-<text top="231" left="111" width="51" height="11" font="14"><i>)(!$&#34;.+-$)(</i></text>
-<text top="241" left="115" width="250" height="11" font="14"><i>) ,   )&amp; ')+0$1      -/)+%#+).&#34;#*.-   $-</i></text>
-<text top="251" left="111" width="33" height="11" font="14"><i>+&#34;$( </i></text>
-<text top="333" left="81" width="359" height="13" font="4">Figure 5: Synchronized start of simulation. The number</text>
-<text top="348" left="81" width="359" height="13" font="4">of units used for emulation is variable, so that the elapsed</text>
-<text top="363" left="81" width="359" height="13" font="4">time for program delivery is not constant. In order to</text>
-<text top="378" left="81" width="359" height="13" font="4">synchronize the start timing, the boot-loader calculates</text>
-<text top="393" left="81" width="359" height="13" font="4">the ﬁnish time of program delivery for all units and noti-</text>
-<text top="409" left="81" width="225" height="13" font="4">ﬁes all of the units of the start time.</text>
-<text top="472" left="81" width="359" height="14" font="4">tial memory image on the node memory is delivered via NoC</text>
-<text top="487" left="81" width="323" height="14" font="4">for the target architecture by the boot-loader program.</text>
-<text top="502" left="88" width="351" height="14" font="4">The number of units used for emulation and also the period</text>
-<text top="517" left="81" width="359" height="14" font="4">to deliver the program to the entire the system are variable.</text>
-<text top="533" left="81" width="359" height="14" font="4">For all units to start execution at the same time, the boot-</text>
-<text top="548" left="81" width="359" height="14" font="4">loader program calculates the virtual clock cycle with which</text>
-<text top="563" left="81" width="359" height="14" font="4">to ﬁnish delivery and notiﬁes the virtual clock cycle to start</text>
-<text top="578" left="81" width="359" height="14" font="4">each core. Each processor core sleeps until the start time.</text>
-<text top="593" left="81" width="359" height="14" font="4">Then each unit wakes its processor core and starts execution</text>
-<text top="608" left="81" width="359" height="14" font="4">at the designated time. If a synchronized start is not required,</text>
-<text top="623" left="81" width="201" height="14" font="4">each unit starts at the timing of it.</text>
-<text top="638" left="88" width="351" height="14" font="4">The memory arbiter selects one function unit accessing the</text>
-<text top="653" left="81" width="359" height="14" font="4">memory from among the emulated hardware functions, as</text>
-<text top="668" left="81" width="359" height="14" font="4">shown in Figure.3. Both Core and INCC require two ports</text>
-<text top="683" left="81" width="359" height="14" font="4">for memory accesses. The memory arbiter chooses and con-</text>
-<text top="698" left="81" width="359" height="14" font="4">nects address signals and data signals from memory access-</text>
-<text top="713" left="81" width="359" height="14" font="4">ing units using the Node Memory Controller, which is a local</text>
-<text top="728" left="81" width="109" height="14" font="4">memory interface.</text>
-<text top="760" left="81" width="128" height="15" font="12">Base System Layer.</text>
-<text top="776" left="88" width="351" height="14" font="4">The base system layer contains a memory initializer. The</text>
-<text top="791" left="81" width="359" height="14" font="4">memory initializer operates when the system is booting and</text>
-<text top="807" left="81" width="281" height="14" font="4">reads the program binary via the SD controller.</text>
-<text top="839" left="81" width="79" height="15" font="12">User Layer.</text>
-<text top="855" left="88" width="351" height="14" font="4">The user layer corresponds to the actual required hardware</text>
-<text top="870" left="81" width="212" height="14" font="4">components of the target processor.</text>
-<text top="885" left="88" width="351" height="14" font="4">In ScalableCore system 1.1, the core architecture in the</text>
-<text top="900" left="81" width="359" height="14" font="4">node is MIPS32 ISA, which is a one-issue single-cycle pro-</text>
-<text top="915" left="81" width="359" height="14" font="4">cessor. The router is a single cycle router with no virtual</text>
-<text top="930" left="81" width="359" height="14" font="4">channels. A packet, a group of data with routing informa-</text>
-<text top="945" left="81" width="359" height="14" font="4">tion, comprises several ﬂits (Flow Control Unit). The Inter-</text>
-<text top="960" left="81" width="359" height="14" font="4">Node Communication Controller (INCC) sends and receives</text>
-<text top="975" left="81" width="359" height="14" font="4">both up to 1 ﬂit per cycle. The data width among routers</text>
-<text top="990" left="81" width="359" height="14" font="4">and between a router and the INCC (network interface) is</text>
-<text top="1005" left="81" width="359" height="14" font="4">8 bits. The local memory interface is realized as a Node</text>
-<text top="1020" left="81" width="359" height="14" font="4">Memory Controller, and the local memory space is allocated</text>
-<text top="1035" left="81" width="359" height="14" font="4">to SRAM via the memory arbiter and SRAM controller, the</text>
-<text top="1050" left="81" width="148" height="14" font="4">size of which is 512 KB.</text>
-<text top="1065" left="88" width="351" height="14" font="4">In order to map complex hardware in the target architec-</text>
-<text top="85" left="475" width="359" height="14" font="4">ture, they can use multiple FPGA clock cycles, as described</text>
-<text top="100" left="475" width="359" height="14" font="4">previously of the virtual cycle. All emulated hardware func-</text>
-<text top="115" left="475" width="359" height="14" font="4">tions have an “EN” port and a “READY” port, which are</text>
-<text top="130" left="475" width="359" height="14" font="4">input signals to proceed the hardware state and an output</text>
-<text top="145" left="475" width="359" height="14" font="4">signal to report the completion of the hardware state pro-</text>
-<text top="160" left="475" width="359" height="14" font="4">ceeding. Synchronizer, a system-controlling unit, uses these</text>
-<text top="176" left="475" width="314" height="14" font="4">signals to control the emulated hardware processing.</text>
-<text top="207" left="475" width="22" height="16" font="1">3.3</text>
-<text top="207" left="516" width="140" height="16" font="1">Simulation Phases</text>
-<text top="227" left="482" width="360" height="14" font="4">The ScalableCore system has two simulation phases, namely,</text>
-<text top="242" left="475" width="359" height="14" font="4">initialization and running. During the initialization phase,</text>
-<text top="257" left="475" width="359" height="14" font="4">each ScalableCore Unit recognizes its adjacent units, con-</text>
-<text top="272" left="475" width="359" height="14" font="4">ﬁgures its ID, and sets the initial memory image of its lo-</text>
-<text top="287" left="475" width="359" height="14" font="4">cal memory. During the running phase, each ScalableCore</text>
-<text top="302" left="475" width="359" height="14" font="4">Unit proceeds simulation steps of the target processor core</text>
-<text top="317" left="475" width="359" height="14" font="4">by taking local barrier synchronization. The following sec-</text>
-<text top="332" left="475" width="359" height="14" font="4">tions describe the initialization and running phases in detail.</text>
-<text top="365" left="475" width="89" height="15" font="12">Initialization.</text>
-<text top="381" left="482" width="351" height="14" font="4">First, the system is powered on, and each unit begins to de-</text>
-<text top="396" left="475" width="359" height="14" font="4">tect adjacent units (port detection). Each unit sends special</text>
-<text top="411" left="475" width="359" height="14" font="4">data sequences for port detection to its four neighbors via the</text>
-<text top="426" left="475" width="359" height="14" font="4">Ser/Des during a certain period. When each unit receives a</text>
-<text top="441" left="475" width="359" height="14" font="4">certain amount of special data, the unit registers the receiv-</text>
-<text top="456" left="475" width="359" height="14" font="4">ing port as valid. This information is used for local barrier</text>
-<text top="471" left="475" width="246" height="14" font="4">synchronizations to wait neighbors’ data.</text>
-<text top="486" left="482" width="351" height="14" font="4">After port detection, each unit begins to emulate the target</text>
-<text top="501" left="475" width="359" height="14" font="4">system, with the exception of the processor cores. At the</text>
-<text top="516" left="475" width="359" height="14" font="4">same time, the upper-left unit (1,1) acquires the initial mem-</text>
-<text top="531" left="475" width="359" height="14" font="4">ory image from the SD card. The processor core of this unit</text>
-<text top="546" left="475" width="359" height="14" font="4">then starts to execute the boot-loader program on its local</text>
-<text top="561" left="475" width="359" height="14" font="4">memory, and the upper-left unit delivers a memory image</text>
-<text top="576" left="475" width="359" height="14" font="4">to the local memory of each unit by the boot-loader via the</text>
-<text top="591" left="475" width="359" height="14" font="4">DMA transfer and the implemented NoC as a network of the</text>
-<text top="606" left="475" width="359" height="14" font="4">target system. If synchronized execution start for all pro-</text>
-<text top="622" left="475" width="359" height="14" font="4">cessor cores is necessary, then the boot-loader calculates the</text>
-<text top="637" left="475" width="359" height="14" font="4">start time and notiﬁes . The upper-left unit then wakes all</text>
-<text top="652" left="475" width="359" height="14" font="4">processor cores to run via the DMA, and all processor cores</text>
-<text top="667" left="475" width="310" height="14" font="4">start to execute the loaded program at the start time.</text>
-<text top="699" left="475" width="60" height="15" font="12">Running.</text>
-<text top="715" left="482" width="351" height="14" font="4">After the initialization phase, the system moves to the run-</text>
-<text top="730" left="475" width="359" height="14" font="4">ning phase. Each unit works under the pre-scheduled virtual</text>
-<text top="745" left="475" width="359" height="14" font="4">cycle. At the end of a virtual cycle, each unit takes a local</text>
-<text top="760" left="475" width="359" height="14" font="4">barrier synchronization by sending and receiving the newest</text>
-<text top="775" left="475" width="323" height="14" font="4">value of the interface of emulated hardware functions.</text>
-<text top="804" left="475" width="22" height="16" font="1">3.4</text>
-<text top="804" left="516" width="205" height="16" font="1">Hardware Implementation</text>
-<text top="824" left="482" width="351" height="14" font="4">Figure.6 shows a snapshot of the ScalableCore system con-</text>
-<text top="840" left="475" width="89" height="14" font="4">sisting of 64 (8</text>
-<text top="836" left="567" width="267" height="19" font="4">× 8) ScalableCore Units and 81 (9 × 9) Scal-</text>
-<text top="855" left="475" width="359" height="14" font="4">ableCore Boards bridging these ScalableCore Units. Fig-</text>
-<text top="870" left="475" width="359" height="14" font="4">ure.7 shows a top view of the ScalableCore Unit and the</text>
-<text top="885" left="475" width="124" height="14" font="4">ScalableCore Board.</text>
-<text top="900" left="482" width="351" height="14" font="4">A ScalableCore Unit is a card-sized FPGA board. The</text>
-<text top="915" left="475" width="361" height="14" font="4">ScalableCore Unit has a low-capacity FPGA (Xilinx Spartan-</text>
-<text top="930" left="475" width="359" height="14" font="4">3E XC3S500E), a conﬁguration ROM (Xilinx XCF04S), a</text>
-<text top="945" left="475" width="251" height="14" font="4">clock oscillator, and a 512 KB (one-port, 8</text>
-<text top="941" left="726" width="108" height="19" font="4">bit×512Kentry)</text>
-<text top="960" left="475" width="359" height="14" font="4">SRAM chip. A ScalableCore Unit also has a JTAG port con-</text>
-<text top="975" left="475" width="359" height="14" font="4">nected to its FPGA and conﬁguration ROM in order to write</text>
-<text top="990" left="475" width="359" height="14" font="4">its FPGA bit stream. The bit stream is stored in the conﬁgu-</text>
-<text top="1005" left="475" width="359" height="14" font="4">ration ROM. Some I/O ports of the FPGA are assigned to ex-</text>
-<text top="1020" left="475" width="359" height="14" font="4">ternal I/O pins in the edge of the board. These I/Os are used</text>
-<text top="1035" left="475" width="359" height="14" font="4">to access the off-board SD card, to communicate simulation</text>
-<text top="1050" left="475" width="359" height="14" font="4">data with adjacent ScalableCore Units, and to synchronize</text>
-<text top="1065" left="475" width="126" height="14" font="4">the simulation states.</text>
-<text top="1121" left="108" width="272" height="18" font="5">ACM SIGARCH Computer Architecture News</text>
-<text top="1121" left="451" width="15" height="18" font="5">41</text>
-<text top="1121" left="621" width="189" height="18" font="5">Vol. 39, No. 4, September 2011</text>
-</page>
-<page number="5" position="absolute" top="0" left="0" height="1188" width="918">
-	<fontspec id="16" size="5" family="Times" color="#f1521a"/>
-	<fontspec id="17" size="5" family="Times" color="#f36916"/>
-	<fontspec id="18" size="5" family="Times" color="#ed1b24"/>
-	<fontspec id="19" size="5" family="Times" color="#231f20"/>
-	<fontspec id="20" size="6" family="Times" color="#100e0c"/>
-	<fontspec id="21" size="6" family="Times" color="#100e0c"/>
-	<fontspec id="22" size="6" family="Times" color="#231f20"/>
-	<fontspec id="23" size="8" family="Times" color="#100e0c"/>
-	<fontspec id="24" size="8" family="Times" color="#100e0c"/>
-<text top="199" left="305" width="19" height="7" font="16"></text>
-<text top="199" left="332" width="19" height="7" font="16"></text>
-<text top="298" left="305" width="19" height="7" font="16"></text>
-<text top="298" left="332" width="19" height="7" font="16"></text>
-<text top="368" left="305" width="19" height="7" font="16"></text>
-<text top="368" left="332" width="19" height="7" font="16"></text>
-<text top="118" left="128" width="19" height="7" font="18"></text>
-<text top="127" left="128" width="16" height="7" font="18">
-</text>
-<text top="202" left="126" width="19" height="7" font="18"></text>
-<text top="211" left="126" width="16" height="7" font="18">
-</text>
-<text top="297" left="125" width="19" height="7" font="18"></text>
-<text top="306" left="125" width="16" height="7" font="18">
-</text>
-<text top="91" left="229" width="33" height="7" font="7"></text>
-<text top="100" left="234" width="18" height="7" font="7"></text>
-<text top="422" left="81" width="245" height="13" font="4">Figure 6: Snapshot of the 64-node (8</text>
-<text top="418" left="325" width="114" height="19" font="4">×8) ScalableCore</text>
-<text top="437" left="81" width="43" height="13" font="4">system</text>
-<text top="685" left="81" width="359" height="13" font="4">Figure 7: ScalableCore Unit (right) and ScalableCore</text>
-<text top="700" left="81" width="82" height="13" font="4">Board (left).</text>
-<text top="700" left="180" width="259" height="13" font="4">ScalableCore Unit has an FPGA (Xil-</text>
-<text top="715" left="81" width="359" height="13" font="4">inx Spartan-3E XC3S500E), conﬁguration ROM (Xilinx</text>
-<text top="730" left="81" width="193" height="13" font="4">XCF04S), and 512 KB SRAM.</text>
-<text top="794" left="88" width="351" height="14" font="4">A ScalableCore Board is an interface that bridges the power</text>
-<text top="809" left="81" width="359" height="14" font="4">supply and signals between neighboring ScalableCore Units.</text>
-<text top="824" left="81" width="359" height="14" font="4">The ScalableCore Board has a DC-DC regulator to generate</text>
-<text top="840" left="81" width="359" height="14" font="4">the DC voltage supplied for FPGA and an external command</text>
-<text top="855" left="81" width="359" height="14" font="4">interpreter LCD. In order to set up a program binary used for</text>
-<text top="870" left="81" width="359" height="14" font="4">simulation, a ScalableCore Board has an SD card slot and is</text>
-<text top="885" left="81" width="359" height="14" font="4">connected to the ScalableCore Unit to the lower-right of the</text>
-<text top="900" left="81" width="359" height="14" font="4">ScalableCore Board (because of the structure, SD cards can</text>
-<text top="915" left="81" width="359" height="14" font="4">only be inserted into ScalableCore Boards on the left). When</text>
-<text top="930" left="81" width="359" height="14" font="4">initializing the simulation, that ScalableCore Unit reads an</text>
-<text top="945" left="81" width="359" height="14" font="4">program binary from the SD card and it propagate whole</text>
-<text top="960" left="81" width="359" height="14" font="4">the simulating ScalableCore Units. Each ScalableCore Unit</text>
-<text top="975" left="81" width="240" height="14" font="4">stores a program in its on-board SRAM.</text>
-<text top="990" left="88" width="351" height="14" font="4">A stable power supply is very important in order to achieve</text>
-<text top="1005" left="81" width="359" height="14" font="4">a stable system. For stable working, this 64-unit system</text>
-<text top="1020" left="81" width="359" height="14" font="4">requires three DC5V power supplies. Power supplies in-</text>
-<text top="1035" left="81" width="359" height="14" font="4">put from the left side of the system are propagated to Scal-</text>
-<text top="1050" left="81" width="359" height="14" font="4">ableCore Units on the right side of the system via Scal-</text>
-<text top="1065" left="81" width="249" height="14" font="4">ableCore Boards and ScalableCore Units.</text>
-<text top="181" left="512" width="5" height="6" font="19"> 0</text>
-<text top="169" left="505" width="12" height="6" font="19"> 200</text>
-<text top="157" left="505" width="12" height="6" font="19"> 400</text>
-<text top="145" left="505" width="12" height="6" font="19"> 600</text>
-<text top="133" left="505" width="12" height="6" font="19"> 800</text>
-<text top="122" left="501" width="16" height="6" font="19"> 1000</text>
-<text top="110" left="501" width="16" height="6" font="19"> 1200</text>
-<text top="98" left="501" width="16" height="6" font="19"> 1400</text>
-<text top="86" left="501" width="16" height="6" font="19"> 1600</text>
-<text top="188" left="538" width="9" height="6" font="19"> 20</text>
-<text top="188" left="560" width="9" height="6" font="19"> 40</text>
-<text top="188" left="582" width="9" height="6" font="19"> 60</text>
-<text top="188" left="604" width="9" height="6" font="19"> 80</text>
-<text top="188" left="624" width="12" height="6" font="19"> 100</text>
-<text top="161" left="483" width="0" height="8" font="20">Si</text>
-<text top="154" left="483" width="0" height="8" font="20">m</text>
-<text top="147" left="483" width="0" height="8" font="20">u</text>
-<text top="143" left="483" width="0" height="8" font="20">lati</text>
-<text top="131" left="483" width="0" height="8" font="20">on </text>
-<text top="120" left="483" width="0" height="8" font="20">Sp</text>
-<text top="111" left="483" width="0" height="8" font="20">ee</text>
-<text top="103" left="483" width="0" height="8" font="20">d</text>
-<text top="170" left="492" width="0" height="8" font="20">(ki</text>
-<text top="160" left="492" width="0" height="8" font="20">lo </text>
-<text top="151" left="492" width="0" height="8" font="20">virtua</text>
-<text top="130" left="492" width="0" height="8" font="20">l c</text>
-<text top="121" left="492" width="0" height="8" font="20">y</text>
-<text top="117" left="492" width="0" height="8" font="20">cle</text>
-<text top="107" left="492" width="0" height="8" font="20">/s</text>
-<text top="101" left="492" width="0" height="8" font="20">ec</text>
-<text top="93" left="492" width="0" height="8" font="20">)</text>
-<text top="197" left="568" width="27" height="8" font="21"># nodes</text>
-<text top="92" left="553" width="56" height="6" font="7">Software Simulator</text>
-<text top="99" left="549" width="59" height="6" font="7">ScalableCore system</text>
-<text top="213" left="514" width="101" height="11" font="3">(a) Simulation Speed</text>
-<text top="176" left="682" width="6" height="7" font="22"> 0</text>
-<text top="158" left="682" width="6" height="7" font="22"> 5</text>
-<text top="141" left="678" width="10" height="7" font="22"> 10</text>
-<text top="123" left="678" width="10" height="7" font="22"> 15</text>
-<text top="106" left="678" width="10" height="7" font="22"> 20</text>
-<text top="89" left="678" width="10" height="7" font="22"> 25</text>
-<text top="184" left="710" width="10" height="7" font="22"> 20</text>
-<text top="184" left="733" width="10" height="7" font="22"> 40</text>
-<text top="184" left="756" width="10" height="7" font="22"> 60</text>
-<text top="184" left="779" width="10" height="7" font="22"> 80</text>
-<text top="184" left="800" width="14" height="7" font="22"> 100</text>
-<text top="146" left="667" width="0" height="9" font="23">Sp</text>
-<text top="135" left="667" width="0" height="9" font="23">ee</text>
-<text top="126" left="667" width="0" height="9" font="23">dup</text>
-<text top="195" left="740" width="31" height="9" font="24"># nodes</text>
-<text top="169" left="693" width="14" height="7" font="22">0.69</text>
-<text top="162" left="708" width="14" height="7" font="22">2.92</text>
-<text top="148" left="727" width="14" height="7" font="22">6.72</text>
-<text top="134" left="745" width="18" height="7" font="22">10.43</text>
-<text top="120" left="764" width="18" height="7" font="22">14.24</text>
-<text top="92" left="802" width="18" height="7" font="22">23.03</text>
-<text top="211" left="717" width="58" height="11" font="3">(b) Speedup</text>
-<text top="240" left="475" width="359" height="13" font="4">Figure 8: Simulation speed of the software simulator and</text>
-<text top="255" left="475" width="359" height="13" font="4">ScalableCore system, and speedup obtain by applying</text>
-<text top="270" left="475" width="320" height="13" font="4">the ScalableCore system to the software simulator.</text>
-<text top="331" left="475" width="13" height="16" font="1">4.</text>
-<text top="331" left="507" width="116" height="16" font="1">EVALUATION</text>
-<text top="351" left="482" width="351" height="14" font="4">In this section, we evaluate the developed system with re-</text>
-<text top="366" left="475" width="281" height="14" font="4">spect to simulation speed and system accuracy.</text>
-<text top="398" left="475" width="22" height="16" font="1">4.1</text>
-<text top="398" left="516" width="134" height="16" font="1">Simulation Speed</text>
-<text top="418" left="482" width="351" height="14" font="4">We evaluate the simulation speed of ScalableCore system</text>
-<text top="433" left="475" width="359" height="14" font="4">1.1 by comparing that of the software simulator. We com-</text>
-<text top="448" left="475" width="359" height="14" font="4">pared the simulation speed of ScalableCore system 1.1 to</text>
-<text top="463" left="475" width="359" height="14" font="4">that of the SimMc [13], which is a software-based simula-</text>
-<text top="478" left="475" width="359" height="14" font="4">tor for M-Core architecture with a functional-level processor</text>
-<text top="493" left="475" width="319" height="14" font="4">model and a cycle-accurate network on a chip model.</text>
-<text top="508" left="482" width="351" height="14" font="4">The simulator is run on a standard computer consisting of</text>
-<text top="523" left="475" width="359" height="14" font="4">a 3.0-GHz Intel Core2Duo E8400 and 4 GB of memory and</text>
-<text top="538" left="475" width="359" height="14" font="4">is compiled by gcc 4.2.4 (optimization option: -O3). We</text>
-<text top="553" left="475" width="359" height="14" font="4">measured the speeds of the software simulator and the Scal-</text>
-<text top="568" left="475" width="359" height="14" font="4">ableCore system for 4 cores, 16 cores, 32 cores, 48 cores,</text>
-<text top="583" left="475" width="359" height="14" font="4">64 cores, and 100 cores. However, since we have only 64</text>
-<text top="599" left="475" width="359" height="14" font="4">ScalableCore Units, the speed of the ScalableCore system</text>
-<text top="614" left="475" width="359" height="14" font="4">obtained for 100 cores is only an estimation. The benchmark</text>
-<text top="629" left="475" width="264" height="14" font="4">Program is the Equation Solver Kernel [14].</text>
-<text top="644" left="482" width="351" height="14" font="4">Figure.8(a) shows the simulation speeds of the software</text>
-<text top="659" left="475" width="359" height="14" font="4">simulator and the ScalableCore system. The X-axis shows</text>
-<text top="674" left="475" width="359" height="14" font="4">the number of emulated cores, and the Y-axis shows the sim-</text>
-<text top="689" left="475" width="359" height="14" font="4">ulation speed, which indicates how many target cycles are</text>
-<text top="704" left="475" width="127" height="14" font="4">emulated per second.</text>
-<text top="719" left="482" width="351" height="14" font="4">The speed of the software simulator decreases as the num-</text>
-<text top="734" left="475" width="361" height="14" font="4">ber of cores increases. The software simulator achieves 1,487</text>
-<text top="749" left="475" width="359" height="14" font="4">K cycles/s and 342 K cycles/s for the simulations using 4</text>
-<text top="764" left="475" width="359" height="14" font="4">cores and 16 cores, respectively. However, the software sim-</text>
-<text top="779" left="475" width="359" height="14" font="4">ulator achieved only 70 K cycles/s for the 64 core simulation,</text>
-<text top="794" left="475" width="234" height="14" font="4">which is one-twentieth that for 4 cores.</text>
-<text top="809" left="482" width="355" height="14" font="4">The speed of the ScalableCore system is approximately con-</text>
-<text top="824" left="475" width="359" height="14" font="4">stant at 1,000 K cycles/s for all of the test conﬁgurations.</text>
-<text top="840" left="475" width="359" height="14" font="4">This means that the overhead of local barrier synchroniza-</text>
-<text top="855" left="475" width="359" height="14" font="4">tion is constant. Therefore, the ScalableCore system is scal-</text>
-<text top="870" left="475" width="187" height="14" font="4">able with respect to core count.</text>
-<text top="885" left="482" width="351" height="14" font="4">Figure.8(b) shows the speedup rate for the ScalableCore</text>
-<text top="900" left="475" width="359" height="14" font="4">system as compared to the software simulator. The software</text>
-<text top="915" left="475" width="359" height="14" font="4">simulator speed decreases as the core count increases. In</text>
-<text top="930" left="475" width="359" height="14" font="4">contrast, the ScalableCore system speed is constant, so that</text>
-<text top="945" left="475" width="359" height="14" font="4">the relative speed of the ScalableCore system compared to</text>
-<text top="960" left="475" width="359" height="14" font="4">the software simulator increases as the number of cores in-</text>
-<text top="975" left="475" width="359" height="14" font="4">creases. In the 16-core simulation the ScalableCore system</text>
-<text top="990" left="475" width="359" height="14" font="4">is 2.92 times faster than the software simulator, and in the</text>
-<text top="1005" left="475" width="359" height="14" font="4">64-core simulation the ScalableCore system is 14.2 times</text>
-<text top="1020" left="475" width="359" height="14" font="4">faster than the software simulator. In 100-core simulation,</text>
-<text top="1035" left="475" width="359" height="14" font="4">which provides only an estimated value, the ScalableCore</text>
-<text top="1050" left="475" width="359" height="14" font="4">system is 23 times faster than the software simulator. Thus,</text>
-<text top="1065" left="475" width="282" height="14" font="4">the ScalableCore system has a scale advantage.</text>
-<text top="1121" left="108" width="272" height="18" font="5">ACM SIGARCH Computer Architecture News</text>
-<text top="1121" left="451" width="15" height="18" font="5">42</text>
-<text top="1121" left="621" width="189" height="18" font="5">Vol. 39, No. 4, September 2011</text>
-</page>
-<page number="6" position="absolute" top="0" left="0" height="1188" width="918">
-<text top="83" left="81" width="22" height="16" font="1">4.2</text>
-<text top="83" left="121" width="132" height="16" font="1">System Accuracy</text>
-<text top="103" left="88" width="351" height="14" font="4">We veriﬁed the accuracy of the developed system by com-</text>
-<text top="118" left="81" width="359" height="14" font="4">paring the simulation behavior of the software simulator and</text>
-<text top="133" left="81" width="229" height="14" font="4">the ScalableCore system, respectively.</text>
-<text top="161" left="85" width="33" height="15" font="12">4.2.1</text>
-<text top="161" left="134" width="182" height="15" font="12">RTL vs. Software Simulator</text>
-<text top="180" left="88" width="351" height="14" font="4">First, we validated the RTL design of the ScalableCore sys-</text>
-<text top="195" left="81" width="359" height="14" font="4">tem. We conﬁrmed that the architectural behavior of each</text>
-<text top="210" left="81" width="359" height="14" font="4">emulated processor on the ScalableCore system was equiv-</text>
-<text top="225" left="81" width="359" height="14" font="4">alent to that of the software simulator for every simulation</text>
-<text top="240" left="81" width="28" height="14" font="4">step.</text>
-<text top="255" left="88" width="351" height="14" font="4">In this test, the processor conﬁgurations are: (1) the num-</text>
-<text top="270" left="81" width="157" height="14" font="4">ber of cores is up to 16 (4</text>
-<text top="266" left="241" width="198" height="19" font="4">× 4), (2) each core is a MIPS 32</text>
-<text top="285" left="81" width="359" height="14" font="4">ISA, one-issue, single-cycle processor, (3) each local mem-</text>
-<text top="300" left="81" width="359" height="14" font="4">ory has 512 KB storage and four access ports (Instruction</text>
-<text top="315" left="81" width="359" height="14" font="4">fetch, Load/Store, Network Interface Read, and Write), (4)</text>
-<text top="330" left="81" width="359" height="14" font="4">each router of the NoC is a single-cycle router, warm-hole</text>
-<text top="345" left="81" width="359" height="14" font="4">router with four input buffers and no virtual channels. The</text>
-<text top="360" left="81" width="117" height="14" font="4">data width is 8 bits.</text>
-<text top="376" left="88" width="351" height="14" font="4">The RTL including serial I/Os for local barrier synchro-</text>
-<text top="391" left="81" width="359" height="14" font="4">nization is tested on the Icarus Verilog 0.9.3 Verilog HDL</text>
-<text top="406" left="81" width="359" height="14" font="4">simulator. For comparison, we used SimMc which is a soft-</text>
-<text top="421" left="81" width="92" height="14" font="4">ware simulator.</text>
-<text top="436" left="88" width="351" height="14" font="4">We compared the following ﬁve characteristics of archi-</text>
-<text top="451" left="81" width="359" height="14" font="4">tecture states dumped from the software simulator and the</text>
-<text top="466" left="81" width="359" height="14" font="4">ScalableCore system: (1) Core ID: each core have an identi-</text>
-<text top="481" left="81" width="359" height="14" font="4">ﬁer for data communication, (2) Cycle Number, (3) Program</text>
-<text top="496" left="81" width="359" height="14" font="4">Counter, (4) Executed Instruction, (5) Input/Output of Net-</text>
-<text top="511" left="81" width="359" height="14" font="4">work Interface: a core generates a data packet to another</text>
-<text top="526" left="81" width="170" height="14" font="4">core via a network interface.</text>
-<text top="541" left="88" width="351" height="14" font="4">We tested six benchmarks for veriﬁcation: (a) a single pro-</text>
-<text top="556" left="81" width="359" height="14" font="4">gram without data communication to/from the other, (b) one-</text>
-<text top="571" left="81" width="359" height="14" font="4">to-one data communication, (c) one-to-all data communica-</text>
-<text top="586" left="81" width="359" height="14" font="4">tion, (d) all-to-one data communication, (e) all-to-all data</text>
-<text top="601" left="81" width="289" height="14" font="4">communication, and (f) Equation Solver Kernel.</text>
-<text top="617" left="88" width="351" height="14" font="4">As a result, the architecture behavior for each simulation</text>
-<text top="632" left="81" width="359" height="14" font="4">step matches between the RTL of the ScalableCore system</text>
-<text top="647" left="81" width="162" height="14" font="4">and the software simulator.</text>
-<text top="674" left="85" width="33" height="15" font="12">4.2.2</text>
-<text top="674" left="134" width="293" height="15" font="12">Actual FPGA System vs. Software Simulator</text>
-<text top="693" left="88" width="351" height="14" font="4">We then compared the execution cycle count to execute a</text>
-<text top="708" left="81" width="359" height="14" font="4">program on the software simulator and an actual FPGA sys-</text>
-<text top="723" left="81" width="359" height="14" font="4">tem, respectively. If the execution cycle counts match, the</text>
-<text top="738" left="81" width="359" height="14" font="4">behavior of the ScalableCore system is the same as that of</text>
-<text top="753" left="81" width="136" height="14" font="4">the software simulator.</text>
-<text top="768" left="88" width="351" height="14" font="4">We used the following four benchmarks: (a) a program to</text>
-<text top="783" left="81" width="359" height="14" font="4">perform noting, (b) one-to-one data communication, (c) par-</text>
-<text top="798" left="81" width="359" height="14" font="4">allel matrix multiply, and (d) random trafﬁc communication.</text>
-<text top="813" left="88" width="351" height="14" font="4">In order for the same conditions to hold, the start of execu-</text>
-<text top="829" left="81" width="359" height="14" font="4">tion is synchronized for each core in actual FPGA system,</text>
-<text top="844" left="81" width="215" height="14" font="4">as described in the previous section.</text>
-<text top="859" left="88" width="351" height="14" font="4">As a result, the execution cycle count of the ScalableCore</text>
-<text top="874" left="81" width="289" height="14" font="4">system is equal to that of the software simulator.</text>
-<text top="889" left="88" width="351" height="14" font="4">These results indicate that, as designed, the ScalableCore</text>
-<text top="904" left="81" width="359" height="14" font="4">system emulates the target architecture in a cycle-accurate</text>
-<text top="919" left="81" width="48" height="14" font="4">manner.</text>
-<text top="955" left="81" width="13" height="16" font="1">5.</text>
-<text top="955" left="112" width="122" height="16" font="1">CONCLUSION</text>
-<text top="975" left="88" width="351" height="14" font="4">In this paper, we proposed ScalableCore, a concept for re-</text>
-<text top="990" left="81" width="359" height="14" font="4">alizing a scalable processor simulator for tile architectures.</text>
-<text top="1005" left="81" width="359" height="14" font="4">The ScalableCore system uses local barrier synchronization</text>
-<text top="1020" left="81" width="359" height="14" font="4">and virtual cycle to achieve scalability. ScalableCore sys-</text>
-<text top="1035" left="81" width="359" height="14" font="4">tem 1.1 achieves 14.2 times faster simulation than the corre-</text>
-<text top="1050" left="81" width="359" height="14" font="4">sponding software simulator in 64-core simulation. In addi-</text>
-<text top="1065" left="81" width="359" height="14" font="4">tion, comparing the architecture states and the execution cy-</text>
-<text top="85" left="475" width="359" height="14" font="4">cle count between the ScalableCore system and the software</text>
-<text top="100" left="475" width="338" height="14" font="4">simulator conﬁrmed the validity of the proposed system.</text>
-<text top="115" left="482" width="351" height="14" font="4">In order to achieve higher FPGA utilization and handle</text>
-<text top="130" left="475" width="359" height="14" font="4">a much greater number of cores, we must consider time-</text>
-<text top="145" left="475" width="359" height="14" font="4">multiplex techniques similar to those used in other studies.</text>
-<text top="160" left="475" width="362" height="14" font="4">In addition, in order to emulate more complex hardware func-</text>
-<text top="176" left="475" width="359" height="14" font="4">tions that are not suitable for single small FPGAs, such as a</text>
-<text top="191" left="475" width="359" height="14" font="4">wide-issue OoO processor core, we must consider partition-</text>
-<text top="206" left="475" width="248" height="14" font="4">ing of the hardware into multiple FPGAs.</text>
-<text top="221" left="482" width="351" height="14" font="4">The current simulation speed is not so fast. In order to ac-</text>
-<text top="236" left="475" width="359" height="14" font="4">celerate simulations, fast serial I/Os are required for FPGA-</text>
-<text top="251" left="475" width="359" height="14" font="4">FPGA communications. For more realistic evaluation, we</text>
-<text top="266" left="475" width="359" height="14" font="4">must develop an off-chip memory model emulator and per-</text>
-<text top="281" left="475" width="115" height="14" font="4">formance counters.</text>
-<text top="315" left="475" width="133" height="16" font="1">Acknowledgment</text>
-<text top="338" left="482" width="351" height="14" font="4">The present study was supported in part by Core Research</text>
-<text top="353" left="475" width="334" height="14" font="4">for Evolutional Science and Technology (CREST), JST.</text>
-<text top="387" left="475" width="13" height="16" font="1">6.</text>
-<text top="387" left="507" width="121" height="16" font="1">REFERENCES</text>
-<text top="400" left="481" width="343" height="11" font="3">[1] T. Austin et al. Simplescalar: an infrastructure for computer system</text>
-<text top="413" left="502" width="221" height="11" font="3">modeling. Computer, 35(2):59 –67, feb. 2002.</text>
-<text top="428" left="481" width="319" height="11" font="3">[2] Milo M. K. Martin et al. Multifacet’s general execution-driven</text>
-<text top="441" left="502" width="325" height="11" font="3">multiprocessor simulator (gems) toolset. SIGARCH Comput. Archit.</text>
-<text top="454" left="502" width="124" height="11" font="3">News, 33(4):92–99, 2005.</text>
-<text top="468" left="481" width="334" height="11" font="3">[3] Nathan L. Binkert et al. The M5 Simulator: Modeling Networked</text>
-<text top="481" left="502" width="187" height="11" font="3">Systems. IEEE Micro, 26:52–60, 2006.</text>
-<text top="495" left="481" width="347" height="11" font="3">[4] Shinya Takamaeda et al. ScalableCore:The Concept of Practical and</text>
-<text top="508" left="502" width="316" height="11" font="3">Low-Cost Prototyping System for Many-Core Processor Research</text>
-<text top="521" left="502" width="282" height="11" font="3">and Education. he 4th Workshop on Architectural Research</text>
-<text top="534" left="502" width="321" height="11" font="3">Prototyping (WARP 2009) held in conjunction with the ISCA-2009,</text>
-<text top="547" left="502" width="91" height="11" font="3">Austin, USA, 2009.</text>
-<text top="561" left="481" width="309" height="11" font="3">[5] Zhangxi Tan et al. A case for fame: Fpga architecture model</text>
-<text top="574" left="502" width="332" height="11" font="3">execution. In ISCA ’10: Proceedings of the 37th annual international</text>
-<text top="587" left="502" width="315" height="11" font="3">symposium on Computer architecture, pages 290–301, New York,</text>
-<text top="600" left="502" width="111" height="11" font="3">NY, USA, 2010. ACM.</text>
-<text top="614" left="481" width="344" height="11" font="3">[6] Zhangxi Tan et al. Ramp gold: an fpga-based architecture simulator</text>
-<text top="627" left="502" width="312" height="11" font="3">for multiprocessors. In DAC ’10: Proceedings of the 47th Design</text>
-<text top="640" left="502" width="330" height="11" font="3">Automation Conference, pages 463–468, New York, NY, USA, 2010.</text>
-<text top="653" left="502" width="30" height="11" font="3">ACM.</text>
-<text top="668" left="481" width="315" height="11" font="3">[7] John D. Davis et al. A chip prototyping substrate: the ﬂexible</text>
-<text top="680" left="502" width="310" height="11" font="3">architecture for simulation and testing (fast). SIGARCH Comput.</text>
-<text top="693" left="502" width="159" height="11" font="3">Archit. News, 33(4):34–43, 2005.</text>
-<text top="708" left="481" width="345" height="11" font="3">[8] Sewook Wee et al. A practical fpga-based framework for novel cmp</text>
-<text top="721" left="502" width="321" height="11" font="3">research. In FPGA ’07: Proceedings of the 2007 ACM/SIGDA 15th</text>
-<text top="734" left="502" width="325" height="11" font="3">international symposium on Field programmable gate arrays, pages</text>
-<text top="746" left="502" width="214" height="11" font="3">116–125, New York, NY, USA, 2007. ACM.</text>
-<text top="761" left="481" width="342" height="11" font="3">[9] Koray Öner et al. The design of rpm: an fpga-based multiprocessor</text>
-<text top="774" left="502" width="288" height="11" font="3">emulator. In FPGA ’95: Proceedings of the 1995 ACM third</text>
-<text top="787" left="502" width="326" height="11" font="3">international symposium on Field-programmable gate arrays, pages</text>
-<text top="800" left="502" width="202" height="11" font="3">60–66, New York, NY, USA, 1995. ACM.</text>
-<text top="814" left="475" width="316" height="11" font="3">[10] Eric S. Chung et al. Protoﬂex: Towards scalable, full-system</text>
-<text top="827" left="502" width="327" height="11" font="3">multiprocessor simulations using fpgas. ACM Trans. Reconﬁgurable</text>
-<text top="840" left="502" width="151" height="11" font="3">Technol. Syst., 2(2):1–32, 2009.</text>
-<text top="854" left="475" width="306" height="11" font="3">[11] Michael Pellauer et al. A-ports: an efﬁcient abstraction for</text>
-<text top="867" left="502" width="322" height="11" font="3">cycle-accurate performance models on fpgas. In Proceedings of the</text>
-<text top="880" left="502" width="324" height="11" font="3">16th international ACM/SIGDA symposium on Field programmable</text>
-<text top="893" left="502" width="315" height="11" font="3">gate arrays, FPGA ’08, pages 87–96, New York, NY, USA, 2008.</text>
-<text top="906" left="502" width="30" height="11" font="3">ACM.</text>
-<text top="920" left="475" width="292" height="11" font="3">[12] T. Oguntebi et al. Farm: A prototyping environment for</text>
-<text top="933" left="502" width="331" height="11" font="3">tightly-coupled, heterogeneous architectures. In Field-Programmable</text>
-<text top="946" left="502" width="307" height="11" font="3">Custom Computing Machines (FCCM), 2010 18th IEEE Annual</text>
-<text top="959" left="502" width="274" height="11" font="3">International Symposium on, pages 221 –228, May 2010.</text>
-<text top="973" left="475" width="332" height="11" font="3">[13] Koh Uehara et al. A Study of an Infrastructure for Research and</text>
-<text top="986" left="502" width="299" height="11" font="3">Development of Many-Core Processors. In Workshop on Ultra</text>
-<text top="999" left="502" width="284" height="11" font="3">Performance and Dependable Acceleration Systems held in</text>
-<text top="1012" left="502" width="247" height="11" font="3">conjunction with PDCAT’09, pages 414–419, 2009.</text>
-<text top="1027" left="475" width="333" height="11" font="3">[14] Jaswinder Pal Sing, David E. Culler, and Anoop Gupta. Parallel</text>
-<text top="1040" left="502" width="309" height="11" font="3">Computer Architecture A Hardware/Software Approach. Morgan</text>
-<text top="1052" left="502" width="83" height="11" font="3">Kaufmann, 1998.</text>
-<text top="1121" left="108" width="272" height="18" font="5">ACM SIGARCH Computer Architecture News</text>
-<text top="1121" left="451" width="15" height="18" font="5">43</text>
-<text top="1121" left="621" width="189" height="18" font="5">Vol. 39, No. 4, September 2011</text>
-</page>
-</pdf2xml>
