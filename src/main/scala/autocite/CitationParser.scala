@@ -57,10 +57,10 @@ object CitationParser {
     val initial = "[\\p{Lu}][.]".r ^^ Token
     val nameUpper = "[\\p{Lu}][\\p{Lu}]+".r ^^ Token
     val nameRegular = "[\\p{Lu}][\\p{Ll}][^,.\\s]+".r ^^ Token
-    val word = "[^.\\s]+".r ^^ Token
     val comma = literal(",") ^^ Token
     val punct = "[\\p{P}]+".r ^^ Token
     val other = ".".r ^^ Token
+    val word = "[^.?()\\s]+".r ^^ Token
 
     def token(): Parser[Token] =
       (conferenceToken | etal | initial | keyToken | nameUpper | other | phd | punct | word)
