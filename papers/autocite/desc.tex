@@ -1,0 +1,57 @@
+\section{Problem Description}
+The goal of \name is to take as input an example document (as text), and emit
+a set of candidate references in the desired format (either \bibtex entries or 
+URLs).
+
+In order to build a candidate corpus and verify the effectiveness of the system,
+we needed to create effective title and citation extraction techniques.  As 
+these differ from those previously used in literature (\cite{citeseer}), we
+describe our methods in detail below.
+
+\subsection{Title Extraction}
+We describe our simple but effective title extraction metric.  In
+short our metric is motivated by using the following observations:
+
+A title is:
+\begin{itemize}
+\item centered and near the top of the first page
+\item in a more prominent font then other texta
+\end{itemize}
+
+We codified these rules into a scoring heuristic for text elements.  Each text
+element on the first page is assigned a score based on the following formula:
+
+\[
+  TitleScore(T) = {FontSize(T) \over log(HorizontalDist(T)) * log(TopDist(T)) }
+\]
+
+In this formula, HorizontalDist and TopDistance are approximating the distance
+of the text element from the optimal title location -- HorizontalDist
+measures the X-distance from the center, and TopDistance 
+the Y-distance from the point roughly 10\% from the top of the document.
+
+To find the title, the top scoring element is found based on this formula.  This
+element is then joined with any elements nearby in the document which share the
+same font.
+
+Suprisingly, given the wide variety of title formats, this technique yields 
+very good results - empirically we observed less then 0.1\% error rates in 
+title extraction, including on documents that other reference engines have
+trouble with.
+\end{quote}
+
+\subsection{Citation Extraction}
+Despite relatively well specified citation formats for common conferences
+\cite{acm}, citation parsing is a messy business.  Previous academic literature
+has focused on using machine learning techniques \cite{citeseer} to handle extracting citation
+details (title, authors and conference) from documents.  Rather then duplicate
+these efforts, we investigated whether citation extraction could be handled using
+traditional parsing techniques (e.g. BNF grammars).
+
+Our experience in this regard has been mixed.  While the resultant parser 
+descriptions were compact and relatively easy to understand, they were 
+also error-prone and difficult to debug.  A simple error would result in
+many missed or erronous parses, and the ambiguous nature of the problem
+complicates debugging.
+
+Describe grammars / process here... etc...

@@ -1,0 +1,14 @@
+\section{Evaluation}
+\subsection{Test Corpus}
+We compiled our sample corpus documents using the contents of 
+the 2008 and 2010 OSDI conferences as \em{seed} documents.  We then extracted 
+all references from these documents and attempted to download the target 
+papers.  In this manner we acquired a set of \corpussize documents for 
+evaluation.
+
+\subsection{Evaluation Metric}
+
+We evaluated the performance of our retrieval algorithms for a document using 
+the most natural criteria - the document's actual references.  To minimize
+trivial exact matches (e.g. based on title and authors) we stripped the 
+reference section of each document prior to checking for matches.
