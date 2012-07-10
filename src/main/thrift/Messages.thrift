@@ -50,7 +50,7 @@ struct LearnerCache {
    2: map<i64, BagOfWords> bow,
    3: map<i64, BagOfWords> normalized,
    4: BagOfWords idf,
-   5: map<i64, list<i64>> matches
+   5: map<i64, set<i64>> matches
 }
 
 // Used during indexing to invert citations.

@@ -59,22 +59,13 @@ object CitationParser {
     val nameRegular = "[\\p{Lu}][\\p{Ll}][^,.\\s]+".r ^^ Token
     val word = "[^.\\s]+".r ^^ Token
     val comma = literal(",") ^^ Token
-    val punct = "[\\p{P}]+" ^^ Token
+    val punct = "[\\p{P}]+".r ^^ Token
     val other = ".".r ^^ Token
 
     def token(): Parser[Token] =
-      (keyToken |
-        conferenceToken |
-        phd |
-        etal |
-        initial |
-        nameUpper |
-        word |
-        punct |
-        other)
+      (conferenceToken | etal | initial | keyToken | nameUpper | other | phd | punct | word)
 
-    def t(msg: String, f: Token => Boolean): Parser[Token] =
-      token ^? { case tok if f(tok) => tok }
+    def t(msg: String, f: Token => Boolean): Parser[Token] = token ^? { case tok if f(tok) => tok }
 
     val author: Parser[Author] =
       nameUpper ~ comma ~ rep1(initial) ^^ { case n ~ c ~ r => { Author(n :: r.map(_.chars)) } } |
@@ -85,7 +76,8 @@ object CitationParser {
       rep1sep(author, comma) ~ "(?i), and".r ~ author ~ opt(".") ^^ { case l ~ a ~ r ~ _ => r :: l } |
       author ~ "." ^^ { case a ~ _ => List(a) }
 
-    val title = rep1(word) ^^ { _.mkString(" ") }
+    val date = "[0-9]+".r ~ punct
+    val title = opt(date) ~> rep1(word) ^^ { _.mkString(" ") }
     val cite = authors ~ title ^^ { case a ~ t => Citation(t, a, "") }
 
     def parseAll(str: String): Seq[Citation] = {

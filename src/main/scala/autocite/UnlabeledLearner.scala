@@ -66,45 +66,40 @@ object UnlabeledLearner {
             incoming = null,
             outgoing = a.citations,
             text = a.text,
-            url = f.getName, year = 0))
+            url = f.getName))
       })
   }
 
   def buildCache(sourceDir: String, local: File, hadoop: String): LearnerCache = {
-    println("Analyzing...")
-    val target = HadoopUtil.sequenceFileWriter[Text, BytesWritable](hadoop)
-    println("Cites...")
-    val docs = computeCitations(sourceDir).toMap
-    println("Words...")
-    val bow = docs.mapValues(docToBagOfWords)
-    println("IDF...")
-    val idf = computeIdf(bow)
-    println("Normalizing...")
-    val normalized = bow.mapValues(b => normalize(b, idf, docs.size))
-    println("Matching...")
-    val matches = docs.mapValues(d => {
-      d.outgoing.map(_.id).filter(docs.contains)
-    })
-    println("Writing...")
+    if (local.exists) {
+      val reader = HadoopUtil.sequenceFileReader[Text, BytesWritable](hadoop)
+      val tIn = new Text
+      val bIn = new BytesWritable
+      reader.next(tIn, bIn)
 
-    val cache = LearnerCache(docs, bow, normalized, idf, matches)
-    target.append(new Text(""), new BytesWritable(cache.compressed))
-    target.close
-
-    cache
-  }
-
-  def loadData(hadoopFile: String) = {
-    println("Loading...")
-    HadoopUtil
-      .sequenceFileToStream[Text, BytesWritable](hadoopFile)
-      .map({
-        case (k, v) => {
-          val doc = Thrift.parseBinary(Document, Compress.decompress(v))
-          (Analysis.titleToId(doc.title), doc)
-        }
+      Thrift.parseBinary(LearnerCache, Compress.decompress(bIn))
+    } else {
+      println("Analyzing...")
+      val target = HadoopUtil.sequenceFileWriter[Text, BytesWritable](hadoop)
+      println("Cites...")
+      val docs = computeCitations(sourceDir).toMap
+      println("Words...")
+      val bow = docs.mapValues(docToBagOfWords)
+      println("IDF...")
+      val idf = computeIdf(bow)
+      println("Normalizing...")
+      val normalized = bow.mapValues(b => normalize(b, idf, docs.size))
+      println("Matching...")
+      val matches = docs.mapValues(d => {
+        d.outgoing.map(_.id).filter(docs.contains).toSet
       })
-      .toMap
+      println("Writing...")
+
+      val cache = LearnerCache(docs, bow, normalized, idf, matches)
+      target.append(new Text(""), new BytesWritable(cache.compressed))
+      target.close
+      cache
+    }
   }
 
   def cosineSimilarity(a: Map[String, Double], b: Map[String, Double]): Double = {
@@ -130,14 +125,6 @@ object UnlabeledLearner {
       .map(b => (b._1, cosineSimilarity(a, b._2)))
       .sortBy(_._2)
   }
-
-  def printMatches(doc: Document, docs: Map[Long, Document], matches: Seq[(Long, Double)]) {
-    println(doc.title)
-    for ((docid, score) <- matches.reverse) {
-      val doc = docs(docid)
-      println("%4.5f %s".format(score, doc.title))
-    }
-  }
 }
 
 class UnlabeledLearner(sourceDir: String, cacheDir: String) {
@@ -154,15 +141,14 @@ class UnlabeledLearner(sourceDir: String, cacheDir: String) {
   val numDocs = docs.size
   val matches = learnerCache.matches
 
-  def evaluate(doc: Document) {
-    println("Processing...." + doc.title)
+  def evaluate(docid: Long) {
+    val doc = docs(docid)
+    val realMatches = matches(docid).toSet
+    val tfidfMatches = mostSimilar(bow(docid), normalized).takeRight(100).map(_._1).toSet
 
-    val realMatches = doc.outgoing.map(_.id).toSet
-    val tfidfMatches = mostSimilar(bow(doc.id.get), normalized).takeRight(realMatches.size * 2).map(_._1).toSet
-
-    val mutual = realMatches.intersect(tfidfMatches)
-    println("Doc: %s -- %s %s %s",
-      doc.title, tfidfMatches.size, realMatches.size, mutual.size)
+    val mutual = realMatches & tfidfMatches
+    println("%-60.60s %3d/%3d (%3d) %.2f%%".format(
+      doc.title, mutual.size, realMatches.size, doc.outgoing.toSet.size, 100.0 * mutual.size / realMatches.size))
   }
 }
 
@@ -171,15 +157,14 @@ object UnlabeledAnalysis extends App {
 
   val best = learner
     .matches
-    .mapValues(_.length)
+    .mapValues(_.size)
     .toArray
     .sortBy(_._2)
-    .takeRight(20)
+    .takeRight(50)
     .map(_._1)
 
   for (docid <- best) {
-    val doc = learner.docs(docid)
-    learner.evaluate(doc)
+    learner.evaluate(docid)
   }
 
 }

@@ -72,6 +72,12 @@ Transactions on Database Systems
         Communications of the ACM, 21(7):558­ 565, July 1978.
         """)
   }
+  
+  test("hp") {
+    testcite("""
+        RUEMMLER, C., AND WILKES, J. 1994. An introduction to disk drive modeling. In IEEE Computer
+27, 3 (March), 17?28.""")
+  }
 
   test("osdi") {
     val files = new File("./osdi")

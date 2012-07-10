@@ -1,7 +1,8 @@
 #!/bin/bash
 
+# -agentlib:hprof=cpu=samples,interval=20,depth=64\
+
 java\
- -agentlib:hprof=cpu=samples,interval=20,depth=64\
  -Xverify:none\
  -Xms512M\
  -Xmx1500M\
