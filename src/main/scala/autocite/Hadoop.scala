@@ -1,21 +1,25 @@
 package autocite
 
-import java.io.{ ObjectOutputStream, ObjectInputStream }
+import java.io._
+import java.security._
 import java.net.URLClassLoader
 import scala.Array.canBuildFrom
 import scala.collection.JavaConversions._
 import scala.collection.Iterator
 import scala.math.{ pow, log1p, log }
+import org.apache.commons.codec.binary._
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
-import org.apache.hadoop.io.compress.GzipCodec
+import org.apache.hadoop.filecache._
 import org.apache.hadoop.io._
+import org.apache.hadoop.io.compress._
 import org.apache.hadoop.mapred.lib.MultipleInputs
 import org.apache.hadoop.mapred._
 import com.twitter.logging._
 import com.twitter.scrooge.{ ThriftStructCodec, ThriftStruct }
 import java.io.ByteArrayInputStream
 import org.apache.commons.io.output.ByteArrayOutputStream
+import autocite.util.Implicits._
 
 object HadoopUtil {
   def sequenceFileReader[K, V](fileName: String) = {
@@ -146,18 +150,40 @@ class GenericMapper[K, V, KO <: Writable, VO <: Writable] extends ScalaMapper[K,
 
 
 class ContextHelper {
+  val log = Logger.get(getClass)
+
   val job = new JobConf
-  val loader = classOf[ContextHelper].getClassLoader().asInstanceOf[URLClassLoader]
+  val loader = classOf[ContextHelper].getClassLoader.asInstanceOf[URLClassLoader]
+
+  def shaDigest(s : String) = 
+    Hex.encodeHexString(MessageDigest.getInstance("SHA").digest(s.getBytes))
+
+  val jarCache = new Path("/cache/jars")
+  val fs = jarCache.getFileSystem(job)
+  fs.mkdirs(jarCache)
 
   val userLibs = loader.getURLs()
     .filter(a => !a.getPath.startsWith("file:/usr/lib"))
-    .map(a => a.toString())
-    .mkString(",")
-  job set ("tmpjars", userLibs)
-
+    .map(a => new File(a.toURI))
+    .filter(_.isFile)
+    .map(f => {
+        val digest = shaDigest(f.readAll)
+        val p = new Path(jarCache, f.getName + "." + digest)
+        if (fs.exists(p)) {
+          log.info("Found existing cache entry for %s", f.getName)
+        } else {
+          log.info("Caching file %s", f.getName)
+          fs.copyFromLocalFile(new Path(f.toURI), p)
+        }
+        p
+      })
+    .map(DistributedCache.addFileToClassPath(_, job, fs))
+  
+  log.info("Caching jar files... %s", userLibs)
+  
   job setNumReduceTasks 100
-  job setMaxMapAttempts 10
-  job setMaxReduceAttempts 10
+  job setMaxMapAttempts 3
+  job setMaxReduceAttempts 3
 
   FileOutputFormat.setCompressOutput(job, true)
   FileOutputFormat.setOutputCompressorClass(job, classOf[GzipCodec])
@@ -203,7 +229,6 @@ class ContextHelper {
     job.set("mapred.output.compression.type", "BLOCK")
 
     val output = new Path(out)
-    val fs = output.getFileSystem(job)
     fs.delete(output, true)
 
     FileOutputFormat setOutputPath (job, output)

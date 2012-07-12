@@ -47,6 +47,7 @@ import org.apache.hadoop.mapred.FileSplit;
 import org.apache.hadoop.mapred.RecordReader;
 import org.archive.io.ArchiveRecord;
 import org.archive.io.warc.WARCReaderFactory;
+import org.archive.io.arc.ARCReaderFactory;
 
 public class WarcFileRecordReader implements
 		RecordReader<LongWritable, WritableArchiveRecord> {
@@ -64,18 +65,22 @@ public class WarcFileRecordReader implements
 		FileSystem fs = path.getFileSystem(conf);
 		totalFileSize = fs.getFileStatus(path).getLen();
 		stream = fs.open(path);
-		iterator = WARCReaderFactory.get(path.getName(), stream, true)
+		iterator = ARCReaderFactory.get(path.getName(), stream, true)
 				.iterator();
 	}
 
-	public boolean next(LongWritable key, WritableArchiveRecord value)
-			throws IOException {
-		if (!iterator.hasNext()) {
-			return false;
-		}
+	public boolean next(LongWritable key, WritableArchiveRecord value) {
+        try {
+          if (!iterator.hasNext()) {
+              return false;
+          }
 
-		key.set(0);
-		value.data = iterator.next();
+          key.set(0);
+          value.data = iterator.next();
+        } catch(Exception e) {
+          return false;
+        }
+
 		return true;
 	}
 

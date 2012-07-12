@@ -2,10 +2,10 @@ import sbt._
 import Keys._
 
 object GenerateScripts extends Plugin {
-  lazy val GenScripts = config("genscripts")
+  lazy val GenScripts = config("script-gen")
 
-  lazy val scriptUsesJar = SettingKey[Boolean]("use-jar-in-classpath")
-  lazy val genScripts = TaskKey[Unit]("generate-scripts", "Generate start scripts.")
+  lazy val scriptUsesJar = SettingKey[Boolean]("script-gen-jar")
+  lazy val genScripts = TaskKey[Unit]("script-gen", "Generate start scripts.")
 
   lazy val scriptTemplate =
     """#!/bin/bash
@@ -25,7 +25,7 @@ java $JVMARGS -cp $CLASSPATH $MAINCLASS $*
     fullClasspath in Runtime,
     packageBin in Compile,
     discoveredMainClasses in Compile) map {
-      (stream, target, useJarFile, cp, jarFile, scripts) =>
+      (stream, target, scriptUsesJar, cp, jarFile, scripts) =>
         {
           val separator = java.io.File.pathSeparator
           val log = stream.log
@@ -33,7 +33,7 @@ java $JVMARGS -cp $CLASSPATH $MAINCLASS $*
             val scriptName = f.split('.').last
             val targetFile = (target / scriptName).asFile
             
-            val jarClassPath = if (useJarFile) { jarFile.getAbsolutePath() + separator } else { "" }
+            val jarClassPath = if (scriptUsesJar) { jarFile.getAbsolutePath() + separator } else { "" }
             val classPath = jarClassPath + cp.map(_.data).mkString(separator)
             log.info("Generating script for %s".format(f))
             IO.write(targetFile, scriptTemplate.format(classPath, f))
@@ -43,6 +43,6 @@ java $JVMARGS -cp $CLASSPATH $MAINCLASS $*
     }
 
   val newSettings: Seq[Setting[_]] = Seq(
-    scriptUsesJar := false,
+    scriptUsesJar := true,
     genScripts <<= genScriptsTask)
 }

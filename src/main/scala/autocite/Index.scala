@@ -1,5 +1,6 @@
 package autocite
 
+import com.twitter.logging._
 import org.apache.hadoop.io.{ LongWritable, BytesWritable }
 import org.apache.lucene.document.Field.{ Store, Index }
 import org.apache.lucene.document.{ Field, Document => LuceneDoc }
@@ -212,14 +213,14 @@ class IdentityReducer[KIn, VIn] extends ScalaReducer[KIn, VIn, KIn, VIn] {
 object Indexer {
   def pdfToDocument() = {
     new ContextHelper()
-      .mapper(classOf[PDFToDocumentMapper], "/autocite-epoch-*/warcs/*.gz")
-      .reducer(classOf[IdentityReducer[LongWritable, BytesWritable]], "/autocite/xml")
+      .mapper(classOf[PDFToDocumentMapper], "/autocite/warcs/*.gz")
+      .reducer(classOf[IdentityReducer[LongWritable, BytesWritable]], "/autocite/epoch-1/xml")
       .run()
   }
 
   def extractDocumentInfo() = {
     new ContextHelper()
-      .mapper(classOf[ExtractInfoMapper], "/autocite/xml/part*")
+      .mapper(classOf[ExtractInfoMapper], "/autocite/epoch-*/xml/part*")
       .reducer(classOf[IdentityReducer[LongWritable, BytesWritable]], "/autocite/document")
       .run()
   }
@@ -246,8 +247,12 @@ object Indexer {
   }
 
   def main(args: Array[String]): Unit = {
-    //pdfToDocument()
-        extractDocumentInfo()
+    LoggerFactory(
+      node = "",
+      level = Some(Level.INFO),
+      handlers = List(ConsoleHandler()))()
+      pdfToDocument()
+    // extractDocumentInfo()
     // invertCitations()
     // buildIndex()
 
