@@ -157,10 +157,10 @@ object Analysis {
     ByteBuffer.wrap(md5.digest(simplify(title).getBytes)).getLong()
   }
 
-  val theParser = new CitationParser.Parser()
+  val theParser = new CitationParser.MergedParser()
 
   def extractCitations(a: Analysis): Seq[Citation] = {
     val txt = a.pages.takeRight(2).map(extractText)
-    txt.flatMap(theParser.parseAll)
+    txt.flatMap(theParser.parse)
   }
 }

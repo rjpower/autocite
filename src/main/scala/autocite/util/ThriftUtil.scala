@@ -18,7 +18,7 @@ import com.twitter.scrooge._
 object Thrift {
   def parseBinary[T <: ThriftStruct](codec: ThriftStructCodec[T], in: Array[Byte]) = {
     val prot = new TBinaryProtocol.Factory().getProtocol(new TMemoryInputTransport(in.toArray))
-    codec.decode(prot)
+    codec.decoder(prot)
   }
 }
 

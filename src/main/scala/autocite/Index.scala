@@ -213,7 +213,7 @@ class IdentityReducer[KIn, VIn] extends ScalaReducer[KIn, VIn, KIn, VIn] {
 object Indexer {
   def pdfToDocument() = {
     new ContextHelper()
-      .mapper(classOf[PDFToDocumentMapper], "/autocite/warcs/*.gz")
+      .mapper(classOf[PDFToDocumentMapper], "/autocite/epoch-1/warcs/*.gz")
       .reducer(classOf[IdentityReducer[LongWritable, BytesWritable]], "/autocite/epoch-1/xml")
       .run()
   }
@@ -251,10 +251,11 @@ object Indexer {
       node = "",
       level = Some(Level.INFO),
       handlers = List(ConsoleHandler()))()
-      pdfToDocument()
-    // extractDocumentInfo()
-    // invertCitations()
-    // buildIndex()
+    
+    //  pdfToDocument()
+    extractDocumentInfo()
+    invertCitations()
+    buildIndex()
 
     //selectTestSet()
   }

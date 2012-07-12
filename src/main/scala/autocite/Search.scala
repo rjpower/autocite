@@ -34,10 +34,6 @@ class SearchWorker extends Search.ThriftServer {
 
   val loadIndexPool = FuturePool(Executors.newFixedThreadPool(4))
   
-  def shutdown() {
-    
-  }
-
   def loadIndex(srcDir: String) = {
     loadIndexPool.apply({
       val srcPath = new Path(srcDir)
@@ -136,10 +132,6 @@ class SearchMaster extends Search.ThriftServer {
     .map(host => Finagle.connect(
       s => new Search.FinagledClient(s), "beaker-%d".format(host), thriftPort))
       
-  def shutdown() {
-    
-  }
-
   def search(text: String, scorerText: String) = {
     log.info("Searching for %s", text)
     val collected = Future.collect(

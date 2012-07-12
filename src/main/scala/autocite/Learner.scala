@@ -106,10 +106,6 @@ class LearnWorker extends Learning.ThriftServer {
 
   val _rand = new java.util.Random
   
-  def shutdown() {
-    
-  }
-
   def lookup(title: String) = {
     Future(LookupResult(documents.get(title)))
   }

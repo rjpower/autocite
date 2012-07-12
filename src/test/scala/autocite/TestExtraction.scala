@@ -29,8 +29,8 @@ class ExtractionSpec extends FunSuite with ShouldMatchers {
   }
 
   def testcite(str: String, shouldAssert: Boolean = true) {
-    val parser = new CitationParser.Parser()
-    val cites = parser.parseAll(str)
+    val parser = new CitationParser.MergedParser()
+    val cites = parser.parse(str)
     if (shouldAssert && cites.isEmpty) {
       log.info("Bad cite: %s", str);
       assert(!cites.isEmpty, cites)
@@ -94,16 +94,16 @@ Transactions on Database Systems
     }
   }
 
-  //  test("MIT Quarterly") {
-  //    val a = new Analysis(Source.fromFile("./test-doc.00076.xml").mkString(""))
-  //    printCites(a.citations)
-  //  }
-  //
-  //  test("ieee") {
-  //    testcite("""C. Gomes, B. Selman, N. Crato, H. Kautz, Heavy-tailed Phenomena in Satisﬁability and Constraint Satisfaction Problems, Journal of Automated Reasoning 24 (1-2) (2000) 67–100.""")
-  //    testcite("""M. F. Cowlishaw, “Decimal ﬂoating-point: algorism for computers,” in Proc. of 16th Symposium on Computer Arithmetic, June 2003, pp. 104–111.""")
-  //
-  //  }
+  test("ieee") {
+    testcite("""[1] K. Pahlavan and A. H. Levesque, “Wireless data communications,”
+    Proc. IEEE , vol. 82, pp. 1398–1430, Sept. 1994.""")
+    testcite("""[2] A. De Simone and S. Nanda, “Wireless data: Systems, standards, ser- vices,”
+    J. Wireless Networks , vol. 1, no. 3, pp. 241–254, Feb. 1996.""")
+    testcite("""[4] L. Kleinrock and F. Tobagi, “Packet switching in radio channels, Part
+    II—The hidden terminal problem in carrier sense multiple access and the busy tone solution,”
+    IEEE Trans. Commun.  , vol. COM-23, no. 12, pp. 1417–1433, Dec. 1975.""")
+  }
+
   //
   //  test("atlas") {
   //    testcite("R. Achenbach et al., The ATLAS Level-1 calorimeter trigger, 2008 JINST 3 P03001.")
@@ -126,30 +126,4 @@ Transactions on Database Systems
   //  test("assorted9") { testcite("L. Martignoni, R. Paleari, G. F. Roglia, and D. Bruschi. Testing CPU emulators. In International Symposium on Software Testing and Analysis (ISSTA), 2009. ") }
   //  test("assorted10") { testcite("D.S. Kolovos, D. Di Ruscio, A. Pierantonio, and R.F. Paige. Diﬀerent models for model matching: An analysis of approaches to support model diﬀerencing. In ICSE Workshop on Comparison and Versioning of Software Models, pages 1–6. IEEE, 2009. 9 ") }
   //
-  //  test("a") {
-  //    var a = new Analysis("""
-  //          <doc>
-  //          <page number="1">
-  //          <text top="1012" left="81" width="88" height="15" font="1">References</text>
-  //  <text top="1034" left="87" width="352" height="11" font="2">[1] A. W. Appel, J. R. Ellis, and K. Li. Real-time Concurrent</text>
-  //  <text top="1048" left="106" width="334" height="11" font="2">Collection on Stock Multiprocessors. In the Proc. of the Con-</text>
-  //  <text top="1061" left="106" width="334" height="11" font="2">ference on Programming Language Design and Implementa-</text>
-  //  <text top="1075" left="106" width="105" height="11" font="2">tion (PLDI), 1988.</text>
-  //          </page>
-  //          </doc>
-  //  """)
-  //
-  //    testcite(a.text)
-  //  }
-  //  test("watchpoints") {
-  //    val a = new Analysis(Common.stringForResource("/paper-00062.xml"))
-  //    printCites(a.citations)
-  //  }
-  //
-  //  test("all") {
-  //    Common.xmlData
-  //      .map(new Analysis(_))
-  //      .map(_.citations)
-  //      .foreach(printCites _)
-  //  }
 }
