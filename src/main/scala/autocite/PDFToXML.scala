@@ -5,8 +5,7 @@ import autocite.util.Implicits._
 
 import scala.collection.JavaConversions.asScalaIterator
 import scala.sys.process._
-
-import edu.cmu.lemurproject.WritableArchiveRecord
+import edu.cmu.lemurproject._
 
 object PDFToXML {
   def apply(v: WritableArchiveRecord): Array[Byte] = {

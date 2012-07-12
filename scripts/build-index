@@ -1,5 +1,0 @@
-#!/bin/bash
-
-sbt package generate-scripts || exit 1
-./target/Indexer
-

@@ -105,6 +105,10 @@ class LearnWorker extends Learning.ThriftServer {
   var learnerResults: SequenceFile.Writer = null
 
   val _rand = new java.util.Random
+  
+  def shutdown() {
+    
+  }
 
   def lookup(title: String) = {
     Future(LookupResult(documents.get(title)))
@@ -190,7 +194,6 @@ object LearnMaster extends AutociteApp {
   }
 
   def prepare {
-    val names = workers.map(_.service)
     workers.map(_.prepare(workerNames)).map(_.apply)
   }
 

@@ -68,8 +68,8 @@ object CitationParser {
     def t(msg: String, f: Token => Boolean): Parser[Token] = token ^? { case tok if f(tok) => tok }
 
     val author: Parser[Author] =
-      nameUpper ~ comma ~ rep1(initial) ^^ { case n ~ c ~ r => { Author(n :: r.map(_.chars)) } } |
-      rep1(initial) ~ nameRegular ^^ { case r ~ n  => { Author(n :: r.map(_.chars)) } }
+      nameUpper ~ comma ~ rep1(initial) ^^ { case n ~ c ~ r => { Author(n.chars :: r.map(_.chars)) } } |
+      rep1(initial) ~ nameRegular ^^ { case r ~ n  => { Author(n.chars :: r.map(_.chars)) } }
 
     val authors: Parser[Seq[Author]] = 
       author ~ "and" ~ author ~ "." ^^ { case a ~ _ ~ b ~ _ => List(a, b) } |

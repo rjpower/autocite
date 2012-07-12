@@ -150,7 +150,7 @@ class InvertCitationsReducer extends ScalaReducer[LongWritable, BytesWritable, L
     // Pick the largest document if there was more then one with the same title.
     def lenSort(d: Document): Long = d.xml.length
     val best = documents.sortBy(lenSort).last
-    val combined = new Document(
+    val combined = Document(
       url = best.url,
       title = best.title,
       xml = best.xml,

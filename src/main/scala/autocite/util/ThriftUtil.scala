@@ -16,17 +16,14 @@ import com.twitter.ostrich.admin._
 import com.twitter.scrooge._
 
 object Thrift {
-  def parseBinary[T <: ThriftStruct](
-    codec: ThriftStructCodec[T],
-    in: Array[Byte]) = {
-    val prot = new TBinaryProtocol.Factory().getProtocol(
-      new TMemoryInputTransport(in.toArray))
-    codec.decoder(prot)
+  def parseBinary[T <: ThriftStruct](codec: ThriftStructCodec[T], in: Array[Byte]) = {
+    val prot = new TBinaryProtocol.Factory().getProtocol(new TMemoryInputTransport(in.toArray))
+    codec.decode(prot)
   }
 }
 
 object Finagle {
-  def connect[T <: FinagleThriftClient](
+  def connect[T](
     constructor: com.twitter.finagle.Service[ThriftClientRequest, Array[Byte]] => T,
     host: String, port: Int) = {
     val service = ClientBuilder()
@@ -39,7 +36,6 @@ object Finagle {
     constructor(service)
   }
 }
-
 
 class FinagleApp[T <: Service](val rpcServer: T) extends autocite.AutociteApp {
   val runtime = RuntimeEnvironment(this, args)
