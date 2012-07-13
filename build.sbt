@@ -12,9 +12,9 @@ version       := "1.0"
 
 organization  := "rjpower.org"
 
-scalaVersion  := "2.9.1"
+scalaVersion  := "2.9.2"
   
-scalacOptions ++= Seq("-explaintypes", "-Xexperimental", "-deprecation")
+scalacOptions ++= Seq("-optimize")
 
 scalacOptions in console ++= Seq("-Xprint:typer")
 
@@ -37,17 +37,16 @@ libraryDependencies ++= Seq(
   "org.apache.lucene" % "lucene-core" % "3.5.0",
   "org.apache.lucene" % "lucene-analyzers" % "3.5.0",
   "org.scalatest" %% "scalatest" % "1.7.2" % "test",
-  "com.codahale" %% "logula" % "2.1.3",
-  "org.scalatra" %% "scalatra" % "2.0.4",
-  "org.scalatra" %% "scalatra-scalate" % "2.0.4",
-  "com.twitter" %% "scrooge-runtime" % "1.1.3",
-  "com.twitter" %% "finagle-core" % "4.0.2",
-  "com.twitter" %% "finagle-thrift" % "4.0.2", 
-  "com.twitter" %% "finagle-ostrich4" % "4.0.2",
-  "com.twitter" %% "util-core" % "4.0.1", 
-  "com.twitter" %% "util-eval" % "4.0.1",
+  "org.scalatra" % "scalatra_2.9.1" % "2.+",
+  "org.scalatra" % "scalatra-scalate_2.9.1" % "2.+",
+  "com.twitter" %% "scrooge-runtime" % "3.0.0",
+  "com.twitter" % "finagle-core_2.9.1" % "4.+",
+  "com.twitter" % "finagle-thrift_2.9.1" % "4.+", 
+  "com.twitter" % "finagle-ostrich4_2.9.1" % "4.+",
+  "com.twitter" % "util-core_2.9.1" % "4.+", 
+  "com.twitter" % "util-eval_2.9.1" % "4.+",
   "javax.servlet" % "servlet-api" % "2.5" % "provided",
   "org.ccil.cowan.tagsoup" % "tagsoup" % "1.2.1"
   )
 
-CompileThriftScrooge.scroogeVersion := "2.5.4"
+CompileThriftScrooge.scroogeVersion := "3.0.0"

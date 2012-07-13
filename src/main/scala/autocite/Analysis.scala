@@ -17,6 +17,17 @@ class Analysis(val xml: String) {
   lazy val title = Analysis.extractTitle(textNodes)
   lazy val citations = Analysis.extractCitations(this)
   lazy val id = Analysis.titleToId(title)
+  lazy val year = Analysis.extractYear(text)
+
+  def toDocument(url : String) = 
+    Document(id = id,
+             title = title,
+             xml = xml,
+             incoming = List(),
+             outgoing = citations,
+             text = text,
+             url = url,
+             year = year)
 }
 
 object Analysis {
@@ -46,16 +57,16 @@ object Analysis {
     override def toString = node.toString
   }
 
-  val parser = new org.ccil.cowan.tagsoup.jaxp.SAXFactoryImpl().newSAXParser()
+  val xmlParser = new org.ccil.cowan.tagsoup.jaxp.SAXFactoryImpl().newSAXParser()
   val adapter = new scala.xml.parsing.NoBindingFactoryAdapter
 
   def parseXML(document: String): Node = {
     val dtd = "<!DOCTYPE pdf2xml SYSTEM \"pdf2xml.dtd\">"
     log.debug("Parsing document of size %d", document.length)
-    adapter.loadXML(scala.xml.Source.fromString(document.split(dtd).last), parser)
+    adapter.loadXML(scala.xml.Source.fromString(document.split(dtd).last), xmlParser)
   }
 
-  def pages(xmlTree: Node): Seq[Page] = {
+  def pages(xmlTree: Node): Array[Page] = {
     try {
       val fonts = xmlTree.\\("fontspec")
         .map(node => (node.iattr("id"), node.iattr("size")))
@@ -67,11 +78,11 @@ object Analysis {
           id += 1
           TextNode(fonts, node, page.iattr("number"), id)
         })
-      }).take(100)
+      }).take(100).toArray
     } catch {
       case e: Exception => {
         log.info("Error while extracting text nodes from document. %s", e.toString)
-        List()
+        Array[Page]()
       }
     }
   }
@@ -147,6 +158,15 @@ object Analysis {
     ""
   }
 
+  val dateRegex = "\\d\\d\\d\\d".r
+  def extractYear(t : String): Int = {
+    dateRegex
+      .findAllIn(t)
+      .map(_.toInt)
+      .filter(d => d > 1990 && d < 2013)
+      .toArray.lastOption.getOrElse(0)
+  }
+
   def titleToId(title: String): Long = {
     def stripPunctuation(v: String) = "[^a-zA-Z+]".r.replaceAllIn(v, "")
     def stripProceedings(v: String) = "(proc\\..*|proceedings.*)".r.replaceAllIn(v, "")
@@ -157,10 +177,10 @@ object Analysis {
     ByteBuffer.wrap(md5.digest(simplify(title).getBytes)).getLong()
   }
 
-  val theParser = new CitationParser.MergedParser()
+  val citationParser = new CitationParser.MergedParser()
 
   def extractCitations(a: Analysis): Seq[Citation] = {
     val txt = a.pages.takeRight(2).map(extractText)
-    txt.flatMap(theParser.parse)
+    txt.flatMap(citationParser.parse)
   }
 }

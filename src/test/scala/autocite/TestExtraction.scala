@@ -12,10 +12,7 @@ import autocite.util.Implicits._
 
 @RunWith(classOf[JUnitRunner])
 class ExtractionSpec extends FunSuite with ShouldMatchers {
-  LoggerFactory(
-    node = "",
-    level = Some(Level.INFO),
-    handlers = List(ConsoleHandler()))()
+  LoggerFactory(node = "", level = Some(Level.INFO), handlers = List(ConsoleHandler()))()
   private val log = Logger.get(getClass)
 
   def printCites(cites: Seq[Citation]) {
@@ -33,6 +30,7 @@ class ExtractionSpec extends FunSuite with ShouldMatchers {
     val cites = parser.parse(str)
     if (shouldAssert && cites.isEmpty) {
       log.info("Bad cite: %s", str);
+      log.info("Log: %s", parser.logLines.mkString("\n"))
       assert(!cites.isEmpty, cites)
     } else {
       printCites(cites)
@@ -47,7 +45,7 @@ HARRIS, T., HO, A., NEUGEBAUER, R., PRATT, I., AND
 Proceedings of the nineteenth ACM symposium on Operating systems principles(New York, NY, USA, 2003), ACM, pp. 164�177.
         """)
   }
-  
+
   test("dht") {
     testcite("""
         [17] D. Karger, E. Lehman, T. Leighton, R. Panigrahy,
@@ -57,7 +55,7 @@ on the World Wide Web. In Proc. STOC '97, El Paso, TX,
 May 1997.
         """)
   }
-  
+
   test("kemme") {
     testcite("""
         [19] B. Kemme and G. Alonso. A new approach to developing
@@ -65,14 +63,14 @@ and implementing eager database replication protocols.
 Transactions on Database Systems
 , 25(3):333­379, 2000.""")
   }
-  
+
   test("lamport") {
     testcite("""
         [20] L. Lamport. Time, clocks, and ordering of events in a dis-tributed system. 
         Communications of the ACM, 21(7):558­ 565, July 1978.
         """)
   }
-  
+
   test("hp") {
     testcite("""
         RUEMMLER, C., AND WILKES, J. 1994. An introduction to disk drive modeling. In IEEE Computer
@@ -104,16 +102,11 @@ Transactions on Database Systems
     IEEE Trans. Commun.  , vol. COM-23, no. 12, pp. 1417–1433, Dec. 1975.""")
   }
 
-  //
-  //  test("atlas") {
-  //    testcite("R. Achenbach et al., The ATLAS Level-1 calorimeter trigger, 2008 JINST 3 P03001.")
-  //  }
-  //
-  //  test("springer") {
-  //    testcite("Tian, H.T., Huang, L.S., Zhou, Z., et al.: Arm up Administrators: Automated Vulnerability Management." +
-  //      "In: Proceedings of the 7th International Symposiumon Parallel Architectures," +
-  //      "Algorithms and Networks, Hongkong, China, pp. 587�~@~S593 (2004)")
-  //  }
+  test("springer") {
+    testcite("Tian, H.T., Huang, L.S., Zhou, Z., et al.: Arm up Administrators: Automated Vulnerability Management." +
+      "In: Proceedings of the 7th International Symposiumon Parallel Architectures," +
+      "Algorithms and Networks, Hongkong, China, pp. 587�~@~S593 (2004)")
+  }
   //
   //  test("assorted1") { testcite("S. Maoz, J. Ringert, and B. Rumpe. Cd2alloy: Class diagrams analysis using alloy revisited. Model Driven Engin eering Languages and Systems, pages 592– 607, 2011. 22 ") }
   //  test("assorted2") { testcite("F. Deissenboeck, B. Hummel, E. Juergens, M. Pfaehler, and B. Schaetz. Model clone detection in practice. In Proceedings of the 4th International Workshop on Software Clones, pages 57–64. ACM, 2010. 6, 19, 27 ") }

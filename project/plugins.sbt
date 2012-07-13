@@ -9,6 +9,7 @@ resolvers <<= (resolvers) { r =>
     Seq("proxy-repo" at url)
   } getOrElse {
     r ++ Seq(
+      "local" at "file://"+Path.userHome.absolutePath+"/.m2/repository",
       "twitter.com" at "http://maven.twttr.com/",
       "scala-tools" at "http://scala-tools.org/repo-releases/",
       "maven" at "http://repo1.maven.org/maven2/",

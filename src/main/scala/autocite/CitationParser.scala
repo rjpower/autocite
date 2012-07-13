@@ -41,16 +41,22 @@ object CitationParser {
 
   implicit def tokenToString(t: Token) = t.chars
 
-  abstract class ParserBase extends Parsers with RegexParsers {
+  abstract class ParserBase extends Parsers with RegexParsers with PackratParsers {
     type Token = CitationParser.Token
 
-    def keyWord: Parser[Token] = keyWords
-      .map(w => literal(w) ^^ Token)
-      .reduce((a, b) => a | b)
+    val keyWord: PackratParser[Token] =
+      keyWords.map(w => literal(w) ^^ Token).reduce((a, b) => a | b)
 
-    def conferenceToken: Parser[Token] = conferenceTokens
-      .map(w => literal(w) ^^ Token)
-      .reduce((a, b) => a | b)
+    val conferenceToken: PackratParser[Token] =
+      conferenceTokens.map(w => literal(w) ^^ Token).reduce((a, b) => a | b)
+
+    var logLines = new ArrayBuffer[String]
+    def plog[T](p: => Parser[T])(name: String): Parser[T] = Parser { in =>
+      logLines.append("trying " + name + " at " + in)
+      val r = p(in)
+      logLines.append(name + " --> " + r)
+      r
+    }
 
     val phd = "ph\\.? ? d\\.?".r ^^^ { Token("PhD") }
     val etal = "(?i)et\\.? al\\.?".r ^^^ { Token("et al") }
@@ -64,23 +70,22 @@ object CitationParser {
     val word = "[^.?()\\s]+".r ^^ Token
     val date = "[0-9]+".r ~ punct
 
-    def token(): Parser[Token] =
-      (conferenceToken | etal | initial | keyWord | nameUpper | other | phd | punct | word)
+    val token: PackratParser[Token] = (conferenceToken | etal | initial | keyWord | nameUpper | other | phd | punct | word)
 
     // def t(msg: String, f: Token => Boolean): Parser[Token] = token ^? { case tok if f(tok) => tok }
     //
-    
-    def authorList(author : Parser[Author], sep : String, finalSep : String, terminator : String)
-      : Parser[List[Author]] = 
+
+    def authorList(author: Parser[Author], sep: String, finalSep: String, terminator: String): PackratParser[List[Author]] =
       (author ~ sep ~ authorList(author, sep, finalSep, terminator) ^^ { case a ~ s ~ rest => a :: rest } |
         author ~ finalSep ~ author <~ terminator ^^ { case a ~ s ~ b => List(a, b) } |
         author <~ terminator ^^ { case a => List(a) })
-    
-    val cite : (Input => ParseResult[Citation])= null
+
+    val cite: (Input => ParseResult[Citation]) = null
 
     def parse(str: String): Seq[Citation] = {
+      logLines.clear
       val out = new ArrayBuffer[Citation]
-      var reader: Input = new CharSequenceReader(str)
+      var reader: Input = new PackratReader(new CharSequenceReader(str))
       while (!reader.atEnd) {
         val result = cite(reader)
         //println(result)
@@ -91,10 +96,10 @@ object CitationParser {
             reader = rest
           }
           case Failure(v, rest) => {
-            reader = token()(reader).next
+            reader = token(reader).next
           }
           case Error(v, rest) => {
-            reader = token()(reader).next
+            reader = token(reader).next
           }
         }
       }
@@ -103,14 +108,14 @@ object CitationParser {
   }
 
   class ACMParser extends ParserBase {
-    val author: Parser[Author] =
+    val author: PackratParser[Author] =
       nameUpper ~ comma ~ rep1(initial) ^^ { case n ~ c ~ r => { Author(n.chars :: r.map(_.chars)) } } |
-      rep1(initial) ~ nameRegular ^^ { case r ~ n  => { Author(n.chars :: r.map(_.chars)) } }
+        rep1(initial) ~ nameRegular ^^ { case r ~ n => { Author(n.chars :: r.map(_.chars)) } }
 
-    val authors: Parser[Seq[Author]] = 
+    val authors: PackratParser[Seq[Author]] =
       author ~ "and" ~ author ~ "." ^^ { case a ~ _ ~ b ~ _ => List(a, b) } |
-      rep1sep(author, comma) ~ "(?i), and".r ~ author ~ opt(".") ^^ { case l ~ a ~ r ~ _ => r :: l } |
-      author ~ "." ^^ { case a ~ _ => List(a) }
+        rep1sep(author, comma) ~ "(?i), and".r ~ author ~ opt(".") ^^ { case l ~ a ~ r ~ _ => r :: l } |
+        author ~ "." ^^ { case a ~ _ => List(a) }
 
     val title = opt(date) ~> rep1(word) ^^ { _.mkString(" ") }
     override val cite = authors ~ title ^^ { case a ~ t => Citation(t, a, "") }
@@ -118,32 +123,43 @@ object CitationParser {
 
   class IEEEParser extends ParserBase {
     val title = dquote ~> "[^\\p{Pi}\\p{Pf}]+".r <~ dquote
-    val author: Parser[Author] = rep1(initial) ~ nameRegular ^^ { 
-      case init ~ lastName => { Author(init.map(_.chars) :+ lastName.chars) } 
+    val author: PackratParser[Author] = rep1(initial) ~ nameRegular ^^ {
+      case init ~ lastName => { Author(init.map(_.chars) :+ lastName.chars) }
     }
 
     val authors = authorList(author, ",", "and", ",")
     override val cite = authors ~ title ^^ { case a ~ t => Citation(t, a, "") }
   }
 
+  class SpringerParser extends ParserBase {
+    val title = "[^.]+".r
+    val author: PackratParser[Author] =
+      nameRegular ~ "," ~ rep1(initial) ^^ { case n ~ comma ~ init => Author(n.chars :: init.map(_.chars)) } |
+        etal ^^^ Author(List("et al"))
+
+    val authors = authorList(author, ",", ",", ":")
+    override val cite = authors ~ title ^^ { case a ~ t => Citation(t, a, "") }
+  }
+
   class MergedParser {
-    val parserList = List(new ACMParser, new IEEEParser)
+    val parserList = List(new ACMParser) // List(new ACMParser, new IEEEParser, new SpringerParser)
     import scala.math._
 
-    def authorsScore(a : Seq[Author]) = a.size
-    def titleScore(t : String) = t.size
-    def confScore(c : String) = 1
+    def logLines = parserList.flatMap(_.logLines)
+    def authorsScore(a: Seq[Author]) = a.size
+    def titleScore(t: String) = t.size
+    def confScore(c: String) = 1
 
-    def scoreResults(cites : Seq[Citation]) : Double = {
+    def scoreResults(cites: Seq[Citation]): Double = {
       val lengthScore = 1.0 / (1 + abs(cites.size - 25))
       val citeScore = cites
-        .map(c => (authorsScore(c.authors) *  titleScore(c.title) * confScore(c.conference)))
+        .map(c => (authorsScore(c.authors) * titleScore(c.title) * confScore(c.conference)))
         .sum
 
       citeScore * lengthScore
     }
 
-    def parse(str : String) : Seq[Citation] = {
+    def parse(str: String): Seq[Citation] = {
       parserList
         .map(_.parse(str))
         .map(citeList => (scoreResults(citeList), citeList))

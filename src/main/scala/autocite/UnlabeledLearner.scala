@@ -9,6 +9,7 @@ import autocite.util.Thrift
 import autocite.util.Compress
 import scala.collection.Map
 import scala.collection.immutable.HashMap
+import org.apache.commons.collections.map.LRUMap
 
 object UnlabeledLearner {
   val splitter = "[0-9\\s\\p{Punct}]".r
@@ -20,7 +21,10 @@ object UnlabeledLearner {
   implicit def enrichCite = RichCite
   implicit def makeOption[T](v: T) = Some(v)
 
-  def docToBagOfWords(d: Document): Map[String, Double] = {
+  type BagOfWords = Map[String, Double]
+  type Metric = (Long, Long) => Double
+
+  def docToBagOfWords(d: Document): BagOfWords = {
     var out = new HashMap[String, Double]
     for (w <- splitter.split(d.text.get.toLowerCase)) {
       out = out + Pair(w, 1.0 + out.getOrElse(w, 0.0))
@@ -28,15 +32,11 @@ object UnlabeledLearner {
     out
   }
 
-  def normalize(bow: Map[String, Double], idf: Map[String, Double], numDocs: Int) = {
-    bow.map({
-      case (k, v) => {
-        (k, v * idf(k))
-      }
-    })
+  def normalize(bow: BagOfWords, idf: BagOfWords, numDocs: Int) = {
+    bow.map({ case (k, v) => { (k, v * idf(k)) } })
   }
 
-  def computeIdf(bow: Map[Long, Map[String, Double]]): Map[String, Double] = {
+  def computeIdf(bow: Map[Long, BagOfWords]): BagOfWords = {
     var idf = new HashMap[String, Double]
     for (m <- bow.values) {
       for ((k, v) <- m) {
@@ -58,15 +58,14 @@ object UnlabeledLearner {
       .map(f => {
         println(f.getName)
         val a = new Analysis(f.readAll)
-        (a.id,
-          Document(
-            id = a.id,
-            title = a.title,
-            xml = "",
-            incoming = null,
-            outgoing = a.citations,
-            text = a.text,
-            url = f.getName))
+        (a.id, Document(id = a.id,
+          title = a.title,
+          xml = "",
+          incoming = List(),
+          outgoing = a.citations,
+          text = a.text,
+          url = f.getName,
+          year = a.year))
       })
   }
 
@@ -102,7 +101,7 @@ object UnlabeledLearner {
     }
   }
 
-  def cosineSimilarity(a: Map[String, Double], b: Map[String, Double]): Double = {
+  def cosineSimilarity(a: BagOfWords, b: BagOfWords): Double = {
     var total = 0.0
     val magnitude = b.values.sum
     for ((k, v) <- a) {
@@ -117,13 +116,6 @@ object UnlabeledLearner {
       _.outgoing.get
         .filter(cite => docs contains cite.id)
         .map(_.id))
-  }
-
-  def mostSimilar(a: Map[String, Double], docs: Map[Long, Map[String, Double]]) = {
-    docs
-      .toArray
-      .map(b => (b._1, cosineSimilarity(a, b._2)))
-      .sortBy(_._2)
   }
 }
 
@@ -141,14 +133,38 @@ class UnlabeledLearner(sourceDir: String, cacheDir: String) {
   val numDocs = docs.size
   val matches = learnerCache.matches
 
-  def evaluate(docid: Long) {
+  val cache = new collection.mutable.HashMap[Long, Array[(Long, Double)]]
+
+  def cosineMetric(a: Long, b: Long) = cosineSimilarity(bow(a), bow(b))
+  def tfidfMetric(a: Long, b: Long) = cosineSimilarity(normalized(a), normalized(b))
+
+  def mostSimilar(a: Long, m: Metric) = {
+    docs
+      .map(b => (b._1, m(a, b._1)))
+      .toArray
+      .sortBy(_._2)
+      .reverse
+      .take(1000)
+  }
+
+  def evaluate(docid: Long, N: Int = 100, metric: Metric) = {
     val doc = docs(docid)
-    val realMatches = matches(docid).toSet
-    val tfidfMatches = mostSimilar(bow(docid), normalized).takeRight(100).map(_._1).toSet
+    val realMatches = matches(docid).toSet.take(N)
+    val topMatches = cache.getOrElseUpdate(docid, mostSimilar(docid, metric))
+    val tfidfMatches = topMatches.take(N).map(_._1).toSet
 
     val mutual = realMatches & tfidfMatches
-    println("%-60.60s %3d/%3d (%3d) %.2f%%".format(
-      doc.title, mutual.size, realMatches.size, doc.outgoing.toSet.size, 100.0 * mutual.size / realMatches.size))
+    (mutual.size, realMatches.size)
+  }
+
+  def precisionRecall(docs: Seq[Long], metric: Metric) {
+    cache.clear
+    for (N <- Range(10, 100)) {
+      val (a, b) = docs.map(evaluate(_, N, metric)).unzip
+      val totalMatched = a.sum
+      val totalFound = b.sum
+      println("%s %s %s %s".format("tfidf", N, totalMatched, totalFound))
+    }
   }
 }
 
@@ -163,8 +179,15 @@ object UnlabeledAnalysis extends App {
     .takeRight(50)
     .map(_._1)
 
+  learner.precisionRecall(best, learner.cosineMetric)
+  learner.precisionRecall(best, learner.tfidfMetric)
+
   for (docid <- best) {
-    learner.evaluate(docid)
+    val doc = learner.docs(docid)
+    val total = doc.outgoing.size
+    val (matched, found) = learner.evaluate(docid, 100, learner.tfidfMetric)
+    println("%-60.60s %3d/%3d (%3d) %.2f%%".format(
+      doc.title, matched, found, total, 100.0 * matched / found))
   }
 
 }

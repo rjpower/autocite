@@ -1,13 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>autocite</name>
-  <projects/>
-  <buildSpec>
-    <buildCommand>
-      <name>ch.epfl.lamp.sdt.core.scalabuilder</name>
-    </buildCommand>
-  </buildSpec>
-  <natures>
-    <nature>ch.epfl.lamp.sdt.core.scalanature</nature>
-    <nature>org.eclipse.jdt.core.javanature</nature>
-  </natures>
+	<name>autocite</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>net.sourceforge.texlipse.builder.TexlipseBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>ch.epfl.lamp.sdt.core.scalabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>net.sourceforge.texlipse.builder.TexlipseNature</nature>
+		<nature>ch.epfl.lamp.sdt.core.scalanature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<filteredResources>
+		<filter>
+			<id>1342134568183</id>
+			<name></name>
+			<type>22</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-*.class</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
